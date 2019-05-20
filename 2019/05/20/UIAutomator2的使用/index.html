@@ -96,16 +96,22 @@
 
 
 
-  <meta name="description" content="人生苦短，我学Python">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Vicの博客">
-<meta property="og:url" content="https://vic.kim/index.html">
+  <meta name="description" content="[TOC] 简介uiautomator2是一个python库，用于Android的UI自动化测试，其底层基于Google uiautomator，Google提供的uiautomator库可以获取屏幕上任意一个APP的任意一个控件属性，并对其进行任意操作 支持平台及语言你在python-uiautomator2封装了谷歌自带的uiautomator2测试框架，提供便利的python接口。他允许测试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UIAutomator2的使用">
+<meta property="og:url" content="https://vic.kim/2019/05/20/UIAutomator2的使用/index.html">
 <meta property="og:site_name" content="Vicの博客">
-<meta property="og:description" content="人生苦短，我学Python">
+<meta property="og:description" content="[TOC] 简介uiautomator2是一个python库，用于Android的UI自动化测试，其底层基于Google uiautomator，Google提供的uiautomator库可以获取屏幕上任意一个APP的任意一个控件属性，并对其进行任意操作 支持平台及语言你在python-uiautomator2封装了谷歌自带的uiautomator2测试框架，提供便利的python接口。他允许测试">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190306150200153.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1ZpY194aWFveWV6aQ==,size_16,color_FFFFFF,t_70#pic_center =600x300">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190306144817135.jpeg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1ZpY194aWFveWV6aQ==,size_16,color_FFFFFF,t_70#pic_center =800x400">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019030620384450.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190306204227862.png#pic_center">
+<meta property="og:updated_time" content="2019-05-20T09:22:28.591Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vicの博客">
-<meta name="twitter:description" content="人生苦短，我学Python">
+<meta name="twitter:title" content="UIAutomator2的使用">
+<meta name="twitter:description" content="[TOC] 简介uiautomator2是一个python库，用于Android的UI自动化测试，其底层基于Google uiautomator，Google提供的uiautomator库可以获取屏幕上任意一个APP的任意一个控件属性，并对其进行任意操作 支持平台及语言你在python-uiautomator2封装了谷歌自带的uiautomator2测试框架，提供便利的python接口。他允许测试">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190306150200153.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1ZpY194aWFveWV6aQ==,size_16,color_FFFFFF,t_70#pic_center =600x300">
 
 
 
@@ -113,7 +119,7 @@
 
   
   
-  <link rel="canonical" href="https://vic.kim/">
+  <link rel="canonical" href="https://vic.kim/2019/05/20/UIAutomator2的使用/">
 
 
 
@@ -123,7 +129,7 @@
   };
 </script>
 
-  <title>Vicの博客</title>
+  <title>UIAutomator2的使用 | Vicの博客</title>
   
 
 
@@ -171,8 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -214,7 +219,7 @@
         
         
           
-          <li class="menu-item menu-item-home menu-item-active">
+          <li class="menu-item menu-item-home">
 
     
     
@@ -327,9 +332,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -361,10 +366,8 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/20/UIAutomator2的使用/" class="post-title-link" itemprop="url">UIAutomator2的使用</a>
+          <h1 class="post-title" itemprop="name headline">UIAutomator2的使用
+
               
             
           </h1>
@@ -428,9 +431,7 @@
       
 
       
-        
-          
-            <p>[TOC]</p>
+        <p>[TOC]</p>
 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>uiautomator2是一个python库，用于Android的UI自动化测试，其底层基于Google uiautomator，Google提供的uiautomator库可以获取屏幕上任意一个APP的任意一个控件属性，并对其进行任意操作</p>
 <h1 id="支持平台及语言你在"><a href="#支持平台及语言你在" class="headerlink" title="支持平台及语言你在"></a>支持平台及语言你在</h1><p>python-uiautomator2封装了谷歌自带的uiautomator2测试框架，提供便利的python接口。他允许测试人员直接在PC上编写Python的测试代码，操作手机应用，完成自动化，大大提高了自动化代码编写的效率。</p>
 <h1 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h1><p><img src="https://img-blog.csdnimg.cn/20190306150200153.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1ZpY194aWFveWV6aQ==,size_16,color_FFFFFF,t_70#pic_center =600x300" alt="在这里插入图片描述"><br>如图所示，python-uiautomator2主要分为两个部分，python客户端，移动设备</p>
@@ -734,8 +735,6 @@
 </li>
 </ul>
 
-          
-        
       
     </div>
 
@@ -747,6 +746,9 @@
 
     <div>
       
+        
+
+      
     </div>
 
     
@@ -757,165 +759,57 @@
     
 
     
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Vic</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://vic.kim/2019/05/20/UIAutomator2的使用/" title="UIAutomator2的使用">https://vic.kim/2019/05/20/UIAutomator2的使用/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
 
     <footer class="post-footer">
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/20/SQL基础语句总结/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Vic">
-      <meta itemprop="description" content="人生苦短，我学Python">
-      <meta itemprop="image" content="/images/smile.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Vicの博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/20/SQL基础语句总结/" class="post-title-link" itemprop="url">SQL基础语句总结</a>
-              
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
+              <a href="/2019/05/20/SQL基础语句总结/" rel="next" title="SQL基础语句总结">
+                <i class="fa fa-chevron-left"></i> SQL基础语句总结
+              </a>
             
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-20 17:09:14 / 修改时间：17:13:51" itemprop="dateCreated datePublished" datetime="2019-05-20T17:09:14+08:00">2019-05-20</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>SQL 是用于访问和处理数据库的标准的计算机语言。</p>
-<h2 id="什么是-SQL？"><a href="#什么是-SQL？" class="headerlink" title="什么是 SQL？"></a>什么是 SQL？</h2><p>SQL 指结构化查询语言<br>SQL 使我们有能力访问数据库<br>SQL 是一种 ANSI 的标准计算机语言<br>编者注：ANSI，美国国家标准化组织</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line">#显示数据库</span><br><span class="line">show databases;</span><br><span class="line"></span><br><span class="line">#判断是否存在数据库test_mysql,有的话先删除</span><br><span class="line">drop database if exists test_mysql;</span><br><span class="line"></span><br><span class="line">#创建数据库</span><br><span class="line">create database test_mysql;</span><br><span class="line"></span><br><span class="line">#删除数据库</span><br><span class="line">drop database test_mysql;</span><br><span class="line"></span><br><span class="line">#使用该数据库</span><br><span class="line">use test_mysql;</span><br><span class="line"></span><br><span class="line">#显示数据库中的表</span><br><span class="line">show tables;</span><br><span class="line"></span><br><span class="line">#先判断表是否存在,存在先删除</span><br><span class="line">drop table if exists student;</span><br><span class="line"></span><br><span class="line">#创建表</span><br><span class="line">create table student(</span><br><span class="line">id int auto_increment primary key,</span><br><span class="line">name varchar(50),</span><br><span class="line">sex varchar(20),</span><br><span class="line">date varchar(50),</span><br><span class="line">)default charset=utf8;</span><br><span class="line"></span><br><span class="line">#删除表</span><br><span class="line">drop table student;</span><br><span class="line"></span><br><span class="line">#查看表的结构</span><br><span class="line">describe student;  #可以简写为desc student;</span><br><span class="line"></span><br><span class="line">#插入数据</span><br><span class="line">insert into student values(null,&apos;test&apos;,&apos;2018-10-2&apos;);</span><br><span class="line"></span><br><span class="line">#查询表中的数据</span><br><span class="line">select * from student;</span><br><span class="line">select id,name from student;</span><br><span class="line"></span><br><span class="line">#修改某一条数据</span><br><span class="line">update student set name=&apos;jack&apos; where id=4;</span><br><span class="line"></span><br><span class="line">#删除数据</span><br><span class="line">delete from student where id=8;</span><br><span class="line"></span><br><span class="line"># and 且</span><br><span class="line">select * from student where date&gt;&apos;2018-1-2&apos; and date&lt;&apos;2018-12-1&apos;;</span><br><span class="line"></span><br><span class="line"># or 或</span><br><span class="line">select * from student where date&lt;&apos;2018-11-2&apos; or date&gt;&apos;2018-12-1&apos;;</span><br><span class="line"></span><br><span class="line">#between</span><br><span class="line">select * from student where date between &apos;2018-1-2&apos; and &apos;2018-12-1&apos;;</span><br><span class="line"></span><br><span class="line">#in 查询制定集合内的数据</span><br><span class="line">select * from student where id in (1,3,5);</span><br><span class="line"></span><br><span class="line">#排序 asc 升序  desc 降序</span><br><span class="line">select * from student order by id asc;</span><br><span class="line"></span><br><span class="line">#分组查询 #聚合函数</span><br><span class="line">select max(id),name,sex from student group by sex;</span><br><span class="line"></span><br><span class="line">select min(date) from student;</span><br><span class="line"></span><br><span class="line">select avg(id) as &apos;Avg&apos; from student;</span><br><span class="line"></span><br><span class="line">select count(*) from student;   #统计表中总数</span><br><span class="line"></span><br><span class="line">select count(sex) from student;   #统计表中性别总数  若有一条数据中sex为空的话,就不予以统计~</span><br><span class="line"></span><br><span class="line">select sum(id) from student;</span><br><span class="line"></span><br><span class="line">#查询第i条以后到第j条的数据(不包括第i条)</span><br><span class="line">select * from student limit 2,5;  #显示3-5条数据</span><br><span class="line"></span><br><span class="line">#修改数据</span><br><span class="line">update student set name=&apos;test&apos; where id=2;</span><br><span class="line">update student set name=&apos;花花&apos;,sex=&apos;女&apos; where id=2</span><br><span class="line">delete from student where id=2;</span><br><span class="line"></span><br><span class="line">#修改表的名字</span><br><span class="line">#格式:alter table tbl_name rename to new_name</span><br><span class="line">alter table student rename to test_1;</span><br><span class="line"></span><br><span class="line">#向表中增加一个字段(列)</span><br><span class="line">#格式:alter table tablename add columnname type;/alter table tablename add(columnname type);</span><br><span class="line">alter table student add  age varchar(20) set default &apos;1&apos;; #set default 设置默认值</span><br><span class="line"></span><br><span class="line">#修改表中某个字段的名字</span><br><span class="line">alter table tablename change columnname newcolumnname type;  #修改一个表的字段名</span><br><span class="line">alter table student change name test_name varchar(50);</span><br><span class="line"></span><br><span class="line">#去掉表中字段age的默认值</span><br><span class="line">alter table student alter age drop default;</span><br><span class="line"></span><br><span class="line">#去掉表中字段age</span><br><span class="line">alter table student drop column age;</span><br><span class="line"></span><br><span class="line">#删除表中主键</span><br><span class="line">alter table student drop primary key;</span><br><span class="line"></span><br><span class="line">#表中增加主键</span><br><span class="line">#alter table add primary key (column1,column2,....,column)</span><br><span class="line">alter table student add primary key (student_id);</span><br><span class="line"></span><br><span class="line">#用文本方式将数据装入数据库表中（例如D:/mysql.txt）</span><br><span class="line">load data local infile &quot;D:/mysql.txt&quot; into table MYTABLE;</span><br><span class="line"></span><br><span class="line">#导入.sql文件命令（例如D:/mysql.sql）</span><br><span class="line">source d:/mysql.sql;  #或者  /. d:/mysql.sql;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -925,680 +819,15 @@
   </article>
 
 
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/20/Homebrew/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Vic">
-      <meta itemprop="description" content="人生苦短，我学Python">
-      <meta itemprop="image" content="/images/smile.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Vicの博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/20/Homebrew/" class="post-title-link" itemprop="url">Homebrew</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-20 16:55:06" itemprop="dateCreated datePublished" datetime="2019-05-20T16:55:06+08:00">2019-05-20</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/20/item2常用快捷键/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Vic">
-      <meta itemprop="description" content="人生苦短，我学Python">
-      <meta itemprop="image" content="/images/smile.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Vicの博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/20/item2常用快捷键/" class="post-title-link" itemprop="url">item2常用快捷键</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-20 16:34:56 / 修改时间：16:36:21" itemprop="dateCreated datePublished" datetime="2019-05-20T16:34:56+08:00">2019-05-20</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><ul>
-<li>新建标签：command + t</li>
-<li>关闭标签：command + w</li>
-<li>切换标签：command + 数字 command + 左右方向键</li>
-<li>切换全屏：command + enter</li>
-<li>查找：command + f</li>
-</ul>
-<h2 id="分屏"><a href="#分屏" class="headerlink" title="分屏"></a>分屏</h2><ul>
-<li>垂直分屏：command + d</li>
-<li>水平分屏：command + shift + d</li>
-<li>切换屏幕：command + option + 方向键 command + [ 或 command + ]</li>
-<li>查看历史命令：command + ;</li>
-<li>查看剪贴板历史：command + shift + h</li>
-</ul>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
-<li>清除当前行：ctrl + u</li>
-<li>到行首：ctrl + a</li>
-<li>到行尾：ctrl + e</li>
-<li>前进后退：ctrl + f/b (相当于左右方向键)</li>
-<li>上一条命令：ctrl + p</li>
-<li>搜索命令历史：ctrl + r</li>
-<li>删除当前光标的字符：ctrl + d</li>
-<li>删除光标之前的字符：ctrl + h</li>
-<li>删除光标之前的单词：ctrl + w</li>
-<li>删除到文本末尾：ctrl + k</li>
-<li>交换光标处文本：ctrl + t</li>
-<li>清屏1：command + r</li>
-<li>清屏2：ctrl + l</li>
-</ul>
-<h2 id="自带有哪些很实用的功能-快捷键"><a href="#自带有哪些很实用的功能-快捷键" class="headerlink" title="自带有哪些很实用的功能/快捷键"></a>自带有哪些很实用的功能/快捷键</h2><ul>
-<li>⌘ + 数字在各 tab 标签直接来回切换</li>
-<li>选择即复制 + 鼠标中键粘贴，这个很实用</li>
-<li>⌘ + f 所查找的内容会被自动复制</li>
-<li>⌘ + d 横着分屏 / ⌘ + shift + d 竖着分屏</li>
-<li>⌘ + r = clear，而且只是换到新一屏，不会想 clear 一样创建一个空屏</li>
-<li>ctrl + u 清空当前行，无论光标在什么位置</li>
-<li>输入开头命令后 按 ⌘ + ; 会自动列出输入过的命令</li>
-<li>⌘ + shift + h 会列出剪切板历史</li>
-<li>可以在 Preferences &gt; keys 设置全局快捷键调出 iterm，这个也可以用过 Alfred 实现</li>
-</ul>
-<h2 id="我常用的一些快捷键"><a href="#我常用的一些快捷键" class="headerlink" title="我常用的一些快捷键"></a>我常用的一些快捷键</h2><ul>
-<li>⌘ + 1 / 2 左右 tab 之间来回切换，这个在 前面 已经介绍过了</li>
-<li>⌘← / ⌘→ 到一行命令最左边/最右边 ，这个功能同 C+a / C+e</li>
-<li>⌥← / ⌥→ 按单词前移/后移，相当与 C+f / C+b，其实这个功能在Iterm中已经预定义好了，⌥f / ⌥b，看个人习惯了</li>
-</ul>
-<h2 id="设置方法如下"><a href="#设置方法如下" class="headerlink" title="设置方法如下"></a>设置方法如下</h2><p>当然除了这些可以自定义的也不能忘了 linux 下那些好用的组合</p>
-<ul>
-<li>C+a / C+e 这个几乎在哪都可以使用</li>
-<li>C+p / !! 上一条命令</li>
-<li>C+k 从光标处删至命令行尾 (本来 C+u 是删至命令行首，但iterm中是删掉整行)</li>
-<li>C+w A+d 从光标处删至字首/尾</li>
-<li>C+h C+d 删掉光标前后的自负</li>
-<li>C+y 粘贴至光标后</li>
-<li>C+r 搜索命令历史，这个较常用</li>
-</ul>
-<h2 id="选择喜欢的配色方案。"><a href="#选择喜欢的配色方案。" class="headerlink" title="选择喜欢的配色方案。"></a>选择喜欢的配色方案。</h2><p>在Preferences-&gt;Profiles-&gt;Colors的load presets可以选择某个配色方案。也可以自己下载。在网站<a href="http://iterm2colorschemes.com/，几乎可以找到所有可用的配色方案。" target="_blank" rel="noopener">http://iterm2colorschemes.com/，几乎可以找到所有可用的配色方案。</a></p>
-<h2 id="选中即复制"><a href="#选中即复制" class="headerlink" title="选中即复制"></a>选中即复制</h2><p>iterm2有2种好用的选中即复制模式。</p>
-<ul>
-<li>一种是用鼠标，在iterm2中，选中某个路径或者某个词汇，那么，iterm2就自动复制了。</li>
-<li>另一种是无鼠标模式，command+f,弹出iterm2的查找模式，输入要查找并复制的内容的前几个字母，确认找到的是自己的内容之后，输入tab，查找窗口将自动变化内容，并将其复制。如果输入的是shift+tab，则自动将查找内容的左边选中并复制。</li>
-</ul>
-<h2 id="屏幕切割"><a href="#屏幕切割" class="headerlink" title="屏幕切割"></a>屏幕切割</h2><ul>
-<li>command+d：垂直分割；</li>
-<li>command+shift+d：水平分割</li>
-</ul>
-<h2 id="自动完成"><a href="#自动完成" class="headerlink" title="自动完成"></a>自动完成</h2><p>输入打头几个字母，然后输入command+; iterm2将自动列出之前输入过的类似命令。</p>
-<h2 id="剪切历史"><a href="#剪切历史" class="headerlink" title="剪切历史"></a>剪切历史</h2><p>输入command+shift+h，iterm2将自动列出剪切板的历史记录。如果需要将剪切板的历史记录保存到磁盘，在Preferences &gt; General &gt; Save copy/paste history to disk.中设置。</p>
-<h2 id="全屏切换"><a href="#全屏切换" class="headerlink" title="全屏切换"></a>全屏切换</h2><p>command+enter进入与返回全屏模式</p>
-<h2 id="Expose所有Tab"><a href="#Expose所有Tab" class="headerlink" title="Exposé所有Tab"></a>Exposé所有Tab</h2><p>command+option+e,并且可以搜索</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/20/Linux常用命令总结/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Vic">
-      <meta itemprop="description" content="人生苦短，我学Python">
-      <meta itemprop="image" content="/images/smile.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Vicの博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/20/Linux常用命令总结/" class="post-title-link" itemprop="url">Linux常用命令总结</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-20 16:20:56 / 修改时间：16:27:18" itemprop="dateCreated datePublished" datetime="2019-05-20T16:20:56+08:00">2019-05-20</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="系统信息"><a href="#系统信息" class="headerlink" title="系统信息"></a>系统信息</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">arch 显示机器的处理器架构(1) </span><br><span class="line">uname -m 显示机器的处理器架构(2) </span><br><span class="line">uname -r 显示正在使用的内核版本 </span><br><span class="line">dmidecode -q 显示硬件系统部件 - (SMBIOS / DMI) </span><br><span class="line">hdparm -i /dev/hda 罗列一个磁盘的架构特性 </span><br><span class="line">hdparm -tT /dev/sda 在磁盘上执行测试性读取操作 </span><br><span class="line">cat /proc/cpuinfo 显示CPU info的信息 </span><br><span class="line">cat /proc/interrupts 显示中断 </span><br><span class="line">cat /proc/meminfo 校验内存使用 </span><br><span class="line">cat /proc/swaps 显示哪些swap被使用 </span><br><span class="line">cat /proc/version 显示内核的版本 </span><br><span class="line">cat /proc/net/dev 显示网络适配器及统计 </span><br><span class="line">cat /proc/mounts 显示已加载的文件系统 </span><br><span class="line">lspci -tv 罗列 PCI 设备 </span><br><span class="line">lsusb -tv 显示 USB 设备 </span><br><span class="line">date 显示系统日期 </span><br><span class="line">cal 2007 显示2007年的日历表 </span><br><span class="line">date 041217002007.00 设置日期和时间 - 月日时分年.秒 </span><br><span class="line">clock -w 将时间修改保存到 BIOS</span><br></pre></td></tr></table></figure>
-<h1 id="关机-系统的关机、重启以及登出"><a href="#关机-系统的关机、重启以及登出" class="headerlink" title="关机 (系统的关机、重启以及登出 )"></a>关机 (系统的关机、重启以及登出 )</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">shutdown -h now 关闭系统(1) </span><br><span class="line">init 0 关闭系统(2) </span><br><span class="line">telinit 0 关闭系统(3) </span><br><span class="line">shutdown -h hours:minutes &amp; 按预定时间关闭系统 </span><br><span class="line">shutdown -c 取消按预定时间关闭系统 </span><br><span class="line">shutdown -r now 重启(1) </span><br><span class="line">reboot 重启(2) </span><br><span class="line">logout 注销</span><br></pre></td></tr></table></figure>
-<h1 id="文件和目录"><a href="#文件和目录" class="headerlink" title="文件和目录"></a>文件和目录</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">cd /home 进入 &apos;/ home&apos; 目录</span><br><span class="line">cd .. 返回上一级目录 </span><br><span class="line">cd ../.. 返回上两级目录 </span><br><span class="line">cd 进入个人的主目录 </span><br><span class="line">cd ~user1 进入个人的主目录 </span><br><span class="line">cd - 返回上次所在的目录 </span><br><span class="line">pwd 显示工作路径 </span><br><span class="line">ls 查看目录中的文件 </span><br><span class="line">ls -F 查看目录中的文件 </span><br><span class="line">ls -l 显示文件和目录的详细资料 </span><br><span class="line">ls -a 显示隐藏文件 </span><br><span class="line">ls *[0-9]* 显示包含数字的文件名和目录名 </span><br><span class="line">tree 显示文件和目录由根目录开始的树形结构(1) </span><br><span class="line">lstree 显示文件和目录由根目录开始的树形结构(2) </span><br><span class="line">mkdir dir1 创建一个叫做 &apos;dir1&apos; 的目录</span><br><span class="line">mkdir dir1 dir2 同时创建两个目录 </span><br><span class="line">mkdir -p /tmp/dir1/dir2 创建一个目录树 </span><br><span class="line">rm -f file1 删除一个叫做 &apos;file1&apos; 的文件</span><br><span class="line">rmdir dir1 删除一个叫做 &apos;dir1&apos; 的目录</span><br><span class="line">rm -rf dir1 删除一个叫做 &apos;dir1&apos; 的目录并同时删除其内容 </span><br><span class="line">rm -rf dir1 dir2 同时删除两个目录及它们的内容 </span><br><span class="line">mv dir1 new_dir 重命名/移动 一个目录 </span><br><span class="line">cp file1 file2 复制一个文件 </span><br><span class="line">cp dir/ * . 复制一个目录下的所有文件到当前工作目录 </span><br><span class="line">cp -a /tmp/dir1 . 复制一个目录到当前工作目录 </span><br><span class="line">cp -a dir1 dir2 复制一个目录 </span><br><span class="line">ln -s file1 lnk1 创建一个指向文件或目录的软链接 </span><br><span class="line">ln file1 lnk1 创建一个指向文件或目录的物理链接 </span><br><span class="line">touch -t 0712250000 file1 修改一个文件或目录的时间戳 - (YYMMDDhhmm)</span><br></pre></td></tr></table></figure>
-<h1 id="文件搜索"><a href="#文件搜索" class="headerlink" title="文件搜索"></a>文件搜索</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">find / -name file1 从 &apos;/&apos; 开始进入根文件系统搜索文件和目录 </span><br><span class="line">find / -user user1 搜索属于用户 &apos;user1&apos; 的文件和目录 </span><br><span class="line">find /home/user1 -name \*.bin 在目录 &apos;/ home/user1&apos; 中搜索带有&apos;.bin&apos; 结尾的文件 </span><br><span class="line">find /usr/bin -type f -atime +100 搜索在过去100天内未被使用过的执行文件 </span><br><span class="line">find /usr/bin -type f -mtime -10 搜索在10天内被创建或者修改过的文件 </span><br><span class="line">find / -name \*.rpm -exec chmod 755 &apos;&#123;&#125;&apos; \; 搜索以 &apos;.rpm&apos; 结尾的文件并定义其权限 </span><br><span class="line">find / -xdev -name \*.rpm 搜索以 &apos;.rpm&apos; 结尾的文件，忽略光驱、捷盘等可移动设备 </span><br><span class="line">locate \*.ps 寻找以 &apos;.ps&apos; 结尾的文件 - 先运行 &apos;updatedb&apos; 命令 </span><br><span class="line">whereis halt 显示一个二进制文件、源码或man的位置 </span><br><span class="line">which halt 显示一个二进制文件或可执行文件的完整路径</span><br></pre></td></tr></table></figure>
-<h1 id="文件的权限-使用-“-”-设置权限，使用-“-“-用于取消"><a href="#文件的权限-使用-“-”-设置权限，使用-“-“-用于取消" class="headerlink" title="文件的权限 - 使用 “+” 设置权限，使用 “-“ 用于取消"></a>文件的权限 - 使用 “+” 设置权限，使用 “-“ 用于取消</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ls -lh 显示权限 </span><br><span class="line">ls /tmp | pr -T5 -W$COLUMNS 将终端划分成5栏显示 </span><br><span class="line">chmod ugo+rwx directory1 设置目录的所有人(u)、群组(g)以及其他人(o)以读（r ）、写(w)和执行(x)的权限 </span><br><span class="line">chmod go-rwx directory1 删除群组(g)与其他人(o)对目录的读写执行权限 </span><br><span class="line">chown user1 file1 改变一个文件的所有人属性 </span><br><span class="line">chown -R user1 directory1 改变一个目录的所有人属性并同时改变改目录下所有文件的属性 </span><br><span class="line">chgrp group1 file1 改变文件的群组 </span><br><span class="line">chown user1:group1 file1 改变一个文件的所有人和群组属性 </span><br><span class="line">find / -perm -u+s 罗列一个系统中所有使用了SUID控制的文件 </span><br><span class="line">chmod u+s /bin/file1 设置一个二进制文件的 SUID 位 - 运行该文件的用户也被赋予和所有者同样的权限 </span><br><span class="line">chmod u-s /bin/file1 禁用一个二进制文件的 SUID位 </span><br><span class="line">chmod g+s /home/public 设置一个目录的SGID 位 - 类似SUID ，不过这是针对目录的 </span><br><span class="line">chmod g-s /home/public 禁用一个目录的 SGID 位 </span><br><span class="line">chmod o+t /home/public 设置一个文件的 STIKY 位 - 只允许合法所有人删除文件 </span><br><span class="line">chmod o-t /home/public 禁用一个目录的 STIKY 位</span><br></pre></td></tr></table></figure>
-<h1 id="打包和压缩文件"><a href="#打包和压缩文件" class="headerlink" title="打包和压缩文件"></a>打包和压缩文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">bunzip2 file1.bz2 解压一个叫做 &apos;file1.bz2&apos;的文件 </span><br><span class="line">bzip2 file1 压缩一个叫做 &apos;file1&apos; 的文件 </span><br><span class="line">gunzip file1.gz 解压一个叫做 &apos;file1.gz&apos;的文件 </span><br><span class="line">gzip file1 压缩一个叫做 &apos;file1&apos;的文件 </span><br><span class="line">gzip -9 file1 最大程度压缩 </span><br><span class="line">rar a file1.rar test_file 创建一个叫做 &apos;file1.rar&apos; 的包 </span><br><span class="line">rar a file1.rar file1 file2 dir1 同时压缩 &apos;file1&apos;, &apos;file2&apos; 以及目录 &apos;dir1&apos; </span><br><span class="line">rar x file1.rar 解压rar包 </span><br><span class="line">unrar x file1.rar 解压rar包 </span><br><span class="line">tar -cvf archive.tar file1 创建一个非压缩的 tarball </span><br><span class="line">tar -cvf archive.tar file1 file2 dir1 创建一个包含了 &apos;file1&apos;, &apos;file2&apos; 以及 &apos;dir1&apos;的档案文件 </span><br><span class="line">tar -tf archive.tar 显示一个包中的内容 </span><br><span class="line">tar -xvf archive.tar 释放一个包 </span><br><span class="line">tar -xvf archive.tar -C /tmp 将压缩包释放到 /tmp目录下 </span><br><span class="line">tar -cvfj archive.tar.bz2 dir1 创建一个bzip2格式的压缩包 </span><br><span class="line">tar -xvfj archive.tar.bz2 解压一个bzip2格式的压缩包 </span><br><span class="line">tar -cvfz archive.tar.gz dir1 创建一个gzip格式的压缩包 </span><br><span class="line">tar -xvfz archive.tar.gz 解压一个gzip格式的压缩包 </span><br><span class="line">zip file1.zip file1 创建一个zip格式的压缩包 </span><br><span class="line">zip -r file1.zip file1 file2 dir1 将几个文件和目录同时压缩成一个zip格式的压缩包 </span><br><span class="line">unzip file1.zip 解压一个zip格式压缩包</span><br></pre></td></tr></table></figure>
-<h1 id="APT-软件工具-Debian-Ubuntu-以及类似系统"><a href="#APT-软件工具-Debian-Ubuntu-以及类似系统" class="headerlink" title="APT 软件工具 (Debian, Ubuntu 以及类似系统)"></a>APT 软件工具 (Debian, Ubuntu 以及类似系统)</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">apt-get install package_name 安装/更新一个 deb 包 </span><br><span class="line">apt-cdrom install package_name 从光盘安装/更新一个 deb 包 </span><br><span class="line">apt-get update 升级列表中的软件包 </span><br><span class="line">apt-get upgrade 升级所有已安装的软件 </span><br><span class="line">apt-get remove package_name 从系统删除一个deb包 </span><br><span class="line">apt-get check 确认依赖的软件仓库正确 </span><br><span class="line">apt-get clean 从下载的软件包中清理缓存 </span><br><span class="line">apt-cache search searched-package 返回包含所要搜索字符串的软件包名称</span><br></pre></td></tr></table></figure>
-<h1 id="查看文件内容"><a href="#查看文件内容" class="headerlink" title="查看文件内容"></a>查看文件内容</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cat file1 从第一个字节开始正向查看文件的内容 </span><br><span class="line">tac file1 从最后一行开始反向查看一个文件的内容 </span><br><span class="line">more file1 查看一个长文件的内容 </span><br><span class="line">less file1 类似于 &apos;more&apos; 命令，但是它允许在文件中和正向操作一样的反向操作 </span><br><span class="line">head -2 file1 查看一个文件的前两行 </span><br><span class="line">tail -2 file1 查看一个文件的最后两行 </span><br><span class="line">tail -f /var/log/messages 实时查看被添加到一个文件中的内容</span><br></pre></td></tr></table></figure>
-<h1 id="网络配置管理"><a href="#网络配置管理" class="headerlink" title="网络配置管理"></a>网络配置管理</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ifconfig ‐a //查ip信息 </span><br><span class="line">ping ‐C 4 192.168.xxx.xxx //ping4次</span><br><span class="line">setup //配置ip、防火墙、服务等，需要root用户执行</span><br><span class="line">ifconfig eth0 192.168.1.100 netmask 255.255.255.0 //临时设置ip </span><br><span class="line">vi /etc/sysconfig/network‐scrippts/ifcfg‐eth0 //永久设置ip </span><br><span class="line">dhclient eth0 //启用dhcp模式</span><br><span class="line">service network restart //重启网络服务[stop、start]</span><br><span class="line">service iptables stop //关闭防火墙，[start]开启，[status]查看状态</span><br><span class="line">hostname  //查看主机名</span><br><span class="line">netstat ‐an //查看所有端口</span><br><span class="line">lsof ‐i :8080 //查看具体端口号运行的程序12. </span><br><span class="line">nmap 10.1.252.121    //扫描端口</span><br></pre></td></tr></table></figure>
-<h1 id="VI底行模式"><a href="#VI底行模式" class="headerlink" title="VI底行模式"></a>VI底行模式</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">:set nu    //显示行号</span><br><span class="line">:set nonu    //不显示行号 </span><br><span class="line">:n    //跳转到指的第n行</span><br><span class="line">:w file    //另存为</span><br><span class="line">:n1,n2 s/string1/string2/g    //从n1行到n2行将string1替换为string2</span><br><span class="line">:%s/string1/string2/g       //将所有行string1替换为string2，%代表所有行，g表示所有string1字</span><br><span class="line">:%s+/usr/local/bin+/usr/bin+g    //替换的字符中含有“/”时，用+来代替/</span><br><span class="line">:wq    //保存并退出</span><br><span class="line">:q!    //强制退出，不保存</span><br></pre></td></tr></table></figure>
-<h1 id="VI命令模式"><a href="#VI命令模式" class="headerlink" title="VI命令模式"></a>VI命令模式</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">G      //到末行</span><br><span class="line">gg     //到首行</span><br><span class="line">dd     //删除行</span><br><span class="line">u      //撤销</span><br><span class="line">yy     //复制一行</span><br><span class="line">nyy    //复制n行 </span><br><span class="line">p      //粘贴</span><br></pre></td></tr></table></figure>
-<h1 id="nmon性能测试监控工具"><a href="#nmon性能测试监控工具" class="headerlink" title="nmon性能测试监控工具"></a>nmon性能测试监控工具</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1、./ nmon -f -t -s 30 -c 180</span><br><span class="line">      -f：按标准格式输出文件：&lt;hostname&gt;_YYYYMMDD_HHMM.nmon；</span><br><span class="line">      -t：输出中包括占用率较高的进程；</span><br><span class="line">      -s 30：每30秒进行一次数据采集</span><br><span class="line">      -c 180：一共采集180次</span><br><span class="line">2、sort -A test.nmon &gt; test.csv  //通过sort命令可以将nmon结果文件转换为csv文件</span><br></pre></td></tr></table></figure>
-<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ctrl+u   //从光标处向前批量删除命令串  </span><br><span class="line">ctrl+k  //从光标处向后批量删除命令串  </span><br><span class="line">ctrl+a  //将光标移动到最前</span><br><span class="line">ctrl+e  //将光标移动到最后</span><br><span class="line">rz  //运行该命令会弹出一个文件选择窗口，从本地选择文件上传到服务器</span><br><span class="line">sz file //将选定的文件file发送到本地机器</span><br><span class="line">vifm、ranger  //图形的文件管理操作</span><br><span class="line">dos2unix file  //将DOS格式的文本文件转换成UNIX格式</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/20/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Vic">
-      <meta itemprop="description" content="人生苦短，我学Python">
-      <meta itemprop="image" content="/images/smile.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Vicの博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/20/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-20 13:41:56" itemprop="dateCreated datePublished" datetime="2019-05-20T13:41:56+08:00">2019-05-20</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -1618,8 +847,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1680,6 +918,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#支持平台及语言你在"><span class="nav-number">2.</span> <span class="nav-text">支持平台及语言你在</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#工作原理"><span class="nav-number">3.</span> <span class="nav-text">工作原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">4.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-安装adb"><span class="nav-number">4.0.0.0.1.</span> <span class="nav-text">1.安装adb</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-安装uiautomator2"><span class="nav-number">4.0.0.0.2.</span> <span class="nav-text">2.安装uiautomator2</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-如果你需要用到截图，安装pillow"><span class="nav-number">4.0.0.0.3.</span> <span class="nav-text">3.如果你需要用到截图，安装pillow</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-设备安装atx-agent"><span class="nav-number">4.0.0.0.4.</span> <span class="nav-text">4.设备安装atx-agent</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-安装weditor"><span class="nav-number">4.0.0.0.5.</span> <span class="nav-text">5.安装weditor</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-【推荐】AppetizerIO-所见即所得脚本编辑器"><span class="nav-number">4.0.0.0.6.</span> <span class="nav-text">6.【推荐】AppetizerIO 所见即所得脚本编辑器</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#应用及操作"><span class="nav-number">5.</span> <span class="nav-text">应用及操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#调用uiautomator2的过程"><span class="nav-number">5.0.0.0.1.</span> <span class="nav-text">调用uiautomator2的过程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#设备连接方法，有两种"><span class="nav-number">5.0.0.0.2.</span> <span class="nav-text">设备连接方法，有两种</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#检查并维持设备端守护进程处于运行状态"><span class="nav-number">5.0.0.0.3.</span> <span class="nav-text">检查并维持设备端守护进程处于运行状态</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#停用UiAutomator的守护程序"><span class="nav-number">5.0.0.0.4.</span> <span class="nav-text">停用UiAutomator的守护程序?</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#打开调试开关"><span class="nav-number">5.0.0.0.5.</span> <span class="nav-text">打开调试开关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安装应用，只能从URL安装"><span class="nav-number">5.0.0.0.6.</span> <span class="nav-text">安装应用，只能从URL安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#启动应用"><span class="nav-number">5.0.0.0.7.</span> <span class="nav-text">启动应用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#停止应用"><span class="nav-number">5.0.0.0.8.</span> <span class="nav-text">停止应用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#停止所有正在运行的应用程序"><span class="nav-number">5.0.0.0.9.</span> <span class="nav-text">停止所有正在运行的应用程序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#跳过弹窗，禁止弹窗"><span class="nav-number">5.0.0.0.10.</span> <span class="nav-text">跳过弹窗，禁止弹窗</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Session"><span class="nav-number">5.0.0.0.11.</span> <span class="nav-text">Session</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取设备信息"><span class="nav-number">5.0.0.0.12.</span> <span class="nav-text">获取设备信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取应用信息"><span class="nav-number">5.0.0.0.13.</span> <span class="nav-text">获取应用信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#推拉文件"><span class="nav-number">5.0.0.0.14.</span> <span class="nav-text">推拉文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关键事件"><span class="nav-number">5.0.0.0.15.</span> <span class="nav-text">关键事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#手势与设备的交互"><span class="nav-number">5.0.0.0.16.</span> <span class="nav-text">手势与设备的交互</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#屏幕相关的"><span class="nav-number">5.0.0.0.17.</span> <span class="nav-text">屏幕相关的</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#选择Ui对象"><span class="nav-number">5.0.0.0.18.</span> <span class="nav-text">选择Ui对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取所选ui对象状态及其信息"><span class="nav-number">5.0.0.0.19.</span> <span class="nav-text">获取所选ui对象状态及其信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对选定UI对象的操作"><span class="nav-number">5.0.0.0.20.</span> <span class="nav-text">对选定UI对象的操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#特定UI对象的手势操作"><span class="nav-number">5.0.0.0.21.</span> <span class="nav-text">特定UI对象的手势操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Watcher（-未懂-）"><span class="nav-number">5.0.0.0.22.</span> <span class="nav-text">Watcher（==未懂==）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#全局设置"><span class="nav-number">5.0.0.0.23.</span> <span class="nav-text">全局设置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Input-method"><span class="nav-number">5.0.0.0.24.</span> <span class="nav-text">Input method</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Toast"><span class="nav-number">5.0.0.0.25.</span> <span class="nav-text">Toast</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#XPath"><span class="nav-number">5.0.0.0.26.</span> <span class="nav-text">XPath</span></a></li></ol></li></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -1817,6 +1072,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
 
   
 
@@ -1832,6 +1091,8 @@
 
   
 
+
+  
 
 
   
