@@ -96,16 +96,18 @@
 
 
 
-  <meta name="description" content="人生苦短，我学Python">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Vicの博客">
-<meta property="og:url" content="https://vic.kim/index.html">
+  <meta name="description" content="系统信息12345678910111213141516171819arch 显示机器的处理器架构(1) uname -m 显示机器的处理器架构(2) uname -r 显示正在使用的内核版本 dmidecode -q 显示硬件系统部件 - (SMBIOS / DMI) hdparm -i /dev/hda 罗列一个磁盘的架构特性 hdparm -tT /dev/sda 在磁盘上执行测试性读取操作">
+<meta name="keywords" content="true">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux常用命令总结">
+<meta property="og:url" content="https://vic.kim/2019/05/20/Linux常用命令总结/index.html">
 <meta property="og:site_name" content="Vicの博客">
-<meta property="og:description" content="人生苦短，我学Python">
+<meta property="og:description" content="系统信息12345678910111213141516171819arch 显示机器的处理器架构(1) uname -m 显示机器的处理器架构(2) uname -r 显示正在使用的内核版本 dmidecode -q 显示硬件系统部件 - (SMBIOS / DMI) hdparm -i /dev/hda 罗列一个磁盘的架构特性 hdparm -tT /dev/sda 在磁盘上执行测试性读取操作">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-20T08:27:18.675Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vicの博客">
-<meta name="twitter:description" content="人生苦短，我学Python">
+<meta name="twitter:title" content="Linux常用命令总结">
+<meta name="twitter:description" content="系统信息12345678910111213141516171819arch 显示机器的处理器架构(1) uname -m 显示机器的处理器架构(2) uname -r 显示正在使用的内核版本 dmidecode -q 显示硬件系统部件 - (SMBIOS / DMI) hdparm -i /dev/hda 罗列一个磁盘的架构特性 hdparm -tT /dev/sda 在磁盘上执行测试性读取操作">
 
 
 
@@ -113,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="https://vic.kim/">
+  <link rel="canonical" href="https://vic.kim/2019/05/20/Linux常用命令总结/">
 
 
 
@@ -123,7 +125,7 @@
   };
 </script>
 
-  <title>Vicの博客</title>
+  <title>Linux常用命令总结 | Vicの博客</title>
   
 
 
@@ -171,8 +173,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -214,7 +215,7 @@
         
         
           
-          <li class="menu-item menu-item-home menu-item-active">
+          <li class="menu-item menu-item-home">
 
     
     
@@ -327,514 +328,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/20/SQL基础语句总结/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Vic">
-      <meta itemprop="description" content="人生苦短，我学Python">
-      <meta itemprop="image" content="/images/smile.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Vicの博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/20/SQL基础语句总结/" class="post-title-link" itemprop="url">SQL基础语句总结</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-20 17:09:14 / 修改时间：17:09:46" itemprop="dateCreated datePublished" datetime="2019-05-20T17:09:14+08:00">2019-05-20</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>SQL 是用于访问和处理数据库的标准的计算机语言。</p>
-<h2 id="什么是-SQL？"><a href="#什么是-SQL？" class="headerlink" title="什么是 SQL？"></a>什么是 SQL？</h2><p>SQL 指结构化查询语言<br>SQL 使我们有能力访问数据库<br>SQL 是一种 ANSI 的标准计算机语言<br>编者注：ANSI，美国国家标准化组织</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line">#显示数据库</span><br><span class="line">show databases;</span><br><span class="line"></span><br><span class="line">#判断是否存在数据库test_mysql,有的话先删除</span><br><span class="line">drop database if exists test_mysql;</span><br><span class="line"></span><br><span class="line">#创建数据库</span><br><span class="line">create database test_mysql;</span><br><span class="line"></span><br><span class="line">#删除数据库</span><br><span class="line">drop database test_mysql;</span><br><span class="line"></span><br><span class="line">#使用该数据库</span><br><span class="line">use test_mysql;</span><br><span class="line"></span><br><span class="line">#显示数据库中的表</span><br><span class="line">show tables;</span><br><span class="line"></span><br><span class="line">#先判断表是否存在,存在先删除</span><br><span class="line">drop table if exists student;</span><br><span class="line"></span><br><span class="line">#创建表</span><br><span class="line">create table student(</span><br><span class="line">id int auto_increment primary key,</span><br><span class="line">name varchar(50),</span><br><span class="line">sex varchar(20),</span><br><span class="line">date varchar(50),</span><br><span class="line">)default charset=utf8;</span><br><span class="line"></span><br><span class="line">#删除表</span><br><span class="line">drop table student;</span><br><span class="line"></span><br><span class="line">#查看表的结构</span><br><span class="line">describe student;  #可以简写为desc student;</span><br><span class="line"></span><br><span class="line">#插入数据</span><br><span class="line">insert into student values(null,&apos;test&apos;,&apos;2018-10-2&apos;);</span><br><span class="line"></span><br><span class="line">#查询表中的数据</span><br><span class="line">select * from student;</span><br><span class="line">select id,name from student;</span><br><span class="line"></span><br><span class="line">#修改某一条数据</span><br><span class="line">update student set name=&apos;jack&apos; where id=4;</span><br><span class="line"></span><br><span class="line">#删除数据</span><br><span class="line">delete from student where id=8;</span><br><span class="line"></span><br><span class="line"># and 且</span><br><span class="line">select * from student where date&gt;&apos;2018-1-2&apos; and date&lt;&apos;2018-12-1&apos;;</span><br><span class="line"></span><br><span class="line"># or 或</span><br><span class="line">select * from student where date&lt;&apos;2018-11-2&apos; or date&gt;&apos;2018-12-1&apos;;</span><br><span class="line"></span><br><span class="line">#between</span><br><span class="line">select * from student where date between &apos;2018-1-2&apos; and &apos;2018-12-1&apos;;</span><br><span class="line"></span><br><span class="line">#in 查询制定集合内的数据</span><br><span class="line">select * from student where id in (1,3,5);</span><br><span class="line"></span><br><span class="line">#排序 asc 升序  desc 降序</span><br><span class="line">select * from student order by id asc;</span><br><span class="line"></span><br><span class="line">#分组查询 #聚合函数</span><br><span class="line">select max(id),name,sex from student group by sex;</span><br><span class="line"></span><br><span class="line">select min(date) from student;</span><br><span class="line"></span><br><span class="line">select avg(id) as &apos;Avg&apos; from student;</span><br><span class="line"></span><br><span class="line">select count(*) from student;   #统计表中总数</span><br><span class="line"></span><br><span class="line">select count(sex) from student;   #统计表中性别总数  若有一条数据中sex为空的话,就不予以统计~</span><br><span class="line"></span><br><span class="line">select sum(id) from student;</span><br><span class="line"></span><br><span class="line">#查询第i条以后到第j条的数据(不包括第i条)</span><br><span class="line">select * from student limit 2,5;  #显示3-5条数据</span><br><span class="line"></span><br><span class="line">#修改数据</span><br><span class="line">update student set name=&apos;test&apos; where id=2;</span><br><span class="line">update student set name=&apos;花花&apos;,sex=&apos;女&apos; where id=2</span><br><span class="line">delete from student where id=2;</span><br><span class="line"></span><br><span class="line">#修改表的名字</span><br><span class="line">#格式:alter table tbl_name rename to new_name</span><br><span class="line">alter table student rename to test_1;</span><br><span class="line"></span><br><span class="line">#向表中增加一个字段(列)</span><br><span class="line">#格式:alter table tablename add columnname type;/alter table tablename add(columnname type);</span><br><span class="line">alter table student add  age varchar(20) set default &apos;1&apos;; #set default 设置默认值</span><br><span class="line"></span><br><span class="line">#修改表中某个字段的名字</span><br><span class="line">alter table tablename change columnname newcolumnname type;  #修改一个表的字段名</span><br><span class="line">alter table student change name test_name varchar(50);</span><br><span class="line"></span><br><span class="line">#去掉表中字段age的默认值</span><br><span class="line">alter table student alter age drop default;</span><br><span class="line"></span><br><span class="line">#去掉表中字段age</span><br><span class="line">alter table student drop column age;</span><br><span class="line"></span><br><span class="line">#删除表中主键</span><br><span class="line">alter table student drop primary key;</span><br><span class="line"></span><br><span class="line">#表中增加主键</span><br><span class="line">#alter table add primary key (column1,column2,....,column)</span><br><span class="line">alter table student add primary key (student_id);</span><br><span class="line"></span><br><span class="line">#用文本方式将数据装入数据库表中（例如D:/mysql.txt）</span><br><span class="line">load data local infile &quot;D:/mysql.txt&quot; into table MYTABLE;</span><br><span class="line"></span><br><span class="line">#导入.sql文件命令（例如D:/mysql.sql）</span><br><span class="line">source d:/mysql.sql;  #或者  /. d:/mysql.sql;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/20/Homebrew/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Vic">
-      <meta itemprop="description" content="人生苦短，我学Python">
-      <meta itemprop="image" content="/images/smile.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Vicの博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/20/Homebrew/" class="post-title-link" itemprop="url">Homebrew</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-20 16:55:06" itemprop="dateCreated datePublished" datetime="2019-05-20T16:55:06+08:00">2019-05-20</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/20/item2常用快捷键/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Vic">
-      <meta itemprop="description" content="人生苦短，我学Python">
-      <meta itemprop="image" content="/images/smile.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Vicの博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/20/item2常用快捷键/" class="post-title-link" itemprop="url">item2常用快捷键</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-20 16:34:56 / 修改时间：16:36:21" itemprop="dateCreated datePublished" datetime="2019-05-20T16:34:56+08:00">2019-05-20</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><ul>
-<li>新建标签：command + t</li>
-<li>关闭标签：command + w</li>
-<li>切换标签：command + 数字 command + 左右方向键</li>
-<li>切换全屏：command + enter</li>
-<li>查找：command + f</li>
-</ul>
-<h2 id="分屏"><a href="#分屏" class="headerlink" title="分屏"></a>分屏</h2><ul>
-<li>垂直分屏：command + d</li>
-<li>水平分屏：command + shift + d</li>
-<li>切换屏幕：command + option + 方向键 command + [ 或 command + ]</li>
-<li>查看历史命令：command + ;</li>
-<li>查看剪贴板历史：command + shift + h</li>
-</ul>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
-<li>清除当前行：ctrl + u</li>
-<li>到行首：ctrl + a</li>
-<li>到行尾：ctrl + e</li>
-<li>前进后退：ctrl + f/b (相当于左右方向键)</li>
-<li>上一条命令：ctrl + p</li>
-<li>搜索命令历史：ctrl + r</li>
-<li>删除当前光标的字符：ctrl + d</li>
-<li>删除光标之前的字符：ctrl + h</li>
-<li>删除光标之前的单词：ctrl + w</li>
-<li>删除到文本末尾：ctrl + k</li>
-<li>交换光标处文本：ctrl + t</li>
-<li>清屏1：command + r</li>
-<li>清屏2：ctrl + l</li>
-</ul>
-<h2 id="自带有哪些很实用的功能-快捷键"><a href="#自带有哪些很实用的功能-快捷键" class="headerlink" title="自带有哪些很实用的功能/快捷键"></a>自带有哪些很实用的功能/快捷键</h2><ul>
-<li>⌘ + 数字在各 tab 标签直接来回切换</li>
-<li>选择即复制 + 鼠标中键粘贴，这个很实用</li>
-<li>⌘ + f 所查找的内容会被自动复制</li>
-<li>⌘ + d 横着分屏 / ⌘ + shift + d 竖着分屏</li>
-<li>⌘ + r = clear，而且只是换到新一屏，不会想 clear 一样创建一个空屏</li>
-<li>ctrl + u 清空当前行，无论光标在什么位置</li>
-<li>输入开头命令后 按 ⌘ + ; 会自动列出输入过的命令</li>
-<li>⌘ + shift + h 会列出剪切板历史</li>
-<li>可以在 Preferences &gt; keys 设置全局快捷键调出 iterm，这个也可以用过 Alfred 实现</li>
-</ul>
-<h2 id="我常用的一些快捷键"><a href="#我常用的一些快捷键" class="headerlink" title="我常用的一些快捷键"></a>我常用的一些快捷键</h2><ul>
-<li>⌘ + 1 / 2 左右 tab 之间来回切换，这个在 前面 已经介绍过了</li>
-<li>⌘← / ⌘→ 到一行命令最左边/最右边 ，这个功能同 C+a / C+e</li>
-<li>⌥← / ⌥→ 按单词前移/后移，相当与 C+f / C+b，其实这个功能在Iterm中已经预定义好了，⌥f / ⌥b，看个人习惯了</li>
-</ul>
-<h2 id="设置方法如下"><a href="#设置方法如下" class="headerlink" title="设置方法如下"></a>设置方法如下</h2><p>当然除了这些可以自定义的也不能忘了 linux 下那些好用的组合</p>
-<ul>
-<li>C+a / C+e 这个几乎在哪都可以使用</li>
-<li>C+p / !! 上一条命令</li>
-<li>C+k 从光标处删至命令行尾 (本来 C+u 是删至命令行首，但iterm中是删掉整行)</li>
-<li>C+w A+d 从光标处删至字首/尾</li>
-<li>C+h C+d 删掉光标前后的自负</li>
-<li>C+y 粘贴至光标后</li>
-<li>C+r 搜索命令历史，这个较常用</li>
-</ul>
-<h2 id="选择喜欢的配色方案。"><a href="#选择喜欢的配色方案。" class="headerlink" title="选择喜欢的配色方案。"></a>选择喜欢的配色方案。</h2><p>在Preferences-&gt;Profiles-&gt;Colors的load presets可以选择某个配色方案。也可以自己下载。在网站<a href="http://iterm2colorschemes.com/，几乎可以找到所有可用的配色方案。" target="_blank" rel="noopener">http://iterm2colorschemes.com/，几乎可以找到所有可用的配色方案。</a></p>
-<h2 id="选中即复制"><a href="#选中即复制" class="headerlink" title="选中即复制"></a>选中即复制</h2><p>iterm2有2种好用的选中即复制模式。</p>
-<ul>
-<li>一种是用鼠标，在iterm2中，选中某个路径或者某个词汇，那么，iterm2就自动复制了。</li>
-<li>另一种是无鼠标模式，command+f,弹出iterm2的查找模式，输入要查找并复制的内容的前几个字母，确认找到的是自己的内容之后，输入tab，查找窗口将自动变化内容，并将其复制。如果输入的是shift+tab，则自动将查找内容的左边选中并复制。</li>
-</ul>
-<h2 id="屏幕切割"><a href="#屏幕切割" class="headerlink" title="屏幕切割"></a>屏幕切割</h2><ul>
-<li>command+d：垂直分割；</li>
-<li>command+shift+d：水平分割</li>
-</ul>
-<h2 id="自动完成"><a href="#自动完成" class="headerlink" title="自动完成"></a>自动完成</h2><p>输入打头几个字母，然后输入command+; iterm2将自动列出之前输入过的类似命令。</p>
-<h2 id="剪切历史"><a href="#剪切历史" class="headerlink" title="剪切历史"></a>剪切历史</h2><p>输入command+shift+h，iterm2将自动列出剪切板的历史记录。如果需要将剪切板的历史记录保存到磁盘，在Preferences &gt; General &gt; Save copy/paste history to disk.中设置。</p>
-<h2 id="全屏切换"><a href="#全屏切换" class="headerlink" title="全屏切换"></a>全屏切换</h2><p>command+enter进入与返回全屏模式</p>
-<h2 id="Expose所有Tab"><a href="#Expose所有Tab" class="headerlink" title="Exposé所有Tab"></a>Exposé所有Tab</h2><p>command+option+e,并且可以搜索</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
 
   
 
@@ -866,10 +362,8 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/20/Linux常用命令总结/" class="post-title-link" itemprop="url">Linux常用命令总结</a>
+          <h1 class="post-title" itemprop="name headline">Linux常用命令总结
+
               
             
           </h1>
@@ -933,9 +427,7 @@
       
 
       
-        
-          
-            <h1 id="系统信息"><a href="#系统信息" class="headerlink" title="系统信息"></a>系统信息</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">arch 显示机器的处理器架构(1) </span><br><span class="line">uname -m 显示机器的处理器架构(2) </span><br><span class="line">uname -r 显示正在使用的内核版本 </span><br><span class="line">dmidecode -q 显示硬件系统部件 - (SMBIOS / DMI) </span><br><span class="line">hdparm -i /dev/hda 罗列一个磁盘的架构特性 </span><br><span class="line">hdparm -tT /dev/sda 在磁盘上执行测试性读取操作 </span><br><span class="line">cat /proc/cpuinfo 显示CPU info的信息 </span><br><span class="line">cat /proc/interrupts 显示中断 </span><br><span class="line">cat /proc/meminfo 校验内存使用 </span><br><span class="line">cat /proc/swaps 显示哪些swap被使用 </span><br><span class="line">cat /proc/version 显示内核的版本 </span><br><span class="line">cat /proc/net/dev 显示网络适配器及统计 </span><br><span class="line">cat /proc/mounts 显示已加载的文件系统 </span><br><span class="line">lspci -tv 罗列 PCI 设备 </span><br><span class="line">lsusb -tv 显示 USB 设备 </span><br><span class="line">date 显示系统日期 </span><br><span class="line">cal 2007 显示2007年的日历表 </span><br><span class="line">date 041217002007.00 设置日期和时间 - 月日时分年.秒 </span><br><span class="line">clock -w 将时间修改保存到 BIOS</span><br></pre></td></tr></table></figure>
+        <h1 id="系统信息"><a href="#系统信息" class="headerlink" title="系统信息"></a>系统信息</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">arch 显示机器的处理器架构(1) </span><br><span class="line">uname -m 显示机器的处理器架构(2) </span><br><span class="line">uname -r 显示正在使用的内核版本 </span><br><span class="line">dmidecode -q 显示硬件系统部件 - (SMBIOS / DMI) </span><br><span class="line">hdparm -i /dev/hda 罗列一个磁盘的架构特性 </span><br><span class="line">hdparm -tT /dev/sda 在磁盘上执行测试性读取操作 </span><br><span class="line">cat /proc/cpuinfo 显示CPU info的信息 </span><br><span class="line">cat /proc/interrupts 显示中断 </span><br><span class="line">cat /proc/meminfo 校验内存使用 </span><br><span class="line">cat /proc/swaps 显示哪些swap被使用 </span><br><span class="line">cat /proc/version 显示内核的版本 </span><br><span class="line">cat /proc/net/dev 显示网络适配器及统计 </span><br><span class="line">cat /proc/mounts 显示已加载的文件系统 </span><br><span class="line">lspci -tv 罗列 PCI 设备 </span><br><span class="line">lsusb -tv 显示 USB 设备 </span><br><span class="line">date 显示系统日期 </span><br><span class="line">cal 2007 显示2007年的日历表 </span><br><span class="line">date 041217002007.00 设置日期和时间 - 月日时分年.秒 </span><br><span class="line">clock -w 将时间修改保存到 BIOS</span><br></pre></td></tr></table></figure>
 <h1 id="关机-系统的关机、重启以及登出"><a href="#关机-系统的关机、重启以及登出" class="headerlink" title="关机 (系统的关机、重启以及登出 )"></a>关机 (系统的关机、重启以及登出 )</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">shutdown -h now 关闭系统(1) </span><br><span class="line">init 0 关闭系统(2) </span><br><span class="line">telinit 0 关闭系统(3) </span><br><span class="line">shutdown -h hours:minutes &amp; 按预定时间关闭系统 </span><br><span class="line">shutdown -c 取消按预定时间关闭系统 </span><br><span class="line">shutdown -r now 重启(1) </span><br><span class="line">reboot 重启(2) </span><br><span class="line">logout 注销</span><br></pre></td></tr></table></figure>
 <h1 id="文件和目录"><a href="#文件和目录" class="headerlink" title="文件和目录"></a>文件和目录</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">cd /home 进入 &apos;/ home&apos; 目录</span><br><span class="line">cd .. 返回上一级目录 </span><br><span class="line">cd ../.. 返回上两级目录 </span><br><span class="line">cd 进入个人的主目录 </span><br><span class="line">cd ~user1 进入个人的主目录 </span><br><span class="line">cd - 返回上次所在的目录 </span><br><span class="line">pwd 显示工作路径 </span><br><span class="line">ls 查看目录中的文件 </span><br><span class="line">ls -F 查看目录中的文件 </span><br><span class="line">ls -l 显示文件和目录的详细资料 </span><br><span class="line">ls -a 显示隐藏文件 </span><br><span class="line">ls *[0-9]* 显示包含数字的文件名和目录名 </span><br><span class="line">tree 显示文件和目录由根目录开始的树形结构(1) </span><br><span class="line">lstree 显示文件和目录由根目录开始的树形结构(2) </span><br><span class="line">mkdir dir1 创建一个叫做 &apos;dir1&apos; 的目录</span><br><span class="line">mkdir dir1 dir2 同时创建两个目录 </span><br><span class="line">mkdir -p /tmp/dir1/dir2 创建一个目录树 </span><br><span class="line">rm -f file1 删除一个叫做 &apos;file1&apos; 的文件</span><br><span class="line">rmdir dir1 删除一个叫做 &apos;dir1&apos; 的目录</span><br><span class="line">rm -rf dir1 删除一个叫做 &apos;dir1&apos; 的目录并同时删除其内容 </span><br><span class="line">rm -rf dir1 dir2 同时删除两个目录及它们的内容 </span><br><span class="line">mv dir1 new_dir 重命名/移动 一个目录 </span><br><span class="line">cp file1 file2 复制一个文件 </span><br><span class="line">cp dir/ * . 复制一个目录下的所有文件到当前工作目录 </span><br><span class="line">cp -a /tmp/dir1 . 复制一个目录到当前工作目录 </span><br><span class="line">cp -a dir1 dir2 复制一个目录 </span><br><span class="line">ln -s file1 lnk1 创建一个指向文件或目录的软链接 </span><br><span class="line">ln file1 lnk1 创建一个指向文件或目录的物理链接 </span><br><span class="line">touch -t 0712250000 file1 修改一个文件或目录的时间戳 - (YYMMDDhhmm)</span><br></pre></td></tr></table></figure>
 <h1 id="文件搜索"><a href="#文件搜索" class="headerlink" title="文件搜索"></a>文件搜索</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">find / -name file1 从 &apos;/&apos; 开始进入根文件系统搜索文件和目录 </span><br><span class="line">find / -user user1 搜索属于用户 &apos;user1&apos; 的文件和目录 </span><br><span class="line">find /home/user1 -name \*.bin 在目录 &apos;/ home/user1&apos; 中搜索带有&apos;.bin&apos; 结尾的文件 </span><br><span class="line">find /usr/bin -type f -atime +100 搜索在过去100天内未被使用过的执行文件 </span><br><span class="line">find /usr/bin -type f -mtime -10 搜索在10天内被创建或者修改过的文件 </span><br><span class="line">find / -name \*.rpm -exec chmod 755 &apos;&#123;&#125;&apos; \; 搜索以 &apos;.rpm&apos; 结尾的文件并定义其权限 </span><br><span class="line">find / -xdev -name \*.rpm 搜索以 &apos;.rpm&apos; 结尾的文件，忽略光驱、捷盘等可移动设备 </span><br><span class="line">locate \*.ps 寻找以 &apos;.ps&apos; 结尾的文件 - 先运行 &apos;updatedb&apos; 命令 </span><br><span class="line">whereis halt 显示一个二进制文件、源码或man的位置 </span><br><span class="line">which halt 显示一个二进制文件或可执行文件的完整路径</span><br></pre></td></tr></table></figure>
@@ -948,8 +440,6 @@
 <h1 id="VI命令模式"><a href="#VI命令模式" class="headerlink" title="VI命令模式"></a>VI命令模式</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">G      //到末行</span><br><span class="line">gg     //到首行</span><br><span class="line">dd     //删除行</span><br><span class="line">u      //撤销</span><br><span class="line">yy     //复制一行</span><br><span class="line">nyy    //复制n行 </span><br><span class="line">p      //粘贴</span><br></pre></td></tr></table></figure>
 <h1 id="nmon性能测试监控工具"><a href="#nmon性能测试监控工具" class="headerlink" title="nmon性能测试监控工具"></a>nmon性能测试监控工具</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1、./ nmon -f -t -s 30 -c 180</span><br><span class="line">      -f：按标准格式输出文件：&lt;hostname&gt;_YYYYMMDD_HHMM.nmon；</span><br><span class="line">      -t：输出中包括占用率较高的进程；</span><br><span class="line">      -s 30：每30秒进行一次数据采集</span><br><span class="line">      -c 180：一共采集180次</span><br><span class="line">2、sort -A test.nmon &gt; test.csv  //通过sort命令可以将nmon结果文件转换为csv文件</span><br></pre></td></tr></table></figure>
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ctrl+u   //从光标处向前批量删除命令串  </span><br><span class="line">ctrl+k  //从光标处向后批量删除命令串  </span><br><span class="line">ctrl+a  //将光标移动到最前</span><br><span class="line">ctrl+e  //将光标移动到最后</span><br><span class="line">rz  //运行该命令会弹出一个文件选择窗口，从本地选择文件上传到服务器</span><br><span class="line">sz file //将选定的文件file发送到本地机器</span><br><span class="line">vifm、ranger  //图形的文件管理操作</span><br><span class="line">dos2unix file  //将DOS格式的文本文件转换成UNIX格式</span><br></pre></td></tr></table></figure>
-          
-        
       
     </div>
 
@@ -961,6 +451,9 @@
 
     <div>
       
+        
+
+      
     </div>
 
     
@@ -971,168 +464,67 @@
     
 
     
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Vic</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://vic.kim/2019/05/20/Linux常用命令总结/" title="Linux常用命令总结">https://vic.kim/2019/05/20/Linux常用命令总结/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/20/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Vic">
-      <meta itemprop="description" content="人生苦短，我学Python">
-      <meta itemprop="image" content="/images/smile.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Vicの博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/20/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-20 13:41:56" itemprop="dateCreated datePublished" datetime="2019-05-20T13:41:56+08:00">2019-05-20</time>
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/true/" rel="tag"># true</a>
           
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/20/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/20/item2常用快捷键/" rel="prev" title="item2常用快捷键">
+                item2常用快捷键 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
       
     </footer>
   </div>
@@ -1142,14 +534,15 @@
   </article>
 
 
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -1169,8 +562,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1231,6 +633,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#系统信息"><span class="nav-number">1.</span> <span class="nav-text">系统信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关机-系统的关机、重启以及登出"><span class="nav-number">2.</span> <span class="nav-text">关机 (系统的关机、重启以及登出 )</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件和目录"><span class="nav-number">3.</span> <span class="nav-text">文件和目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件搜索"><span class="nav-number">4.</span> <span class="nav-text">文件搜索</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件的权限-使用-“-”-设置权限，使用-“-“-用于取消"><span class="nav-number">5.</span> <span class="nav-text">文件的权限 - 使用 “+” 设置权限，使用 “-“ 用于取消</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#打包和压缩文件"><span class="nav-number">6.</span> <span class="nav-text">打包和压缩文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#APT-软件工具-Debian-Ubuntu-以及类似系统"><span class="nav-number">7.</span> <span class="nav-text">APT 软件工具 (Debian, Ubuntu 以及类似系统)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看文件内容"><span class="nav-number">8.</span> <span class="nav-text">查看文件内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络配置管理"><span class="nav-number">9.</span> <span class="nav-text">网络配置管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VI底行模式"><span class="nav-number">10.</span> <span class="nav-text">VI底行模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VI命令模式"><span class="nav-number">11.</span> <span class="nav-text">VI命令模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nmon性能测试监控工具"><span class="nav-number">12.</span> <span class="nav-text">nmon性能测试监控工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他"><span class="nav-number">13.</span> <span class="nav-text">其他</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -1368,6 +787,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
 
   
 
@@ -1383,6 +806,8 @@
 
   
 
+
+  
 
 
   
