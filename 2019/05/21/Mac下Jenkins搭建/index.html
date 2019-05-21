@@ -96,17 +96,23 @@
 
 
 
-  <meta name="description" content="人生苦短，我学Python">
+  <meta name="description" content="[TOC] Mac Jenkins搭建这里有两种方法可以用。第一种操作方便，可以直接下载安装包，但是安装包会有一些莫名的问题。第二种操作繁琐一点，需要操作命令行，直接命令行安装： ##直接登录官网下载安装：（不推荐）jenkins的官网下载地址：https://jenkins.io/download/因为这里是Mac下面所以需要选择MacOS的版本：(左边是稳定版本，右边是测试版本，所以一般都是选">
+<meta name="keywords" content="Jenkins">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Homebrew">
-<meta property="og:url" content="https://vic.kim/2019/05/20/Homebrew/index.html">
+<meta property="og:title" content="Mac下Jenkins搭建">
+<meta property="og:url" content="https://vic.kim/2019/05/21/Mac下Jenkins搭建/index.html">
 <meta property="og:site_name" content="Vicの博客">
-<meta property="og:description" content="人生苦短，我学Python">
+<meta property="og:description" content="[TOC] Mac Jenkins搭建这里有两种方法可以用。第一种操作方便，可以直接下载安装包，但是安装包会有一些莫名的问题。第二种操作繁琐一点，需要操作命令行，直接命令行安装： ##直接登录官网下载安装：（不推荐）jenkins的官网下载地址：https://jenkins.io/download/因为这里是Mac下面所以需要选择MacOS的版本：(左边是稳定版本，右边是测试版本，所以一般都是选">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-20T08:55:06.592Z">
+<meta property="og:image" content="https://vic.kim/2019/05/21/Mac下Jenkins搭建/15578018638193.jpg">
+<meta property="og:image" content="https://vic.kim/2019/05/21/Mac下Jenkins搭建/15578025178751.jpg">
+<meta property="og:image" content="https://vic.kim/2019/05/21/Mac下Jenkins搭建/15578027381238.jpg">
+<meta property="og:image" content="https://vic.kim/2019/05/21/Mac下Jenkins搭建/15578050696004.jpg">
+<meta property="og:updated_time" content="2019-05-21T11:07:33.863Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Homebrew">
-<meta name="twitter:description" content="人生苦短，我学Python">
+<meta name="twitter:title" content="Mac下Jenkins搭建">
+<meta name="twitter:description" content="[TOC] Mac Jenkins搭建这里有两种方法可以用。第一种操作方便，可以直接下载安装包，但是安装包会有一些莫名的问题。第二种操作繁琐一点，需要操作命令行，直接命令行安装： ##直接登录官网下载安装：（不推荐）jenkins的官网下载地址：https://jenkins.io/download/因为这里是Mac下面所以需要选择MacOS的版本：(左边是稳定版本，右边是测试版本，所以一般都是选">
+<meta name="twitter:image" content="https://vic.kim/2019/05/21/Mac下Jenkins搭建/15578018638193.jpg">
 
 
 
@@ -114,7 +120,7 @@
 
   
   
-  <link rel="canonical" href="https://vic.kim/2019/05/20/Homebrew/">
+  <link rel="canonical" href="https://vic.kim/2019/05/21/Mac下Jenkins搭建/">
 
 
 
@@ -124,7 +130,7 @@
   };
 </script>
 
-  <title>Homebrew | Vicの博客</title>
+  <title>Mac下Jenkins搭建 | Vicの博客</title>
   
 
 
@@ -344,7 +350,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/20/Homebrew/">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/21/Mac下Jenkins搭建/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Vic">
@@ -361,7 +367,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Homebrew
+          <h1 class="post-title" itemprop="name headline">Mac下Jenkins搭建
 
               
             
@@ -387,12 +393,34 @@
                 
               
 
-              <time title="创建时间：2019-05-20 16:55:06" itemprop="dateCreated datePublished" datetime="2019-05-20T16:55:06+08:00">2019-05-20</time>
+              <time title="创建时间：2019-05-21 18:58:20 / 修改时间：19:07:33" itemprop="dateCreated datePublished" datetime="2019-05-21T18:58:20+08:00">2019-05-21</time>
             
 
+            
+              
+
+              
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Jenkins/" itemprop="url" rel="index"><span itemprop="name">Jenkins</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -422,7 +450,34 @@
       
 
       
-        
+        <p>[TOC]</p>
+<h1 id="Mac-Jenkins搭建"><a href="#Mac-Jenkins搭建" class="headerlink" title="Mac Jenkins搭建"></a>Mac Jenkins搭建</h1><p>这里有两种方法可以用。第一种操作方便，可以直接下载安装包，但是安装包会有一些莫名的问题。第二种操作繁琐一点，需要操作命令行，直接命令行安装：</p>
+<p>##直接登录官网下载安装：（不推荐）<br>jenkins的官网下载地址：<a href="https://jenkins.io/download/" target="_blank" rel="noopener">https://jenkins.io/download/</a><br>因为这里是Mac下面所以需要选择MacOS的版本：(左边是稳定版本，右边是测试版本，所以一般都是选择左边的)<br><img src="//vic.kim/2019/05/21/Mac下Jenkins搭建/15578018638193.jpg" alt="Jenkins官网"><br>下载完成以后直接点击安装就可以了。之后在浏览器输入链接：<a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a> 就行</p>
+<p>##brew下载安装(推荐使用)：</p>
+<ul>
+<li><p>安装安装brew（如果已安装跳过）</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)”</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装Jenkins</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install jenkins</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查找jenkins war地址</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#在安装后有可能找不到war包地址,可以用mdfind命令本地查询下</span><br><span class="line"></span><br><span class="line">mdfind -name jenkins.war</span><br><span class="line">#/usr/local/Cellar/jenkins/2.174/libexec/jenkins.war</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar /usr/local/Cellar/jenkins/2.116/libexec/jenkins.war --httpPort=8080</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>后台启动</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">后台启动的意思是放到后台运行,即使窗口被干掉,jenkins的进程也会存在.</span><br><span class="line"></span><br><span class="line">简单用shell脚本nohup命令放到后台</span><br><span class="line"></span><br><span class="line">启动脚本命令:sh startjenkins.sh</span><br><span class="line"></span><br><span class="line">#!/bin/bash</span><br><span class="line">echo start jenkins</span><br><span class="line"></span><br><span class="line">nohup java -jar /usr/local/Cellar/jenkins/2.116/libexec/jenkins.war --httpPort=8080 &amp;</span><br><span class="line"></span><br><span class="line">echo start end</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>#Jenkins的环境配置</p>
+<p>##启动进入<br>启动成功就可以在浏览器输入<a href="http://localhost:8080后" target="_blank" rel="noopener">http://localhost:8080后</a><br><img src="//vic.kim/2019/05/21/Mac下Jenkins搭建/15578025178751.jpg" alt="Jenkins官网"><br>可以通过红色路径找到文件打开查看密码，Mac下面路径这个<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/Users/你的Mac用户名/.jenkins/secrets/initialAdminPassword</span><br></pre></td></tr></table></figure></p>
+<p>密码：<br><img src="//vic.kim/2019/05/21/Mac下Jenkins搭建/15578027381238.jpg" alt="Jenkins官网"></p>
+<p>##插件安装<br>输入密码进入插件安装的页面，分别是“安装建议的插件”和“选择插件进行安装”，这里我选择左侧的选项（“安装建议的插件”），然后等待自动安装完成<br>如果提示install failure，右下角有个retry，重试一下就好了</p>
+<p>##创建第一个管理员账户<br><img src="//vic.kim/2019/05/21/Mac下Jenkins搭建/15578050696004.jpg" alt="Jenkins官网"><br>填写完表格，点击save and finish，jenkins的初始配置就完成啦<br>然后要重启一下，填入刚才输入的admin账号密码才能登录进去</p>
+<p>#jenkins常用操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">访问:http://localhost:8080/login?from=%2F</span><br><span class="line"></span><br><span class="line">退出:http://localhost:8080/exit </span><br><span class="line"></span><br><span class="line">重启:http://localhost:8080/restart </span><br><span class="line"></span><br><span class="line">重新加载:http://localhost:8080/reload</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -463,7 +518,7 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="https://vic.kim/2019/05/20/Homebrew/" title="Homebrew">https://vic.kim/2019/05/20/Homebrew/</a>
+    <a href="https://vic.kim/2019/05/21/Mac下Jenkins搭建/" title="Mac下Jenkins搭建">https://vic.kim/2019/05/21/Mac下Jenkins搭建/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -474,6 +529,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Jenkins/" rel="tag"># Jenkins</a>
+          
+        </div>
+      
 
       
       
@@ -483,8 +544,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/20/item2常用快捷键/" rel="next" title="item2常用快捷键">
-                <i class="fa fa-chevron-left"></i> item2常用快捷键
+              <a href="/2019/05/20/UIAutomator2的使用/" rel="next" title="UIAutomator2的使用">
+                <i class="fa fa-chevron-left"></i> UIAutomator2的使用
               </a>
             
           </div>
@@ -492,10 +553,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/20/SQL基础语句总结/" rel="prev" title="SQL基础语句总结">
-                SQL基础语句总结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -539,8 +596,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -630,6 +696,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mac-Jenkins搭建"><span class="nav-number">1.</span> <span class="nav-text">Mac Jenkins搭建</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
