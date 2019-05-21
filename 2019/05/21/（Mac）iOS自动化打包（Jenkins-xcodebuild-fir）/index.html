@@ -96,13 +96,13 @@
 
 
 
-  <meta name="description" content="环境   名称 版本     macOS 10.14.4 (18E226)   Xcode Version 10.2.1   ruby 2.6.3   fir-cli 1.7.1    下载安装Jenkins  Jenkins是基于Java环境的，所以电脑上必须先安装Java，Jenkins官网（https://jenkins.io） 下载安装Jenkins。具体安装过程可参考 Mac Jenki">
+  <meta name="description" content="环境   名称 版本     macOS 10.14.4 (18E226)   Xcode Version 10.2.1   ruby 2.6.3   fir-cli 1.7.1    下载安装Jenkins  Jenkins是基于Java环境的，所以电脑上必须先安装Java，Jenkins官网（https://jenkins.io） 下载安装Jenkins。具体安装过程可参考 Mac Jenki">
 <meta name="keywords" content="Jenkins">
 <meta property="og:type" content="article">
 <meta property="og:title" content="（Mac）iOS自动化打包（Jenkins+xcodebuild+fir）">
 <meta property="og:url" content="https://vic.kim/2019/05/21/（Mac）iOS自动化打包（Jenkins-xcodebuild-fir）/index.html">
 <meta property="og:site_name" content="Vicの博客">
-<meta property="og:description" content="环境   名称 版本     macOS 10.14.4 (18E226)   Xcode Version 10.2.1   ruby 2.6.3   fir-cli 1.7.1    下载安装Jenkins  Jenkins是基于Java环境的，所以电脑上必须先安装Java，Jenkins官网（https://jenkins.io） 下载安装Jenkins。具体安装过程可参考 Mac Jenki">
+<meta property="og:description" content="环境   名称 版本     macOS 10.14.4 (18E226)   Xcode Version 10.2.1   ruby 2.6.3   fir-cli 1.7.1    下载安装Jenkins  Jenkins是基于Java环境的，所以电脑上必须先安装Java，Jenkins官网（https://jenkins.io） 下载安装Jenkins。具体安装过程可参考 Mac Jenki">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://vic.kim/2019/05/21/（Mac）iOS自动化打包（Jenkins-xcodebuild-fir）/15580614334038.jpg">
 <meta property="og:image" content="https://vic.kim/2019/05/21/（Mac）iOS自动化打包（Jenkins-xcodebuild-fir）/15580618394386.jpg">
@@ -112,10 +112,10 @@
 <meta property="og:image" content="https://vic.kim/2019/05/21/（Mac）iOS自动化打包（Jenkins-xcodebuild-fir）/15580622588816.jpg">
 <meta property="og:image" content="https://vic.kim/2019/05/21/（Mac）iOS自动化打包（Jenkins-xcodebuild-fir）/15580626158656.jpg">
 <meta property="og:image" content="https://vic.kim/2019/05/21/（Mac）iOS自动化打包（Jenkins-xcodebuild-fir）/15580629118728.jpg">
-<meta property="og:updated_time" content="2019-05-21T12:36:21.444Z">
+<meta property="og:updated_time" content="2019-05-21T12:39:22.608Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（Mac）iOS自动化打包（Jenkins+xcodebuild+fir）">
-<meta name="twitter:description" content="环境   名称 版本     macOS 10.14.4 (18E226)   Xcode Version 10.2.1   ruby 2.6.3   fir-cli 1.7.1    下载安装Jenkins  Jenkins是基于Java环境的，所以电脑上必须先安装Java，Jenkins官网（https://jenkins.io） 下载安装Jenkins。具体安装过程可参考 Mac Jenki">
+<meta name="twitter:description" content="环境   名称 版本     macOS 10.14.4 (18E226)   Xcode Version 10.2.1   ruby 2.6.3   fir-cli 1.7.1    下载安装Jenkins  Jenkins是基于Java环境的，所以电脑上必须先安装Java，Jenkins官网（https://jenkins.io） 下载安装Jenkins。具体安装过程可参考 Mac Jenki">
 <meta name="twitter:image" content="https://vic.kim/2019/05/21/（Mac）iOS自动化打包（Jenkins-xcodebuild-fir）/15580614334038.jpg">
 
 
@@ -397,7 +397,7 @@
                 
               
 
-              <time title="创建时间：2019-05-21 20:32:37 / 修改时间：20:36:21" itemprop="dateCreated datePublished" datetime="2019-05-21T20:32:37+08:00">2019-05-21</time>
+              <time title="创建时间：2019-05-21 20:32:37 / 修改时间：20:39:22" itemprop="dateCreated datePublished" datetime="2019-05-21T20:32:37+08:00">2019-05-21</time>
             
 
             
@@ -481,7 +481,11 @@
 </tbody>
 </table>
 <h1 id="下载安装Jenkins"><a href="#下载安装Jenkins" class="headerlink" title="下载安装Jenkins"></a>下载安装Jenkins</h1><p><img src="//vic.kim/2019/05/21/（Mac）iOS自动化打包（Jenkins-xcodebuild-fir）/15580614334038.jpg" alt></p>
-<p> Jenkins是基于Java环境的，所以电脑上必须先安装Java，Jenkins官网（<a href="https://jenkins.io" target="_blank" rel="noopener">https://jenkins.io</a>）<br> 下载安装Jenkins。具体安装过程可参考 Mac Jenkins搭建<br> 安装完成后会自动打开<a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a>这个网址，如果没有自动打开可以手动打开。有些教程还有添加<code>Xcode integration</code> 、<code>Keychains and Provisioning Profiles Plugin</code>之类插件的步骤，我们不需要。因为我们是用xcode脚本构建，所以不需要安装任何插件。</p>
+<ul>
+<li>Jenkins是基于Java环境的，所以电脑上必须先安装Java，Jenkins官网（<a href="https://jenkins.io" target="_blank" rel="noopener">https://jenkins.io</a>）</li>
+<li>下载安装Jenkins。具体安装过程可参考 <a href="https://vic.kim/2019/05/21/Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/">Mac Jenkins搭建</a></li>
+<li>安装完成后会自动打开<a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a>这个网址，如果没有自动打开可以手动打开。有些教程还有添加<code>Xcode integration</code> 、<code>Keychains and Provisioning Profiles Plugin</code>之类插件的步骤，我们不需要。因为我们是用xcode脚本构建，所以不需要安装任何插件。</li>
+</ul>
 <h1 id="新建任务"><a href="#新建任务" class="headerlink" title="新建任务"></a>新建任务</h1><h2 id="构建一个自由风格的软件项目"><a href="#构建一个自由风格的软件项目" class="headerlink" title="构建一个自由风格的软件项目"></a>构建一个自由风格的软件项目</h2><p>点击左侧菜单中的新建任务,然后在新的界面输入项目名字,选择<code>构建一个自由风格的软件项目</code>选项完成创建<br><img src="//vic.kim/2019/05/21/（Mac）iOS自动化打包（Jenkins-xcodebuild-fir）/15580618394386.jpg" alt></p>
 <h2 id="填写工程相关介绍"><a href="#填写工程相关介绍" class="headerlink" title="填写工程相关介绍"></a>填写工程相关介绍</h2><p><img src="//vic.kim/2019/05/21/（Mac）iOS自动化打包（Jenkins-xcodebuild-fir）/15580620272901.jpg" alt="-w960"></p>
 <h2 id="源码管理"><a href="#源码管理" class="headerlink" title="源码管理"></a>源码管理</h2><p>  源码管理，使用github选择git<br>  <img src="//vic.kim/2019/05/21/（Mac）iOS自动化打包（Jenkins-xcodebuild-fir）/15580620765523.jpg" alt="-w949"></p>
