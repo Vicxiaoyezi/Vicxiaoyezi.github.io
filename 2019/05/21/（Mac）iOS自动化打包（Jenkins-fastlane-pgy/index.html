@@ -105,7 +105,7 @@
 <meta property="og:description" content="环境   名称 版本     macOS 10.14.4 (18E226)   Xcode Version 10.2.1   ruby 2.6.3   fastlane 2.123.0    Fastlane安装Fastlane是一套使用Ruby写的自动化工具集，用于iOS和Android的自动化打包、发布等工作，可以节省大量的时间。安装过程如下 安装ruby（brew安装最新版）12345678">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://vic.kim/2019/05/21/（Mac）iOS自动化打包（Jenkins-fastlane-pgy/15584430633082.jpg">
-<meta property="og:updated_time" content="2019-05-21T13:00:57.602Z">
+<meta property="og:updated_time" content="2019-05-21T13:12:48.727Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（Mac）iOS自动化打包（Jenkins+fastlane+pgy">
 <meta name="twitter:description" content="环境   名称 版本     macOS 10.14.4 (18E226)   Xcode Version 10.2.1   ruby 2.6.3   fastlane 2.123.0    Fastlane安装Fastlane是一套使用Ruby写的自动化工具集，用于iOS和Android的自动化打包、发布等工作，可以节省大量的时间。安装过程如下 安装ruby（brew安装最新版）12345678">
@@ -390,7 +390,7 @@
                 
               
 
-              <time title="创建时间：2019-05-21 20:41:37 / 修改时间：21:00:57" itemprop="dateCreated datePublished" datetime="2019-05-21T20:41:37+08:00">2019-05-21</time>
+              <time title="创建时间：2019-05-21 20:41:37 / 修改时间：21:12:48" itemprop="dateCreated datePublished" datetime="2019-05-21T20:41:37+08:00">2019-05-21</time>
             
 
             
@@ -510,11 +510,11 @@
 <h1 id="Jenkins配置"><a href="#Jenkins配置" class="headerlink" title="Jenkins配置"></a>Jenkins配置</h1><ul>
 <li>点击新建，输入名称，构建一个自由风格的软件项目</li>
 <li>添加Git仓库地址，可以是HTTP也可以是SSH。点击Add</li>
-<li>构建，点击“添加构建步骤”，选择Execute shell。<br>  <img src="//vic.kim/2019/05/21/（Mac）iOS自动化打包（Jenkins-fastlane-pgy/15584430633082.jpg" alt></li>
-</ul>
-<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/usr/local/bin:$PATH</span><br><span class="line">fastlane development_build</span><br><span class="line"></span><br><span class="line">filepath=`pwd`fastlane/build/Ruguo*.api</span><br><span class="line">file=`ls $filepath`</span><br><span class="line">if [ $uploadPgy = true ]</span><br><span class="line">then</span><br><span class="line">    curl -F &quot;installType=2&quot; -F &quot;password=alpha&quot; -F &quot;file=@$file&quot; -F &quot;uKey=542e73b113b5908da8b028805bf7e837&quot; -F &quot;_api_key=8e860ee5ba4996f9b19e56c28e07846a&quot; https://qiniu-storage.pgyer.com/apiv1/app/upload</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-</code></pre><ul>
-<li>添加完成之后保存，点击立即构建</li>
+<li><p>构建，点击“添加构建步骤”，选择Execute shell。<br>  <img src="//vic.kim/2019/05/21/（Mac）iOS自动化打包（Jenkins-fastlane-pgy/15584430633082.jpg" alt></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/usr/local/bin:$PATH</span><br><span class="line">fastlane development_build</span><br><span class="line"></span><br><span class="line">filepath=`pwd`fastlane/build/Ruguo*.api</span><br><span class="line">file=`ls $filepath`</span><br><span class="line">if [ $uploadPgy = true ]</span><br><span class="line">then</span><br><span class="line">    curl -F &quot;installType=2&quot; -F &quot;password=alpha&quot; -F &quot;file=@$file&quot; -F &quot;uKey=542e73b113b5908da8b028805bf7e837&quot; -F &quot;_api_key=8e860ee5ba4996f9b19e56c28e07846a&quot; https://qiniu-storage.pgyer.com/apiv1/app/upload</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加完成之后保存，点击立即构建</p>
+</li>
 </ul>
 
       
