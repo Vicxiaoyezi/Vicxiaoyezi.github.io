@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[Hexo Next 主题中添加本地搜索功能]]></title>
     <url>%2F2019%2F05%2F22%2FHexo%20Next%20%E4%B8%BB%E9%A2%98%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD%2F</url>
-    <content type="text"><![CDATA[关于随着时间的推移，个人站点的博客文章会越来越多，那怎么样才能快速找到你印象中的文章呢？增加一个站点内的搜索功能是非常有必要和方便的。 安装本地搜索插件 hexo-generator-search在博客根目录下执行下列命令 1npm install hexo-generator-search --save 安装之后，会在站点目录的 public 文件夹下创建一个 search.xml 文件。 修改全局配置文件_config.yml（博客根目录）在站点配置文件 _config.yml 中添加如下内容： 123456# Search search: path: ./public/search.xml field: post format: html limit: 10000 path：索引文件的路径，相对于站点根目录field：搜索范围，默认是 post，还可以选择 page、all，设置成 all 表示搜索所有页面limit：限制搜索的条目数3、主题配置文件在主题配置文件 _config.yml 中找到如下内容： local_search: enable: true trigger: auto top_n_per_article: 1确保 enable 设成 true。 top_n_per_article 字段表示在每篇文章中显示的搜索结果数量，设成 -1 会显示每篇文章的所有搜索结果数量。 然后，重新部署网站即可愉快的使用本地搜索功能了，效果参见本网站右侧的 搜索 菜单。]]></content>
+    <content type="text"><![CDATA[关于随着时间的推移，个人站点的博客文章会越来越多，那怎么样才能快速找到你印象中的文章呢？增加一个站点内的搜索功能是非常有必要和方便的。 安装本地搜索插件 hexo-generator-search在博客根目录下执行下列命令 1npm install hexo-generator-search --save 安装之后，会在站点目录的 public 文件夹下创建一个 search.xml 文件。 修改全局配置文件_config.yml（博客根目录）在站点配置文件 _config.yml 中添加如下内容： 123456# Search search: path: ./public/search.xml field: post format: html limit: 10000 path：索引文件的路径，相对于站点根目录field：搜索范围，默认是 post，还可以选择 page、all，设置成 all 表示搜索所有页面limit：限制搜索的条目数 hexo主题配置文件（/themes/next/_config.yml）在主题配置文件 _config.yml 中找到如下内容： 1234local_search: enable: true trigger: auto top_n_per_article: 1 修改local_search的enable为true top_n_per_article字段表示在每篇文章中显示的搜索结果数量，设成 -1 会显示每篇文章的所有搜索结果数量。 重新部署然后执行以下命令，重新部署网站即可愉快的使用本地搜索功能了 1hexo clean &amp;&amp; hexo g &amp;&amp; hexo d]]></content>
       <categories>
         <category>Hexo Next</category>
       </categories>
