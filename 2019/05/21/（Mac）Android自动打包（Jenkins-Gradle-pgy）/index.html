@@ -501,10 +501,10 @@
 
       
         <h1 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h1><h2 id="配置Android-ADB环境"><a href="#配置Android-ADB环境" class="headerlink" title="配置Android ADB环境"></a>配置Android ADB环境</h2><p>关于Android整个开发环境的搭建，SDK的下载安装这里就不赘述了，配置adb环境可以参考、</p>
-<p>这里查看adb是否配置成功可以在终端输入<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb version</span><br></pre></td></tr></table></figure></p>
-<p>显示以下信息则证明配置成功<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Android Debug Bridge version 1.0.41</span><br><span class="line">Version 28.0.3-5475833</span><br><span class="line">Installed as /Users/vic/Library/Android/sdk/platform-tools/adb</span><br></pre></td></tr></table></figure></p>
+<p>这里查看adb是否配置成功可以在终端输入<br><figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">adb <span class="built_in">version</span></span><br></pre></td></tr></table></figure></p>
+<p>显示以下信息则证明配置成功<br><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">Android <span class="builtin-name">Debug</span><span class="built_in"> Bridge </span>version 1.0.41</span><br><span class="line">Version 28.0.3-5475833</span><br><span class="line">Installed as /Users/vic/Library/Android/sdk/platform-tools/adb</span><br></pre></td></tr></table></figure></p>
 <h2 id="配置Gradle环境"><a href="#配置Gradle环境" class="headerlink" title="配置Gradle环境"></a>配置Gradle环境</h2><p>配置gradle环境可以看一下我之前写的这篇文章Mac 配置gradle环境变量.</p>
-<p>这里查看gradle是否配置成功可以在终端输入<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gradle -version</span><br></pre></td></tr></table></figure></p>
+<p>这里查看gradle是否配置成功可以在终端输入<br><figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">gradle -<span class="built_in">version</span></span><br></pre></td></tr></table></figure></p>
 <p>显示如下信息则表示配置成功<br><img src="//vic.kim/2019/05/21/（Mac）Android自动打包（Jenkins-Gradle-pgy）/15578015087253.jpg" alt="-w547"></p>
 <h1 id="下载安装Jenkins"><a href="#下载安装Jenkins" class="headerlink" title="下载安装Jenkins"></a>下载安装Jenkins</h1><p>这里有两种方法可以用。参考<a href="https://vic.kim/2019/05/21/Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/#more">Mac下Jenkins搭建</a></p>
 <h1 id="Jenkins环境变量的配置"><a href="#Jenkins环境变量的配置" class="headerlink" title="Jenkins环境变量的配置"></a>Jenkins环境变量的配置</h1><h2 id="左侧系统管理-gt-系统设置，进入系统设置页面"><a href="#左侧系统管理-gt-系统设置，进入系统设置页面" class="headerlink" title="左侧系统管理-&gt;系统设置，进入系统设置页面"></a>左侧系统管理-&gt;系统设置，进入系统设置页面</h2><p>全局属性下的环境变量，添加键值对<br><img src="//vic.kim/2019/05/21/（Mac）Android自动打包（Jenkins-Gradle-pgy）/15578054807625.jpg" alt="-w1284"></p>
@@ -532,12 +532,12 @@
 </li>
 </ul>
 <h3 id="构建触发器"><a href="#构建触发器" class="headerlink" title="构建触发器"></a>构建触发器</h3><ul>
-<li>选择Build periodically，输入：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">H 2 * * *</span><br></pre></td></tr></table></figure>
+<li>选择Build periodically，输入：<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">H 2 <span class="bullet">* *</span> *</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>周期性的执行编译任务，强制每天凌晨两点构建一次<br><img src="//vic.kim/2019/05/21/（Mac）Android自动打包（Jenkins-Gradle-pgy）/15578167070841.jpg" alt="-w945"></p>
 <ul>
-<li>选择Poll SCM，输入<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">H/5 * * * *</span><br></pre></td></tr></table></figure>
+<li>选择Poll SCM，输入<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">H/5 <span class="bullet">* *</span> <span class="bullet">* *</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>表示的就是每5分钟检查一次源码变化。<br><img src="//vic.kim/2019/05/21/（Mac）Android自动打包（Jenkins-Gradle-pgy）/15578168071497.jpg" alt="-w934"></p>
@@ -553,18 +553,18 @@
 <ul>
 <li>Gradle选择你配置的版本</li>
 <li><p>Task中填写构建执行的语句（注意：不要选择Use Gradle Wrapper），一般要填写“clean assembleRelease”。先clean再build</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">clean</span><br><span class="line">assembleReleaseChannels -PchannelFile=markets.txt</span><br></pre></td></tr></table></figure>
+  <figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">clean</span><br><span class="line">assembleReleaseChannels <span class="attribute">-PchannelFile</span>=markets.txt</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在Root Build script中输入你想要包生成的位置，在Build File中输入项目的build.gradle的路径。即在Root Build script路径的后边加/build.gradle，可以不输入这两项，项目会有个默认构建地址，具体地址可以再jenkins的系统管理中查看。 </p>
 </li>
 </ul>
 </li>
 <li><p>继续添加构建步骤，选择“Execute shell”，在command中填入（上传蒲公英）</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">./gitswitch dev/ci</span><br><span class="line">cd Source</span><br><span class="line"></span><br><span class="line">filepath=`pwd`/app/build/outputs/channels/*pgy*.apk</span><br><span class="line">file=`ls $filepath`</span><br><span class="line">if [ $uploadPgy = true ]</span><br><span class="line">then</span><br><span class="line">    curl -F &quot;installType=2&quot; -F &quot;password=alpha&quot; -F &quot;file=@$file&quot; -F &quot;uKey=542e73b113b5908da8b028805bf7e837&quot; -F &quot;_api_key=8e860ee5ba4996f9b19e56c28e07846a&quot; https://qiniu-storage.pgyer.com/apiv1/app/upload</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./gitswitch dev/ci</span><br><span class="line"><span class="built_in">cd</span> Source</span><br><span class="line"></span><br><span class="line">filepath=`<span class="built_in">pwd</span>`/app/build/outputs/channels/*pgy*.apk</span><br><span class="line">file=`ls <span class="variable">$filepath</span>`</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$uploadPgy</span> = <span class="literal">true</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">    curl -F <span class="string">"installType=2"</span> -F <span class="string">"password=alpha"</span> -F <span class="string">"file=@<span class="variable">$file</span>"</span> -F <span class="string">"uKey=542e73b113b5908da8b028805bf7e837"</span> -F <span class="string">"_api_key=8e860ee5ba4996f9b19e56c28e07846a"</span> https://qiniu-storage.pgyer.com/apiv1/app/upload</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="构建后操作"><a href="#构建后操作" class="headerlink" title="构建后操作"></a>构建后操作</h3><p>Archive the artifacts（归档成品），输入内容<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">**/app/build/outputs/channels/*.apk, **/apk-checker-result.*</span><br></pre></td></tr></table></figure></p>
-<h2 id="上传蒲公英"><a href="#上传蒲公英" class="headerlink" title="上传蒲公英"></a>上传蒲公英</h2><p>增加一个构建步骤，选择Execute shell，在command中填入<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">./gitswitch dev/ci</span><br><span class="line">cd Source</span><br><span class="line"></span><br><span class="line">filepath=`pwd`/app/build/outputs/channels/*pgy*.apk</span><br><span class="line">file=`ls $filepath`</span><br><span class="line">if [ $uploadPgy = true ]</span><br><span class="line">then</span><br><span class="line">    curl -F &quot;installType=2&quot; -F &quot;password=alpha&quot; -F &quot;file=@$file&quot; -F &quot;uKey=542e73b113b5908da8b028805bf7e837&quot; -F &quot;_api_key=8e860ee5ba4996f9b19e56c28e07846a&quot; https://qiniu-storage.pgyer.com/apiv1/app/upload</span><br><span class="line">fi</span><br></pre></td></tr></table></figure></p>
+<h3 id="构建后操作"><a href="#构建后操作" class="headerlink" title="构建后操作"></a>构建后操作</h3><p>Archive the artifacts（归档成品），输入内容<br><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">**<span class="regexp">/app/</span>build<span class="regexp">/outputs/</span>channels<span class="regexp">/*.apk, **/</span>apk-checker-result.*</span><br></pre></td></tr></table></figure></p>
+<h2 id="上传蒲公英"><a href="#上传蒲公英" class="headerlink" title="上传蒲公英"></a>上传蒲公英</h2><p>增加一个构建步骤，选择Execute shell，在command中填入<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./gitswitch dev/ci</span><br><span class="line"><span class="built_in">cd</span> Source</span><br><span class="line"></span><br><span class="line">filepath=`<span class="built_in">pwd</span>`/app/build/outputs/channels/*pgy*.apk</span><br><span class="line">file=`ls <span class="variable">$filepath</span>`</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$uploadPgy</span> = <span class="literal">true</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">    curl -F <span class="string">"installType=2"</span> -F <span class="string">"password=alpha"</span> -F <span class="string">"file=@<span class="variable">$file</span>"</span> -F <span class="string">"uKey=542e73b113b5908da8b028805bf7e837"</span> -F <span class="string">"_api_key=8e860ee5ba4996f9b19e56c28e07846a"</span> https://qiniu-storage.pgyer.com/apiv1/app/upload</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure></p>
 <p>蒲公英官方文档地址<a href="https://www.pgyer.com/doc/api#uploadApp" target="_blank" rel="noopener">https://www.pgyer.com/doc/api#uploadApp</a></p>
 <h1 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h1><p>构建历史-&gt;控制台输出，可以查看构建日志，根据报错来具体定位问题<br><img src="//vic.kim/2019/05/21/（Mac）Android自动打包（Jenkins-Gradle-pgy）/15578187257664.jpg" alt="-w370"><br><img src="//vic.kim/2019/05/21/（Mac）Android自动打包（Jenkins-Gradle-pgy）/15578188007960.jpg" alt="-w1064"></p>
 

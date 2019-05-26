@@ -495,7 +495,7 @@
 <ol>
 <li>打开终端</li>
 <li><p>输入ls -al ~/.ssh以查看是否存在现有SSH密钥：</p>
- <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ls -al ~/.ssh</span><br><span class="line"># 列出.ssh目录中的文件(如果存在的话)</span><br></pre></td></tr></table></figure>
+ <figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ls</span> -al ~<span class="string">/.ssh</span></span><br><span class="line"><span class="comment"># 列出.ssh目录中的文件(如果存在的话)</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>检查目录列表以查看您是否已拥有公共SSH密钥。</p>
 <ul>
@@ -507,7 +507,7 @@
 <h1 id="如果本地没有的话，我们要自己生成新的SSH秘钥"><a href="#如果本地没有的话，我们要自己生成新的SSH秘钥" class="headerlink" title="如果本地没有的话，我们要自己生成新的SSH秘钥"></a>如果本地没有的话，我们要自己生成新的SSH秘钥</h1><ol>
 <li>开放式终端。</li>
 <li><p>输入下面的命令，记得替换您的GitHub电子邮件地址。</p>
- <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</span><br><span class="line">#&quot;your_email@example.com&quot;为示例邮箱，此处应填写为你在github上面注册的邮箱。</span><br></pre></td></tr></table></figure>
+ <figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -<span class="selector-tag">b</span> <span class="number">4096</span> -C <span class="string">"your_email@example.com"</span></span><br><span class="line">#<span class="string">"your_email@example.com"</span>为示例邮箱，此处应填写为你在github上面注册的邮箱。</span><br></pre></td></tr></table></figure>
 <p> 这将使用提供的电子邮件作为标签创建一个新的ssh密钥。</p>
 <blockquote>
 <p>Generating public/private rsa key pair.</p>
@@ -530,7 +530,7 @@
 </blockquote>
 <h1 id="将SSH密钥添加到ssh-agent"><a href="#将SSH密钥添加到ssh-agent" class="headerlink" title="将SSH密钥添加到ssh-agent"></a>将SSH密钥添加到ssh-agent</h1><ol>
 <li><p>在后台启动ssh-agent</p>
- <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">eval &quot;$(ssh-agent -s)&quot;</span><br><span class="line">&gt; Agent pid 59566</span><br></pre></td></tr></table></figure>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br><span class="line">&gt; Agent pid 59566</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>终端输入命令：<br> <code>ssh-add -K ~/.ssh/id_rsa</code><br> 如果设置密码，此时会要求输入passphrase（输入步骤 二 中的 passphrase就好 ）</p>
 </li>
@@ -541,7 +541,7 @@
 </blockquote>
 <h1 id="添加SSH-key-到Github-上"><a href="#添加SSH-key-到Github-上" class="headerlink" title="添加SSH key 到Github 上"></a>添加SSH key 到Github 上</h1><ol>
 <li><p>将SSH密钥复制到剪贴板。</p>
- <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pbcopy &lt; ~/.ssh/id_rsa.pub</span><br><span class="line"># 复制id_rsa.pub的内容到剪贴板</span><br></pre></td></tr></table></figure>
+ <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">pbcopy &lt; ~<span class="regexp">/.ssh/i</span>d_rsa.pub</span><br><span class="line"><span class="comment"># 复制id_rsa.pub的内容到剪贴板</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <pre><code>提示：如果pbcopy不起作用，您可以找到隐藏.ssh文件夹，在文本编辑器中打开id_rsa.pub文件，然后将文件内容复制到剪贴板。
 </code></pre></blockquote>

@@ -487,31 +487,31 @@
         <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>A library to communicate with services of Apple iOS devices using native protocols.</p>
 <h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><ul>
 <li><p>打印app列表</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ideviceinstaller -l</span><br></pre></td></tr></table></figure>
+  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">ideviceinstaller -l</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>查看当前已连接的设备的UUID</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">idevice_id -l</span><br></pre></td></tr></table></figure>
+  <figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">idevice_id</span> -l</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>获取设备信息</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ideviceinfo</span><br></pre></td></tr></table></figure>
+  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">ideviceinfo</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>获取设备时间</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">idevicedate</span><br></pre></td></tr></table></figure>
+  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">idevicedate</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>重启设备</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">idevicediagnostics restart</span><br></pre></td></tr></table></figure>
+  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">idevicediagnostics restart</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>安装ipa包，卸载应用</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ideviceinstaller -i xxx.ipa</span><br><span class="line">//命令安装一个ipa文件到手机上，如果是企业签名的，非越狱机器也可以直接安装了。</span><br><span class="line"></span><br><span class="line">ideviceinstaller -U [bundleID]</span><br><span class="line">//命令卸载应用，需要知道此应用的bundleID</span><br></pre></td></tr></table></figure>
+  <figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">ideviceinstaller -<span class="selector-tag">i</span> xxx.ipa</span><br><span class="line"><span class="comment">//命令安装一个ipa文件到手机上，如果是企业签名的，非越狱机器也可以直接安装了。</span></span><br><span class="line"></span><br><span class="line">ideviceinstaller -U [bundleID]</span><br><span class="line"><span class="comment">//命令卸载应用，需要知道此应用的bundleID</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>查看系统日志</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">idevicesyslog</span><br><span class="line">//屏幕上即可看见手机上所有的日志</span><br><span class="line"></span><br><span class="line">idevicesyslog &gt;&gt; iphone.log &amp;</span><br><span class="line">//该命令是将日志导入到iphone.log这个文件，并且是在后台执行。</span><br><span class="line">//然后用tail -f和grep查看log</span><br><span class="line"></span><br><span class="line">tail -f iphone.log</span><br><span class="line">tail -f iphone.log | grep &apos;WeChat’  # 查看包含WeChat的行</span><br></pre></td></tr></table></figure>
+  <figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">idevicesyslog</span><br><span class="line"><span class="comment">//屏幕上即可看见手机上所有的日志</span></span><br><span class="line"></span><br><span class="line">idevicesyslog &gt;&gt; iphone.<span class="built_in">log</span> <span class="meta">&amp;</span></span><br><span class="line"><span class="comment">//该命令是将日志导入到iphone.log这个文件，并且是在后台执行。</span></span><br><span class="line"><span class="comment">//然后用tail -f和grep查看log</span></span><br><span class="line"></span><br><span class="line">tail -f iphone.<span class="built_in">log</span></span><br><span class="line">tail -f iphone.<span class="built_in">log</span> <span class="string">| grep 'WeChat’  # 查看包含WeChat的行</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>截图</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">idevicescreenshot</span><br><span class="line">//如果在使用截图的时候出现报错信息，那么就去把相应版本的DeveloperDiskImage的两个文件复制到libimobiledevice文件下面。</span><br><span class="line"></span><br><span class="line">路径：</span><br><span class="line">/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/DeviceSupport/对应版本/</span><br><span class="line"></span><br><span class="line">获取版本号命令：</span><br><span class="line">ideviceinfo -k ProductVersion</span><br><span class="line"></span><br><span class="line">安装DeveloperDiskImage命令：</span><br><span class="line">ideviceimagemounter DeveloperDiskImage.dmg</span><br><span class="line">//然后就可以正常截图了</span><br></pre></td></tr></table></figure>
+  <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">idevicescreenshot</span><br><span class="line"><span class="comment">//如果在使用截图的时候出现报错信息，那么就去把相应版本的DeveloperDiskImage的两个文件复制到libimobiledevice文件下面。</span></span><br><span class="line"></span><br><span class="line">路径：</span><br><span class="line"><span class="regexp">/Applications/</span>Xcode.app<span class="regexp">/Contents/</span>Developer<span class="regexp">/Platforms/</span>iPhoneOS.platform<span class="regexp">/DeviceSupport/</span>对应版本/</span><br><span class="line"></span><br><span class="line">获取版本号命令：</span><br><span class="line">ideviceinfo -k ProductVersion</span><br><span class="line"></span><br><span class="line">安装DeveloperDiskImage命令：</span><br><span class="line">ideviceimagemounter DeveloperDiskImage.dmg</span><br><span class="line"><span class="comment">//然后就可以正常截图了</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>遇到报错</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">解决方法：卸载重装</span><br><span class="line">brew uninstall ideviceinstaller</span><br><span class="line">brew uninstall libimobiledevice</span><br><span class="line">brew install --HEAD libimobiledevice</span><br><span class="line">brew install ideviceinstaller</span><br></pre></td></tr></table></figure></li>
+  <figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line">解决方法：卸载重装</span><br><span class="line"><span class="keyword">brew </span>uninstall ideviceinstaller</span><br><span class="line"><span class="keyword">brew </span>uninstall libimobiledevice</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>--HEAD libimobiledevice</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>ideviceinstaller</span><br></pre></td></tr></table></figure></li>
 </ul>
 
       
