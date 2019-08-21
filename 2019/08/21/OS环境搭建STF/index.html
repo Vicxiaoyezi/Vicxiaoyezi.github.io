@@ -105,7 +105,7 @@
 <meta property="og:description" content="前言STF（Smartphone Test Farm）是一个Web应用程序，用于从浏览器中远程调试智能手机，智能手表和其他小工具。openstf GitHub开源地址 功能：  支持的系统：Android 版本限制：2.3.3 (SDK 版本 10) to 9.0 (SDK 版本 28) Android Wear 5.1（由于权限问题不支持5.0） Fire OS, CyanogenMod，基于A">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://vic.kim/2019/08/21/OS环境搭建STF/stf-login.png">
-<meta property="og:updated_time" content="2019-08-21T11:16:13.946Z">
+<meta property="og:updated_time" content="2019-08-21T11:22:24.004Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OS环境搭建STF">
 <meta name="twitter:description" content="前言STF（Smartphone Test Farm）是一个Web应用程序，用于从浏览器中远程调试智能手机，智能手表和其他小工具。openstf GitHub开源地址 功能：  支持的系统：Android 版本限制：2.3.3 (SDK 版本 10) to 9.0 (SDK 版本 28) Android Wear 5.1（由于权限问题不支持5.0） Fire OS, CyanogenMod，基于A">
@@ -429,7 +429,7 @@
                 
               
 
-              <time title="创建时间：2019-08-21 16:59:44 / 修改时间：19:16:13" itemprop="dateCreated datePublished" datetime="2019-08-21T16:59:44+08:00">2019-08-21</time>
+              <time title="创建时间：2019-08-21 16:59:44 / 修改时间：19:22:24" itemprop="dateCreated datePublished" datetime="2019-08-21T16:59:44+08:00">2019-08-21</time>
             
 
             
@@ -511,7 +511,7 @@
 </ul>
 <h2 id="通过brew安装依赖"><a href="#通过brew安装依赖" class="headerlink" title="通过brew安装依赖"></a>通过brew安装依赖</h2><p>在终端使用输入命令安装所需的依赖：<br><figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>rethinkdb graphicsmagick zeromq protobuf yasm pkg-<span class="built_in">config</span></span><br></pre></td></tr></table></figure></p>
 <p>若提示找不到brew，则需要先安装brew，参照：<br><a href="https://vic.kim/2019/05/20/Homebrew/">Homebrew</a></p>
-<h2 id="Node-js安装"><a href="#Node-js安装" class="headerlink" title="Node.js安装"></a>Node.js安装</h2><p>Node.js版本强烈建议选择8.X 版本,如果是安装了最新10.X及以上版本后续安装stf过程中可能会出现报错，参考<br><figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line"><span class="keyword">node</span> <span class="title">-v</span></span><br><span class="line">    v8.<span class="number">16.0</span></span><br><span class="line">npm -v</span><br><span class="line">    <span class="number">6.4</span>.<span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="Node-js安装"><a href="#Node-js安装" class="headerlink" title="Node.js安装"></a>Node.js安装</h2><p>Node.js版本强烈建议选择8.X 版本,如果是安装了最新10.X及以上版本后续安装stf过程中可能会出现报错，参考<a href="https://vic.kim/2019/08/21/Mac终端安装指定版本node/#more">Mac终端安装指定版本node</a><br><figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line"><span class="keyword">node</span> <span class="title">-v</span></span><br><span class="line">    v8.<span class="number">16.0</span></span><br><span class="line">npm -v</span><br><span class="line">    <span class="number">6.4</span>.<span class="number">1</span></span><br></pre></td></tr></table></figure></p>
 <p>由于网络限制，为了保障后续安装顺利，这里我们建议增加 npm淘宝镜像。<br><figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">npm</span> install -g cnpm --registry=https:<span class="regexp">//</span>registry.<span class="built_in">npm</span>.taobao.org</span><br></pre></td></tr></table></figure></p>
 <h2 id="adb安装"><a href="#adb安装" class="headerlink" title="adb安装"></a>adb安装</h2><p>使用brew安装，命令如下:<br><figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span>cask <span class="keyword">install </span><span class="keyword">android-platform-tools</span></span><br></pre></td></tr></table></figure></p>
 <p>安装完成后，连上Android 设备(开启usb-debug)输入命令adb –version查看是否安装成功。<br><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">adb --version</span><br><span class="line">    Android <span class="builtin-name">Debug</span><span class="built_in"> Bridge </span>version 1.0.41</span><br><span class="line">    Version 29.0.1-5644136</span><br><span class="line">    Installed as /usr/local/bin/adb</span><br></pre></td></tr></table></figure></p>
