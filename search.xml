@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[atxserver2设备管理平台搭建]]></title>
+    <url>%2F2019%2F08%2F21%2Fatxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA%2F</url>
+    <content type="text"><![CDATA[前言前面我们已经搭建好了ATX2平台来管理iOS设备，搭建博文参考:ATX2 iOS设备管理平台搭建 接下来分享一下该平台的入门进阶使用(还是基于iOS设备)。]]></content>
+      <categories>
+        <category>App自动化</category>
+      </categories>
+      <tags>
+        <tag>App自动化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CocoaPods安装]]></title>
+    <url>%2F2019%2F08%2F21%2FCocoaPods%E5%AE%89%E8%A3%85%2F</url>
+    <content type="text"><![CDATA[Ruby环境搭建查看当前Ruby版本ruby -v 查看rvm版本rvm -v 显示如下(或者是其他版本) rvm 1.29.3 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io] 列出ruby可安装的版本信息rvm list known 显示如下 # MRI Rubies[ruby-]1.8.6[-p420][ruby-]1.8.7[-head] # security released on head[ruby-]1.9.1[-p431][ruby-]1.9.2[-p330][ruby-]1.9.3[-p551][ruby-]2.0.0[-p648][ruby-]2.1[.10][ruby-]2.2[.10][ruby-]2.3[.7][ruby-]2.4[.4][ruby-]2.5[.1] // 重点在这里 重点在这里 重点在这里[ruby-]2.6[.0-preview2] // 测试版ruby-head..... 安装一个ruby版本（这里我选择的是2.5.1版本，当然你也可以选择其他的）rvm install 2.5.1// 注意:安装过程中需要两次按下 Enter 键, 第二次按下后需要输入电脑访问密码(不可见,只管输入就行);// 如果你电脑没有安装Xcode和Command Line Tools for Xcode以及Homebrew 会自动下载安装,建议提前安装这三者. 这里很多小伙伴会遇到错误，大部分是因为没有安装Homebrew造成，所以所以所以要提前安装比较好 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" 设置为默认版本rvm use 2.5.1 --default 更换源sudo gem update --systemgem sources --remove https://rubygems.org/gem sources --add https://gems.ruby-china.com/ 为了验证你的Ruby镜像是并且仅是ruby-china，执行以下命令查看gem sources -l 如果是以下结果说明正确，如果有其他的请自行百度解决 *** CURRENT SOURCES ***https://gems.ruby-china.com/ 开始安装CocoaPodssudo gem install -n /usr/local/bin cocoapods 如果安装了多个Xcode使用下面的命令选择（一般需要选择最近的Xcode版本）sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer 安装本地库pod setup 执行以上命令后Setting up CocoaPods master repo $ /usr/bin/git clone https://github.com/CocoaPods/Specs.git master --progress Cloning into 'master'... remote: Counting objects: 1879515, done. remote: Compressing objects: 100% (321/321), done. Receiving objects: 21% (404525/1879515), 73.70 MiB | 22.00 KiB/ 然后就是漫长的等待，当然,网络好的情况下会更快 如果一直安装不成功请参考这里 查看你是否安裝成功pod 显示Usage: $ pod COMMAND CocoaPods, the Cocoa library package manager.Commands: + cache Manipulate the CocoaPods cache + deintegrate Deintegrate CocoaPods from your project + env Display pod environment + init Generate a Podfile for the current directory + install Install project dependencies according to versions from a Podfile.lock + ipc Inter-process communication + lib Develop pods + list List pods + outdated Show outdated project dependencies + plugins Show available CocoaPods plugins + repo Manage spec-repositories + search Search for pods + setup Setup the CocoaPods environment + spec Manage pod specs + trunk Interact with the CocoaPods API (e.g. publishing new specs) + try Try a Pod! + update Update outdated project dependencies and create new Podfile.lockOptions: --silent Show nothing --version Show the version of the tool --verbose Show more debugging information --no-ansi Show output without ANSI codes --help Show help banner of specified command CocoaPods版本pod --version]]></content>
+      <categories>
+        <category>资料</category>
+      </categories>
+      <tags>
+        <tag>资料</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Mac终端安装指定版本node]]></title>
     <url>%2F2019%2F08%2F21%2FMac%E7%BB%88%E7%AB%AF%E5%AE%89%E8%A3%85%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%ACnode%2F</url>
     <content type="text"><![CDATA[安装brew终端上运行/usr/bin/ruby -e “$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)” 安装NVMbrew install nvm 安装完成之后打开shell的配置文件cd ~vim .bash_profile 在文件里添加以下命令export NVM_DIR=~/.nvmsource $(brew --prefix nvm)/nvm.sh 然后重新sourcesource .bash_profile 使用nvm安装nodenvm ls-remote 查看 所有的node可用版本nvm install xxx 下载你想要的版本nvm use xxx 使用指定版本的nodenvm alias default xxx 每次启动终端都使用该版本的node]]></content>
