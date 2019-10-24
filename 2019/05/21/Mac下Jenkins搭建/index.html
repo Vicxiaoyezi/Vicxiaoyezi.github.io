@@ -270,7 +270,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">10</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">11</span></a>
 
   </li>
         
@@ -289,7 +289,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">9</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">10</span></a>
 
   </li>
         
@@ -308,7 +308,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">32</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">34</span></a>
 
   </li>
 
@@ -505,26 +505,26 @@
 <h2 id="直接登录官网下载安装：（不推荐）"><a href="#直接登录官网下载安装：（不推荐）" class="headerlink" title="直接登录官网下载安装：（不推荐）"></a>直接登录官网下载安装：（不推荐）</h2><p>jenkins的官网下载地址：<a href="https://jenkins.io/download/" target="_blank" rel="noopener">https://jenkins.io/download/</a><br>因为这里是Mac下面所以需要选择MacOS的版本：(左边是稳定版本，右边是测试版本，所以一般都是选择左边的)<br><img src="//vic.kim/2019/05/21/Mac下Jenkins搭建/15578018638193.jpg" alt="Jenkins官网"><br>下载完成以后直接点击安装就可以了。之后在浏览器输入链接：<a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a> 就行</p>
 <h2 id="brew下载安装-推荐使用-："><a href="#brew下载安装-推荐使用-：" class="headerlink" title="brew下载安装(推荐使用)："></a>brew下载安装(推荐使用)：</h2><ul>
 <li><p>安装安装brew（如果已安装跳过）</p>
-  <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">/usr/</span>bin<span class="regexp">/ruby -e "$(curl -fsSL https:/</span><span class="regexp">/raw.githubusercontent.com/</span>Homebrew<span class="regexp">/install/m</span>aster<span class="regexp">/install)”</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/usr/</span>bin<span class="regexp">/ruby -e "$(curl -fsSL https:/</span><span class="regexp">/raw.githubusercontent.com/</span>Homebrew<span class="regexp">/install/m</span>aster<span class="regexp">/install)”</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>安装Jenkins</p>
-  <figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span><span class="keyword">jenkins</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span><span class="keyword">jenkins</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>查找jenkins war地址</p>
-  <figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"><span class="meta">#在安装后有可能找不到war包地址,可以用mdfind命令本地查询下</span></span><br><span class="line"></span><br><span class="line">mdfind -name jenkins.war</span><br><span class="line"><span class="meta">#/usr/local/Cellar/jenkins/2.174/libexec/jenkins.war</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#在安装后有可能找不到war包地址,可以用mdfind命令本地查询下</span></span><br><span class="line"></span><br><span class="line">mdfind -name jenkins.war</span><br><span class="line"><span class="meta">#/usr/local/Cellar/jenkins/2.174/libexec/jenkins.war</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>启动</p>
-  <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">java -jar <span class="regexp">/usr/</span>local<span class="regexp">/Cellar/</span>jenkins<span class="regexp">/2.116/</span>libexec<span class="regexp">/jenkins.war --httpPort=8080</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar <span class="regexp">/usr/</span>local<span class="regexp">/Cellar/</span>jenkins<span class="regexp">/2.116/</span>libexec<span class="regexp">/jenkins.war --httpPort=8080</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>后台启动</p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">后台启动的意思是放到后台运行,即使窗口被干掉,jenkins的进程也会存在.</span><br><span class="line"></span><br><span class="line">简单用shell脚本nohup命令放到后台</span><br><span class="line"></span><br><span class="line">启动脚本命令:sh startjenkins.sh</span><br><span class="line"></span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">echo</span> start jenkins</span><br><span class="line"></span><br><span class="line">nohup java -jar /usr/<span class="built_in">local</span>/Cellar/jenkins/2.116/libexec/jenkins.war --httpPort=8080 &amp;</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> start end</span><br></pre></td></tr></table></figure>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">后台启动的意思是放到后台运行,即使窗口被干掉,jenkins的进程也会存在.</span><br><span class="line"></span><br><span class="line">简单用shell脚本nohup命令放到后台</span><br><span class="line"></span><br><span class="line">启动脚本命令:sh startjenkins.sh</span><br><span class="line"></span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">echo</span> start jenkins</span><br><span class="line"></span><br><span class="line">nohup java -jar /usr/<span class="built_in">local</span>/Cellar/jenkins/2.116/libexec/jenkins.war --httpPort=8080 &amp;</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> start end</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h1 id="Jenkins的环境配置"><a href="#Jenkins的环境配置" class="headerlink" title="Jenkins的环境配置"></a>Jenkins的环境配置</h1><h2 id="启动进入"><a href="#启动进入" class="headerlink" title="启动进入"></a>启动进入</h2><p>启动成功就可以在浏览器输入<a href="http://localhost:8080后" target="_blank" rel="noopener">http://localhost:8080后</a><br><img src="//vic.kim/2019/05/21/Mac下Jenkins搭建/15578025178751.jpg" alt="Jenkins官网"><br>可以通过红色路径找到文件打开查看密码，Mac下面路径这个<br><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">/Users/</span>你的Mac用户名<span class="regexp">/.jenkins/</span>secrets<span class="regexp">/initialAdminPassword</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="Jenkins的环境配置"><a href="#Jenkins的环境配置" class="headerlink" title="Jenkins的环境配置"></a>Jenkins的环境配置</h1><h2 id="启动进入"><a href="#启动进入" class="headerlink" title="启动进入"></a>启动进入</h2><p>启动成功就可以在浏览器输入<a href="http://localhost:8080后" target="_blank" rel="noopener">http://localhost:8080后</a><br><img src="//vic.kim/2019/05/21/Mac下Jenkins搭建/15578025178751.jpg" alt="Jenkins官网"><br>可以通过红色路径找到文件打开查看密码，Mac下面路径这个<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/Users/</span>你的Mac用户名<span class="regexp">/.jenkins/</span>secrets<span class="regexp">/initialAdminPassword</span></span><br></pre></td></tr></table></figure></p>
 <p>密码：<br><img src="//vic.kim/2019/05/21/Mac下Jenkins搭建/15578027381238.jpg" alt="Jenkins官网"></p>
 <h2 id="插件安装"><a href="#插件安装" class="headerlink" title="插件安装"></a>插件安装</h2><p>输入密码进入插件安装的页面，分别是“安装建议的插件”和“选择插件进行安装”，这里我选择左侧的选项（“安装建议的插件”），然后等待自动安装完成<br>如果提示install failure，右下角有个retry，重试一下就好了</p>
 <h2 id="创建第一个管理员账户"><a href="#创建第一个管理员账户" class="headerlink" title="创建第一个管理员账户"></a>创建第一个管理员账户</h2><p><img src="//vic.kim/2019/05/21/Mac下Jenkins搭建/15578050696004.jpg" alt="Jenkins官网"><br>填写完表格，点击save and finish，jenkins的初始配置就完成啦<br>然后要重启一下，填入刚才输入的admin账号密码才能登录进去</p>
-<h1 id="jenkins常用操作"><a href="#jenkins常用操作" class="headerlink" title="jenkins常用操作"></a>jenkins常用操作</h1><figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">访问<span class="symbol">:http</span><span class="symbol">://localhost</span><span class="symbol">:</span><span class="number">8080</span>/login?from=%<span class="number">2</span>F</span><br><span class="line"></span><br><span class="line">退出<span class="symbol">:http</span><span class="symbol">://localhost</span><span class="symbol">:</span><span class="number">8080</span>/exit </span><br><span class="line"></span><br><span class="line">重启<span class="symbol">:http</span><span class="symbol">://localhost</span><span class="symbol">:</span><span class="number">8080</span>/restart </span><br><span class="line"></span><br><span class="line">重新加载<span class="symbol">:http</span><span class="symbol">://localhost</span><span class="symbol">:</span><span class="number">8080</span>/reload</span><br><span class="line"></span><br><span class="line"><span class="comment">#如果你不想/不需要后台服务，你可以运行:</span></span><br><span class="line">brew services start jenkins</span><br></pre></td></tr></table></figure>
+<h1 id="jenkins常用操作"><a href="#jenkins常用操作" class="headerlink" title="jenkins常用操作"></a>jenkins常用操作</h1><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">访问<span class="symbol">:http</span><span class="symbol">://localhost</span><span class="symbol">:</span><span class="number">8080</span>/login?from=%<span class="number">2</span>F</span><br><span class="line"></span><br><span class="line">退出<span class="symbol">:http</span><span class="symbol">://localhost</span><span class="symbol">:</span><span class="number">8080</span>/exit </span><br><span class="line"></span><br><span class="line">重启<span class="symbol">:http</span><span class="symbol">://localhost</span><span class="symbol">:</span><span class="number">8080</span>/restart </span><br><span class="line"></span><br><span class="line">重新加载<span class="symbol">:http</span><span class="symbol">://localhost</span><span class="symbol">:</span><span class="number">8080</span>/reload</span><br><span class="line"></span><br><span class="line"><span class="comment">#如果你不想/不需要后台服务，你可以运行:</span></span><br><span class="line">brew services start jenkins</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -674,7 +674,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-count">34</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -709,7 +709,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -746,7 +748,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -809,7 +813,7 @@
           <h3 class="widget-title">Tag Cloud</h3>
           <div id="myCanvasContainer" class="widget tagcloud">
               <canvas width="250" height="250" id="resCanvas" style="width=100%">
-                  <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/App自动化/">App自动化</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-Next/">Hexo Next</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jenkins/">Jenkins</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/备忘/">备忘</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口测试/">接口测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设备管理/">设备管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/资料/">资料</a><span class="tag-list-count">7</span></li></ul>
+                  <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/App自动化/">App自动化</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-Next/">Hexo Next</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jenkins/">Jenkins</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/备忘/">备忘</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口测试/">接口测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口自动化测试/">接口自动化测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设备管理/">设备管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/资料/">资料</a><span class="tag-list-count">7</span></li></ul>
               </canvas>
           </div>
         </div>

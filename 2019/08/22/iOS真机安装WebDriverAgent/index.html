@@ -274,7 +274,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">10</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">11</span></a>
 
   </li>
         
@@ -293,7 +293,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">9</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">10</span></a>
 
   </li>
         
@@ -312,7 +312,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">32</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">34</span></a>
 
   </li>
 
@@ -504,7 +504,7 @@
 <li><p>新建一个目录，从 git 下载 WDA 项目代码到本地<br>  <code>git clone https://github.com/facebook/WebDriverAgent</code></p>
 </li>
 <li><p>运行初始化脚本</p>
-  <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="comment">#进入代码目录</span></span><br><span class="line">cd xx<span class="regexp">/xx/</span>WebDriverAgent-master</span><br><span class="line"><span class="comment">#执行初始化脚本</span></span><br><span class="line">.<span class="regexp">/Scripts/</span>bootstrap.sh</span><br></pre></td></tr></table></figure>
+  <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#进入代码目录</span></span><br><span class="line">cd xx<span class="regexp">/xx/</span>WebDriverAgent-master</span><br><span class="line"><span class="comment">#执行初始化脚本</span></span><br><span class="line">.<span class="regexp">/Scripts/</span>bootstrap.sh</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>注<br>  根据报错通过 brew 安装以下依赖</p>
 <ol>
@@ -548,7 +548,7 @@
 <ul>
 <li>安装libimobiledevice</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">brew <span class="keyword">update</span></span><br><span class="line">brew <span class="keyword">uninstall</span> <span class="comment">--ignore-dependencies libimobiledevice</span></span><br><span class="line">brew <span class="keyword">uninstall</span> <span class="comment">--ignore-dependencies usbmuxd</span></span><br><span class="line">brew <span class="keyword">install</span> <span class="comment">--HEAD usbmuxd</span></span><br><span class="line">brew unlink usbmuxd</span><br><span class="line">brew <span class="keyword">link</span> usbmuxd</span><br><span class="line">brew <span class="keyword">install</span> <span class="comment">--HEAD libimobiledevice</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">brew <span class="keyword">update</span></span><br><span class="line">brew <span class="keyword">uninstall</span> <span class="comment">--ignore-dependencies libimobiledevice</span></span><br><span class="line">brew <span class="keyword">uninstall</span> <span class="comment">--ignore-dependencies usbmuxd</span></span><br><span class="line">brew <span class="keyword">install</span> <span class="comment">--HEAD usbmuxd</span></span><br><span class="line">brew unlink usbmuxd</span><br><span class="line">brew <span class="keyword">link</span> usbmuxd</span><br><span class="line">brew <span class="keyword">install</span> <span class="comment">--HEAD libimobiledevice</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>转发端口<br><code>iproxy 8100 8100 UDID</code><br>使用iproxy –help 可以查到更具体的用法。</p>
 </li>
@@ -564,7 +564,7 @@
 <li>Using fbsimctl from FBSimulatorControl framework</li>
 <li>Using FBSimulatorControl framework directly</li>
 </ol>
-<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 解锁keychain，以便可以正常的签名应用，</span></span><br><span class="line">PASSWORD=<span class="string">"replace-with-your-password"</span></span><br><span class="line">security unlock-keychain -p $PASSWORD ~/Library/Keychains/login.keychain</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取设备的UDID</span></span><br><span class="line">UDID=<span class="variable">$(idevice_id -l | head -n1)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行测试</span></span><br><span class="line">xcodebuild -project WebDriverAgent.xcodeproj -scheme WebDriverAgentRunner -destination <span class="string">"id=$UDID"</span> test</span><br></pre></td></tr></table></figure>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 解锁keychain，以便可以正常的签名应用，</span></span><br><span class="line">PASSWORD=<span class="string">"replace-with-your-password"</span></span><br><span class="line">security unlock-keychain -p $PASSWORD ~/Library/Keychains/login.keychain</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取设备的UDID</span></span><br><span class="line">UDID=<span class="variable">$(idevice_id -l | head -n1)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行测试</span></span><br><span class="line">xcodebuild -project WebDriverAgent.xcodeproj -scheme WebDriverAgentRunner -destination <span class="string">"id=$UDID"</span> test</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -715,7 +715,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-count">34</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -750,7 +750,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -787,7 +789,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -850,7 +854,7 @@
           <h3 class="widget-title">Tag Cloud</h3>
           <div id="myCanvasContainer" class="widget tagcloud">
               <canvas width="250" height="250" id="resCanvas" style="width=100%">
-                  <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/App自动化/">App自动化</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-Next/">Hexo Next</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jenkins/">Jenkins</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/备忘/">备忘</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口测试/">接口测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设备管理/">设备管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/资料/">资料</a><span class="tag-list-count">7</span></li></ul>
+                  <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/App自动化/">App自动化</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-Next/">Hexo Next</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jenkins/">Jenkins</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/备忘/">备忘</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口测试/">接口测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口自动化测试/">接口自动化测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设备管理/">设备管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/资料/">资料</a><span class="tag-list-count">7</span></li></ul>
               </canvas>
           </div>
         </div>
