@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[JMeter(二)_基础介绍]]></title>
+    <url>%2F2020%2F02%2F25%2FJMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D%2F</url>
+    <content type="text"><![CDATA[测试计划（test plan）描述一个性能测试，包含本次测试所有相关功能 threads（users）线程Setup thread group：一种特殊类型的线程，可用于执行预测试操作。即执行测试前进行定期线程组的执行 Teardown thread group：一种特殊类型的线程，可用于执行测试后动作。即执行测试结束后执行定期的线程组 Thread group：通常添加使用的线程，一般一个线程组可看做一个虚拟用户组，其中每个线程为一个虚拟用户 测试片段（test fragment）应用在控制器上的一个特殊线程组，与线程组处于同一层级，必须与Include Controller或模块控制器一起使用才被执行。应用场景：1、当jmeter脚本非常复杂的时候，可以通过测试片段分模块管理用例2、当jmeter脚本由多个测试人员共同完成，通过测试片段分人分模块管理用例 取样器（Sampler）是性能测试中向服务器发送请求，记录响应信息，记录响应时间的最小单元，JMeter 原生支持多种不同的sampler如 HTTP Request Sampler 、 FTP Request Sampler 、TCP Request Sampler 、JDBC Request Sampler 等每一种不同类型的 sampler 可以根据设置的参数向服务器发出不同类型的请求。Java Request Sampler 和 Beanshell Request Sampler 是两种特殊的可定制的 Sampler （暂不讨论） 逻辑控制器（Logic Controller）包含两类原件：一类是控制Test Plan中Sampler节点发送请求的逻辑顺序控制器，常用的有：If Controller、Swith Controller、Loop Controller、Random Controller等另一类是用来组织和控制Sampler节点的，如Transaction Controller、Throughput Controller等 监听器（Listener）对测试结果进行处理和可视化展示的一系列组件，常用的有图形结果、查看结果树、聚合报告等以上的五类原件就可以构成一个简单的性能测试脚本 配置元件（Config Element）用于提供对静态数据配置的支持。CSV Date Set Config可以将本地数据文件形成数据池（Date Pool），而对应于HTTP Request Configuration和TCP Request Sample等类型的Configuration元件则可以修改这些Sample的默认数据等 定时器（Time）用于操作之间设置等待时间，等待时间使性能测试中常用的控制客户端QPS的手段，jmeter定义了Constant Times、 Constant Throughput Times、Guass Ramdon Times等不同类型的Times 断言（Assertions）用于检查测试中得到的响应数据等是否符合预期，Assertions一般用来设置检查点，用以保证性能测试过程中的数据交互与预期一致 前置处理器（Pre Processors）用于在实际请求发出之前对即将发出的请求进行特殊处理。例如：当URL中有sessionID一类的session信息时，可以通过该处理器填充发出请求实际的sessionID。 后置处理器（Pre Processors）用于对Sampler发出请求后得到的服务器响应进行处理。一般用来提取响应中的特定数据例如：Regular Expression Extractor用于提取响应数据中匹配某正则表达式的数据段，并将其填充在参数中，Xpath Extractor则可以用于提取响应数据中通过给定Xpath值获得的数据。。。]]></content>
+      <categories>
+        <category>JMeter</category>
+      </categories>
+      <tags>
+        <tag>JMeter</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[JMeter(一)_Mac下安装部署]]></title>
     <url>%2F2020%2F02%2F25%2FJMeter-%E4%B8%80-Mac%E4%B8%8B%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%2F</url>
     <content type="text"><![CDATA[JMeter官网下载 运行方法一，直接运行解压后命令行进入/Users/vic/apache-jmeter-5.1.1/bin目录下，输入sh jmeter即可启动 运行方法二，配置环境变量配置环境变量vim ~/.bash_profile 内容输入举例：12export JMETER_HOME=/Users/vic/apache-jmeter-5.1.1export PATH=$PATH:$JMETER_HOME/bin 使环境变量生效source ~/.bash_profile 修改jmeter为中文：编辑/Users/vic/apache-jmeter-5.1.1/bin目录下的jmeter.properties文件修改第37行左右如下： 打开终端输入：jmeter 启动JMeter]]></content>
