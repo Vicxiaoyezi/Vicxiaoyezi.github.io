@@ -96,16 +96,24 @@
 
 
 
-  <meta name="description" content="人生苦短，我学Python">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Vicの博客">
-<meta property="og:url" content="https://vic.kim/categories/JMeter/index.html">
+  <meta name="description" content="启动JMeter——&amp;gt;测试计划——&amp;gt;添加线程组 配置元件→添加http信息头管理器 HTTP Header Manager（信息头管理器）  用于定制Sampler发出的HTTP请求的请求头的内容。  HTTP Request Defaults（请求默认值）  用于设置其作用范围内的所有HTTP的默认值，可被设置的内容包括HTTP请求的host、端口、协议等  HTTP Cache M">
+<meta name="keywords" content="JMeter">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JMeter(四)_HTTP请求">
+<meta property="og:url" content="https://vic.kim/2020/02/25/JMeter-四-HTTP请求/index.html">
 <meta property="og:site_name" content="Vicの博客">
-<meta property="og:description" content="人生苦短，我学Python">
+<meta property="og:description" content="启动JMeter——&amp;gt;测试计划——&amp;gt;添加线程组 配置元件→添加http信息头管理器 HTTP Header Manager（信息头管理器）  用于定制Sampler发出的HTTP请求的请求头的内容。  HTTP Request Defaults（请求默认值）  用于设置其作用范围内的所有HTTP的默认值，可被设置的内容包括HTTP请求的host、端口、协议等  HTTP Cache M">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://vic.kim/2020/02/25/JMeter-四-HTTP请求/HTTP信息头管理器.png">
+<meta property="og:image" content="https://vic.kim/2020/02/25/JMeter-四-HTTP请求/HTTP请求.png">
+<meta property="og:image" content="https://vic.kim/2020/02/25/JMeter-四-HTTP请求/结果树.png">
+<meta property="og:image" content="https://vic.kim/2020/02/25/JMeter-四-HTTP请求/请求数据.png">
+<meta property="og:image" content="https://vic.kim/2020/02/25/JMeter-四-HTTP请求/响应数据.png">
+<meta property="og:updated_time" content="2020-02-27T07:36:49.019Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vicの博客">
-<meta name="twitter:description" content="人生苦短，我学Python">
+<meta name="twitter:title" content="JMeter(四)_HTTP请求">
+<meta name="twitter:description" content="启动JMeter——&amp;gt;测试计划——&amp;gt;添加线程组 配置元件→添加http信息头管理器 HTTP Header Manager（信息头管理器）  用于定制Sampler发出的HTTP请求的请求头的内容。  HTTP Request Defaults（请求默认值）  用于设置其作用范围内的所有HTTP的默认值，可被设置的内容包括HTTP请求的host、端口、协议等  HTTP Cache M">
+<meta name="twitter:image" content="https://vic.kim/2020/02/25/JMeter-四-HTTP请求/HTTP信息头管理器.png">
 
 
 
@@ -113,7 +121,7 @@
 
   
   
-  <link rel="canonical" href="https://vic.kim/categories/JMeter/">
+  <link rel="canonical" href="https://vic.kim/2020/02/25/JMeter-四-HTTP请求/">
 
 
 
@@ -123,7 +131,7 @@
   };
 </script>
 
-  <title>分类: JMeter | Vicの博客</title>
+  <title>JMeter(四)_HTTP请求 | Vicの博客</title>
   
 
 
@@ -171,7 +179,7 @@
     
   
 
-  <div class="container sidebar-position-right ">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -270,7 +278,7 @@
         
         
           
-          <li class="menu-item menu-item-categories menu-item-active">
+          <li class="menu-item menu-item-categories">
 
     
     
@@ -362,161 +370,276 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>JMeter<small>分类</small>
-        </h1>
-      </div>
-
-      
-        
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2020/02/25/JMeter-四-HTTP请求/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+      <meta itemprop="image" content="/images/smile.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/2020/02/25/JMeter-四-HTTP请求/" itemprop="url">
-            
-              <span itemprop="name">JMeter(四)_HTTP请求</span>
-            
-          </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">JMeter(四)_HTTP请求
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-02-25T19:26:43+08:00" content="2020-02-25">
-          02-25
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
+          <span class="post-time">
 
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-25 19:26:43" itemprop="dateCreated datePublished" datetime="2020-02-25T19:26:43+08:00">2020-02-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-02-27 15:36:49" itemprop="dateModified" datetime="2020-02-27T15:36:49+08:00">2020-02-27</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JMeter/" itemprop="url" rel="index"><span itemprop="name">JMeter</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2020/02/25/JMeter-三-脚本录制之基于HTTP代理服务器/" itemprop="url">
-            
-              <span itemprop="name">JMeter(三)_脚本录制之基于HTTP代理服务器</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-02-25T16:41:27+08:00" content="2020-02-25">
-          02-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2020/02/25/JMeter-二-基础介绍/" itemprop="url">
-            
-              <span itemprop="name">JMeter(二)_基础介绍</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-02-25T15:47:20+08:00" content="2020-02-25">
-          02-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2020/02/25/JMeter-一-Mac下安装部署/" itemprop="url">
-            
-              <span itemprop="name">JMeter(一)_Mac下安装部署</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-02-25T11:35:11+08:00" content="2020-02-25">
-          02-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <p>启动JMeter——&gt;测试计划——&gt;添加线程组</p>
+<h2 id="配置元件→添加http信息头管理器"><a href="#配置元件→添加http信息头管理器" class="headerlink" title="配置元件→添加http信息头管理器"></a>配置元件→添加http信息头管理器</h2><ul>
+<li><p>HTTP Header Manager（信息头管理器）<br>  用于定制Sampler发出的HTTP请求的请求头的内容。</p>
+</li>
+<li><p>HTTP Request Defaults（请求默认值）<br>  用于设置其作用范围内的所有HTTP的默认值，可被设置的内容包括HTTP请求的host、端口、协议等</p>
+</li>
+<li><p>HTTP Cache Manager（缓存管理器）<br>  用于模拟浏览器的Cache行为。为Test Plan增加该属性管理器后，Test Plan运行过程中会使用Last-Modified、ETag和Expired等决定是否从Cache中获取相应的元素</p>
+</li>
+<li><p>HTTP Cookie Manager（Cookie管理器）<br>  用于管理Test Plan运行时的所有Cookie。HTTP Cookie Manager可以自动储存服务器发送给客户端的所有Cookie，并在发送请求时附加上合适的Cookie</p>
+</li>
+</ul>
+<p>HTTP信息头管理器添加好之后，需要填入信息头的名称以及对应的值，如下<br><img src="//vic.kim/2020/02/25/JMeter-四-HTTP请求/HTTP信息头管理器.png" alt="HTTP信息头管理器"></p>
+<h2 id="Sampler（取样器）→HTTP请求"><a href="#Sampler（取样器）→HTTP请求" class="headerlink" title="Sampler（取样器）→HTTP请求"></a>Sampler（取样器）→HTTP请求</h2><p><img src="//vic.kim/2020/02/25/JMeter-四-HTTP请求/HTTP请求.png" alt="HTTP请求"><br>填入测试的服务器地址、端口、所用的户协议、方法，这里方法我用的是POST，然后填入路径，选择Body Data</p>
+<p>关于http请求的的属性参数说明：</p>
+<ul>
+<li>名称：用于标识一个sample。建议使用一个有意义的名称</li>
+<li>注释：对于测试没任何影响，仅用来记录用户可读的注释信息</li>
+<li>协议：向目标服务器发送http请求时的协议，http/https，大小写不敏感，默认http</li>
+<li>服务器名称或IP：http请求发送的目标服务器名称或者IP地址，比如:<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a></li>
+<li>端口号：目标服务器的端口号，默认值为443，可不填</li>
+<li>方法：发送http请求的方法，比如POST</li>
+<li>路径：目标的URL路径（不包括服务器地址和端口）</li>
+<li>Content encoding：内容的编码方式（Content-Type=application/json;charset=utf-8）</li>
+<li>自动重定向：如果选中该项，发出的http请求得到响应是301/302，jmeter会重定向到新的界面</li>
+<li>Use keep Alive：jmeter 和目标服务器之间使用 Keep-Alive方式进行HTTP通信（默认选中）</li>
+<li>Use multipart/from-data for HTTP POST ：当发送HTTP POST 请求时，使用</li>
+<li>Parameters、Body Data以及Files Upload的区别：<ol>
+<li>parameter是指函数定义中参数，而argument指的是函数调用时的实际参数</li>
+<li>简略描述为：parameter=形参(formal parameter)， argument=实参(actual parameter)</li>
+<li>在不很严格的情况下，现在二者可以混用，一般用argument，而parameter则比较少用</li>
+<li>Body Data指的是实体数据，就是请求报文里面主体实体的内容，一般我们向服务器发送请求，携带的实体主体参数，可以写入这里</li>
+<li>Files Upload指的是：从HTML文件获取所有有内含的资源：被选中时，发出HTTP请求并获得响应的HTML文件内容后还对该HTML<br> 进行Parse 并获取HTML中包含的所有资源（图片、flash等）：（默认不选中）<br> 如果用户只希望获取特定资源，可以在下方的Embedded URLs must match 文本框中填入需要下载的特定资源表达式，只有能匹配指定正则表达式的URL指向资源会被下载</li>
+</ol>
+</li>
+</ul>
+<h2 id="监听器-→察看结果树"><a href="#监听器-→察看结果树" class="headerlink" title="监听器 →察看结果树"></a>监听器 →察看结果树</h2><p>添加好监视器，点击运行，开始测试<br>测试结束后，如果我们的请求成功发送给服务器，那么结果树里面的模拟请求会显示为绿色，可以通过取样器结果里面的响应状态码信息来判断<br><img src="//vic.kim/2020/02/25/JMeter-四-HTTP请求/结果树.png" alt="结果树"></p>
+<p>也可以点击请求模块，查看我们发送的请求<br>里面有我们发送的请求的方法、协议、地址以及实体主体数据，以及数据类型，大小，发送时间，客户端版本等信息<br><img src="//vic.kim/2020/02/25/JMeter-四-HTTP请求/请求数据.png" alt="请求数据"></p>
+<p>响应数据：里面包含服务器返回给我们的响应数据实体，如下图<br><img src="//vic.kim/2020/02/25/JMeter-四-HTTP请求/响应数据.png" alt="响应数据"></p>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    
+
+    
+      
+    
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Vic</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://vic.kim/2020/02/25/JMeter-四-HTTP请求/" title="JMeter(四)_HTTP请求">https://vic.kim/2020/02/25/JMeter-四-HTTP请求/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JMeter/" rel="tag"># JMeter</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/25/JMeter-三-脚本录制之基于HTTP代理服务器/" rel="next" title="JMeter(三)_脚本录制之基于HTTP代理服务器">
+                <i class="fa fa-chevron-left"></i> JMeter(三)_脚本录制之基于HTTP代理服务器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -536,8 +659,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -661,6 +793,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置元件→添加http信息头管理器"><span class="nav-number">1.</span> <span class="nav-text">配置元件→添加http信息头管理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sampler（取样器）→HTTP请求"><span class="nav-number">2.</span> <span class="nav-text">Sampler（取样器）→HTTP请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#监听器-→察看结果树"><span class="nav-number">3.</span> <span class="nav-text">监听器 →察看结果树</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -814,6 +963,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
 
   
 
@@ -829,6 +982,8 @@
 
   
 
+
+  
 
 
   
