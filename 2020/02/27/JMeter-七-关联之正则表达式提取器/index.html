@@ -108,7 +108,7 @@
 <meta property="og:image" content="https://vic.kim/2020/02/27/JMeter-七-关联之正则表达式提取器/正则表达式提取器.png">
 <meta property="og:image" content="https://vic.kim/2020/02/27/JMeter-七-关联之正则表达式提取器/正则表达式.png">
 <meta property="og:image" content="https://vic.kim/2020/02/27/JMeter-七-关联之正则表达式提取器/正则表达式提取器.png">
-<meta property="og:updated_time" content="2020-02-27T12:38:22.654Z">
+<meta property="og:updated_time" content="2020-02-27T12:42:19.493Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JMeter(七)_关联之正则表达式提取器">
 <meta name="twitter:description" content="应用场景：在一个线程组中，从前一个请求的响应结果中，提取到某些需要的内容，可以作为下一个接口需要的入参从而实现关联添加路径：HTTP请求-&amp;gt;添加-&amp;gt;后置处理器-&amp;gt;正则表达式提取器 说明下面是JMeter-正则表达式提取器的界面  后置处理器：在请求结束或者返回响应结果时发挥作用  正则表达式提取器：允许用户从服务器的响应中通过使用perl的正则表达式提取值。该元素会作用在指定范围">
@@ -308,7 +308,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">41</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">42</span></a>
 
   </li>
 
@@ -432,7 +432,7 @@
                 
               
 
-              <time title="创建时间：2020-02-27 19:45:35 / 修改时间：20:38:22" itemprop="dateCreated datePublished" datetime="2020-02-27T19:45:35+08:00">2020-02-27</time>
+              <time title="创建时间：2020-02-27 19:45:35 / 修改时间：20:42:19" itemprop="dateCreated datePublished" datetime="2020-02-27T19:45:35+08:00">2020-02-27</time>
             
 
             
@@ -529,13 +529,13 @@
 <li><p><strong>缺省值：</strong>匹配失败时候的默认值；通常用于后续的逻辑判断，一般通常为特定含义的英文大写组合，比如：ERROR</p>
 </li>
 </ul>
-<h2 id="正则表达式的举例说明："><a href="#正则表达式的举例说明：" class="headerlink" title="正则表达式的举例说明："></a>正则表达式的举例说明：</h2><h3 id="1、提取单个字符串："><a href="#1、提取单个字符串：" class="headerlink" title="1、提取单个字符串："></a>1、提取单个字符串：</h3><blockquote>
+<h2 id="正则表达式的举例说明："><a href="#正则表达式的举例说明：" class="headerlink" title="正则表达式的举例说明："></a>正则表达式的举例说明：</h2><h4 id="1、提取单个字符串："><a href="#1、提取单个字符串：" class="headerlink" title="1、提取单个字符串："></a>1、提取单个字符串：</h4><blockquote>
 <p>假设我们想要匹配Web页面的如下部分：name = “file” value = “readme.txt”&gt;并要提取readme.txt。一个合适的正则表达式是：name = “file” value = “(.+?)”&gt;。我们可以这么写：</p>
 </blockquote>
 <blockquote>
 <p>引用名称：file<br>正则表达式：name = “file” value = “(.+?)”&gt;<br>模板：\$1\$<br>readme.txt在需要引用的地方可以通过：${file}进行使用。</p>
 </blockquote>
-<h3 id="2、提取多个字符串："><a href="#2、提取多个字符串：" class="headerlink" title="2、提取多个字符串："></a>2、提取多个字符串：</h3><blockquote>
+<h4 id="2、提取多个字符串："><a href="#2、提取多个字符串：" class="headerlink" title="2、提取多个字符串："></a>2、提取多个字符串：</h4><blockquote>
 <p>假设我们想要匹配Web页面的如下部分：name = “file.name” value = “readme.txt”&gt;并要提取file.name和readme.txt。一个合适的正则表达式是：name = “(.+?)” value = “(.+?)”。这样就会创建2个组，分别用于\$1\$和\$2\$。我们可以这么写：</p>
 </blockquote>
 <blockquote>
@@ -544,13 +544,13 @@
 <blockquote>
 <p>在需要引用的地方可以通过：\${file}, \${file_g0},{file_g1},{file_g2}进行使用。</p>
 </blockquote>
-<h2 id="3、正则表达式中有转义符（例如：-），需要进行转义："><a href="#3、正则表达式中有转义符（例如：-），需要进行转义：" class="headerlink" title="3、正则表达式中有转义符（例如： \  ?），需要进行转义："></a>3、正则表达式中有转义符（例如： \  ?），需要进行转义：</h2><blockquote>
+<h4 id="3、正则表达式中有转义符（例如：-），需要进行转义："><a href="#3、正则表达式中有转义符（例如：-），需要进行转义：" class="headerlink" title="3、正则表达式中有转义符（例如： \  ?），需要进行转义："></a>3、正则表达式中有转义符（例如： \  ?），需要进行转义：</h4><blockquote>
 <p>例如：id?test\”:”1234” ，我们想要匹配出1234。</p>
 </blockquote>
 <blockquote>
 <p>一个合适的正则表达式是： id\?test\“:”(.+?)”</p>
 </blockquote>
-<h2 id="4、从消息头（header）提取token"><a href="#4、从消息头（header）提取token" class="headerlink" title="4、从消息头（header）提取token:"></a>4、从消息头（header）提取token:</h2><p><img src="//vic.kim/2020/02/27/JMeter-七-关联之正则表达式提取器/正则表达式提取器.png" alt="正则表达式提取器"></p>
+<h4 id="4、从消息头（header）提取token"><a href="#4、从消息头（header）提取token" class="headerlink" title="4、从消息头（header）提取token:"></a>4、从消息头（header）提取token:</h4><p><img src="//vic.kim/2020/02/27/JMeter-七-关联之正则表达式提取器/正则表达式提取器.png" alt="正则表达式提取器"></p>
 
       
     </div>
@@ -628,6 +628,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2020/02/28/JMeter-八-函数助手大全/" rel="prev" title="JMeter(八)_函数助手大全">
+                JMeter(八)_函数助手大全 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -697,7 +701,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-count">42</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -815,7 +819,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用场景："><span class="nav-number">1.</span> <span class="nav-text">应用场景：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-number">2.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则表达式的举例说明："><span class="nav-number">3.</span> <span class="nav-text">正则表达式的举例说明：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、提取单个字符串："><span class="nav-number">3.1.</span> <span class="nav-text">1、提取单个字符串：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、提取多个字符串："><span class="nav-number">3.2.</span> <span class="nav-text">2、提取多个字符串：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、正则表达式中有转义符（例如：-），需要进行转义："><span class="nav-number">4.</span> <span class="nav-text">3、正则表达式中有转义符（例如： \  ?），需要进行转义：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、从消息头（header）提取token"><span class="nav-number">5.</span> <span class="nav-text">4、从消息头（header）提取token:</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用场景："><span class="nav-number">1.</span> <span class="nav-text">应用场景：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-number">2.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则表达式的举例说明："><span class="nav-number">3.</span> <span class="nav-text">正则表达式的举例说明：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、提取单个字符串："><span class="nav-number">3.0.1.</span> <span class="nav-text">1、提取单个字符串：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、提取多个字符串："><span class="nav-number">3.0.2.</span> <span class="nav-text">2、提取多个字符串：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、正则表达式中有转义符（例如：-），需要进行转义："><span class="nav-number">3.0.3.</span> <span class="nav-text">3、正则表达式中有转义符（例如： \  ?），需要进行转义：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、从消息头（header）提取token"><span class="nav-number">3.0.4.</span> <span class="nav-text">4、从消息头（header）提取token:</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -840,7 +844,7 @@
           <h3 class="widget-title">Tag Cloud</h3>
           <div id="myCanvasContainer" class="widget tagcloud">
               <canvas width="250" height="250" id="resCanvas" style="width=100%">
-                  <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/App自动化/">App自动化</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-Next/">Hexo Next</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMeter/">JMeter</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jenkins/">Jenkins</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/备忘/">备忘</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口测试/">接口测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口自动化测试/">接口自动化测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设备管理/">设备管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/资料/">资料</a><span class="tag-list-count">7</span></li></ul>
+                  <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/App自动化/">App自动化</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-Next/">Hexo Next</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMeter/">JMeter</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jenkins/">Jenkins</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/备忘/">备忘</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口测试/">接口测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口自动化测试/">接口自动化测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设备管理/">设备管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/资料/">资料</a><span class="tag-list-count">7</span></li></ul>
               </canvas>
           </div>
         </div>
