@@ -105,18 +105,18 @@
 <meta property="og:description" content="官方文档 常用__BeanShell 入参：BeanShell语法的程序语句或者Bean Shell脚本文件 示例：   12$&amp;#123;__BeanShell(123*456,)&amp;#125;：返回56088；$&amp;#123;__BeanShell(source(&quot;function.bsh&quot;,))&amp;#125;：执行在function.bsh中的脚本；    __Random 作用：生成指定范围内的">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://vic.kim/2020/02/28/JMeter-八-函数助手大全/BeanShell.png">
-<meta property="og:image" content="https://vic.kim/2020/02/28/JMeter-八-函数助手大全/__Random.png">
-<meta property="og:image" content="https://vic.kim/2020/02/28/JMeter-八-函数助手大全/__RandomDate.png">
-<meta property="og:image" content="https://vic.kim/2020/02/28/JMeter-八-函数助手大全/__RandomFromMultipleVars.png">
-<meta property="og:image" content="https://vic.kim/2020/02/28/JMeter-八-函数助手大全/__RandomString.png">
-<meta property="og:image" content="https://vic.kim/2020/02/28/JMeter-八-函数助手大全/__UUID.png">
-<meta property="og:image" content="https://vic.kim/2020/02/28/JMeter-八-函数助手大全/__time.png">
-<meta property="og:image" content="https://vic.kim/2020/02/28/JMeter-八-函数助手大全/__timeShift.png">
-<meta property="og:image" content="https://vic.kim/2020/02/28/JMeter-八-函数助手大全/__counter.png">
-<meta property="og:image" content="https://vic.kim/2020/02/28/JMeter-八-函数助手大全/__intSum.png">
-<meta property="og:image" content="https://vic.kim/2020/02/28/JMeter-八-函数助手大全/__longSum.png">
-<meta property="og:image" content="https://vic.kim/2020/02/28/JMeter-八-函数助手大全/__CSVRead.png">
-<meta property="og:updated_time" content="2020-02-29T02:39:07.168Z">
+<meta property="og:image" content="https://vic.kim/2020/02/28/JMeter-八-函数助手大全/Random.png">
+<meta property="og:image" content="https://vic.kim/2020/02/28/JMeter-八-函数助手大全/RandomDate.png">
+<meta property="og:image" content="https://vic.kim/2020/02/28/JMeter-八-函数助手大全/RandomFromMultipleVars.png">
+<meta property="og:image" content="https://vic.kim/2020/02/28/JMeter-八-函数助手大全/RandomString.png">
+<meta property="og:image" content="https://vic.kim/2020/02/28/JMeter-八-函数助手大全/UUID.png">
+<meta property="og:image" content="https://vic.kim/2020/02/28/JMeter-八-函数助手大全/time.png">
+<meta property="og:image" content="https://vic.kim/2020/02/28/JMeter-八-函数助手大全/timeShift.png">
+<meta property="og:image" content="https://vic.kim/2020/02/28/JMeter-八-函数助手大全/counter.png">
+<meta property="og:image" content="https://vic.kim/2020/02/28/JMeter-八-函数助手大全/intSum.png">
+<meta property="og:image" content="https://vic.kim/2020/02/28/JMeter-八-函数助手大全/longSum.png">
+<meta property="og:image" content="https://vic.kim/2020/02/28/JMeter-八-函数助手大全/CSVRead.png">
+<meta property="og:updated_time" content="2020-02-29T02:45:50.024Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JMeter(八)_函数助手大全">
 <meta name="twitter:description" content="官方文档 常用__BeanShell 入参：BeanShell语法的程序语句或者Bean Shell脚本文件 示例：   12$&amp;#123;__BeanShell(123*456,)&amp;#125;：返回56088；$&amp;#123;__BeanShell(source(&quot;function.bsh&quot;,))&amp;#125;：执行在function.bsh中的脚本；    __Random 作用：生成指定范围内的">
@@ -457,7 +457,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-02-29 10:39:07" itemprop="dateModified" datetime="2020-02-29T10:39:07+08:00">2020-02-29</time>
+                <time title="修改时间：2020-02-29 10:45:50" itemprop="dateModified" datetime="2020-02-29T10:45:50+08:00">2020-02-29</time>
               
             
           </span>
@@ -523,14 +523,14 @@
 <li>示例：</li>
 </ul>
 <figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;__Random(<span class="number">1</span>,<span class="number">20</span>,random_num)&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="//vic.kim/2020/02/28/JMeter-八-函数助手大全/__Random.png" alt="__Random"></p>
+<p><img src="//vic.kim/2020/02/28/JMeter-八-函数助手大全/Random.png" alt="__Random"></p>
 <h2 id="RandomDate"><a href="#RandomDate" class="headerlink" title="__RandomDate"></a>__RandomDate</h2><ul>
 <li>作用：生成指定范围内的日期</li>
 <li>入参：日期格式；左右范围；语言；变量名</li>
 <li>示例：</li>
 </ul>
 <figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;__RandomDate(,,<span class="number">2050</span><span class="number">-07</span><span class="number">-08</span>,,)&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="//vic.kim/2020/02/28/JMeter-八-函数助手大全/__RandomDate.png" alt="__RandomDate"></p>
+<p><img src="//vic.kim/2020/02/28/JMeter-八-函数助手大全/RandomDate.png" alt="__RandomDate"></p>
 <h2 id="RandomFromMultipleVars"><a href="#RandomFromMultipleVars" class="headerlink" title="__RandomFromMultipleVars"></a>__RandomFromMultipleVars</h2><p>首先要创建用户定义的变量name1,name2,areaCode</p>
 <ul>
 <li>作用：在设定的几个值中随机使用其一，如下在name1、nema2、areaCode中随机使用</li>
@@ -538,21 +538,21 @@
 <li>示例：</li>
 </ul>
 <figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;__RandomFromMultipleVars(name1|<span class="type">name2</span>|<span class="type">areaCode</span>,name)&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="//vic.kim/2020/02/28/JMeter-八-函数助手大全/__RandomFromMultipleVars.png" alt="__RandomFromMultipleVars"></p>
+<p><img src="//vic.kim/2020/02/28/JMeter-八-函数助手大全/RandomFromMultipleVars.png" alt="__RandomFromMultipleVars"></p>
 <h2 id="RandomString"><a href="#RandomString" class="headerlink" title="__RandomString"></a>__RandomString</h2><ul>
 <li>作用：生成指定长度的字符串</li>
 <li>入参：字符串长度；可选字符串；变量名</li>
 <li>示例：</li>
 </ul>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;__RandomString(2,我爱你祖国,random_char)&#125;</span></span><br></pre></td></tr></table></figure>
-<p><img src="//vic.kim/2020/02/28/JMeter-八-函数助手大全/__RandomString.png" alt="__RandomString"></p>
+<p><img src="//vic.kim/2020/02/28/JMeter-八-函数助手大全/RandomString.png" alt="__RandomString"></p>
 <h2 id="UUID"><a href="#UUID" class="headerlink" title="__UUID"></a>__UUID</h2><ul>
 <li>作用：获取UUID</li>
 <li>入参：无</li>
 <li>示例：</li>
 </ul>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;__UUID&#125;</span></span><br></pre></td></tr></table></figure>
-<p><img src="//vic.kim/2020/02/28/JMeter-八-函数助手大全/__UUID.png" alt="__UUID"></p>
+<p><img src="//vic.kim/2020/02/28/JMeter-八-函数助手大全/UUID.png" alt="__UUID"></p>
 <h2 id="time"><a href="#time" class="headerlink" title="__time"></a>__time</h2><ul>
 <li>作用：返回当前时间，可指定返回格式，由SimpleDateFormat类处理函数格式<ul>
 <li>年：yyyy</li>
@@ -567,7 +567,7 @@
 <li>示例：</li>
 </ul>
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;__time(yyyy-MM-dd <span class="string">hh:</span><span class="string">mm:</span>ss,)&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="//vic.kim/2020/02/28/JMeter-八-函数助手大全/__time.png" alt="__time"></p>
+<p><img src="//vic.kim/2020/02/28/JMeter-八-函数助手大全/time.png" alt="__time"></p>
 <h2 id="timeShift"><a href="#timeShift" class="headerlink" title="__timeShift"></a>__timeShift</h2><ul>
 <li>作用：</li>
 <li>入参：<ul>
@@ -591,7 +591,7 @@
 <li>示例：</li>
 </ul>
 <figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$&#123;__timeShift(yyyy-MM-dd HH:mm:</span>ss,,P2D,,c)&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="//vic.kim/2020/02/28/JMeter-八-函数助手大全/__timeShift.png" alt="__timeShift"></p>
+<p><img src="//vic.kim/2020/02/28/JMeter-八-函数助手大全/timeShift.png" alt="__timeShift"></p>
 <p>##__counter</p>
 <ul>
 <li>作用：作为一个计数器使用，支持多线程（多用户）</li>
@@ -599,28 +599,28 @@
 <li>示例</li>
 </ul>
 <figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$&#123;<span class="variable">__counter</span>(<span class="literal">FALSE</span>,<span class="built_in">count</span>)&#125;; 全局计数器</span><br><span class="line">$&#123;<span class="variable">__counter</span>(<span class="literal">TRUE</span>,<span class="built_in">count</span>)&#125;; 每个用户有自己的计数器</span><br></pre></td></tr></table></figure>
-<p><img src="//vic.kim/2020/02/28/JMeter-八-函数助手大全/__counter.png" alt="__counter"></p>
+<p><img src="//vic.kim/2020/02/28/JMeter-八-函数助手大全/counter.png" alt="__counter"></p>
 <h2 id="intSum"><a href="#intSum" class="headerlink" title="__intSum"></a>__intSum</h2><ul>
 <li>作用：整数求和，多个数字之间用逗号分隔</li>
 <li>入参：第一个整数；第二个及之后的整数；变量名</li>
 <li>示例：</li>
 </ul>
 <figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;__intSum(<span class="number">1</span>,<span class="number">2</span>,test)&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="//vic.kim/2020/02/28/JMeter-八-函数助手大全/__intSum.png" alt="__intSum"></p>
+<p><img src="//vic.kim/2020/02/28/JMeter-八-函数助手大全/intSum.png" alt="__intSum"></p>
 <h2 id="longSum"><a href="#longSum" class="headerlink" title="__longSum"></a>__longSum</h2><ul>
 <li>作用：计算长整型的和</li>
 <li>入参：整数</li>
 <li>示例</li>
 </ul>
 <figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span>&#123;__longSum(<span class="number">1</span>,<span class="number">2</span>],<span class="keyword">sum</span>)&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="//vic.kim/2020/02/28/JMeter-八-函数助手大全/__longSum.png" alt="__longSum"></p>
+<p><img src="//vic.kim/2020/02/28/JMeter-八-函数助手大全/longSum.png" alt="__longSum"></p>
 <h2 id="CSVRead"><a href="#CSVRead" class="headerlink" title="__CSVRead"></a>__CSVRead</h2><ul>
 <li>作用：从文件读取指定列的值（读取固定值/读取动态值/使用文件别名）</li>
 <li>入参：文件路径；读取方式；</li>
 <li>示例</li>
 </ul>
 <figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;</span>__CSVRead(<span class="regexp">/Users/vic</span><span class="regexp">/Downloads/</span>Jmeter ALY/phone_numbers.csv,<span class="number">0</span>)&#125;;读取第一列的值</span><br><span class="line"><span class="variable">$&#123;</span>__CSVRead(<span class="regexp">/Users/vic</span><span class="regexp">/Downloads/</span>Jmeter ALY/phone_numbers.csv,<span class="keyword">next</span>())&#125;; 每次读取下一次的值，配合第一条使用，否则不知道从哪里开始</span><br><span class="line"></span><br><span class="line"><span class="variable">$&#123;</span>__CSVRead(<span class="regexp">/Users/vic</span><span class="regexp">/Downloads/</span>Jmeter ALY/phone_numbers.csv,*user_info)&#125;;使用别名，然后通过以下方法获取数据</span><br><span class="line"><span class="variable">$&#123;</span>__CSVRead(*user_info, <span class="number">1</span>)&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="//vic.kim/2020/02/28/JMeter-八-函数助手大全/__CSVRead.png" alt="__CSVRead"></p>
+<p><img src="//vic.kim/2020/02/28/JMeter-八-函数助手大全/CSVRead.png" alt="__CSVRead"></p>
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1>
       
     </div>
