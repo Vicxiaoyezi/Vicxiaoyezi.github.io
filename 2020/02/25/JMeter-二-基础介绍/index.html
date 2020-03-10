@@ -114,7 +114,7 @@
 <meta property="og:image" content="https://vic.kim/2020/02/25/JMeter-二-基础介绍/WX20200225-161013@2x.png">
 <meta property="og:image" content="https://vic.kim/2020/02/25/JMeter-二-基础介绍/WX20200225-160912@2x.png">
 <meta property="og:image" content="https://vic.kim/2020/02/25/JMeter-二-基础介绍/WX20200225-160927@2x.png">
-<meta property="og:updated_time" content="2020-02-25T08:34:18.099Z">
+<meta property="og:updated_time" content="2020-03-10T06:26:02.938Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JMeter(二)_基础介绍">
 <meta name="twitter:description" content="测试计划（test plan）描述一个性能测试，包含本次测试所有相关功能 threads（users）线程Setup thread group：一种特殊类型的线程，可用于执行预测试操作。即执行测试前进行定期线程组的执行 Teardown thread group：一种特殊类型的线程，可用于执行测试后动作。即执行测试结束后执行定期的线程组 Thread group：通常添加使用的线程，一般一个线程组">
@@ -314,7 +314,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">42</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">43</span></a>
 
   </li>
 
@@ -438,12 +438,24 @@
                 
               
 
-              <time title="创建时间：2020-02-25 15:47:20 / 修改时间：16:34:18" itemprop="dateCreated datePublished" datetime="2020-02-25T15:47:20+08:00">2020-02-25</time>
+              <time title="创建时间：2020-02-25 15:47:20" itemprop="dateCreated datePublished" datetime="2020-02-25T15:47:20+08:00">2020-02-25</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-10 14:26:02" itemprop="dateModified" datetime="2020-03-10T14:26:02+08:00">2020-03-10</time>
               
             
           </span>
@@ -503,6 +515,7 @@
 <h2 id="取样器（Sampler）"><a href="#取样器（Sampler）" class="headerlink" title="取样器（Sampler）"></a>取样器（Sampler）</h2><p><img src="//vic.kim/2020/02/25/JMeter-二-基础介绍/WX20200225-160607@2x.png" alt="取样器"><br>是性能测试中向服务器发送请求，记录响应信息，记录响应时间的最小单元，JMeter 原生支持多种不同的sampler<br>如 HTTP Request Sampler 、 FTP  Request Sampler 、TCP  Request Sampler 、JDBC Request Sampler 等<br>每一种不同类型的 sampler 可以根据设置的参数向服务器发出不同类型的请求。<br>Java Request Sampler 和 Beanshell Request Sampler 是两种特殊的可定制的 Sampler （暂不讨论）</p>
 <h2 id="逻辑控制器（Logic-Controller）"><a href="#逻辑控制器（Logic-Controller）" class="headerlink" title="逻辑控制器（Logic Controller）"></a>逻辑控制器（Logic Controller）</h2><p><img src="//vic.kim/2020/02/25/JMeter-二-基础介绍/WX20200225-160636@2x.png" alt="逻辑控制器"><br>包含两类原件：<br>一类是控制Test Plan中Sampler节点发送请求的逻辑顺序控制器，常用的有：If Controller、Swith Controller、Loop Controller、Random Controller等<br>另一类是用来组织和控制Sampler节点的，如Transaction Controller、Throughput Controller等</p>
 <h2 id="监听器（Listener）"><a href="#监听器（Listener）" class="headerlink" title="监听器（Listener）"></a>监听器（Listener）</h2><p><img src="//vic.kim/2020/02/25/JMeter-二-基础介绍/WX20200225-160723@2x.png" alt="监听器"><br>对测试结果进行处理和可视化展示的一系列组件，常用的有图形结果、查看结果树、聚合报告等<br>以上的五类原件就可以构成一个简单的性能测试脚本</p>
+<p>聚合报告<br><strong>Label：</strong>每个 JMeter 的 element（例如 HTTP Request）都有一个 Name 属性，这里显示的就是 Name 属性的值<br><strong>Samples：</strong>表示你这次测试中一共发出了多少个请求，如果模拟10个用户，每个用户迭代10次，那么这里显示100<br><strong>Average：</strong>平均响应时间——默认情况下是单个 Request 的平均响应时间，当使用了 Transaction Controller 时，也可以以Transaction 为单位显示平均响应时间<br><strong>Median：</strong>中位数，也就是 50％ 用户的响应时间<br><strong>90% Line：</strong>90％ 用户的响应时间<br><strong>Min：</strong>最小响应时间<br><strong>Max：</strong>最大响应时间<br><strong>Error%：</strong>本次测试中出现错误的请求的数量/请求的总数<br><strong>Throughput：</strong>吞吐量——默认情况下表示每秒完成的请求数（Request per Second），当使用了 Transaction Controller 时，也可以表示类似 LoadRunner 的 Transaction per Second 数<br><strong>KB/Sec：</strong>每秒从服务器端接收到的数据量</p>
 <h2 id="配置元件（Config-Element）"><a href="#配置元件（Config-Element）" class="headerlink" title="配置元件（Config Element）"></a>配置元件（Config Element）</h2><p><img src="//vic.kim/2020/02/25/JMeter-二-基础介绍/WX20200225-160737@2x.png" alt="配置元件"><br>用于提供对静态数据配置的支持。CSV Date Set Config可以将本地数据文件形成数据池（Date Pool），而对应于HTTP Request Configuration和TCP Request Sample等类型的Configuration元件则可以修改这些Sample的默认数据等</p>
 <h2 id="定时器（Time）"><a href="#定时器（Time）" class="headerlink" title="定时器（Time）"></a>定时器（Time）</h2><p><img src="//vic.kim/2020/02/25/JMeter-二-基础介绍/WX20200225-160849@2x.png" alt="定时器"><br>用于操作之间设置等待时间，等待时间使性能测试中常用的控制客户端QPS的手段，jmeter定义了Constant Times、</p>
 <p>Constant Throughput Times、Guass Ramdon Times等不同类型的Times</p>
@@ -659,7 +672,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">42</span>
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -802,7 +815,7 @@
           <h3 class="widget-title">Tag Cloud</h3>
           <div id="myCanvasContainer" class="widget tagcloud">
               <canvas width="250" height="250" id="resCanvas" style="width=100%">
-                  <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/App自动化/">App自动化</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-Next/">Hexo Next</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMeter/">JMeter</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jenkins/">Jenkins</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/备忘/">备忘</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口测试/">接口测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口自动化测试/">接口自动化测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设备管理/">设备管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/资料/">资料</a><span class="tag-list-count">7</span></li></ul>
+                  <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/App自动化/">App自动化</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-Next/">Hexo Next</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMeter/">JMeter</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jenkins/">Jenkins</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/备忘/">备忘</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口测试/">接口测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口自动化测试/">接口自动化测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设备管理/">设备管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/资料/">资料</a><span class="tag-list-count">7</span></li></ul>
               </canvas>
           </div>
         </div>
