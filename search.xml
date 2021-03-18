@@ -230,6 +230,29 @@
     <content><![CDATA[]]></content>
   </entry>
   <entry>
+    <title>Hexo Next 主题中添加本地搜索功能</title>
+    <url>/2019/05/22/Hexo%20Next%20%E4%B8%BB%E9%A2%98%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD/</url>
+    <content><![CDATA[<h1 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h1><p>随着时间的推移，个人站点的博客文章会越来越多，那怎么样才能快速找到你印象中的文章呢？增加一个站点内的搜索功能是非常有必要和方便的。</p>
+<h1 id="安装本地搜索插件-hexo-generator-search"><a href="#安装本地搜索插件-hexo-generator-search" class="headerlink" title="安装本地搜索插件 hexo-generator-search"></a>安装本地搜索插件 hexo-generator-search</h1><p>在博客根目录下执行下列命令</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-<span class="keyword">search</span> <span class="comment">--save</span></span><br></pre></td></tr></table></figure>
+<p>安装之后，会在站点目录的 public 文件夹下创建一个 search.xml 文件。</p>
+<h1 id="修改全局配置文件-config-yml（博客根目录）"><a href="#修改全局配置文件-config-yml（博客根目录）" class="headerlink" title="修改全局配置文件_config.yml（博客根目录）"></a>修改全局配置文件_config.yml（博客根目录）</h1><p>在站点配置文件 _config.yml 中添加如下内容：</p>
+<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line"><span class="meta"># Search </span></span><br><span class="line"><span class="symbol">search:</span></span><br><span class="line"><span class="symbol">  path:</span> .<span class="meta-keyword">/public/</span>search.xml</span><br><span class="line"><span class="symbol">  field:</span> post</span><br><span class="line"><span class="symbol">  format:</span> html</span><br><span class="line"><span class="symbol">  limit:</span> <span class="number">10000</span></span><br></pre></td></tr></table></figure>
+<p>path：索引文件的路径，相对于站点根目录<br>field：搜索范围，默认是 post，还可以选择 page、all，设置成 all 表示搜索所有页面<br>limit：限制搜索的条目数</p>
+<h1 id="hexo主题配置文件（-themes-next-config-yml）"><a href="#hexo主题配置文件（-themes-next-config-yml）" class="headerlink" title="hexo主题配置文件（/themes/next/_config.yml）"></a>hexo主题配置文件（/themes/next/_config.yml）</h1><p>在主题配置文件 _config.yml 中找到如下内容：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">local_search:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">trigger:</span> <span class="string">auto</span></span><br><span class="line">  <span class="attr">top_n_per_article:</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>修改<code>local_search</code>的<code>enable</code>为<code>true</code></p>
+<p><code>top_n_per_article </code>字段表示在每篇文章中显示的搜索结果数量，设成 -1 会显示每篇文章的所有搜索结果数量。</p>
+<h1 id="重新部署"><a href="#重新部署" class="headerlink" title="重新部署"></a>重新部署</h1><p>然后执行以下命令，重新部署网站即可愉快的使用本地搜索功能了</p>
+<figure class="highlight sas"><table><tr><td class="code"><pre><span class="line">hexo clean <span class="variable">&amp;&amp;</span> hexo g <span class="variable">&amp;&amp;</span> hexo d</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Hexo Next</category>
+      </categories>
+      <tags>
+        <tag>Hexo Next</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo NexT 代码块复制功能</title>
     <url>/2019/05/26/Hexo%20NexT%20%E4%BB%A3%E7%A0%81%E5%9D%97%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>为了提高博客代码块的用户体验，仅仅代码高亮还不行，最好还能一键复制代码。故此文将讲述Hexo NexT主题博客的代码块复制功能配置。</p>
@@ -307,29 +330,6 @@
 <li>再在&lt;你喜欢的模型名字&gt;下建json文件：&lt;你喜欢的模型名字&gt;.model.json</li>
 </ul>
 <h1 id="安装模型。在命令行（即Git-Bash）运行以下命令即可："><a href="#安装模型。在命令行（即Git-Bash）运行以下命令即可：" class="headerlink" title="安装模型。在命令行（即Git Bash）运行以下命令即可："></a>安装模型。在命令行（即Git Bash）运行以下命令即可：</h1><figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">npm</span> install –save live<span class="number">2</span>d-widget-model-&lt;你喜欢的模型名字&gt;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Hexo Next</category>
-      </categories>
-      <tags>
-        <tag>Hexo Next</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo Next 主题中添加本地搜索功能</title>
-    <url>/2019/05/22/Hexo%20Next%20%E4%B8%BB%E9%A2%98%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD/</url>
-    <content><![CDATA[<h1 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h1><p>随着时间的推移，个人站点的博客文章会越来越多，那怎么样才能快速找到你印象中的文章呢？增加一个站点内的搜索功能是非常有必要和方便的。</p>
-<h1 id="安装本地搜索插件-hexo-generator-search"><a href="#安装本地搜索插件-hexo-generator-search" class="headerlink" title="安装本地搜索插件 hexo-generator-search"></a>安装本地搜索插件 hexo-generator-search</h1><p>在博客根目录下执行下列命令</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-<span class="keyword">search</span> <span class="comment">--save</span></span><br></pre></td></tr></table></figure>
-<p>安装之后，会在站点目录的 public 文件夹下创建一个 search.xml 文件。</p>
-<h1 id="修改全局配置文件-config-yml（博客根目录）"><a href="#修改全局配置文件-config-yml（博客根目录）" class="headerlink" title="修改全局配置文件_config.yml（博客根目录）"></a>修改全局配置文件_config.yml（博客根目录）</h1><p>在站点配置文件 _config.yml 中添加如下内容：</p>
-<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line"><span class="meta"># Search </span></span><br><span class="line"><span class="symbol">search:</span></span><br><span class="line"><span class="symbol">  path:</span> .<span class="meta-keyword">/public/</span>search.xml</span><br><span class="line"><span class="symbol">  field:</span> post</span><br><span class="line"><span class="symbol">  format:</span> html</span><br><span class="line"><span class="symbol">  limit:</span> <span class="number">10000</span></span><br></pre></td></tr></table></figure>
-<p>path：索引文件的路径，相对于站点根目录<br>field：搜索范围，默认是 post，还可以选择 page、all，设置成 all 表示搜索所有页面<br>limit：限制搜索的条目数</p>
-<h1 id="hexo主题配置文件（-themes-next-config-yml）"><a href="#hexo主题配置文件（-themes-next-config-yml）" class="headerlink" title="hexo主题配置文件（/themes/next/_config.yml）"></a>hexo主题配置文件（/themes/next/_config.yml）</h1><p>在主题配置文件 _config.yml 中找到如下内容：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">local_search:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">trigger:</span> <span class="string">auto</span></span><br><span class="line">  <span class="attr">top_n_per_article:</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>修改<code>local_search</code>的<code>enable</code>为<code>true</code></p>
-<p><code>top_n_per_article </code>字段表示在每篇文章中显示的搜索结果数量，设成 -1 会显示每篇文章的所有搜索结果数量。</p>
-<h1 id="重新部署"><a href="#重新部署" class="headerlink" title="重新部署"></a>重新部署</h1><p>然后执行以下命令，重新部署网站即可愉快的使用本地搜索功能了</p>
-<figure class="highlight sas"><table><tr><td class="code"><pre><span class="line">hexo clean <span class="variable">&amp;&amp;</span> hexo g <span class="variable">&amp;&amp;</span> hexo d</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>Hexo Next</category>
       </categories>
@@ -518,6 +518,32 @@
       </tags>
   </entry>
   <entry>
+    <title>JMeter(二)_基础介绍</title>
+    <url>/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/</url>
+    <content><![CDATA[<h2 id="测试计划（test-plan）"><a href="#测试计划（test-plan）" class="headerlink" title="测试计划（test plan）"></a>测试计划（test plan）</h2><p>描述一个性能测试，包含本次测试所有相关功能<br><img src="/.kim//WX20200225-155506@2x.png" alt="测试计划"></p>
+<h2 id="threads（users）线程"><a href="#threads（users）线程" class="headerlink" title="threads（users）线程"></a>threads（users）线程</h2><p><img src="/.kim//WX20200225-155944@2x.png" alt="线程组"><br>Setup thread group：<br>一种特殊类型的线程，可用于执行预测试操作。即执行测试前进行定期线程组的执行</p>
+<p>Teardown thread group：<br>一种特殊类型的线程，可用于执行测试后动作。即执行测试结束后执行定期的线程组</p>
+<p>Thread group：<br>通常添加使用的线程，一般一个线程组可看做一个虚拟用户组，其中每个线程为一个虚拟用户</p>
+<h2 id="测试片段（test-fragment）"><a href="#测试片段（test-fragment）" class="headerlink" title="测试片段（test fragment）"></a>测试片段（test fragment）</h2><p>应用在控制器上的一个特殊线程组，与线程组处于同一层级，必须与Include Controller或模块控制器一起使用才被执行。<br>应用场景：<br>1、当jmeter脚本非常复杂的时候，可以通过测试片段分模块管理用例<br>2、当jmeter脚本由多个测试人员共同完成，通过测试片段分人分模块管理用例</p>
+<h2 id="取样器（Sampler）"><a href="#取样器（Sampler）" class="headerlink" title="取样器（Sampler）"></a>取样器（Sampler）</h2><p><img src="/.kim//WX20200225-160607@2x.png" alt="取样器"><br>是性能测试中向服务器发送请求，记录响应信息，记录响应时间的最小单元，JMeter 原生支持多种不同的sampler<br>如 HTTP Request Sampler 、 FTP  Request Sampler 、TCP  Request Sampler 、JDBC Request Sampler 等<br>每一种不同类型的 sampler 可以根据设置的参数向服务器发出不同类型的请求。<br>Java Request Sampler 和 Beanshell Request Sampler 是两种特殊的可定制的 Sampler （暂不讨论）</p>
+<h2 id="逻辑控制器（Logic-Controller）"><a href="#逻辑控制器（Logic-Controller）" class="headerlink" title="逻辑控制器（Logic Controller）"></a>逻辑控制器（Logic Controller）</h2><p><img src="/.kim//WX20200225-160636@2x.png" alt="逻辑控制器"><br>包含两类原件：<br>一类是控制Test Plan中Sampler节点发送请求的逻辑顺序控制器，常用的有：If Controller、Swith Controller、Loop Controller、Random Controller等<br>另一类是用来组织和控制Sampler节点的，如Transaction Controller、Throughput Controller等</p>
+<h2 id="监听器（Listener）"><a href="#监听器（Listener）" class="headerlink" title="监听器（Listener）"></a>监听器（Listener）</h2><p><img src="/.kim//WX20200225-160723@2x.png" alt="监听器"><br>对测试结果进行处理和可视化展示的一系列组件，常用的有图形结果、查看结果树、聚合报告等<br>以上的五类原件就可以构成一个简单的性能测试脚本</p>
+<p>聚合报告<br><strong>Label：</strong>每个 JMeter 的 element（例如 HTTP Request）都有一个 Name 属性，这里显示的就是 Name 属性的值<br><strong>Samples：</strong>表示你这次测试中一共发出了多少个请求，如果模拟10个用户，每个用户迭代10次，那么这里显示100<br><strong>Average：</strong>平均响应时间——默认情况下是单个 Request 的平均响应时间，当使用了 Transaction Controller 时，也可以以Transaction 为单位显示平均响应时间<br><strong>Median：</strong>中位数，也就是 50％ 用户的响应时间<br><strong>90% Line：</strong>90％ 用户的响应时间<br><strong>Min：</strong>最小响应时间<br><strong>Max：</strong>最大响应时间<br><strong>Error%：</strong>本次测试中出现错误的请求的数量/请求的总数<br><strong>Throughput：</strong>吞吐量——默认情况下表示每秒完成的请求数（Request per Second），当使用了 Transaction Controller 时，也可以表示类似 LoadRunner 的 Transaction per Second 数<br><strong>KB/Sec：</strong>每秒从服务器端接收到的数据量</p>
+<h2 id="配置元件（Config-Element）"><a href="#配置元件（Config-Element）" class="headerlink" title="配置元件（Config Element）"></a>配置元件（Config Element）</h2><p><img src="/.kim//WX20200225-160737@2x.png" alt="配置元件"><br>用于提供对静态数据配置的支持。CSV Date Set Config可以将本地数据文件形成数据池（Date Pool），而对应于HTTP Request Configuration和TCP Request Sample等类型的Configuration元件则可以修改这些Sample的默认数据等</p>
+<h2 id="定时器（Time）"><a href="#定时器（Time）" class="headerlink" title="定时器（Time）"></a>定时器（Time）</h2><p><img src="/.kim//WX20200225-160849@2x.png" alt="定时器"><br>用于操作之间设置等待时间，等待时间使性能测试中常用的控制客户端QPS的手段，jmeter定义了Constant Times、</p>
+<p>Constant Throughput Times、Guass Ramdon Times等不同类型的Times</p>
+<h2 id="断言（Assertions）"><a href="#断言（Assertions）" class="headerlink" title="断言（Assertions）"></a>断言（Assertions）</h2><p><img src="/.kim//WX20200225-161013@2x.png" alt="断言"><br>用于检查测试中得到的响应数据等是否符合预期，Assertions一般用来设置检查点，用以保证性能测试过程中的数据交互与预期一致</p>
+<h2 id="前置处理器（Pre-Processors）"><a href="#前置处理器（Pre-Processors）" class="headerlink" title="前置处理器（Pre Processors）"></a>前置处理器（Pre Processors）</h2><p><img src="/.kim//WX20200225-160912@2x.png" alt="前置处理器"><br>用于在实际请求发出之前对即将发出的请求进行特殊处理。<br>例如：当URL中有sessionID一类的session信息时，可以通过该处理器填充发出请求实际的sessionID。</p>
+<h2 id="后置处理器（Pre-Processors）"><a href="#后置处理器（Pre-Processors）" class="headerlink" title="后置处理器（Pre Processors）"></a>后置处理器（Pre Processors）</h2><p><img src="/.kim//WX20200225-160927@2x.png" alt="后置处理器"><br>用于对Sampler发出请求后得到的服务器响应进行处理。一般用来提取响应中的特定数据<br>例如：正则表达式，用于提取响应数据中匹配某正则表达式的数据段，</p>
+]]></content>
+      <categories>
+        <category>JMeter</category>
+      </categories>
+      <tags>
+        <tag>JMeter</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JMeter(三)_脚本录制之基于HTTP代理服务器</title>
     <url>/2020/02/25/JMeter-%E4%B8%89-%E8%84%9A%E6%9C%AC%E5%BD%95%E5%88%B6%E4%B9%8B%E5%9F%BA%E4%BA%8EHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
     <content><![CDATA[<h1 id="一、添加录制控制器"><a href="#一、添加录制控制器" class="headerlink" title="一、添加录制控制器"></a>一、添加录制控制器</h1><p>启动jmeter：在测试计划中添加线程组，线程组中添加逻辑控制器→录制控制器</p>
@@ -576,23 +602,44 @@
       </tags>
   </entry>
   <entry>
-    <title>JMeter(二)_基础介绍</title>
-    <url>/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/</url>
-    <content><![CDATA[<h2 id="测试计划（test-plan）"><a href="#测试计划（test-plan）" class="headerlink" title="测试计划（test plan）"></a>测试计划（test plan）</h2><p>描述一个性能测试，包含本次测试所有相关功能<br><img src="/.kim//WX20200225-155506@2x.png" alt="测试计划"></p>
-<h2 id="threads（users）线程"><a href="#threads（users）线程" class="headerlink" title="threads（users）线程"></a>threads（users）线程</h2><p><img src="/.kim//WX20200225-155944@2x.png" alt="线程组"><br>Setup thread group：<br>一种特殊类型的线程，可用于执行预测试操作。即执行测试前进行定期线程组的执行</p>
-<p>Teardown thread group：<br>一种特殊类型的线程，可用于执行测试后动作。即执行测试结束后执行定期的线程组</p>
-<p>Thread group：<br>通常添加使用的线程，一般一个线程组可看做一个虚拟用户组，其中每个线程为一个虚拟用户</p>
-<h2 id="测试片段（test-fragment）"><a href="#测试片段（test-fragment）" class="headerlink" title="测试片段（test fragment）"></a>测试片段（test fragment）</h2><p>应用在控制器上的一个特殊线程组，与线程组处于同一层级，必须与Include Controller或模块控制器一起使用才被执行。<br>应用场景：<br>1、当jmeter脚本非常复杂的时候，可以通过测试片段分模块管理用例<br>2、当jmeter脚本由多个测试人员共同完成，通过测试片段分人分模块管理用例</p>
-<h2 id="取样器（Sampler）"><a href="#取样器（Sampler）" class="headerlink" title="取样器（Sampler）"></a>取样器（Sampler）</h2><p><img src="/.kim//WX20200225-160607@2x.png" alt="取样器"><br>是性能测试中向服务器发送请求，记录响应信息，记录响应时间的最小单元，JMeter 原生支持多种不同的sampler<br>如 HTTP Request Sampler 、 FTP  Request Sampler 、TCP  Request Sampler 、JDBC Request Sampler 等<br>每一种不同类型的 sampler 可以根据设置的参数向服务器发出不同类型的请求。<br>Java Request Sampler 和 Beanshell Request Sampler 是两种特殊的可定制的 Sampler （暂不讨论）</p>
-<h2 id="逻辑控制器（Logic-Controller）"><a href="#逻辑控制器（Logic-Controller）" class="headerlink" title="逻辑控制器（Logic Controller）"></a>逻辑控制器（Logic Controller）</h2><p><img src="/.kim//WX20200225-160636@2x.png" alt="逻辑控制器"><br>包含两类原件：<br>一类是控制Test Plan中Sampler节点发送请求的逻辑顺序控制器，常用的有：If Controller、Swith Controller、Loop Controller、Random Controller等<br>另一类是用来组织和控制Sampler节点的，如Transaction Controller、Throughput Controller等</p>
-<h2 id="监听器（Listener）"><a href="#监听器（Listener）" class="headerlink" title="监听器（Listener）"></a>监听器（Listener）</h2><p><img src="/.kim//WX20200225-160723@2x.png" alt="监听器"><br>对测试结果进行处理和可视化展示的一系列组件，常用的有图形结果、查看结果树、聚合报告等<br>以上的五类原件就可以构成一个简单的性能测试脚本</p>
-<p>聚合报告<br><strong>Label：</strong>每个 JMeter 的 element（例如 HTTP Request）都有一个 Name 属性，这里显示的就是 Name 属性的值<br><strong>Samples：</strong>表示你这次测试中一共发出了多少个请求，如果模拟10个用户，每个用户迭代10次，那么这里显示100<br><strong>Average：</strong>平均响应时间——默认情况下是单个 Request 的平均响应时间，当使用了 Transaction Controller 时，也可以以Transaction 为单位显示平均响应时间<br><strong>Median：</strong>中位数，也就是 50％ 用户的响应时间<br><strong>90% Line：</strong>90％ 用户的响应时间<br><strong>Min：</strong>最小响应时间<br><strong>Max：</strong>最大响应时间<br><strong>Error%：</strong>本次测试中出现错误的请求的数量/请求的总数<br><strong>Throughput：</strong>吞吐量——默认情况下表示每秒完成的请求数（Request per Second），当使用了 Transaction Controller 时，也可以表示类似 LoadRunner 的 Transaction per Second 数<br><strong>KB/Sec：</strong>每秒从服务器端接收到的数据量</p>
-<h2 id="配置元件（Config-Element）"><a href="#配置元件（Config-Element）" class="headerlink" title="配置元件（Config Element）"></a>配置元件（Config Element）</h2><p><img src="/.kim//WX20200225-160737@2x.png" alt="配置元件"><br>用于提供对静态数据配置的支持。CSV Date Set Config可以将本地数据文件形成数据池（Date Pool），而对应于HTTP Request Configuration和TCP Request Sample等类型的Configuration元件则可以修改这些Sample的默认数据等</p>
-<h2 id="定时器（Time）"><a href="#定时器（Time）" class="headerlink" title="定时器（Time）"></a>定时器（Time）</h2><p><img src="/.kim//WX20200225-160849@2x.png" alt="定时器"><br>用于操作之间设置等待时间，等待时间使性能测试中常用的控制客户端QPS的手段，jmeter定义了Constant Times、</p>
-<p>Constant Throughput Times、Guass Ramdon Times等不同类型的Times</p>
-<h2 id="断言（Assertions）"><a href="#断言（Assertions）" class="headerlink" title="断言（Assertions）"></a>断言（Assertions）</h2><p><img src="/.kim//WX20200225-161013@2x.png" alt="断言"><br>用于检查测试中得到的响应数据等是否符合预期，Assertions一般用来设置检查点，用以保证性能测试过程中的数据交互与预期一致</p>
-<h2 id="前置处理器（Pre-Processors）"><a href="#前置处理器（Pre-Processors）" class="headerlink" title="前置处理器（Pre Processors）"></a>前置处理器（Pre Processors）</h2><p><img src="/.kim//WX20200225-160912@2x.png" alt="前置处理器"><br>用于在实际请求发出之前对即将发出的请求进行特殊处理。<br>例如：当URL中有sessionID一类的session信息时，可以通过该处理器填充发出请求实际的sessionID。</p>
-<h2 id="后置处理器（Pre-Processors）"><a href="#后置处理器（Pre-Processors）" class="headerlink" title="后置处理器（Pre Processors）"></a>后置处理器（Pre Processors）</h2><p><img src="/.kim//WX20200225-160927@2x.png" alt="后置处理器"><br>用于对Sampler发出请求后得到的服务器响应进行处理。一般用来提取响应中的特定数据<br>例如：正则表达式，用于提取响应数据中匹配某正则表达式的数据段，</p>
+    <title>JMeter(五)_元件的作用域与执行顺序</title>
+    <url>/2020/02/27/JMeter-%E4%BA%94-%E5%85%83%E4%BB%B6%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/</url>
+    <content><![CDATA[<p>JMeter可以通过鼠标拖拽来随意改变元件之间的顺序以及元件的父子关系，那么随着它们的顺序和所在的域不同，它们在执行的时候，也会有很多不同。</p>
+<p>JMeter的test plan通过图形化的方式表达脚本，域代码方式的脚本不同，图形方式表达的脚本中无法使用变量和函数等描述元件的作用域，因此jmeter主要依靠test plan中元件的相对位置、父子关系以及元件本身的类型来决定test plan中各元件的执行顺序；原件在test plan中的位置不同，可能导致该元件的行为有很大差异。</p>
+<h2 id="元件的作用域"><a href="#元件的作用域" class="headerlink" title="元件的作用域"></a>元件的作用域</h2><p>jmeter中共有8类可被执行的元件（test plan和thread group不属于元件），其中，sampler（取样器）是不与其他元件发生交互的作用的元件，Logic Controller（逻辑控制器）只对其子节点的sampler有效，而其他元件需要与sampler等元件交互。</p>
+<ul>
+<li>Config Elements（配置元件）：影响其范围内的所有元件</li>
+<li>Pre-porcessors（前置处理器）：在其作用范围内的每一个sampler元件之前执行</li>
+<li>Timer（定时器）：对其作用范围内的每一个sampler有效</li>
+<li>Post-porcessors（后置处理器）：在其作用范围内的每一个sampler元件之后执行</li>
+<li>Assirtions（断言）：对其作用范围内的每一个sampler元件执行后的结果执行校验</li>
+<li>Listener（监听器）：收集其作用范围内的每一个sampler元件的信息并且呈现出来</li>
+</ul>
+<p>在jmeter中，元件的作用域是靠test plan的树形结构中元件的父子关系来确定的，其原则如下：</p>
+<ul>
+<li>sampler不与其他元件相互作用，因此不存在作用域问题</li>
+<li>Logic Controller只对其子节点中的sampler和Logic Controller作用</li>
+<li>除sampler和Logic Controller外的其他元件，如果是某个sampler的子节点，则该元件仅对其父节点作用</li>
+<li>除sampler和Logic Controller外的其他元件，如果其父节点不是sampler，则其作用域是该元件父节点下的其他所有后带节点（包括子节点，子节点的子节点等）</li>
+</ul>
+<h2 id="元件的执行顺序"><a href="#元件的执行顺序" class="headerlink" title="元件的执行顺序"></a>元件的执行顺序</h2><p>在同一作用域范围内，test plan中的元件按照以下顺序执行：</p>
+<ul>
+<li><p>Config Elements（配置元件）</p>
+</li>
+<li><p>Pre-porcessors（前置处理器）</p>
+</li>
+<li><p>Timer（定时器）</p>
+</li>
+<li><p>Sampler（取样器）</p>
+</li>
+<li><p>Post-porcessors（后置处理器）（除非Sampler得到的返回结果为空）</p>
+</li>
+<li><p>Assirtions（断言）（除非Sampler得到的返回结果为空）</p>
+</li>
+<li><p>Listener（监听器）（除非Sampler得到的返回结果为空）</p>
+<p>  注意:Pre-porcessors、Post-porcessors和Assirtions等元件仅对Sampler作用，如在它们作用域内没有任何Sampler，则不会被执行；<br>  如果在同一作用域范围内有多个同一类型的元件，则这些元件按照它们在test plan中的上下顺序依次执行。</p>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>JMeter</category>
@@ -718,53 +765,6 @@
 <figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">$&#123;__CSVRead(<span class="regexp">/Users/</span>vic<span class="regexp">/Downloads/</span>Jmeter ALY/phone_numbers.csv,<span class="number">0</span>)&#125;;读取第一列的值</span><br><span class="line">$&#123;__CSVRead(<span class="regexp">/Users/</span>vic<span class="regexp">/Downloads/</span>Jmeter ALY/phone_numbers.csv,<span class="keyword">next</span>())&#125;; 每次读取下一次的值，配合第一条使用，否则不知道从哪里开始</span><br><span class="line"></span><br><span class="line">$&#123;__CSVRead(<span class="regexp">/Users/</span>vic<span class="regexp">/Downloads/</span>Jmeter ALY/phone_numbers.csv,*user_info)&#125;;使用别名，然后通过以下方法获取数据</span><br><span class="line">$&#123;__CSVRead(*user_info, <span class="number">1</span>)&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="/.kim//CSVRead.png" alt="__CSVRead"></p>
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1>]]></content>
-      <categories>
-        <category>JMeter</category>
-      </categories>
-      <tags>
-        <tag>JMeter</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JMeter(五)_元件的作用域与执行顺序</title>
-    <url>/2020/02/27/JMeter-%E4%BA%94-%E5%85%83%E4%BB%B6%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/</url>
-    <content><![CDATA[<p>JMeter可以通过鼠标拖拽来随意改变元件之间的顺序以及元件的父子关系，那么随着它们的顺序和所在的域不同，它们在执行的时候，也会有很多不同。</p>
-<p>JMeter的test plan通过图形化的方式表达脚本，域代码方式的脚本不同，图形方式表达的脚本中无法使用变量和函数等描述元件的作用域，因此jmeter主要依靠test plan中元件的相对位置、父子关系以及元件本身的类型来决定test plan中各元件的执行顺序；原件在test plan中的位置不同，可能导致该元件的行为有很大差异。</p>
-<h2 id="元件的作用域"><a href="#元件的作用域" class="headerlink" title="元件的作用域"></a>元件的作用域</h2><p>jmeter中共有8类可被执行的元件（test plan和thread group不属于元件），其中，sampler（取样器）是不与其他元件发生交互的作用的元件，Logic Controller（逻辑控制器）只对其子节点的sampler有效，而其他元件需要与sampler等元件交互。</p>
-<ul>
-<li>Config Elements（配置元件）：影响其范围内的所有元件</li>
-<li>Pre-porcessors（前置处理器）：在其作用范围内的每一个sampler元件之前执行</li>
-<li>Timer（定时器）：对其作用范围内的每一个sampler有效</li>
-<li>Post-porcessors（后置处理器）：在其作用范围内的每一个sampler元件之后执行</li>
-<li>Assirtions（断言）：对其作用范围内的每一个sampler元件执行后的结果执行校验</li>
-<li>Listener（监听器）：收集其作用范围内的每一个sampler元件的信息并且呈现出来</li>
-</ul>
-<p>在jmeter中，元件的作用域是靠test plan的树形结构中元件的父子关系来确定的，其原则如下：</p>
-<ul>
-<li>sampler不与其他元件相互作用，因此不存在作用域问题</li>
-<li>Logic Controller只对其子节点中的sampler和Logic Controller作用</li>
-<li>除sampler和Logic Controller外的其他元件，如果是某个sampler的子节点，则该元件仅对其父节点作用</li>
-<li>除sampler和Logic Controller外的其他元件，如果其父节点不是sampler，则其作用域是该元件父节点下的其他所有后带节点（包括子节点，子节点的子节点等）</li>
-</ul>
-<h2 id="元件的执行顺序"><a href="#元件的执行顺序" class="headerlink" title="元件的执行顺序"></a>元件的执行顺序</h2><p>在同一作用域范围内，test plan中的元件按照以下顺序执行：</p>
-<ul>
-<li><p>Config Elements（配置元件）</p>
-</li>
-<li><p>Pre-porcessors（前置处理器）</p>
-</li>
-<li><p>Timer（定时器）</p>
-</li>
-<li><p>Sampler（取样器）</p>
-</li>
-<li><p>Post-porcessors（后置处理器）（除非Sampler得到的返回结果为空）</p>
-</li>
-<li><p>Assirtions（断言）（除非Sampler得到的返回结果为空）</p>
-</li>
-<li><p>Listener（监听器）（除非Sampler得到的返回结果为空）</p>
-<p>  注意:Pre-porcessors、Post-porcessors和Assirtions等元件仅对Sampler作用，如在它们作用域内没有任何Sampler，则不会被执行；<br>  如果在同一作用域范围内有多个同一类型的元件，则这些元件按照它们在test plan中的上下顺序依次执行。</p>
-</li>
-</ul>
-]]></content>
       <categories>
         <category>JMeter</category>
       </categories>
@@ -1157,7 +1157,7 @@
 </ol>
 <p>成功后，终端显示</p>
 <blockquote>
-<p>Your identitification has been saved in /Users/xxx/.ssh/id_rsa.<br>Your public key has been saved in /user/xxx/id_rsa.pub.<br>the key fingerprint is xxxxxxxxxx…….xxxxxxxx <a href="mailto:&#x79;&#x6f;&#x75;&#x72;&#x5f;&#101;&#x6d;&#x61;&#x69;&#x6c;&#x40;&#101;&#120;&#97;&#x6d;&#x70;&#108;&#101;&#x2e;&#x63;&#111;&#x6d;">&#x79;&#x6f;&#x75;&#x72;&#x5f;&#101;&#x6d;&#x61;&#x69;&#x6c;&#x40;&#101;&#120;&#97;&#x6d;&#x70;&#108;&#101;&#x2e;&#x63;&#111;&#x6d;</a><br>The key’s randomart image is:<br>![-w465](Mac电脑用终端生成SSH key 访问自己的Github/15577192525730.jpg)</p>
+<p>Your identitification has been saved in /Users/xxx/.ssh/id_rsa.<br>Your public key has been saved in /user/xxx/id_rsa.pub.<br>the key fingerprint is xxxxxxxxxx…….xxxxxxxx <a href="mailto:&#121;&#111;&#x75;&#x72;&#95;&#x65;&#x6d;&#x61;&#105;&#x6c;&#64;&#101;&#x78;&#x61;&#x6d;&#112;&#108;&#x65;&#x2e;&#x63;&#111;&#x6d;">&#121;&#111;&#x75;&#x72;&#95;&#x65;&#x6d;&#x61;&#105;&#x6c;&#64;&#101;&#x78;&#x61;&#x6d;&#112;&#108;&#x65;&#x2e;&#x63;&#111;&#x6d;</a><br>The key’s randomart image is:<br>![-w465](Mac电脑用终端生成SSH key 访问自己的Github/15577192525730.jpg)</p>
 </blockquote>
 <h1 id="将SSH密钥添加到ssh-agent"><a href="#将SSH密钥添加到ssh-agent" class="headerlink" title="将SSH密钥添加到ssh-agent"></a>将SSH密钥添加到ssh-agent</h1><ol>
 <li><p>在后台启动ssh-agent</p>
@@ -1167,7 +1167,7 @@
 </ol>
 <p>成功后，中选显示：</p>
 <blockquote>
-<p> Identity added: /Users/xxx/.ssh/id_rsa (<a href="mailto:&#x79;&#x6f;&#117;&#114;&#95;&#101;&#109;&#x61;&#105;&#x6c;&#x40;&#x65;&#x78;&#97;&#x6d;&#x70;&#108;&#x65;&#46;&#99;&#x6f;&#109;">&#x79;&#x6f;&#117;&#114;&#95;&#101;&#109;&#x61;&#105;&#x6c;&#x40;&#x65;&#x78;&#97;&#x6d;&#x70;&#108;&#x65;&#46;&#99;&#x6f;&#109;</a>)</p>
+<p> Identity added: /Users/xxx/.ssh/id_rsa (<a href="mailto:&#x79;&#x6f;&#117;&#114;&#x5f;&#x65;&#x6d;&#97;&#x69;&#x6c;&#x40;&#101;&#x78;&#x61;&#109;&#112;&#108;&#x65;&#x2e;&#99;&#111;&#109;">&#x79;&#x6f;&#117;&#114;&#x5f;&#x65;&#x6d;&#97;&#x69;&#x6c;&#x40;&#101;&#x78;&#x61;&#109;&#112;&#108;&#x65;&#x2e;&#99;&#111;&#109;</a>)</p>
 </blockquote>
 <h1 id="添加SSH-key-到Github-上"><a href="#添加SSH-key-到Github-上" class="headerlink" title="添加SSH key 到Github 上"></a>添加SSH key 到Github 上</h1><ol>
 <li><p>将SSH密钥复制到剪贴板。</p>
@@ -1447,6 +1447,76 @@
       </tags>
   </entry>
   <entry>
+    <title>atxserver2设备管理平台搭建</title>
+    <url>/2019/08/21/atxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>前面分享了STF Andriod设备远程管理平台的搭建和使用，但是STF不支持iOS设备连接，虽然现在社区有了STF集成iOS设备的开源方案，但是经过实践不太稳定，后面再Testerhome社区发现了一个新的框架ATX2同时支持Android和iOS设备远程管理，经过实践设备连接非常稳定，所以这里分享下这个平台的搭建和使用</p>
+<h1 id="ATX2简介"><a href="#ATX2简介" class="headerlink" title="ATX2简介"></a>ATX2简介</h1><p>ATX2是一款可以远程控制Android和iOS设备的设备管理平台。该平台使用的技术栈为:Python3+NodeJS+RethinkDB 项目目前已经开源，作者是阿里的一位大牛:<a href="https://github.com/codeskyblue">codeskyblue</a></p>
+<ul>
+<li>项目:Github地址:<a href="https://github.com/openatx/atxserver2">https://github.com/openatx/atxserver2</a></li>
+<li>平台框架图如下所示：<br><img src="/.kim//atx-frame.png" alt="框架图"></li>
+</ul>
+<h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><p>系统环境:Mac Os 10.14.6(因为要使用iOS设备连接WDA，所以需要Mac Os环境)</p>
+<p>python3安装</p>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>python3</span><br></pre></td></tr></table></figure>
+<p>rethinkdb安装</p>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span> rethinkdb</span><br></pre></td></tr></table></figure>
+
+<h1 id="服务部署"><a href="#服务部署" class="headerlink" title="服务部署"></a>服务部署</h1><p>启动ATX2服务有2种方式：</p>
+<ul>
+<li>Docker部署</li>
+<li>源码部署</li>
+</ul>
+<h2 id="Docker部署"><a href="#Docker部署" class="headerlink" title="Docker部署"></a>Docker部署</h2><ul>
+<li>使用Docker部署需要安装Docker，具体安装步骤见:Docker安装</li>
+<li>代码Clone到本地</li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/openatx/</span>atxserver2</span><br></pre></td></tr></table></figure>
+<ul>
+<li>打开命令终端，切换到代码目录，执行一条命令即可</li>
+</ul>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">docker-compose up</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="源码部署"><a href="#源码部署" class="headerlink" title="源码部署"></a>源码部署</h2><p>先准备好一个rethinkdb服务器，并启动</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">rethinkdb</span></span><br></pre></td></tr></table></figure>
+<p>代码clone到本地</p>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">git</span>@github.com:openatx/atxserver2.git</span><br></pre></td></tr></table></figure>
+<p>打开命令终端，切换到代码目录，然后执行命令下面的命令安装依赖</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">pip3 <span class="keyword">install</span> -r requirements.txt</span><br></pre></td></tr></table></figure>
+<p>启动服务，命令如下</p>
+<figure class="highlight dsconfig"><table><tr><td class="code"><pre><span class="line"><span class="comment">#默认方式启动，使用默认的登录方式，默认端口</span></span><br><span class="line"><span class="string">python3</span> <span class="string">main</span>.<span class="string">py</span>  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定认证方式</span></span><br><span class="line"><span class="string">python3</span> <span class="string">main</span>.<span class="string">py</span> <span class="built_in">--auth</span> <span class="string">simple</span>  <span class="comment">#默认是一个非常simple的认证，输入邮箱就可以</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置监听端口</span></span><br><span class="line"><span class="string">python3</span> <span class="string">main</span>.<span class="string">py</span> <span class="built_in">--port</span> <span class="string">4000</span> <span class="comment"># 默认监听4000端口</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="打开页面"><a href="#打开页面" class="headerlink" title="打开页面"></a>打开页面</h2><p>启动之后，浏览器打开<a href="http://localhost(本机ip也可以):4000，登录之后就可以顺利的看到设备列表页了,由于还没有接入设备所以设备列表为空。">http://localhost(本机ip也可以):4000，登录之后就可以顺利的看到设备列表页了,由于还没有接入设备所以设备列表为空。</a><br><img src="/.kim//atx_index.png" alt="框架图"></p>
+<h1 id="Android设备接入atxserver2-android-provider"><a href="#Android设备接入atxserver2-android-provider" class="headerlink" title="Android设备接入atxserver2-android-provider"></a>Android设备接入<a href="https://github.com/openatx/atxserver2-android-provider">atxserver2-android-provider</a></h1><p>依赖 Python3.6+, NodeJS 8, Git-LFS<br>NodeJS版本太高了也不行，一定要NodeJS 8，推荐使用nvm管理node版本</p>
+<h2 id="Install-git-lfs"><a href="#Install-git-lfs" class="headerlink" title="Install git-lfs"></a>Install git-lfs</h2><figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>git-lfs</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Clone代码到本地，切换到代码目录"><a href="#Clone代码到本地，切换到代码目录" class="headerlink" title="Clone代码到本地，切换到代码目录"></a>Clone代码到本地，切换到代码目录</h2><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/openatx/</span>atxserver2-android-provider</span><br><span class="line">cd atxserver2-android-provider</span><br><span class="line">git lfs install</span><br><span class="line">git lfs pull</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">npm <span class="keyword">install</span></span><br><span class="line">pip <span class="keyword">install</span> -r requirements.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="启动，需要指定atxserver2的地址-假设地址为-http-localhost-4000"><a href="#启动，需要指定atxserver2的地址-假设地址为-http-localhost-4000" class="headerlink" title="启动，需要指定atxserver2的地址, 假设地址为 http://localhost:4000"></a>启动，需要指定atxserver2的地址, 假设地址为 <a href="http://localhost:4000/">http://localhost:4000</a></h2><figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">python3</span> main.<span class="keyword">py</span> --server localhos<span class="variable">t:4000</span></span><br></pre></td></tr></table></figure>
+<p>Provider可以通过adb track-devices自动发现已经接入的设备，当手机接入到电脑上时，会自动给手机安装minicap, minitouch, atx-agent, app-uiautomator-[test].apk, whatsinput-apk</p>
+<p>接入的设备需要配置好开发者选项, 不同设备的设置方案放到了该项目的Issue中, tag: device-settings 如果没有该机型，可以自助添加</p>
+<h1 id="iOS设备接入atxserver2-ios-provider"><a href="#iOS设备接入atxserver2-ios-provider" class="headerlink" title="iOS设备接入atxserver2-ios-provider"></a>iOS设备接入<a href="https://github.com/openatx/atxserver2-ios-provider">atxserver2-ios-provider</a></h1><p>依赖 Python3.6+, NodeJS 8, WebDriverAgent(appium)</p>
+<h2 id="安装libimobiledevice工具包"><a href="#安装libimobiledevice工具包" class="headerlink" title="安装libimobiledevice工具包"></a>安装libimobiledevice工具包</h2><figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span>uninstall --ignore-dependencies libimobiledevice</span><br><span class="line"><span class="keyword">brew </span>uninstall --ignore-dependencies usbmuxd</span><br><span class="line"></span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>--HEAD usbmuxd</span><br><span class="line"><span class="keyword">brew </span>unlink usbmuxd</span><br><span class="line"><span class="keyword">brew </span>link usbmuxd</span><br><span class="line"></span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>--HEAD libimobiledevice</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>ideviceinstaller</span><br><span class="line"><span class="keyword">brew </span>link --overwrite ideviceinstaller</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装atxserver2-ios-provider"><a href="#安装atxserver2-ios-provider" class="headerlink" title="安装atxserver2-ios-provider,"></a>安装atxserver2-ios-provider,</h2><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/openatx/</span>atxserver2-ios-provider --recursive</span><br><span class="line">cd atxserver2-ios-provider</span><br><span class="line">pip3 install -r requirements.txt</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="初始化其中的ATX-WebDriverAgent"><a href="#初始化其中的ATX-WebDriverAgent" class="headerlink" title="初始化其中的ATX-WebDriverAgent"></a>初始化其中的ATX-WebDriverAgent</h2><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/appium/</span>WebDriverAgent</span><br><span class="line">cd ATX-WebDriverAgent</span><br><span class="line">brew install carthage</span><br><span class="line">.<span class="regexp">/Scripts/</span>bootstrap.sh</span><br></pre></td></tr></table></figure>
+<p>后找台手机接到苹果电脑上。 按照这个文档<a href="https://testerhome.com/topics/7220">https://testerhome.com/topics/7220</a> 对WebDriverAgent项目进行下设置</p>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">python3</span> main.<span class="keyword">py</span></span><br></pre></td></tr></table></figure>
+<p>连接成功后，如下图所示可以看到连接的iOS设备，点击立即使用即可远程控制。<br><img src="/.kim//atx2_iOS_action.gif" alt="示例图"></p>
+]]></content>
+      <categories>
+        <category>App自动化</category>
+      </categories>
+      <tags>
+        <tag>App自动化</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2019/05/20/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -1538,76 +1608,6 @@
 <li>Using FBSimulatorControl framework directly</li>
 </ol>
 <figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 解锁keychain，以便可以正常的签名应用，</span></span><br><span class="line"><span class="attribute">PASSWORD</span>=<span class="string">&quot;replace-with-your-password&quot;</span></span><br><span class="line">security unlock-keychain -p <span class="variable">$PASSWORD</span> ~/Library/Keychains/login.keychain</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取设备的UDID</span></span><br><span class="line"><span class="attribute">UDID</span>=$(idevice_id -l | head -n1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行测试</span></span><br><span class="line">xcodebuild -project WebDriverAgent.xcodeproj -scheme WebDriverAgentRunner -destination <span class="string">&quot;id=<span class="variable">$UDID</span>&quot;</span> test</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>App自动化</category>
-      </categories>
-      <tags>
-        <tag>App自动化</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>atxserver2设备管理平台搭建</title>
-    <url>/2019/08/21/atxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<p>[TOC]</p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>前面分享了STF Andriod设备远程管理平台的搭建和使用，但是STF不支持iOS设备连接，虽然现在社区有了STF集成iOS设备的开源方案，但是经过实践不太稳定，后面再Testerhome社区发现了一个新的框架ATX2同时支持Android和iOS设备远程管理，经过实践设备连接非常稳定，所以这里分享下这个平台的搭建和使用</p>
-<h1 id="ATX2简介"><a href="#ATX2简介" class="headerlink" title="ATX2简介"></a>ATX2简介</h1><p>ATX2是一款可以远程控制Android和iOS设备的设备管理平台。该平台使用的技术栈为:Python3+NodeJS+RethinkDB 项目目前已经开源，作者是阿里的一位大牛:<a href="https://github.com/codeskyblue">codeskyblue</a></p>
-<ul>
-<li>项目:Github地址:<a href="https://github.com/openatx/atxserver2">https://github.com/openatx/atxserver2</a></li>
-<li>平台框架图如下所示：<br><img src="/.kim//atx-frame.png" alt="框架图"></li>
-</ul>
-<h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><p>系统环境:Mac Os 10.14.6(因为要使用iOS设备连接WDA，所以需要Mac Os环境)</p>
-<p>python3安装</p>
-<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>python3</span><br></pre></td></tr></table></figure>
-<p>rethinkdb安装</p>
-<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span> rethinkdb</span><br></pre></td></tr></table></figure>
-
-<h1 id="服务部署"><a href="#服务部署" class="headerlink" title="服务部署"></a>服务部署</h1><p>启动ATX2服务有2种方式：</p>
-<ul>
-<li>Docker部署</li>
-<li>源码部署</li>
-</ul>
-<h2 id="Docker部署"><a href="#Docker部署" class="headerlink" title="Docker部署"></a>Docker部署</h2><ul>
-<li>使用Docker部署需要安装Docker，具体安装步骤见:Docker安装</li>
-<li>代码Clone到本地</li>
-</ul>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/openatx/</span>atxserver2</span><br></pre></td></tr></table></figure>
-<ul>
-<li>打开命令终端，切换到代码目录，执行一条命令即可</li>
-</ul>
-<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">docker-compose up</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="源码部署"><a href="#源码部署" class="headerlink" title="源码部署"></a>源码部署</h2><p>先准备好一个rethinkdb服务器，并启动</p>
-<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">rethinkdb</span></span><br></pre></td></tr></table></figure>
-<p>代码clone到本地</p>
-<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">git</span>@github.com:openatx/atxserver2.git</span><br></pre></td></tr></table></figure>
-<p>打开命令终端，切换到代码目录，然后执行命令下面的命令安装依赖</p>
-<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">pip3 <span class="keyword">install</span> -r requirements.txt</span><br></pre></td></tr></table></figure>
-<p>启动服务，命令如下</p>
-<figure class="highlight dsconfig"><table><tr><td class="code"><pre><span class="line"><span class="comment">#默认方式启动，使用默认的登录方式，默认端口</span></span><br><span class="line"><span class="string">python3</span> <span class="string">main</span>.<span class="string">py</span>  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定认证方式</span></span><br><span class="line"><span class="string">python3</span> <span class="string">main</span>.<span class="string">py</span> <span class="built_in">--auth</span> <span class="string">simple</span>  <span class="comment">#默认是一个非常simple的认证，输入邮箱就可以</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置监听端口</span></span><br><span class="line"><span class="string">python3</span> <span class="string">main</span>.<span class="string">py</span> <span class="built_in">--port</span> <span class="string">4000</span> <span class="comment"># 默认监听4000端口</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="打开页面"><a href="#打开页面" class="headerlink" title="打开页面"></a>打开页面</h2><p>启动之后，浏览器打开<a href="http://localhost(本机ip也可以):4000，登录之后就可以顺利的看到设备列表页了,由于还没有接入设备所以设备列表为空。">http://localhost(本机ip也可以):4000，登录之后就可以顺利的看到设备列表页了,由于还没有接入设备所以设备列表为空。</a><br><img src="/.kim//atx_index.png" alt="框架图"></p>
-<h1 id="Android设备接入atxserver2-android-provider"><a href="#Android设备接入atxserver2-android-provider" class="headerlink" title="Android设备接入atxserver2-android-provider"></a>Android设备接入<a href="https://github.com/openatx/atxserver2-android-provider">atxserver2-android-provider</a></h1><p>依赖 Python3.6+, NodeJS 8, Git-LFS<br>NodeJS版本太高了也不行，一定要NodeJS 8，推荐使用nvm管理node版本</p>
-<h2 id="Install-git-lfs"><a href="#Install-git-lfs" class="headerlink" title="Install git-lfs"></a>Install git-lfs</h2><figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>git-lfs</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="Clone代码到本地，切换到代码目录"><a href="#Clone代码到本地，切换到代码目录" class="headerlink" title="Clone代码到本地，切换到代码目录"></a>Clone代码到本地，切换到代码目录</h2><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/openatx/</span>atxserver2-android-provider</span><br><span class="line">cd atxserver2-android-provider</span><br><span class="line">git lfs install</span><br><span class="line">git lfs pull</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">npm <span class="keyword">install</span></span><br><span class="line">pip <span class="keyword">install</span> -r requirements.txt</span><br></pre></td></tr></table></figure>
-
-<h2 id="启动，需要指定atxserver2的地址-假设地址为-http-localhost-4000"><a href="#启动，需要指定atxserver2的地址-假设地址为-http-localhost-4000" class="headerlink" title="启动，需要指定atxserver2的地址, 假设地址为 http://localhost:4000"></a>启动，需要指定atxserver2的地址, 假设地址为 <a href="http://localhost:4000/">http://localhost:4000</a></h2><figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">python3</span> main.<span class="keyword">py</span> --server localhos<span class="variable">t:4000</span></span><br></pre></td></tr></table></figure>
-<p>Provider可以通过adb track-devices自动发现已经接入的设备，当手机接入到电脑上时，会自动给手机安装minicap, minitouch, atx-agent, app-uiautomator-[test].apk, whatsinput-apk</p>
-<p>接入的设备需要配置好开发者选项, 不同设备的设置方案放到了该项目的Issue中, tag: device-settings 如果没有该机型，可以自助添加</p>
-<h1 id="iOS设备接入atxserver2-ios-provider"><a href="#iOS设备接入atxserver2-ios-provider" class="headerlink" title="iOS设备接入atxserver2-ios-provider"></a>iOS设备接入<a href="https://github.com/openatx/atxserver2-ios-provider">atxserver2-ios-provider</a></h1><p>依赖 Python3.6+, NodeJS 8, WebDriverAgent(appium)</p>
-<h2 id="安装libimobiledevice工具包"><a href="#安装libimobiledevice工具包" class="headerlink" title="安装libimobiledevice工具包"></a>安装libimobiledevice工具包</h2><figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span>uninstall --ignore-dependencies libimobiledevice</span><br><span class="line"><span class="keyword">brew </span>uninstall --ignore-dependencies usbmuxd</span><br><span class="line"></span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>--HEAD usbmuxd</span><br><span class="line"><span class="keyword">brew </span>unlink usbmuxd</span><br><span class="line"><span class="keyword">brew </span>link usbmuxd</span><br><span class="line"></span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>--HEAD libimobiledevice</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>ideviceinstaller</span><br><span class="line"><span class="keyword">brew </span>link --overwrite ideviceinstaller</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装atxserver2-ios-provider"><a href="#安装atxserver2-ios-provider" class="headerlink" title="安装atxserver2-ios-provider,"></a>安装atxserver2-ios-provider,</h2><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/openatx/</span>atxserver2-ios-provider --recursive</span><br><span class="line">cd atxserver2-ios-provider</span><br><span class="line">pip3 install -r requirements.txt</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="初始化其中的ATX-WebDriverAgent"><a href="#初始化其中的ATX-WebDriverAgent" class="headerlink" title="初始化其中的ATX-WebDriverAgent"></a>初始化其中的ATX-WebDriverAgent</h2><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/appium/</span>WebDriverAgent</span><br><span class="line">cd ATX-WebDriverAgent</span><br><span class="line">brew install carthage</span><br><span class="line">.<span class="regexp">/Scripts/</span>bootstrap.sh</span><br></pre></td></tr></table></figure>
-<p>后找台手机接到苹果电脑上。 按照这个文档<a href="https://testerhome.com/topics/7220">https://testerhome.com/topics/7220</a> 对WebDriverAgent项目进行下设置</p>
-<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">python3</span> main.<span class="keyword">py</span></span><br></pre></td></tr></table></figure>
-<p>连接成功后，如下图所示可以看到连接的iOS设备，点击立即使用即可远程控制。<br><img src="/.kim//atx2_iOS_action.gif" alt="示例图"></p>
 ]]></content>
       <categories>
         <category>App自动化</category>
@@ -2056,6 +2056,52 @@
       </tags>
   </entry>
   <entry>
+    <title>（Mac）iOS自动化打包（Jenkins+fastlane+pgy</title>
+    <url>/2019/05/21/%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-fastlane-pgy/</url>
+    <content><![CDATA[<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p>| 名称 | 版本 |<br>| — | — | — |<br>| macOS | 10.14.4 (18E226) |<br>| Xcode | Version 10.2.1 |<br>| ruby | 2.6.3 |<br>| fastlane  | 2.123.0  |</p>
+<h1 id="Fastlane安装"><a href="#Fastlane安装" class="headerlink" title="Fastlane安装"></a>Fastlane安装</h1><p>Fastlane是一套使用Ruby写的自动化工具集，用于iOS和Android的自动化打包、发布等工作，可以节省大量的时间。<br>安装过程如下</p>
+<h2 id="安装ruby（brew安装最新版）"><a href="#安装ruby（brew安装最新版）" class="headerlink" title="安装ruby（brew安装最新版）"></a>安装ruby（brew安装最新版）</h2><figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"><span class="meta">#直接在终端执行，未安装brew，先安装brew</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">#安装最新的2.6.3</span></span><br><span class="line">brew install ruby   </span><br><span class="line"> </span><br><span class="line"><span class="meta">#安装完根据提示执行</span></span><br><span class="line">echo <span class="string">&#x27;export PATH=&quot;/usr/local/opt/ruby/bin:$PATH&quot;&#x27;</span> &gt;&gt; ~/.zshrc</span><br><span class="line"> </span><br><span class="line"><span class="meta">#退出终端查看ruby版本</span></span><br><span class="line">ruby -v </span><br><span class="line"> </span><br><span class="line"><span class="meta">#检查安装路径</span></span><br><span class="line">which -a ruby</span><br></pre></td></tr></table></figure>
+<h2 id="更改gem源"><a href="#更改gem源" class="headerlink" title="更改gem源"></a>更改gem源</h2><ul>
+<li>更改  <figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">gem sources --<span class="built_in">remove</span> http<span class="variable">s:</span>//rubygems.org/</span><br><span class="line">gem sources --<span class="built_in">add</span> http<span class="variable">s:</span>//gems.<span class="keyword">ruby</span>-china.<span class="keyword">com</span>/</span><br></pre></td></tr></table></figure></li>
+<li>查看   <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">gem sources -l</span></span><br></pre></td></tr></table></figure>
+  如果是以下结果说明正确，如果有其他的请自行百度解决  <figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">*** CURRENT SOURCES ***</span><br><span class="line">http<span class="variable">s:</span>//gems.<span class="keyword">ruby</span>-china.<span class="keyword">com</span>/</span><br></pre></td></tr></table></figure></li>
+<li>安装fastlane  <figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">#安装</span></span><br><span class="line">gem install -n /usr/<span class="keyword">local</span>/bin fastlane -NV</span><br><span class="line"></span><br><span class="line"><span class="comment">#检查是否安装成</span></span><br><span class="line">fastlane <span class="comment">--version</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p>至此，我们已经可以使用fastlane自动化打包了</p>
+</blockquote>
+<h1 id="Fastlane配置"><a href="#Fastlane配置" class="headerlink" title="Fastlane配置"></a>Fastlane配置</h1><h2 id="fastlane-init"><a href="#fastlane-init" class="headerlink" title="fastlane init"></a>fastlane init</h2><p>cd 到工程主目录执行<code>fastlane init </code>我这里选择的是手动配置</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">cd <span class="regexp">/Users/</span>vic<span class="regexp">/.jenkins/</span>workspace/jike-iOS-Fastlan</span><br><span class="line">fastlane init</span><br></pre></td></tr></table></figure>
+<p>会在你项目工程的目录下生成一个fastlane文件夹，里面有Fastlane的配置文件，一个是Appfile文件(保存了苹果开发者的相关信息)，一个是Fastfile文件（运行脚本）</p>
+<h2 id="编辑Fastfile文件（运行脚本）"><a href="#编辑Fastfile文件（运行脚本）" class="headerlink" title="编辑Fastfile文件（运行脚本）"></a>编辑Fastfile文件（运行脚本）</h2><p>有时候一天需要打好几个包，为了区分，我们这里实现一个递增build号的功能。</p>
+<ul>
+<li>定义一个递增build号的函数，添加到Fastfile中  <figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line">def updateProjectBuildNumber</span><br><span class="line"></span><br><span class="line">currentTime = Time.new.strftime(&quot;%Y%m%d&quot;)</span><br><span class="line"><span class="keyword">build</span> = get_build_number()</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">build</span>.<span class="keyword">include</span>?<span class="string">&quot;#&#123;currentTime&#125;.&quot;</span></span><br><span class="line"># =&gt; 为当天版本 计算迭代版本号</span><br><span class="line">lastStr = <span class="keyword">build</span>[<span class="keyword">build</span>.<span class="built_in">length</span><span class="number">-2.</span>.<span class="keyword">build</span>.<span class="built_in">length</span><span class="number">-1</span>]</span><br><span class="line">lastNum = lastStr.to_i</span><br><span class="line">lastNum = lastNum + <span class="number">1</span></span><br><span class="line">lastStr = lastNum.to_s</span><br><span class="line"><span class="keyword">if</span> lastNum &lt; <span class="number">10</span></span><br><span class="line">lastStr = lastStr.<span class="keyword">insert</span>(<span class="number">0</span>,<span class="string">&quot;0&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">build</span> = <span class="string">&quot;#&#123;currentTime&#125;.#&#123;lastStr&#125;&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"># =&gt; 非当天版本 <span class="keyword">build</span> 号重置</span><br><span class="line"><span class="keyword">build</span> = <span class="string">&quot;#&#123;currentTime&#125;.01&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">puts(<span class="string">&quot;*************| 更新build #&#123;build&#125; |*************&quot;</span>)</span><br><span class="line"># =&gt; 更改项目 <span class="keyword">build</span> 号</span><br><span class="line">increment_build_number(</span><br><span class="line">build_number: <span class="string">&quot;#&#123;build&#125;&quot;</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>实现自动打包的完整Fastfile如下:  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 定义fastlane版本号</span></span><br><span class="line">fastlane_version <span class="string">&quot;2.123.0&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义打包平台</span></span><br><span class="line">default_platform <span class="symbol">:ios</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">updateProjectBuildNumber</span></span></span><br><span class="line"></span><br><span class="line">currentTime = Time.new.strftime(<span class="string">&quot;%Y%m%d&quot;</span>)</span><br><span class="line">build = get_build_number()</span><br><span class="line"><span class="keyword">if</span> build.<span class="keyword">include</span>?<span class="string">&quot;<span class="subst">#&#123;currentTime&#125;</span>.&quot;</span></span><br><span class="line"><span class="comment"># =&gt; 为当天版本 计算迭代版本号</span></span><br><span class="line">lastStr = build[build.length-<span class="number">2</span>..build.length-<span class="number">1</span>]</span><br><span class="line">lastNum = lastStr.to_i</span><br><span class="line">lastNum = lastNum + <span class="number">1</span></span><br><span class="line">lastStr = lastNum.to_s</span><br><span class="line"><span class="keyword">if</span> lastNum &lt; <span class="number">10</span></span><br><span class="line">lastStr = lastStr.insert(<span class="number">0</span>,<span class="string">&quot;0&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">build = <span class="string">&quot;<span class="subst">#&#123;currentTime&#125;</span>.<span class="subst">#&#123;lastStr&#125;</span>&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"><span class="comment"># =&gt; 非当天版本 build 号重置</span></span><br><span class="line">build = <span class="string">&quot;<span class="subst">#&#123;currentTime&#125;</span>.01&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">puts(<span class="string">&quot;*************| 更新build <span class="subst">#&#123;build&#125;</span> |*************&quot;</span>)</span><br><span class="line"><span class="comment"># =&gt; 更改项目 build 号</span></span><br><span class="line">increment_build_number(</span><br><span class="line"><span class="symbol">build_number:</span> <span class="string">&quot;<span class="subst">#&#123;build&#125;</span>&quot;</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#指定项目的scheme名称</span></span><br><span class="line">scheme=<span class="string">&quot;Ruguo&quot;</span></span><br><span class="line"><span class="comment">#蒲公英api_key和user_key</span></span><br><span class="line">api_key=<span class="string">&quot;8e860ee5ba4996f9b19e56c28e07846a&quot;</span></span><br><span class="line">user_key=<span class="string">&quot;542e73b113b5908da8b028805bf7e837&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 任务脚本</span></span><br><span class="line">platform <span class="symbol">:ios</span> <span class="keyword">do</span></span><br><span class="line">lane <span class="symbol">:development_build</span> <span class="keyword">do</span><span class="params">|options|</span></span><br><span class="line">branch = options[<span class="symbol">:branch</span>]</span><br><span class="line"></span><br><span class="line">puts <span class="string">&quot;开始打development ipa&quot;</span></span><br><span class="line"></span><br><span class="line">updateProjectBuildNumber <span class="comment">#更改项目build号</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始打包</span></span><br><span class="line">gym(</span><br><span class="line"><span class="comment">#指定需要编译的scheme</span></span><br><span class="line"><span class="symbol">scheme:</span><span class="string">&quot;<span class="subst">#&#123;scheme&#125;</span>&quot;</span>,</span><br><span class="line"><span class="comment">#输出的ipa名称</span></span><br><span class="line"><span class="symbol">output_name:</span><span class="string">&quot;<span class="subst">#&#123;scheme&#125;</span>_<span class="subst">#&#123;get_build_number()&#125;</span>&quot;</span>,</span><br><span class="line"><span class="comment"># 是否清空以前的编译信息 true：是</span></span><br><span class="line"><span class="symbol">clean:</span><span class="literal">true</span>,</span><br><span class="line"><span class="comment"># 指定打包方式，Release 或者 Debug</span></span><br><span class="line"><span class="symbol">configuration:</span><span class="string">&quot;Release&quot;</span>,</span><br><span class="line"><span class="comment"># 指定打包所使用的输出方式，目前支持app-store, package, ad-hoc, enterprise, development</span></span><br><span class="line"><span class="symbol">export_method:</span><span class="string">&quot;development&quot;</span>,</span><br><span class="line"><span class="comment"># 指定输出文件夹</span></span><br><span class="line"><span class="symbol">output_directory:</span><span class="string">&quot;./fastlane/build&quot;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">#puts &quot;开始上传蒲公英&quot;</span></span><br><span class="line"><span class="comment"># 开始上传蒲公英</span></span><br><span class="line"><span class="comment">#pgyer(api_key: &quot;#&#123;api_key&#125;&quot;, user_key: &quot;#&#123;user_key&#125;&quot;, password: &quot;alpha&quot;, install_type: &quot;2&quot;)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+  注意：蒲公英的 api_key 和 user_key，开发者在自己账号下的 账号设置-API信息 中可以找到。打其它类型的包的方法与development类似，可自定义一个新的lane实现。</li>
+</ul>
+<h2 id="自动打包并上传蒲公英，"><a href="#自动打包并上传蒲公英，" class="headerlink" title="自动打包并上传蒲公英，"></a>自动打包并上传蒲公英，</h2><p>在终端输入便会进行自动打包并上传蒲公英了。</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">fastlane development_build</span></span><br></pre></td></tr></table></figure>
+<h1 id="Jenkins安装"><a href="#Jenkins安装" class="headerlink" title="Jenkins安装"></a>Jenkins安装</h1><p>下载安装Jenkins。具体安装过程可参考 <a href="https://vic.kim/2019/05/21/Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/">Mac Jenkins搭建</a></p>
+<h1 id="Jenkins配置"><a href="#Jenkins配置" class="headerlink" title="Jenkins配置"></a>Jenkins配置</h1><ul>
+<li><p>点击新建，输入名称，构建一个自由风格的软件项目</p>
+</li>
+<li><p>添加Git仓库地址，可以是HTTP也可以是SSH。点击Add</p>
+</li>
+<li><p>构建，点击“添加构建步骤”，选择Execute shell。<br>  <img src="/.kim//15584430633082.jpg"></p>
+  <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">export PATH=<span class="regexp">/usr/</span>local/bin:<span class="variable">$PATH</span></span><br><span class="line">fastlane development_build</span><br><span class="line"></span><br><span class="line">filepath=`pwd`fastlane<span class="regexp">/build/</span>Ruguo*.api</span><br><span class="line">file=`ls <span class="variable">$filepath</span>`</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$uploadPgy</span> = true ]</span><br><span class="line">then</span><br><span class="line">    curl -F <span class="string">&quot;installType=2&quot;</span> -F <span class="string">&quot;password=alpha&quot;</span> -F <span class="string">&quot;file=@$file&quot;</span> -F <span class="string">&quot;uKey=542e73b113b5908da8b028805bf7e837&quot;</span> -F <span class="string">&quot;_api_key=8e860ee5ba4996f9b19e56c28e07846a&quot;</span> https:<span class="regexp">//</span>qiniu-storage.pgyer.com<span class="regexp">/apiv1/</span>app/upload</span><br><span class="line">fi</span><br></pre></td></tr></table></figure></li>
+<li><p>添加完成之后保存，点击立即构建</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Jenkins</category>
+      </categories>
+      <tags>
+        <tag>Jenkins</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>（Mac）iOS自动化打包（Jenkins+xcodebuild+fir）</title>
     <url>/2019/05/21/%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-xcodebuild-fir%EF%BC%89/</url>
     <content><![CDATA[<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p>| 名称 | 版本 |<br>| — | — | — |<br>| macOS | 10.14.4 (18E226) |<br>| Xcode | Version 10.2.1 |<br>| ruby | 2.6.3 |<br>| fir-cli  | 1.7.1  |</p>
@@ -2101,52 +2147,6 @@
 </li>
 <li><p>脚本</p>
   <figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">fir</span> publish /Users/vic/.jenkins/workspace/jike-iOS/Export/Ruguo/Ruguo.ipa -T <span class="number">4554</span>bab<span class="number">16</span>fc<span class="number">50</span>b<span class="number">5</span>b<span class="number">8</span>ee<span class="number">20</span>d<span class="number">9663</span>fa<span class="number">64</span>c<span class="number">7</span> --password=jikebeta</span><br></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Jenkins</category>
-      </categories>
-      <tags>
-        <tag>Jenkins</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>（Mac）iOS自动化打包（Jenkins+fastlane+pgy</title>
-    <url>/2019/05/21/%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-fastlane-pgy/</url>
-    <content><![CDATA[<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p>| 名称 | 版本 |<br>| — | — | — |<br>| macOS | 10.14.4 (18E226) |<br>| Xcode | Version 10.2.1 |<br>| ruby | 2.6.3 |<br>| fastlane  | 2.123.0  |</p>
-<h1 id="Fastlane安装"><a href="#Fastlane安装" class="headerlink" title="Fastlane安装"></a>Fastlane安装</h1><p>Fastlane是一套使用Ruby写的自动化工具集，用于iOS和Android的自动化打包、发布等工作，可以节省大量的时间。<br>安装过程如下</p>
-<h2 id="安装ruby（brew安装最新版）"><a href="#安装ruby（brew安装最新版）" class="headerlink" title="安装ruby（brew安装最新版）"></a>安装ruby（brew安装最新版）</h2><figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"><span class="meta">#直接在终端执行，未安装brew，先安装brew</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">#安装最新的2.6.3</span></span><br><span class="line">brew install ruby   </span><br><span class="line"> </span><br><span class="line"><span class="meta">#安装完根据提示执行</span></span><br><span class="line">echo <span class="string">&#x27;export PATH=&quot;/usr/local/opt/ruby/bin:$PATH&quot;&#x27;</span> &gt;&gt; ~/.zshrc</span><br><span class="line"> </span><br><span class="line"><span class="meta">#退出终端查看ruby版本</span></span><br><span class="line">ruby -v </span><br><span class="line"> </span><br><span class="line"><span class="meta">#检查安装路径</span></span><br><span class="line">which -a ruby</span><br></pre></td></tr></table></figure>
-<h2 id="更改gem源"><a href="#更改gem源" class="headerlink" title="更改gem源"></a>更改gem源</h2><ul>
-<li>更改  <figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">gem sources --<span class="built_in">remove</span> http<span class="variable">s:</span>//rubygems.org/</span><br><span class="line">gem sources --<span class="built_in">add</span> http<span class="variable">s:</span>//gems.<span class="keyword">ruby</span>-china.<span class="keyword">com</span>/</span><br></pre></td></tr></table></figure></li>
-<li>查看   <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">gem sources -l</span></span><br></pre></td></tr></table></figure>
-  如果是以下结果说明正确，如果有其他的请自行百度解决  <figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">*** CURRENT SOURCES ***</span><br><span class="line">http<span class="variable">s:</span>//gems.<span class="keyword">ruby</span>-china.<span class="keyword">com</span>/</span><br></pre></td></tr></table></figure></li>
-<li>安装fastlane  <figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">#安装</span></span><br><span class="line">gem install -n /usr/<span class="keyword">local</span>/bin fastlane -NV</span><br><span class="line"></span><br><span class="line"><span class="comment">#检查是否安装成</span></span><br><span class="line">fastlane <span class="comment">--version</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<blockquote>
-<p>至此，我们已经可以使用fastlane自动化打包了</p>
-</blockquote>
-<h1 id="Fastlane配置"><a href="#Fastlane配置" class="headerlink" title="Fastlane配置"></a>Fastlane配置</h1><h2 id="fastlane-init"><a href="#fastlane-init" class="headerlink" title="fastlane init"></a>fastlane init</h2><p>cd 到工程主目录执行<code>fastlane init </code>我这里选择的是手动配置</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">cd <span class="regexp">/Users/</span>vic<span class="regexp">/.jenkins/</span>workspace/jike-iOS-Fastlan</span><br><span class="line">fastlane init</span><br></pre></td></tr></table></figure>
-<p>会在你项目工程的目录下生成一个fastlane文件夹，里面有Fastlane的配置文件，一个是Appfile文件(保存了苹果开发者的相关信息)，一个是Fastfile文件（运行脚本）</p>
-<h2 id="编辑Fastfile文件（运行脚本）"><a href="#编辑Fastfile文件（运行脚本）" class="headerlink" title="编辑Fastfile文件（运行脚本）"></a>编辑Fastfile文件（运行脚本）</h2><p>有时候一天需要打好几个包，为了区分，我们这里实现一个递增build号的功能。</p>
-<ul>
-<li>定义一个递增build号的函数，添加到Fastfile中  <figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line">def updateProjectBuildNumber</span><br><span class="line"></span><br><span class="line">currentTime = Time.new.strftime(&quot;%Y%m%d&quot;)</span><br><span class="line"><span class="keyword">build</span> = get_build_number()</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">build</span>.<span class="keyword">include</span>?<span class="string">&quot;#&#123;currentTime&#125;.&quot;</span></span><br><span class="line"># =&gt; 为当天版本 计算迭代版本号</span><br><span class="line">lastStr = <span class="keyword">build</span>[<span class="keyword">build</span>.<span class="built_in">length</span><span class="number">-2.</span>.<span class="keyword">build</span>.<span class="built_in">length</span><span class="number">-1</span>]</span><br><span class="line">lastNum = lastStr.to_i</span><br><span class="line">lastNum = lastNum + <span class="number">1</span></span><br><span class="line">lastStr = lastNum.to_s</span><br><span class="line"><span class="keyword">if</span> lastNum &lt; <span class="number">10</span></span><br><span class="line">lastStr = lastStr.<span class="keyword">insert</span>(<span class="number">0</span>,<span class="string">&quot;0&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">build</span> = <span class="string">&quot;#&#123;currentTime&#125;.#&#123;lastStr&#125;&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"># =&gt; 非当天版本 <span class="keyword">build</span> 号重置</span><br><span class="line"><span class="keyword">build</span> = <span class="string">&quot;#&#123;currentTime&#125;.01&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">puts(<span class="string">&quot;*************| 更新build #&#123;build&#125; |*************&quot;</span>)</span><br><span class="line"># =&gt; 更改项目 <span class="keyword">build</span> 号</span><br><span class="line">increment_build_number(</span><br><span class="line">build_number: <span class="string">&quot;#&#123;build&#125;&quot;</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>实现自动打包的完整Fastfile如下:  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 定义fastlane版本号</span></span><br><span class="line">fastlane_version <span class="string">&quot;2.123.0&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义打包平台</span></span><br><span class="line">default_platform <span class="symbol">:ios</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">updateProjectBuildNumber</span></span></span><br><span class="line"></span><br><span class="line">currentTime = Time.new.strftime(<span class="string">&quot;%Y%m%d&quot;</span>)</span><br><span class="line">build = get_build_number()</span><br><span class="line"><span class="keyword">if</span> build.<span class="keyword">include</span>?<span class="string">&quot;<span class="subst">#&#123;currentTime&#125;</span>.&quot;</span></span><br><span class="line"><span class="comment"># =&gt; 为当天版本 计算迭代版本号</span></span><br><span class="line">lastStr = build[build.length-<span class="number">2</span>..build.length-<span class="number">1</span>]</span><br><span class="line">lastNum = lastStr.to_i</span><br><span class="line">lastNum = lastNum + <span class="number">1</span></span><br><span class="line">lastStr = lastNum.to_s</span><br><span class="line"><span class="keyword">if</span> lastNum &lt; <span class="number">10</span></span><br><span class="line">lastStr = lastStr.insert(<span class="number">0</span>,<span class="string">&quot;0&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">build = <span class="string">&quot;<span class="subst">#&#123;currentTime&#125;</span>.<span class="subst">#&#123;lastStr&#125;</span>&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"><span class="comment"># =&gt; 非当天版本 build 号重置</span></span><br><span class="line">build = <span class="string">&quot;<span class="subst">#&#123;currentTime&#125;</span>.01&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">puts(<span class="string">&quot;*************| 更新build <span class="subst">#&#123;build&#125;</span> |*************&quot;</span>)</span><br><span class="line"><span class="comment"># =&gt; 更改项目 build 号</span></span><br><span class="line">increment_build_number(</span><br><span class="line"><span class="symbol">build_number:</span> <span class="string">&quot;<span class="subst">#&#123;build&#125;</span>&quot;</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#指定项目的scheme名称</span></span><br><span class="line">scheme=<span class="string">&quot;Ruguo&quot;</span></span><br><span class="line"><span class="comment">#蒲公英api_key和user_key</span></span><br><span class="line">api_key=<span class="string">&quot;8e860ee5ba4996f9b19e56c28e07846a&quot;</span></span><br><span class="line">user_key=<span class="string">&quot;542e73b113b5908da8b028805bf7e837&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 任务脚本</span></span><br><span class="line">platform <span class="symbol">:ios</span> <span class="keyword">do</span></span><br><span class="line">lane <span class="symbol">:development_build</span> <span class="keyword">do</span><span class="params">|options|</span></span><br><span class="line">branch = options[<span class="symbol">:branch</span>]</span><br><span class="line"></span><br><span class="line">puts <span class="string">&quot;开始打development ipa&quot;</span></span><br><span class="line"></span><br><span class="line">updateProjectBuildNumber <span class="comment">#更改项目build号</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始打包</span></span><br><span class="line">gym(</span><br><span class="line"><span class="comment">#指定需要编译的scheme</span></span><br><span class="line"><span class="symbol">scheme:</span><span class="string">&quot;<span class="subst">#&#123;scheme&#125;</span>&quot;</span>,</span><br><span class="line"><span class="comment">#输出的ipa名称</span></span><br><span class="line"><span class="symbol">output_name:</span><span class="string">&quot;<span class="subst">#&#123;scheme&#125;</span>_<span class="subst">#&#123;get_build_number()&#125;</span>&quot;</span>,</span><br><span class="line"><span class="comment"># 是否清空以前的编译信息 true：是</span></span><br><span class="line"><span class="symbol">clean:</span><span class="literal">true</span>,</span><br><span class="line"><span class="comment"># 指定打包方式，Release 或者 Debug</span></span><br><span class="line"><span class="symbol">configuration:</span><span class="string">&quot;Release&quot;</span>,</span><br><span class="line"><span class="comment"># 指定打包所使用的输出方式，目前支持app-store, package, ad-hoc, enterprise, development</span></span><br><span class="line"><span class="symbol">export_method:</span><span class="string">&quot;development&quot;</span>,</span><br><span class="line"><span class="comment"># 指定输出文件夹</span></span><br><span class="line"><span class="symbol">output_directory:</span><span class="string">&quot;./fastlane/build&quot;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">#puts &quot;开始上传蒲公英&quot;</span></span><br><span class="line"><span class="comment"># 开始上传蒲公英</span></span><br><span class="line"><span class="comment">#pgyer(api_key: &quot;#&#123;api_key&#125;&quot;, user_key: &quot;#&#123;user_key&#125;&quot;, password: &quot;alpha&quot;, install_type: &quot;2&quot;)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-  注意：蒲公英的 api_key 和 user_key，开发者在自己账号下的 账号设置-API信息 中可以找到。打其它类型的包的方法与development类似，可自定义一个新的lane实现。</li>
-</ul>
-<h2 id="自动打包并上传蒲公英，"><a href="#自动打包并上传蒲公英，" class="headerlink" title="自动打包并上传蒲公英，"></a>自动打包并上传蒲公英，</h2><p>在终端输入便会进行自动打包并上传蒲公英了。</p>
-<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">fastlane development_build</span></span><br></pre></td></tr></table></figure>
-<h1 id="Jenkins安装"><a href="#Jenkins安装" class="headerlink" title="Jenkins安装"></a>Jenkins安装</h1><p>下载安装Jenkins。具体安装过程可参考 <a href="https://vic.kim/2019/05/21/Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/">Mac Jenkins搭建</a></p>
-<h1 id="Jenkins配置"><a href="#Jenkins配置" class="headerlink" title="Jenkins配置"></a>Jenkins配置</h1><ul>
-<li><p>点击新建，输入名称，构建一个自由风格的软件项目</p>
-</li>
-<li><p>添加Git仓库地址，可以是HTTP也可以是SSH。点击Add</p>
-</li>
-<li><p>构建，点击“添加构建步骤”，选择Execute shell。<br>  <img src="/.kim//15584430633082.jpg"></p>
-  <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">export PATH=<span class="regexp">/usr/</span>local/bin:<span class="variable">$PATH</span></span><br><span class="line">fastlane development_build</span><br><span class="line"></span><br><span class="line">filepath=`pwd`fastlane<span class="regexp">/build/</span>Ruguo*.api</span><br><span class="line">file=`ls <span class="variable">$filepath</span>`</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$uploadPgy</span> = true ]</span><br><span class="line">then</span><br><span class="line">    curl -F <span class="string">&quot;installType=2&quot;</span> -F <span class="string">&quot;password=alpha&quot;</span> -F <span class="string">&quot;file=@$file&quot;</span> -F <span class="string">&quot;uKey=542e73b113b5908da8b028805bf7e837&quot;</span> -F <span class="string">&quot;_api_key=8e860ee5ba4996f9b19e56c28e07846a&quot;</span> https:<span class="regexp">//</span>qiniu-storage.pgyer.com<span class="regexp">/apiv1/</span>app/upload</span><br><span class="line">fi</span><br></pre></td></tr></table></figure></li>
-<li><p>添加完成之后保存，点击立即构建</p>
-</li>
 </ul>
 ]]></content>
       <categories>
