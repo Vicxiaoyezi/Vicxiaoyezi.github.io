@@ -14,10 +14,11 @@
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"vic.kim","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"vic.kim","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="[TOC] 前言前面分享了STF Andriod设备远程管理平台的搭建和使用，但是STF不支持iOS设备连接，虽然现在社区有了STF集成iOS设备的开源方案，但是经过实践不太稳定，后面再Testerhome社区发现了一个新的框架ATX2同时支持Android和iOS设备远程管理，经过实践设备连接非常稳定，所以这里分享下这个平台的搭建和使用 ATX2简介ATX2是一款可以远程控制Android和iO">
@@ -27,15 +28,15 @@
 <meta property="og:site_name" content="Vicの博客">
 <meta property="og:description" content="[TOC] 前言前面分享了STF Andriod设备远程管理平台的搭建和使用，但是STF不支持iOS设备连接，虽然现在社区有了STF集成iOS设备的开源方案，但是经过实践不太稳定，后面再Testerhome社区发现了一个新的框架ATX2同时支持Android和iOS设备远程管理，经过实践设备连接非常稳定，所以这里分享下这个平台的搭建和使用 ATX2简介ATX2是一款可以远程控制Android和iO">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://vic.kim/.kim//atx-frame.png">
-<meta property="og:image" content="https://vic.kim/.kim//atx_index.png">
-<meta property="og:image" content="https://vic.kim/.kim//atx2_iOS_action.gif">
+<meta property="og:image" content="https://vic.kim/2019/08/21/atxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/atxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/atx-frame.png">
+<meta property="og:image" content="https://vic.kim/2019/08/21/atxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/atxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/atx_index.png">
+<meta property="og:image" content="https://vic.kim/2019/08/21/atxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/atxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/atx2_iOS_action.gif">
 <meta property="article:published_time" content="2019-08-21T11:54:24.000Z">
 <meta property="article:modified_time" content="2019-10-24T07:55:00.862Z">
 <meta property="article:author" content="Vic">
 <meta property="article:tag" content="App自动化">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://vic.kim/.kim//atx-frame.png">
+<meta name="twitter:image" content="https://vic.kim/2019/08/21/atxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/atxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/atx-frame.png">
 
 <link rel="canonical" href="https://vic.kim/2019/08/21/atxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/">
 
@@ -253,7 +254,7 @@
 <h1 id="ATX2简介"><a href="#ATX2简介" class="headerlink" title="ATX2简介"></a>ATX2简介</h1><p>ATX2是一款可以远程控制Android和iOS设备的设备管理平台。该平台使用的技术栈为:Python3+NodeJS+RethinkDB 项目目前已经开源，作者是阿里的一位大牛:<a target="_blank" rel="noopener" href="https://github.com/codeskyblue">codeskyblue</a></p>
 <ul>
 <li>项目:Github地址:<a target="_blank" rel="noopener" href="https://github.com/openatx/atxserver2">https://github.com/openatx/atxserver2</a></li>
-<li>平台框架图如下所示：<br><img src="/.kim//atx-frame.png" alt="框架图"></li>
+<li>平台框架图如下所示：<br><img data-src="atxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/atx-frame.png" alt="框架图"></li>
 </ul>
 <h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><p>系统环境:Mac Os 10.14.6(因为要使用iOS设备连接WDA，所以需要Mac Os环境)</p>
 <p>python3安装</p>
@@ -285,7 +286,7 @@
 <p>启动服务，命令如下</p>
 <figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#默认方式启动，使用默认的登录方式，默认端口</span></span><br><span class="line"><span class="string">python3</span> <span class="string">main</span>.<span class="string">py</span>  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定认证方式</span></span><br><span class="line"><span class="string">python3</span> <span class="string">main</span>.<span class="string">py</span> <span class="built_in">--auth</span> <span class="string">simple</span>  <span class="comment">#默认是一个非常simple的认证，输入邮箱就可以</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置监听端口</span></span><br><span class="line"><span class="string">python3</span> <span class="string">main</span>.<span class="string">py</span> <span class="built_in">--port</span> <span class="string">4000</span> <span class="comment"># 默认监听4000端口</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="打开页面"><a href="#打开页面" class="headerlink" title="打开页面"></a>打开页面</h2><p>启动之后，浏览器打开<a href="http://localhost(本机ip也可以):4000，登录之后就可以顺利的看到设备列表页了,由于还没有接入设备所以设备列表为空。">http://localhost(本机ip也可以):4000，登录之后就可以顺利的看到设备列表页了,由于还没有接入设备所以设备列表为空。</a><br><img src="/.kim//atx_index.png" alt="框架图"></p>
+<h2 id="打开页面"><a href="#打开页面" class="headerlink" title="打开页面"></a>打开页面</h2><p>启动之后，浏览器打开<a href="http://localhost(本机ip也可以):4000，登录之后就可以顺利的看到设备列表页了,由于还没有接入设备所以设备列表为空。">http://localhost(本机ip也可以):4000，登录之后就可以顺利的看到设备列表页了,由于还没有接入设备所以设备列表为空。</a><br><img data-src="atxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/atx_index.png" alt="框架图"></p>
 <h1 id="Android设备接入atxserver2-android-provider"><a href="#Android设备接入atxserver2-android-provider" class="headerlink" title="Android设备接入atxserver2-android-provider"></a>Android设备接入<a target="_blank" rel="noopener" href="https://github.com/openatx/atxserver2-android-provider">atxserver2-android-provider</a></h1><p>依赖 Python3.6+, NodeJS 8, Git-LFS<br>NodeJS版本太高了也不行，一定要NodeJS 8，推荐使用nvm管理node版本</p>
 <h2 id="Install-git-lfs"><a href="#Install-git-lfs" class="headerlink" title="Install git-lfs"></a>Install git-lfs</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>git-lfs</span><br></pre></td></tr></table></figure>
 
@@ -306,7 +307,7 @@
 <h2 id="初始化其中的ATX-WebDriverAgent"><a href="#初始化其中的ATX-WebDriverAgent" class="headerlink" title="初始化其中的ATX-WebDriverAgent"></a>初始化其中的ATX-WebDriverAgent</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/appium/</span>WebDriverAgent</span><br><span class="line">cd ATX-WebDriverAgent</span><br><span class="line">brew install carthage</span><br><span class="line">.<span class="regexp">/Scripts/</span>bootstrap.sh</span><br></pre></td></tr></table></figure>
 <p>后找台手机接到苹果电脑上。 按照这个文档<a target="_blank" rel="noopener" href="https://testerhome.com/topics/7220">https://testerhome.com/topics/7220</a> 对WebDriverAgent项目进行下设置</p>
 <h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">python3</span> main.<span class="keyword">py</span></span><br></pre></td></tr></table></figure>
-<p>连接成功后，如下图所示可以看到连接的iOS设备，点击立即使用即可远程控制。<br><img src="/.kim//atx2_iOS_action.gif" alt="示例图"></p>
+<p>连接成功后，如下图所示可以看到连接的iOS设备，点击立即使用即可远程控制。<br><img data-src="atxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/atx2_iOS_action.gif" alt="示例图"></p>
 
     </div>
 
@@ -506,6 +507,9 @@
   
   <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
   <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 

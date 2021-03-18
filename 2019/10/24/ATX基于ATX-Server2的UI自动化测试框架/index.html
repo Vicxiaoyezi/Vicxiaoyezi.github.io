@@ -14,10 +14,11 @@
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"vic.kim","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"vic.kim","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="前言基于ATX-Server2的UI自动化测试框架，支持多设备的并行测试，并生成统一的测试报告 支持atx-server2android：修改config下的Server地址为atx-server2的Url，token填写正确后,就可以正常运行了 atxserver2设备管理平台搭建 前置条件部署好atxserver2只支持Python 3上运行  本人python版本 3.7Android设备需">
@@ -27,15 +28,15 @@
 <meta property="og:site_name" content="Vicの博客">
 <meta property="og:description" content="前言基于ATX-Server2的UI自动化测试框架，支持多设备的并行测试，并生成统一的测试报告 支持atx-server2android：修改config下的Server地址为atx-server2的Url，token填写正确后,就可以正常运行了 atxserver2设备管理平台搭建 前置条件部署好atxserver2只支持Python 3上运行  本人python版本 3.7Android设备需">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://vic.kim/.kim//directory.jpg">
-<meta property="og:image" content="https://vic.kim/.kim//TestReport.png">
-<meta property="og:image" content="https://vic.kim/.kim//Report.png">
+<meta property="og:image" content="https://vic.kim/2019/10/24/ATX%E5%9F%BA%E4%BA%8EATX-Server2%E7%9A%84UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/ATX%E5%9F%BA%E4%BA%8EATX-Server2%E7%9A%84UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/directory.jpg">
+<meta property="og:image" content="https://vic.kim/2019/10/24/ATX%E5%9F%BA%E4%BA%8EATX-Server2%E7%9A%84UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/ATX%E5%9F%BA%E4%BA%8EATX-Server2%E7%9A%84UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/TestReport.png">
+<meta property="og:image" content="https://vic.kim/2019/10/24/ATX%E5%9F%BA%E4%BA%8EATX-Server2%E7%9A%84UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/ATX%E5%9F%BA%E4%BA%8EATX-Server2%E7%9A%84UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/Report.png">
 <meta property="article:published_time" content="2019-10-24T07:15:42.000Z">
 <meta property="article:modified_time" content="2019-10-24T08:01:52.588Z">
 <meta property="article:author" content="Vic">
 <meta property="article:tag" content="App自动化">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://vic.kim/.kim//directory.jpg">
+<meta name="twitter:image" content="https://vic.kim/2019/10/24/ATX%E5%9F%BA%E4%BA%8EATX-Server2%E7%9A%84UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/ATX%E5%9F%BA%E4%BA%8EATX-Server2%E7%9A%84UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/directory.jpg">
 
 <link rel="canonical" href="https://vic.kim/2019/10/24/ATX%E5%9F%BA%E4%BA%8EATX-Server2%E7%9A%84UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/">
 
@@ -246,7 +247,7 @@
 <h1 id="支持atx-server2"><a href="#支持atx-server2" class="headerlink" title="支持atx-server2"></a>支持atx-server2</h1><p>android：修改config下的Server地址为atx-server2的Url，token填写正确后,就可以正常运行了</p>
 <p><a href="https://vic.kim/2019/08/21/atxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/">atxserver2设备管理平台搭建</a></p>
 <h1 id="前置条件"><a href="#前置条件" class="headerlink" title="前置条件"></a>前置条件</h1><p>部署好atxserver2<br>只支持Python 3上运行  本人python版本 3.7<br>Android设备需要通过uiautomator2 init 初始化完成（<code>python -m uiautomator2 init</code>），确认可以正常连接 </p>
-<h1 id="工程介绍"><a href="#工程介绍" class="headerlink" title="工程介绍"></a>工程介绍</h1><h2 id="工程目录如下"><a href="#工程目录如下" class="headerlink" title="工程目录如下"></a>工程目录如下</h2><p><img src="/.kim//directory.jpg" alt="Directory"></p>
+<h1 id="工程介绍"><a href="#工程介绍" class="headerlink" title="工程介绍"></a>工程介绍</h1><h2 id="工程目录如下"><a href="#工程目录如下" class="headerlink" title="工程目录如下"></a>工程目录如下</h2><p><img data-src="ATX%E5%9F%BA%E4%BA%8EATX-Server2%E7%9A%84UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/directory.jpg" alt="Directory"></p>
 <h2 id="common："><a href="#common：" class="headerlink" title="common："></a><strong>common：</strong></h2><ul>
 <li>devices.py 获取atx-server2上特定设备（get_atxserver2_online_devices()）、或config.ini下devices IP列表的在线设备（get_local_devices()）、有线连接电脑的设备自动连接u2（get_usb_devices()）</li>
 <li>atxserver.py 获取</li>
@@ -277,8 +278,8 @@
 <li>​测试完之后，杀掉执行过程</li>
 <li>​最后在TestReport下生成统计测试报告，并且移到TestReport_History下（自动化测试报告.html</li>
 </ol>
-<h3 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h3><p>生成的测试报告路径结构如下<br><img src="/.kim//TestReport.png" alt="TestReport"></p>
-<p>每个设备的测试结果及报告或存放在单独的文件夹下<br>在Testreport目录下会有一个统计测试报告（自动化测试报告.html)会将所有设备的报告统一在一个页面展示<br><img src="/.kim//Report.png" alt="Report"></p>
+<h3 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h3><p>生成的测试报告路径结构如下<br><img data-src="ATX%E5%9F%BA%E4%BA%8EATX-Server2%E7%9A%84UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/TestReport.png" alt="TestReport"></p>
+<p>每个设备的测试结果及报告或存放在单独的文件夹下<br>在Testreport目录下会有一个统计测试报告（自动化测试报告.html)会将所有设备的报告统一在一个页面展示<br><img data-src="ATX%E5%9F%BA%E4%BA%8EATX-Server2%E7%9A%84UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/Report.png" alt="Report"></p>
 
     </div>
 
@@ -478,6 +479,9 @@
   
   <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
   <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 

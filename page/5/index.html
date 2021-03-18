@@ -14,10 +14,11 @@
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"vic.kim","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"vic.kim","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="人生苦短，我学Python">
@@ -243,7 +244,7 @@
       
           <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>uiautomator2是一个python库，用于Android的UI自动化测试，其底层基于Google uiautomator，Google提供的uiautomator库可以获取屏幕上任意一个APP的任意一个控件属性，并对其进行任意操作</p>
 <h1 id="支持平台及语言你在"><a href="#支持平台及语言你在" class="headerlink" title="支持平台及语言你在"></a>支持平台及语言你在</h1><p>python-uiautomator2封装了谷歌自带的uiautomator2测试框架，提供便利的python接口。他允许测试人员直接在PC上编写Python的测试代码，操作手机应用，完成自动化，大大提高了自动化代码编写的效率。</p>
-<h1 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h1><p><img src="/.kim//%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.png" alt="工作原理"><br>如图所示，python-uiautomator2主要分为两个部分，python客户端，移动设备</p>
+<h1 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h1><p><img data-src="UIAutomator2%E7%9A%84%E4%BD%BF%E7%94%A8/%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.png" alt="工作原理"><br>如图所示，python-uiautomator2主要分为两个部分，python客户端，移动设备</p>
 <ul>
 <li>python端: 运行脚本，并向移动设备发送HTTP请求</li>
 <li>移动设备：移动设备上运行了封装了uiautomator2的HTTP服务，解析收到的请求，并转化成uiautomator2的代码。</li>
@@ -265,8 +266,8 @@
 <p>Windows系统可以使用命令在桌面创建一个快捷方式 python -m weditor –shortcut</p>
 <p>启动方法：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m weditor </span><br></pre></td></tr></table></figure>
-<p>浏览器会自动打开一个网页 <a target="_blank" rel="noopener" href="http://atx.open.netease.com,看到如下界面/">http://atx.open.netease.com，看到如下界面</a><br><img src="/.kim//weditor.jpeg" alt="weditor"></p>
-<p>重点说下这个部分<br><img src="/.kim//weditor_connect.png" alt="weditor"><br>如何与手机连接起来呢？就是通过手机序列号或IP来实现的。打开cmd,输入adb devices，查看手机序列号，输入框中填写设备的IP或者设备的Serial（序列号）。之后点击Connect，如果一切正常就会出现一个绿色的叶子<br><img src="/.kim//weditor_state.png" alt="weditor"><br>点击蓝色的Reload，就可以在网页上看到手机的界面了。非常的强大。我们可以看到手机元素的各种定位方法，在UI自动化写代码的时候，真的是非常的方面，手机页面和weditor是实时同步的。</p>
+<p>浏览器会自动打开一个网页 <a target="_blank" rel="noopener" href="http://atx.open.netease.com,看到如下界面/">http://atx.open.netease.com，看到如下界面</a><br><img data-src="UIAutomator2%E7%9A%84%E4%BD%BF%E7%94%A8/weditor.jpeg" alt="weditor"></p>
+<p>重点说下这个部分<br><img data-src="UIAutomator2%E7%9A%84%E4%BD%BF%E7%94%A8/weditor_connect.png" alt="weditor"><br>如何与手机连接起来呢？就是通过手机序列号或IP来实现的。打开cmd,输入adb devices，查看手机序列号，输入框中填写设备的IP或者设备的Serial（序列号）。之后点击Connect，如果一切正常就会出现一个绿色的叶子<br><img data-src="UIAutomator2%E7%9A%84%E4%BD%BF%E7%94%A8/weditor_state.png" alt="weditor"><br>点击蓝色的Reload，就可以在网页上看到手机的界面了。非常的强大。我们可以看到手机元素的各种定位方法，在UI自动化写代码的时候，真的是非常的方面，手机页面和weditor是实时同步的。</p>
 <h2 id="【推荐】AppetizerIO-所见即所得脚本编辑器"><a href="#【推荐】AppetizerIO-所见即所得脚本编辑器" class="headerlink" title="【推荐】AppetizerIO 所见即所得脚本编辑器"></a>【推荐】AppetizerIO 所见即所得脚本编辑器</h2><p><a target="_blank" rel="noopener" href="https://www.appetizer.io/">AppetizerIO</a> 提供了对uiautomator2的深度集成，可以图形化管理ATX设备，还有所见即所得脚本编辑器<br>     *到网站下载直接打开，首次使用需要注册账号<br>       * <code>设备管理</code> 界面里可以检查设备是否正常init，起停atx-agent，抓取atx-agent.log文件<br>       *  <code>APP测试-&gt;脚本助手</code>调出脚本助手，实时界面同步，点击界面直接插入各种代码，同时支持uiautomator和Appium<br>      * <strong><a target="_blank" rel="noopener" href="https://github.com/openatx/uiautomator2/wiki/Appetizer%E6%89%80%E8%A7%81%E5%8D%B3%E6%89%80%E5%BE%97u2%E8%84%9A%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8">视频教程 请戳这里</a></strong>  <a target="_blank" rel="noopener" href="http://doc.appetizer.io/">其他文档在此</a></p>
 <h1 id="应用及操作"><a href="#应用及操作" class="headerlink" title="应用及操作"></a>应用及操作</h1><h2 id="调用uiautomator2的过程"><a href="#调用uiautomator2的过程" class="headerlink" title="调用uiautomator2的过程"></a>调用uiautomator2的过程</h2><ol>
 <li>配置手机设备参数，设置具体操作的是哪一台手机 </li>
@@ -1055,6 +1056,9 @@
   
   <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
   <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 

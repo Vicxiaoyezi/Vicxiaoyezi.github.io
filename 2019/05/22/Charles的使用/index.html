@@ -14,10 +14,11 @@
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"vic.kim","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"vic.kim","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="Charles 简介Charles 是一个支持多平台的 HTTP 代理器、HTTP 监控、反向代理器。它能够让开发者查看本地机器与互联网之间的所有 HTTP 以及 SSL&#x2F;HTTPS 传输数据。包括请求数据、响应数据 以及 HTTP 头部信息（包括 Cookie 和缓存信息）。  Charles 是收费软件，可以免费试用 30 天。试用期过后，未付费的用户仍然可以继续使用，但是每次使用时间不能超过">
@@ -27,41 +28,41 @@
 <meta property="og:site_name" content="Vicの博客">
 <meta property="og:description" content="Charles 简介Charles 是一个支持多平台的 HTTP 代理器、HTTP 监控、反向代理器。它能够让开发者查看本地机器与互联网之间的所有 HTTP 以及 SSL&#x2F;HTTPS 传输数据。包括请求数据、响应数据 以及 HTTP 头部信息（包括 Cookie 和缓存信息）。  Charles 是收费软件，可以免费试用 30 天。试用期过后，未付费的用户仍然可以继续使用，但是每次使用时间不能超过">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://vic.kim/.kim//charles.png">
-<meta property="og:image" content="https://vic.kim/.kim//%E4%B8%BB%E7%95%8C%E9%9D%A2.png">
-<meta property="og:image" content="https://vic.kim/.kim//%E5%B7%A5%E5%85%B7%E6%A0%8F.png">
-<meta property="og:image" content="https://vic.kim/.kim//Prroxy.png">
-<meta property="og:image" content="https://vic.kim/.kim//Recording.png">
-<meta property="og:image" content="https://vic.kim/.kim//WechatIMG102.png">
-<meta property="og:image" content="https://vic.kim/.kim//WechatIMG103.png">
-<meta property="og:image" content="https://vic.kim/.kim//WechatIMG104.png">
-<meta property="og:image" content="https://vic.kim/.kim//15561941553646.jpg">
-<meta property="og:image" content="https://vic.kim/.kim//15561944287744.jpg">
-<meta property="og:image" content="https://vic.kim/.kim//15561945816569.jpg">
-<meta property="og:image" content="https://vic.kim/.kim//Tools.png">
-<meta property="og:image" content="https://vic.kim/.kim//15562500582883.jpg">
-<meta property="og:image" content="https://vic.kim/.kim//15562501825204.jpg">
-<meta property="og:image" content="https://vic.kim/.kim//15562504002462.jpg">
-<meta property="og:image" content="https://vic.kim/.kim//15562478115998.jpg">
-<meta property="og:image" content="https://vic.kim/.kim//15562477662170.jpg">
-<meta property="og:image" content="https://vic.kim/.kim//15562478841032.jpg">
-<meta property="og:image" content="https://vic.kim/.kim//15562482464485.jpg">
-<meta property="og:image" content="https://vic.kim/.kim//15562483183428.jpg">
-<meta property="og:image" content="https://vic.kim/.kim//15562483967942.jpg">
-<meta property="og:image" content="https://vic.kim/.kim//15562487628999.jpg">
-<meta property="og:image" content="https://vic.kim/.kim//15562487454525.jpg">
-<meta property="og:image" content="https://vic.kim/.kim//15562493127758.jpg">
-<meta property="og:image" content="https://vic.kim/.kim//15562494118375.jpg">
-<meta property="og:image" content="https://vic.kim/.kim//15562490163542.jpg">
-<meta property="og:image" content="https://vic.kim/.kim//15562490428158.jpg">
-<meta property="og:image" content="https://vic.kim/.kim//15562492527131.jpg">
-<meta property="og:image" content="https://vic.kim/.kim//15562492796996.jpg">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/charles.png">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/%E4%B8%BB%E7%95%8C%E9%9D%A2.png">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/%E5%B7%A5%E5%85%B7%E6%A0%8F.png">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Prroxy.png">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Recording.png">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/WechatIMG102.png">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/WechatIMG103.png">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/WechatIMG104.png">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15561941553646.jpg">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15561944287744.jpg">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15561945816569.jpg">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Tools.png">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562500582883.jpg">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562501825204.jpg">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562504002462.jpg">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562478115998.jpg">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562477662170.jpg">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562478841032.jpg">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562482464485.jpg">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562483183428.jpg">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562483967942.jpg">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562487628999.jpg">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562487454525.jpg">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562493127758.jpg">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562494118375.jpg">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562490163542.jpg">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562490428158.jpg">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562492527131.jpg">
+<meta property="og:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562492796996.jpg">
 <meta property="article:published_time" content="2019-05-22T02:14:26.000Z">
 <meta property="article:modified_time" content="2019-05-22T02:23:43.304Z">
 <meta property="article:author" content="Vic">
 <meta property="article:tag" content="工具">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://vic.kim/.kim//charles.png">
+<meta name="twitter:image" content="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/charles.png">
 
 <link rel="canonical" href="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/">
 
@@ -284,14 +285,14 @@
 <li>支持反向代理。</li>
 <li>支持SOCKS</li>
 </ul>
-<h1 id="下载安装-Charles"><a href="#下载安装-Charles" class="headerlink" title="下载安装 Charles"></a>下载安装 Charles</h1><p><img src="/.kim//charles.png" alt="charles"></p>
+<h1 id="下载安装-Charles"><a href="#下载安装-Charles" class="headerlink" title="下载安装 Charles"></a>下载安装 Charles</h1><p><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/charles.png" alt="charles"></p>
 <ol>
 <li>打开浏览器访问 <a target="_blank" rel="noopener" href="https://www.charlesproxy.com/">Charles 官网</a> ，下载相应系统的 <a target="_blank" rel="noopener" href="https://www.charlesproxy.com/download/">Charles 安装包</a>，然后安装即可<br> Mac版Charles 4.2.7破解版，<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1gyuC6GHjanSOWo8DdaI2-Q">百度网盘地址</a>，安装密码：<a target="_blank" rel="noopener" href="http://www.ifunmac.com/">www.ifunmac.com</a></li>
 <li>安装Charles<br> 打开 Charles for Mac 4.2.7.dmg 包，后将 Charles 拖到 Application 目录下即完成安装。</li>
 <li>安装完毕后，进行破解，方法很简单:<br> Mac 将 charles.jar 覆盖到 安装包Contents/Java 下；</li>
 </ol>
-<h1 id="Charles-主界面介绍"><a href="#Charles-主界面介绍" class="headerlink" title="Charles 主界面介绍"></a>Charles 主界面介绍</h1><p>Charles 的主界面视图如下图所示：<br><img src="/.kim//%E4%B8%BB%E7%95%8C%E9%9D%A2.png" alt="主界面"></p>
-<h2 id="工具导航栏"><a href="#工具导航栏" class="headerlink" title="工具导航栏"></a>工具导航栏</h2><p>Charles 顶部为菜单导航栏，菜单导航栏下面为工具导航栏。视图如下图所示：<br><img src="/.kim//%E5%B7%A5%E5%85%B7%E6%A0%8F.png" alt="工具栏"><br>工具导航栏中提供了几种常用工具，依次为：</p>
+<h1 id="Charles-主界面介绍"><a href="#Charles-主界面介绍" class="headerlink" title="Charles 主界面介绍"></a>Charles 主界面介绍</h1><p>Charles 的主界面视图如下图所示：<br><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/%E4%B8%BB%E7%95%8C%E9%9D%A2.png" alt="主界面"></p>
+<h2 id="工具导航栏"><a href="#工具导航栏" class="headerlink" title="工具导航栏"></a>工具导航栏</h2><p>Charles 顶部为菜单导航栏，菜单导航栏下面为工具导航栏。视图如下图所示：<br><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/%E5%B7%A5%E5%85%B7%E6%A0%8F.png" alt="工具栏"><br>工具导航栏中提供了几种常用工具，依次为：</p>
 <ol>
 <li>清除捕获到的所有请求</li>
 <li>红点状态说明正在捕获请求，灰色状态说明目前没有捕获请求。</li>
@@ -313,7 +314,7 @@
 <p>对于某一个具体的网络请求，你可以查看其详细的请求内容和响应内容。如果请求内容是 POST 的表单，Charles 会自动帮你将表单进行分项显示。如果响应内容是 JSON 格式的，那么 Charles 可以自动帮你将 JSON 内容格式化，方便你查看。如果响应内容是图片，那么 Charles 可以显示出图片的预览。</p>
 </blockquote>
 <h1 id="Charles-菜单介绍"><a href="#Charles-菜单介绍" class="headerlink" title="Charles 菜单介绍"></a>Charles 菜单介绍</h1><p>Charles 的主菜单包括：File、Edit、View、Proxy、Tools、Window、Help。用的最多的主菜单分别是 Proxy 和 Tools。</p>
-<h2 id="Proxy-菜单"><a href="#Proxy-菜单" class="headerlink" title="Proxy 菜单"></a>Proxy 菜单</h2><p>Charles 是一个 HTTP 和 SOCKS 代理服务器。代理请求和响应使 Charles 能够在请求从客户端传递到服务器时检查和更改请求，以及从服务器传递到客户端时的响应。下面主要介绍 Charles 提供的一些代理功能。Proxy 菜单的视图如下图所示：<br><img src="/.kim//Prroxy.png" alt="Prroxy"></p>
+<h2 id="Proxy-菜单"><a href="#Proxy-菜单" class="headerlink" title="Proxy 菜单"></a>Proxy 菜单</h2><p>Charles 是一个 HTTP 和 SOCKS 代理服务器。代理请求和响应使 Charles 能够在请求从客户端传递到服务器时检查和更改请求，以及从服务器传递到客户端时的响应。下面主要介绍 Charles 提供的一些代理功能。Proxy 菜单的视图如下图所示：<br><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Prroxy.png" alt="Prroxy"></p>
 <p>Proxy 菜单包含以下功能：</p>
 <ul>
 <li>Start/Stop Recording：开始/停止记录会话。</li>
@@ -331,13 +332,13 @@
 <li>External Proxy Settings：外部代理设置。</li>
 <li>Web Interface Settings：Web 界面设置。</li>
 </ul>
-<h3 id="Recording-Settings-记录会话设置"><a href="#Recording-Settings-记录会话设置" class="headerlink" title="Recording Settings(记录会话设置)"></a>Recording Settings(记录会话设置)</h3><p>Recording Settings 和 Start/Stop Recording 配合使用，在 Start Recording 的状态下，可以通过 Recording Settings 配置 Charles 的会话记录行为。Recording Settings 的视图如下图所示：<br><img src="/.kim//Recording.png" alt="Recording"><br>Recording Settings 有 Options、Include、Exclude 三个选项卡：</p>
+<h3 id="Recording-Settings-记录会话设置"><a href="#Recording-Settings-记录会话设置" class="headerlink" title="Recording Settings(记录会话设置)"></a>Recording Settings(记录会话设置)</h3><p>Recording Settings 和 Start/Stop Recording 配合使用，在 Start Recording 的状态下，可以通过 Recording Settings 配置 Charles 的会话记录行为。Recording Settings 的视图如下图所示：<br><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Recording.png" alt="Recording"><br>Recording Settings 有 Options、Include、Exclude 三个选项卡：</p>
 <ul>
 <li>Options：通过 Recording Size Limits 限制记录数据的大小。当 Charles 记录时，请求、响应头和响应体存储在内存中，或写入磁盘上的临时文件。有时，内存中的数据量可能会变得太多，Charles 会通知您并停止录制。在这种情况下，您应该清除 Charles 会话以释放内存，然后再次开始录制。在录制设置中，您可以限制 Charles 将记录的最大大小; 这根本不会影响你的浏览，Charles 仅会停止录制。</li>
 <li>Include：只有与配置的地址匹配的请求才会被录制。</li>
-<li>Exclude：只有与配置的地址匹配的请求将不会被录制。<br>Include 和 Exclude 选项卡的操作相同，选择 Add，然后填入需要监控的Procotol、Host 和 Port等信息，这样就达到了过滤的目的。如下图所示：<br><img src="/.kim//WechatIMG102.png" alt="WechatIMG102"><br><img src="/.kim//WechatIMG103.png" alt="WechatIMG103"></li>
+<li>Exclude：只有与配置的地址匹配的请求将不会被录制。<br>Include 和 Exclude 选项卡的操作相同，选择 Add，然后填入需要监控的Procotol、Host 和 Port等信息，这样就达到了过滤的目的。如下图所示：<br><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/WechatIMG102.png" alt="WechatIMG102"><br><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/WechatIMG103.png" alt="WechatIMG103"></li>
 </ul>
-<h3 id="Throttle-Settings-节流设置"><a href="#Throttle-Settings-节流设置" class="headerlink" title="Throttle Settings(节流设置)"></a>Throttle Settings(节流设置)</h3><p>Throttle Settings 和 Start/Stop Throttling 配合使用，在 Start Throttling 的状态下，可以通过 Throttle Settings 配置 Charles 的网速模拟配置。Throttle Settings 的视图如下图所示：<br><img src="/.kim//WechatIMG104.png" alt="WechatIMG104"></p>
+<h3 id="Throttle-Settings-节流设置"><a href="#Throttle-Settings-节流设置" class="headerlink" title="Throttle Settings(节流设置)"></a>Throttle Settings(节流设置)</h3><p>Throttle Settings 和 Start/Stop Throttling 配合使用，在 Start Throttling 的状态下，可以通过 Throttle Settings 配置 Charles 的网速模拟配置。Throttle Settings 的视图如下图所示：<br><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/WechatIMG104.png" alt="WechatIMG104"></p>
 <p>勾选 Enable Throttling 启用网速模拟配置，在 Throttle Preset 下选择网络类型即可，具体设置可以根据实际情况自行设置。如果只想模拟指定网站的慢速网络，可以再勾选上图中的 Only for selected hosts 项，然后在对话框的下半部分设置中增加指定的 hosts 项即可。</p>
 <p>Throttle Settings 视图中的选项含义如下：</p>
 <ul>
@@ -346,12 +347,12 @@
 <li>Round-trip：往返延迟</li>
 <li>MTU：字节</li>
 </ul>
-<h3 id="Breakpoint-Settings-断点设置"><a href="#Breakpoint-Settings-断点设置" class="headerlink" title="Breakpoint Settings(断点设置)"></a>Breakpoint Settings(断点设置)</h3><p>Breakpoint Settings 和 Enable/Disable Breakpoints 配合使用，在 Enable Breakpoints 的状态下，可以通过 Breakpoint Settings 配置 Charles 的断点模式。Breakpoint Settings 的视图如下图所示：<br><img src="/.kim//15561941553646.jpg" alt="-w540"><br>勾选 Enable Breakpoints 启用断点模式，选择 Add，然后填入需要监控的Scheme、Procotol、Host 和 Port 等信息，这样就达到了设置断点的目的。然后可以来观察或者修改请求或者返回的内容，但是在这过程中需要注意请求的超时时间问题。或者可以在某个想要设置断点的请求网址上右击选择 Breakpoints 来设置断点。</p>
+<h3 id="Breakpoint-Settings-断点设置"><a href="#Breakpoint-Settings-断点设置" class="headerlink" title="Breakpoint Settings(断点设置)"></a>Breakpoint Settings(断点设置)</h3><p>Breakpoint Settings 和 Enable/Disable Breakpoints 配合使用，在 Enable Breakpoints 的状态下，可以通过 Breakpoint Settings 配置 Charles 的断点模式。Breakpoint Settings 的视图如下图所示：<br><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15561941553646.jpg" alt="-w540"><br>勾选 Enable Breakpoints 启用断点模式，选择 Add，然后填入需要监控的Scheme、Procotol、Host 和 Port 等信息，这样就达到了设置断点的目的。然后可以来观察或者修改请求或者返回的内容，但是在这过程中需要注意请求的超时时间问题。或者可以在某个想要设置断点的请求网址上右击选择 Breakpoints 来设置断点。</p>
 <h3 id="Reverse-Proxies-Settings-反向代理设置"><a href="#Reverse-Proxies-Settings-反向代理设置" class="headerlink" title="Reverse Proxies Settings(反向代理设置)"></a>Reverse Proxies Settings(反向代理设置)</h3><p>反向代理在本地端口上创建 Web 服务器，该端口透明地将请求代理给远程 Web 服务器。反向代理上的所有请求和响应都可以记录在 Charles 中。<br>如果您的客户端应用程序不支持使用 HTTP 代理，或者您希望避免将其配置为使用代理，那么反向代理很有用。创建原始目标 Web 服务器的反向代理，然后将客户端应用程序连接到本地端口； 反向代理对客户端应用程序是透明的，使您可以查看 Charles 以前可能无法访问的流量。<br>有关反向代理的更多信息，请访问 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Reverse_proxy">Reverse proxy</a></p>
 <h3 id="Port-Forwarding-Settings-端口转发"><a href="#Port-Forwarding-Settings-端口转发" class="headerlink" title="Port Forwarding Settings(端口转发)"></a>Port Forwarding Settings(端口转发)</h3><p>可以将任何 TCP/IP 或 UDP 端口配置为使用 Port Forwarding 工具从 Charles 转发到远程主机。这样可以调试 Charles 中的任何协议。<br>在 Macromedia Flash 中调试 XMLSocket 连接时，这尤其有用。<br>还可以使用 Charles 作为 SOCKS 代理，因此无需设置端口转发。</p>
 <h3 id="macOS-Proxy-记录计算机上的所有请求"><a href="#macOS-Proxy-记录计算机上的所有请求" class="headerlink" title="macOS Proxy(记录计算机上的所有请求)"></a>macOS Proxy(记录计算机上的所有请求)</h3><p>如果想要抓取电脑端的请求，勾选 Windows Proxy 选项即可；如果只需要抓取手机请求，则取消勾选这个选项。</p>
-<h3 id="Proxy-Settings-代理设置"><a href="#Proxy-Settings-代理设置" class="headerlink" title="Proxy Settings(代理设置)"></a>Proxy Settings(代理设置)</h3><p>Proxy Settings 的视图如下图所示：<br><img src="/.kim//15561944287744.jpg" alt="-w592"><br>代理端口默认为 8888(可以修改)，并且勾上 Enable transparent HTTP proxying 就完成了在 Charles 上的代理设置。</p>
-<h3 id="SSL-Proxy-Settings-SSL-代理设置"><a href="#SSL-Proxy-Settings-SSL-代理设置" class="headerlink" title="SSL Proxy Settings(SSL 代理设置)"></a>SSL Proxy Settings(SSL 代理设置)</h3><p>SSL Proxy Settings 的视图如下图所示：<br><img src="/.kim//15561945816569.jpg" alt="-w592"><br>勾上 Enable SSL proxying 就完成了在 Charles 上的 SSL 代理设置。之后也可以选择 Add，然后填入需要监控的 Host 和 Port 信息，这样就达到了针对某个域名启用 SSL 代理的目的。</p>
+<h3 id="Proxy-Settings-代理设置"><a href="#Proxy-Settings-代理设置" class="headerlink" title="Proxy Settings(代理设置)"></a>Proxy Settings(代理设置)</h3><p>Proxy Settings 的视图如下图所示：<br><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15561944287744.jpg" alt="-w592"><br>代理端口默认为 8888(可以修改)，并且勾上 Enable transparent HTTP proxying 就完成了在 Charles 上的代理设置。</p>
+<h3 id="SSL-Proxy-Settings-SSL-代理设置"><a href="#SSL-Proxy-Settings-SSL-代理设置" class="headerlink" title="SSL Proxy Settings(SSL 代理设置)"></a>SSL Proxy Settings(SSL 代理设置)</h3><p>SSL Proxy Settings 的视图如下图所示：<br><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15561945816569.jpg" alt="-w592"><br>勾上 Enable SSL proxying 就完成了在 Charles 上的 SSL 代理设置。之后也可以选择 Add，然后填入需要监控的 Host 和 Port 信息，这样就达到了针对某个域名启用 SSL 代理的目的。</p>
 <h3 id="Access-Control-Settings-访问控制设置"><a href="#Access-Control-Settings-访问控制设置" class="headerlink" title="Access Control Settings(访问控制设置)"></a>Access Control Settings(访问控制设置)</h3><p>Access Control Settings 表示访问控制设置。访问控制列表确定谁可以使用此 Charles 实例。通常，您在自己的计算机上运行 Charles，并且您只打算自己使用它，因此 localhost 始终包含在访问控制列表中。也可以选择 Add，然后填入允许访问的 IP，这样就达到了允许某个 IP 访问 Charles 的目的。</p>
 <h3 id="External-Proxy-Settings-外部代理设置"><a href="#External-Proxy-Settings-外部代理设置" class="headerlink" title="External Proxy Settings(外部代理设置)"></a>External Proxy Settings(外部代理设置)</h3><p>External Proxy Settings 表示外部代理设置。可能在网络上有一个代理服务器，必须使用该代理服务器才能访问 Internet。在这种情况下，需要将 Charles 配置为在尝试访问 Internet 时使用现有代理。</p>
 <p>可以配置单独的代理地址和端口：</p>
@@ -383,7 +384,7 @@
 </li>
 </ul>
 <p>通过检查 Web 界面 HTML ，您可以推导出如何将其用作 Web 服务来自动化 Charles。</p>
-<h2 id="Tools-菜单"><a href="#Tools-菜单" class="headerlink" title="Tools 菜单"></a>Tools 菜单</h2><p>Charles 是一个 HTTP 和 SOCKS 代理服务器，所有的请求都会经过 Charles。下面主要介绍 Charles 提供的一些实用工具。Tools 菜单的视图如下图所示：<br><img src="/.kim//Tools.png" alt="Tools"><br>Tools 菜单包含以下功能：</p>
+<h2 id="Tools-菜单"><a href="#Tools-菜单" class="headerlink" title="Tools 菜单"></a>Tools 菜单</h2><p>Charles 是一个 HTTP 和 SOCKS 代理服务器，所有的请求都会经过 Charles。下面主要介绍 Charles 提供的一些实用工具。Tools 菜单的视图如下图所示：<br><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/Tools.png" alt="Tools"><br>Tools 菜单包含以下功能：</p>
 <ul>
 <li>No Caching Settings：禁用缓存设置。</li>
 <li>Block Cookies Settings：禁用 Cookie设置。</li>
@@ -481,23 +482,23 @@
 <p>完成以上步骤，就可以进行抓包了。</p>
 <h2 id="通过-Charles-进行-HTTPS-抓包"><a href="#通过-Charles-进行-HTTPS-抓包" class="headerlink" title="通过 Charles 进行 HTTPS 抓包"></a>通过 Charles 进行 HTTPS 抓包</h2><p>HTTPS 的抓包需要在 HTTP 抓包基础上再进行设置。需要完成步骤：</p>
 <ol>
-<li>电脑端安装 Charles 证书：通过 Charles 菜单栏找到 Help - SSL Proxying - Install Charles Root Certificate 安装证书，然后给电脑安装证书，信任证书<br><img src="/.kim//15562500582883.jpg" alt="-w694"><br><img src="/.kim//15562501825204.jpg" alt="-w774"></li>
+<li>电脑端安装 Charles 证书：通过 Charles 菜单栏找到 Help - SSL Proxying - Install Charles Root Certificate 安装证书，然后给电脑安装证书，信任证书<br><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562500582883.jpg" alt="-w694"><br><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562501825204.jpg" alt="-w774"></li>
 </ol>
 <ol start="2">
-<li><p>设置 SSL 代理：通过主菜单打开 Proxy - SSL Proxy Settings 弹窗，勾选 Enable SSL proxying。并添加域名端口，匹配想要监听的域名端口，这里可以添加*:443或*:*匹配全部：<br><img src="/.kim//15562504002462.jpg" alt="-w768"></p>
+<li><p>设置 SSL 代理：通过主菜单打开 Proxy - SSL Proxy Settings 弹窗，勾选 Enable SSL proxying。并添加域名端口，匹配想要监听的域名端口，这里可以添加*:443或*:*匹配全部：<br><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562504002462.jpg" alt="-w768"></p>
 </li>
 <li><p>移动端安装 Charles 证书：通过 Charles 的主菜单Help - SSL Proxying - Install Charles Root Certificate on a Mobile Device or Remote Browser.. ，按照弹出的提示会让你将手机切换为手动代理到电脑的Charles，然后用浏览器打开提示上面的地址下载安装证书<br> iPhone需要信任证书。设置 - 通用 - 描述文件与设备管理 - 点击证书信任</p>
 </li>
 <li><p>设置好之后，我们打开手机上的任意需要网络请求的程序，就可以进行 HTTPS 抓包了。</p>
 </li>
 </ol>
-<h2 id="Focus-功能"><a href="#Focus-功能" class="headerlink" title="Focus 功能"></a>Focus 功能</h2><p>使用 Focus 功能指定想要查看的域名，可以避免这个域名相关的请求淹没在茫茫请求当中。当然使用“Structure”视图也可以避免这个问题。<br>对想要Focus的域名，选中抓取的接口-右键菜单-选择Focus，这个域名就会添加到Focused列表，可以在这里找到：<br><img src="/.kim//15562478115998.jpg" alt="-w951"></p>
-<p><img src="/.kim//15562477662170.jpg" alt="-w540"><br><img src="/.kim//15562478841032.jpg" alt="-w1115"></p>
-<h2 id="重复请求功能Repeat"><a href="#重复请求功能Repeat" class="headerlink" title="重复请求功能Repeat"></a>重复请求功能Repeat</h2><p><img src="/.kim//15562482464485.jpg" alt="-w953"><br>使用Repeat Advanced 还可以指定请求次数<br><img src="/.kim//15562483183428.jpg" alt="-w544"><br><img src="/.kim//15562483967942.jpg" alt="-w1116"></p>
-<h2 id="查找功能"><a href="#查找功能" class="headerlink" title="查找功能"></a>查找功能</h2><p>选中抓取的接口-右键菜单-选择Find In 即可打开查找面板<br><img src="/.kim//15562487628999.jpg" alt="-w1004"></p>
-<p><img src="/.kim//15562487454525.jpg" alt="-w751"><br>双击查找结果会跳到想要的结果</p>
-<h2 id="设置断点拦截请求响应"><a href="#设置断点拦截请求响应" class="headerlink" title="设置断点拦截请求响应"></a>设置断点拦截请求响应</h2><p>首先开启断点功能，然后再到想要设置断点的请求上，右键设置一个断点，如图所示：<br><img src="/.kim//15562493127758.jpg" alt="-w1000"><br>查看是否加入断点设置面板<br><img src="/.kim//15562494118375.jpg" alt="-w1168"><br><img src="/.kim//15562490163542.jpg" alt="-w540"><br>默认拦截请求和响应，如果只需要两者之一，可以选择设置<br><img src="/.kim//15562490428158.jpg" alt="-w440"><br>再次发起请求，就会看到拦截了请求和响应<br><img src="/.kim//15562492527131.jpg" alt="-w1167"></p>
-<p><img src="/.kim//15562492796996.jpg" alt="-w1167"></p>
+<h2 id="Focus-功能"><a href="#Focus-功能" class="headerlink" title="Focus 功能"></a>Focus 功能</h2><p>使用 Focus 功能指定想要查看的域名，可以避免这个域名相关的请求淹没在茫茫请求当中。当然使用“Structure”视图也可以避免这个问题。<br>对想要Focus的域名，选中抓取的接口-右键菜单-选择Focus，这个域名就会添加到Focused列表，可以在这里找到：<br><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562478115998.jpg" alt="-w951"></p>
+<p><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562477662170.jpg" alt="-w540"><br><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562478841032.jpg" alt="-w1115"></p>
+<h2 id="重复请求功能Repeat"><a href="#重复请求功能Repeat" class="headerlink" title="重复请求功能Repeat"></a>重复请求功能Repeat</h2><p><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562482464485.jpg" alt="-w953"><br>使用Repeat Advanced 还可以指定请求次数<br><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562483183428.jpg" alt="-w544"><br><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562483967942.jpg" alt="-w1116"></p>
+<h2 id="查找功能"><a href="#查找功能" class="headerlink" title="查找功能"></a>查找功能</h2><p>选中抓取的接口-右键菜单-选择Find In 即可打开查找面板<br><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562487628999.jpg" alt="-w1004"></p>
+<p><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562487454525.jpg" alt="-w751"><br>双击查找结果会跳到想要的结果</p>
+<h2 id="设置断点拦截请求响应"><a href="#设置断点拦截请求响应" class="headerlink" title="设置断点拦截请求响应"></a>设置断点拦截请求响应</h2><p>首先开启断点功能，然后再到想要设置断点的请求上，右键设置一个断点，如图所示：<br><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562493127758.jpg" alt="-w1000"><br>查看是否加入断点设置面板<br><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562494118375.jpg" alt="-w1168"><br><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562490163542.jpg" alt="-w540"><br>默认拦截请求和响应，如果只需要两者之一，可以选择设置<br><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562490428158.jpg" alt="-w440"><br>再次发起请求，就会看到拦截了请求和响应<br><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562492527131.jpg" alt="-w1167"></p>
+<p><img data-src="Charles%E7%9A%84%E4%BD%BF%E7%94%A8/15562492796996.jpg" alt="-w1167"></p>
 
     </div>
 
@@ -697,6 +698,9 @@
   
   <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
   <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 
