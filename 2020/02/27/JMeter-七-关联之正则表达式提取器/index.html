@@ -108,7 +108,7 @@
 <meta property="og:image" content="https://vic.kim/2020/02/27/JMeter-七-关联之正则表达式提取器/正则表达式提取器.png">
 <meta property="og:image" content="https://vic.kim/2020/02/27/JMeter-七-关联之正则表达式提取器/正则表达式.png">
 <meta property="og:image" content="https://vic.kim/2020/02/27/JMeter-七-关联之正则表达式提取器/正则表达式提取器.png">
-<meta property="og:updated_time" content="2020-02-27T12:42:19.493Z">
+<meta property="og:updated_time" content="2021-01-13T07:43:57.826Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JMeter(七)_关联之正则表达式提取器">
 <meta name="twitter:description" content="应用场景：在一个线程组中，从前一个请求的响应结果中，提取到某些需要的内容，可以作为下一个接口需要的入参从而实现关联添加路径：HTTP请求-&amp;gt;添加-&amp;gt;后置处理器-&amp;gt;正则表达式提取器 说明下面是JMeter-正则表达式提取器的界面  后置处理器：在请求结束或者返回响应结果时发挥作用  正则表达式提取器：允许用户从服务器的响应中通过使用perl的正则表达式提取值。该元素会作用在指定范围">
@@ -308,7 +308,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">46</span></a>
 
   </li>
 
@@ -432,12 +432,24 @@
                 
               
 
-              <time title="创建时间：2020-02-27 19:45:35 / 修改时间：20:42:19" itemprop="dateCreated datePublished" datetime="2020-02-27T19:45:35+08:00">2020-02-27</time>
+              <time title="创建时间：2020-02-27 19:45:35" itemprop="dateCreated datePublished" datetime="2020-02-27T19:45:35+08:00">2020-02-27</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-01-13 15:43:57" itemprop="dateModified" datetime="2021-01-13T15:43:57+08:00">2021-01-13</time>
               
             
           </span>
@@ -506,14 +518,14 @@
 </li>
 <li><p><strong>要检查的响应字段：</strong>需要检查的响应报文的范围</p>
 <ul>
-<li>主体：响应报文的主体</li>
+<li>主体：Response Body，响应数据主体</li>
 <li>Body(unescaped): 主体，响应的主体内容且替换了所有的html转义符，注意html转义符处理时不考虑上下文，因此可能有不正确的转换，不太建议使用 </li>
 <li>Body as a Document：从不同类型的文件中提取文本，注意这个选项比较影响性能 </li>
 <li>Response Headers：响应信息头</li>
 <li>Request Headers: 请求信息头</li>
 <li>URL：统一资源定位符，即Internet上用来描述信息资源的字符串</li>
-<li>Response Code: 响应状态码，比如200、404等</li>
-<li>Response Message: 响应信息 </li>
+<li>Response Code: 响应状态码，比如：200、404等</li>
+<li>Response Message: 响应信息，比如：OK </li>
 </ul>
 </li>
 <li><p><strong>引用名称（Reference Name）：</strong>Jmeter变量的名称，存储提取的结果；即下个请求需要引用的值、字段、变量名（例子中我提取的是SOCIAL_NO）</p>
@@ -701,7 +713,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-count">46</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -848,7 +860,7 @@
           <h3 class="widget-title">Tag Cloud</h3>
           <div id="myCanvasContainer" class="widget tagcloud">
               <canvas width="250" height="250" id="resCanvas" style="width=100%">
-                  <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/App自动化/">App自动化</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-Next/">Hexo Next</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMeter/">JMeter</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jenkins/">Jenkins</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/备忘/">备忘</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口测试/">接口测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口自动化测试/">接口自动化测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动性能/">移动性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设备管理/">设备管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/资料/">资料</a><span class="tag-list-count">7</span></li></ul>
+                  <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/App自动化/">App自动化</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-Next/">Hexo Next</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMeter/">JMeter</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jenkins/">Jenkins</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/备忘/">备忘</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口测试/">接口测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口自动化测试/">接口自动化测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动性能/">移动性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设备管理/">设备管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/资料/">资料</a><span class="tag-list-count">8</span></li></ul>
               </canvas>
           </div>
         </div>
@@ -865,7 +877,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
