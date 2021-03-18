@@ -1,23 +1,486 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"vic.kim","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="性能测试工具谈到性能测试工具，我们首先想到的是LoadRunner或JMeter。LoadRunner是非常有名的商业性能测试工具，功能非常强大。但现在一般不推荐使用该工具来进行性能测试，主要是使用也较为复杂，而且该工具体积比较大，需要付费且价格不便宜。JMeter同样是非常有名的开源性能测试工具，功能也很完善，我们之前介绍了它作为接口测试工具的使用。Locust同样是性能测试工具，虽然官方这样来">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Locust接口性能测试">
+<meta property="og:url" content="https://vic.kim/2019/08/23/Locust%E6%8E%A5%E5%8F%A3%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/index.html">
+<meta property="og:site_name" content="Vicの博客">
+<meta property="og:description" content="性能测试工具谈到性能测试工具，我们首先想到的是LoadRunner或JMeter。LoadRunner是非常有名的商业性能测试工具，功能非常强大。但现在一般不推荐使用该工具来进行性能测试，主要是使用也较为复杂，而且该工具体积比较大，需要付费且价格不便宜。JMeter同样是非常有名的开源性能测试工具，功能也很完善，我们之前介绍了它作为接口测试工具的使用。Locust同样是性能测试工具，虽然官方这样来">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-08-23T06:46:47.000Z">
+<meta property="article:modified_time" content="2019-08-23T06:58:48.770Z">
+<meta property="article:author" content="Vic">
+<meta property="article:tag" content="接口自动化测试">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://vic.kim/2019/08/23/Locust%E6%8E%A5%E5%8F%A3%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Locust接口性能测试 | Vicの博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Vicの博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">测试攻城狮</p>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/08/23/Locust%E6%8E%A5%E5%8F%A3%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Locust接口性能测试
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-08-23 14:46:47 / 修改时间：14:58:48" itemprop="dateCreated datePublished" datetime="2019-08-23T14:46:47+08:00">2019-08-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">接口自动化测试</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="性能测试工具"><a href="#性能测试工具" class="headerlink" title="性能测试工具"></a>性能测试工具</h1><p>谈到性能测试工具，我们首先想到的是LoadRunner或JMeter。<br>LoadRunner是非常有名的商业性能测试工具，功能非常强大。但现在一般不推荐使用该工具来进行性能测试，主要是使用也较为复杂，而且该工具体积比较大，需要付费且价格不便宜。<br>JMeter同样是非常有名的开源性能测试工具，功能也很完善，我们之前介绍了它作为接口测试工具的使用。<br>Locust同样是性能测试工具，虽然官方这样来描述它：“An open source load testing tool.”，但它和前面两个工具有一些不同。
+　</p>
+<h1 id="Locust简介"><a href="#Locust简介" class="headerlink" title="Locust简介"></a>Locust简介</h1><p>Locust完全基于Python编程语言，采用纯 Python描述测试脚本，并且HTTP请求完全基于Requests库。除了HTTP/HTTPS协议外，Locust还可以测试其他协议的系统，只需采用Python调用对应的库进行请求描述即可。<br>LoadRunner和JMeter这类采用进程和线程的测试工具，都很难在单机上模拟出较高的并发压力。Locust的并发机制摒弃了进程和线程，采用协程（gevent）的机制。协程避免了系统级资源调度，因此可以大幅提高单机的并发能力。</p>
+<p>扩展资料：<a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/897692888725344/923057403198272">协程—廖雪峰博客</a></p>
+<p>下载安装<br>官网地址：<a target="_blank" rel="noopener" href="https://www.locust.io/">https://www.locust.io</a></p>
+<p>使用pip命令安装Locust：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip <span class="keyword">install</span> locustio</span><br></pre></td></tr></table></figure>
+<p>安装完成之后检测是否安装成功：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">locust -<span class="keyword">help</span></span><br><span class="line">Usage: locust [<span class="keyword">options</span>] [LocustClass [LocustClass2 ... ]]</span><br><span class="line"></span><br><span class="line">Option<span class="variable">s:</span></span><br><span class="line">  -h, --<span class="keyword">help</span>            show this <span class="keyword">help</span> message <span class="built_in">and</span> <span class="keyword">exit</span></span><br><span class="line">  -H HOST, --host=HOST  Host <span class="keyword">to</span> load test in the following forma<span class="variable">t:</span></span><br><span class="line">                        http://<span class="number">10.21</span>.<span class="number">32.33</span></span><br><span class="line">  --web-host=WEB_HOST   Host <span class="keyword">to</span> bind the web interface <span class="keyword">to</span>. Defaults <span class="keyword">to</span> <span class="string">&#x27;&#x27;</span> (<span class="keyword">all</span></span><br><span class="line">                        interfaces)</span><br><span class="line">  -<span class="keyword">P</span> PORT, --port=PORT, --web-port=PORT</span><br><span class="line">                        Port <span class="keyword">on</span> which <span class="keyword">to</span> run web host</span><br><span class="line">  -<span class="keyword">f</span> LOCUSTFILE, --locustfile=LOCUSTFILE</span><br><span class="line">                        Python module <span class="keyword">file</span> <span class="keyword">to</span> import, <span class="keyword">e</span>.g. <span class="string">&#x27;../other.py&#x27;</span>.</span><br><span class="line">                        Defaul<span class="variable">t:</span> locustfile</span><br><span class="line">  ....</span><br></pre></td></tr></table></figure>
+
+<h1 id="测试案例"><a href="#测试案例" class="headerlink" title="测试案例"></a>测试案例</h1><h2 id="测试场景"><a href="#测试场景" class="headerlink" title="测试场景"></a>测试场景</h2><p>针对如下两个接口进行性能测试：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="regexp">//</span><span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">8000</span><span class="regexp">/users/</span></span><br><span class="line">http:<span class="regexp">//</span><span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">8000</span><span class="regexp">/groups/</span></span><br></pre></td></tr></table></figure>
+<p>以上两个接口也就是我们之前项目django_restful的接口</p>
+<p>负载场景</p>
+<pre><code>* 每秒生成2个用户，总共生成60个用户。
+* 负载测试5分钟然后查看接口的平均响应时间。
+</code></pre>
+<h2 id="脚本实现"><a href="#脚本实现" class="headerlink" title="脚本实现"></a>脚本实现</h2><p>restful_api_locust.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> locust <span class="keyword">import</span>  HttpLocust,TaskSet,task</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserBehavior</span>(<span class="params">TaskSet</span>):</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @task(<span class="params"><span class="number">2</span></span>)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_users</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.client.get(<span class="string">&quot;/users/&quot;</span>,auth=(<span class="string">&#x27;51zxw&#x27;</span>,<span class="string">&#x27;zxw20182018&#x27;</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">    @task(<span class="params"><span class="number">1</span></span>)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_groups</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.client.get(<span class="string">&quot;/groups/&quot;</span>,auth=(<span class="string">&#x27;51zxw&#x27;</span>,<span class="string">&#x27;zxw20182018&#x27;</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WebsiteUser</span>(<span class="params">HttpLocust</span>):</span></span><br><span class="line">    task_set = UserBehavior</span><br><span class="line">    min_wait = <span class="number">3000</span></span><br><span class="line">    max_wait = <span class="number">6000</span></span><br></pre></td></tr></table></figure>
+<p>UserBehavior类继承TaskSet类，用于描述用户行为。</p>
+<pre><code>* @task装饰该方法为一个事务,后面的数字表示请求比例，上面的比例为2:1 默认都是1:1
+* test_users()方法表示一个用户行为，这里是请求user接口。
+* test_groups()方法表示请求group接口。
+* client.get()用于指定请求的路径。
+</code></pre>
+<p>WebsiteUser类用于设置性能测试。</p>
+<pre><code>* task_set：指向一个定义的用户行为类。
+* min_wait：执行事务之间用户等待时间的下界（单位：毫秒）。
+* max_wait：执行事务之间用户等待时间的上界（单位：毫秒）。
+</code></pre>
+<h2 id="执行测试"><a href="#执行测试" class="headerlink" title="执行测试"></a>执行测试</h2><p>使用如下命令开始启动测试</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">locust -f vic\locust\restful_api_locust.py --host=http://127.0.0.1:8000</span><br><span class="line">[2018-07-24 15:39:22,917] LAPTOP-8B5JADC8/INFO/locust.main: Starting web<span class="built_in"> monitor </span>at *:8089</span><br><span class="line">[2018-07-24 15:39:22,917] LAPTOP-8B5JADC8/INFO/locust.main: Starting Locust 0.8.1</span><br></pre></td></tr></table></figure>
+<p>在浏览器打开localhost:8089可以看到如下页面：</p>
+<p>locust-index</p>
+<pre><code>* Number of users to simulate：设置模拟用户数。
+* Hatch rate（users spawned/second）：每秒产生（启动）的虚拟用户数。
+* 单击“Start swarming”按钮，开始运行性能测试
+</code></pre>
+<p>运行之后可以看到主界面如下：</p>
+<p>locust-statistics</p>
+<p>性能测试参数如下。</p>
+<pre><code>* Type：请求的类型，例如GET/POST。
+* Name：请求的路径。
+* request：当前请求的数量。
+* fails：当前请求失败的数量。
+* Median：中间值，单位毫秒，一半的服务器响应时间低于该值，而另一半高于该值。
+* Average：平均值，单位毫秒，所有请求的平均响应时间。
+* Min：请求的最小服务器响应时间，单位毫秒。
+* Max：请求的最大服务器响应时间，单位毫秒。
+* Content Size：单个请求的大小，单位字节。
+* reqs/sec：每秒钟请求的个数。
+</code></pre>
+<p>点击 Charts 菜单可以查看性能图表</p>
+<p>locust-charts</p>
+<p>图表含义如下：</p>
+<pre><code>* Total Request per Second ：每秒的请求数
+* Average Response Time: 平均响应时间
+* Number of Users: 用户数
+</code></pre>
+<h1 id="参数化"><a href="#参数化" class="headerlink" title="参数化"></a>参数化</h1><h2 id="测试场景-1"><a href="#测试场景-1" class="headerlink" title="测试场景"></a>测试场景</h2><p>如果想对如下接口进行并发测试，则可以将id进行参数化设置</p>
+<pre><code>* http://127.0.0.1:8000/groups/1/
+* http://127.0.0.1:8000/groups/2/
+* http://127.0.0.1:8000/users/1/
+* http://127.0.0.1:8000/users/2/
+</code></pre>
+<p>代码实现<br>locust_users_groups.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> locust <span class="keyword">import</span>  HttpLocust,TaskSet,task</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserBehavior</span>(<span class="params">TaskSet</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">on_start</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="comment">#设置user和group参数下标初始值</span></span><br><span class="line">        self.users_index=<span class="number">0</span></span><br><span class="line">        self.groups_index=<span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @task</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_users</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="comment">#读取参数</span></span><br><span class="line">        users_id=self.locust.<span class="built_in">id</span>[self.users_index]</span><br><span class="line">        url=<span class="string">&quot;/users/&quot;</span>+<span class="built_in">str</span>(users_id)+<span class="string">&#x27;/&#x27;</span></span><br><span class="line">        self.client.get(url,auth=(<span class="string">&#x27;51zxw&#x27;</span>,<span class="string">&#x27;zxw20182018&#x27;</span>))</span><br><span class="line">        <span class="comment">#取余运算循环遍历参数</span></span><br><span class="line">        self.users_index=(self.users_index+<span class="number">1</span>)%<span class="built_in">len</span>(self.locust.<span class="built_in">id</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @task</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_groups</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="comment">#参数化</span></span><br><span class="line">        groups_id=self.locust.<span class="built_in">id</span>[self.groups_index]</span><br><span class="line">        url=<span class="string">&quot;/groups/&quot;</span>+<span class="built_in">str</span>(groups_id)+<span class="string">&quot;/&quot;</span></span><br><span class="line">        self.client.get(url,auth=(<span class="string">&#x27;51zxw&#x27;</span>,<span class="string">&#x27;zxw20182018&#x27;</span>))</span><br><span class="line">        self.groups_index=(self.groups_index+<span class="number">1</span>)%<span class="built_in">len</span>(self.locust.<span class="built_in">id</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WebsiteUser</span>(<span class="params">HttpLocust</span>):</span></span><br><span class="line">    task_set = UserBehavior</span><br><span class="line">    <span class="comment">#参数配置</span></span><br><span class="line">    <span class="built_in">id</span>=[<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line">    min_wait = <span class="number">3000</span></span><br><span class="line">    max_wait = <span class="number">6000</span></span><br><span class="line">    <span class="comment">#host配置</span></span><br><span class="line">    host = <span class="string">&#x27;http://127.0.0.1:8000&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><p>执行如下命令即可运行测试</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locust -f vic<span class="symbol">\l</span>ocust<span class="symbol">\l</span>ocust_users_groups.py</span><br></pre></td></tr></table></figure>
+<p>locust-params</p>
+<h2 id="运行模式"><a href="#运行模式" class="headerlink" title="运行模式"></a>运行模式</h2><h3 id="no-web运行"><a href="#no-web运行" class="headerlink" title="no-web运行"></a>no-web运行</h3><p>前面是通过登录web来运行测试的，其实也可以非web状态来运行,如cmd命令来运行。<br>如果需要非Web形式运行，则需使用–no-web参数，并会用到如下几个参数。</p>
+<pre><code>* -c, --clients：指定并发用户数；
+* -r, --hatch-rate：指定并发加压速率，默认值位1。
+* -t, --run-time：设置运行时间。如(300s,20m, 3h, 1h30m等）；
+</code></pre>
+<p>运行命令如下：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">locust</span> -f vic\locust\locust_users_groups.py --no-web -c <span class="number">10</span> -r <span class="number">2</span> -t <span class="number">15</span>s</span><br></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">locust -f vic\locust\locust_users_groups.py --no-web -c 10 -r 2 -t 15s</span><br><span class="line">[2018-08-21 10:12:59,017] LAPTOP-8B5JADC8/INFO/locust.main: Run time limit set to 15 seconds</span><br><span class="line">[2018-08-21 10:12:59,017] LAPTOP-8B5JADC8/INFO/locust.main: Starting Locust 0.8</span><br><span class="line">[2018-08-21 10:12:59,018] LAPTOP-8B5JADC8/INFO/locust.runners: Hatching and swarming 10 clients at the rate 2 clients/s...</span><br><span class="line"><span class="code"> Name                                                          # reqs      # fails     Avg     Min     Max  |  Median   req/s</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> Total                                                              0     0(0.00%)                                       0.00</span></span><br><span class="line"></span><br><span class="line"><span class="code"> Name                                                          # reqs      # fails     Avg     Min     Max  |  Median   req/s</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> GET /groups/1/                                                     2     0(0.00%)     134     122     146  |     120    0.00</span></span><br><span class="line"><span class="code"> GET /users/1/                                                      2     0(0.00%)     118     100     136  |     100    0.00</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> Total                                                              4     0(0.00%)                                       0.00</span></span><br><span class="line"></span><br><span class="line"><span class="code"> Name                                                          # reqs      # fails     Avg     Min     Max  |  Median   req/s</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> GET /groups/1/                                                     4     0(0.00%)     135     122     146  |     130    1.00</span></span><br><span class="line"><span class="code"> GET /users/1/                                                      4     0(0.00%)     115     100     136  |     100    1.00</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> Total                                                              8     0(0.00%)                                       2.00</span></span><br><span class="line"></span><br><span class="line">[2018-08-21 10:13:04,034] LAPTOP-8B5JADC8/INFO/locust.runners: All locusts hatched: WebsiteUser: 10</span><br><span class="line">[2018-08-21 10:13:04,034] LAPTOP-8B5JADC8/INFO/locust.runners: Resetting stats</span><br><span class="line"></span><br><span class="line"><span class="code"> Name                                                          # reqs      # fails     Avg     Min     Max  |  Median   req/s</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> GET /groups/1/                                                     1     0(0.00%)     147     147     147  |     150    0.00</span></span><br><span class="line"><span class="code"> GET /users/1/                                                      2     0(0.00%)     110      92     128  |      92    0.00</span></span><br><span class="line"><span class="code"> GET /users/2/                                                      1     0(0.00%)     102     102     102  |     100    0.00</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> Total                                                              4     0(0.00%)                                       0.00</span></span><br><span class="line"></span><br><span class="line"><span class="code"> Name                                                          # reqs      # fails     Avg     Min     Max  |  Median   req/s</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> GET /groups/1/                                                     3     0(0.00%)     129     101     147  |     140    0.00</span></span><br><span class="line"><span class="code"> GET /users/1/                                                      3     0(0.00%)     108      92     128  |     100    0.00</span></span><br><span class="line"><span class="code"> GET /users/2/                                                      1     0(0.00%)     102     102     102  |     100    0.00</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> Total                                                              7     0(0.00%)                                       0.00</span></span><br><span class="line"></span><br><span class="line"><span class="code"> Name                                                          # reqs      # fails     Avg     Min     Max  |  Median   req/s</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> GET /groups/1/                                                     4     0(0.00%)     125     101     147  |     110    1.00</span></span><br><span class="line"><span class="code"> GET /groups/2/                                                     2     0(0.00%)     136     116     156  |     120    0.00</span></span><br><span class="line"><span class="code"> GET /users/1/                                                      3     0(0.00%)     108      92     128  |     100    1.00</span></span><br><span class="line"><span class="code"> GET /users/2/                                                      2     0(0.00%)     102     102     102  |     100    0.33</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> Total                                                             11     0(0.00%)                                       2.33</span></span><br><span class="line"></span><br><span class="line"><span class="code"> Name                                                          # reqs      # fails     Avg     Min     Max  |  Median   req/s</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> GET /groups/1/                                                     5     0(0.00%)     123     101     147  |     120    0.75</span></span><br><span class="line"><span class="code"> GET /groups/2/                                                     3     0(0.00%)     124     100     156  |     120    0.50</span></span><br><span class="line"><span class="code"> GET /users/1/                                                      3     0(0.00%)     108      92     128  |     100    0.75</span></span><br><span class="line"><span class="code"> GET /users/2/                                                      4     0(0.00%)     114     102     153  |     100    0.25</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> Total                                                             15     0(0.00%)                                       2.25</span></span><br><span class="line"></span><br><span class="line"><span class="code"> Name                                                          # reqs      # fails     Avg     Min     Max  |  Median   req/s</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> GET /groups/1/                                                     6     0(0.00%)     128     101     157  |     120    0.67</span></span><br><span class="line"><span class="code"> GET /groups/2/                                                     5     0(0.00%)     127     100     156  |     120    0.33</span></span><br><span class="line"><span class="code"> GET /users/1/                                                      4     0(0.00%)     108      92     128  |     100    0.50</span></span><br><span class="line"><span class="code"> GET /users/2/                                                      5     0(0.00%)     121     102     153  |     100    0.50</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> Total                                                             20     0(0.00%)                                       2.00</span></span><br><span class="line"></span><br><span class="line">[2018-08-21 10:13:13,691] LAPTOP-8B5JADC8/INFO/locust.main: Time limit reached. Stopping Locust.</span><br><span class="line">[2018-08-21 10:13:13,693] LAPTOP-8B5JADC8/INFO/locust.main: Shutting down (exit code 0), bye.</span><br><span class="line"><span class="code"> Name                                                          # reqs      # fails     Avg     Min     Max  |  Median   req/s</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> GET /groups/1/                                                     6     0(0.00%)     128     101     157  |     120    0.67</span></span><br><span class="line"><span class="code"> GET /groups/2/                                                     5     0(0.00%)     127     100     156  |     120    0.33</span></span><br><span class="line"><span class="code"> GET /users/1/                                                      4     0(0.00%)     108      92     128  |     100    0.50</span></span><br><span class="line"><span class="code"> GET /users/2/                                                      5     0(0.00%)     121     102     153  |     100    0.50</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> Total                                                             20     0(0.00%)                                       2.00</span></span><br><span class="line"></span><br><span class="line">Percentage of the requests completed within given times</span><br><span class="line"><span class="code"> Name                                                           # reqs    50%    66%    75%    80%    90%    95%    98%    99%   100%</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> GET /groups/1/                                                      6    140    140    150    150    160    160    160    160    157</span></span><br><span class="line"><span class="code"> GET /groups/2/                                                      5    120    150    150    160    160    160    160    160    156</span></span><br><span class="line"><span class="code"> GET /users/1/                                                       4    110    110    130    130    130    130    130    130    128</span></span><br><span class="line"><span class="code"> GET /users/2/                                                       5    100    150    150    150    150    150    150    150    153</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> Total                                                              20    120    140    150    150    160    160    160    160    157</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="分布式运行"><a href="#分布式运行" class="headerlink" title="分布式运行"></a>分布式运行</h3><p>上面我们都是单台机器来执行性能测试，但是当单台机器不够模拟足够多的用户时，Locust支持运行在多台机器中进行压力测试。分布式运行一般是一台master 多台slave 如下图所示：</p>
+<p>image</p>
+<p>首先定义一台 master</p>
+<figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locust -f vic\locust\locust_users_groups.py <span class="comment">--master</span></span><br></pre></td></tr></table></figure>
+<p>然后定义 slave</p>
+<p>locust -f D:\api_test\locust\locust_users_groups.py  –slave<br>如果slave与master不在同一台机器上，还需要通过–master-host参数再指定master的IP地址。</p>
+<p>C:\Users\Shuqing&gt;locust -f D:\api_test\locust\locust_users_groups.py –slave –master-host <master_ip><br>运行之后可以看到web界面显示的SLAVES数量</master_ip></p>
+<p>locust-slave</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" rel="tag"># 接口自动化测试</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/08/22/ATX2%E5%85%A5%E9%97%A8%E8%BF%9B%E9%98%B6%E5%BA%94%E7%94%A8/" rel="prev" title="ATX2入门进阶应用">
+      <i class="fa fa-chevron-left"></i> ATX2入门进阶应用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/10/24/ATX%E5%9F%BA%E4%BA%8EATX-Server2%E7%9A%84UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/" rel="next" title="ATX基于ATX-Server2的UI自动化测试框架">
+      ATX基于ATX-Server2的UI自动化测试框架 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7"><span class="nav-number">1.</span> <span class="nav-text">性能测试工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Locust%E7%AE%80%E4%BB%8B"><span class="nav-number">2.</span> <span class="nav-text">Locust简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%A1%88%E4%BE%8B"><span class="nav-number">3.</span> <span class="nav-text">测试案例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E5%9C%BA%E6%99%AF"><span class="nav-number">3.1.</span> <span class="nav-text">测试场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.2.</span> <span class="nav-text">脚本实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E6%B5%8B%E8%AF%95"><span class="nav-number">3.3.</span> <span class="nav-text">执行测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E5%8C%96"><span class="nav-number">4.</span> <span class="nav-text">参数化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E5%9C%BA%E6%99%AF-1"><span class="nav-number">4.1.</span> <span class="nav-text">测试场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">4.2.</span> <span class="nav-text">运行结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.3.</span> <span class="nav-text">运行模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#no-web%E8%BF%90%E8%A1%8C"><span class="nav-number">4.3.1.</span> <span class="nav-text">no-web运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E8%BF%90%E8%A1%8C"><span class="nav-number">4.3.2.</span> <span class="nav-text">分布式运行</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Vic</p>
+  <div class="site-description" itemprop="description">人生苦短，我学Python</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vic</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

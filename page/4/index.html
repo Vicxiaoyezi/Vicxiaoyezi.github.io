@@ -1,23 +1,1723 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block title %}{{ title }}{% if theme.index_with_subtitle and subtitle %} – {{ subtitle }}{% endif %}{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
-{% block page_class %}
-  {% if is_home() %}page-home{% endif -%}
-{% endblock %}
 
-{% block content %}
-  <section id="posts" class="posts-expand">
-    {% for post in page.posts %}
-      {{ post_template.render(post, true) }}
-    {% endfor %}
-  </section>
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-  {% include '_partials/pagination.swig' %}
-{% endblock %}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"vic.kim","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
-{% block sidebar %}
-  {{ sidebar_template.render(false) }}
-{% endblock %}
+  <meta name="description" content="人生苦短，我学Python">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vicの博客">
+<meta property="og:url" content="https://vic.kim/page/4/index.html">
+<meta property="og:site_name" content="Vicの博客">
+<meta property="og:description" content="人生苦短，我学Python">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Vic">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://vic.kim/page/4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Vicの博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Vicの博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">测试攻城狮</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/22/Hexo%20Next%20%E4%B8%BB%E9%A2%98%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/22/Hexo%20Next%20%E4%B8%BB%E9%A2%98%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD/" class="post-title-link" itemprop="url">Hexo Next 主题中添加本地搜索功能</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-05-22 10:38:00 / 修改时间：10:54:11" itemprop="dateCreated datePublished" datetime="2019-05-22T10:38:00+08:00">2019-05-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo-Next/" itemprop="url" rel="index"><span itemprop="name">Hexo Next</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h1><p>随着时间的推移，个人站点的博客文章会越来越多，那怎么样才能快速找到你印象中的文章呢？增加一个站点内的搜索功能是非常有必要和方便的。</p>
+<h1 id="安装本地搜索插件-hexo-generator-search"><a href="#安装本地搜索插件-hexo-generator-search" class="headerlink" title="安装本地搜索插件 hexo-generator-search"></a>安装本地搜索插件 hexo-generator-search</h1><p>在博客根目录下执行下列命令</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-<span class="keyword">search</span> <span class="comment">--save</span></span><br></pre></td></tr></table></figure>
+<p>安装之后，会在站点目录的 public 文件夹下创建一个 search.xml 文件。</p>
+<h1 id="修改全局配置文件-config-yml（博客根目录）"><a href="#修改全局配置文件-config-yml（博客根目录）" class="headerlink" title="修改全局配置文件_config.yml（博客根目录）"></a>修改全局配置文件_config.yml（博客根目录）</h1><p>在站点配置文件 _config.yml 中添加如下内容：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># Search </span></span><br><span class="line"><span class="symbol">search:</span></span><br><span class="line"><span class="symbol">  path:</span> .<span class="meta-keyword">/public/</span>search.xml</span><br><span class="line"><span class="symbol">  field:</span> post</span><br><span class="line"><span class="symbol">  format:</span> html</span><br><span class="line"><span class="symbol">  limit:</span> <span class="number">10000</span></span><br></pre></td></tr></table></figure>
+<p>path：索引文件的路径，相对于站点根目录<br>field：搜索范围，默认是 post，还可以选择 page、all，设置成 all 表示搜索所有页面<br>limit：限制搜索的条目数</p>
+<h1 id="hexo主题配置文件（-themes-next-config-yml）"><a href="#hexo主题配置文件（-themes-next-config-yml）" class="headerlink" title="hexo主题配置文件（/themes/next/_config.yml）"></a>hexo主题配置文件（/themes/next/_config.yml）</h1><p>在主题配置文件 _config.yml 中找到如下内容：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">local_search:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">trigger:</span> <span class="string">auto</span></span><br><span class="line">  <span class="attr">top_n_per_article:</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>修改<code>local_search</code>的<code>enable</code>为<code>true</code></p>
+<p><code>top_n_per_article </code>字段表示在每篇文章中显示的搜索结果数量，设成 -1 会显示每篇文章的所有搜索结果数量。</p>
+<h1 id="重新部署"><a href="#重新部署" class="headerlink" title="重新部署"></a>重新部署</h1><p>然后执行以下命令，重新部署网站即可愉快的使用本地搜索功能了</p>
+<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean <span class="variable">&amp;&amp;</span> hexo g <span class="variable">&amp;&amp;</span> hexo d</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">Charles的使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-05-22 10:14:26 / 修改时间：10:23:43" itemprop="dateCreated datePublished" datetime="2019-05-22T10:14:26+08:00">2019-05-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Charles-简介"><a href="#Charles-简介" class="headerlink" title="Charles 简介"></a>Charles 简介</h1><p>Charles 是一个支持多平台的 HTTP 代理器、HTTP 监控、反向代理器。它能够让开发者查看本地机器与互联网之间的所有 HTTP 以及 SSL/HTTPS 传输数据。包括请求数据、响应数据 以及 HTTP 头部信息（包括 Cookie 和缓存信息）。</p>
+<blockquote>
+<p>Charles 是收费软件，可以免费试用 30 天。试用期过后，未付费的用户仍然可以继续使用，但是每次使用时间不能超过 30 分钟，并且启动时将会有 10 秒种的延时。因此，该付费方案对广大用户还是相当友好的，即使你长期不付费，也能使用完整的软件功能。只是当你需要长时间进行封包调试时，会因为 Charles 强制关闭而遇到影响.</p>
+</blockquote>
+<p>Charles 主要的功能包括：</p>
+<ul>
+<li>截取 Http 和 Https 网络封包。</li>
+<li>支持重发网络请求，方便后端调试。</li>
+<li>支持修改网络请求参数。</li>
+<li>支持网络请求的截获并动态修改。</li>
+<li>支持模拟慢速网络。</li>
+<li>支持SSL代理。可以截取分析SSL的请求。</li>
+<li>支持端口映射。</li>
+<li>支持反向代理。</li>
+<li>支持SOCKS</li>
+</ul>
+<h1 id="下载安装-Charles"><a href="#下载安装-Charles" class="headerlink" title="下载安装 Charles"></a>下载安装 Charles</h1><p><img src="/.kim//charles.png" alt="charles"></p>
+<ol>
+<li>打开浏览器访问 <a target="_blank" rel="noopener" href="https://www.charlesproxy.com/">Charles 官网</a> ，下载相应系统的 <a target="_blank" rel="noopener" href="https://www.charlesproxy.com/download/">Charles 安装包</a>，然后安装即可<br> Mac版Charles 4.2.7破解版，<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1gyuC6GHjanSOWo8DdaI2-Q">百度网盘地址</a>，安装密码：<a target="_blank" rel="noopener" href="http://www.ifunmac.com/">www.ifunmac.com</a></li>
+<li>安装Charles<br> 打开 Charles for Mac 4.2.7.dmg 包，后将 Charles 拖到 Application 目录下即完成安装。</li>
+<li>安装完毕后，进行破解，方法很简单:<br> Mac 将 charles.jar 覆盖到 安装包Contents/Java 下；</li>
+</ol>
+<h1 id="Charles-主界面介绍"><a href="#Charles-主界面介绍" class="headerlink" title="Charles 主界面介绍"></a>Charles 主界面介绍</h1><p>Charles 的主界面视图如下图所示：<br><img src="/.kim//%E4%B8%BB%E7%95%8C%E9%9D%A2.png" alt="主界面"></p>
+<h2 id="工具导航栏"><a href="#工具导航栏" class="headerlink" title="工具导航栏"></a>工具导航栏</h2><p>Charles 顶部为菜单导航栏，菜单导航栏下面为工具导航栏。视图如下图所示：<br><img src="/.kim//%E5%B7%A5%E5%85%B7%E6%A0%8F.png" alt="工具栏"><br>工具导航栏中提供了几种常用工具，依次为：</p>
+<ol>
+<li>清除捕获到的所有请求</li>
+<li>红点状态说明正在捕获请求，灰色状态说明目前没有捕获请求。</li>
+<li>灰色状态说明是没有开启网速节流，绿色状态说明开启了网速节流。</li>
+<li>灰色状态说明是没有开启断点，绿色状态说明开启了断点。</li>
+<li>编辑修改请求，点击之后可以修改请求的内容。</li>
+<li>重复发送请求，点击之后选中的请求会被再次发送。</li>
+<li>验证选中的请求的响应。</li>
+<li>常用功能，包含了 Tools 菜单中的常用功能。</li>
+<li>常用设置，包含了 Proxy 菜单中的常用设置。</li>
+</ol>
+<h2 id="主界面视图"><a href="#主界面视图" class="headerlink" title="主界面视图"></a>主界面视图</h2><p>Charles 主要提供两种查看封包的视图，分别名为 Structure 和 Sequence。</p>
+<ul>
+<li>Structure： 此视图将网络请求按访问的域名分类。</li>
+<li>Sequence： 此视图将网络请求按访问的时间排序。</li>
+</ul>
+<p>使用时可以根据具体的需要在这两种视图之前来回切换。请求多了有些时候会看不过来，Charles 提供了一个简单的 Filter 功能，可以输入关键字来快速筛选出 URL 中带指定关键字的网络请求。</p>
+<blockquote>
+<p>对于某一个具体的网络请求，你可以查看其详细的请求内容和响应内容。如果请求内容是 POST 的表单，Charles 会自动帮你将表单进行分项显示。如果响应内容是 JSON 格式的，那么 Charles 可以自动帮你将 JSON 内容格式化，方便你查看。如果响应内容是图片，那么 Charles 可以显示出图片的预览。</p>
+</blockquote>
+<h1 id="Charles-菜单介绍"><a href="#Charles-菜单介绍" class="headerlink" title="Charles 菜单介绍"></a>Charles 菜单介绍</h1><p>Charles 的主菜单包括：File、Edit、View、Proxy、Tools、Window、Help。用的最多的主菜单分别是 Proxy 和 Tools。</p>
+<h2 id="Proxy-菜单"><a href="#Proxy-菜单" class="headerlink" title="Proxy 菜单"></a>Proxy 菜单</h2><p>Charles 是一个 HTTP 和 SOCKS 代理服务器。代理请求和响应使 Charles 能够在请求从客户端传递到服务器时检查和更改请求，以及从服务器传递到客户端时的响应。下面主要介绍 Charles 提供的一些代理功能。Proxy 菜单的视图如下图所示：<br><img src="/.kim//Prroxy.png" alt="Prroxy"></p>
+<p>Proxy 菜单包含以下功能：</p>
+<ul>
+<li>Start/Stop Recording：开始/停止记录会话。</li>
+<li>Start/Stop Throttling：开始/停止节流。</li>
+<li>Enable/Disable Breakpoints：开启/关闭断点模式。</li>
+<li>Recording Settings：记录会话设置。</li>
+<li>Throttle Settings：节流设置。</li>
+<li>Breakpoint Settings：断点设置。</li>
+<li>Reverse Proxies Settings：反向代理设置。</li>
+<li>Port Forwarding Settings：端口转发。</li>
+<li>Windows Proxy：记录计算机上的所有请求。</li>
+<li>Proxy Settings：代理设置。</li>
+<li>SSL Proxying Settings：SSL 代理设置。</li>
+<li>Access Control Settings：访问控制设置。</li>
+<li>External Proxy Settings：外部代理设置。</li>
+<li>Web Interface Settings：Web 界面设置。</li>
+</ul>
+<h3 id="Recording-Settings-记录会话设置"><a href="#Recording-Settings-记录会话设置" class="headerlink" title="Recording Settings(记录会话设置)"></a>Recording Settings(记录会话设置)</h3><p>Recording Settings 和 Start/Stop Recording 配合使用，在 Start Recording 的状态下，可以通过 Recording Settings 配置 Charles 的会话记录行为。Recording Settings 的视图如下图所示：<br><img src="/.kim//Recording.png" alt="Recording"><br>Recording Settings 有 Options、Include、Exclude 三个选项卡：</p>
+<ul>
+<li>Options：通过 Recording Size Limits 限制记录数据的大小。当 Charles 记录时，请求、响应头和响应体存储在内存中，或写入磁盘上的临时文件。有时，内存中的数据量可能会变得太多，Charles 会通知您并停止录制。在这种情况下，您应该清除 Charles 会话以释放内存，然后再次开始录制。在录制设置中，您可以限制 Charles 将记录的最大大小; 这根本不会影响你的浏览，Charles 仅会停止录制。</li>
+<li>Include：只有与配置的地址匹配的请求才会被录制。</li>
+<li>Exclude：只有与配置的地址匹配的请求将不会被录制。<br>Include 和 Exclude 选项卡的操作相同，选择 Add，然后填入需要监控的Procotol、Host 和 Port等信息，这样就达到了过滤的目的。如下图所示：<br><img src="/.kim//WechatIMG102.png" alt="WechatIMG102"><br><img src="/.kim//WechatIMG103.png" alt="WechatIMG103"></li>
+</ul>
+<h3 id="Throttle-Settings-节流设置"><a href="#Throttle-Settings-节流设置" class="headerlink" title="Throttle Settings(节流设置)"></a>Throttle Settings(节流设置)</h3><p>Throttle Settings 和 Start/Stop Throttling 配合使用，在 Start Throttling 的状态下，可以通过 Throttle Settings 配置 Charles 的网速模拟配置。Throttle Settings 的视图如下图所示：<br><img src="/.kim//WechatIMG104.png" alt="WechatIMG104"></p>
+<p>勾选 Enable Throttling 启用网速模拟配置，在 Throttle Preset 下选择网络类型即可，具体设置可以根据实际情况自行设置。如果只想模拟指定网站的慢速网络，可以再勾选上图中的 Only for selected hosts 项，然后在对话框的下半部分设置中增加指定的 hosts 项即可。</p>
+<p>Throttle Settings 视图中的选项含义如下：</p>
+<ul>
+<li>Bandwidth：带宽</li>
+<li>Utilistation：利用百分比</li>
+<li>Round-trip：往返延迟</li>
+<li>MTU：字节</li>
+</ul>
+<h3 id="Breakpoint-Settings-断点设置"><a href="#Breakpoint-Settings-断点设置" class="headerlink" title="Breakpoint Settings(断点设置)"></a>Breakpoint Settings(断点设置)</h3><p>Breakpoint Settings 和 Enable/Disable Breakpoints 配合使用，在 Enable Breakpoints 的状态下，可以通过 Breakpoint Settings 配置 Charles 的断点模式。Breakpoint Settings 的视图如下图所示：<br><img src="/.kim//15561941553646.jpg" alt="-w540"><br>勾选 Enable Breakpoints 启用断点模式，选择 Add，然后填入需要监控的Scheme、Procotol、Host 和 Port 等信息，这样就达到了设置断点的目的。然后可以来观察或者修改请求或者返回的内容，但是在这过程中需要注意请求的超时时间问题。或者可以在某个想要设置断点的请求网址上右击选择 Breakpoints 来设置断点。</p>
+<h3 id="Reverse-Proxies-Settings-反向代理设置"><a href="#Reverse-Proxies-Settings-反向代理设置" class="headerlink" title="Reverse Proxies Settings(反向代理设置)"></a>Reverse Proxies Settings(反向代理设置)</h3><p>反向代理在本地端口上创建 Web 服务器，该端口透明地将请求代理给远程 Web 服务器。反向代理上的所有请求和响应都可以记录在 Charles 中。<br>如果您的客户端应用程序不支持使用 HTTP 代理，或者您希望避免将其配置为使用代理，那么反向代理很有用。创建原始目标 Web 服务器的反向代理，然后将客户端应用程序连接到本地端口； 反向代理对客户端应用程序是透明的，使您可以查看 Charles 以前可能无法访问的流量。<br>有关反向代理的更多信息，请访问 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Reverse_proxy">Reverse proxy</a></p>
+<h3 id="Port-Forwarding-Settings-端口转发"><a href="#Port-Forwarding-Settings-端口转发" class="headerlink" title="Port Forwarding Settings(端口转发)"></a>Port Forwarding Settings(端口转发)</h3><p>可以将任何 TCP/IP 或 UDP 端口配置为使用 Port Forwarding 工具从 Charles 转发到远程主机。这样可以调试 Charles 中的任何协议。<br>在 Macromedia Flash 中调试 XMLSocket 连接时，这尤其有用。<br>还可以使用 Charles 作为 SOCKS 代理，因此无需设置端口转发。</p>
+<h3 id="macOS-Proxy-记录计算机上的所有请求"><a href="#macOS-Proxy-记录计算机上的所有请求" class="headerlink" title="macOS Proxy(记录计算机上的所有请求)"></a>macOS Proxy(记录计算机上的所有请求)</h3><p>如果想要抓取电脑端的请求，勾选 Windows Proxy 选项即可；如果只需要抓取手机请求，则取消勾选这个选项。</p>
+<h3 id="Proxy-Settings-代理设置"><a href="#Proxy-Settings-代理设置" class="headerlink" title="Proxy Settings(代理设置)"></a>Proxy Settings(代理设置)</h3><p>Proxy Settings 的视图如下图所示：<br><img src="/.kim//15561944287744.jpg" alt="-w592"><br>代理端口默认为 8888(可以修改)，并且勾上 Enable transparent HTTP proxying 就完成了在 Charles 上的代理设置。</p>
+<h3 id="SSL-Proxy-Settings-SSL-代理设置"><a href="#SSL-Proxy-Settings-SSL-代理设置" class="headerlink" title="SSL Proxy Settings(SSL 代理设置)"></a>SSL Proxy Settings(SSL 代理设置)</h3><p>SSL Proxy Settings 的视图如下图所示：<br><img src="/.kim//15561945816569.jpg" alt="-w592"><br>勾上 Enable SSL proxying 就完成了在 Charles 上的 SSL 代理设置。之后也可以选择 Add，然后填入需要监控的 Host 和 Port 信息，这样就达到了针对某个域名启用 SSL 代理的目的。</p>
+<h3 id="Access-Control-Settings-访问控制设置"><a href="#Access-Control-Settings-访问控制设置" class="headerlink" title="Access Control Settings(访问控制设置)"></a>Access Control Settings(访问控制设置)</h3><p>Access Control Settings 表示访问控制设置。访问控制列表确定谁可以使用此 Charles 实例。通常，您在自己的计算机上运行 Charles，并且您只打算自己使用它，因此 localhost 始终包含在访问控制列表中。也可以选择 Add，然后填入允许访问的 IP，这样就达到了允许某个 IP 访问 Charles 的目的。</p>
+<h3 id="External-Proxy-Settings-外部代理设置"><a href="#External-Proxy-Settings-外部代理设置" class="headerlink" title="External Proxy Settings(外部代理设置)"></a>External Proxy Settings(外部代理设置)</h3><p>External Proxy Settings 表示外部代理设置。可能在网络上有一个代理服务器，必须使用该代理服务器才能访问 Internet。在这种情况下，需要将 Charles 配置为在尝试访问 Internet 时使用现有代理。</p>
+<p>可以配置单独的代理地址和端口：</p>
+<ul>
+<li>HTTP</li>
+<li>HTTPS</li>
+<li>SOCKS</li>
+</ul>
+<h3 id="Web-Interface-Settings-Web-界面设置"><a href="#Web-Interface-Settings-Web-界面设置" class="headerlink" title="Web Interface Settings(Web 界面设置)"></a>Web Interface Settings(Web 界面设置)</h3><p>Web Interface Settings 表示 Web 界面设置。Charles 有一个 Web 界面，可以让您从浏览器控制 Charles，或使用 Web 界面作为 Web 服务使用外部程序。</p>
+<p>在 External Proxy Settings 视图中勾选 Enable the web interface 选项启用 Web 界面。可以允许匿名访问，也可以配置用户名和密码。还可以通过在配置使用 Charles 作为其代理的 Web 浏览器中访问 <a target="_blank" rel="noopener" href="http://control.charles/">http://control.charles/</a> 来访问 Web 界面。<br>Web界面提供对以下功能的访问：</p>
+<ul>
+<li>节流控制<ul>
+<li>激活或停用任何已配置的限制预设</li>
+</ul>
+</li>
+<li>录音控制<ul>
+<li>开始和停止会话录制</li>
+</ul>
+</li>
+<li>工具<ul>
+<li>激活和停用工具</li>
+</ul>
+</li>
+<li>会话控制<ul>
+<li>清除当前会话</li>
+<li>以任何支持的格式导出当前会话</li>
+<li>以 Charles 的本机会话格式下载当前会话<br>退出Charles</li>
+</ul>
+</li>
+</ul>
+<p>通过检查 Web 界面 HTML ，您可以推导出如何将其用作 Web 服务来自动化 Charles。</p>
+<h2 id="Tools-菜单"><a href="#Tools-菜单" class="headerlink" title="Tools 菜单"></a>Tools 菜单</h2><p>Charles 是一个 HTTP 和 SOCKS 代理服务器，所有的请求都会经过 Charles。下面主要介绍 Charles 提供的一些实用工具。Tools 菜单的视图如下图所示：<br><img src="/.kim//Tools.png" alt="Tools"><br>Tools 菜单包含以下功能：</p>
+<ul>
+<li>No Caching Settings：禁用缓存设置。</li>
+<li>Block Cookies Settings：禁用 Cookie设置。</li>
+<li>Map Remote Settings：远程映射设置。</li>
+<li>Map Local Settings：本地映射设置。</li>
+<li>Rewrite Settings：重写设置。</li>
+<li>Black List Settings：黑名单设置。</li>
+<li>White List Settings：白名单设置。</li>
+<li>DNS Spoofing Settings：DNS 欺骗设置。</li>
+<li>Mirror Settings：镜像设置。</li>
+<li>Auto Save Settings：自动保存设置。</li>
+<li>Client Process Settings：客户端进程设置。</li>
+<li>Compose：编辑修改。</li>
+<li>Repeat：重复发包。</li>
+<li>Repeat Advanced：高级重复发包。</li>
+<li>Validate：验证。</li>
+<li>Publish Gist：发布要点。</li>
+<li>Import/Export Settings：导入/导出设置。</li>
+<li>Profiles：配置文件。</li>
+<li>Publish Gist Settings：发布要点设置。</li>
+</ul>
+<h3 id="No-Caching-Settings-禁用缓存"><a href="#No-Caching-Settings-禁用缓存" class="headerlink" title="No Caching Settings(禁用缓存)"></a>No Caching Settings(禁用缓存)</h3><p>No Caching 工具可防止客户端应用程序（如 Web 浏览器）缓存任何资源。因此，始终向远程网站发出请求，您始终可以看到最新版本。</p>
+<ul>
+<li>适用范围<br>该工具可以作用于每个请求(选中 Enable No Caching 即可)，也可以仅对你配置的请求启用(启用 No Caching 的同时，请选中 Only for selected locations)。当用于选定的请求时，可以使用简单但功能强大的模式匹配将工具的效果限制为指定的主机和路径。</li>
+<li>工作原理<br>No Caching 工具通过操纵控制响应缓存的 HTTP 请求头来防止缓存。从请求中删除 If-Modified-Since 和 If-None-Match 请求头，添加 Pragma：no-cache 和 Cache-control：no-cache。从响应中删除 Expires，Last-Modified 和ETag 请求头，添加 Expires：0 和 Cache-Control：no-cache。</li>
+</ul>
+<h3 id="Block-Cookies-Settings-禁用-Cookie"><a href="#Block-Cookies-Settings-禁用-Cookie" class="headerlink" title="Block Cookies Settings(禁用 Cookie)"></a>Block Cookies Settings(禁用 Cookie)</h3><p>Block Cookies 工具阻止了 Cookie 的发送和接收。它可用于测试网站，就像在浏览器中禁用了 Cookie 一样。 请注意，网络爬虫（例如 Google）通常不支持 Cookie，因此该工具还可用于模拟网络爬虫网站的视图。</p>
+<ul>
+<li>适用范围<br>该工具可以作用于每个请求(选中 Enable Block Cookies 即可)，也可以仅对你配置的请求启用(启用 Block Cookies 的同时，请选中 Only for selected locations)。当用于选定的请求时，可以使用简单但功能强大的模式匹配将工具的效果限制为指定的主机和路径。</li>
+<li>工作原理<br>Block Cookies 工具通过操纵控制响应 Cookies 的 HTTP 请求头来禁用 Cookies。从请求中移除 Cookie 请求头，防止 Cookie 值从客户端应用程序（例如 Web 浏览器）发送到远程服务器。从响应中删除 Set-Cookie 请求头，防止请求设置客户端应用程序从远程服务器接收的 Cookie。</li>
+</ul>
+<h3 id="Map-Remote-Settings-远程映射"><a href="#Map-Remote-Settings-远程映射" class="headerlink" title="Map Remote Settings(远程映射)"></a>Map Remote Settings(远程映射)</h3><p>Map Remote 工具根据配置的映射更改请求站点，以便从新站点透明地提供响应，就好像这是原始请求一样。</p>
+<p>通过此映射，您可以从另一个站点提供全部或部分站点。例如：</p>
+<ul>
+<li>可以把 xk72.com/charles/ 映射到 localhost/charlesdev/ 来为 xk72.com 提供一个子目录；</li>
+<li>可以把 xk72.com/*.php 这种指定后缀的所有文件映射到 localhost/charlesdev/。</li>
+</ul>
+<h4 id="使用建议"><a href="#使用建议" class="headerlink" title="使用建议"></a>使用建议</h4><p>如果您拥有站点的开发版本并且希望能够通过开发提供的某些请求浏览实时站点，则 Map Remote 非常有用。例如，您可能希望从开发服务器提供 css 和 images 目录。使用 live.com/css/ 等映射到 dev.com/css/ 或 live.com/*.css 到 dev.com 。</p>
+<h4 id="映射类型"><a href="#映射类型" class="headerlink" title="映射类型"></a>映射类型</h4><ul>
+<li>可以将目录映射到目录，如 xk72.com/charles/ 映射到 localhost/charlesdev/；</li>
+<li>可以将文件映射到文件，如 xk72.com/charles/dow… 映射到 abc.com/testing/tes…</li>
+<li>可以将带有文件模式的目录映射到目录，如 xk72.com/charles/*.p… 到 localhost/charlesdev/；</li>
+<li>如果在目标映射中未指定路径，则 URL 的路径部分将不会更改。如果要映射到根目录，请在目标路径字段中已 / 结尾。</li>
+</ul>
+<h4 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h4><p>Map Remote 工具可以将 HTTP 请求映射到 HTTPS 目标，反之亦然，因此您可以将 HTTP 或 HTTPS 站点映射到其对立面。</p>
+<h4 id="站点匹配"><a href="#站点匹配" class="headerlink" title="站点匹配"></a>站点匹配</h4><p>每个站点匹配可能包含协议、主机、端口和路径模式，以匹配特定的 URL。站点可能包括通配符。当您向此工具添加新站点时，可能会找到有关创建站点匹配的更多帮助。</p>
+<h3 id="Map-Local-Settings-本地映射"><a href="#Map-Local-Settings-本地映射" class="headerlink" title="Map Local Settings(本地映射)"></a>Map Local Settings(本地映射)</h3><p>Map Local 工具使您可以使用本地文件，就像它们是远程网站的一部分一样。您可以在本地开发文件，并像在线上一样测试它们。本地文件的内容将返回给客户端，就像它是正常的远程响应一样。<br>Map Local 可以大大加快开发和测试速度，否则您必须将文件上传到网站以测试结果。使用 Map Local，您可以在开发环境中安全地进行测试。</p>
+<h4 id="动态文件"><a href="#动态文件" class="headerlink" title="动态文件"></a>动态文件</h4><p>动态文件（例如包含服务器端脚本的文件）不会由 Map Local 执行，因此如果文件中有任何脚本，脚本将按原样返回到浏览器，这可能不是预期的结果。如果您想使用动态文件，就好像它们是远程网站的一部分一样，请参阅 Map Remote 工具。</p>
+<h4 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h4><p>当请求与 Map Local 映射匹配时，它会检查与路径匹配的本地文件。它不包括查询字符串（如果有）。如果在本地找到所请求的文件，则将其作为响应返回，就好像它是从远程站点加载的一样，因此它对客户端是透明的。如果在本地找不到所请求的文件，那么该请求会像平常一样由网站提供，返回由真正的服务器提供的数据。</p>
+<h4 id="站点匹配-1"><a href="#站点匹配-1" class="headerlink" title="站点匹配"></a>站点匹配</h4><p>每个站点匹配可能包含协议、主机、端口和路径模式，以匹配特定的 URL。站点可能包括通配符。当您向此工具添加新站点时，可能会找到有关创建站点匹配的更多帮助。</p>
+<h3 id="Rewrite-Settings-重写"><a href="#Rewrite-Settings-重写" class="headerlink" title="Rewrite Settings(重写)"></a>Rewrite Settings(重写)</h3><p>Rewrite 工具允许创建请求和响应在通过 Charles 时修改他们的规则。如：添加或更改头信息、搜索和替换响应内容中的某些文本等。</p>
+<h4 id="重写集"><a href="#重写集" class="headerlink" title="重写集"></a>重写集</h4><p>重写集可以单独激活和停用。每个集合包含站点和规则的列表。这些站点选择规则将要运行的请求和响应。</p>
+<h4 id="重写规则"><a href="#重写规则" class="headerlink" title="重写规则"></a>重写规则</h4><p>每个规则都描述了一次重写操作。规则可能会影响请求URL的 Header，正文或部分内容；它可以根据请求或响应来操作；它可以定义搜索、替换或者仅替换样式重写。</p>
+<h4 id="站点匹配-2"><a href="#站点匹配-2" class="headerlink" title="站点匹配"></a>站点匹配</h4><p>每个站点匹配可能包含协议、主机、端口和路径模式，以匹配特定的 URL。站点可能包括通配符。当您向此工具添加新站点时，可能会找到有关创建站点匹配的更多帮助。</p>
+<h4 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h4><p>当重写操作未按预期工作时，重写工具可能难以调试。如果您遇到问题，请尝试添加一个非常基本的规则，例如添加明显头信息的规则，以便您可以查看规则是否与请求完全匹配。同时打开错误日志中的调试，以获取从 Charles 中的 Window 菜单访问的错误日志中打印的一些调试信息。</p>
+<h3 id="Black-List-Settings-黑名单"><a href="#Black-List-Settings-黑名单" class="headerlink" title="Black List Settings(黑名单)"></a>Black List Settings(黑名单)</h3><p>Black List 工具允许输入应该被阻止的域名。当 Web 浏览器尝试从被列入黑名单的域名请求任何页面时，该请求将被 Charles 阻止。您还可以输入通配符来阻止其子域名。</p>
+<h3 id="White-List-Settings-白名单"><a href="#White-List-Settings-白名单" class="headerlink" title="White List Settings(白名单)"></a>White List Settings(白名单)</h3><p>Black List 工具允许输入仅仅被允许的域名。Black List 工具将阻止除被列入白名单的域名之外的所有请求。</p>
+<blockquote>
+<p>白名单工具用于仅允许指定的域名；黑名单工具，用于仅屏蔽指定的域名。<br>如果一个请求与“黑名单”和“白名单”都匹配，则该请求会被阻止。</p>
+</blockquote>
+<h3 id="DNS-Spoofing-Settings-DNS-欺骗"><a href="#DNS-Spoofing-Settings-DNS-欺骗" class="headerlink" title="DNS Spoofing Settings(DNS 欺骗)"></a>DNS Spoofing Settings(DNS 欺骗)</h3><p>DNS Spoofing 工具允许通过将自己的主机名指定给远程地址映射来欺骗 DNS 查找。 当请求通过 Charles 时，您的 DNS 映射将优先。<br>Charles 包含配置的域名到 IP 地址映射的列表。当针对列出的域名发出请求时，Spoof DNS 插件会发现欺骗 IP 将请求重定向到该地址。主机HTTP标头保持不变，因此就像您的 DNS 服务器返回欺骗性 IP一样。</p>
+<h4 id="虚拟主机"><a href="#虚拟主机" class="headerlink" title="虚拟主机"></a>虚拟主机</h4><p>虚拟主机是指单个IP地址上有多个站点，Web 服务器根据浏览器中键入的名称确定要请求的站点。更准确地说，它查看请求中发送的主机头。<br>如果没有为您的站点设置 DNS，那么您通常无法测试它，因为您不能只输入 IP 地址，因为服务器无法获取名称，因此无法将请求与网站。使用 DNS 欺骗工具来克服此问题。</p>
+<h3 id="Mirror-Settings-镜像"><a href="#Mirror-Settings-镜像" class="headerlink" title="Mirror Settings(镜像)"></a>Mirror Settings(镜像)</h3><p>Mirror 工具会在浏览指定站点时，把接收到的响应内容克隆一份，并保存在磁盘上指定的路径下。<br>保存文件的路径会与浏览站点的目录结构相同，并且 Charles 会为主机名创建一个根目录。文件名从 URL 导出并转换为适合的数据进行保存。查询字符串包含在文件名中。如果收到相同 URL 的两个响应，则后面一个文件会覆盖前面的同名文件，因此保存在镜像中在的响应内容将始终为最新的。</p>
+<h4 id="选定站点"><a href="#选定站点" class="headerlink" title="选定站点"></a>选定站点</h4><p>可以为每个请求启用该工具，也可以仅为指定站点启用该工具。当用于选定的站点时，可以使用简单但功能强大的模式匹配将工具的效果限制为指定的主机和/或路径。</p>
+<h4 id="副作用"><a href="#副作用" class="headerlink" title="副作用"></a>副作用</h4><p>如果为请求启用镜像工具，它将导致任何压缩或编码的响应被解码。因此，如果服务器提供了压缩响应，Charles 将在传递给客户端之前对其进行解压缩，这通常不会产生任何影响。但是如果您已经构建了自己的客户端，或者客户端希望得到压缩响应，此时将会产生影响。使用 web 浏览器则没有任何影响。</p>
+<h3 id="Auto-Save-Settings-自动保存"><a href="#Auto-Save-Settings-自动保存" class="headerlink" title="Auto Save Settings(自动保存)"></a>Auto Save Settings(自动保存)</h3><p>Auto Save 工具会按设定的时间间隔自动保存和清除记录会话。</p>
+<p>如果您让 Charles 长时间监控网络活动，并希望将记录分解为可管理的单元，或者避免因数据量过大而可能出现的内存不足情况，这将非常有用。</p>
+<p>输入以分钟为单位的保存间隔以及保存会话文件的目录。您可以选择是否在每次运行 Charles 时启动 Auto Save 工具，否则在 Charles 启动时将始终禁用 Auto Save 工具。</p>
+<p>会话文件的名称中保存时间戳，格式为 yyyyMMddHHmm，即年月日时分，以便按字母顺序排序时，它们以正确的顺序显示。</p>
+<h3 id="Client-Process-Settings-客户端进程"><a href="#Client-Process-Settings-客户端进程" class="headerlink" title="Client Process Settings(客户端进程)"></a>Client Process Settings(客户端进程)</h3><p>Client Process 工具显示负责发出每个请求的本地客户端进程的名称。客户端进程通常是您的 Web 浏览器(例如 firefox.exe)，但客户端进程工具可以帮助您发现许多可能未知的 HTTP 客户端。<br>客户端进程名称显示在每个请求的 Notes 区域中。<br>如果您可以在 Charles 中看到不确定原始进程的请求，则客户端进程工具很有用。 它仅适用于在运行 Charles 的计算机上发出的请求。<br>在 Charles 接受每个连接之前，该工具将引入一个短暂的延迟。 延迟通常不明显或不显著。</p>
+<h4 id="选定站点-1"><a href="#选定站点-1" class="headerlink" title="选定站点"></a>选定站点</h4><p>可以为每个请求启用该工具，也可以仅为指定站点启用该工具。当用于选定的站点时，可以使用简单但功能强大的模式匹配将工具的效果限制为指定的主机和/或路径。</p>
+<h3 id="Compose-编辑修改"><a href="#Compose-编辑修改" class="headerlink" title="Compose(编辑修改)"></a>Compose(编辑修改)</h3><p>Compose 工具允许在原有的请求基础上修改。</p>
+<h3 id="Repeat-重复"><a href="#Repeat-重复" class="headerlink" title="Repeat(重复)"></a>Repeat(重复)</h3><p>Repeat 工具允许选择一个请求并重复它。Charles 将请求重新发送到服务器，并将响应显示为新请求。如果您正在进行后端更改并希望在浏览器(或其他客户机)中重复请求的情况下测试这些更改，那么这将非常有用。特别是如果重新创建请求需要花费一些精力，例如在游戏中获得分数，这将节省大量精力。<br>重复请求是在 Charles 内部完成的，因此无法在浏览器或其他客户端中查看响应，响应只能在 Charles 中查看。</p>
+<h3 id="Repeat-Advanced-高级重复"><a href="#Repeat-Advanced-高级重复" class="headerlink" title="Repeat Advanced(高级重复)"></a>Repeat Advanced(高级重复)</h3><p>Repeat Advanced 工具扩展了 Repeat 工具，提供了迭代次数和并发数的选项。这对于负载测试非常有用。</p>
+<h3 id="Validate-验证"><a href="#Validate-验证" class="headerlink" title="Validate(验证)"></a>Validate(验证)</h3><p>Validate 工具允许 Charles 通过将它们发送到 W3C HTML 验证器、W3C CSS 验证器和 W3C Feed 验证器来验证记录的响应。<br>验证报告在 Charles 中显示，其中包含与响应源中相应行相关联的任何警告或错误（双击错误消息中的行号可以切换到源视图）。<br>因为 Charles 测试它记录的响应，所以它可以测试不易测试的场景，例如在提交表单后呈现错误消息。</p>
+<h4 id="重新验证"><a href="#重新验证" class="headerlink" title="重新验证"></a>重新验证</h4><p>验证后，可以从验证结果中选择响应并 Repeat，重复原始请求，然后重新验证结果。</p>
+<h3 id="Publish-Gist-发布要点"><a href="#Publish-Gist-发布要点" class="headerlink" title="Publish Gist(发布要点)"></a>Publish Gist(发布要点)</h3><p>Publish Gist 工具可以将将所选请求和响应作为要点发布。默认情况下，这个要点将匿名发布，这意味着你将无法做到<br>删除它。可以在 Tools 菜单的 Publish Gist Settings 中授权 Charles 使用您的 GitHub 帐户进行发布。</p>
+<h3 id="Import-Export-Settings-导入-导出"><a href="#Import-Export-Settings-导入-导出" class="headerlink" title="Import/Export Settings(导入/导出)"></a>Import/Export Settings(导入/导出)</h3><p>Import/Export 工具允许导入/导出 Charles 的 Proxy、Tools、Preferences 等设置。</p>
+<h3 id="Profiles-配置"><a href="#Profiles-配置" class="headerlink" title="Profiles(配置)"></a>Profiles(配置)</h3><p>Profiles 包含所有配置设置的完整副本。<br>每次更改当前设置时，系统都会更新当前活动的配置文件，当您更改活动配置文件时，所有设置都将恢复为上次使用该配置文件时的状态。<br>请注意，如果导入已保存的配置，则会覆盖当前配置文件的设置。建议使用导入/导出来备份或创建当前配置和配置文件的快照，以维护多个并行工作区。</p>
+<h1 id="Charles-使用教程"><a href="#Charles-使用教程" class="headerlink" title="Charles 使用教程"></a>Charles 使用教程</h1><h2 id="通过-Charles-进行-PC-端抓包"><a href="#通过-Charles-进行-PC-端抓包" class="headerlink" title="通过 Charles 进行 PC 端抓包"></a>通过 Charles 进行 PC 端抓包</h2><p>Charles 会自动配置浏览器和工具的代理设置，所以说打开工具直接就已经是抓包状态了。只需要保证一下几点即可：</p>
+<p>确保 Charles 处于 Start Recording 状态。<br>勾选 Proxy | macOS Proxy。</p>
+<h2 id="通过-Charles-进行移动端抓包"><a href="#通过-Charles-进行移动端抓包" class="headerlink" title="通过 Charles 进行移动端抓包"></a>通过 Charles 进行移动端抓包</h2><ol>
+<li>电脑端配置：<ul>
+<li>打开 Charles 的代理功能：</li>
+<li>通过主菜单打开 Proxy | Proxy Settings 弹窗，查看代理端口(端口默认为 8888，不用修改)</li>
+</ul>
+</li>
+<li>手机端配置：<ul>
+<li>打开 iPhone 设置 - 无线局域网，将手机网络连接到与电脑相同WiFi</li>
+<li>点击WiFi详情按钮设置HTTP代理，将其改为手动，然后填写Charles所在电脑的代理IP地址，端口号默认为8888。</li>
+</ul>
+</li>
+<li>设置好之后，我们打开手机上的任意需要网络请求的程序，就可以看到 Charles 弹出手机请求连接的确认菜单（只有首次弹出），点击 Allow 即可完成设置。</li>
+</ol>
+<p>完成以上步骤，就可以进行抓包了。</p>
+<h2 id="通过-Charles-进行-HTTPS-抓包"><a href="#通过-Charles-进行-HTTPS-抓包" class="headerlink" title="通过 Charles 进行 HTTPS 抓包"></a>通过 Charles 进行 HTTPS 抓包</h2><p>HTTPS 的抓包需要在 HTTP 抓包基础上再进行设置。需要完成步骤：</p>
+<ol>
+<li>电脑端安装 Charles 证书：通过 Charles 菜单栏找到 Help - SSL Proxying - Install Charles Root Certificate 安装证书，然后给电脑安装证书，信任证书<br><img src="/.kim//15562500582883.jpg" alt="-w694"><br><img src="/.kim//15562501825204.jpg" alt="-w774"></li>
+</ol>
+<ol start="2">
+<li><p>设置 SSL 代理：通过主菜单打开 Proxy - SSL Proxy Settings 弹窗，勾选 Enable SSL proxying。并添加域名端口，匹配想要监听的域名端口，这里可以添加*:443或*:*匹配全部：<br><img src="/.kim//15562504002462.jpg" alt="-w768"></p>
+</li>
+<li><p>移动端安装 Charles 证书：通过 Charles 的主菜单Help - SSL Proxying - Install Charles Root Certificate on a Mobile Device or Remote Browser.. ，按照弹出的提示会让你将手机切换为手动代理到电脑的Charles，然后用浏览器打开提示上面的地址下载安装证书<br> iPhone需要信任证书。设置 - 通用 - 描述文件与设备管理 - 点击证书信任</p>
+</li>
+<li><p>设置好之后，我们打开手机上的任意需要网络请求的程序，就可以进行 HTTPS 抓包了。</p>
+</li>
+</ol>
+<h2 id="Focus-功能"><a href="#Focus-功能" class="headerlink" title="Focus 功能"></a>Focus 功能</h2><p>使用 Focus 功能指定想要查看的域名，可以避免这个域名相关的请求淹没在茫茫请求当中。当然使用“Structure”视图也可以避免这个问题。<br>对想要Focus的域名，选中抓取的接口-右键菜单-选择Focus，这个域名就会添加到Focused列表，可以在这里找到：<br><img src="/.kim//15562478115998.jpg" alt="-w951"></p>
+<p><img src="/.kim//15562477662170.jpg" alt="-w540"><br><img src="/.kim//15562478841032.jpg" alt="-w1115"></p>
+<h2 id="重复请求功能Repeat"><a href="#重复请求功能Repeat" class="headerlink" title="重复请求功能Repeat"></a>重复请求功能Repeat</h2><p><img src="/.kim//15562482464485.jpg" alt="-w953"><br>使用Repeat Advanced 还可以指定请求次数<br><img src="/.kim//15562483183428.jpg" alt="-w544"><br><img src="/.kim//15562483967942.jpg" alt="-w1116"></p>
+<h2 id="查找功能"><a href="#查找功能" class="headerlink" title="查找功能"></a>查找功能</h2><p>选中抓取的接口-右键菜单-选择Find In 即可打开查找面板<br><img src="/.kim//15562487628999.jpg" alt="-w1004"></p>
+<p><img src="/.kim//15562487454525.jpg" alt="-w751"><br>双击查找结果会跳到想要的结果</p>
+<h2 id="设置断点拦截请求响应"><a href="#设置断点拦截请求响应" class="headerlink" title="设置断点拦截请求响应"></a>设置断点拦截请求响应</h2><p>首先开启断点功能，然后再到想要设置断点的请求上，右键设置一个断点，如图所示：<br><img src="/.kim//15562493127758.jpg" alt="-w1000"><br>查看是否加入断点设置面板<br><img src="/.kim//15562494118375.jpg" alt="-w1168"><br><img src="/.kim//15562490163542.jpg" alt="-w540"><br>默认拦截请求和响应，如果只需要两者之一，可以选择设置<br><img src="/.kim//15562490428158.jpg" alt="-w440"><br>再次发起请求，就会看到拦截了请求和响应<br><img src="/.kim//15562492527131.jpg" alt="-w1167"></p>
+<p><img src="/.kim//15562492796996.jpg" alt="-w1167"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/22/Postman%E7%9A%84%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/22/Postman%E7%9A%84%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">Postman的使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-05-22 09:52:37 / 修改时间：10:12:05" itemprop="dateCreated datePublished" datetime="2019-05-22T09:52:37+08:00">2019-05-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="常见接口测试工具"><a href="#常见接口测试工具" class="headerlink" title="常见接口测试工具"></a>常见接口测试工具</h1><ul>
+<li>Postman: 简单方便的接口调试工具，便于分享和协作。具有接口调试，接口集管理，环境配置，参数化，断言，批量执行，录制接口，Mock Server, 接口文档，接口监控等功能</li>
+<li>JMeter: 开源接口测试及压测工具，支持Linux及无界面运行</li>
+<li>LR: 商业版接口性能测试工具，简单易用，功能强大</li>
+<li>SoupUI: 开源，WebService接口常用测试工具，也可以测试Rest接口及接口安全</li>
+</ul>
+<h1 id="新版Postman使用简介"><a href="#新版Postman使用简介" class="headerlink" title="新版Postman使用简介"></a>新版Postman使用简介</h1><p>Postman 官网地址：<a href>https://www.getpostman.com/pricing</a><br><img src="/.kim//Postman%E4%B8%BB%E7%95%8C%E9%9D%A2.png" alt="Postman主界面"><br><img src="/.kim//Postman%E7%94%A8%E6%B3%95%E4%BB%8B%E7%BB%8D.png" alt="Postman用法介绍"></p>
+<h2 id="工具栏"><a href="#工具栏" class="headerlink" title="工具栏"></a>工具栏</h2><ul>
+<li>New: 新建，可以新建Request请求，Collection请求集，环境等等</li>
+<li>Import: 导入，可以导入别人导出的请求集</li>
+<li>Runner: 运行一个请求集（批量执行）</li>
+<li>Invite: 邀请（需要注册，邀请进行协作）</li>
+<li>同步图标： （需要注册，同步你的项目到云端）</li>
+<li>抓包图标： 抓包/捕获请求，用于开启Postman代理， 手动设置代理（或手机代理）后可抓包/录制请求</li>
+<li>设置图标： Postman设置</li>
+<li>消息图标： 官方及协助消息</li>
+<li>收藏图标： 我的收藏（需要注册）</li>
+<li>云端图标： 用户云端数据（需要注册）</li>
+</ul>
+<h2 id="接口管理区"><a href="#接口管理区" class="headerlink" title="接口管理区"></a>接口管理区</h2><ul>
+<li>History: 请求历史记录，可以查询到之前的请求记录</li>
+<li>Collections: 接口集，相当于一个接口项目或测试计划，接口集中可以建立无限极子文件夹，用于对接口进行分组管理</li>
+</ul>
+<h2 id="环境管理区"><a href="#环境管理区" class="headerlink" title="环境管理区"></a>环境管理区</h2><ul>
+<li>环境切换：用于切换环境</li>
+<li>环境预览：用于快速预览环境中的所有变量</li>
+<li>环境管理：用于添加修改环境及环境变量，以及全局变量</li>
+</ul>
+<h2 id="什么是环境"><a href="#什么是环境" class="headerlink" title="什么是环境"></a>什么是环境</h2><p>接口完整地址 = 服务地址 + 接口地址， 如<br><code>https://app.jike.ruguoapp.com + /1.0/users/login</code><br>环境是一套配置，包含许多环境变量。在接口测试中，根据部署在不同的服务器上，服务器地址有可能不同，而同一个接口，接口地址是不变的。为了测试部署在不同服务器上的同一套接口，我们可以建立不同的环境，不同环境中host变量使用不同的地址</p>
+<h2 id="接口设计区"><a href="#接口设计区" class="headerlink" title="接口设计区"></a>接口设计区</h2><p>可以通过上方tab边上的+号，新建多个请求。接口设计区从上到下分为请求区和响应区</p>
+<ul>
+<li><p>请求区</p>
+<ul>
+<li>请求地址行：可以选择请求方法（GET/POST/…），填写请求地址，发送请求和保存请求到测试集</li>
+<li>请求数据区：分为授权，请求头，请求数据，请求发送前执行的脚本（用于准备数据），请求结束后执行的脚本（用于断言）</li>
+</ul>
+</li>
+<li><p>响应区：</p>
+<ul>
+<li>响应内容： 可以查看Pretty（美化格式），Raw（原始格式），Preview（HTML预览格式）</li>
+<li>响应Cookie</li>
+<li>响应头</li>
+<li>测试结果，对应请求中Tests中设置的断言<h2 id="Collection请求集"><a href="#Collection请求集" class="headerlink" title="Collection请求集"></a>Collection请求集</h2>测试集是Postman中接口管理的一个“整体”单位，运行、导出、分享等都是基于测试集的。</li>
+</ul>
+</li>
+<li><p>新建测试集： New按钮-&gt;Collection 或 直接点击测试集列表上方的新建测试集按钮<br><img src="/.kim//%E6%96%B0%E5%BB%BA%E6%B5%8B%E8%AF%95%E9%9B%86.png" alt="新建测试集"></p>
+<ul>
+<li>授权： 测试集及其子文件夹下的接口统一使用该授权，不用每个接口再都单独设置一遍</li>
+<li>请求前脚本： 测试集的每个接口公用的请求前脚本</li>
+<li>请求后断言： 测试集每个接口公用的请求后脚本</li>
+<li>请求集变量： 请求集中公用的一些变量</li>
+</ul>
+</li>
+<li><p>子文件夹：子文件夹的属性中同样拥有描述，授权，请求前脚本，和请求后断言（没有变量，一个请求集的变量统一管理），实现了不同范围（Scope）的Fixture功能。</p>
+</li>
+<li><p>请求集导出：请求集可以导出并发送给别人（不携带环境信息），别人通过导入来使用你的接口</p>
+</li>
+<li><p>请求集分享： 请求集直接分享给别人（双方都需要注册）</p>
+</li>
+<li><p>环境管理</p>
+<ul>
+<li>我们可以环境中设置多个变量，以供在请求中使用</li>
+<li>环境变量使用方法：<ul>
+<li>选择环境，在请求URL或者请求Body里使用来使用环境变量</li>
+<li>变量可以在请求Body的各种格式中使用</li>
+<li>不能直接在请求前脚本（Pre-request Script）和请求后脚本（Tests）中使用</li>
+</ul>
+</li>
+<li>环境管理中还可以点击“Global”添加全局变量，环境变量只有当选择了该环境时生效，全局变量在任何环境中生效，测试集中的变量只在当前测试集生效，当测试集变量，环境变量，全局变量有重复的变量名时，优先级为：环境变量&gt;全局变量&gt;测试集变量<br><img src="/.kim//%E8%AE%BE%E7%BD%AE%E5%8F%98%E9%87%8F.png" alt="设置变量"><br><img src="/.kim//%E4%BD%BF%E7%94%A8%E5%8F%98%E9%87%8F.png" alt="使用变量"></li>
+</ul>
+</li>
+</ul>
+<h2 id="Params使用"><a href="#Params使用" class="headerlink" title="Params使用"></a>Params使用</h2><p>当请求URL中参数很多时，不方便进行添加和查看，可以点击Params按钮，以表格的方式添加变量及值，从表格添加后，变量和值会自动添加到URL中</p>
+<h2 id="请求设计"><a href="#请求设计" class="headerlink" title="请求设计"></a>请求设计</h2><ul>
+<li>授权：如果接口需要授权，可以在该页面设置授权方式（type）和授权信息</li>
+<li>Header: 请求头，可以设置请求类型（Content-Type）和Cookie</li>
+<li>Body: 请求数据<ul>
+<li>form-data：混合表单，支持上传文件</li>
+<li>x-www-form-urlencoded：文本表单</li>
+<li>raw：原始格式，支持JSON/XML格式（后面可选择）</li>
+<li>binary: 二进制格式，用于发送二进制数据流</li>
+</ul>
+</li>
+<li>Pre-request Script: 请求前脚本，Javascript语法，用于在发送请求前生成一些动态数据或做一些处理</li>
+<li>Tests：请求后脚本，Javascript语法，用于请求返回后做一些处理或断言结果</li>
+</ul>
+<h2 id="Postman发送各种格式请求的方法："><a href="#Postman发送各种格式请求的方法：" class="headerlink" title="Postman发送各种格式请求的方法："></a>Postman发送各种格式请求的方法：</h2><p>注意：选择不同的请求，会自动在Header中添加Content-Type信息</p>
+<h2 id="Tests断言"><a href="#Tests断言" class="headerlink" title="Tests断言"></a>Tests断言</h2><p>一个Postman的test本质上是JavaScript的代码可以用来为一些特殊的test设置值。你可以在对象中设置一个描述性的键作为一个元素，然后声明他如果是true或false。<br>tests[“Body contains user_id”] = responseBody.has(“user_id”)<br>这回核对body中是否包含了user_id这个字符串。如果你需要，你可以增加更多的键，这取决于你要用test做多少的事情。</p>
+<ul>
+<li>HTTP状态码断言:</li>
+</ul>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tests[<span class="string">&quot;HTTP状态码200&quot;</span>]=responseCode.code == <span class="number">200</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>响应包含内容断言：</li>
+</ul>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tests[<span class="string">&quot;状态码200&quot;</span>] = responseBody.has(<span class="string">&quot;登录成功&quot;</span><span class="string">|&quot;</span>你已经登录，无需重复登录<span class="string">&quot;);</span></span><br></pre></td></tr></table></figure>
+<p>接口样例<br>POST <a target="_blank" rel="noopener" href="https://demo.fastadmin.net/admin/index/login.html">https://demo.fastadmin.net/admin/index/login.html</a> 用户名/密码： username:admin password:123456</p>
+<ul>
+<li>JSON响应断言</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> jsonData = <span class="built_in">JSON</span>.parse(responseBody); <span class="comment">//获取body中返回的所有参数</span></span><br><span class="line">tests[<span class="string">&quot;code为100000表示成功&quot;</span>] = jsonData.code == <span class="string">&quot;100000&quot;</span></span><br></pre></td></tr></table></figure>
+<p>接口样例 GET <a target="_blank" rel="noopener" href="http://www.tuling123.com/openapi/api?key=ec961279f453459b9248f0aeb6600bbe&amp;info=%E4%BD%A0%E5%A5%BD">http://www.tuling123.com/openapi/api?key=ec961279f453459b9248f0aeb6600bbe&amp;info=你好</a></p>
+<p><img src="/.kim//tests.png" alt="tests"></p>
+<p>Postman尝试通过列出编辑器旁边常用的片段来简化过程。您可以选择要添加的代码段，并将相应的代码添加到测试编辑器中。</p>
+<h2 id="Runner-测试集批量执行"><a href="#Runner-测试集批量执行" class="headerlink" title="Runner: 测试集批量执行"></a>Runner: 测试集批量执行</h2><ul>
+<li>支持设置迭代次数</li>
+<li>支持加载csv或json类测试数据</li>
+<li>操作方法：<a target="_blank" rel="noopener" href="https://demo.fastadmin.net/admin/index/login.html%E6%8E%A5%E5%8F%A3">https://demo.fastadmin.net/admin/index/login.html接口</a></li>
+<li>新建一个Collection，比如名称Demo2</li>
+<li>填入URL：<a target="_blank" rel="noopener" href="https://demo.fastadmin.net/admin/index/login.html%EF%BC%8C">https://demo.fastadmin.net/admin/index/login.html，</a> 选择POST方法</li>
+<li>请求数据（Body）格式选x-www-form-urlecoded，请求数据填写username     password  ，这里使用了两个变量来做参数化</li>
+<li>保存请求到Demo2中</li>
+<li>在电脑上新建一个data.csv文件，第一行为变量名</li>
+<li>点击Postman工具栏的Runner按钮，Collection选择Demo2， Data选择数据文件data.csv， 点击运行Demo2</li>
+</ul>
+<h2 id="环境变量的用法详解"><a href="#环境变量的用法详解" class="headerlink" title="环境变量的用法详解"></a>环境变量的用法详解</h2><p>在postman中，可以利用tests将接口返回的response设置为环境变量，供后续接口使用（类似参数化的概念）</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var jsonData =<span class="module-access"><span class="module"><span class="identifier">JSON</span>.</span></span>parse(responseBody); <span class="comment">//获取body中返回的所有参数</span></span><br><span class="line">postman.set<span class="constructor">EnvironmentVariable(<span class="string">&quot;appKey&quot;</span>,<span class="params">jsonData</span>.<span class="params">data</span>.<span class="params">appKey</span>)</span>;<span class="comment">//把返回参数中的keys设置为环境变量</span></span><br><span class="line"></span><br><span class="line">var data = postman.get<span class="constructor">ResponseHeader(<span class="string">&quot;Access-Token&quot;</span>)</span>; <span class="comment">//获取响应头所有参数</span></span><br><span class="line">postman.set<span class="constructor">EnvironmentVariable(<span class="string">&quot;Access-Token&quot;</span>,<span class="params">data</span>)</span>; <span class="comment">//把返回参数中的Access-Token设置为环境变量</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="postman常用方法集合"><a href="#postman常用方法集合" class="headerlink" title="postman常用方法集合"></a>postman常用方法集合</h1><p><a target="_blank" rel="noopener" href="https://learning.getpostman.com/docs/postman/scripts/test_examples/">https://learning.getpostman.com/docs/postman/scripts/test_examples/</a></p>
+<h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置环境变量</span></span><br><span class="line">pm.environment.<span class="built_in">set</span>(<span class="string">&quot;variable_key&quot;</span>, <span class="string">&quot;variable_value&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//将一个嵌套的对象设置为一个环境变量</span></span><br><span class="line"><span class="built_in">var</span> array = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line">pm.environment.<span class="built_in">set</span>(<span class="string">&quot;array&quot;</span>, JSON.stringify(array, <span class="built_in">null</span>, <span class="number">2</span>)); </span><br><span class="line"></span><br><span class="line"><span class="built_in">var</span> obj = &#123; a: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], b: &#123; c: &#x27;val&#x27; &#125; &#125;;</span><br><span class="line">pm.environment.<span class="built_in">set</span>(<span class="string">&quot;obj&quot;</span>, JSON.stringify(obj)) </span><br><span class="line"></span><br><span class="line"><span class="comment">//获取环境变量</span></span><br><span class="line">pm.environment.<span class="built_in">get</span>(<span class="string">&quot;variable_key&quot;</span>); </span><br><span class="line"></span><br><span class="line"><span class="comment">//获取环境变量（其值是字符串化对象)</span></span><br><span class="line"><span class="comment">// 如果数据来自未知源，则应该将这些语句包装在try-catch块中</span></span><br><span class="line"><span class="built_in">var</span> array = JSON.<span class="built_in">parse</span>(pm.environment.<span class="built_in">get</span>(<span class="string">&quot;array&quot;</span>));</span><br><span class="line"><span class="built_in">var</span> obj = JSON.<span class="built_in">parse</span>(pm.environment.<span class="built_in">get</span>(<span class="string">&quot;obj&quot;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">//清除环境变量</span></span><br><span class="line">pm.environment.unset(<span class="string">&quot;variable_key&quot;</span>); <span class="comment">//清除一个环境变量</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h2><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pm.<span class="built_in">globals</span>.<span class="built_in">set</span>(<span class="string">&quot;variable_key&quot;</span>, <span class="string">&quot;variable_value&quot;</span>);<span class="comment"> //设置一个全局变量</span></span><br><span class="line">pm.<span class="built_in">globals</span>.<span class="built_in">get</span>(<span class="string">&quot;variable_key&quot;</span>);<span class="comment"> //获取一个全局变量</span></span><br><span class="line">pm.<span class="built_in">globals</span>.unset(<span class="string">&quot;variable_key&quot;</span>);<span class="comment"> //清除一个全局变量</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="获取一个变量"><a href="#获取一个变量" class="headerlink" title="获取一个变量"></a>获取一个变量</h2><p>该函数在全局变量和活动环境中搜索变量</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm.variables.<span class="builtin-name">get</span>(<span class="string">&quot;variable_key&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="检查response-body中是否包含某个string"><a href="#检查response-body中是否包含某个string" class="headerlink" title="检查response body中是否包含某个string"></a>检查response body中是否包含某个string</h2><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tests[&quot;Body matches string&quot;] = responseBody.has(&quot;string_you_want_to_search&quot;);</span><br><span class="line"></span><br><span class="line">pm.test(&quot;Body matches string&quot;, <span class="keyword">function</span> () &#123;</span><br><span class="line">    pm.expect(pm.response.text()).<span class="keyword">to</span>.<span class="keyword">include</span>(&quot;string_you_want_to_search&quot;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="检查response-body是否与某个string相等"><a href="#检查response-body是否与某个string相等" class="headerlink" title="检查response body是否与某个string相等"></a>检查response body是否与某个string相等</h2><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tests[<span class="string">&quot;Body is correct&quot;</span>] = responseBody === <span class="string">&quot;哈哈哈&quot;</span>; <span class="comment">//必须完全匹配</span></span><br><span class="line"></span><br><span class="line">pm.test(<span class="string">&quot;Body is correct&quot;</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    pm.response.to.have.body(<span class="string">&quot;response_body_string&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="检测JSON中的某个值是否等于预期的值"><a href="#检测JSON中的某个值是否等于预期的值" class="headerlink" title="检测JSON中的某个值是否等于预期的值"></a>检测JSON中的某个值是否等于预期的值</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="keyword">data</span> = JSON.parse(responseBody);</span><br><span class="line">tests[<span class="string">&quot;Your test name&quot;</span>] = <span class="keyword">data</span>.value === <span class="number">100</span>;</span><br><span class="line">tests[<span class="string">&quot;状态码为301&quot;</span>] = <span class="keyword">data</span>[<span class="string">&quot;status&quot;</span>] == <span class="string">&quot;301&quot;</span>;</span><br><span class="line">tests[<span class="string">&quot;message&quot;</span>] = <span class="keyword">data</span>[<span class="string">&quot;message&quot;</span>] == <span class="string">&quot;购买商品库存不足&quot;</span>;</span><br><span class="line">tests[<span class="string">&quot;list&quot;</span>] = <span class="keyword">data</span>[<span class="string">&quot;lists&quot;</span>][<span class="number">0</span>] == <span class="string">&quot;11&quot;</span>;</span><br><span class="line"></span><br><span class="line">pm.test(<span class="string">&quot;Your test name&quot;</span>, function () &#123;</span><br><span class="line">    <span class="keyword">var</span> jsonData = pm.response.json();</span><br><span class="line">    pm.<span class="keyword">expect</span>(jsonData.value).to.eql(<span class="number">100</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+<p>JSON.parse()方法，把json字符串转化为对象。parse()会进行json格式的检查是一个安全的函数。<br>如：检查json中某个数组元素的个数(这里检测programs的长度)</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">var</span> <span class="class"><span class="keyword">data</span> = <span class="type">JSON</span>.parse(<span class="title">responseBody</span>);</span></span><br><span class="line"><span class="title">tests</span>[<span class="string">&quot;program&#x27;s lenght&quot;</span>] = <span class="class"><span class="keyword">data</span>.programs.length === 5;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="测试response-Headers中的某个元素是否存在-如-Content-Type"><a href="#测试response-Headers中的某个元素是否存在-如-Content-Type" class="headerlink" title="测试response Headers中的某个元素是否存在(如:Content-Type)"></a>测试response Headers中的某个元素是否存在(如:Content-Type)</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//g</span>etResponseHeader()方法会返回header的值，如果该值存在的话</span><br><span class="line">tests[<span class="string">&quot;Content-Type is present&quot;</span>] = postman.getResponseHeader(<span class="string">&quot;Content-Type&quot;</span>);  <span class="regexp">//</span>不区分大小写</span><br><span class="line">tests[<span class="string">&quot;Content-Type is present&quot;</span>] = responseHeaders.hasOwnProperty(<span class="string">&quot;Content-Type&quot;</span>); <span class="regexp">//</span>要区分大小写 </span><br><span class="line"></span><br><span class="line">pm.test(<span class="string">&quot;Content-Type is present&quot;</span>, <span class="keyword">function</span> () &#123;</span><br><span class="line">    pm.response.to.have.header(<span class="string">&quot;Content-Type&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="验证响应时间小于xxx毫秒"><a href="#验证响应时间小于xxx毫秒" class="headerlink" title="验证响应时间小于xxx毫秒"></a>验证响应时间小于xxx毫秒</h2><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tests[<span class="string">&quot;Response time is less than 200ms&quot;</span>] = responseTime &lt; <span class="number">200</span>;</span><br><span class="line"></span><br><span class="line">pm.test(<span class="string">&quot;Response time is less than 200ms&quot;</span>, <span class="keyword">function</span> <span class="title"></span>() &#123;</span><br><span class="line">    pm.expect(pm.response.responseTime).to.be.below(200);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="响应时间在特定范围内（包含下限，上限不包括）"><a href="#响应时间在特定范围内（包含下限，上限不包括）" class="headerlink" title="响应时间在特定范围内（包含下限，上限不包括）"></a>响应时间在特定范围内（包含下限，上限不包括）</h2><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tests<span class="literal">[&quot;R<span class="identifier">esponse</span> <span class="identifier">time</span> <span class="identifier">is</span> <span class="identifier">acceptable</span>&quot;]</span> = <span class="module-access"><span class="module"><span class="identifier">_</span>.</span></span><span class="keyword">in</span><span class="constructor">Range(<span class="params">responseTime</span>, 100, 1001)</span>; </span><br></pre></td></tr></table></figure>
+
+<h2 id="验证状态码的值为200"><a href="#验证状态码的值为200" class="headerlink" title="验证状态码的值为200"></a>验证状态码的值为200</h2><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tests[<span class="string">&quot;Status code is 200&quot;</span>] = responseCode.code === <span class="number">200</span>;</span><br><span class="line"></span><br><span class="line">pm.test(<span class="string">&quot;Status code is 200&quot;</span>, <span class="keyword">function</span> <span class="title"></span>() &#123;</span><br><span class="line">    pm.response.to.have.status(200);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="代码名包含一个字符串"><a href="#代码名包含一个字符串" class="headerlink" title="代码名包含一个字符串"></a>代码名包含一个字符串</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tests[<span class="string">&quot;Status code name has string&quot;</span>] = responseCode.name.has(<span class="string">&quot;Created&quot;</span>);</span><br><span class="line"></span><br><span class="line">pm.test(<span class="string">&quot;Status code name has string&quot;</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span></span> &#123;</span><br><span class="line">    pm.response.to.have.<span class="built_in">status</span>(<span class="string">&quot;Created&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="成功的POST请求状态代码"><a href="#成功的POST请求状态代码" class="headerlink" title="成功的POST请求状态代码"></a>成功的POST请求状态代码</h2><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">tests</span>[<span class="string">&quot;Successful POST request&quot;</span>] = responseCode<span class="meta">.code</span> === <span class="number">201</span> <span class="title">||</span> responseCode<span class="meta">.code</span> === <span class="number">202</span><span class="comment">;</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">pm.test</span>(<span class="string">&quot;Successful POST request&quot;</span>, <span class="meta">function</span> () &#123;</span><br><span class="line">    pm.expect(pm.response<span class="meta">.code</span>).to.be.oneOf([<span class="number">201</span>,<span class="number">202</span>])<span class="comment">;</span></span><br><span class="line">&#125;)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<h2 id="使用TinyValidator获取JSON数据"><a href="#使用TinyValidator获取JSON数据" class="headerlink" title="使用TinyValidator获取JSON数据"></a>使用TinyValidator获取JSON数据</h2><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var schema = &#123; &quot;items&quot;: &#123; &quot;type&quot;: &quot;boolean&quot; &#125;&#125;;</span><br><span class="line">var data1 = [<span class="keyword">true</span>, <span class="keyword">false</span>];</span><br><span class="line">var data2 = [<span class="keyword">true</span>, <span class="number">123</span>];</span><br><span class="line">pm.test(<span class="string">&#x27;Schema is valid&#x27;</span>, <span class="keyword">function</span>() &#123;</span><br><span class="line">  pm.expect(tv4.<span class="keyword">validate</span>(data1, <span class="keyword">schema</span>)).<span class="keyword">to</span>.be.<span class="keyword">true</span>;</span><br><span class="line">  pm.expect(tv4.<span class="keyword">validate</span>(data2, <span class="keyword">schema</span>)).<span class="keyword">to</span>.be.<span class="keyword">true</span>;</span><br><span class="line">&#125;);</span><br><span class="line">//data1和data2是测试数据，<span class="keyword">schema</span>相当于验证<span class="type">json</span>的规范 </span><br><span class="line">//示例中验证data1和data2中的<span class="keyword">value</span>是否都是<span class="type">boolean</span>类型</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取request值："><a href="#获取request值：" class="headerlink" title="获取request值："></a>获取request值：</h2><ul>
+<li>data {object}:<br>  这是一个用于请求的表单数据字典 (request.data[“key”]==”value”)</li>
+<li>headers {object}:<br>  这是请求头的字典 (request.headers[“key”]==”value”)</li>
+<li>method {string}:<br>  GET/POST/PUT 等.</li>
+<li>url {string}:<br>  请求的url</li>
+</ul>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">var</span> <span class="type">Json</span> = <span class="type">JSON</span>.parse(request.<span class="class"><span class="keyword">data</span>); </span></span><br></pre></td></tr></table></figure>
+
+<p>假设requestBody中有”version”:”1.0”；这个值,如果想获取到version的value值，代码如下</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var <span class="type">Json</span> = <span class="type">JSON</span>.parse(request.data); </span><br><span class="line">var version = <span class="type">Json</span>[&quot;version&quot;];</span><br></pre></td></tr></table></figure>
+
+<h2 id="JSON-parse-和JSON-stringify"><a href="#JSON-parse-和JSON-stringify" class="headerlink" title="JSON.parse()和JSON.stringify()"></a>JSON.parse()和JSON.stringify()</h2><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">JSON</span>.parse() //【从一个字符串中解析出<span class="type">json</span>对象】<span class="comment">--把string转对象</span></span><br><span class="line"><span class="type">JSON</span>.stringify() //【从一个对象中解析出字符串，主要针对[<span class="keyword">object</span> <span class="keyword">object</span>]类型数据的转换】<span class="comment">--把对象转String</span></span><br><span class="line"></span><br><span class="line">var data=&#123;<span class="type">name</span>:<span class="string">&#x27;goatling&#x27;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">JSON</span>.parse(data)</span><br><span class="line">//结果是： <span class="string">&#x27;&#123;&quot;name&quot;:&quot;goatling&quot;&#125;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="type">JSON</span>.stringify(data)</span><br><span class="line">//结果是：<span class="type">name</span>:&quot;goatling&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="发送异步请求。此功能既可用作预请求脚本，也可用作测试脚本。"><a href="#发送异步请求。此功能既可用作预请求脚本，也可用作测试脚本。" class="headerlink" title="发送异步请求。此功能既可用作预请求脚本，也可用作测试脚本。"></a>发送异步请求。此功能既可用作预请求脚本，也可用作测试脚本。</h2><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pm.send<span class="constructor">Request(<span class="string">&quot;https://postman-echo.com/get&quot;</span>, <span class="params">function</span> (<span class="params">err</span>, <span class="params">response</span>)</span> &#123;</span><br><span class="line">    console.log(response.json<span class="literal">()</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="转换XML-body为JSON对象"><a href="#转换XML-body为JSON对象" class="headerlink" title="转换XML body为JSON对象"></a>转换XML body为JSON对象</h2><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">var jsonObject</span> = xml2Json(responseBody);</span><br></pre></td></tr></table></figure>
+
+<h2 id="判断字段值是否为空typeof"><a href="#判断字段值是否为空typeof" class="headerlink" title="判断字段值是否为空typeof()"></a>判断字段值是否为空typeof()</h2><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var Jsondata = <span class="module-access"><span class="module"><span class="identifier">JSON</span>.</span></span>parse(responseBody);</span><br><span class="line"><span class="keyword">if</span>( typeof(<span class="module-access"><span class="module"><span class="identifier">Jsondata</span>.</span></span>data) != <span class="string">&quot;undefined&quot;</span> )</span><br></pre></td></tr></table></figure>
+
+<h2 id="分支和循环"><a href="#分支和循环" class="headerlink" title="分支和循环"></a>分支和循环</h2><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置下一个要执行的请求</span></span><br><span class="line">postman.set<span class="constructor">NextRequest(<span class="string">&quot;request_name&quot;</span>)</span>;</span><br><span class="line"><span class="comment">//停止工作流程执行</span></span><br><span class="line">postman.set<span class="constructor">NextRequest(<span class="params">null</span>)</span>;</span><br></pre></td></tr></table></figure>
+<p>postman.setNextRequest()一些重点：<br>    * 指定后续请求的名称或ID，集合运行器将负责其余的请求。<br>    * 它可以用在预请求或测试脚本中。如果有多个赋值，则考虑最后一个赋值。<br>    * 如果postman.setNextRequest()请求中不存在，则集合运行器默认为线性执行并移至下一个请求</p>
+<h1 id="服务端返回异常-Status-Code："><a href="#服务端返回异常-Status-Code：" class="headerlink" title="服务端返回异常 Status Code："></a>服务端返回异常 Status Code：</h1><h2 id="HTTP状态码"><a href="#HTTP状态码" class="headerlink" title="HTTP状态码"></a>HTTP状态码</h2><ul>
+<li>1** 信息，服务器收到请求，需要请求者继续执行操作</li>
+<li>2** 成功，操作被成功接收并处理</li>
+<li>3** 重定向，需要进一步的操作以完成请求</li>
+<li>4** 客户端错误，请求包含语法错误或无法完成请求</li>
+<li>5** 服务器错误，服务器在处理请求的过程中发生了错误</li>
+</ul>
+<h2 id="常见HTTP响应码"><a href="#常见HTTP响应码" class="headerlink" title="常见HTTP响应码"></a>常见HTTP响应码</h2><ul>
+<li>200：成功</li>
+<li>301、302：请求重定向到另外一个接口</li>
+<li>400：请求格式不对／服务端故意失败</li>
+<li>403：禁止访问(被封禁／没有权限)</li>
+<li>404：资源不存在（有可能是请求url错误或参数不正确）</li>
+<li>405：请求方法不被允许（比如接口只允许Post,使用Get请求接口）</li>
+<li>429：请求频率过高</li>
+<li>500：服务器内部错误（通常是服务器挂了或接口Bug)</li>
+<li>502、503：服务发布间隙没衔接好／挂了</li>
+<li>504：网关请求超时（Bug，挂了）</li>
+<li>409、406：正常返回，不应该被记录</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/21/Mac%E7%94%B5%E8%84%91%E7%94%A8%E7%BB%88%E7%AB%AF%E7%94%9F%E6%88%90SSH%20key%20%E8%AE%BF%E9%97%AE%E8%87%AA%E5%B7%B1%E7%9A%84Github/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/21/Mac%E7%94%B5%E8%84%91%E7%94%A8%E7%BB%88%E7%AB%AF%E7%94%9F%E6%88%90SSH%20key%20%E8%AE%BF%E9%97%AE%E8%87%AA%E5%B7%B1%E7%9A%84Github/" class="post-title-link" itemprop="url">Mac电脑用终端生成SSH key 访问自己的Github</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-05-21 21:33:43 / 修改时间：21:38:55" itemprop="dateCreated datePublished" datetime="2019-05-21T21:33:43+08:00">2019-05-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%B5%84%E6%96%99/" itemprop="url" rel="index"><span itemprop="name">资料</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="首先检测自己电脑是否存在-SSH-key"><a href="#首先检测自己电脑是否存在-SSH-key" class="headerlink" title="首先检测自己电脑是否存在 SSH key"></a>首先检测自己电脑是否存在 SSH key</h1><p>在生成SSH密钥之前，您可以检查是否有任何现有的SSH密钥。</p>
+<ol>
+<li><p>打开终端</p>
+</li>
+<li><p>输入ls -al ~/.ssh以查看是否存在现有SSH密钥：</p>
+ <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ls</span> -al ~<span class="string">/.ssh</span></span><br><span class="line"><span class="comment"># 列出.ssh目录中的文件(如果存在的话)</span></span><br></pre></td></tr></table></figure></li>
+<li><p>检查目录列表以查看您是否已拥有公共SSH密钥。</p>
+<ul>
+<li>如果你本地没有生成的话<br>  终端上面会显示：No such   file or directory</li>
+<li>如果已经存在的话，<br>  则会显示 id_rsa 和 id_rsa.pub</li>
+</ul>
+</li>
+</ol>
+<h1 id="如果本地没有的话，我们要自己生成新的SSH秘钥"><a href="#如果本地没有的话，我们要自己生成新的SSH秘钥" class="headerlink" title="如果本地没有的话，我们要自己生成新的SSH秘钥"></a>如果本地没有的话，我们要自己生成新的SSH秘钥</h1><ol>
+<li><p>开放式终端。</p>
+</li>
+<li><p>输入下面的命令，记得替换您的GitHub电子邮件地址。</p>
+ <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ssh</span>-keygen -t rsa -b <span class="number">4096</span> -C <span class="string">&quot;your_email@example.com&quot;</span></span><br><span class="line"><span class="comment">#&quot;your_email@example.com&quot;为示例邮箱，此处应填写为你在github上面注册的邮箱。</span></span><br></pre></td></tr></table></figure>
+
+<p> 这将使用提供的电子邮件作为标签创建一个新的ssh密钥。</p>
+<blockquote>
+<p>Generating public/private rsa key pair.</p>
+</blockquote>
+</li>
+<li><p>当系统提示您“输入要保存密钥的文件”时，按Enter键使用默认文件位置。</p>
+<blockquote>
+<p>Enter a file in which to save the key (/Users/you/.ssh/id_rsa): [Press enter]</p>
+</blockquote>
+</li>
+<li><p>在提示符下，键入安全密码。可以连续Enter，不设置密码。</p>
+<blockquote>
+<p>Enter passphrase (empty for no passphrase): [Type a passphrase]<br>Enter same passphrase again: [Type passphrase again]</p>
+</blockquote>
+</li>
+</ol>
+<p>成功后，终端显示</p>
+<blockquote>
+<p>Your identitification has been saved in /Users/xxx/.ssh/id_rsa.<br>Your public key has been saved in /user/xxx/id_rsa.pub.<br>the key fingerprint is xxxxxxxxxx…….xxxxxxxx <a href="mailto:&#x79;&#111;&#117;&#114;&#x5f;&#x65;&#x6d;&#97;&#x69;&#x6c;&#x40;&#x65;&#x78;&#x61;&#109;&#x70;&#108;&#101;&#x2e;&#99;&#x6f;&#x6d;">&#x79;&#111;&#117;&#114;&#x5f;&#x65;&#x6d;&#97;&#x69;&#x6c;&#x40;&#x65;&#x78;&#x61;&#109;&#x70;&#108;&#101;&#x2e;&#99;&#x6f;&#x6d;</a><br>The key’s randomart image is:<br>![-w465](Mac电脑用终端生成SSH key 访问自己的Github/15577192525730.jpg)</p>
+</blockquote>
+<h1 id="将SSH密钥添加到ssh-agent"><a href="#将SSH密钥添加到ssh-agent" class="headerlink" title="将SSH密钥添加到ssh-agent"></a>将SSH密钥添加到ssh-agent</h1><ol>
+<li><p>在后台启动ssh-agent</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(ssh-agent -s)</span>&quot;</span></span><br><span class="line">&gt; Agent pid 59566</span><br></pre></td></tr></table></figure></li>
+<li><p>终端输入命令：<br> <code>ssh-add -K ~/.ssh/id_rsa</code><br> 如果设置密码，此时会要求输入passphrase（输入步骤 二 中的 passphrase就好 ）</p>
+</li>
+</ol>
+<p>成功后，中选显示：</p>
+<blockquote>
+<p> Identity added: /Users/xxx/.ssh/id_rsa (<a href="mailto:&#121;&#111;&#117;&#x72;&#x5f;&#x65;&#x6d;&#97;&#x69;&#108;&#64;&#x65;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#109;">&#121;&#111;&#117;&#x72;&#x5f;&#x65;&#x6d;&#97;&#x69;&#108;&#64;&#x65;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#109;</a>)</p>
+</blockquote>
+<h1 id="添加SSH-key-到Github-上"><a href="#添加SSH-key-到Github-上" class="headerlink" title="添加SSH key 到Github 上"></a>添加SSH key 到Github 上</h1><ol>
+<li><p>将SSH密钥复制到剪贴板。</p>
+ <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pbcopy &lt; ~<span class="regexp">/.ssh/i</span>d_rsa.pub</span><br><span class="line"><span class="comment"># 复制id_rsa.pub的内容到剪贴板</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<pre><code>提示：如果pbcopy不起作用，您可以找到隐藏.ssh文件夹，在文本编辑器中打开id_rsa.pub文件，然后将文件内容复制到剪贴板。
+</code></pre>
+</blockquote>
+</li>
+</ol>
+<ol start="2">
+<li><p>在任意页面的右上角，单击您的个人资料照片，然后单击“Settings”。<br> ![](Mac电脑用终端生成SSH key 访问自己的Github/15577199319629.jpg)</p>
+</li>
+<li><p>在用户设置侧栏中，单击“SSH and GPG keys”。<br>![](Mac电脑用终端生成SSH key 访问自己的Github/15577200089972.jpg)</p>
+</li>
+<li><p>单击“ New SSH key”<br>![](Mac电脑用终端生成SSH key 访问自己的Github/15577201145279.jpg)</p>
+</li>
+<li><p>在“Title”字段中添加描述性标签，Key字段中粘贴您复制的id_rsa.pub内容。最后点击“Add SSH key”<br>![](Mac电脑用终端生成SSH key 访问自己的Github/15577202167548.jpg)</p>
+</li>
+<li><p>最后请确认您的GitHub密码。<br>![](Mac电脑用终端生成SSH key 访问自己的Github/15577204012764.jpg)</p>
+</li>
+</ol>
+<h1 id="如何检测SSH-key"><a href="#如何检测SSH-key" class="headerlink" title="如何检测SSH key"></a>如何检测SSH key</h1><ol>
+<li><p>终端输入命令：<code>ssh git@github.com</code></p>
+</li>
+<li><p>验证SSH key是否有权限访问 你的 github，输入“yes”</p>
+<blockquote>
+<p>The authenticity of host ‘github.com (13.250.177.223)’ can’t be established.<br>RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.<br>Are you sure you want to continue connecting (yes/no)? yes</p>
+</blockquote>
+</li>
+<li><p>成功会显示为</p>
+<blockquote>
+<p> Hi you name! You’ve successfully authenticated, but GitHub does not provide shell access.</p>
+</blockquote>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/21/libimobiledevice%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/21/libimobiledevice%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">libimobiledevice命令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-05-21 21:23:43 / 修改时间：21:26:49" itemprop="dateCreated datePublished" datetime="2019-05-21T21:23:43+08:00">2019-05-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%B5%84%E6%96%99/" itemprop="url" rel="index"><span itemprop="name">资料</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>A library to communicate with services of Apple iOS devices using native protocols.</p>
+<h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><ul>
+<li><p>打印app列表</p>
+  <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ideviceinstaller -l</span></span><br></pre></td></tr></table></figure></li>
+<li><p>查看当前已连接的设备的UUID</p>
+  <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">idevice_id -l</span></span><br></pre></td></tr></table></figure></li>
+<li><p>获取设备信息</p>
+  <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ideviceinfo</span></span><br></pre></td></tr></table></figure></li>
+<li><p>获取设备时间</p>
+  <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">idevicedate</span></span><br></pre></td></tr></table></figure></li>
+<li><p>重启设备</p>
+  <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">idevicediagnostics restart</span></span><br></pre></td></tr></table></figure></li>
+<li><p>安装ipa包，卸载应用</p>
+  <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ideviceinstaller -<span class="selector-tag">i</span> xxx.ipa</span><br><span class="line"><span class="comment">//命令安装一个ipa文件到手机上，如果是企业签名的，非越狱机器也可以直接安装了。</span></span><br><span class="line"></span><br><span class="line">ideviceinstaller -U <span class="selector-attr">[bundleID]</span></span><br><span class="line"><span class="comment">//命令卸载应用，需要知道此应用的bundleID</span></span><br></pre></td></tr></table></figure></li>
+<li><p>查看系统日志</p>
+  <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">idevicesyslog</span><br><span class="line"><span class="comment">//屏幕上即可看见手机上所有的日志</span></span><br><span class="line"></span><br><span class="line">idevicesyslog &gt;&gt; iphone.<span class="built_in">log</span> <span class="meta">&amp;</span></span><br><span class="line"><span class="comment">//该命令是将日志导入到iphone.log这个文件，并且是在后台执行。</span></span><br><span class="line"><span class="comment">//然后用tail -f和grep查看log</span></span><br><span class="line"></span><br><span class="line">tail -f iphone.<span class="built_in">log</span></span><br><span class="line">tail -f iphone.<span class="built_in">log</span> <span class="string">| grep &#x27;WeChat’  # 查看包含WeChat的行</span></span><br></pre></td></tr></table></figure></li>
+<li><p>截图</p>
+  <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">idevicescreenshot</span><br><span class="line"><span class="regexp">//</span>如果在使用截图的时候出现报错信息，那么就去把相应版本的DeveloperDiskImage的两个文件复制到libimobiledevice文件下面。</span><br><span class="line"></span><br><span class="line">路径：</span><br><span class="line"><span class="regexp">/Applications/</span>Xcode.app<span class="regexp">/Contents/</span>Developer<span class="regexp">/Platforms/i</span>PhoneOS.platform<span class="regexp">/DeviceSupport/</span>对应版本/</span><br><span class="line"></span><br><span class="line">获取版本号命令：</span><br><span class="line">ideviceinfo -k ProductVersion</span><br><span class="line"></span><br><span class="line">安装DeveloperDiskImage命令：</span><br><span class="line">ideviceimagemounter DeveloperDiskImage.dmg</span><br><span class="line"><span class="regexp">//</span>然后就可以正常截图了</span><br></pre></td></tr></table></figure></li>
+<li><p>遇到报错</p>
+  <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">解决方法：卸载重装</span><br><span class="line"><span class="keyword">brew </span>uninstall ideviceinstaller</span><br><span class="line"><span class="keyword">brew </span>uninstall libimobiledevice</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>--HEAD libimobiledevice</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>ideviceinstaller</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/21/Mac%E5%AE%89%E8%A3%85Ruby%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%99%A8RVM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/21/Mac%E5%AE%89%E8%A3%85Ruby%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%99%A8RVM/" class="post-title-link" itemprop="url">Mac安装Ruby版本管理器RVM</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-05-21 21:03:35 / 修改时间：21:21:47" itemprop="dateCreated datePublished" datetime="2019-05-21T21:03:35+08:00">2019-05-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%B5%84%E6%96%99/" itemprop="url" rel="index"><span itemprop="name">资料</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>RVM是一个命令行工具，它允许您轻松地安装，管理和使用从解释器到多组宝石的多个ruby环境。</p>
+<h1 id="安装Ruby原因"><a href="#安装Ruby原因" class="headerlink" title="安装Ruby原因"></a>安装Ruby原因</h1><p>虽然 macOS 自带了一个 ruby 环境，但是是系统自己使用的，所以权限很小，只有 system。而/Library 目录是 root 权限,所以很多会提示无权限。</p>
+<h1 id="安装RVM"><a href="#安装RVM" class="headerlink" title="安装RVM"></a>安装RVM</h1><ol>
+<li><p>安装mpapis公钥。但是，正如安装页面所记录的，您可能需要gpg。Mac OS X不附带gpg，因此在安装公钥之前，您需要安装gpg。</p>
+<p> Homebrew安装gpg ：</p>
+ <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>gnupg </span><br></pre></td></tr></table></figure></li>
+<li><p>安装完gpg之后，你可以安装mpapis公钥：</p>
+ <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">gpg2</span> --recv-keys <span class="number">409</span>B<span class="number">6</span>B<span class="number">1796</span>C<span class="number">275462</span>A<span class="number">1703113804</span>BB<span class="number">82</span>D<span class="number">39</span>DC<span class="number">0</span>E<span class="number">3</span> <span class="number">7</span>D<span class="number">2</span>BAF<span class="number">1</span>CF<span class="number">37</span>B<span class="number">13</span>E<span class="number">2069</span>D<span class="number">6956105</span>BD<span class="number">0</span>E<span class="number">739499</span>BDB</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装最新版本的Ruby的RVM</p>
+ <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\curl -sSL https:<span class="regexp">//g</span>et.rvm.io | bash -s stable</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装完载入 RVM 环境：</p>
+ <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">source</span> ~<span class="regexp">/.rvm/</span>scripts/rvm</span><br></pre></td></tr></table></figure></li>
+<li><p>检查版本</p>
+ <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">rvm -v</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>（如果想卸载RVM，执行以下命令）</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">rvm implode</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="使用RVM-amp-Ruby"><a href="#使用RVM-amp-Ruby" class="headerlink" title="使用RVM&amp;Ruby"></a>使用RVM&amp;Ruby</h1><h2 id="ruby-rvm-常用指令"><a href="#ruby-rvm-常用指令" class="headerlink" title="ruby rvm 常用指令"></a>ruby rvm 常用指令</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">ruby -v <span class="comment"># 查看ruby 版本</span></span><br><span class="line">rvm list known <span class="comment"># 列出已知的 ruby 版本</span></span><br><span class="line">rvm install <span class="number">2.3</span>.<span class="number">0</span> <span class="comment"># 选择指定 ruby 版本进行更新</span></span><br><span class="line">rvm get stable <span class="comment"># 更新 rvm</span></span><br><span class="line">rvm use <span class="number">2.2</span>.<span class="number">2</span> <span class="comment"># 切换到指定 ruby 版本</span></span><br><span class="line">rvm use <span class="number">2.2</span>.<span class="number">2</span> --default <span class="comment"># 设置指定 ruby 版本为默认版本</span></span><br><span class="line">rvm list <span class="comment"># 查询已安装的 ruby 版本</span></span><br><span class="line">rvm remove <span class="number">1.9</span>.<span class="number">2</span> <span class="comment"># 卸载移除 指定 ruby 版本</span></span><br><span class="line">rvm uninstall <span class="number">2.0</span>.<span class="number">0</span></span><br><span class="line">rvm system <span class="comment">#使用系统ruby(就像没有rvm一样)</span></span><br><span class="line"></span><br><span class="line">curl -L https:<span class="regexp">//g</span>et.rvm.io | bash -s stable <span class="comment"># 安装 rvm 环境</span></span><br><span class="line">curl -sSL https:<span class="regexp">//g</span>et.rvm.io | bash -s stable --ruby <span class="comment"># 默认安装 rvm 最新版本</span></span><br><span class="line">curl -sSL https:<span class="regexp">//g</span>et.rvm.io | bash -s stable --ruby=<span class="number">2.3</span>.<span class="number">0</span> <span class="comment"># 安装 rvm 指定版本</span></span><br><span class="line">source ~<span class="regexp">/.rvm/</span>scripts/rvm <span class="comment"># 载入 rvm</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Gem常用指令"><a href="#Gem常用指令" class="headerlink" title="Gem常用指令"></a>Gem常用指令</h2><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">gem -v <span class="comment"># 查看 gem 版本</span></span><br><span class="line">gem source <span class="comment"># 查看 gem 配置源</span></span><br><span class="line">gem source -l <span class="comment"># 查看 gem 配置源目录</span></span><br><span class="line">gem sources -a url <span class="comment"># 添加 gem 配置源（url 需换成网址）</span></span><br><span class="line">gem sources <span class="params">--add</span> url <span class="comment"># 添加 gem 配置源（url 需换成网址）</span></span><br><span class="line">gem sources -r url <span class="comment"># 删除 gem 配置源（url 需换成网址）</span></span><br><span class="line">gem sources <span class="params">--remove</span> url <span class="comment"># 删除 gem 配置源（url 需换成网址）</span></span><br><span class="line">gem update <span class="comment"># 更新 所有包</span></span><br><span class="line">gem update <span class="params">--system</span> <span class="comment"># 更新 Ruby Gems 软件</span></span><br><span class="line"></span><br><span class="line">gem install rake <span class="comment"># 安装 rake，从本地或远程服务器</span></span><br><span class="line">gem install rake <span class="params">--remote</span> <span class="comment"># 安装 rake，从远程服务器</span></span><br><span class="line">gem install watir -v 1.6.2 <span class="comment"># 安装 指定版本的 watir</span></span><br><span class="line">gem install watir <span class="params">--version</span> 1.6.2 <span class="comment"># 安装 指定版本的 watir</span></span><br><span class="line">gem uninstall rake <span class="comment"># 卸载 rake 包</span></span><br><span class="line">gem list d <span class="comment"># 列出 本地以 d 打头的包</span></span><br><span class="line">gem query -n &#x27;&#x27;[0-9]&#x27;&#x27; <span class="params">--local</span> <span class="comment"># 查找 本地含有数字的包</span></span><br><span class="line">gem search log <span class="params">--both</span> <span class="comment"># 查找 从本地和远程服务器上查找含有 log 字符串的包</span></span><br><span class="line">gem search log <span class="params">--remoter</span> <span class="comment"># 查找 只从远程服务器上查找含有 log 字符串的包</span></span><br><span class="line">gem search -r log <span class="comment"># 查找 只从远程服务器上查找含有log字符串的包</span></span><br><span class="line"></span><br><span class="line">gem <span class="keyword">help</span> <span class="comment"># 提醒式的帮助</span></span><br><span class="line">gem <span class="keyword">help</span> install <span class="comment"># 列出 install 命令 帮助</span></span><br><span class="line">gem <span class="keyword">help</span> examples <span class="comment"># 列出 gem 命令使用一些例子</span></span><br><span class="line">gem build rake.gemspec <span class="comment"># 把 rake.gemspec 编译成 rake.gem</span></span><br><span class="line">gem check -v pkg/rake-0.4.0.gem <span class="comment"># 检测 rake 是否有效</span></span><br><span class="line">gem cleanup <span class="comment"># 清除 所有包旧版本，保留最新版本</span></span><br><span class="line">gem contents rake <span class="comment"># 显示 rake 包中所包含的文件</span></span><br><span class="line">gem dependency rails -v 0.10.1 <span class="comment"># 列出 与 rails 相互依赖的包</span></span><br><span class="line">gem environment <span class="comment"># 查看 gem 的环境</span></span><br><span class="line"></span><br><span class="line">sudo gem -v <span class="comment"># 查看 gem 版本（以管理员权限）</span></span><br><span class="line">sudo gem install cocoa pods <span class="comment"># 安装 CocoaPods（以管理员权限）</span></span><br><span class="line">sudo gem install cocoapods <span class="comment"># 安装 CocoaPods（以管理员权限）</span></span><br><span class="line">sudo gem install cocoapods <span class="params">--pre</span> <span class="comment"># 安装 CocoaPods 至预览版（以管理员权限）</span></span><br><span class="line">sudo gem install cocoapods -v 0.39.0 <span class="comment"># 安装 CocoaPods 指定版本（以管理员权限）</span></span><br><span class="line">sudo gem update cocoapods <span class="comment"># 更新 CocoaPods 至最新版（以管理员权限）</span></span><br><span class="line">sudo gem update cocoapods <span class="params">--pre</span> <span class="comment"># 更新 CocoaPods 至预览版（以管理员权限）</span></span><br><span class="line">sudo gem uninstall cocoapods -v 0.39.0 <span class="comment"># 移除 CocoaPods 指定版本（以管理员权限）</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="pod常用指令"><a href="#pod常用指令" class="headerlink" title="pod常用指令"></a>pod常用指令</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pod setup <span class="comment"># CocoaPods 将信息下载到~/.cocoapods/repos 目录下。如果安装 CocoaPods 时不执行此命令，在初次执行 pod intall 命令时，系统也会自动执行该指令</span></span><br><span class="line">pod --version <span class="comment"># 检查 CocoaPods 是否安装成功及其版本号</span></span><br><span class="line">pod <span class="keyword">install</span> <span class="comment"># 安装 CocoaPods 的配置文件 Podfile</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/21/%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-fastlane-pgy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/21/%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-fastlane-pgy/" class="post-title-link" itemprop="url">（Mac）iOS自动化打包（Jenkins+fastlane+pgy</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-05-21 20:41:37 / 修改时间：21:12:48" itemprop="dateCreated datePublished" datetime="2019-05-21T20:41:37+08:00">2019-05-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Jenkins/" itemprop="url" rel="index"><span itemprop="name">Jenkins</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p>| 名称 | 版本 |<br>| — | — | — |<br>| macOS | 10.14.4 (18E226) |<br>| Xcode | Version 10.2.1 |<br>| ruby | 2.6.3 |<br>| fastlane  | 2.123.0  |</p>
+<h1 id="Fastlane安装"><a href="#Fastlane安装" class="headerlink" title="Fastlane安装"></a>Fastlane安装</h1><p>Fastlane是一套使用Ruby写的自动化工具集，用于iOS和Android的自动化打包、发布等工作，可以节省大量的时间。<br>安装过程如下</p>
+<h2 id="安装ruby（brew安装最新版）"><a href="#安装ruby（brew安装最新版）" class="headerlink" title="安装ruby（brew安装最新版）"></a>安装ruby（brew安装最新版）</h2><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#直接在终端执行，未安装brew，先安装brew</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">#安装最新的2.6.3</span></span><br><span class="line">brew install ruby   </span><br><span class="line"> </span><br><span class="line"><span class="meta">#安装完根据提示执行</span></span><br><span class="line">echo <span class="string">&#x27;export PATH=&quot;/usr/local/opt/ruby/bin:$PATH&quot;&#x27;</span> &gt;&gt; ~/.zshrc</span><br><span class="line"> </span><br><span class="line"><span class="meta">#退出终端查看ruby版本</span></span><br><span class="line">ruby -v </span><br><span class="line"> </span><br><span class="line"><span class="meta">#检查安装路径</span></span><br><span class="line">which -a ruby</span><br></pre></td></tr></table></figure>
+<h2 id="更改gem源"><a href="#更改gem源" class="headerlink" title="更改gem源"></a>更改gem源</h2><ul>
+<li>更改  <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gem sources --<span class="built_in">remove</span> http<span class="variable">s:</span>//rubygems.org/</span><br><span class="line">gem sources --<span class="built_in">add</span> http<span class="variable">s:</span>//gems.<span class="keyword">ruby</span>-china.<span class="keyword">com</span>/</span><br></pre></td></tr></table></figure></li>
+<li>查看   <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">gem sources -l</span></span><br></pre></td></tr></table></figure>
+  如果是以下结果说明正确，如果有其他的请自行百度解决  <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*** CURRENT SOURCES ***</span><br><span class="line">http<span class="variable">s:</span>//gems.<span class="keyword">ruby</span>-china.<span class="keyword">com</span>/</span><br></pre></td></tr></table></figure></li>
+<li>安装fastlane  <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#安装</span></span><br><span class="line">gem install -n /usr/<span class="keyword">local</span>/bin fastlane -NV</span><br><span class="line"></span><br><span class="line"><span class="comment">#检查是否安装成</span></span><br><span class="line">fastlane <span class="comment">--version</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p>至此，我们已经可以使用fastlane自动化打包了</p>
+</blockquote>
+<h1 id="Fastlane配置"><a href="#Fastlane配置" class="headerlink" title="Fastlane配置"></a>Fastlane配置</h1><h2 id="fastlane-init"><a href="#fastlane-init" class="headerlink" title="fastlane init"></a>fastlane init</h2><p>cd 到工程主目录执行<code>fastlane init </code>我这里选择的是手动配置</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd <span class="regexp">/Users/</span>vic<span class="regexp">/.jenkins/</span>workspace/jike-iOS-Fastlan</span><br><span class="line">fastlane init</span><br></pre></td></tr></table></figure>
+<p>会在你项目工程的目录下生成一个fastlane文件夹，里面有Fastlane的配置文件，一个是Appfile文件(保存了苹果开发者的相关信息)，一个是Fastfile文件（运行脚本）</p>
+<h2 id="编辑Fastfile文件（运行脚本）"><a href="#编辑Fastfile文件（运行脚本）" class="headerlink" title="编辑Fastfile文件（运行脚本）"></a>编辑Fastfile文件（运行脚本）</h2><p>有时候一天需要打好几个包，为了区分，我们这里实现一个递增build号的功能。</p>
+<ul>
+<li>定义一个递增build号的函数，添加到Fastfile中  <figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">def updateProjectBuildNumber</span><br><span class="line"></span><br><span class="line">currentTime = Time.new.strftime(&quot;%Y%m%d&quot;)</span><br><span class="line"><span class="keyword">build</span> = get_build_number()</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">build</span>.<span class="keyword">include</span>?<span class="string">&quot;#&#123;currentTime&#125;.&quot;</span></span><br><span class="line"># =&gt; 为当天版本 计算迭代版本号</span><br><span class="line">lastStr = <span class="keyword">build</span>[<span class="keyword">build</span>.<span class="built_in">length</span><span class="number">-2.</span>.<span class="keyword">build</span>.<span class="built_in">length</span><span class="number">-1</span>]</span><br><span class="line">lastNum = lastStr.to_i</span><br><span class="line">lastNum = lastNum + <span class="number">1</span></span><br><span class="line">lastStr = lastNum.to_s</span><br><span class="line"><span class="keyword">if</span> lastNum &lt; <span class="number">10</span></span><br><span class="line">lastStr = lastStr.<span class="keyword">insert</span>(<span class="number">0</span>,<span class="string">&quot;0&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">build</span> = <span class="string">&quot;#&#123;currentTime&#125;.#&#123;lastStr&#125;&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"># =&gt; 非当天版本 <span class="keyword">build</span> 号重置</span><br><span class="line"><span class="keyword">build</span> = <span class="string">&quot;#&#123;currentTime&#125;.01&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">puts(<span class="string">&quot;*************| 更新build #&#123;build&#125; |*************&quot;</span>)</span><br><span class="line"># =&gt; 更改项目 <span class="keyword">build</span> 号</span><br><span class="line">increment_build_number(</span><br><span class="line">build_number: <span class="string">&quot;#&#123;build&#125;&quot;</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>实现自动打包的完整Fastfile如下:  <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义fastlane版本号</span></span><br><span class="line">fastlane_version <span class="string">&quot;2.123.0&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义打包平台</span></span><br><span class="line">default_platform <span class="symbol">:ios</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">updateProjectBuildNumber</span></span></span><br><span class="line"></span><br><span class="line">currentTime = Time.new.strftime(<span class="string">&quot;%Y%m%d&quot;</span>)</span><br><span class="line">build = get_build_number()</span><br><span class="line"><span class="keyword">if</span> build.<span class="keyword">include</span>?<span class="string">&quot;<span class="subst">#&#123;currentTime&#125;</span>.&quot;</span></span><br><span class="line"><span class="comment"># =&gt; 为当天版本 计算迭代版本号</span></span><br><span class="line">lastStr = build[build.length-<span class="number">2</span>..build.length-<span class="number">1</span>]</span><br><span class="line">lastNum = lastStr.to_i</span><br><span class="line">lastNum = lastNum + <span class="number">1</span></span><br><span class="line">lastStr = lastNum.to_s</span><br><span class="line"><span class="keyword">if</span> lastNum &lt; <span class="number">10</span></span><br><span class="line">lastStr = lastStr.insert(<span class="number">0</span>,<span class="string">&quot;0&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">build = <span class="string">&quot;<span class="subst">#&#123;currentTime&#125;</span>.<span class="subst">#&#123;lastStr&#125;</span>&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"><span class="comment"># =&gt; 非当天版本 build 号重置</span></span><br><span class="line">build = <span class="string">&quot;<span class="subst">#&#123;currentTime&#125;</span>.01&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">puts(<span class="string">&quot;*************| 更新build <span class="subst">#&#123;build&#125;</span> |*************&quot;</span>)</span><br><span class="line"><span class="comment"># =&gt; 更改项目 build 号</span></span><br><span class="line">increment_build_number(</span><br><span class="line"><span class="symbol">build_number:</span> <span class="string">&quot;<span class="subst">#&#123;build&#125;</span>&quot;</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#指定项目的scheme名称</span></span><br><span class="line">scheme=<span class="string">&quot;Ruguo&quot;</span></span><br><span class="line"><span class="comment">#蒲公英api_key和user_key</span></span><br><span class="line">api_key=<span class="string">&quot;8e860ee5ba4996f9b19e56c28e07846a&quot;</span></span><br><span class="line">user_key=<span class="string">&quot;542e73b113b5908da8b028805bf7e837&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 任务脚本</span></span><br><span class="line">platform <span class="symbol">:ios</span> <span class="keyword">do</span></span><br><span class="line">lane <span class="symbol">:development_build</span> <span class="keyword">do</span><span class="params">|options|</span></span><br><span class="line">branch = options[<span class="symbol">:branch</span>]</span><br><span class="line"></span><br><span class="line">puts <span class="string">&quot;开始打development ipa&quot;</span></span><br><span class="line"></span><br><span class="line">updateProjectBuildNumber <span class="comment">#更改项目build号</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始打包</span></span><br><span class="line">gym(</span><br><span class="line"><span class="comment">#指定需要编译的scheme</span></span><br><span class="line"><span class="symbol">scheme:</span><span class="string">&quot;<span class="subst">#&#123;scheme&#125;</span>&quot;</span>,</span><br><span class="line"><span class="comment">#输出的ipa名称</span></span><br><span class="line"><span class="symbol">output_name:</span><span class="string">&quot;<span class="subst">#&#123;scheme&#125;</span>_<span class="subst">#&#123;get_build_number()&#125;</span>&quot;</span>,</span><br><span class="line"><span class="comment"># 是否清空以前的编译信息 true：是</span></span><br><span class="line"><span class="symbol">clean:</span><span class="literal">true</span>,</span><br><span class="line"><span class="comment"># 指定打包方式，Release 或者 Debug</span></span><br><span class="line"><span class="symbol">configuration:</span><span class="string">&quot;Release&quot;</span>,</span><br><span class="line"><span class="comment"># 指定打包所使用的输出方式，目前支持app-store, package, ad-hoc, enterprise, development</span></span><br><span class="line"><span class="symbol">export_method:</span><span class="string">&quot;development&quot;</span>,</span><br><span class="line"><span class="comment"># 指定输出文件夹</span></span><br><span class="line"><span class="symbol">output_directory:</span><span class="string">&quot;./fastlane/build&quot;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">#puts &quot;开始上传蒲公英&quot;</span></span><br><span class="line"><span class="comment"># 开始上传蒲公英</span></span><br><span class="line"><span class="comment">#pgyer(api_key: &quot;#&#123;api_key&#125;&quot;, user_key: &quot;#&#123;user_key&#125;&quot;, password: &quot;alpha&quot;, install_type: &quot;2&quot;)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+  注意：蒲公英的 api_key 和 user_key，开发者在自己账号下的 账号设置-API信息 中可以找到。打其它类型的包的方法与development类似，可自定义一个新的lane实现。</li>
+</ul>
+<h2 id="自动打包并上传蒲公英，"><a href="#自动打包并上传蒲公英，" class="headerlink" title="自动打包并上传蒲公英，"></a>自动打包并上传蒲公英，</h2><p>在终端输入便会进行自动打包并上传蒲公英了。</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">fastlane development_build</span></span><br></pre></td></tr></table></figure>
+<h1 id="Jenkins安装"><a href="#Jenkins安装" class="headerlink" title="Jenkins安装"></a>Jenkins安装</h1><p>下载安装Jenkins。具体安装过程可参考 <a href="https://vic.kim/2019/05/21/Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/">Mac Jenkins搭建</a></p>
+<h1 id="Jenkins配置"><a href="#Jenkins配置" class="headerlink" title="Jenkins配置"></a>Jenkins配置</h1><ul>
+<li><p>点击新建，输入名称，构建一个自由风格的软件项目</p>
+</li>
+<li><p>添加Git仓库地址，可以是HTTP也可以是SSH。点击Add</p>
+</li>
+<li><p>构建，点击“添加构建步骤”，选择Execute shell。<br>  <img src="/.kim//15584430633082.jpg"></p>
+  <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">export PATH=<span class="regexp">/usr/</span>local/bin:<span class="variable">$PATH</span></span><br><span class="line">fastlane development_build</span><br><span class="line"></span><br><span class="line">filepath=`pwd`fastlane<span class="regexp">/build/</span>Ruguo*.api</span><br><span class="line">file=`ls <span class="variable">$filepath</span>`</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$uploadPgy</span> = true ]</span><br><span class="line">then</span><br><span class="line">    curl -F <span class="string">&quot;installType=2&quot;</span> -F <span class="string">&quot;password=alpha&quot;</span> -F <span class="string">&quot;file=@$file&quot;</span> -F <span class="string">&quot;uKey=542e73b113b5908da8b028805bf7e837&quot;</span> -F <span class="string">&quot;_api_key=8e860ee5ba4996f9b19e56c28e07846a&quot;</span> https:<span class="regexp">//</span>qiniu-storage.pgyer.com<span class="regexp">/apiv1/</span>app/upload</span><br><span class="line">fi</span><br></pre></td></tr></table></figure></li>
+<li><p>添加完成之后保存，点击立即构建</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/21/%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-xcodebuild-fir%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/21/%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-xcodebuild-fir%EF%BC%89/" class="post-title-link" itemprop="url">（Mac）iOS自动化打包（Jenkins+xcodebuild+fir）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-05-21 20:32:37 / 修改时间：20:39:22" itemprop="dateCreated datePublished" datetime="2019-05-21T20:32:37+08:00">2019-05-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Jenkins/" itemprop="url" rel="index"><span itemprop="name">Jenkins</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p>| 名称 | 版本 |<br>| — | — | — |<br>| macOS | 10.14.4 (18E226) |<br>| Xcode | Version 10.2.1 |<br>| ruby | 2.6.3 |<br>| fir-cli  | 1.7.1  |</p>
+<h1 id="下载安装Jenkins"><a href="#下载安装Jenkins" class="headerlink" title="下载安装Jenkins"></a>下载安装Jenkins</h1><p><img src="/.kim//15580614334038.jpg"></p>
+<ul>
+<li>Jenkins是基于Java环境的，所以电脑上必须先安装Java，Jenkins官网（<a target="_blank" rel="noopener" href="https://jenkins.io/">https://jenkins.io</a>）</li>
+<li>下载安装Jenkins。具体安装过程可参考 <a href="https://vic.kim/2019/05/21/Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/">Mac Jenkins搭建</a></li>
+<li>安装完成后会自动打开<a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a>这个网址，如果没有自动打开可以手动打开。有些教程还有添加<code>Xcode integration</code> 、<code>Keychains and Provisioning Profiles Plugin</code>之类插件的步骤，我们不需要。因为我们是用xcode脚本构建，所以不需要安装任何插件。</li>
+</ul>
+<h1 id="新建任务"><a href="#新建任务" class="headerlink" title="新建任务"></a>新建任务</h1><h2 id="构建一个自由风格的软件项目"><a href="#构建一个自由风格的软件项目" class="headerlink" title="构建一个自由风格的软件项目"></a>构建一个自由风格的软件项目</h2><p>点击左侧菜单中的新建任务,然后在新的界面输入项目名字,选择<code>构建一个自由风格的软件项目</code>选项完成创建<br><img src="/.kim//15580618394386.jpg"></p>
+<h2 id="填写工程相关介绍"><a href="#填写工程相关介绍" class="headerlink" title="填写工程相关介绍"></a>填写工程相关介绍</h2><p><img src="/.kim//15580620272901.jpg" alt="-w960"></p>
+<h2 id="源码管理"><a href="#源码管理" class="headerlink" title="源码管理"></a>源码管理</h2><p>  源码管理，使用github选择git<br>  <img src="/.kim//15580620765523.jpg" alt="-w949"></p>
+<h2 id="构建触发器"><a href="#构建触发器" class="headerlink" title="构建触发器"></a>构建触发器</h2><ul>
+<li>选择Build periodically，输入：  <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">H</span> <span class="number">2</span> * * *</span><br></pre></td></tr></table></figure>
+周期性的执行编译任务，强制每天凌晨两点构建一次<br><img src="/.kim//15580621994075.jpg"></li>
+</ul>
+<ul>
+<li><p>选择Poll SCM，输入</p>
+  <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">H/5 <span class="emphasis">* *</span> <span class="emphasis">* *</span></span><br></pre></td></tr></table></figure>
+<p>  表示的就是每5分钟检查一次源码变化。<br> <img src="/.kim//15580622588816.jpg"></p>
+<blockquote>
+<pre><code>第一个参数代表的是分钟 minute，取值 0~59；
+第二个参数代表的是小时 hour，取值 0~23；
+第三个参数代表的是天 day，取值 1~31；
+第四个参数代表的是月 month，取值 1~12；
+最后一个参数代表的是星期 week，取值 0~7，0 和 7 都是表示星期天。
+</code></pre>
+</blockquote>
+</li>
+</ul>
+<h2 id="构建环境"><a href="#构建环境" class="headerlink" title="构建环境"></a>构建环境</h2><p>  通过<code>xcodebuild</code>脚本的方式构建，这里不用做任何设置。</p>
+<h2 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h2><p>重点来了。<br>点击“添加构建步骤”，选择Execute shell。<br><img src="/.kim//15580626158656.jpg" alt="-w951"></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/bin/sh +x</span></span><br><span class="line">xcodebuild clean -workspace <span class="regexp">/Users/</span>vic<span class="regexp">/.jenkins/</span>workspace<span class="regexp">/jike-iOS/</span>Ruguo.xcworkspace \</span><br><span class="line">                 -scheme Ruguo \</span><br><span class="line"></span><br><span class="line">xcodebuild archive -workspace <span class="regexp">/Users/</span>vic<span class="regexp">/.jenkins/</span>workspace<span class="regexp">/jike-iOS/</span>Ruguo.xcworkspace \</span><br><span class="line">                   -scheme Ruguo \</span><br><span class="line">                   -archivePath <span class="string">&quot;$WORKSPACE/Ruguo.xcarchive&quot;</span> \</span><br><span class="line">                   -configuration Debug \</span><br><span class="line"></span><br><span class="line">xcodebuild -exportArchive -archivePath <span class="string">&quot;$WORKSPACE/Ruguo.xcarchive&quot;</span> \</span><br><span class="line">                          -exportPath <span class="string">&quot;$WORKSPACE/Export/Ruguo&quot;</span> \</span><br><span class="line">                          -exportOptionsPlist <span class="string">&quot;$WORKSPACE/ExportOptions.plist&quot;</span> \</span><br><span class="line">                          -configuration Debug \</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">export PATH=<span class="regexp">/usr/</span>local/bin:<span class="variable">$PATH</span></span><br><span class="line"></span><br><span class="line">fir publish <span class="regexp">/Users/</span>vic<span class="regexp">/.jenkins/</span>workspace<span class="regexp">/jike-iOS/</span>Export<span class="regexp">/Ruguo/</span>Ruguo.ipa -T <span class="number">4554</span>bab16fc50b5b8ee20d9663fa64c7 --password=jikebeta</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>说明：<br>-archivePath：.xcarchive文件的存放路径。<br>-exportPath：导出文件的路径。Export文件夹是自己建的。<br>-ExportOptions.plist：这个文件的内容其实是ipa的打包信息。手动archive并export时，这个文件就包含在最终输出的文件夹内，可以copy一份出来使用。<br>-configuration ：默认Debug或Release。<br>这里有个坑要说明一下。archive和ipa文件的导出目录最好位于Jenkins用户下的那个工程中，我之前选择的是导出到当前用户的桌面，结果一直报读写权限的问题。</p>
+<h2 id="上传到fir"><a href="#上传到fir" class="headerlink" title="上传到fir"></a>上传到fir</h2><p>要实现自动上传到fir，要先安装fir-cli<br>fir-cli由ruby实现，所以先安装ruby</p>
+<ul>
+<li><p>安装ruby，<a target="_blank" rel="noopener" href="http://www.ruby-lang.org/en/documentation/installation/">ruby官网安装文档</a>（我使用了brew安装）</p>
+  <figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#直接在终端执行，未安装brew，先安装brew</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#安装最新的2.6.3</span></span><br><span class="line">brew install ruby   </span><br><span class="line"> </span><br><span class="line"><span class="meta">#安装完根据提示执行</span></span><br><span class="line">echo <span class="string">&#x27;export PATH=&quot;/usr/local/opt/ruby/bin:$PATH&quot;&#x27;</span> &gt;&gt; ~/.zshrc</span><br><span class="line"> </span><br><span class="line"><span class="meta">#退出终端查看ruby版本</span></span><br><span class="line">ruby -v </span><br><span class="line"> </span><br><span class="line"><span class="meta">#检查安装路径</span></span><br><span class="line">which -a ruby</span><br></pre></td></tr></table></figure></li>
+<li><p>安装fir-cli。要实现自动上传到fir，要先安装fir-cli。Github: <a target="_blank" rel="noopener" href="https://github.com/FIRHQ/fir-cli">fir-cli</a></p>
+  <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem install -n <span class="regexp">/usr/</span>local/bin fir-cli </span><br></pre></td></tr></table></figure></li>
+<li><p>fir token查看方法：<br><img src="/.kim//15580629118728.jpg" alt="-w459"></p>
+</li>
+<li><p>脚本</p>
+  <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">fir</span> publish /Users/vic/.jenkins/workspace/jike-iOS/Export/Ruguo/Ruguo.ipa -T <span class="number">4554</span>bab<span class="number">16</span>fc<span class="number">50</span>b<span class="number">5</span>b<span class="number">8</span>ee<span class="number">20</span>d<span class="number">9663</span>fa<span class="number">64</span>c<span class="number">7</span> --password=jikebeta</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/21/%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/21/%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/" class="post-title-link" itemprop="url">（Mac）Android自动打包（Jenkins+Gradle+pgy）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-05-21 19:13:51 / 修改时间：20:28:06" itemprop="dateCreated datePublished" datetime="2019-05-21T19:13:51+08:00">2019-05-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Jenkins/" itemprop="url" rel="index"><span itemprop="name">Jenkins</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h1><h2 id="配置Android-ADB环境"><a href="#配置Android-ADB环境" class="headerlink" title="配置Android ADB环境"></a>配置Android ADB环境</h2><p>关于Android整个开发环境的搭建，SDK的下载安装这里就不赘述了，配置adb环境可以参考、</p>
+<p>这里查看adb是否配置成功可以在终端输入</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb <span class="built_in">version</span></span><br></pre></td></tr></table></figure>
+<p>显示以下信息则证明配置成功</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Android</span> Debug Bridge version <span class="number">1</span>.<span class="number">0</span>.<span class="number">41</span></span><br><span class="line"><span class="attribute">Version</span> <span class="number">28</span>.<span class="number">0</span>.<span class="number">3</span>-<span class="number">5475833</span></span><br><span class="line"><span class="attribute">Installed</span> as /Users/vic/Library/Android/sdk/platform-tools/adb</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置Gradle环境"><a href="#配置Gradle环境" class="headerlink" title="配置Gradle环境"></a>配置Gradle环境</h2><p>配置gradle环境可以看一下我之前写的这篇文章Mac 配置gradle环境变量.</p>
+<p>这里查看gradle是否配置成功可以在终端输入</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gradle -<span class="built_in">version</span></span><br></pre></td></tr></table></figure>
+<p>显示如下信息则表示配置成功<br><img src="/.kim//15578015087253.jpg" alt="-w547"></p>
+<h1 id="下载安装Jenkins"><a href="#下载安装Jenkins" class="headerlink" title="下载安装Jenkins"></a>下载安装Jenkins</h1><p>这里有两种方法可以用。参考<a href="https://vic.kim/2019/05/21/Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/#more">Mac下Jenkins搭建</a></p>
+<h1 id="Jenkins环境变量的配置"><a href="#Jenkins环境变量的配置" class="headerlink" title="Jenkins环境变量的配置"></a>Jenkins环境变量的配置</h1><h2 id="左侧系统管理-gt-系统设置，进入系统设置页面"><a href="#左侧系统管理-gt-系统设置，进入系统设置页面" class="headerlink" title="左侧系统管理-&gt;系统设置，进入系统设置页面"></a>左侧系统管理-&gt;系统设置，进入系统设置页面</h2><p>全局属性下的环境变量，添加键值对<br><img src="/.kim//15578054807625.jpg" alt="-w1284"></p>
+<h2 id="左侧系统管理-gt-全局工具设置，进入全局工具设置页面"><a href="#左侧系统管理-gt-全局工具设置，进入全局工具设置页面" class="headerlink" title="左侧系统管理-&gt;全局工具设置，进入全局工具设置页面"></a>左侧系统管理-&gt;全局工具设置，进入全局工具设置页面</h2><pre><code>1. JDK
+    JDK installations一栏里面点击Add JDK，Name随便取，不过最好对应好版本号；JAVE_HOME就设置为当前Mac下Java的安装路径。当然也可以设置成自动安装
+</code></pre>
+<p><img src="/.kim//15578058867250.jpg" alt="-w1268"></p>
+<pre><code>2. Gradle
+    gradle配置：一样名字最好跟着版本号，GRADLE_HOME就设置为gradle的安装目录
+</code></pre>
+<p><img src="/.kim//15578059009464.jpg" alt="-w1294"></p>
+<h1 id="项目配置"><a href="#项目配置" class="headerlink" title="项目配置"></a>项目配置</h1><h2 id="构建一个自由风格的软件项目"><a href="#构建一个自由风格的软件项目" class="headerlink" title="构建一个自由风格的软件项目"></a>构建一个自由风格的软件项目</h2><p>点击左侧菜单中的新建任务,然后在新的界面输入项目名字,选择构建一个自由风格的软件项目选项完成创建<br><img src="/.kim//15578064782260.jpg" alt="-w1020"></p>
+<h2 id="项目基本配置"><a href="#项目基本配置" class="headerlink" title="项目基本配置"></a>项目基本配置</h2><p>点击左边的配置，从上到下一共6个tab，我们去一一配置自己想要的功能： </p>
+<h3 id="General"><a href="#General" class="headerlink" title="General"></a>General</h3><ul>
+<li><p>描述里面我们可以写工程简介</p>
+</li>
+<li><p>“This project is parameterized”参数化构建<br><img src="/.kim//15578155499359.jpg" alt="-w931"></p>
+</li>
+<li><p>“Discard old builds”丢弃旧的仓库<br><img src="/.kim//15578155286650.jpg" alt="-w920"></p>
+</li>
+</ul>
+<h3 id="源码管理"><a href="#源码管理" class="headerlink" title="源码管理"></a>源码管理</h3><ul>
+<li><p>源码管理，使用github选择git，使用svn选择subversion<br><img src="/.kim//15578157952790.jpg" alt="-w949"></p>
+</li>
+<li><p>点击add以后，进入选择身份验证的页面，没有ssh key的，选择用户名和密码，有ssh key的选择ssh验证（注意，这里填写的是private key，id_rsa文件中的key，不是id_rsa.pub中的key），填写完成后，点击add即可完成身份验证的添加。然后选择对应的身份验证<br><img src="/.kim//15578162180467.jpg" alt="-w1250"></p>
+</li>
+<li><p>项目的分支，填写你需要的分支</p>
+</li>
+</ul>
+<h3 id="构建触发器"><a href="#构建触发器" class="headerlink" title="构建触发器"></a>构建触发器</h3><ul>
+<li><p>选择Build periodically，输入：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">H</span> <span class="number">2</span> * * *</span><br></pre></td></tr></table></figure>
+<p>周期性的执行编译任务，强制每天凌晨两点构建一次<br><img src="/.kim//15578167070841.jpg" alt="-w945"></p>
+</li>
+<li><p>选择Poll SCM，输入</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">H/5 <span class="emphasis">* *</span> <span class="emphasis">* *</span></span><br></pre></td></tr></table></figure>
+<p>表示的就是每5分钟检查一次源码变化。<br><img src="/.kim//15578168071497.jpg" alt="-w934"></p>
+<blockquote>
+<p>第一个参数代表的是分钟 minute，取值 0<del>59；<br>第二个参数代表的是小时 hour，取值 0</del>23；<br>第三个参数代表的是天 day，取值 1<del>31；<br>第四个参数代表的是月 month，取值 1</del>12；<br>最后一个参数代表的是星期 week，取值 0~7，0 和 7 都是表示星期天。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="构建环境"><a href="#构建环境" class="headerlink" title="构建环境"></a>构建环境</h3><p>这里可以设置一些项目信息，比如在构建之前删除工作目录，设置构建名称等等。。。（但是我没有设置）</p>
+<h3 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h3><p><img src="/.kim//15578170815187.jpg" alt="-w299"></p>
+<ul>
+<li><p>增加构建步骤，选择Invoke Gradle script（编译）<br><img src="/.kim//15578174201446.jpg" alt="-w948"></p>
+<ul>
+<li>Gradle选择你配置的版本</li>
+<li>Task中填写构建执行的语句（注意：不要选择Use Gradle Wrapper），一般要填写“clean assembleRelease”。先clean再build  <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">clean</span><br><span class="line">assembleReleaseChannels <span class="attribute">-PchannelFile</span>=markets.txt</span><br></pre></td></tr></table></figure></li>
+<li>在Root Build script中输入你想要包生成的位置，在Build File中输入项目的build.gradle的路径。即在Root Build script路径的后边加/build.gradle，可以不输入这两项，项目会有个默认构建地址，具体地址可以再jenkins的系统管理中查看。 </li>
+</ul>
+</li>
+<li><p>继续添加构建步骤，选择“Execute shell”，在command中填入（上传蒲公英）</p>
+  <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.<span class="regexp">/gitswitch dev/</span>ci</span><br><span class="line">cd Source</span><br><span class="line"></span><br><span class="line">filepath=`pwd`<span class="regexp">/app/</span>build<span class="regexp">/outputs/</span>channels/*pgy*.apk</span><br><span class="line">file=`ls <span class="variable">$filepath</span>`</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$uploadPgy</span> = true ]</span><br><span class="line">then</span><br><span class="line">    curl -F <span class="string">&quot;installType=2&quot;</span> -F <span class="string">&quot;password=alpha&quot;</span> -F <span class="string">&quot;file=@$file&quot;</span> -F <span class="string">&quot;uKey=542e73b113b5908da8b028805bf7e837&quot;</span> -F <span class="string">&quot;_api_key=8e860ee5ba4996f9b19e56c28e07846a&quot;</span> https:<span class="regexp">//</span>qiniu-storage.pgyer.com<span class="regexp">/apiv1/</span>app/upload</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="构建后操作"><a href="#构建后操作" class="headerlink" title="构建后操作"></a>构建后操作</h3><p>Archive the artifacts（归档成品），输入内容</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">**<span class="regexp">/app/</span>build<span class="regexp">/outputs/</span>channels<span class="regexp">/*.apk, **/</span>apk-checker-result.*</span><br></pre></td></tr></table></figure>
+
+<h2 id="上传蒲公英"><a href="#上传蒲公英" class="headerlink" title="上传蒲公英"></a>上传蒲公英</h2><p>增加一个构建步骤，选择Execute shell，在command中填入</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.<span class="regexp">/gitswitch dev/</span>ci</span><br><span class="line">cd Source</span><br><span class="line"></span><br><span class="line">filepath=`pwd`<span class="regexp">/app/</span>build<span class="regexp">/outputs/</span>channels/*pgy*.apk</span><br><span class="line">file=`ls <span class="variable">$filepath</span>`</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$uploadPgy</span> = true ]</span><br><span class="line">then</span><br><span class="line">    curl -F <span class="string">&quot;installType=2&quot;</span> -F <span class="string">&quot;password=alpha&quot;</span> -F <span class="string">&quot;file=@$file&quot;</span> -F <span class="string">&quot;uKey=542e73b113b5908da8b028805bf7e837&quot;</span> -F <span class="string">&quot;_api_key=8e860ee5ba4996f9b19e56c28e07846a&quot;</span> https:<span class="regexp">//</span>qiniu-storage.pgyer.com<span class="regexp">/apiv1/</span>app/upload</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>蒲公英官方文档地址<a target="_blank" rel="noopener" href="https://www.pgyer.com/doc/api#uploadApp">https://www.pgyer.com/doc/api#uploadApp</a></p>
+<h1 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h1><p>构建历史-&gt;控制台输出，可以查看构建日志，根据报错来具体定位问题<br><img src="/.kim//15578187257664.jpg" alt="-w370"><br><img src="/.kim//15578188007960.jpg" alt="-w1064"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/21/Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/21/Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/" class="post-title-link" itemprop="url">Mac Jenkins搭建</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-21 18:58:20" itemprop="dateCreated datePublished" datetime="2019-05-21T18:58:20+08:00">2019-05-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-05-23 16:34:42" itemprop="dateModified" datetime="2019-05-23T16:34:42+08:00">2019-05-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Jenkins/" itemprop="url" rel="index"><span itemprop="name">Jenkins</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Mac-Jenkins搭建"><a href="#Mac-Jenkins搭建" class="headerlink" title="Mac Jenkins搭建"></a>Mac Jenkins搭建</h1><p>这里有两种方法可以用。第一种操作方便，可以直接下载安装包，但是安装包会有一些莫名的问题。第二种操作繁琐一点，需要操作命令行，直接命令行安装：</p>
+<h2 id="直接登录官网下载安装：（不推荐）"><a href="#直接登录官网下载安装：（不推荐）" class="headerlink" title="直接登录官网下载安装：（不推荐）"></a>直接登录官网下载安装：（不推荐）</h2><p>jenkins的官网下载地址：<a target="_blank" rel="noopener" href="https://jenkins.io/download/">https://jenkins.io/download/</a><br>因为这里是Mac下面所以需要选择MacOS的版本：(左边是稳定版本，右边是测试版本，所以一般都是选择左边的)<br><img src="/.kim//15578018638193.jpg" alt="Jenkins官网"><br>下载完成以后直接点击安装就可以了。之后在浏览器输入链接：<a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a> 就行</p>
+<h2 id="brew下载安装-推荐使用-："><a href="#brew下载安装-推荐使用-：" class="headerlink" title="brew下载安装(推荐使用)："></a>brew下载安装(推荐使用)：</h2><ul>
+<li><p>安装安装brew（如果已安装跳过）</p>
+  <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/usr/</span>bin<span class="regexp">/ruby -e &quot;$(curl -fsSL https:/</span><span class="regexp">/raw.githubusercontent.com/</span>Homebrew<span class="regexp">/install/m</span>aster/install)”</span><br></pre></td></tr></table></figure></li>
+<li><p>安装Jenkins</p>
+  <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span><span class="keyword">jenkins</span></span><br></pre></td></tr></table></figure></li>
+<li><p>查找jenkins war地址</p>
+  <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#在安装后有可能找不到war包地址,可以用mdfind命令本地查询下</span><br><span class="line"></span><br><span class="line">mdfind -name jenkins.war</span><br><span class="line">#<span class="regexp">/usr/</span>local<span class="regexp">/Cellar/</span>jenkins<span class="regexp">/2.174/</span>libexec/jenkins.war</span><br></pre></td></tr></table></figure></li>
+<li><p>启动</p>
+  <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar <span class="regexp">/usr/</span>local<span class="regexp">/Cellar/</span>jenkins<span class="regexp">/2.116/</span>libexec/jenkins.war --httpPort=<span class="number">8080</span></span><br></pre></td></tr></table></figure></li>
+<li><p>后台启动</p>
+  <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">后台启动的意思是放到后台运行,即使窗口被干掉,jenkins的进程也会存在.</span><br><span class="line"></span><br><span class="line">简单用shell脚本nohup命令放到后台</span><br><span class="line"></span><br><span class="line">启动脚本命令:sh startjenkins.sh</span><br><span class="line"></span><br><span class="line">#!<span class="regexp">/bin/</span>bash</span><br><span class="line">echo start jenkins</span><br><span class="line"></span><br><span class="line">nohup java -jar <span class="regexp">/usr/</span>local<span class="regexp">/Cellar/</span>jenkins<span class="regexp">/2.116/</span>libexec/jenkins.war --httpPort=<span class="number">8080</span> &amp;</span><br><span class="line"></span><br><span class="line">echo start end</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="Jenkins的环境配置"><a href="#Jenkins的环境配置" class="headerlink" title="Jenkins的环境配置"></a>Jenkins的环境配置</h1><h2 id="启动进入"><a href="#启动进入" class="headerlink" title="启动进入"></a>启动进入</h2><p>启动成功就可以在浏览器输入<a href="http://localhost:8080后">http://localhost:8080后</a><br><img src="/.kim//15578025178751.jpg" alt="Jenkins官网"><br>可以通过红色路径找到文件打开查看密码，Mac下面路径这个</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/Users/</span>你的Mac用户名<span class="regexp">/.jenkins/</span>secrets/initialAdminPassword</span><br></pre></td></tr></table></figure>
+<p>密码：<br><img src="/.kim//15578027381238.jpg" alt="Jenkins官网"></p>
+<h2 id="插件安装"><a href="#插件安装" class="headerlink" title="插件安装"></a>插件安装</h2><p>输入密码进入插件安装的页面，分别是“安装建议的插件”和“选择插件进行安装”，这里我选择左侧的选项（“安装建议的插件”），然后等待自动安装完成<br>如果提示install failure，右下角有个retry，重试一下就好了</p>
+<h2 id="创建第一个管理员账户"><a href="#创建第一个管理员账户" class="headerlink" title="创建第一个管理员账户"></a>创建第一个管理员账户</h2><p><img src="/.kim//15578050696004.jpg" alt="Jenkins官网"><br>填写完表格，点击save and finish，jenkins的初始配置就完成啦<br>然后要重启一下，填入刚才输入的admin账号密码才能登录进去</p>
+<h1 id="jenkins常用操作"><a href="#jenkins常用操作" class="headerlink" title="jenkins常用操作"></a>jenkins常用操作</h1><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">访问:http:<span class="regexp">//</span>localhost:<span class="number">8080</span>/login?from=%<span class="number">2</span>F</span><br><span class="line"></span><br><span class="line">退出:http:<span class="regexp">//</span>localhost:<span class="number">8080</span>/<span class="keyword">exit</span> </span><br><span class="line"></span><br><span class="line">重启:http:<span class="regexp">//</span>localhost:<span class="number">8080</span>/restart </span><br><span class="line"></span><br><span class="line">重新加载:http:<span class="regexp">//</span>localhost:<span class="number">8080</span>/reload</span><br><span class="line"></span><br><span class="line"><span class="comment">#如果你不想/不需要后台服务，你可以运行:</span></span><br><span class="line">brew services start jenkins</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Vic</p>
+  <div class="site-description" itemprop="description">人生苦短，我学Python</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vic</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

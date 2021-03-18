@@ -1,23 +1,1532 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block title %}{{ title }}{% if theme.index_with_subtitle and subtitle %} – {{ subtitle }}{% endif %}{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
-{% block page_class %}
-  {% if is_home() %}page-home{% endif -%}
-{% endblock %}
 
-{% block content %}
-  <section id="posts" class="posts-expand">
-    {% for post in page.posts %}
-      {{ post_template.render(post, true) }}
-    {% endfor %}
-  </section>
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-  {% include '_partials/pagination.swig' %}
-{% endblock %}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"vic.kim","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
-{% block sidebar %}
-  {{ sidebar_template.render(false) }}
-{% endblock %}
+  <meta name="description" content="人生苦短，我学Python">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vicの博客">
+<meta property="og:url" content="https://vic.kim/index.html">
+<meta property="og:site_name" content="Vicの博客">
+<meta property="og:description" content="人生苦短，我学Python">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Vic">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://vic.kim/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Vicの博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Vicの博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">测试攻城狮</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2021/03/18/iOS%E8%AE%BE%E5%A4%87%E5%9E%8B%E5%8F%B7%E5%90%8D%E7%A7%B0%E5%AF%B9%E5%BA%94%E8%A1%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/18/iOS%E8%AE%BE%E5%A4%87%E5%9E%8B%E5%8F%B7%E5%90%8D%E7%A7%B0%E5%AF%B9%E5%BA%94%E8%A1%A8/" class="post-title-link" itemprop="url">iOS设备型号名称对应表</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-03-18 20:19:30 / 修改时间：23:18:31" itemprop="dateCreated datePublished" datetime="2021-03-18T20:19:30+08:00">2021-03-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%B5%84%E6%96%99/" itemprop="url" rel="index"><span itemprop="name">资料</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <table>
+<thead>
+<tr>
+<th>名称</th>
+<th>后盖型号</th>
+<th>Internal Name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>iPhone</td>
+<td>A1203</td>
+<td>iPhone 1,1</td>
+</tr>
+<tr>
+<td>iPhone 3G</td>
+<td>A1324 A1241</td>
+<td>iPhone 1,2</td>
+</tr>
+<tr>
+<td>iPhone 3GS</td>
+<td>A1325 A1303</td>
+<td>iPhone 2,1</td>
+</tr>
+<tr>
+<td>iPhone 4</td>
+<td>A1349 A1332</td>
+<td>iPhone 3,1 3,2 3,3</td>
+</tr>
+<tr>
+<td>iPhone 4S</td>
+<td>A1431 A1387</td>
+<td>iPhone 4,1</td>
+</tr>
+<tr>
+<td>iPhone 5</td>
+<td>A1428 A1429 A1442</td>
+<td>iPhone 5,1 5,2</td>
+</tr>
+<tr>
+<td>iPhone 5C</td>
+<td>A1456 A1507 A1516 A1529 A1532</td>
+<td>iPhone 5,3 5,4</td>
+</tr>
+<tr>
+<td>iPhone 5S</td>
+<td>A1453 A1457 A1518 A1528 A1530 A1533</td>
+<td>iPhone 6,1 6,2</td>
+</tr>
+<tr>
+<td>iPhone 6</td>
+<td>A1549 A1586 A1589</td>
+<td>iPhone 7,2</td>
+</tr>
+<tr>
+<td>iPhone 6P</td>
+<td>A1522 A1524 A1593</td>
+<td>iPhone 7,1</td>
+</tr>
+<tr>
+<td>iPhone 6S</td>
+<td>A1633 A1688 A1700</td>
+<td>iPhone 8,1</td>
+</tr>
+<tr>
+<td>iPhone 6SP</td>
+<td>A1634 A1687 A1699</td>
+<td>iPhone 8,2</td>
+</tr>
+<tr>
+<td>iPhone SE</td>
+<td>A1723 A1662 A1724</td>
+<td>iPhone 8,4</td>
+</tr>
+<tr>
+<td>iPhone 7</td>
+<td>A1660 A1778 A1779</td>
+<td>iPhone 9,1 9,3</td>
+</tr>
+<tr>
+<td>iPhone 7P</td>
+<td>A1661 A1784 A1785</td>
+<td>iPhone 9,2 9,4</td>
+</tr>
+<tr>
+<td>iPhone 8</td>
+<td>A1863 A1905 A1906</td>
+<td>iPhone 10,1 10,4</td>
+</tr>
+<tr>
+<td>iPhone 8P</td>
+<td>A1864 A1897 A1898</td>
+<td>iPhone 10,2 10,5</td>
+</tr>
+<tr>
+<td>iPhone X</td>
+<td>A1865 A1901 A1902</td>
+<td>iPhone 10,3 10.6</td>
+</tr>
+<tr>
+<td>iPhone XR</td>
+<td>A1984 A2105 A2106 A2107 A2108</td>
+<td>iPhone 11,8</td>
+</tr>
+<tr>
+<td>iPhone XS</td>
+<td>A1920 A2097 A2098 A2099 A2100</td>
+<td>iPhone 11,2</td>
+</tr>
+<tr>
+<td>iPhone XS Max</td>
+<td>A1921 A2101 A2102 A2103 A2104</td>
+<td>iPhone 11,6</td>
+</tr>
+<tr>
+<td>iPhone 11</td>
+<td>A2111 A2223 A2221</td>
+<td>iPhone 12,1</td>
+</tr>
+<tr>
+<td>iPhone 11 Pro</td>
+<td>A2160 A2217 A2215</td>
+<td>iPhone 12,3</td>
+</tr>
+<tr>
+<td>iPhone 11 Pro Max</td>
+<td>A2161 A2220 A2218</td>
+<td>iPhone 12,5</td>
+</tr>
+<tr>
+<td>iPhone SE 2</td>
+<td>A2275 A2298 A2296</td>
+<td>iPhone 12,8</td>
+</tr>
+<tr>
+<td>iPhone 12 mini</td>
+<td>A2176 A2398 A2400 A2399</td>
+<td>iPhone 13,1</td>
+</tr>
+<tr>
+<td>iPhone 12</td>
+<td>A2172 A2402 A2404 A2403</td>
+<td>iPhone 13,2</td>
+</tr>
+<tr>
+<td>iPhone 12 Pro</td>
+<td>A2341 A2406 A2408 A2407</td>
+<td>iPhone 13,3</td>
+</tr>
+<tr>
+<td>iPhone 12 Pro Max</td>
+<td>A2342 A2410 A2412 A2411</td>
+<td>iPhone 13,4</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2020/08/31/%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/31/%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/" class="post-title-link" itemprop="url">使用 mitmproxy + python 实现移动端异常数据测试</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-31 16:53:40" itemprop="dateCreated datePublished" datetime="2020-08-31T16:53:40+08:00">2020-08-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-08 11:25:35" itemprop="dateModified" datetime="2020-09-08T11:25:35+08:00">2020-09-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%A7%BB%E5%8A%A8%E6%80%A7%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">移动性能</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://github.com/mitmproxy/mitmproxy">mitmproxy github地址（Man-in-the-middle attack）</a></p>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>Crash率是衡量一个App好坏的重要指标之一，如果你忽略了它的存在，它就会愈演愈烈<br>客户端的很大一部分的Crash是因为API返回的脏数据。比如当API返回空值、空数组或返回不是约定类型的数据，App收到这些数据，就极有可能发生空指针、数组越界和类型转换错误等Crash。而且这样的脏数据，特别容易引起线上大面积的崩溃。</p>
+<h1 id="异常数据测试方法"><a href="#异常数据测试方法" class="headerlink" title="异常数据测试方法"></a>异常数据测试方法</h1><p>手工测试时，借助charles等抓包工具，对返回结果拦截修改数据，再进行数据的maplocal</p>
+<h2 id="异常数据修改规则"><a href="#异常数据修改规则" class="headerlink" title="异常数据修改规则"></a>异常数据修改规则</h2><p>字符：非法字符、超长、null<br>数组：空数组、非法序列<br>接口超时：5s、10s<br>接口状态码：404、500、503<br>增加删除数据：数组、字典</p>
+<h1 id="mitmproxy是什么"><a href="#mitmproxy是什么" class="headerlink" title="mitmproxy是什么"></a>mitmproxy是什么</h1><p>顾名思义，mitmproxy 就是用于 MITM 的 proxy，MITM 即中间人攻击（Man-in-the-middle attack）。<br>    <img src="/.kim//mitmproxy.png" alt="mitmproxy"><br>    mitmproxy是一个支持HTTP和HTTPS的抓包程序，有类似Fiddler、Charles的功能，只不过它是一个控制台的形式操作。mitmproxy还有两个关联组件。一个是mitmdump，它是mitmproxy的命令行接口，利用它我们可以对接Python脚本，用Python实现监听后的处理。另一个是mitmweb，它是一个Web程序，通过它我们可以清楚观察mitmproxy捕获的请求。</p>
+<h2 id="mitmproxy有如下几项功能"><a href="#mitmproxy有如下几项功能" class="headerlink" title="mitmproxy有如下几项功能"></a>mitmproxy有如下几项功能</h2><ul>
+<li>拦截HTTP和HTTPS请求和响应。</li>
+<li>保存HTTP会话并进行分析。</li>
+<li>模拟客户端发起请求，模拟服务端返回响应。</li>
+<li>利用反向代理将流量转发给指定的服务器。</li>
+<li>支持Mac和Linux上的透明代理。</li>
+<li>利用Python对HTTP请求和响应进行实时处理。</li>
+</ul>
+<h1 id="安装mitmproxy"><a href="#安装mitmproxy" class="headerlink" title="安装mitmproxy"></a>安装mitmproxy</h1><p><code>brew install mitmproxy</code><br>安装完成后，系统将拥有 mitmproxy、mitmdump、mitmweb 三个命令<br>验证安装成功<br><code>mitmdump --version</code><br>应当可以看到类似于这样的输出：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Mitmproxy</span>: <span class="number">5</span>.<span class="number">2</span></span><br><span class="line"><span class="attribute">Python</span>:    <span class="number">3</span>.<span class="number">7</span>.<span class="number">7</span></span><br><span class="line"><span class="attribute">OpenSSL</span>:   OpenSSL <span class="number">1</span>.<span class="number">1</span>.<span class="number">1</span>g  <span class="number">21</span> Apr <span class="number">2020</span></span><br><span class="line"><span class="attribute">Platform</span>:  Darwin-<span class="number">19</span>.<span class="number">6</span>.<span class="number">0</span>-x<span class="number">86</span>_<span class="number">64</span>-i<span class="number">386</span>-<span class="number">64</span>bit</span><br></pre></td></tr></table></figure>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>要启动 mitmproxy 用 <code>mitmproxy</code>、<code>mitmdump</code>、<code>mitmweb</code> 这三个命令中的任意一个即可，这三个命令功能一致，且都可以加载自定义脚本，唯一的区别是交互界面的不同。<br>mitmproxy 命令启动后，会提供一个命令行界面，用户可以实时看到发生的请求，并通过命令过滤请求，查看请求数据。形如：<br>启动 mitmproxy：<br><code>mitmweb</code><br>应当看到如下输出：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Web server listening at http:<span class="regexp">//</span><span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">8081</span>/</span><br><span class="line">Proxy server listening at http:<span class="regexp">//</span>*:<span class="number">8080</span></span><br></pre></td></tr></table></figure>
+<h1 id="设置代理-https证书安装"><a href="#设置代理-https证书安装" class="headerlink" title="设置代理+https证书安装"></a>设置代理+https证书安装</h1><p>移动设备和电脑保存在一个wifi网络下，在移动设备在网络代理填写：电脑ip+8080(端口)<br>在浏览器输入:<code>mitm.it</code>，选择对应设备类型安装证书</p>
+<h1 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h1><p>完成了上述工作，我们已经具备了操作 mitmproxy 的基本能力 了。接下来开始开发自定义脚本，这才是 mitmproxy 真正强大的地方。<br>脚本的编写需要遵循 mitmproxy 规定的套路，这样的套路有两个，使用时选其中一个套路即可。<br>##第一个套路<br>编写一个 py 文件供 mitmproxy 加载，文件中定义了若干函数，这些函数实现了某些 mitmproxy 提供的事件，mitmproxy 会在某个事件发生时调用对应的函数，形如：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">from</span> mitmproxy import <span class="keyword">http</span></span><br><span class="line"><span class="built_in">from</span> mitmproxy import ctx</span><br><span class="line"></span><br><span class="line"><span class="built_in">num</span> = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def request(flow: <span class="keyword">http</span>.HTTPFlow):</span><br><span class="line">    <span class="built_in">global</span> <span class="built_in">num</span></span><br><span class="line">    <span class="built_in">num</span> = <span class="built_in">num</span> + <span class="number">1</span></span><br><span class="line">    ctx.<span class="built_in">log</span>.info(<span class="string">&quot;We&#x27;ve seen %d flows&quot;</span> % <span class="built_in">num</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="第二个套路"><a href="#第二个套路" class="headerlink" title="第二个套路"></a>第二个套路</h2><p>编写一个 py 文件供 mitmproxy 加载，文件定义了变量 addons，addons 是个数组，每个元素是一个类实例，这些类有若干方法，这些方法实现了某些 mitmproxy 提供的事件，mitmproxy 会在某个事件发生时调用对应的方法。这些类，称为一个个 addon，比如一个叫 Counter 的 addon：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> mitmproxy <span class="keyword">import</span> http</span><br><span class="line"><span class="keyword">from</span> mitmproxy <span class="keyword">import</span> ctx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.num = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">request</span>(<span class="params">self, flow: http.HTTPFlow</span>):</span></span><br><span class="line">        self.num = self.num + <span class="number">1</span></span><br><span class="line">        ctx.log.info(<span class="string">&quot;We&#x27;ve seen %d flows&quot;</span> % self.num)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">addons = [</span><br><span class="line">    Counter()</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h2 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h2><p>这里强烈建议使用第二种套路，这也是官方内置的一些 addon 的实现方式。</p>
+<p>我们将上面第二种套路的示例代码存为 addons.py，再重新启动 mitmproxy：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">mitmweb</span> -s addons.py</span><br></pre></td></tr></table></figure>
+<p>这个脚本是当 request 发生时，计数器加一，并打印日志。这里对应的是 request 事件</p>
+<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>事件针对不同生命周期分为 5 类：HTTP 生命周期、 TCP 生命周期、Websocket 生命周期、网络连接生命周期、通用生命周期</p>
+<p>这里我们只介绍HTTP 生命周期的事件：<br><code>def http_connect(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 收到了来自客户端的 HTTP CONNECT 请求。在 flow 上设置非 2xx 响应将返回该响应并断开连接。CONNECT 不是常用的 HTTP 请求方法，目的是与服务器建立代理连接，仅是 client 与 proxy 的之间的交流，所以 CONNECT 请求不会触发 request、response 等其他常规的 HTTP 事件。</p>
+<p><code>def requestheaders(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自客户端的 HTTP 请求的头部被成功读取。此时 flow 中的 request 的 body 是空的。</p>
+<p><code>def request(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自客户端的 HTTP 请求被成功完整读取。</p>
+<p><code>def responseheaders(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自服务端的 HTTP 响应的头部被成功读取。此时 flow 中的 response 的 body 是空的。</p>
+<p><code>def response(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自服务端端的 HTTP 响应被成功完整读取。</p>
+<p><code>def error(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 发生了一个 HTTP 错误。比如无效的服务端响应、连接断开等。注意与“有效的 HTTP 错误返回”不是一回事，后者是一个正确的服务端响应，只是 HTTP code 表示错误而已。</p>
+<p>大多数情况下我们只会用到针对 HTTP 生命周期的几个事件。再精简一点，甚至只需要用到 http_connect、request、response 三个事件就能完成大多数需求了。</p>
+<h2 id="脚本示例"><a href="#脚本示例" class="headerlink" title="脚本示例"></a>脚本示例</h2><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&quot;&quot;&quot;</span><br><span class="line">拦截请求的request</span><br><span class="line">拦截返回的response</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> mitmproxy <span class="keyword">import</span> http</span><br><span class="line"></span><br><span class="line">def request(flow: http.HTTPFlow):</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== intercept request start ==========================&quot;)</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== host is:&#123;&#125; ========================== &quot;.format(flow.request.host))</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== url is:&#123;&#125; ========================== &quot;.format(flow.request.url))</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== method is:&#123;&#125; ========================== &quot;.format(flow.request.<span class="keyword">method</span>))</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== intercept request end ==========================\n\n\n&quot;)</span><br><span class="line"></span><br><span class="line">def response(flow: http.HTTPFlow):</span><br><span class="line">        code = flow.response.status_code</span><br></pre></td></tr></table></figure>
+<h2 id="常用Api有"><a href="#常用Api有" class="headerlink" title="常用Api有"></a>常用Api有</h2><h3 id="request"><a href="#request" class="headerlink" title="request"></a>request</h3><figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">flow.<span class="built_in">request</span>.headers # 获取所有头信息，包含Host、User-Agent、Content-type等字段</span><br><span class="line">flow.<span class="built_in">request</span>.url # 完整的请求地址，包含域名及请求参数，但是不包含放在body里面的请求参数</span><br><span class="line">flow.<span class="built_in">request</span>.pretty_url # 同flow.<span class="built_in">request</span>.url目前没看出什么差别</span><br><span class="line">flow.<span class="built_in">request</span>.host # 域名</span><br><span class="line">flow.<span class="built_in">request</span>.method # 请求方式。POST、<span class="keyword">GET</span>等</span><br><span class="line">flow.<span class="built_in">request</span>.scheme # 什么请求 ，如https</span><br><span class="line">flow.<span class="built_in">request</span>.path # 请求的路径，url除域名之外的内容</span><br><span class="line">flow.<span class="built_in">request</span>.get_text() # 请求中body内容，有一些http会把请求参数放在body里面，那么可通过此方法获取，返回字典类型</span><br><span class="line">flow.<span class="built_in">request</span>.query # 返回MultiDictView类型的数据，url直接带的键值参数</span><br><span class="line">flow.<span class="built_in">request</span>.get_content() # bytes,结果如flow.<span class="built_in">request</span>.get_text()</span><br><span class="line">flow.<span class="built_in">request</span>.raw_content # bytes,结果如flow.<span class="built_in">request</span>.get_content()</span><br><span class="line">flow.<span class="built_in">request</span>.urlencoded_form # MultiDictView，content-type：application/x-www-form-urlencoded时的请求参数，不包含url直接带的键值参数</span><br><span class="line">flow.<span class="built_in">request</span>.multipart_form # MultiDictView，content-type：multipart/form-data时的请求参数，不包含url直接带的键值参数</span><br></pre></td></tr></table></figure>
+<h3 id="response"><a href="#response" class="headerlink" title="response"></a>response</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">flow<span class="selector-class">.response</span><span class="selector-class">.status_code</span> #状态码</span><br><span class="line">flow<span class="selector-class">.response</span>.text#返回内容，已解码</span><br><span class="line">flow<span class="selector-class">.response</span><span class="selector-class">.content</span> #返回内容，二进制</span><br><span class="line">flow<span class="selector-class">.response</span><span class="selector-class">.setText</span>()#修改返回内容，不需要转码</span><br></pre></td></tr></table></figure>
+
+<h1 id="设计流程"><a href="#设计流程" class="headerlink" title="设计流程"></a>设计流程</h1><p>在上面提到可以拦截request和response,那么就可以对response数据做修改，再返回修改后的数据.<br>基于上面提到修改数据规则，随机多拦截数据做随机修改.<br>保存修改前和修改后的数据，方便数据diff.<br><img src="/.kim//%E8%AE%BE%E8%AE%A1%E6%B5%81%E7%A8%8B.jpg" alt="设计流程"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2020/03/10/JMeter-%E5%8D%81-%E6%96%AD%E8%A8%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/10/JMeter-%E5%8D%81-%E6%96%AD%E8%A8%80/" class="post-title-link" itemprop="url">JMeter(十)_断言</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-10 16:41:30 / 修改时间：18:11:50" itemprop="dateCreated datePublished" datetime="2020-03-10T16:41:30+08:00">2020-03-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JMeter/" itemprop="url" rel="index"><span itemprop="name">JMeter</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>用于检查测试中得到的响应数据等是否符合预期，用以保证性能测试过程中的数据交互与预期一致。</p>
+<p>使用断言的方法：</p>
+<p>△在选择的Sampler下添加对应的断言（因为不同类型的断言检查的内容不同）；配置好响应的检查内容（根据断言情况而定，有的断言控制面板不需要添加任何内容，如XML Assertion）。<br>△添加一个断言结果的监听器（从监听器中添加），通过“断言结果”可以看到是否通过断言；对于一次请求，如果通过的话，断言结果中只会打印一行请求的名称；<br>如果失败，则除了请求的名称外，还会有一行失败的原因（不同类型的断言，结果不同）。</p>
+<p>PS：一个Sampler可以添加多个断言，根据你的检查需求来添加相应的断言，当Sampler下所有的断言都通过了，那么才算request成功。</p>
+<h2 id="响应断言"><a href="#响应断言" class="headerlink" title="响应断言"></a>响应断言</h2><p>判断返回内容中的内容<br><strong>作用对象：</strong>响应报文中的所有对象<br><img src="/.kim//%E5%93%8D%E5%BA%94%E6%96%AD%E8%A8%80.png" alt="响应断言"><br><strong>APPly to:适用范围</strong><br>         Main sample and sub-samples:作用于父节点取样器及对应子节点取样器<br>         Main sample only：仅作用于父节点取样器<br>         Sub-samples only:仅作用于子节点取样器<br>         JMeter Variable:作用于jmeter变量(输入框内可输入jmeter的变量名称)</p>
+<p><strong>要测试的响应字段：要检查的项</strong><br>    * 响应文本：服务器响应文本，一般情况下，我们都是勾选改选项，用于验证服务器返回值。<br>    * 响应代码：即http响应代码，例如200，404等等，需要注意： 由于jmeter默认情况下认为4xx，5xx时该请求失败，所以在断言这类响应代码时，需要同时勾选Ingore Status，才能正常去做断言。<br>    * 响应信息：即响应代码对应的信息，例如OK， Not Found等等这类的。<br>    * Response Headers:响应头部<br>    * 求情头<br>    * URL样本<br>    *  Documeng(text)：测试文件<br>    * Ignore status：忽略返回的响应报文状态码<br>    * 请求数据</p>
+<p><strong>模式匹配规则：</strong><br>    * 包括：返回结果包括你指定的内容<br>    * 匹配：（好像跟Equals查不多，弄不明白有什么区别）<br>    * Equals：返回结果与你指定结果一致<br>    * Substring：返回结果是指定结果的字串<br>    * 否：不进行匹配<br>    * 或者</p>
+<p>要测试的模式:即填写你指定的结果（可填写多个）,按钮【添加】、【删除】是进行指定内容的管理</p>
+<h2 id="断言持续时"><a href="#断言持续时" class="headerlink" title="断言持续时"></a>断言持续时</h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2020/03/10/JMeter-%E4%B9%9D-%E5%AE%9A%E6%97%B6%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/10/JMeter-%E4%B9%9D-%E5%AE%9A%E6%97%B6%E5%99%A8/" class="post-title-link" itemprop="url">JMeter(九)_定时器</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-10 15:06:14 / 修改时间：16:14:50" itemprop="dateCreated datePublished" datetime="2020-03-10T15:06:14+08:00">2020-03-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JMeter/" itemprop="url" rel="index"><span itemprop="name">JMeter</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在默认情况下，jmeter 发送每个请求之间是没有延时的，如果采用默认方式，如果线程数足够大，瞬间就会将服务器压死。再则在实际的业务过程中，请求之间是有一定时间的停顿的所以在请求之间设置合理的延时是必须的，也是更接近用户真实业务情况。在 jmeter 中，定时器组件提供了系列不同类型的延时控制。合理使用定时器组件，能让你的性能测试更接近真实，更能挖掘出系统的瓶颈和评估系统的性能指标。</p>
+<h2 id="定时器类型"><a href="#定时器类型" class="headerlink" title="定时器类型"></a>定时器类型</h2><p><img src="/.kim//%E5%AE%9A%E6%97%B6%E5%99%A8%E7%B1%BB%E5%9E%8B.png" alt="定时器类型"></p>
+<h2 id="1、固定定时器（Constant-Timer）"><a href="#1、固定定时器（Constant-Timer）" class="headerlink" title="1、固定定时器（Constant Timer）"></a>1、固定定时器（Constant Timer）</h2><p>这是最简单的一种定时器，也是新手最常用的一种方式。下面我们看下其具体设置：<br><img src="/.kim//%E5%9B%BA%E5%AE%9A%E5%AE%9A%E6%97%B6%E5%99%A8.png" alt="固定定时器"><br>作用：通过ThreadDelay设定每个线程请求之前的等待时间（单位为毫秒）。注意：固定定时是有作用域的，放到线程组下其作用域是所有请求都会延迟固定器设置的时间，如果放到请求内，作用域是单个请求延迟时间（常用）。</p>
+<h2 id="2、高斯随机定时器（Gaussian-Random-Timer）"><a href="#2、高斯随机定时器（Gaussian-Random-Timer）" class="headerlink" title="2、高斯随机定时器（Gaussian Random Timer）"></a>2、高斯随机定时器（Gaussian Random Timer）</h2><p>高斯随机定时器，又可以称作正态分布随机定时器，该定时器可以设置在两个请求间随机延时时长。且总的延时是高斯分布(正态分布)的总和（均值：0.0、标准差 1.0）。在使用时须指定偏差延时值和偏移值。。下面我们看下其具体设置：<br><img src="/.kim//%E9%AB%98%E6%96%AF%E9%9A%8F%E6%9C%BA%E5%AE%9A%E6%97%B6%E5%99%A8.png" alt="高斯随机定时器"></p>
+<p>例如在访问百度首页，然后输入关键词进行搜索，受网络、人等各种因素影响，有的人打开首页后 3s 后则进行了搜索，有时则是 10s或更多时间，在正常情况下，打开百度然后进行搜索，假设用户间隔在 3s-10s 之间，从统计学来看，这个间隔时间可能是一个正态分布或接近正态分布。而不是一个固定的常量。从笔者在日常实践中，也更推荐使用该定时器。能更接近模拟用户实际情况。</p>
+<h2 id="3、同步定时器（Synchronizing-Timer）"><a href="#3、同步定时器（Synchronizing-Timer）" class="headerlink" title="3、同步定时器（Synchronizing Timer）"></a>3、同步定时器（Synchronizing Timer）</h2><p><img src="/.kim//%E5%90%8C%E6%AD%A5%E5%AE%9A%E6%97%B6%E5%99%A8.png" alt="同步定时器"></p>
+<p>用来设置集合点，其作用是：阻塞线程，直到指定的线程数量到达后，再一起释放，可以瞬间产生很大的压力<br>（1）Number of Simulated Users to Group by：模拟用户的数量，即指定同时释放的线程数数量，若设置为0，等于设置为线程组中的线程数量；<br>（2）Timeout in milliseconds：超时时间，即超时多少毫秒后同时释放指定的线程数；如果设置为0，该定时器将会等待线程数达到了设置的线程数才释放，</p>
+<p>若没有达到设置的线程数会一直死等。如果大于0，那么如果超过Timeout inmilliseconds中设置的最大等待时间后还没达到设置的线程数，Timer将不再等待，释放已到达的线程。默认为0<br>同步定时器（Synchronizing Timer）的超时时间设置要求：超时时间 &gt; 请求集合数量 * 1000 / (线程数 / 线程加载时间)</p>
+<p>场景应用：0点秒杀</p>
+<h2 id="4、统一随机定时器（Uniform-Random-Timer）"><a href="#4、统一随机定时器（Uniform-Random-Timer）" class="headerlink" title="4、统一随机定时器（Uniform Random Timer）"></a>4、统一随机定时器（Uniform Random Timer）</h2><p>该定时器可以在请求之间设置一个随机延时，每个随机延时有相同的发生概率。<br>总延迟时间=指定范围内的随机时间+固定延迟时间<br><img src="/.kim//%E7%BB%9F%E4%B8%80%E9%9A%8F%E6%9C%BA%E5%AE%9A%E6%97%B6%E5%99%A8.png" alt="统一随机定时器"></p>
+<h2 id="5、泊松随机定时器（Poisson-Random-Timer）"><a href="#5、泊松随机定时器（Poisson-Random-Timer）" class="headerlink" title="5、泊松随机定时器（Poisson Random Timer）"></a>5、泊松随机定时器（Poisson Random Timer）</h2><p>类似高斯随机定时器，只是其随机延时值发生在一个特定的值。总的延时值呈现泊松分布。<br><img src="/.kim//%E6%B3%8A%E6%9D%BE%E9%9A%8F%E6%9C%BA%E5%AE%9A%E6%97%B6%E5%99%A8.png" alt="泊松随机定时器"></p>
+<p>作用：这个定时器在每个线程请求之前按随机的时间停顿，总的延迟就是泊松分布值和偏移值之和。<br>上面表示暂停时间会分布在100到400毫秒之间：<br>（1）Lambda(in milliseconds):兰布达值<br>（2）Constant Delay Offset(in milliseconds):暂停的毫秒数减去随机延迟的毫秒数</p>
+<h2 id="6、常数吞吐量定时器（Constant-Throughput-Timer）"><a href="#6、常数吞吐量定时器（Constant-Throughput-Timer）" class="headerlink" title="6、常数吞吐量定时器（Constant Throughput Timer）"></a>6、常数吞吐量定时器（Constant Throughput Timer）</h2><p>通过控制每分钟请求数（即控制吞吐的方式）来控制是否进行延时暂停。<br>例如，当我们需要使服务端长期处于一定的压力下时，可以通过该定时器来控制吞吐。<br>注意：吞吐值可以是常量，也可以使用函数来动态生成，已达成更灵活的使用，满足不同的压力场景。<br><img src="/.kim//%E5%B8%B8%E6%95%B0%E5%90%9E%E5%90%90%E9%87%8F%E5%AE%9A%E6%97%B6%E5%99%A8.png" alt="常数吞吐量定时器"></p>
+<p>作用: 按指定的吞吐量执行，以每分钟为单位。计算吞吐量依据是最后一次线程的执行时延。</p>
+<p><strong>Target throughput（in samples per minute）：</strong>目标吞吐量。注意这里是每分钟发送的请求数，可以选择作用的线程：当前线程、当前线程组、所有线程组等，具体含义如下：<br>**this thread only: *<em>设置每个线程的吞吐量。总的吞吐量=线程数</em>该值。<br><strong>all active threads in current thread group：</strong>吞吐量被分摊到当前线程组所有的活动线程上。每个线程将根据上次运行时间延迟。<br><strong>all active threads：</strong>吞吐量被分配到所有线程组的所有活动线程的总吞吐量。每个线程将根据上次运行时间延迟。在这种情况下，每个线程组需要一个具有相同设置的固定吞吐量定时器。（不常用）<br><strong>all active threads in current thread group (shared)：</strong>同上，但是每个线程是根据组中的线程的上一次运行时间来延迟。相当于线程组组内排队。（不常用）<br><strong>all active threads (shared)：</strong>同上，但每个线程是根据线程的上次运行时间来延迟。相当于让所有线程组整体排队。（不常用）</p>
+<h2 id="7、准确的吞吐量定时器（Precise-Throughput-Timer）"><a href="#7、准确的吞吐量定时器（Precise-Throughput-Timer）" class="headerlink" title="7、准确的吞吐量定时器（Precise Throughput Timer）"></a>7、准确的吞吐量定时器（Precise Throughput Timer）</h2><p><img src="/.kim//%E5%87%86%E7%A1%AE%E7%9A%84%E5%90%9E%E5%90%90%E9%87%8F%E5%AE%9A%E6%97%B6%E5%99%A8.png" alt="准确的吞吐量定时器"></p>
+<p>Target Throught：目标吞吐量<br>Throught Period：表示在多长时间内发送Target Throught指定的请求数(以秒为单位)<br>Test Druation：指定测试运行时间(以秒为单位)<br>Number of threads in the bath：用来设置集合点，等到指定个数的请求后并发执行其它参数默认即可</p>
+<h2 id="8、JSr-R223-Timer-和-BeanShell-Timer"><a href="#8、JSr-R223-Timer-和-BeanShell-Timer" class="headerlink" title="8、JSr R223 Timer   和  BeanShell Timer"></a>8、JSr R223 Timer   和  BeanShell Timer</h2><p>这两种定时器就不细说了，简单的说就是提供了脚本方式来进行控制，是更为灵活的方式。一般情况下，大家是不会用的。当然有兴趣的，可以去研究下，增强理解。</p>
+<p>总结<br>本文就各种定时器进行了介绍，并大致介绍了其可能的应用场景。不管是哪种定时器，都需要深入理解业务的情况下，统筹规划使用。以更深入的发挥其作用，模拟好真实应用场景，更好的挖掘性能瓶颈和评估目标服务的性能情况。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2020/02/28/JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/28/JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/" class="post-title-link" itemprop="url">JMeter(八)_函数助手大全</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-28 15:59:03" itemprop="dateCreated datePublished" datetime="2020-02-28T15:59:03+08:00">2020-02-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-29 10:45:50" itemprop="dateModified" datetime="2020-02-29T10:45:50+08:00">2020-02-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JMeter/" itemprop="url" rel="index"><span itemprop="name">JMeter</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://jmeter.apache.org/usermanual/functions.html">官方文档</a></p>
+<h1 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h1><h2 id="BeanShell"><a href="#BeanShell" class="headerlink" title="__BeanShell"></a>__BeanShell</h2><ul>
+<li><p>入参：BeanShell语法的程序语句或者Bean Shell脚本文件</p>
+</li>
+<li><p>示例：</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">&#123;__BeanShell(123*456,)&#125;：返回56088；</span></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;__BeanShell(<span class="built_in">source</span>(<span class="string">&quot;function.bsh&quot;</span>,))&#125;：执行在function.bsh中的脚本；</span></span><br></pre></td></tr></table></figure>
+<p><img src="/.kim//BeanShell.png" alt="BeanShell"></p>
+</li>
+</ul>
+<h2 id="Random"><a href="#Random" class="headerlink" title="__Random"></a>__Random</h2><ul>
+<li>作用：生成指定范围内的随机数</li>
+<li>入参：左右范围；变量名</li>
+<li>示例：</li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;__Random(1,20,random_num)&#125;</span></span><br></pre></td></tr></table></figure>
+<p><img src="/.kim//Random.png" alt="__Random"></p>
+<h2 id="RandomDate"><a href="#RandomDate" class="headerlink" title="__RandomDate"></a>__RandomDate</h2><ul>
+<li>作用：生成指定范围内的日期</li>
+<li>入参：日期格式；左右范围；语言；变量名</li>
+<li>示例：</li>
+</ul>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;__RandomDate(,,<span class="number">2050</span>-<span class="number">07</span>-<span class="number">08</span>,,)&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/.kim//RandomDate.png" alt="__RandomDate"></p>
+<h2 id="RandomFromMultipleVars"><a href="#RandomFromMultipleVars" class="headerlink" title="__RandomFromMultipleVars"></a>__RandomFromMultipleVars</h2><p>首先要创建用户定义的变量name1,name2,areaCode</p>
+<ul>
+<li>作用：在设定的几个值中随机使用其一，如下在name1、nema2、areaCode中随机使用</li>
+<li>入参：多个值，使用|分隔；变量名</li>
+<li>示例：</li>
+</ul>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;__RandomFromMultipleVars(name1|<span class="type">name2</span>|<span class="type">areaCode</span>,name)&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/.kim//RandomFromMultipleVars.png" alt="__RandomFromMultipleVars"></p>
+<h2 id="RandomString"><a href="#RandomString" class="headerlink" title="__RandomString"></a>__RandomString</h2><ul>
+<li>作用：生成指定长度的字符串</li>
+<li>入参：字符串长度；可选字符串；变量名</li>
+<li>示例：</li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;__RandomString(2,我爱你祖国,random_char)&#125;</span></span><br></pre></td></tr></table></figure>
+<p><img src="/.kim//RandomString.png" alt="__RandomString"></p>
+<h2 id="UUID"><a href="#UUID" class="headerlink" title="__UUID"></a>__UUID</h2><ul>
+<li>作用：获取UUID</li>
+<li>入参：无</li>
+<li>示例：</li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;__UUID&#125;</span></span><br></pre></td></tr></table></figure>
+<p><img src="/.kim//UUID.png" alt="__UUID"></p>
+<h2 id="time"><a href="#time" class="headerlink" title="__time"></a>__time</h2><ul>
+<li>作用：返回当前时间，可指定返回格式，由SimpleDateFormat类处理函数格式<ul>
+<li>年：yyyy</li>
+<li>月：MM</li>
+<li>日：dd</li>
+<li>时：hh</li>
+<li>分：mm</li>
+<li>秒：ss</li>
+</ul>
+</li>
+<li>入参：返回格式；变量名</li>
+<li>示例：</li>
+</ul>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;__time(yyyy-MM-<span class="built_in">dd</span> hh:mm:<span class="built_in">ss</span>,)&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/.kim//time.png" alt="__time"></p>
+<h2 id="timeShift"><a href="#timeShift" class="headerlink" title="__timeShift"></a>__timeShift</h2><ul>
+<li>作用：</li>
+<li>入参：<ul>
+<li>格式：创建日期的格式。如果该值未被传递，则以毫秒为单位创建日期。</li>
+<li>日期：日期值</li>
+<li>移位：从日期参数的值中添加或减去多少天，几小时或几分钟<ul>
+<li>“PT20.345S”解析为“20.345秒”</li>
+<li>“PT15M”解析为“15分钟”</li>
+<li>“PT10H”解析为“10小时”</li>
+<li>“P2D”解析为“2天”</li>
+<li>“P2DT3H4M”解析为“2天，3小时和4分钟”</li>
+<li>“P-6H3M”解析为“-6小时+3分钟”</li>
+<li>“-P6H3M”解析为“-6小时-3分钟”</li>
+<li>“-P-6H + 3M”解析为“+6小时和-3分钟”</li>
+</ul>
+</li>
+<li>区域设置：设置创建日期的显示语言</li>
+<li>变量名</li>
+</ul>
+</li>
+<li>示例：</li>
+</ul>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">$&#123;__timeShift(yyyy-MM-dd HH:mm:</span>ss,,P2D,,c)&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/.kim//timeShift.png" alt="__timeShift"></p>
+<p>##__counter</p>
+<ul>
+<li>作用：作为一个计数器使用，支持多线程（多用户）</li>
+<li>入参：计数变量i，是否为线程计数器True/False</li>
+<li>示例</li>
+</ul>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$&#123;<span class="variable">__counter</span>(<span class="literal">FALSE</span>,<span class="built_in">count</span>)&#125;; 全局计数器</span><br><span class="line">$&#123;<span class="variable">__counter</span>(<span class="literal">TRUE</span>,<span class="built_in">count</span>)&#125;; 每个用户有自己的计数器</span><br></pre></td></tr></table></figure>
+<p><img src="/.kim//counter.png" alt="__counter"></p>
+<h2 id="intSum"><a href="#intSum" class="headerlink" title="__intSum"></a>__intSum</h2><ul>
+<li>作用：整数求和，多个数字之间用逗号分隔</li>
+<li>入参：第一个整数；第二个及之后的整数；变量名</li>
+<li>示例：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">&#123;__intSum(1,2,<span class="built_in">test</span>)&#125;</span></span><br></pre></td></tr></table></figure>
+<p><img src="/.kim//intSum.png" alt="__intSum"></p>
+<h2 id="longSum"><a href="#longSum" class="headerlink" title="__longSum"></a>__longSum</h2><ul>
+<li>作用：计算长整型的和</li>
+<li>入参：整数</li>
+<li>示例</li>
+</ul>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span>&#123;__longSum(<span class="number">1</span>,<span class="number">2</span>],<span class="keyword">sum</span>)&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/.kim//longSum.png" alt="__longSum"></p>
+<h2 id="CSVRead"><a href="#CSVRead" class="headerlink" title="__CSVRead"></a>__CSVRead</h2><ul>
+<li>作用：从文件读取指定列的值（读取固定值/读取动态值/使用文件别名）</li>
+<li>入参：文件路径；读取方式；</li>
+<li>示例</li>
+</ul>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$&#123;__CSVRead(<span class="regexp">/Users/</span>vic<span class="regexp">/Downloads/</span>Jmeter ALY/phone_numbers.csv,<span class="number">0</span>)&#125;;读取第一列的值</span><br><span class="line">$&#123;__CSVRead(<span class="regexp">/Users/</span>vic<span class="regexp">/Downloads/</span>Jmeter ALY/phone_numbers.csv,<span class="keyword">next</span>())&#125;; 每次读取下一次的值，配合第一条使用，否则不知道从哪里开始</span><br><span class="line"></span><br><span class="line">$&#123;__CSVRead(<span class="regexp">/Users/</span>vic<span class="regexp">/Downloads/</span>Jmeter ALY/phone_numbers.csv,*user_info)&#125;;使用别名，然后通过以下方法获取数据</span><br><span class="line">$&#123;__CSVRead(*user_info, <span class="number">1</span>)&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/.kim//CSVRead.png" alt="__CSVRead"></p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2020/02/27/JMeter-%E4%B8%83-%E5%85%B3%E8%81%94%E4%B9%8B%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8F%90%E5%8F%96%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/27/JMeter-%E4%B8%83-%E5%85%B3%E8%81%94%E4%B9%8B%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8F%90%E5%8F%96%E5%99%A8/" class="post-title-link" itemprop="url">JMeter(七)_关联之正则表达式提取器</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-27 19:45:35" itemprop="dateCreated datePublished" datetime="2020-02-27T19:45:35+08:00">2020-02-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-01-13 15:43:57" itemprop="dateModified" datetime="2021-01-13T15:43:57+08:00">2021-01-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JMeter/" itemprop="url" rel="index"><span itemprop="name">JMeter</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="应用场景："><a href="#应用场景：" class="headerlink" title="应用场景："></a>应用场景：</h2><p>在一个线程组中，从前一个请求的响应结果中，提取到某些需要的内容，可以作为下一个接口需要的入参从而实现关联<br>添加路径：HTTP请求-&gt;添加-&gt;后置处理器-&gt;正则表达式提取器<br><img src="/.kim//%E6%B7%BB%E5%8A%A0%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8F%90%E5%8F%96%E5%99%A8.png" alt="添加正则表达式提取器"></p>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>下面是JMeter-正则表达式提取器的界面<br><img src="/.kim//%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8F%90%E5%8F%96%E5%99%A8.png" alt="正则表达式提取器"></p>
+<ul>
+<li><p><strong>后置处理器：</strong>在请求结束或者返回响应结果时发挥作用</p>
+</li>
+<li><p><strong>正则表达式提取器：</strong>允许用户从服务器的响应中通过使用perl的正则表达式提取值。该元素会作用在指定范围取样器，用正则表达式提取所需值，生成模板字符串，并将结果存储到给定的变量名中。</p>
+</li>
+<li><p>**APPly to:**作用范围（返回内容的断言范围）</p>
+<ul>
+<li>Main sample and sub-samples:作用于父节点的取样器及对应子节点的取样器</li>
+<li>Main sample only：仅作用于父节点的取样器</li>
+<li>Sub-samples only:仅作用于子节点的取样器</li>
+<li>JMeter Variable:作用于jmeter变量(输入框内可输入jmeter的变量名称)</li>
+</ul>
+</li>
+<li><p><strong>要检查的响应字段：</strong>需要检查的响应报文的范围</p>
+<ul>
+<li> 主体：Response Body，响应数据主体</li>
+<li> Body(unescaped): 主体，响应的主体内容且替换了所有的html转义符，注意html转义符处理时不考虑上下文，因此可能有不正确的转换，不太建议使用 </li>
+<li> Body as a Document：从不同类型的文件中提取文本，注意这个选项比较影响性能 </li>
+<li> Response Headers：响应信息头</li>
+<li> Request Headers: 请求信息头</li>
+<li> URL：统一资源定位符，即Internet上用来描述信息资源的字符串</li>
+<li> Response Code: 响应状态码，比如：200、404等</li>
+<li> Response Message: 响应信息，比如：OK </li>
+</ul>
+</li>
+<li><p><strong>引用名称（Reference Name）：</strong>Jmeter变量的名称，存储提取的结果；即下个请求需要引用的值、字段、变量名（例子中我提取的是SOCIAL_NO）</p>
+</li>
+<li><p><strong>引用方法：</strong>${xxx}</p>
+</li>
+<li><p><strong>正则表达式（Regular Expression）：</strong>使用正则表达式解析响应结果，“（）”表示提取字符串中的部分值<br><img src="/.kim//%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.png" alt="正则表达式"></p>
+</li>
+<li><p><strong>模板（Template）：</strong> 用$$引用起来，如果在正则表达式字段中，文本框写了多个正则表达式，则可以是$2$$3$等等，表示提取到的第几个值给引用名称。如：$1$表示匹配到的第1个值赋给引用名称。</p>
+</li>
+<li><p><strong>匹配数字（Match No）：</strong>正则表达式匹配数据的结果可以看做一个数组，表示如何取值：0代表随机取值，正数n则表示取第n个值（比如1代表取第一个值），负数则表示提取所有符合条件的值。</p>
+</li>
+<li><p><strong>缺省值：</strong>匹配失败时候的默认值；通常用于后续的逻辑判断，一般通常为特定含义的英文大写组合，比如：ERROR</p>
+</li>
+</ul>
+<h2 id="正则表达式的举例说明："><a href="#正则表达式的举例说明：" class="headerlink" title="正则表达式的举例说明："></a>正则表达式的举例说明：</h2><h4 id="1、提取单个字符串："><a href="#1、提取单个字符串：" class="headerlink" title="1、提取单个字符串："></a>1、提取单个字符串：</h4><blockquote>
+<p>假设我们想要匹配Web页面的如下部分：name = “file” value = “readme.txt”&gt;并要提取readme.txt。一个合适的正则表达式是：name = “file” value = “(.+?)”&gt;。我们可以这么写：</p>
+</blockquote>
+<blockquote>
+<p>引用名称：file<br>正则表达式：name = “file” value = “(.+?)”&gt;<br>模板：$1$<br>readme.txt在需要引用的地方可以通过：${file}进行使用。</p>
+</blockquote>
+<h4 id="2、提取多个字符串："><a href="#2、提取多个字符串：" class="headerlink" title="2、提取多个字符串："></a>2、提取多个字符串：</h4><blockquote>
+<p>假设我们想要匹配Web页面的如下部分：name = “file.name” value = “readme.txt”&gt;并要提取file.name和readme.txt。一个合适的正则表达式是：name = “(.+?)” value = “(.+?)”。这样就会创建2个组，分别用于$1$和$2$。我们可以这么写：</p>
+</blockquote>
+<blockquote>
+<p>引用名称：file<br>正则表达式：name = “(.+?)” value = “(.+?)”<br>模板：$1$$2$<br>如下变量的值将会被设定为：<br>file ： file.namereadme.txt<br>file_g0 ： name = “file.name” value = “readme.txt”<br>file_g1 ： file.name<br>file_g2 ： readme.txt</p>
+</blockquote>
+<blockquote>
+<p>在需要引用的地方可以通过：${file}, ${file_g0},{file_g1},{file_g2}进行使用。</p>
+</blockquote>
+<h4 id="3、正则表达式中有转义符（例如：-），需要进行转义："><a href="#3、正则表达式中有转义符（例如：-），需要进行转义：" class="headerlink" title="3、正则表达式中有转义符（例如： \  ?），需要进行转义："></a>3、正则表达式中有转义符（例如： \  ?），需要进行转义：</h4><blockquote>
+<p>例如：id?test&quot;:”1234” ，我们想要匹配出1234。</p>
+</blockquote>
+<blockquote>
+<p>一个合适的正则表达式是： id?test\“:”(.+?)”</p>
+</blockquote>
+<h4 id="4、从消息头（header）提取token"><a href="#4、从消息头（header）提取token" class="headerlink" title="4、从消息头（header）提取token:"></a>4、从消息头（header）提取token:</h4><p><img src="/.kim//%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8F%90%E5%8F%96%E5%99%A8.png" alt="正则表达式提取器"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/" class="post-title-link" itemprop="url">JMeter(六)_参数化</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-27 16:33:41 / 修改时间：17:39:46" itemprop="dateCreated datePublished" datetime="2020-02-27T16:33:41+08:00">2020-02-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JMeter/" itemprop="url" rel="index"><span itemprop="name">JMeter</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="一、JMeter参数化简介"><a href="#一、JMeter参数化简介" class="headerlink" title="一、JMeter参数化简介"></a>一、JMeter参数化简介</h1><h2 id="JMeter参数化的概念"><a href="#JMeter参数化的概念" class="headerlink" title="JMeter参数化的概念"></a>JMeter参数化的概念</h2><p>当使用JMeter进行测试时，测试数据的准备是一项重要的工作。若要求每次迭代的数据不一样时，则需进行参数化，然后从参数化的文件中来读取测试数据。</p>
+<blockquote>
+<p>参数化：是自动化测试脚本的一种常用技巧，可将脚本中的某些输入使用参数来代替，如登录时利用GET/POST请求方式传递参数的场景，在脚本运行时指定参数的取值范围和规则。<br>脚本在运行时，根据需要选取不同的参数值作为输入，该方式称为数据驱动测试（Data Driven Test），而参数的取值范围被称为数据池（Data Pool）。</p>
+</blockquote>
+<h2 id="JMeter参数化方式之使用场景对比"><a href="#JMeter参数化方式之使用场景对比" class="headerlink" title="JMeter参数化方式之使用场景对比"></a>JMeter参数化方式之使用场景对比</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>参数化方式</th>
+<th><span class="Apple-tab-span" style="white-space:pre"></span>使用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>User Parameters</td>
+<td>适用于参数取值范围很小的时候使用</td>
+</tr>
+<tr>
+<td>2</td>
+<td>CSV Data Set Config</td>
+<td>适用于参数取值范围较大的时候使用，该方法具有更大的灵活性</td>
+</tr>
+<tr>
+<td>3</td>
+<td>User Defined Variables</td>
+<td>一般用于Test Plan中不需要随请求迭代的参数设置，如：Host、Port Number</td>
+</tr>
+<tr>
+<td>4</td>
+<td>函数助手：_CSVRead</td>
+<td>可作为其他参数化方式的补充项，如：随机数生成的函数${__Random(,,)}</td>
+</tr>
+</tbody></table>
+<h1 id="二、JMeter参数化的4种主要方式-操作演练"><a href="#二、JMeter参数化的4种主要方式-操作演练" class="headerlink" title="二、JMeter参数化的4种主要方式-操作演练"></a>二、JMeter参数化的4种主要方式-操作演练</h1><h2 id="User-Parameters（用户参数）"><a href="#User-Parameters（用户参数）" class="headerlink" title="User Parameters（用户参数）"></a>User Parameters（用户参数）</h2><p>操作路径：HTTP请求–&gt;添加–&gt;前置处理器–&gt;用户参数<br>1）添加User Parameters功能模块<br><img src="/.kim//%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E5%8F%82%E6%95%B0.png" alt="添加用户参数"><br>2）设置参数项、参数值<br><img src="/.kim//%E7%94%A8%E6%88%B7%E5%8F%82%E6%95%B0.png" alt="用户参数"><br>3）配置HTTP取样器界面的请求参数：${xxx}<br><img src="/.kim//HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE.png" alt="HTTP请求参数配置"><br>4）配置Thread Group<br>设置线程数=2，即2个虚拟用户数，对应User Parameters中设置的2个用户<br><img src="/.kim//%E7%BA%BF%E7%A8%8B%E6%95%B0.png" alt="线程数"></p>
+<h2 id="CSV-Data-Set-Config（CSV数据配置）"><a href="#CSV-Data-Set-Config（CSV数据配置）" class="headerlink" title="CSV Data Set Config（CSV数据配置）"></a>CSV Data Set Config（CSV数据配置）</h2><p>操作路径：线程组–&gt;添加–&gt;配置元件–&gt;CSV Data Set Config<br>1）添加CSV Data Set Config模块<br><img src="/.kim//%E6%B7%BB%E5%8A%A0CSV%E6%95%B0%E6%8D%AE%E9%85%8D%E7%BD%AE.png" alt="添加CSV数据配置"><br>2）预先准备好要参数化的所有参数值（txt、csv文件）<br><img src="/.kim//%E5%8F%82%E6%95%B0%E6%96%87%E4%BB%B6.png" alt="参数文件"><br>3）配置CSV Data来源<br><img src="/.kim//CSV%E6%95%B0%E6%8D%AE%E9%85%8D%E7%BD%AE.png" alt="CSV数据配置"><br>4）设置HTTP取样器的请求参数：${xxx}<br><img src="/.kim//HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE.png" alt="HTTP请求参数配置"></p>
+<h2 id="User-Defined-Variables（用户自定义变量）"><a href="#User-Defined-Variables（用户自定义变量）" class="headerlink" title="User Defined Variables（用户自定义变量）"></a>User Defined Variables（用户自定义变量）</h2><p>操作路径：线程组–&gt;添加–&gt;配置元件–&gt;用户自定义变量<br>1）添加User Defined Variables模块<br><img src="/.kim//%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F.png" alt="添加用户自定义变量"><br>2）配置User Defined Variables界面中的参数及其值<br><img src="/.kim//%E7%94%A8%E6%88%B7%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F.png" alt="用户自定义变量"><br>3）配置HTTP取样器中的请求参数<br><img src="/.kim//HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE2.png" alt="HTTP请求参数配置"></p>
+<h2 id="函数助手"><a href="#函数助手" class="headerlink" title="函数助手"></a>函数助手</h2><p>操作路径：Tools–&gt;函数助手对话框<br>1）选择参数化所需的函数，配置函数<br><img src="/.kim//%E6%89%93%E5%BC%80%E5%87%BD%E6%95%B0%E5%AF%B9%E8%AF%9D%E5%8A%A9%E6%89%8B.png" alt="打开函数对话助手"><br><img src="/.kim//%E9%85%8D%E7%BD%AE%E5%87%BD%E6%95%B0.png" alt="配置函数"><br>2）配置HTTP取样器的请求参数<br><img src="/.kim//HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE3.png" alt="HTTP请求参数配置"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2020/02/27/JMeter-%E4%BA%94-%E5%85%83%E4%BB%B6%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/27/JMeter-%E4%BA%94-%E5%85%83%E4%BB%B6%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/" class="post-title-link" itemprop="url">JMeter(五)_元件的作用域与执行顺序</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-27 16:02:23 / 修改时间：16:15:13" itemprop="dateCreated datePublished" datetime="2020-02-27T16:02:23+08:00">2020-02-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JMeter/" itemprop="url" rel="index"><span itemprop="name">JMeter</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>JMeter可以通过鼠标拖拽来随意改变元件之间的顺序以及元件的父子关系，那么随着它们的顺序和所在的域不同，它们在执行的时候，也会有很多不同。</p>
+<p>JMeter的test plan通过图形化的方式表达脚本，域代码方式的脚本不同，图形方式表达的脚本中无法使用变量和函数等描述元件的作用域，因此jmeter主要依靠test plan中元件的相对位置、父子关系以及元件本身的类型来决定test plan中各元件的执行顺序；原件在test plan中的位置不同，可能导致该元件的行为有很大差异。</p>
+<h2 id="元件的作用域"><a href="#元件的作用域" class="headerlink" title="元件的作用域"></a>元件的作用域</h2><p>jmeter中共有8类可被执行的元件（test plan和thread group不属于元件），其中，sampler（取样器）是不与其他元件发生交互的作用的元件，Logic Controller（逻辑控制器）只对其子节点的sampler有效，而其他元件需要与sampler等元件交互。</p>
+<ul>
+<li>Config Elements（配置元件）：影响其范围内的所有元件</li>
+<li>Pre-porcessors（前置处理器）：在其作用范围内的每一个sampler元件之前执行</li>
+<li>Timer（定时器）：对其作用范围内的每一个sampler有效</li>
+<li>Post-porcessors（后置处理器）：在其作用范围内的每一个sampler元件之后执行</li>
+<li>Assirtions（断言）：对其作用范围内的每一个sampler元件执行后的结果执行校验</li>
+<li>Listener（监听器）：收集其作用范围内的每一个sampler元件的信息并且呈现出来</li>
+</ul>
+<p>在jmeter中，元件的作用域是靠test plan的树形结构中元件的父子关系来确定的，其原则如下：</p>
+<ul>
+<li>sampler不与其他元件相互作用，因此不存在作用域问题</li>
+<li>Logic Controller只对其子节点中的sampler和Logic Controller作用</li>
+<li>除sampler和Logic Controller外的其他元件，如果是某个sampler的子节点，则该元件仅对其父节点作用</li>
+<li>除sampler和Logic Controller外的其他元件，如果其父节点不是sampler，则其作用域是该元件父节点下的其他所有后带节点（包括子节点，子节点的子节点等）</li>
+</ul>
+<h2 id="元件的执行顺序"><a href="#元件的执行顺序" class="headerlink" title="元件的执行顺序"></a>元件的执行顺序</h2><p>在同一作用域范围内，test plan中的元件按照以下顺序执行：</p>
+<ul>
+<li><p>Config Elements（配置元件）</p>
+</li>
+<li><p>Pre-porcessors（前置处理器）</p>
+</li>
+<li><p>Timer（定时器）</p>
+</li>
+<li><p>Sampler（取样器）</p>
+</li>
+<li><p>Post-porcessors（后置处理器）（除非Sampler得到的返回结果为空）</p>
+</li>
+<li><p>Assirtions（断言）（除非Sampler得到的返回结果为空）</p>
+</li>
+<li><p>Listener（监听器）（除非Sampler得到的返回结果为空）</p>
+<p>  注意:Pre-porcessors、Post-porcessors和Assirtions等元件仅对Sampler作用，如在它们作用域内没有任何Sampler，则不会被执行；<br>  如果在同一作用域范围内有多个同一类型的元件，则这些元件按照它们在test plan中的上下顺序依次执行。</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2020/02/25/JMeter-%E5%9B%9B-HTTP%E8%AF%B7%E6%B1%82/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/25/JMeter-%E5%9B%9B-HTTP%E8%AF%B7%E6%B1%82/" class="post-title-link" itemprop="url">JMeter(四)_HTTP请求</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-25 19:26:43" itemprop="dateCreated datePublished" datetime="2020-02-25T19:26:43+08:00">2020-02-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-27 15:58:33" itemprop="dateModified" datetime="2020-02-27T15:58:33+08:00">2020-02-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JMeter/" itemprop="url" rel="index"><span itemprop="name">JMeter</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>启动JMeter——&gt;测试计划——&gt;添加线程组</p>
+<h2 id="配置元件→添加http信息头管理器"><a href="#配置元件→添加http信息头管理器" class="headerlink" title="配置元件→添加http信息头管理器"></a>配置元件→添加http信息头管理器</h2><ul>
+<li><p>HTTP Header Manager（信息头管理器）<br>  用于定制Sampler发出的HTTP请求的请求头的内容。</p>
+</li>
+<li><p>HTTP Request Defaults（请求默认值）<br>  用于设置其作用范围内的所有HTTP的默认值，可被设置的内容包括HTTP请求的host、端口、协议等</p>
+</li>
+<li><p>HTTP Cache Manager（缓存管理器）<br>  用于模拟浏览器的Cache行为。为Test Plan增加该属性管理器后，Test Plan运行过程中会使用Last-Modified、ETag和Expired等决定是否从Cache中获取相应的元素</p>
+</li>
+<li><p>HTTP Cookie Manager（Cookie管理器）<br>  用于管理Test Plan运行时的所有Cookie。HTTP Cookie Manager可以自动储存服务器发送给客户端的所有Cookie，并在发送请求时附加上合适的Cookie</p>
+</li>
+</ul>
+<p>HTTP信息头管理器添加好之后，需要填入信息头的名称以及对应的值，如下<br><img src="/.kim//HTTP%E4%BF%A1%E6%81%AF%E5%A4%B4%E7%AE%A1%E7%90%86%E5%99%A8.png" alt="HTTP信息头管理器"></p>
+<h2 id="Sampler（取样器）→HTTP请求"><a href="#Sampler（取样器）→HTTP请求" class="headerlink" title="Sampler（取样器）→HTTP请求"></a>Sampler（取样器）→HTTP请求</h2><p><img src="/.kim//HTTP%E8%AF%B7%E6%B1%82.png" alt="HTTP请求"><br>填入测试的服务器地址、端口、所用的户协议、方法，这里方法我用的是POST，然后填入路径，选择Body Data</p>
+<p>关于http请求的的属性参数说明：</p>
+<ul>
+<li>名称：用于标识一个sample。建议使用一个有意义的名称</li>
+<li>注释：对于测试没任何影响，仅用来记录用户可读的注释信息</li>
+<li>协议：向目标服务器发送http请求时的协议，http/https，大小写不敏感，默认http</li>
+<li>服务器名称或IP：http请求发送的目标服务器名称或者IP地址，比如:<a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></li>
+<li>端口号：目标服务器的端口号，默认值为443，可不填</li>
+<li>方法：发送http请求的方法，比如POST</li>
+<li>路径：目标的URL路径（不包括服务器地址和端口）</li>
+<li>Content encoding：内容的编码方式（Content-Type=application/json;charset=utf-8）</li>
+<li>自动重定向：如果选中该项，发出的http请求得到响应是301/302，jmeter会重定向到新的界面</li>
+<li>Use keep Alive：jmeter 和目标服务器之间使用 Keep-Alive方式进行HTTP通信（默认选中）</li>
+<li>Use multipart/from-data for HTTP POST ：当发送HTTP POST 请求时，使用</li>
+<li>Parameters、Body Data以及Files Upload的区别：<ol>
+<li>parameter是指函数定义中参数，而argument指的是函数调用时的实际参数</li>
+<li>简略描述为：parameter=形参(formal parameter)， argument=实参(actual parameter)</li>
+<li>在不很严格的情况下，现在二者可以混用，一般用argument，而parameter则比较少用</li>
+<li>Body Data指的是实体数据，就是请求报文里面主体实体的内容，一般我们向服务器发送请求，携带的实体主体参数，可以写入这里</li>
+<li>Files Upload指的是：从HTML文件获取所有有内含的资源：被选中时，发出HTTP请求并获得响应的HTML文件内容后还对该HTML<br> 进行Parse 并获取HTML中包含的所有资源（图片、flash等）：（默认不选中）<br> 如果用户只希望获取特定资源，可以在下方的Embedded URLs must match 文本框中填入需要下载的特定资源表达式，只有能匹配指定正则表达式的URL指向资源会被下载</li>
+</ol>
+</li>
+</ul>
+<h2 id="监听器-→察看结果树"><a href="#监听器-→察看结果树" class="headerlink" title="监听器 →察看结果树"></a>监听器 →察看结果树</h2><p>添加好监视器，点击运行，开始测试<br>测试结束后，如果我们的请求成功，那么结果树里面的模拟请求会显示为绿色，可以通过取样器结果里面的响应状态码信息来判断<br><img src="/.kim//%E7%BB%93%E6%9E%9C%E6%A0%91.png" alt="结果树"></p>
+<p>也可以点击请求模块，查看我们发送的请求<br>里面有我们发送的请求的方法、协议、地址以及实体主体数据，以及数据类型，大小，发送时间等信息<br><img src="/.kim//%E8%AF%B7%E6%B1%82%E6%95%B0%E6%8D%AE.png" alt="请求数据"></p>
+<p>响应数据：里面包含服务器返回给我们的响应数据实体，如下图<br><img src="/.kim//%E5%93%8D%E5%BA%94%E6%95%B0%E6%8D%AE.png" alt="响应数据"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2020/02/25/JMeter-%E4%B8%89-%E8%84%9A%E6%9C%AC%E5%BD%95%E5%88%B6%E4%B9%8B%E5%9F%BA%E4%BA%8EHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/25/JMeter-%E4%B8%89-%E8%84%9A%E6%9C%AC%E5%BD%95%E5%88%B6%E4%B9%8B%E5%9F%BA%E4%BA%8EHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="post-title-link" itemprop="url">JMeter(三)_脚本录制之基于HTTP代理服务器</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-25 16:41:27 / 修改时间：17:25:01" itemprop="dateCreated datePublished" datetime="2020-02-25T16:41:27+08:00">2020-02-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JMeter/" itemprop="url" rel="index"><span itemprop="name">JMeter</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="一、添加录制控制器"><a href="#一、添加录制控制器" class="headerlink" title="一、添加录制控制器"></a>一、添加录制控制器</h1><p>启动jmeter：在测试计划中添加线程组，线程组中添加逻辑控制器→录制控制器</p>
+<h1 id="二、添加HTTP代理服务器"><a href="#二、添加HTTP代理服务器" class="headerlink" title="二、添加HTTP代理服务器"></a>二、添加HTTP代理服务器</h1><p>工作台：添加非测试元件→HTTP代理服务器</p>
+<h1 id="三、配置代理服务器"><a href="#三、配置代理服务器" class="headerlink" title="三、配置代理服务器"></a>三、配置代理服务器</h1><p>服务器的配置，可以根据下面的代理服务器详细说明，根据需要配置不同代理模式。<br><img src="/.kim//WX20200225-165933@2x.png" alt="HTTP代理服务器"></p>
+<h2 id="代理服务器说明"><a href="#代理服务器说明" class="headerlink" title="代理服务器说明"></a>代理服务器说明</h2><p>1）名称：代理服务器名称，可以自定义<br>2）注释：对此代理服务器的说明，可自定义，默认为空<br>3）Global Settings</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">端口：JMeter代理服务器端口，需要检查端口是否被占用</span><br><span class="line">HTTPS Domains：https协议要监听的域名，如访问：https:<span class="regexp">//</span>api.xiaoyuzhoufm.com/</span><br></pre></td></tr></table></figure>
+<p>4）Test plan content</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">目标控制器：下拉选项，表明在哪个模块下面保存录制的请求</span><br><span class="line">分组：下拉框；对录制的请求按照一定方式进行进行分组，一般默认使用【不对样本分组】即可</span><br><span class="line">记录http信息头、添加断言、Regex matching：勾选框；记录每个请求的request <span class="selector-tag">header</span>、断言、正则表达式匹配等，录制一般使用默认勾选就行</span><br></pre></td></tr></table></figure>
+<p>5）HTTP Sampler settings</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">A）<span class="keyword">Type</span>：http采样器的<span class="keyword">type</span>类型，默认为空</span><br><span class="line"> B）Prefix：对每个录制的http请求的前缀命名，默认为空，则录制的请求会按照数字递增的方式进行命名，如：<span class="number">0</span>，<span class="number">1</span>，<span class="number">2</span>......</span><br><span class="line">C）自动重定向：勾选框；表示请求是否自动重定向</span><br><span class="line">D）跟随重定向：勾选框；表示请求是否跟随重定向</span><br><span class="line">E）<span class="keyword">User</span> <span class="title">KeepAlive</span>：勾选框；表示此http请求的TCP链接是否保持不中断</span><br><span class="line">F）从HTML文件获取所有内涵的资源：勾选框，表示是否获取html文件中的资源信息，录制时一般默认不勾选</span><br></pre></td></tr></table></figure>
+<p>6）Content-Type filter</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">A</span>）Include：<span class="attribute">Content</span>-Type的白名单，表示那些<span class="attribute">Content</span>-Type可以通过</span><br><span class="line"><span class="selector-tag">B</span>）Exclude：<span class="attribute">Content</span>-Type黑名单，表示那些<span class="attribute">Content</span>-Type被拒绝</span><br></pre></td></tr></table></figure>
+<p>7）包含模式：表示哪些请求信息会被录制，如：*.html<br>8）排除模式：表示那些请求信息不会被录制，可点击Add suggested Excludes使用默认排除方式，<br>包含模式&amp;排除模式 就是我们需要的和我们不需要的。一般情况下，我们只需要排除我们不需要的。<br>格式：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> .*\<span class="string">.css</span> 排除css文件，<span class="string">&quot; .* &quot;</span> 匹配任意字符的意思 <span class="string">&quot; \ &quot;</span>是转义的意思</span><br><span class="line"></span><br><span class="line"> .*\<span class="string">.js</span> 排除js文件</span><br><span class="line"></span><br><span class="line">.*\<span class="string">.png</span> 排除png文件</span><br></pre></td></tr></table></figure>
+<p>9）Notify Child Listeners of filtered samplers：是否唤起过滤取样器的后台监听，默认勾选即可</p>
+<h1 id="四、本地设置代理"><a href="#四、本地设置代理" class="headerlink" title="四、本地设置代理"></a>四、本地设置代理</h1><p>浏览器或手机设置为电脑代理</p>
+<h1 id="五、SSL问题"><a href="#五、SSL问题" class="headerlink" title="五、SSL问题"></a>五、SSL问题</h1><p>如果在录制过程中提示：SSL问题 ，那就需要安装SSL安全证书。<br><img src="/.kim//WX20200225-171508@2x.png" alt="SSL"><br>1）生成证书，在点击HTTP代理服务器的“启动”按钮后，弹出提示框：提示我们，CA证书已经创建，在jmeter的bin目录下<br> 2）安装证书（jmeter） 选择菜单栏“选项—SSL管理器”，再打开的对话框中选择bin目录下的证书<br>3）手机需要安装<code>apache-jmeter-5.1.1/bin</code>目录下<code>ApacheJMeterTemporaryRootCA.crt</code>证书</p>
+<h1 id="六、脚本录制"><a href="#六、脚本录制" class="headerlink" title="六、脚本录制"></a>六、脚本录制</h1><p>代理服务器配置后之后，点击启动，代理服务器就会开始记录所接受的http请求</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Vic</p>
+  <div class="site-description" itemprop="description">人生苦短，我学Python</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vic</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

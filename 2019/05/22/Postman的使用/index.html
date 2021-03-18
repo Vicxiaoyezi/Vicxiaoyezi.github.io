@@ -1,23 +1,594 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"vic.kim","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="常见接口测试工具 Postman: 简单方便的接口调试工具，便于分享和协作。具有接口调试，接口集管理，环境配置，参数化，断言，批量执行，录制接口，Mock Server, 接口文档，接口监控等功能 JMeter: 开源接口测试及压测工具，支持Linux及无界面运行 LR: 商业版接口性能测试工具，简单易用，功能强大 SoupUI: 开源，WebService接口常用测试工具，也可以测试Rest接口">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Postman的使用">
+<meta property="og:url" content="https://vic.kim/2019/05/22/Postman%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="Vicの博客">
+<meta property="og:description" content="常见接口测试工具 Postman: 简单方便的接口调试工具，便于分享和协作。具有接口调试，接口集管理，环境配置，参数化，断言，批量执行，录制接口，Mock Server, 接口文档，接口监控等功能 JMeter: 开源接口测试及压测工具，支持Linux及无界面运行 LR: 商业版接口性能测试工具，简单易用，功能强大 SoupUI: 开源，WebService接口常用测试工具，也可以测试Rest接口">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://vic.kim/.kim//Postman%E4%B8%BB%E7%95%8C%E9%9D%A2.png">
+<meta property="og:image" content="https://vic.kim/.kim//Postman%E7%94%A8%E6%B3%95%E4%BB%8B%E7%BB%8D.png">
+<meta property="og:image" content="https://vic.kim/.kim//%E6%96%B0%E5%BB%BA%E6%B5%8B%E8%AF%95%E9%9B%86.png">
+<meta property="og:image" content="https://vic.kim/.kim//%E8%AE%BE%E7%BD%AE%E5%8F%98%E9%87%8F.png">
+<meta property="og:image" content="https://vic.kim/.kim//%E4%BD%BF%E7%94%A8%E5%8F%98%E9%87%8F.png">
+<meta property="og:image" content="https://vic.kim/.kim//tests.png">
+<meta property="article:published_time" content="2019-05-22T01:52:37.000Z">
+<meta property="article:modified_time" content="2019-05-22T02:12:05.457Z">
+<meta property="article:author" content="Vic">
+<meta property="article:tag" content="工具">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://vic.kim/.kim//Postman%E4%B8%BB%E7%95%8C%E9%9D%A2.png">
+
+<link rel="canonical" href="https://vic.kim/2019/05/22/Postman%E7%9A%84%E4%BD%BF%E7%94%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Postman的使用 | Vicの博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Vicの博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">测试攻城狮</p>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/22/Postman%E7%9A%84%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Postman的使用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-05-22 09:52:37 / 修改时间：10:12:05" itemprop="dateCreated datePublished" datetime="2019-05-22T09:52:37+08:00">2019-05-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="常见接口测试工具"><a href="#常见接口测试工具" class="headerlink" title="常见接口测试工具"></a>常见接口测试工具</h1><ul>
+<li>Postman: 简单方便的接口调试工具，便于分享和协作。具有接口调试，接口集管理，环境配置，参数化，断言，批量执行，录制接口，Mock Server, 接口文档，接口监控等功能</li>
+<li>JMeter: 开源接口测试及压测工具，支持Linux及无界面运行</li>
+<li>LR: 商业版接口性能测试工具，简单易用，功能强大</li>
+<li>SoupUI: 开源，WebService接口常用测试工具，也可以测试Rest接口及接口安全</li>
+</ul>
+<h1 id="新版Postman使用简介"><a href="#新版Postman使用简介" class="headerlink" title="新版Postman使用简介"></a>新版Postman使用简介</h1><p>Postman 官网地址：<a href>https://www.getpostman.com/pricing</a><br><img src="/.kim//Postman%E4%B8%BB%E7%95%8C%E9%9D%A2.png" alt="Postman主界面"><br><img src="/.kim//Postman%E7%94%A8%E6%B3%95%E4%BB%8B%E7%BB%8D.png" alt="Postman用法介绍"></p>
+<h2 id="工具栏"><a href="#工具栏" class="headerlink" title="工具栏"></a>工具栏</h2><ul>
+<li>New: 新建，可以新建Request请求，Collection请求集，环境等等</li>
+<li>Import: 导入，可以导入别人导出的请求集</li>
+<li>Runner: 运行一个请求集（批量执行）</li>
+<li>Invite: 邀请（需要注册，邀请进行协作）</li>
+<li>同步图标： （需要注册，同步你的项目到云端）</li>
+<li>抓包图标： 抓包/捕获请求，用于开启Postman代理， 手动设置代理（或手机代理）后可抓包/录制请求</li>
+<li>设置图标： Postman设置</li>
+<li>消息图标： 官方及协助消息</li>
+<li>收藏图标： 我的收藏（需要注册）</li>
+<li>云端图标： 用户云端数据（需要注册）</li>
+</ul>
+<h2 id="接口管理区"><a href="#接口管理区" class="headerlink" title="接口管理区"></a>接口管理区</h2><ul>
+<li>History: 请求历史记录，可以查询到之前的请求记录</li>
+<li>Collections: 接口集，相当于一个接口项目或测试计划，接口集中可以建立无限极子文件夹，用于对接口进行分组管理</li>
+</ul>
+<h2 id="环境管理区"><a href="#环境管理区" class="headerlink" title="环境管理区"></a>环境管理区</h2><ul>
+<li>环境切换：用于切换环境</li>
+<li>环境预览：用于快速预览环境中的所有变量</li>
+<li>环境管理：用于添加修改环境及环境变量，以及全局变量</li>
+</ul>
+<h2 id="什么是环境"><a href="#什么是环境" class="headerlink" title="什么是环境"></a>什么是环境</h2><p>接口完整地址 = 服务地址 + 接口地址， 如<br><code>https://app.jike.ruguoapp.com + /1.0/users/login</code><br>环境是一套配置，包含许多环境变量。在接口测试中，根据部署在不同的服务器上，服务器地址有可能不同，而同一个接口，接口地址是不变的。为了测试部署在不同服务器上的同一套接口，我们可以建立不同的环境，不同环境中host变量使用不同的地址</p>
+<h2 id="接口设计区"><a href="#接口设计区" class="headerlink" title="接口设计区"></a>接口设计区</h2><p>可以通过上方tab边上的+号，新建多个请求。接口设计区从上到下分为请求区和响应区</p>
+<ul>
+<li><p>请求区</p>
+<ul>
+<li>请求地址行：可以选择请求方法（GET/POST/…），填写请求地址，发送请求和保存请求到测试集</li>
+<li>请求数据区：分为授权，请求头，请求数据，请求发送前执行的脚本（用于准备数据），请求结束后执行的脚本（用于断言）</li>
+</ul>
+</li>
+<li><p>响应区：</p>
+<ul>
+<li>响应内容： 可以查看Pretty（美化格式），Raw（原始格式），Preview（HTML预览格式）</li>
+<li>响应Cookie</li>
+<li>响应头</li>
+<li>测试结果，对应请求中Tests中设置的断言<h2 id="Collection请求集"><a href="#Collection请求集" class="headerlink" title="Collection请求集"></a>Collection请求集</h2>测试集是Postman中接口管理的一个“整体”单位，运行、导出、分享等都是基于测试集的。</li>
+</ul>
+</li>
+<li><p>新建测试集： New按钮-&gt;Collection 或 直接点击测试集列表上方的新建测试集按钮<br><img src="/.kim//%E6%96%B0%E5%BB%BA%E6%B5%8B%E8%AF%95%E9%9B%86.png" alt="新建测试集"></p>
+<ul>
+<li>授权： 测试集及其子文件夹下的接口统一使用该授权，不用每个接口再都单独设置一遍</li>
+<li>请求前脚本： 测试集的每个接口公用的请求前脚本</li>
+<li>请求后断言： 测试集每个接口公用的请求后脚本</li>
+<li>请求集变量： 请求集中公用的一些变量</li>
+</ul>
+</li>
+<li><p>子文件夹：子文件夹的属性中同样拥有描述，授权，请求前脚本，和请求后断言（没有变量，一个请求集的变量统一管理），实现了不同范围（Scope）的Fixture功能。</p>
+</li>
+<li><p>请求集导出：请求集可以导出并发送给别人（不携带环境信息），别人通过导入来使用你的接口</p>
+</li>
+<li><p>请求集分享： 请求集直接分享给别人（双方都需要注册）</p>
+</li>
+<li><p>环境管理</p>
+<ul>
+<li>我们可以环境中设置多个变量，以供在请求中使用</li>
+<li>环境变量使用方法：<ul>
+<li>选择环境，在请求URL或者请求Body里使用来使用环境变量</li>
+<li>变量可以在请求Body的各种格式中使用</li>
+<li>不能直接在请求前脚本（Pre-request Script）和请求后脚本（Tests）中使用</li>
+</ul>
+</li>
+<li>环境管理中还可以点击“Global”添加全局变量，环境变量只有当选择了该环境时生效，全局变量在任何环境中生效，测试集中的变量只在当前测试集生效，当测试集变量，环境变量，全局变量有重复的变量名时，优先级为：环境变量&gt;全局变量&gt;测试集变量<br><img src="/.kim//%E8%AE%BE%E7%BD%AE%E5%8F%98%E9%87%8F.png" alt="设置变量"><br><img src="/.kim//%E4%BD%BF%E7%94%A8%E5%8F%98%E9%87%8F.png" alt="使用变量"></li>
+</ul>
+</li>
+</ul>
+<h2 id="Params使用"><a href="#Params使用" class="headerlink" title="Params使用"></a>Params使用</h2><p>当请求URL中参数很多时，不方便进行添加和查看，可以点击Params按钮，以表格的方式添加变量及值，从表格添加后，变量和值会自动添加到URL中</p>
+<h2 id="请求设计"><a href="#请求设计" class="headerlink" title="请求设计"></a>请求设计</h2><ul>
+<li>授权：如果接口需要授权，可以在该页面设置授权方式（type）和授权信息</li>
+<li>Header: 请求头，可以设置请求类型（Content-Type）和Cookie</li>
+<li>Body: 请求数据<ul>
+<li>form-data：混合表单，支持上传文件</li>
+<li>x-www-form-urlencoded：文本表单</li>
+<li>raw：原始格式，支持JSON/XML格式（后面可选择）</li>
+<li>binary: 二进制格式，用于发送二进制数据流</li>
+</ul>
+</li>
+<li>Pre-request Script: 请求前脚本，Javascript语法，用于在发送请求前生成一些动态数据或做一些处理</li>
+<li>Tests：请求后脚本，Javascript语法，用于请求返回后做一些处理或断言结果</li>
+</ul>
+<h2 id="Postman发送各种格式请求的方法："><a href="#Postman发送各种格式请求的方法：" class="headerlink" title="Postman发送各种格式请求的方法："></a>Postman发送各种格式请求的方法：</h2><p>注意：选择不同的请求，会自动在Header中添加Content-Type信息</p>
+<h2 id="Tests断言"><a href="#Tests断言" class="headerlink" title="Tests断言"></a>Tests断言</h2><p>一个Postman的test本质上是JavaScript的代码可以用来为一些特殊的test设置值。你可以在对象中设置一个描述性的键作为一个元素，然后声明他如果是true或false。<br>tests[“Body contains user_id”] = responseBody.has(“user_id”)<br>这回核对body中是否包含了user_id这个字符串。如果你需要，你可以增加更多的键，这取决于你要用test做多少的事情。</p>
+<ul>
+<li>HTTP状态码断言:</li>
+</ul>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tests[<span class="string">&quot;HTTP状态码200&quot;</span>]=responseCode.code == <span class="number">200</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>响应包含内容断言：</li>
+</ul>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tests[<span class="string">&quot;状态码200&quot;</span>] = responseBody.has(<span class="string">&quot;登录成功&quot;</span><span class="string">|&quot;</span>你已经登录，无需重复登录<span class="string">&quot;);</span></span><br></pre></td></tr></table></figure>
+<p>接口样例<br>POST <a target="_blank" rel="noopener" href="https://demo.fastadmin.net/admin/index/login.html">https://demo.fastadmin.net/admin/index/login.html</a> 用户名/密码： username:admin password:123456</p>
+<ul>
+<li>JSON响应断言</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> jsonData = <span class="built_in">JSON</span>.parse(responseBody); <span class="comment">//获取body中返回的所有参数</span></span><br><span class="line">tests[<span class="string">&quot;code为100000表示成功&quot;</span>] = jsonData.code == <span class="string">&quot;100000&quot;</span></span><br></pre></td></tr></table></figure>
+<p>接口样例 GET <a target="_blank" rel="noopener" href="http://www.tuling123.com/openapi/api?key=ec961279f453459b9248f0aeb6600bbe&amp;info=%E4%BD%A0%E5%A5%BD">http://www.tuling123.com/openapi/api?key=ec961279f453459b9248f0aeb6600bbe&amp;info=你好</a></p>
+<p><img src="/.kim//tests.png" alt="tests"></p>
+<p>Postman尝试通过列出编辑器旁边常用的片段来简化过程。您可以选择要添加的代码段，并将相应的代码添加到测试编辑器中。</p>
+<h2 id="Runner-测试集批量执行"><a href="#Runner-测试集批量执行" class="headerlink" title="Runner: 测试集批量执行"></a>Runner: 测试集批量执行</h2><ul>
+<li>支持设置迭代次数</li>
+<li>支持加载csv或json类测试数据</li>
+<li>操作方法：<a target="_blank" rel="noopener" href="https://demo.fastadmin.net/admin/index/login.html%E6%8E%A5%E5%8F%A3">https://demo.fastadmin.net/admin/index/login.html接口</a></li>
+<li>新建一个Collection，比如名称Demo2</li>
+<li>填入URL：<a target="_blank" rel="noopener" href="https://demo.fastadmin.net/admin/index/login.html%EF%BC%8C">https://demo.fastadmin.net/admin/index/login.html，</a> 选择POST方法</li>
+<li>请求数据（Body）格式选x-www-form-urlecoded，请求数据填写username     password  ，这里使用了两个变量来做参数化</li>
+<li>保存请求到Demo2中</li>
+<li>在电脑上新建一个data.csv文件，第一行为变量名</li>
+<li>点击Postman工具栏的Runner按钮，Collection选择Demo2， Data选择数据文件data.csv， 点击运行Demo2</li>
+</ul>
+<h2 id="环境变量的用法详解"><a href="#环境变量的用法详解" class="headerlink" title="环境变量的用法详解"></a>环境变量的用法详解</h2><p>在postman中，可以利用tests将接口返回的response设置为环境变量，供后续接口使用（类似参数化的概念）</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var jsonData =<span class="module-access"><span class="module"><span class="identifier">JSON</span>.</span></span>parse(responseBody); <span class="comment">//获取body中返回的所有参数</span></span><br><span class="line">postman.set<span class="constructor">EnvironmentVariable(<span class="string">&quot;appKey&quot;</span>,<span class="params">jsonData</span>.<span class="params">data</span>.<span class="params">appKey</span>)</span>;<span class="comment">//把返回参数中的keys设置为环境变量</span></span><br><span class="line"></span><br><span class="line">var data = postman.get<span class="constructor">ResponseHeader(<span class="string">&quot;Access-Token&quot;</span>)</span>; <span class="comment">//获取响应头所有参数</span></span><br><span class="line">postman.set<span class="constructor">EnvironmentVariable(<span class="string">&quot;Access-Token&quot;</span>,<span class="params">data</span>)</span>; <span class="comment">//把返回参数中的Access-Token设置为环境变量</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="postman常用方法集合"><a href="#postman常用方法集合" class="headerlink" title="postman常用方法集合"></a>postman常用方法集合</h1><p><a target="_blank" rel="noopener" href="https://learning.getpostman.com/docs/postman/scripts/test_examples/">https://learning.getpostman.com/docs/postman/scripts/test_examples/</a></p>
+<h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置环境变量</span></span><br><span class="line">pm.environment.<span class="built_in">set</span>(<span class="string">&quot;variable_key&quot;</span>, <span class="string">&quot;variable_value&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//将一个嵌套的对象设置为一个环境变量</span></span><br><span class="line"><span class="built_in">var</span> array = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line">pm.environment.<span class="built_in">set</span>(<span class="string">&quot;array&quot;</span>, JSON.stringify(array, <span class="built_in">null</span>, <span class="number">2</span>)); </span><br><span class="line"></span><br><span class="line"><span class="built_in">var</span> obj = &#123; a: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], b: &#123; c: &#x27;val&#x27; &#125; &#125;;</span><br><span class="line">pm.environment.<span class="built_in">set</span>(<span class="string">&quot;obj&quot;</span>, JSON.stringify(obj)) </span><br><span class="line"></span><br><span class="line"><span class="comment">//获取环境变量</span></span><br><span class="line">pm.environment.<span class="built_in">get</span>(<span class="string">&quot;variable_key&quot;</span>); </span><br><span class="line"></span><br><span class="line"><span class="comment">//获取环境变量（其值是字符串化对象)</span></span><br><span class="line"><span class="comment">// 如果数据来自未知源，则应该将这些语句包装在try-catch块中</span></span><br><span class="line"><span class="built_in">var</span> array = JSON.<span class="built_in">parse</span>(pm.environment.<span class="built_in">get</span>(<span class="string">&quot;array&quot;</span>));</span><br><span class="line"><span class="built_in">var</span> obj = JSON.<span class="built_in">parse</span>(pm.environment.<span class="built_in">get</span>(<span class="string">&quot;obj&quot;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">//清除环境变量</span></span><br><span class="line">pm.environment.unset(<span class="string">&quot;variable_key&quot;</span>); <span class="comment">//清除一个环境变量</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h2><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pm.<span class="built_in">globals</span>.<span class="built_in">set</span>(<span class="string">&quot;variable_key&quot;</span>, <span class="string">&quot;variable_value&quot;</span>);<span class="comment"> //设置一个全局变量</span></span><br><span class="line">pm.<span class="built_in">globals</span>.<span class="built_in">get</span>(<span class="string">&quot;variable_key&quot;</span>);<span class="comment"> //获取一个全局变量</span></span><br><span class="line">pm.<span class="built_in">globals</span>.unset(<span class="string">&quot;variable_key&quot;</span>);<span class="comment"> //清除一个全局变量</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="获取一个变量"><a href="#获取一个变量" class="headerlink" title="获取一个变量"></a>获取一个变量</h2><p>该函数在全局变量和活动环境中搜索变量</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm.variables.<span class="builtin-name">get</span>(<span class="string">&quot;variable_key&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="检查response-body中是否包含某个string"><a href="#检查response-body中是否包含某个string" class="headerlink" title="检查response body中是否包含某个string"></a>检查response body中是否包含某个string</h2><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tests[&quot;Body matches string&quot;] = responseBody.has(&quot;string_you_want_to_search&quot;);</span><br><span class="line"></span><br><span class="line">pm.test(&quot;Body matches string&quot;, <span class="keyword">function</span> () &#123;</span><br><span class="line">    pm.expect(pm.response.text()).<span class="keyword">to</span>.<span class="keyword">include</span>(&quot;string_you_want_to_search&quot;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="检查response-body是否与某个string相等"><a href="#检查response-body是否与某个string相等" class="headerlink" title="检查response body是否与某个string相等"></a>检查response body是否与某个string相等</h2><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tests[<span class="string">&quot;Body is correct&quot;</span>] = responseBody === <span class="string">&quot;哈哈哈&quot;</span>; <span class="comment">//必须完全匹配</span></span><br><span class="line"></span><br><span class="line">pm.test(<span class="string">&quot;Body is correct&quot;</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    pm.response.to.have.body(<span class="string">&quot;response_body_string&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="检测JSON中的某个值是否等于预期的值"><a href="#检测JSON中的某个值是否等于预期的值" class="headerlink" title="检测JSON中的某个值是否等于预期的值"></a>检测JSON中的某个值是否等于预期的值</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="keyword">data</span> = JSON.parse(responseBody);</span><br><span class="line">tests[<span class="string">&quot;Your test name&quot;</span>] = <span class="keyword">data</span>.value === <span class="number">100</span>;</span><br><span class="line">tests[<span class="string">&quot;状态码为301&quot;</span>] = <span class="keyword">data</span>[<span class="string">&quot;status&quot;</span>] == <span class="string">&quot;301&quot;</span>;</span><br><span class="line">tests[<span class="string">&quot;message&quot;</span>] = <span class="keyword">data</span>[<span class="string">&quot;message&quot;</span>] == <span class="string">&quot;购买商品库存不足&quot;</span>;</span><br><span class="line">tests[<span class="string">&quot;list&quot;</span>] = <span class="keyword">data</span>[<span class="string">&quot;lists&quot;</span>][<span class="number">0</span>] == <span class="string">&quot;11&quot;</span>;</span><br><span class="line"></span><br><span class="line">pm.test(<span class="string">&quot;Your test name&quot;</span>, function () &#123;</span><br><span class="line">    <span class="keyword">var</span> jsonData = pm.response.json();</span><br><span class="line">    pm.<span class="keyword">expect</span>(jsonData.value).to.eql(<span class="number">100</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+<p>JSON.parse()方法，把json字符串转化为对象。parse()会进行json格式的检查是一个安全的函数。<br>如：检查json中某个数组元素的个数(这里检测programs的长度)</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">var</span> <span class="class"><span class="keyword">data</span> = <span class="type">JSON</span>.parse(<span class="title">responseBody</span>);</span></span><br><span class="line"><span class="title">tests</span>[<span class="string">&quot;program&#x27;s lenght&quot;</span>] = <span class="class"><span class="keyword">data</span>.programs.length === 5;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="测试response-Headers中的某个元素是否存在-如-Content-Type"><a href="#测试response-Headers中的某个元素是否存在-如-Content-Type" class="headerlink" title="测试response Headers中的某个元素是否存在(如:Content-Type)"></a>测试response Headers中的某个元素是否存在(如:Content-Type)</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//g</span>etResponseHeader()方法会返回header的值，如果该值存在的话</span><br><span class="line">tests[<span class="string">&quot;Content-Type is present&quot;</span>] = postman.getResponseHeader(<span class="string">&quot;Content-Type&quot;</span>);  <span class="regexp">//</span>不区分大小写</span><br><span class="line">tests[<span class="string">&quot;Content-Type is present&quot;</span>] = responseHeaders.hasOwnProperty(<span class="string">&quot;Content-Type&quot;</span>); <span class="regexp">//</span>要区分大小写 </span><br><span class="line"></span><br><span class="line">pm.test(<span class="string">&quot;Content-Type is present&quot;</span>, <span class="keyword">function</span> () &#123;</span><br><span class="line">    pm.response.to.have.header(<span class="string">&quot;Content-Type&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="验证响应时间小于xxx毫秒"><a href="#验证响应时间小于xxx毫秒" class="headerlink" title="验证响应时间小于xxx毫秒"></a>验证响应时间小于xxx毫秒</h2><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tests[<span class="string">&quot;Response time is less than 200ms&quot;</span>] = responseTime &lt; <span class="number">200</span>;</span><br><span class="line"></span><br><span class="line">pm.test(<span class="string">&quot;Response time is less than 200ms&quot;</span>, <span class="keyword">function</span> <span class="title"></span>() &#123;</span><br><span class="line">    pm.expect(pm.response.responseTime).to.be.below(200);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="响应时间在特定范围内（包含下限，上限不包括）"><a href="#响应时间在特定范围内（包含下限，上限不包括）" class="headerlink" title="响应时间在特定范围内（包含下限，上限不包括）"></a>响应时间在特定范围内（包含下限，上限不包括）</h2><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tests<span class="literal">[&quot;R<span class="identifier">esponse</span> <span class="identifier">time</span> <span class="identifier">is</span> <span class="identifier">acceptable</span>&quot;]</span> = <span class="module-access"><span class="module"><span class="identifier">_</span>.</span></span><span class="keyword">in</span><span class="constructor">Range(<span class="params">responseTime</span>, 100, 1001)</span>; </span><br></pre></td></tr></table></figure>
+
+<h2 id="验证状态码的值为200"><a href="#验证状态码的值为200" class="headerlink" title="验证状态码的值为200"></a>验证状态码的值为200</h2><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tests[<span class="string">&quot;Status code is 200&quot;</span>] = responseCode.code === <span class="number">200</span>;</span><br><span class="line"></span><br><span class="line">pm.test(<span class="string">&quot;Status code is 200&quot;</span>, <span class="keyword">function</span> <span class="title"></span>() &#123;</span><br><span class="line">    pm.response.to.have.status(200);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="代码名包含一个字符串"><a href="#代码名包含一个字符串" class="headerlink" title="代码名包含一个字符串"></a>代码名包含一个字符串</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tests[<span class="string">&quot;Status code name has string&quot;</span>] = responseCode.name.has(<span class="string">&quot;Created&quot;</span>);</span><br><span class="line"></span><br><span class="line">pm.test(<span class="string">&quot;Status code name has string&quot;</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span></span> &#123;</span><br><span class="line">    pm.response.to.have.<span class="built_in">status</span>(<span class="string">&quot;Created&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="成功的POST请求状态代码"><a href="#成功的POST请求状态代码" class="headerlink" title="成功的POST请求状态代码"></a>成功的POST请求状态代码</h2><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">tests</span>[<span class="string">&quot;Successful POST request&quot;</span>] = responseCode<span class="meta">.code</span> === <span class="number">201</span> <span class="title">||</span> responseCode<span class="meta">.code</span> === <span class="number">202</span><span class="comment">;</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">pm.test</span>(<span class="string">&quot;Successful POST request&quot;</span>, <span class="meta">function</span> () &#123;</span><br><span class="line">    pm.expect(pm.response<span class="meta">.code</span>).to.be.oneOf([<span class="number">201</span>,<span class="number">202</span>])<span class="comment">;</span></span><br><span class="line">&#125;)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<h2 id="使用TinyValidator获取JSON数据"><a href="#使用TinyValidator获取JSON数据" class="headerlink" title="使用TinyValidator获取JSON数据"></a>使用TinyValidator获取JSON数据</h2><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var schema = &#123; &quot;items&quot;: &#123; &quot;type&quot;: &quot;boolean&quot; &#125;&#125;;</span><br><span class="line">var data1 = [<span class="keyword">true</span>, <span class="keyword">false</span>];</span><br><span class="line">var data2 = [<span class="keyword">true</span>, <span class="number">123</span>];</span><br><span class="line">pm.test(<span class="string">&#x27;Schema is valid&#x27;</span>, <span class="keyword">function</span>() &#123;</span><br><span class="line">  pm.expect(tv4.<span class="keyword">validate</span>(data1, <span class="keyword">schema</span>)).<span class="keyword">to</span>.be.<span class="keyword">true</span>;</span><br><span class="line">  pm.expect(tv4.<span class="keyword">validate</span>(data2, <span class="keyword">schema</span>)).<span class="keyword">to</span>.be.<span class="keyword">true</span>;</span><br><span class="line">&#125;);</span><br><span class="line">//data1和data2是测试数据，<span class="keyword">schema</span>相当于验证<span class="type">json</span>的规范 </span><br><span class="line">//示例中验证data1和data2中的<span class="keyword">value</span>是否都是<span class="type">boolean</span>类型</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取request值："><a href="#获取request值：" class="headerlink" title="获取request值："></a>获取request值：</h2><ul>
+<li>data {object}:<br>  这是一个用于请求的表单数据字典 (request.data[“key”]==”value”)</li>
+<li>headers {object}:<br>  这是请求头的字典 (request.headers[“key”]==”value”)</li>
+<li>method {string}:<br>  GET/POST/PUT 等.</li>
+<li>url {string}:<br>  请求的url</li>
+</ul>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">var</span> <span class="type">Json</span> = <span class="type">JSON</span>.parse(request.<span class="class"><span class="keyword">data</span>); </span></span><br></pre></td></tr></table></figure>
+
+<p>假设requestBody中有”version”:”1.0”；这个值,如果想获取到version的value值，代码如下</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var <span class="type">Json</span> = <span class="type">JSON</span>.parse(request.data); </span><br><span class="line">var version = <span class="type">Json</span>[&quot;version&quot;];</span><br></pre></td></tr></table></figure>
+
+<h2 id="JSON-parse-和JSON-stringify"><a href="#JSON-parse-和JSON-stringify" class="headerlink" title="JSON.parse()和JSON.stringify()"></a>JSON.parse()和JSON.stringify()</h2><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">JSON</span>.parse() //【从一个字符串中解析出<span class="type">json</span>对象】<span class="comment">--把string转对象</span></span><br><span class="line"><span class="type">JSON</span>.stringify() //【从一个对象中解析出字符串，主要针对[<span class="keyword">object</span> <span class="keyword">object</span>]类型数据的转换】<span class="comment">--把对象转String</span></span><br><span class="line"></span><br><span class="line">var data=&#123;<span class="type">name</span>:<span class="string">&#x27;goatling&#x27;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">JSON</span>.parse(data)</span><br><span class="line">//结果是： <span class="string">&#x27;&#123;&quot;name&quot;:&quot;goatling&quot;&#125;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="type">JSON</span>.stringify(data)</span><br><span class="line">//结果是：<span class="type">name</span>:&quot;goatling&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="发送异步请求。此功能既可用作预请求脚本，也可用作测试脚本。"><a href="#发送异步请求。此功能既可用作预请求脚本，也可用作测试脚本。" class="headerlink" title="发送异步请求。此功能既可用作预请求脚本，也可用作测试脚本。"></a>发送异步请求。此功能既可用作预请求脚本，也可用作测试脚本。</h2><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pm.send<span class="constructor">Request(<span class="string">&quot;https://postman-echo.com/get&quot;</span>, <span class="params">function</span> (<span class="params">err</span>, <span class="params">response</span>)</span> &#123;</span><br><span class="line">    console.log(response.json<span class="literal">()</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="转换XML-body为JSON对象"><a href="#转换XML-body为JSON对象" class="headerlink" title="转换XML body为JSON对象"></a>转换XML body为JSON对象</h2><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">var jsonObject</span> = xml2Json(responseBody);</span><br></pre></td></tr></table></figure>
+
+<h2 id="判断字段值是否为空typeof"><a href="#判断字段值是否为空typeof" class="headerlink" title="判断字段值是否为空typeof()"></a>判断字段值是否为空typeof()</h2><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var Jsondata = <span class="module-access"><span class="module"><span class="identifier">JSON</span>.</span></span>parse(responseBody);</span><br><span class="line"><span class="keyword">if</span>( typeof(<span class="module-access"><span class="module"><span class="identifier">Jsondata</span>.</span></span>data) != <span class="string">&quot;undefined&quot;</span> )</span><br></pre></td></tr></table></figure>
+
+<h2 id="分支和循环"><a href="#分支和循环" class="headerlink" title="分支和循环"></a>分支和循环</h2><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置下一个要执行的请求</span></span><br><span class="line">postman.set<span class="constructor">NextRequest(<span class="string">&quot;request_name&quot;</span>)</span>;</span><br><span class="line"><span class="comment">//停止工作流程执行</span></span><br><span class="line">postman.set<span class="constructor">NextRequest(<span class="params">null</span>)</span>;</span><br></pre></td></tr></table></figure>
+<p>postman.setNextRequest()一些重点：<br>    * 指定后续请求的名称或ID，集合运行器将负责其余的请求。<br>    * 它可以用在预请求或测试脚本中。如果有多个赋值，则考虑最后一个赋值。<br>    * 如果postman.setNextRequest()请求中不存在，则集合运行器默认为线性执行并移至下一个请求</p>
+<h1 id="服务端返回异常-Status-Code："><a href="#服务端返回异常-Status-Code：" class="headerlink" title="服务端返回异常 Status Code："></a>服务端返回异常 Status Code：</h1><h2 id="HTTP状态码"><a href="#HTTP状态码" class="headerlink" title="HTTP状态码"></a>HTTP状态码</h2><ul>
+<li>1** 信息，服务器收到请求，需要请求者继续执行操作</li>
+<li>2** 成功，操作被成功接收并处理</li>
+<li>3** 重定向，需要进一步的操作以完成请求</li>
+<li>4** 客户端错误，请求包含语法错误或无法完成请求</li>
+<li>5** 服务器错误，服务器在处理请求的过程中发生了错误</li>
+</ul>
+<h2 id="常见HTTP响应码"><a href="#常见HTTP响应码" class="headerlink" title="常见HTTP响应码"></a>常见HTTP响应码</h2><ul>
+<li>200：成功</li>
+<li>301、302：请求重定向到另外一个接口</li>
+<li>400：请求格式不对／服务端故意失败</li>
+<li>403：禁止访问(被封禁／没有权限)</li>
+<li>404：资源不存在（有可能是请求url错误或参数不正确）</li>
+<li>405：请求方法不被允许（比如接口只允许Post,使用Get请求接口）</li>
+<li>429：请求频率过高</li>
+<li>500：服务器内部错误（通常是服务器挂了或接口Bug)</li>
+<li>502、503：服务发布间隙没衔接好／挂了</li>
+<li>504：网关请求超时（Bug，挂了）</li>
+<li>409、406：正常返回，不应该被记录</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag"># 工具</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/05/21/Mac%E7%94%B5%E8%84%91%E7%94%A8%E7%BB%88%E7%AB%AF%E7%94%9F%E6%88%90SSH%20key%20%E8%AE%BF%E9%97%AE%E8%87%AA%E5%B7%B1%E7%9A%84Github/" rel="prev" title="Mac电脑用终端生成SSH key 访问自己的Github">
+      <i class="fa fa-chevron-left"></i> Mac电脑用终端生成SSH key 访问自己的Github
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/05/22/Charles%E7%9A%84%E4%BD%BF%E7%94%A8/" rel="next" title="Charles的使用">
+      Charles的使用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7"><span class="nav-number">1.</span> <span class="nav-text">常见接口测试工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B0%E7%89%88Postman%E4%BD%BF%E7%94%A8%E7%AE%80%E4%BB%8B"><span class="nav-number">2.</span> <span class="nav-text">新版Postman使用简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E6%A0%8F"><span class="nav-number">2.1.</span> <span class="nav-text">工具栏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E7%AE%A1%E7%90%86%E5%8C%BA"><span class="nav-number">2.2.</span> <span class="nav-text">接口管理区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%E5%8C%BA"><span class="nav-number">2.3.</span> <span class="nav-text">环境管理区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%8E%AF%E5%A2%83"><span class="nav-number">2.4.</span> <span class="nav-text">什么是环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1%E5%8C%BA"><span class="nav-number">2.5.</span> <span class="nav-text">接口设计区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Collection%E8%AF%B7%E6%B1%82%E9%9B%86"><span class="nav-number">2.6.</span> <span class="nav-text">Collection请求集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Params%E4%BD%BF%E7%94%A8"><span class="nav-number">2.7.</span> <span class="nav-text">Params使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.8.</span> <span class="nav-text">请求设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Postman%E5%8F%91%E9%80%81%E5%90%84%E7%A7%8D%E6%A0%BC%E5%BC%8F%E8%AF%B7%E6%B1%82%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="nav-number">2.9.</span> <span class="nav-text">Postman发送各种格式请求的方法：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tests%E6%96%AD%E8%A8%80"><span class="nav-number">2.10.</span> <span class="nav-text">Tests断言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Runner-%E6%B5%8B%E8%AF%95%E9%9B%86%E6%89%B9%E9%87%8F%E6%89%A7%E8%A1%8C"><span class="nav-number">2.11.</span> <span class="nav-text">Runner: 测试集批量执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E7%9A%84%E7%94%A8%E6%B3%95%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.12.</span> <span class="nav-text">环境变量的用法详解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#postman%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E9%9B%86%E5%90%88"><span class="nav-number">3.</span> <span class="nav-text">postman常用方法集合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">3.1.</span> <span class="nav-text">环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="nav-number">3.2.</span> <span class="nav-text">全局变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E4%B8%80%E4%B8%AA%E5%8F%98%E9%87%8F"><span class="nav-number">3.3.</span> <span class="nav-text">获取一个变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5response-body%E4%B8%AD%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E6%9F%90%E4%B8%AAstring"><span class="nav-number">3.4.</span> <span class="nav-text">检查response body中是否包含某个string</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5response-body%E6%98%AF%E5%90%A6%E4%B8%8E%E6%9F%90%E4%B8%AAstring%E7%9B%B8%E7%AD%89"><span class="nav-number">3.5.</span> <span class="nav-text">检查response body是否与某个string相等</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E6%B5%8BJSON%E4%B8%AD%E7%9A%84%E6%9F%90%E4%B8%AA%E5%80%BC%E6%98%AF%E5%90%A6%E7%AD%89%E4%BA%8E%E9%A2%84%E6%9C%9F%E7%9A%84%E5%80%BC"><span class="nav-number">3.6.</span> <span class="nav-text">检测JSON中的某个值是否等于预期的值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95response-Headers%E4%B8%AD%E7%9A%84%E6%9F%90%E4%B8%AA%E5%85%83%E7%B4%A0%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8-%E5%A6%82-Content-Type"><span class="nav-number">3.7.</span> <span class="nav-text">测试response Headers中的某个元素是否存在(如:Content-Type)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E5%93%8D%E5%BA%94%E6%97%B6%E9%97%B4%E5%B0%8F%E4%BA%8Exxx%E6%AF%AB%E7%A7%92"><span class="nav-number">3.8.</span> <span class="nav-text">验证响应时间小于xxx毫秒</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E6%97%B6%E9%97%B4%E5%9C%A8%E7%89%B9%E5%AE%9A%E8%8C%83%E5%9B%B4%E5%86%85%EF%BC%88%E5%8C%85%E5%90%AB%E4%B8%8B%E9%99%90%EF%BC%8C%E4%B8%8A%E9%99%90%E4%B8%8D%E5%8C%85%E6%8B%AC%EF%BC%89"><span class="nav-number">3.9.</span> <span class="nav-text">响应时间在特定范围内（包含下限，上限不包括）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E7%8A%B6%E6%80%81%E7%A0%81%E7%9A%84%E5%80%BC%E4%B8%BA200"><span class="nav-number">3.10.</span> <span class="nav-text">验证状态码的值为200</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%90%8D%E5%8C%85%E5%90%AB%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">3.11.</span> <span class="nav-text">代码名包含一个字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%90%E5%8A%9F%E7%9A%84POST%E8%AF%B7%E6%B1%82%E7%8A%B6%E6%80%81%E4%BB%A3%E7%A0%81"><span class="nav-number">3.12.</span> <span class="nav-text">成功的POST请求状态代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8TinyValidator%E8%8E%B7%E5%8F%96JSON%E6%95%B0%E6%8D%AE"><span class="nav-number">3.13.</span> <span class="nav-text">使用TinyValidator获取JSON数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96request%E5%80%BC%EF%BC%9A"><span class="nav-number">3.14.</span> <span class="nav-text">获取request值：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON-parse-%E5%92%8CJSON-stringify"><span class="nav-number">3.15.</span> <span class="nav-text">JSON.parse()和JSON.stringify()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E9%80%81%E5%BC%82%E6%AD%A5%E8%AF%B7%E6%B1%82%E3%80%82%E6%AD%A4%E5%8A%9F%E8%83%BD%E6%97%A2%E5%8F%AF%E7%94%A8%E4%BD%9C%E9%A2%84%E8%AF%B7%E6%B1%82%E8%84%9A%E6%9C%AC%EF%BC%8C%E4%B9%9F%E5%8F%AF%E7%94%A8%E4%BD%9C%E6%B5%8B%E8%AF%95%E8%84%9A%E6%9C%AC%E3%80%82"><span class="nav-number">3.16.</span> <span class="nav-text">发送异步请求。此功能既可用作预请求脚本，也可用作测试脚本。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AC%E6%8D%A2XML-body%E4%B8%BAJSON%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.17.</span> <span class="nav-text">转换XML body为JSON对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E5%AD%97%E6%AE%B5%E5%80%BC%E6%98%AF%E5%90%A6%E4%B8%BA%E7%A9%BAtypeof"><span class="nav-number">3.18.</span> <span class="nav-text">判断字段值是否为空typeof()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF"><span class="nav-number">3.19.</span> <span class="nav-text">分支和循环</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%BF%94%E5%9B%9E%E5%BC%82%E5%B8%B8-Status-Code%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">服务端返回异常 Status Code：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">4.1.</span> <span class="nav-text">HTTP状态码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81HTTP%E5%93%8D%E5%BA%94%E7%A0%81"><span class="nav-number">4.2.</span> <span class="nav-text">常见HTTP响应码</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Vic</p>
+  <div class="site-description" itemprop="description">人生苦短，我学Python</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vic</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

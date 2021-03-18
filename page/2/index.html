@@ -1,23 +1,1370 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block title %}{{ title }}{% if theme.index_with_subtitle and subtitle %} – {{ subtitle }}{% endif %}{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
-{% block page_class %}
-  {% if is_home() %}page-home{% endif -%}
-{% endblock %}
 
-{% block content %}
-  <section id="posts" class="posts-expand">
-    {% for post in page.posts %}
-      {{ post_template.render(post, true) }}
-    {% endfor %}
-  </section>
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-  {% include '_partials/pagination.swig' %}
-{% endblock %}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"vic.kim","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
-{% block sidebar %}
-  {{ sidebar_template.render(false) }}
-{% endblock %}
+  <meta name="description" content="人生苦短，我学Python">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vicの博客">
+<meta property="og:url" content="https://vic.kim/page/2/index.html">
+<meta property="og:site_name" content="Vicの博客">
+<meta property="og:description" content="人生苦短，我学Python">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Vic">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://vic.kim/page/2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Vicの博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Vicの博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">测试攻城狮</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/" class="post-title-link" itemprop="url">JMeter(二)_基础介绍</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-25 15:47:20" itemprop="dateCreated datePublished" datetime="2020-02-25T15:47:20+08:00">2020-02-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-10 14:26:02" itemprop="dateModified" datetime="2020-03-10T14:26:02+08:00">2020-03-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JMeter/" itemprop="url" rel="index"><span itemprop="name">JMeter</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="测试计划（test-plan）"><a href="#测试计划（test-plan）" class="headerlink" title="测试计划（test plan）"></a>测试计划（test plan）</h2><p>描述一个性能测试，包含本次测试所有相关功能<br><img src="/.kim//WX20200225-155506@2x.png" alt="测试计划"></p>
+<h2 id="threads（users）线程"><a href="#threads（users）线程" class="headerlink" title="threads（users）线程"></a>threads（users）线程</h2><p><img src="/.kim//WX20200225-155944@2x.png" alt="线程组"><br>Setup thread group：<br>一种特殊类型的线程，可用于执行预测试操作。即执行测试前进行定期线程组的执行</p>
+<p>Teardown thread group：<br>一种特殊类型的线程，可用于执行测试后动作。即执行测试结束后执行定期的线程组</p>
+<p>Thread group：<br>通常添加使用的线程，一般一个线程组可看做一个虚拟用户组，其中每个线程为一个虚拟用户</p>
+<h2 id="测试片段（test-fragment）"><a href="#测试片段（test-fragment）" class="headerlink" title="测试片段（test fragment）"></a>测试片段（test fragment）</h2><p>应用在控制器上的一个特殊线程组，与线程组处于同一层级，必须与Include Controller或模块控制器一起使用才被执行。<br>应用场景：<br>1、当jmeter脚本非常复杂的时候，可以通过测试片段分模块管理用例<br>2、当jmeter脚本由多个测试人员共同完成，通过测试片段分人分模块管理用例</p>
+<h2 id="取样器（Sampler）"><a href="#取样器（Sampler）" class="headerlink" title="取样器（Sampler）"></a>取样器（Sampler）</h2><p><img src="/.kim//WX20200225-160607@2x.png" alt="取样器"><br>是性能测试中向服务器发送请求，记录响应信息，记录响应时间的最小单元，JMeter 原生支持多种不同的sampler<br>如 HTTP Request Sampler 、 FTP  Request Sampler 、TCP  Request Sampler 、JDBC Request Sampler 等<br>每一种不同类型的 sampler 可以根据设置的参数向服务器发出不同类型的请求。<br>Java Request Sampler 和 Beanshell Request Sampler 是两种特殊的可定制的 Sampler （暂不讨论）</p>
+<h2 id="逻辑控制器（Logic-Controller）"><a href="#逻辑控制器（Logic-Controller）" class="headerlink" title="逻辑控制器（Logic Controller）"></a>逻辑控制器（Logic Controller）</h2><p><img src="/.kim//WX20200225-160636@2x.png" alt="逻辑控制器"><br>包含两类原件：<br>一类是控制Test Plan中Sampler节点发送请求的逻辑顺序控制器，常用的有：If Controller、Swith Controller、Loop Controller、Random Controller等<br>另一类是用来组织和控制Sampler节点的，如Transaction Controller、Throughput Controller等</p>
+<h2 id="监听器（Listener）"><a href="#监听器（Listener）" class="headerlink" title="监听器（Listener）"></a>监听器（Listener）</h2><p><img src="/.kim//WX20200225-160723@2x.png" alt="监听器"><br>对测试结果进行处理和可视化展示的一系列组件，常用的有图形结果、查看结果树、聚合报告等<br>以上的五类原件就可以构成一个简单的性能测试脚本</p>
+<p>聚合报告<br><strong>Label：</strong>每个 JMeter 的 element（例如 HTTP Request）都有一个 Name 属性，这里显示的就是 Name 属性的值<br><strong>Samples：</strong>表示你这次测试中一共发出了多少个请求，如果模拟10个用户，每个用户迭代10次，那么这里显示100<br><strong>Average：</strong>平均响应时间——默认情况下是单个 Request 的平均响应时间，当使用了 Transaction Controller 时，也可以以Transaction 为单位显示平均响应时间<br><strong>Median：</strong>中位数，也就是 50％ 用户的响应时间<br><strong>90% Line：</strong>90％ 用户的响应时间<br><strong>Min：</strong>最小响应时间<br><strong>Max：</strong>最大响应时间<br><strong>Error%：</strong>本次测试中出现错误的请求的数量/请求的总数<br><strong>Throughput：</strong>吞吐量——默认情况下表示每秒完成的请求数（Request per Second），当使用了 Transaction Controller 时，也可以表示类似 LoadRunner 的 Transaction per Second 数<br><strong>KB/Sec：</strong>每秒从服务器端接收到的数据量</p>
+<h2 id="配置元件（Config-Element）"><a href="#配置元件（Config-Element）" class="headerlink" title="配置元件（Config Element）"></a>配置元件（Config Element）</h2><p><img src="/.kim//WX20200225-160737@2x.png" alt="配置元件"><br>用于提供对静态数据配置的支持。CSV Date Set Config可以将本地数据文件形成数据池（Date Pool），而对应于HTTP Request Configuration和TCP Request Sample等类型的Configuration元件则可以修改这些Sample的默认数据等</p>
+<h2 id="定时器（Time）"><a href="#定时器（Time）" class="headerlink" title="定时器（Time）"></a>定时器（Time）</h2><p><img src="/.kim//WX20200225-160849@2x.png" alt="定时器"><br>用于操作之间设置等待时间，等待时间使性能测试中常用的控制客户端QPS的手段，jmeter定义了Constant Times、</p>
+<p>Constant Throughput Times、Guass Ramdon Times等不同类型的Times</p>
+<h2 id="断言（Assertions）"><a href="#断言（Assertions）" class="headerlink" title="断言（Assertions）"></a>断言（Assertions）</h2><p><img src="/.kim//WX20200225-161013@2x.png" alt="断言"><br>用于检查测试中得到的响应数据等是否符合预期，Assertions一般用来设置检查点，用以保证性能测试过程中的数据交互与预期一致</p>
+<h2 id="前置处理器（Pre-Processors）"><a href="#前置处理器（Pre-Processors）" class="headerlink" title="前置处理器（Pre Processors）"></a>前置处理器（Pre Processors）</h2><p><img src="/.kim//WX20200225-160912@2x.png" alt="前置处理器"><br>用于在实际请求发出之前对即将发出的请求进行特殊处理。<br>例如：当URL中有sessionID一类的session信息时，可以通过该处理器填充发出请求实际的sessionID。</p>
+<h2 id="后置处理器（Pre-Processors）"><a href="#后置处理器（Pre-Processors）" class="headerlink" title="后置处理器（Pre Processors）"></a>后置处理器（Pre Processors）</h2><p><img src="/.kim//WX20200225-160927@2x.png" alt="后置处理器"><br>用于对Sampler发出请求后得到的服务器响应进行处理。一般用来提取响应中的特定数据<br>例如：正则表达式，用于提取响应数据中匹配某正则表达式的数据段，</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2020/02/25/JMeter-%E4%B8%80-Mac%E4%B8%8B%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/25/JMeter-%E4%B8%80-Mac%E4%B8%8B%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/" class="post-title-link" itemprop="url">JMeter(一)_Mac下安装部署</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-25 11:35:11 / 修改时间：14:17:26" itemprop="dateCreated datePublished" datetime="2020-02-25T11:35:11+08:00">2020-02-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JMeter/" itemprop="url" rel="index"><span itemprop="name">JMeter</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://jmeter.apache.org/download_jmeter.cgi">JMeter官网下载</a><br><img src="/.kim//1651582602156_.pic_hd.jpg" alt="Jmeter版本"></p>
+<h1 id="运行方法一，直接运行"><a href="#运行方法一，直接运行" class="headerlink" title="运行方法一，直接运行"></a>运行方法一，直接运行</h1><p>解压后<br>命令行进入/Users/vic/apache-jmeter-5.1.1/bin目录下，输入sh jmeter即可启动</p>
+<h1 id="运行方法二，配置环境变量"><a href="#运行方法二，配置环境变量" class="headerlink" title="运行方法二，配置环境变量"></a>运行方法二，配置环境变量</h1><p>配置环境变量<br><code>vim ~/.bash_profile</code></p>
+<p>内容输入举例：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">JMETER_HOME</span>=/Users/vic/apache-jmeter-5.1.1</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=<span class="variable">$PATH</span>:$JMETER_HOME/bin</span><br></pre></td></tr></table></figure>
+<p>使环境变量生效<br><code>source ~/.bash_profile</code></p>
+<p>修改jmeter为中文：<br>编辑/Users/vic/apache-jmeter-5.1.1/bin目录下的jmeter.properties文件<br>修改第37行左右如下：<br><img src="/.kim//1671582611252_.pic.jpg" alt="Jmeter版本"></p>
+<p>打开终端输入：<code>jmeter</code> 启动JMeter</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/10/24/ATX%E5%9F%BA%E4%BA%8EATX-Server2%E7%9A%84UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/24/ATX%E5%9F%BA%E4%BA%8EATX-Server2%E7%9A%84UI%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/" class="post-title-link" itemprop="url">ATX基于ATX-Server2的UI自动化测试框架</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-10-24 15:15:42 / 修改时间：16:01:52" itemprop="dateCreated datePublished" datetime="2019-10-24T15:15:42+08:00">2019-10-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/App%E8%87%AA%E5%8A%A8%E5%8C%96/" itemprop="url" rel="index"><span itemprop="name">App自动化</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>基于ATX-Server2的UI自动化测试框架，支持多设备的并行测试，并生成统一的测试报告</p>
+<h1 id="支持atx-server2"><a href="#支持atx-server2" class="headerlink" title="支持atx-server2"></a>支持atx-server2</h1><p>android：修改config下的Server地址为atx-server2的Url，token填写正确后,就可以正常运行了</p>
+<p><a href="https://vic.kim/2019/08/21/atxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/">atxserver2设备管理平台搭建</a></p>
+<h1 id="前置条件"><a href="#前置条件" class="headerlink" title="前置条件"></a>前置条件</h1><p>部署好atxserver2<br>只支持Python 3上运行  本人python版本 3.7<br>Android设备需要通过uiautomator2 init 初始化完成（<code>python -m uiautomator2 init</code>），确认可以正常连接 </p>
+<h1 id="工程介绍"><a href="#工程介绍" class="headerlink" title="工程介绍"></a>工程介绍</h1><h2 id="工程目录如下"><a href="#工程目录如下" class="headerlink" title="工程目录如下"></a>工程目录如下</h2><p><img src="/.kim//directory.jpg" alt="Directory"></p>
+<h2 id="common："><a href="#common：" class="headerlink" title="common："></a><strong>common：</strong></h2><ul>
+<li>devices.py 获取atx-server2上特定设备（get_atxserver2_online_devices()）、或config.ini下devices IP列表的在线设备（get_local_devices()）、有线连接电脑的设备自动连接u2（get_usb_devices()）</li>
+<li>atxserver.py 获取</li>
+<li>base_page.py 用于设备的初始化 u2.connect  已经一些公共模块的封装</li>
+<li>chromedriver.py 和Ports.py 结合使用，启动chromedriver以便实现u2的webview操作（目前还没做到根据设备的chromeversion 启动指定版本的chromedriver）</li>
+<li>cases_trategy.py 组织测试用例</li>
+<li>decorator.py 有<a target="_blank" rel="noopener" href="https://testerhome.com/testcase">*@*testcase</a>、<a target="_blank" rel="noopener" href="https://testerhome.com/teststep">*@*teststep</a>这样的装饰器用例执行日志打印、错误后的处理、生成截图（支持gif测试步骤）</li>
+<li>report.py  对生成的报告的一些操作，备份Testreport的报告到TestReport_History下、多设备统一报告的生成、报告的文件夹压缩</li>
+<li>test_data.py 在执行测试前的测试数据的生成，会在common下生成data.json，测试执行的时候各个设设备更具自己的serial获取对应的测试数据</li>
+<li>drivers.py  设备的获取，初始化准备，测试执行都是在这里完成的</li>
+<li>run_case.py 存放测试报告/日志/截图的路径的生成，以及最终通过HTMLTestRunner来执行用例 </li>
+<li>config.ini 一些需要用到的数据，atx-server地址、测试设备的ip、测试数据等</li>
+</ul>
+<h2 id="流程："><a href="#流程：" class="headerlink" title="流程："></a>流程：</h2><h3 id="通过runAll-py开始执行测试"><a href="#通过runAll-py开始执行测试" class="headerlink" title="通过runAll .py开始执行测试"></a>通过runAll .py开始执行测试</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    cs = CaseStrategy()</span><br><span class="line">    cases = cs.set_case_suite()</span><br><span class="line">    Drivers().run(cases)</span><br><span class="line">    zip_report()</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>​    通过CaseStrategy获取到需要执的测试用例</li>
+<li>​    <code>Drivers().run(cases)</code>开始执行测试</li>
+<li>​    执行完成之后打包压缩（压缩后发邮件方便）</li>
+</ol>
+<h3 id="Drivers-run-cases-执行测试"><a href="#Drivers-run-cases-执行测试" class="headerlink" title="Drivers().run(cases)执行测试"></a><code>Drivers().run(cases)</code>执行测试</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span>(<span class="params">self, cases</span>):</span></span><br><span class="line">    start_time = time.strftime(<span class="string">&#x27;%Y%m%d%H%M%S&#x27;</span>, time.localtime(time.time()))</span><br><span class="line">    devices = check_devices()</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> devices:</span><br><span class="line">        print(<span class="string">&#x27;没有发现设备，测试结束&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># generate test data data.json 准备测试数据</span></span><br><span class="line">    generate_test_data(devices)</span><br><span class="line"></span><br><span class="line">    print(<span class="string">&#x27;Starting Run test &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&#x27;</span>)</span><br><span class="line">    <span class="comment"># devices_list = []</span></span><br><span class="line">    <span class="comment"># for i in range(len(devices)):</span></span><br><span class="line">    <span class="comment">#     devices_list.append(RunCases(devices[i]))</span></span><br><span class="line">    run_devices_list = [RunCases(device) <span class="keyword">for</span> device <span class="keyword">in</span> devices]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># run on every device 开始执行测试</span></span><br><span class="line">    pool = Pool(processes=<span class="built_in">len</span>(run_devices_list))</span><br><span class="line">    <span class="keyword">for</span> run_device <span class="keyword">in</span> run_devices_list:</span><br><span class="line">        pool.apply_async(self._run_cases,</span><br><span class="line">                         args=(run_device, cases,))</span><br><span class="line">    print(<span class="string">&#x27;Waiting for all runs done........ &#x27;</span>)</span><br><span class="line">    pool.close()</span><br><span class="line">    pool.join()</span><br><span class="line">    print(<span class="string">&#x27;All runs done........ &#x27;</span>)</span><br><span class="line">    <span class="comment"># ChromeDriver.kill()</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#  Generate statistics report  生成统计测试报告 将所有设备的报告在一个HTML中展示</span></span><br><span class="line">    create_statistics_report(run_devices_list)</span><br><span class="line">    backup_report(<span class="string">&#x27;./TestReport&#x27;</span>, <span class="string">&#x27;./TestReport_History&#x27;</span>, start_time)</span><br><span class="line">```   </span><br><span class="line">```python    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check_devices</span>():</span></span><br><span class="line">    <span class="comment"># 根据method 获取android设备</span></span><br><span class="line">    method = ReadConfig().get_method().strip()</span><br><span class="line">    <span class="keyword">if</span> method == <span class="string">&#x27;SERVER2&#x27;</span>:</span><br><span class="line">        print(<span class="string">&#x27;atxserver2 中获取可用的在线设备…&#x27;</span>)</span><br><span class="line">        devices = get_atxserver2_online_devices(Atxserver2(ReadConfig().get_server_url()).present_android_devices())</span><br><span class="line">        print(<span class="string">&#x27;atxserver2中有%s台在线设备&#x27;</span> % <span class="built_in">len</span>(devices))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> method == <span class="string">&#x27;UDID&#x27;</span>:</span><br><span class="line">        print(<span class="string">&#x27;Get available UDID devices %s from atxserver2...&#x27;</span> % ReadConfig().get_server_udid())</span><br><span class="line">        devices = get_atxserver2_online_devices(Atxserver2(ReadConfig().get_server_url()).present_udid_devices())</span><br><span class="line">        print(<span class="string">&#x27;\nThere has %s available udid devices in atxserver2&#x27;</span> % <span class="built_in">len</span>(devices))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> method == <span class="string">&#x27;IP&#x27;</span>:</span><br><span class="line">        <span class="comment"># get  devices from config devices list</span></span><br><span class="line">        print(<span class="string">&#x27;Get available IP devices %s from config... &#x27;</span> % ReadConfig().get_devices_ip())</span><br><span class="line">        devices = get_local_devices()</span><br><span class="line">        print(<span class="string">&#x27;\nThere has %s  devices alive in config IP list&#x27;</span> % <span class="built_in">len</span>(devices))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> method == <span class="string">&#x27;USB&#x27;</span>:</span><br><span class="line">        <span class="comment"># get  devices connected PC with USB</span></span><br><span class="line">        print(<span class="string">&#x27;Get available USB devices connected on PC... &#x27;</span>)</span><br><span class="line">        devices = get_usb_devices()</span><br><span class="line">        print(<span class="string">&#x27;\nThere has %s  USB devices alive &#x27;</span> % <span class="built_in">len</span>(devices))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">raise</span> Exception(<span class="string">&#x27;Config.ini method illegal:method =%s&#x27;</span> % method)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> devices</span><br><span class="line">```    </span><br><span class="line">```python</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_run_cases</span>(<span class="params">run_device, cases</span>):</span></span><br><span class="line">    log = Log()</span><br><span class="line">    log.set_logger(run_device.get_device()[<span class="string">&#x27;model&#x27;</span>], os.path.join(run_device.get_path(), <span class="string">&#x27;client.log&#x27;</span>))</span><br><span class="line">    log.i(<span class="string">&#x27;udid: %s&#x27;</span> % run_device.get_device()[<span class="string">&#x27;udid&#x27;</span>])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 设置cls.path, 必须在操作任何页面之前调用</span></span><br><span class="line">    path = ReportPath()</span><br><span class="line">    path.set_path(run_device.get_path())</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 设置cls.driver, 必须在操作任何页面之前调用</span></span><br><span class="line">    base_page = BasePage()</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;ip&#x27;</span> <span class="keyword">in</span> run_device.get_device():</span><br><span class="line">        base_page.set_driver(run_device.get_device()[<span class="string">&#x27;ip&#x27;</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        base_page.set_driver(run_device.get_device()[<span class="string">&#x27;serial&#x27;</span>])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># run cases</span></span><br><span class="line">        base_page.set_fastinput_ime()  <span class="comment"># 切换成FastInputIME输入法</span></span><br><span class="line">        base_page.d.shell(<span class="string">&#x27;logcat -c&#x27;</span>)  <span class="comment"># 清空logcat</span></span><br><span class="line"></span><br><span class="line">        run_device.run_cases(cases)  <span class="comment"># RunCases().run(cases)</span></span><br><span class="line">        <span class="comment"># 将logcat文件上传到报告</span></span><br><span class="line">        base_page.d.shell(<span class="string">&#x27;logcat -d &gt; /sdcard/logcat.log&#x27;</span>)</span><br><span class="line">        time.sleep(<span class="number">1</span>)</span><br><span class="line">        base_page.d.pull(<span class="string">&#x27;/sdcard/logcat.log&#x27;</span>, os.path.join(path.get_path(), <span class="string">&#x27;logcat.log&#x27;</span>))</span><br><span class="line">        base_page.set_original_ime()  <span class="comment"># 切换成正常输入法</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ReadConfig().get_method().strip() <span class="keyword">in</span> [<span class="string">&quot;UDID&quot;</span>, <span class="string">&quot;SERVER2&quot;</span>]:</span><br><span class="line">            log.i(<span class="string">&#x27;释放设备 %s &#x27;</span> % run_device.get_device()[<span class="string">&#x27;serial&#x27;</span>])</span><br><span class="line">            Atxserver2(ReadConfig().get_server_url()).release_device(run_device.get_device()[<span class="string">&#x27;serial&#x27;</span>])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">except</span> AssertionError <span class="keyword">as</span> e:</span><br><span class="line">        log.e(<span class="string">&#x27;AssertionError, %s&#x27;</span>, e)   </span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>​首先根据config.ini中<code>method</code>的值来判断从SERVER2获取online的设备 还是从config.ini中的ip来获取在线的设备</li>
+<li>​在获取到设备之后，根据设备生产data.json测试数据</li>
+<li>​生成设备列表</li>
+<li>根据设备列表数生成多进程，执行测试用例</li>
+<li>​测试完之后，杀掉执行过程</li>
+<li>​最后在TestReport下生成统计测试报告，并且移到TestReport_History下（自动化测试报告.html</li>
+</ol>
+<h3 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h3><p>生成的测试报告路径结构如下<br><img src="/.kim//TestReport.png" alt="TestReport"></p>
+<p>每个设备的测试结果及报告或存放在单独的文件夹下<br>在Testreport目录下会有一个统计测试报告（自动化测试报告.html)会将所有设备的报告统一在一个页面展示<br><img src="/.kim//Report.png" alt="Report"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/08/23/Locust%E6%8E%A5%E5%8F%A3%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/23/Locust%E6%8E%A5%E5%8F%A3%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" class="post-title-link" itemprop="url">Locust接口性能测试</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-08-23 14:46:47 / 修改时间：14:58:48" itemprop="dateCreated datePublished" datetime="2019-08-23T14:46:47+08:00">2019-08-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">接口自动化测试</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="性能测试工具"><a href="#性能测试工具" class="headerlink" title="性能测试工具"></a>性能测试工具</h1><p>谈到性能测试工具，我们首先想到的是LoadRunner或JMeter。<br>LoadRunner是非常有名的商业性能测试工具，功能非常强大。但现在一般不推荐使用该工具来进行性能测试，主要是使用也较为复杂，而且该工具体积比较大，需要付费且价格不便宜。<br>JMeter同样是非常有名的开源性能测试工具，功能也很完善，我们之前介绍了它作为接口测试工具的使用。<br>Locust同样是性能测试工具，虽然官方这样来描述它：“An open source load testing tool.”，但它和前面两个工具有一些不同。
+　</p>
+<h1 id="Locust简介"><a href="#Locust简介" class="headerlink" title="Locust简介"></a>Locust简介</h1><p>Locust完全基于Python编程语言，采用纯 Python描述测试脚本，并且HTTP请求完全基于Requests库。除了HTTP/HTTPS协议外，Locust还可以测试其他协议的系统，只需采用Python调用对应的库进行请求描述即可。<br>LoadRunner和JMeter这类采用进程和线程的测试工具，都很难在单机上模拟出较高的并发压力。Locust的并发机制摒弃了进程和线程，采用协程（gevent）的机制。协程避免了系统级资源调度，因此可以大幅提高单机的并发能力。</p>
+<p>扩展资料：<a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/897692888725344/923057403198272">协程—廖雪峰博客</a></p>
+<p>下载安装<br>官网地址：<a target="_blank" rel="noopener" href="https://www.locust.io/">https://www.locust.io</a></p>
+<p>使用pip命令安装Locust：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip <span class="keyword">install</span> locustio</span><br></pre></td></tr></table></figure>
+<p>安装完成之后检测是否安装成功：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">locust -<span class="keyword">help</span></span><br><span class="line">Usage: locust [<span class="keyword">options</span>] [LocustClass [LocustClass2 ... ]]</span><br><span class="line"></span><br><span class="line">Option<span class="variable">s:</span></span><br><span class="line">  -h, --<span class="keyword">help</span>            show this <span class="keyword">help</span> message <span class="built_in">and</span> <span class="keyword">exit</span></span><br><span class="line">  -H HOST, --host=HOST  Host <span class="keyword">to</span> load test in the following forma<span class="variable">t:</span></span><br><span class="line">                        http://<span class="number">10.21</span>.<span class="number">32.33</span></span><br><span class="line">  --web-host=WEB_HOST   Host <span class="keyword">to</span> bind the web interface <span class="keyword">to</span>. Defaults <span class="keyword">to</span> <span class="string">&#x27;&#x27;</span> (<span class="keyword">all</span></span><br><span class="line">                        interfaces)</span><br><span class="line">  -<span class="keyword">P</span> PORT, --port=PORT, --web-port=PORT</span><br><span class="line">                        Port <span class="keyword">on</span> which <span class="keyword">to</span> run web host</span><br><span class="line">  -<span class="keyword">f</span> LOCUSTFILE, --locustfile=LOCUSTFILE</span><br><span class="line">                        Python module <span class="keyword">file</span> <span class="keyword">to</span> import, <span class="keyword">e</span>.g. <span class="string">&#x27;../other.py&#x27;</span>.</span><br><span class="line">                        Defaul<span class="variable">t:</span> locustfile</span><br><span class="line">  ....</span><br></pre></td></tr></table></figure>
+
+<h1 id="测试案例"><a href="#测试案例" class="headerlink" title="测试案例"></a>测试案例</h1><h2 id="测试场景"><a href="#测试场景" class="headerlink" title="测试场景"></a>测试场景</h2><p>针对如下两个接口进行性能测试：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="regexp">//</span><span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">8000</span><span class="regexp">/users/</span></span><br><span class="line">http:<span class="regexp">//</span><span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">8000</span><span class="regexp">/groups/</span></span><br></pre></td></tr></table></figure>
+<p>以上两个接口也就是我们之前项目django_restful的接口</p>
+<p>负载场景</p>
+<pre><code>* 每秒生成2个用户，总共生成60个用户。
+* 负载测试5分钟然后查看接口的平均响应时间。
+</code></pre>
+<h2 id="脚本实现"><a href="#脚本实现" class="headerlink" title="脚本实现"></a>脚本实现</h2><p>restful_api_locust.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> locust <span class="keyword">import</span>  HttpLocust,TaskSet,task</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserBehavior</span>(<span class="params">TaskSet</span>):</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @task(<span class="params"><span class="number">2</span></span>)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_users</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.client.get(<span class="string">&quot;/users/&quot;</span>,auth=(<span class="string">&#x27;51zxw&#x27;</span>,<span class="string">&#x27;zxw20182018&#x27;</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">    @task(<span class="params"><span class="number">1</span></span>)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_groups</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.client.get(<span class="string">&quot;/groups/&quot;</span>,auth=(<span class="string">&#x27;51zxw&#x27;</span>,<span class="string">&#x27;zxw20182018&#x27;</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WebsiteUser</span>(<span class="params">HttpLocust</span>):</span></span><br><span class="line">    task_set = UserBehavior</span><br><span class="line">    min_wait = <span class="number">3000</span></span><br><span class="line">    max_wait = <span class="number">6000</span></span><br></pre></td></tr></table></figure>
+<p>UserBehavior类继承TaskSet类，用于描述用户行为。</p>
+<pre><code>* @task装饰该方法为一个事务,后面的数字表示请求比例，上面的比例为2:1 默认都是1:1
+* test_users()方法表示一个用户行为，这里是请求user接口。
+* test_groups()方法表示请求group接口。
+* client.get()用于指定请求的路径。
+</code></pre>
+<p>WebsiteUser类用于设置性能测试。</p>
+<pre><code>* task_set：指向一个定义的用户行为类。
+* min_wait：执行事务之间用户等待时间的下界（单位：毫秒）。
+* max_wait：执行事务之间用户等待时间的上界（单位：毫秒）。
+</code></pre>
+<h2 id="执行测试"><a href="#执行测试" class="headerlink" title="执行测试"></a>执行测试</h2><p>使用如下命令开始启动测试</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">locust -f vic\locust\restful_api_locust.py --host=http://127.0.0.1:8000</span><br><span class="line">[2018-07-24 15:39:22,917] LAPTOP-8B5JADC8/INFO/locust.main: Starting web<span class="built_in"> monitor </span>at *:8089</span><br><span class="line">[2018-07-24 15:39:22,917] LAPTOP-8B5JADC8/INFO/locust.main: Starting Locust 0.8.1</span><br></pre></td></tr></table></figure>
+<p>在浏览器打开localhost:8089可以看到如下页面：</p>
+<p>locust-index</p>
+<pre><code>* Number of users to simulate：设置模拟用户数。
+* Hatch rate（users spawned/second）：每秒产生（启动）的虚拟用户数。
+* 单击“Start swarming”按钮，开始运行性能测试
+</code></pre>
+<p>运行之后可以看到主界面如下：</p>
+<p>locust-statistics</p>
+<p>性能测试参数如下。</p>
+<pre><code>* Type：请求的类型，例如GET/POST。
+* Name：请求的路径。
+* request：当前请求的数量。
+* fails：当前请求失败的数量。
+* Median：中间值，单位毫秒，一半的服务器响应时间低于该值，而另一半高于该值。
+* Average：平均值，单位毫秒，所有请求的平均响应时间。
+* Min：请求的最小服务器响应时间，单位毫秒。
+* Max：请求的最大服务器响应时间，单位毫秒。
+* Content Size：单个请求的大小，单位字节。
+* reqs/sec：每秒钟请求的个数。
+</code></pre>
+<p>点击 Charts 菜单可以查看性能图表</p>
+<p>locust-charts</p>
+<p>图表含义如下：</p>
+<pre><code>* Total Request per Second ：每秒的请求数
+* Average Response Time: 平均响应时间
+* Number of Users: 用户数
+</code></pre>
+<h1 id="参数化"><a href="#参数化" class="headerlink" title="参数化"></a>参数化</h1><h2 id="测试场景-1"><a href="#测试场景-1" class="headerlink" title="测试场景"></a>测试场景</h2><p>如果想对如下接口进行并发测试，则可以将id进行参数化设置</p>
+<pre><code>* http://127.0.0.1:8000/groups/1/
+* http://127.0.0.1:8000/groups/2/
+* http://127.0.0.1:8000/users/1/
+* http://127.0.0.1:8000/users/2/
+</code></pre>
+<p>代码实现<br>locust_users_groups.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> locust <span class="keyword">import</span>  HttpLocust,TaskSet,task</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserBehavior</span>(<span class="params">TaskSet</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">on_start</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="comment">#设置user和group参数下标初始值</span></span><br><span class="line">        self.users_index=<span class="number">0</span></span><br><span class="line">        self.groups_index=<span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @task</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_users</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="comment">#读取参数</span></span><br><span class="line">        users_id=self.locust.<span class="built_in">id</span>[self.users_index]</span><br><span class="line">        url=<span class="string">&quot;/users/&quot;</span>+<span class="built_in">str</span>(users_id)+<span class="string">&#x27;/&#x27;</span></span><br><span class="line">        self.client.get(url,auth=(<span class="string">&#x27;51zxw&#x27;</span>,<span class="string">&#x27;zxw20182018&#x27;</span>))</span><br><span class="line">        <span class="comment">#取余运算循环遍历参数</span></span><br><span class="line">        self.users_index=(self.users_index+<span class="number">1</span>)%<span class="built_in">len</span>(self.locust.<span class="built_in">id</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @task</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_groups</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="comment">#参数化</span></span><br><span class="line">        groups_id=self.locust.<span class="built_in">id</span>[self.groups_index]</span><br><span class="line">        url=<span class="string">&quot;/groups/&quot;</span>+<span class="built_in">str</span>(groups_id)+<span class="string">&quot;/&quot;</span></span><br><span class="line">        self.client.get(url,auth=(<span class="string">&#x27;51zxw&#x27;</span>,<span class="string">&#x27;zxw20182018&#x27;</span>))</span><br><span class="line">        self.groups_index=(self.groups_index+<span class="number">1</span>)%<span class="built_in">len</span>(self.locust.<span class="built_in">id</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WebsiteUser</span>(<span class="params">HttpLocust</span>):</span></span><br><span class="line">    task_set = UserBehavior</span><br><span class="line">    <span class="comment">#参数配置</span></span><br><span class="line">    <span class="built_in">id</span>=[<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line">    min_wait = <span class="number">3000</span></span><br><span class="line">    max_wait = <span class="number">6000</span></span><br><span class="line">    <span class="comment">#host配置</span></span><br><span class="line">    host = <span class="string">&#x27;http://127.0.0.1:8000&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><p>执行如下命令即可运行测试</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locust -f vic<span class="symbol">\l</span>ocust<span class="symbol">\l</span>ocust_users_groups.py</span><br></pre></td></tr></table></figure>
+<p>locust-params</p>
+<h2 id="运行模式"><a href="#运行模式" class="headerlink" title="运行模式"></a>运行模式</h2><h3 id="no-web运行"><a href="#no-web运行" class="headerlink" title="no-web运行"></a>no-web运行</h3><p>前面是通过登录web来运行测试的，其实也可以非web状态来运行,如cmd命令来运行。<br>如果需要非Web形式运行，则需使用–no-web参数，并会用到如下几个参数。</p>
+<pre><code>* -c, --clients：指定并发用户数；
+* -r, --hatch-rate：指定并发加压速率，默认值位1。
+* -t, --run-time：设置运行时间。如(300s,20m, 3h, 1h30m等）；
+</code></pre>
+<p>运行命令如下：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">locust</span> -f vic\locust\locust_users_groups.py --no-web -c <span class="number">10</span> -r <span class="number">2</span> -t <span class="number">15</span>s</span><br></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">locust -f vic\locust\locust_users_groups.py --no-web -c 10 -r 2 -t 15s</span><br><span class="line">[2018-08-21 10:12:59,017] LAPTOP-8B5JADC8/INFO/locust.main: Run time limit set to 15 seconds</span><br><span class="line">[2018-08-21 10:12:59,017] LAPTOP-8B5JADC8/INFO/locust.main: Starting Locust 0.8</span><br><span class="line">[2018-08-21 10:12:59,018] LAPTOP-8B5JADC8/INFO/locust.runners: Hatching and swarming 10 clients at the rate 2 clients/s...</span><br><span class="line"><span class="code"> Name                                                          # reqs      # fails     Avg     Min     Max  |  Median   req/s</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> Total                                                              0     0(0.00%)                                       0.00</span></span><br><span class="line"></span><br><span class="line"><span class="code"> Name                                                          # reqs      # fails     Avg     Min     Max  |  Median   req/s</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> GET /groups/1/                                                     2     0(0.00%)     134     122     146  |     120    0.00</span></span><br><span class="line"><span class="code"> GET /users/1/                                                      2     0(0.00%)     118     100     136  |     100    0.00</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> Total                                                              4     0(0.00%)                                       0.00</span></span><br><span class="line"></span><br><span class="line"><span class="code"> Name                                                          # reqs      # fails     Avg     Min     Max  |  Median   req/s</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> GET /groups/1/                                                     4     0(0.00%)     135     122     146  |     130    1.00</span></span><br><span class="line"><span class="code"> GET /users/1/                                                      4     0(0.00%)     115     100     136  |     100    1.00</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> Total                                                              8     0(0.00%)                                       2.00</span></span><br><span class="line"></span><br><span class="line">[2018-08-21 10:13:04,034] LAPTOP-8B5JADC8/INFO/locust.runners: All locusts hatched: WebsiteUser: 10</span><br><span class="line">[2018-08-21 10:13:04,034] LAPTOP-8B5JADC8/INFO/locust.runners: Resetting stats</span><br><span class="line"></span><br><span class="line"><span class="code"> Name                                                          # reqs      # fails     Avg     Min     Max  |  Median   req/s</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> GET /groups/1/                                                     1     0(0.00%)     147     147     147  |     150    0.00</span></span><br><span class="line"><span class="code"> GET /users/1/                                                      2     0(0.00%)     110      92     128  |      92    0.00</span></span><br><span class="line"><span class="code"> GET /users/2/                                                      1     0(0.00%)     102     102     102  |     100    0.00</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> Total                                                              4     0(0.00%)                                       0.00</span></span><br><span class="line"></span><br><span class="line"><span class="code"> Name                                                          # reqs      # fails     Avg     Min     Max  |  Median   req/s</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> GET /groups/1/                                                     3     0(0.00%)     129     101     147  |     140    0.00</span></span><br><span class="line"><span class="code"> GET /users/1/                                                      3     0(0.00%)     108      92     128  |     100    0.00</span></span><br><span class="line"><span class="code"> GET /users/2/                                                      1     0(0.00%)     102     102     102  |     100    0.00</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> Total                                                              7     0(0.00%)                                       0.00</span></span><br><span class="line"></span><br><span class="line"><span class="code"> Name                                                          # reqs      # fails     Avg     Min     Max  |  Median   req/s</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> GET /groups/1/                                                     4     0(0.00%)     125     101     147  |     110    1.00</span></span><br><span class="line"><span class="code"> GET /groups/2/                                                     2     0(0.00%)     136     116     156  |     120    0.00</span></span><br><span class="line"><span class="code"> GET /users/1/                                                      3     0(0.00%)     108      92     128  |     100    1.00</span></span><br><span class="line"><span class="code"> GET /users/2/                                                      2     0(0.00%)     102     102     102  |     100    0.33</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> Total                                                             11     0(0.00%)                                       2.33</span></span><br><span class="line"></span><br><span class="line"><span class="code"> Name                                                          # reqs      # fails     Avg     Min     Max  |  Median   req/s</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> GET /groups/1/                                                     5     0(0.00%)     123     101     147  |     120    0.75</span></span><br><span class="line"><span class="code"> GET /groups/2/                                                     3     0(0.00%)     124     100     156  |     120    0.50</span></span><br><span class="line"><span class="code"> GET /users/1/                                                      3     0(0.00%)     108      92     128  |     100    0.75</span></span><br><span class="line"><span class="code"> GET /users/2/                                                      4     0(0.00%)     114     102     153  |     100    0.25</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> Total                                                             15     0(0.00%)                                       2.25</span></span><br><span class="line"></span><br><span class="line"><span class="code"> Name                                                          # reqs      # fails     Avg     Min     Max  |  Median   req/s</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> GET /groups/1/                                                     6     0(0.00%)     128     101     157  |     120    0.67</span></span><br><span class="line"><span class="code"> GET /groups/2/                                                     5     0(0.00%)     127     100     156  |     120    0.33</span></span><br><span class="line"><span class="code"> GET /users/1/                                                      4     0(0.00%)     108      92     128  |     100    0.50</span></span><br><span class="line"><span class="code"> GET /users/2/                                                      5     0(0.00%)     121     102     153  |     100    0.50</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> Total                                                             20     0(0.00%)                                       2.00</span></span><br><span class="line"></span><br><span class="line">[2018-08-21 10:13:13,691] LAPTOP-8B5JADC8/INFO/locust.main: Time limit reached. Stopping Locust.</span><br><span class="line">[2018-08-21 10:13:13,693] LAPTOP-8B5JADC8/INFO/locust.main: Shutting down (exit code 0), bye.</span><br><span class="line"><span class="code"> Name                                                          # reqs      # fails     Avg     Min     Max  |  Median   req/s</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> GET /groups/1/                                                     6     0(0.00%)     128     101     157  |     120    0.67</span></span><br><span class="line"><span class="code"> GET /groups/2/                                                     5     0(0.00%)     127     100     156  |     120    0.33</span></span><br><span class="line"><span class="code"> GET /users/1/                                                      4     0(0.00%)     108      92     128  |     100    0.50</span></span><br><span class="line"><span class="code"> GET /users/2/                                                      5     0(0.00%)     121     102     153  |     100    0.50</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> Total                                                             20     0(0.00%)                                       2.00</span></span><br><span class="line"></span><br><span class="line">Percentage of the requests completed within given times</span><br><span class="line"><span class="code"> Name                                                           # reqs    50%    66%    75%    80%    90%    95%    98%    99%   100%</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> GET /groups/1/                                                      6    140    140    150    150    160    160    160    160    157</span></span><br><span class="line"><span class="code"> GET /groups/2/                                                      5    120    150    150    160    160    160    160    160    156</span></span><br><span class="line"><span class="code"> GET /users/1/                                                       4    110    110    130    130    130    130    130    130    128</span></span><br><span class="line"><span class="code"> GET /users/2/                                                       5    100    150    150    150    150    150    150    150    153</span></span><br><span class="line">--------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line"><span class="code"> Total                                                              20    120    140    150    150    160    160    160    160    157</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="分布式运行"><a href="#分布式运行" class="headerlink" title="分布式运行"></a>分布式运行</h3><p>上面我们都是单台机器来执行性能测试，但是当单台机器不够模拟足够多的用户时，Locust支持运行在多台机器中进行压力测试。分布式运行一般是一台master 多台slave 如下图所示：</p>
+<p>image</p>
+<p>首先定义一台 master</p>
+<figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locust -f vic\locust\locust_users_groups.py <span class="comment">--master</span></span><br></pre></td></tr></table></figure>
+<p>然后定义 slave</p>
+<p>locust -f D:\api_test\locust\locust_users_groups.py  –slave<br>如果slave与master不在同一台机器上，还需要通过–master-host参数再指定master的IP地址。</p>
+<p>C:\Users\Shuqing&gt;locust -f D:\api_test\locust\locust_users_groups.py –slave –master-host <master_ip><br>运行之后可以看到web界面显示的SLAVES数量</master_ip></p>
+<p>locust-slave</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/08/22/ATX2%E5%85%A5%E9%97%A8%E8%BF%9B%E9%98%B6%E5%BA%94%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/22/ATX2%E5%85%A5%E9%97%A8%E8%BF%9B%E9%98%B6%E5%BA%94%E7%94%A8/" class="post-title-link" itemprop="url">ATX2入门进阶应用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-08-22 17:29:38 / 修改时间：17:51:03" itemprop="dateCreated datePublished" datetime="2019-08-22T17:29:38+08:00">2019-08-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/App%E8%87%AA%E5%8A%A8%E5%8C%96/" itemprop="url" rel="index"><span itemprop="name">App自动化</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[TOC]</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>前面我们已经搭建好了ATX2平台来管理iOS设备，搭建博文参考:ATX2 iOS设备管理平台搭建 接下来分享一下该平台的入门进阶使用(还是基于iOS设备)。</p>
+<h1 id="ATX2入门操作"><a href="#ATX2入门操作" class="headerlink" title="ATX2入门操作"></a>ATX2入门操作</h1><ul>
+<li>打开登录地址：<a target="_blank" rel="noopener" href="http://172.28.xx.xx:4000/login">http://172.28.xx.xx:4000/login</a> 输入用户名登录ATX平台。</li>
+<li>登录之后进入ATX2界面，在对应的设备点击<code>点击使用</code>则可以远程操作设备。</li>
+<li>如下图所示，点击使用之后可以使用鼠标进行设备远程操作控制。<br><img src="/.kim//atx2_iOS_action.gif" alt="示例图"></li>
+</ul>
+<blockquote>
+<p>注意： iOS的弹窗不能通过屏幕点击来选择，需要在常用功能中点击“选择弹窗按钮”来进行操作</p>
+</blockquote>
+<h1 id="ATX2-API"><a href="#ATX2-API" class="headerlink" title="ATX2 API"></a>ATX2 API</h1><p>ATX2提供了API可以进行调用，可以方便我们在自动化测试过程中进行调用。<br>API文档地址：<a target="_blank" rel="noopener" href="https://github.com/openatx/atxserver2/blob/master/API.md">https://github.com/openatx/atxserver2/blob/master/API.md</a></p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="token获取"><a href="#token获取" class="headerlink" title="token获取"></a>token获取</h3><p>ATX2所有的接口采用<code>token</code>认证，<code>token</code>可以在<a target="_blank" rel="noopener" href="http://172.28.xx.xx:4000/user%E9%A1%B5%E9%9D%A2%E8%8E%B7%E5%8F%96%E5%88%B0">http://172.28.xx.xx:4000/user页面获取到</a><br>也可以点击右上角用户名-&gt;用户信息获取，如下图所示:<br><img src="/.kim//token.png" alt="示例图"></p>
+<h3 id="获取设备的udid"><a href="#获取设备的udid" class="headerlink" title="获取设备的udid"></a>获取设备的udid</h3><p>设备列表界面中的设备编号即为设备的<code>udid</code>，可以使用<code>libimobiledevice</code>命令获取设备的udid,命令如下：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">idevice_id</span> -l  <span class="comment"># 显示当前所连接的设备[udid]，包括 usb、WiFi 连接</span></span><br><span class="line">c06e788b2d8dc60004a7015ce5dad782</span><br></pre></td></tr></table></figure>
+<h2 id="API封装"><a href="#API封装" class="headerlink" title="API封装"></a>API封装</h2><p>为了更好的调用API,我们可以进行封装方法，便于后续的调用。首先如下所示，我们定义一个类<code>AtxiOS</code> 这个类进行远程调用设备的初始化操作，如atx地址和token的初始化。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json,logging</span><br><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> urljoin</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> pprint <span class="keyword">import</span> pprint</span><br><span class="line"></span><br><span class="line">logging.basicConfig(level=logging.INFO,</span><br><span class="line">                    <span class="built_in">format</span>=<span class="string">&#x27;%(asctime)s %(filename)s[line:%(lineno)d]%(levelname)s%(message)s&#x27;</span>)</span><br><span class="line"></span><br><span class="line">DEVICES_URL = <span class="string">&#x27;/api/v1/devices&#x27;</span> <span class="comment">#获取全部设备信息</span></span><br><span class="line">USER_DEVICES_URL = <span class="string">&#x27;/api/v1/user/devices&#x27;</span>  <span class="comment">#获取单台设备信息</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AtxiOS</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    封装ATX2接口用于设备远程操作</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">       <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, atx_url, token</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        初始化操作</span></span><br><span class="line"><span class="string">        :param atx_url: atx的url地址</span></span><br><span class="line"><span class="string">        :param token: 账户的token</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        self.atx_url = atx_url</span><br><span class="line">        self.token = token</span><br><span class="line">        self.session = requests.Session()</span><br><span class="line">        self.headers = <span class="built_in">dict</span>(Authorization=<span class="string">&quot;Bearer &#123;&#125;&quot;</span>.<span class="built_in">format</span>(self.token))</span><br><span class="line">        self.apply_devices = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_get_response</span>(<span class="params">self, url, method=<span class="string">&quot;GET&quot;</span>, headers=<span class="literal">None</span>, data=<span class="literal">None</span></span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        获取API响应结果</span></span><br><span class="line"><span class="string">        :param url:返回的url地址</span></span><br><span class="line"><span class="string">        :param method:请求方法</span></span><br><span class="line"><span class="string">        :param headers:响应header内容</span></span><br><span class="line"><span class="string">        :param data:响应的data内容</span></span><br><span class="line"><span class="string">        :return: 返回响应信息</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> headers:</span><br><span class="line">            headers = self.headers</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            response = self.session.request(method, url, headers=headers, data=data, timeout=<span class="number">20</span>)</span><br><span class="line">            info = response.json()</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> error:</span><br><span class="line">            logging.error(<span class="string">&#x27;网址：&#123;&#125;请求失败。&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(url, error))</span><br><span class="line">            info = &#123;<span class="string">&#x27;success&#x27;</span>: <span class="literal">False</span>, <span class="string">&#x27;description&#x27;</span>: <span class="string">&#x27;Bad request url: &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(url)&#125;</span><br><span class="line">        <span class="keyword">return</span> info</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取所有iOS设备信息"><a href="#获取所有iOS设备信息" class="headerlink" title="获取所有iOS设备信息"></a>获取所有iOS设备信息</h2><p>在上面的<code>AtxiOS</code>类中定义如下方法用于获取所有iOS设备信息。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_all_iOS_devices</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    获取所有iOS设备</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    url = urljoin(self.atx_url, DEVICES_URL)</span><br><span class="line">    info = self._get_response(url=url)</span><br><span class="line">    pprint(info)</span><br><span class="line">    <span class="keyword">return</span> info</span><br></pre></td></tr></table></figure>
+<p>然后调用定义好的方法</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ATX_URL</span> =&#x27;http://<span class="number">172</span>.<span class="number">28</span>.xx.xx:<span class="number">4000</span>&#x27;</span><br><span class="line"><span class="attribute">Token</span>=&#x27;xxxxxxxxx&#x27;</span><br><span class="line"><span class="attribute">udid</span>=&#x27;<span class="number">2</span>cced<span class="number">5</span>ac<span class="number">6</span>ad<span class="number">06</span>c<span class="number">35</span>e<span class="number">067460</span>dad<span class="number">5</span>ff<span class="number">417</span>f<span class="number">264</span>b<span class="number">8</span>ae&#x27;  #iphone<span class="number">7</span></span><br><span class="line"> </span><br><span class="line"><span class="attribute">atx</span>=AtxiOS(ATX_URL,Token)</span><br><span class="line"><span class="attribute">atx</span>.get_all_iOS_devices() #获取所有设备信息</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>调用之后返回结果如下：</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#x27;count&#x27;: <span class="number">4</span>,</span><br><span class="line"> &#x27;devices&#x27;: [&#123;&#x27;colding&#x27;: False,</span><br><span class="line">              &#x27;createdAt&#x27;: &#x27;<span class="number">2019-06-11</span>T16:57:17.<span class="number">371000</span>&#x27;,</span><br><span class="line">              &#x27;owner&#x27;: &#x27;&#x27;,</span><br><span class="line">              &#x27;platform&#x27;: &#x27;apple&#x27;,</span><br><span class="line">              &#x27;present&#x27;: False,</span><br><span class="line">              &#x27;properties&#x27;: &#123;&#x27;brand&#x27;: &#x27;Apple&#x27;,</span><br><span class="line">                             &#x27;name&#x27;: &#x27;&#x27;,</span><br><span class="line">                             &#x27;product&#x27;: &#x27;Unknown&#x27;&#125;,</span><br><span class="line">              &#x27;udid&#x27;: &#x27;ece<span class="number">8186</span>4b51f3e<span class="number">0535</span>bf86e9ab24f<span class="number">9209</span>e<span class="number">9727</span>f0&#x27;,</span><br><span class="line">              &#x27;updatedAt&#x27;: &#x27;<span class="number">2019-06-11</span>T16:58:33.<span class="number">049000</span>&#x27;&#125;,</span><br><span class="line">             &#123;&#x27;colding&#x27;: False,</span><br><span class="line">              &#x27;createdAt&#x27;: &#x27;<span class="number">2019-06-11</span>T10:17:43.<span class="number">340000</span>&#x27;,</span><br><span class="line">              &#x27;owner&#x27;: &#x27;&#x27;,</span><br><span class="line">              &#x27;platform&#x27;: &#x27;apple&#x27;,</span><br><span class="line">              &#x27;present&#x27;: False,</span><br><span class="line">              &#x27;properties&#x27;: &#123;&#x27;brand&#x27;: &#x27;Apple&#x27;,</span><br><span class="line">                             &#x27;name&#x27;: &#x27;&#x27;,</span><br><span class="line">                             &#x27;product&#x27;: &#x27;Unknown&#x27;&#125;,</span><br><span class="line">              &#x27;udid&#x27;: &#x27;6dd5e55bf<span class="number">4204</span>cd5ad<span class="number">8042</span>dc4ecb2b703bbdb435&#x27;,</span><br><span class="line">              &#x27;updatedAt&#x27;: &#x27;<span class="number">2019-06-11</span>T10:21:28.<span class="number">894000</span>&#x27;,</span><br><span class="line">              &#x27;using&#x27;: False&#125;,</span><br><span class="line">             &#123;&#x27;colding&#x27;: False,</span><br><span class="line">              &#x27;createdAt&#x27;: &#x27;<span class="number">2019-06-06</span>T08:54:42.<span class="number">115000</span>&#x27;,</span><br><span class="line">              &#x27;idleTimeout&#x27;: <span class="number">600</span>,</span><br><span class="line">              &#x27;lastActivatedAt&#x27;: &#x27;<span class="number">2019-06-10</span>T09:12:46.<span class="number">465000</span>&#x27;,</span><br><span class="line">              &#x27;owner&#x27;: &#x27;&#x27;,</span><br><span class="line">              &#x27;platform&#x27;: &#x27;apple&#x27;,</span><br><span class="line">              &#x27;present&#x27;: False,</span><br><span class="line">              &#x27;properties&#x27;: &#123;&#x27;brand&#x27;: &#x27;Apple&#x27;,</span><br><span class="line">                             &#x27;ip&#x27;: &#x27;172.28.212.16&#x27;,</span><br><span class="line">                             &#x27;name&#x27;: &#x27;iPhone6&#x27;,</span><br><span class="line">                             &#x27;product&#x27;: &#x27;iPhone 6&#x27;,</span><br><span class="line">                             &#x27;propertyId&#x27;: &#x27;<span class="number">1908090114</span>&#x27;,</span><br><span class="line">                             &#x27;sdkVersion&#x27;: &#x27;12.2&#x27;,</span><br><span class="line">                             &#x27;version&#x27;: &#x27;12.1.4&#x27;&#125;,</span><br><span class="line">              &#x27;udid&#x27;: &#x27;fa00fcc158dadb6bd1cc7c<span class="number">618540</span>ebd7c<span class="number">372352</span>0&#x27;,</span><br><span class="line">              &#x27;updatedAt&#x27;: &#x27;<span class="number">2019-06-10</span>T10:13:48.<span class="number">662000</span>&#x27;,</span><br><span class="line">              &#x27;userId&#x27;: None,</span><br><span class="line">              &#x27;using&#x27;: False,</span><br><span class="line">              &#x27;usingBeganAt&#x27;: &#x27;<span class="number">2019-06-10</span>T09:02:10.<span class="number">333000</span>&#x27;,</span><br><span class="line">              &#x27;usingDuration&#x27;: <span class="number">1041.401</span>&#125;,</span><br><span class="line">             &#123;&#x27;colding&#x27;: False,</span><br><span class="line">              &#x27;createdAt&#x27;: &#x27;<span class="number">2019-05-30</span>T21:39:47.<span class="number">708000</span>&#x27;,</span><br><span class="line">              &#x27;idleTimeout&#x27;: <span class="number">600</span>,</span><br><span class="line">              &#x27;lastActivatedAt&#x27;: &#x27;<span class="number">2019-06-11</span>T16:53:32.<span class="number">250000</span>&#x27;,</span><br><span class="line">              &#x27;owner&#x27;: &#x27;&#x27;,</span><br><span class="line">              &#x27;platform&#x27;: &#x27;apple&#x27;,</span><br><span class="line">              &#x27;present&#x27;: True,</span><br><span class="line">              &#x27;properties&#x27;: &#123;&#x27;brand&#x27;: &#x27;Apple&#x27;,</span><br><span class="line">                             &#x27;ip&#x27;: &#x27;172.28.213.231&#x27;,</span><br><span class="line">                             &#x27;name&#x27;: &#x27;iPhone 7&#x27;,</span><br><span class="line">                             &#x27;product&#x27;: &#x27;iPhone 7&#x27;,</span><br><span class="line">                             &#x27;propertyId&#x27;: &#x27;<span class="number">1908090112</span>&#x27;,</span><br><span class="line">                             &#x27;sdkVersion&#x27;: &#x27;12.2&#x27;,</span><br><span class="line">                             &#x27;version&#x27;: &#x27;12.1.4&#x27;&#125;,</span><br><span class="line">              &#x27;udid&#x27;: &#x27;2cced5ac6ad06c35e<span class="number">067460</span>dad5ff417f264b8ae&#x27;,</span><br><span class="line">              &#x27;updatedAt&#x27;: &#x27;<span class="number">2019-06-11</span>T16:53:56.<span class="number">737000</span>&#x27;,</span><br><span class="line">              &#x27;userId&#x27;: None,</span><br><span class="line">              &#x27;using&#x27;: False,</span><br><span class="line">              &#x27;usingBeganAt&#x27;: &#x27;<span class="number">2019-06-11</span>T16:53:32.<span class="number">250000</span>&#x27;,</span><br><span class="line">              &#x27;usingDuration&#x27;: <span class="number">8877.971</span>&#125;],</span><br><span class="line"> &#x27;success&#x27;: True&#125;</span><br></pre></td></tr></table></figure>
+<p>几个比较重要的字段说明</p>
+<pre><code>* platform目前有两个值android和apple
+* present代表设备是否在线
+* colding代表设备是否正在清理或者自检中, 此时是不能占用设备的
+* using代表设备是否有人正在使用
+* userId代表使用者的ID，这里的ID其实就是Email
+* properties代表设备的一些状态信息，基本都是静态信息
+</code></pre>
+<h2 id="获取单个设备信息"><a href="#获取单个设备信息" class="headerlink" title="获取单个设备信息"></a>获取单个设备信息</h2><p>如果我们想查看单个设备的信息，可以封装如下方法来查看。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_iOS_device_by_udid</span>(<span class="params">self, udid</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    获取单个设备信息</span></span><br><span class="line"><span class="string">    :param udid:str 设备的 udid 字段</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    left_url = <span class="string">&quot;/&quot;</span>.join([USER_DEVICES_URL, udid])</span><br><span class="line">    url = urljoin(self.atx_url, left_url)</span><br><span class="line">    info = self._get_response(url=url)</span><br><span class="line">    <span class="comment"># pprint(info)</span></span><br><span class="line">    <span class="keyword">return</span> info</span><br></pre></td></tr></table></figure>
+<p>调用方法如下：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ATX_URL</span> =&#x27;http://<span class="number">172</span>.<span class="number">28</span>.xx.xx:<span class="number">4000</span>&#x27;</span><br><span class="line"><span class="attribute">Token</span>=&#x27;xxxxxxx&#x27;</span><br><span class="line"><span class="attribute">udid</span>=&#x27;<span class="number">2</span>cced<span class="number">5</span>ac<span class="number">6</span>ad<span class="number">06</span>c<span class="number">35</span>e<span class="number">067460</span>dad<span class="number">5</span>ff<span class="number">417</span>f<span class="number">264</span>b<span class="number">8</span>ae&#x27;  #iphone<span class="number">7</span></span><br><span class="line"> </span><br><span class="line"><span class="attribute">atx</span>=AtxiOS(ATX_URL,Token)</span><br><span class="line"><span class="attribute">device_info</span>=atx.get_iOS_device_by_udid(udid) #获取单个设备信息</span><br><span class="line"><span class="attribute">pprint</span>(device_info)</span><br></pre></td></tr></table></figure>
+<p>返回内容如下：</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#x27;device&#x27;: &#123;&#x27;colding&#x27;: False,</span><br><span class="line">            &#x27;createdAt&#x27;: &#x27;<span class="number">2019-05-30</span>T21:39:47.<span class="number">708000</span>&#x27;,</span><br><span class="line">            &#x27;idleTimeout&#x27;: <span class="number">600</span>,</span><br><span class="line">            &#x27;lastActivatedAt&#x27;: &#x27;<span class="number">2019-06-11</span>T16:53:32.<span class="number">250000</span>&#x27;,</span><br><span class="line">            &#x27;owner&#x27;: &#x27;&#x27;,</span><br><span class="line">            &#x27;platform&#x27;: &#x27;apple&#x27;,</span><br><span class="line">            &#x27;properties&#x27;: &#123;&#x27;brand&#x27;: &#x27;Apple&#x27;,</span><br><span class="line">                           &#x27;ip&#x27;: &#x27;172.28.213.231&#x27;,</span><br><span class="line">                           &#x27;name&#x27;: &#x27;iPhone 7&#x27;,</span><br><span class="line">                           &#x27;product&#x27;: &#x27;iPhone 7&#x27;,</span><br><span class="line">                           &#x27;propertyId&#x27;: &#x27;<span class="number">1908090112</span>&#x27;,</span><br><span class="line">                           &#x27;sdkVersion&#x27;: &#x27;12.2&#x27;,</span><br><span class="line">                           &#x27;version&#x27;: &#x27;12.1.4&#x27;&#125;,</span><br><span class="line">            &#x27;source&#x27;: &#123;&#x27;id&#x27;: &#x27;<span class="number">0681</span>c592-8bf4-11e9-afd1-<span class="number">0242</span>ac<span class="number">120002</span>&#x27;,</span><br><span class="line">                       &#x27;name&#x27;: &#x27;pyclient&#x27;,</span><br><span class="line">                       &#x27;owner&#x27;: &#x27;nobody@nobody.io&#x27;,</span><br><span class="line">                       &#x27;priority&#x27;: <span class="number">2</span>,</span><br><span class="line">                       &#x27;secret&#x27;: &#x27;&#x27;,</span><br><span class="line">                       &#x27;url&#x27;: &#x27;http://172.28.xx.xx:<span class="number">3600</span>&#x27;,</span><br><span class="line">                       &#x27;wdaUrl&#x27;: &#x27;http://172.28.xx.xx:<span class="number">2002</span>3&#x27;&#125;,</span><br><span class="line">            &#x27;sources&#x27;: &#123;&#x27;<span class="number">0681</span>c592-8bf4-11e9-afd1-<span class="number">0242</span>ac<span class="number">120002</span>&#x27;: &#123;&#x27;id&#x27;: &#x27;<span class="number">0681</span>c592-8bf4-11e9-afd1-<span class="number">0242</span>ac<span class="number">120002</span>&#x27;,</span><br><span class="line">                                                                 &#x27;name&#x27;: &#x27;pyclient&#x27;,</span><br><span class="line">                                                                 &#x27;owner&#x27;: &#x27;nobody@nobody.io&#x27;,</span><br><span class="line">                                                                 &#x27;priority&#x27;: <span class="number">2</span>,</span><br><span class="line">                                                                 &#x27;secret&#x27;: &#x27;&#x27;,</span><br><span class="line">                                                                 &#x27;url&#x27;: &#x27;http://172.28.xx.xx:<span class="number">3600</span>&#x27;,</span><br><span class="line">                                                                 &#x27;wdaUrl&#x27;: &#x27;http://172.28.xx.xx:<span class="number">2002</span>3&#x27;&#125;&#125;,</span><br><span class="line">            &#x27;udid&#x27;: &#x27;2cced5ac6ad06c35e<span class="number">067460</span>dad5ff417f264b8ae&#x27;,</span><br><span class="line">            &#x27;updatedAt&#x27;: &#x27;<span class="number">2019-06-11</span>T16:53:56.<span class="number">737000</span>&#x27;,</span><br><span class="line">            &#x27;userId&#x27;: None,</span><br><span class="line">            &#x27;using&#x27;: False,</span><br><span class="line">            &#x27;usingBeganAt&#x27;: &#x27;<span class="number">2019-06-11</span>T16:53:32.<span class="number">250000</span>&#x27;,</span><br><span class="line">            &#x27;usingDuration&#x27;: <span class="number">8877.971</span>&#125;,</span><br><span class="line"> &#x27;success&#x27;: True&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="获取设备远程WDA地址"><a href="#获取设备远程WDA地址" class="headerlink" title="获取设备远程WDA地址"></a>获取设备远程WDA地址</h2><p>每台挂载在ATX2平台的iOS设备都有一个唯一的WDA地址，我们可以根据这个地址来远程调用该设备，一般地址格式为:ATX地址IP+端口号</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_wda_url</span>(<span class="params">self,udid</span>):</span></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    获取iOS设备远程wda链接</span></span><br><span class="line"><span class="string">    :param udid: 设备udid</span></span><br><span class="line"><span class="string">    :return: </span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    device_info =self.get_iOS_device_by_udid(udid)</span><br><span class="line">    wda_url = device_info[<span class="string">&#x27;device&#x27;</span>][<span class="string">&#x27;source&#x27;</span>][<span class="string">&#x27;wdaUrl&#x27;</span>]</span><br><span class="line">    logging.info(<span class="string">&#x27;wda_url is %s&#x27;</span> %wda_url)</span><br><span class="line">    <span class="keyword">return</span> wda_url</span><br></pre></td></tr></table></figure>
+<p>调用方法</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ATX_URL</span> =&#x27;http://<span class="number">172</span>.<span class="number">28</span>.xx.xx:<span class="number">4000</span>&#x27;</span><br><span class="line"><span class="attribute">Token</span>=&#x27;a<span class="number">0344</span>xxxxx<span class="number">45</span>e<span class="number">92</span>a<span class="number">396</span>b<span class="number">0530</span>&#x27;</span><br><span class="line"><span class="attribute">udid</span>=&#x27;<span class="number">2</span>cced<span class="number">5</span>ac<span class="number">6</span>ad<span class="number">06</span>c<span class="number">35</span>e<span class="number">067460</span>dad<span class="number">5</span>ff<span class="number">417</span>f<span class="number">264</span>b<span class="number">8</span>ae&#x27;  #iphone<span class="number">7</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">atx</span>=AtxiOS(ATX_URL,Token)</span><br><span class="line"><span class="attribute">atx</span>.get_wda_url(udid) #获取设备的远程url地址</span><br></pre></td></tr></table></figure>
+<p>返回结果</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">http</span>://<span class="number">172</span>.<span class="number">28</span>.xx.xx:<span class="number">200000</span></span><br></pre></td></tr></table></figure>
+<p>设备占用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">using_iOS_device</span>(<span class="params">self, udid</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    占用一台设备</span></span><br><span class="line"><span class="string">    :param udid: str 设备的 udid 字段</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    url = urljoin(self.atx_url, USER_DEVICES_URL)</span><br><span class="line">    data = &#123;<span class="string">&quot;udid&quot;</span>: udid&#125;</span><br><span class="line">    headers = self.headers</span><br><span class="line">    headers[<span class="string">&quot;Content-Type&quot;</span>] = <span class="string">&quot;application/json&quot;</span></span><br><span class="line">    info = self._get_response(url, <span class="string">&quot;POST&quot;</span>, headers, json.dumps(data))</span><br><span class="line">    logging.info(info)</span><br></pre></td></tr></table></figure>
+<p>调用方法</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ATX_URL</span> =&#x27;http://<span class="number">172</span>.<span class="number">28</span>.xx.xx:<span class="number">4000</span>&#x27;</span><br><span class="line"><span class="attribute">Token</span>=&#x27;a<span class="number">0344</span>xxxxx<span class="number">45</span>e<span class="number">92</span>a<span class="number">396</span>b<span class="number">0530</span>&#x27;</span><br><span class="line"><span class="attribute">udid</span>=&#x27;<span class="number">2</span>cced<span class="number">5</span>ac<span class="number">6</span>ad<span class="number">06</span>c<span class="number">35</span>e<span class="number">067460</span>dad<span class="number">5</span>ff<span class="number">417</span>f<span class="number">264</span>b<span class="number">8</span>ae&#x27;  #iphone<span class="number">7</span></span><br><span class="line"> </span><br><span class="line"><span class="attribute">atx</span>=AtxiOS(ATX_URL,Token)</span><br><span class="line"><span class="attribute">atx</span>.using_iOS_device(udid) #占用设备</span><br></pre></td></tr></table></figure>
+<p>调用方法之后会有三种情况，设备占用成功或失败，返回内容如下：</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">&#x27;description&#x27;</span>: <span class="string">&#x27;Device successfully added&#x27;</span>, <span class="string">&#x27;success&#x27;</span>: <span class="literal">True</span>&#125; <span class="meta">#设备占用成功</span></span><br><span class="line">&#123;<span class="string">&#x27;description&#x27;</span>: <span class="string">&#x27;Device add failed: device busy&#x27;</span>, <span class="string">&#x27;success&#x27;</span>: <span class="literal">False</span>&#125; <span class="meta">#设备被其他人占用</span></span><br><span class="line">&#123;<span class="string">&#x27;success&#x27;</span>: <span class="literal">False</span>, <span class="string">&#x27;description&#x27;</span>: <span class="string">&#x27;Device add failed: device not exist&#x27;</span>&#125; <span class="meta">#udid值错误</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="设备释放"><a href="#设备释放" class="headerlink" title="设备释放"></a>设备释放</h2><p>使用完设备之后我们需要释放设备，定义方法如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">release_iOS_device</span>(<span class="params">self, udid</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    释放iOS设备</span></span><br><span class="line"><span class="string">    :param udid:str 设备的 udid 字段</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    left_url = <span class="string">&quot;/&quot;</span>.join([USER_DEVICES_URL, udid])</span><br><span class="line">    url = urljoin(self.atx_url, left_url)</span><br><span class="line">    info = self._get_response(url, <span class="string">&quot;DELETE&quot;</span>)</span><br><span class="line">    logging.info(info)</span><br></pre></td></tr></table></figure>
+<p>调用方法如下：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ATX_URL</span> =&#x27;http://<span class="number">172</span>.<span class="number">28</span>.xx.xx:<span class="number">4000</span>&#x27;</span><br><span class="line"><span class="attribute">Token</span>=&#x27;a<span class="number">0344</span>xxxxx<span class="number">45</span>e<span class="number">92</span>a<span class="number">396</span>b<span class="number">0530</span>&#x27;</span><br><span class="line"><span class="attribute">udid</span>=&#x27;<span class="number">2</span>cced<span class="number">5</span>ac<span class="number">6</span>ad<span class="number">06</span>c<span class="number">35</span>e<span class="number">067460</span>dad<span class="number">5</span>ff<span class="number">417</span>f<span class="number">264</span>b<span class="number">8</span>ae&#x27;  #iphone<span class="number">7</span></span><br><span class="line"> </span><br><span class="line"><span class="attribute">atx</span>=AtxiOS(ATX_URL,Token)</span><br><span class="line"><span class="attribute">atx</span>.release_iOS_device(udid) #释放设备</span><br></pre></td></tr></table></figure>
+<p>设备释放成功时返回内容如下：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="symbol">&#x27;success</span>&#x27;: <span class="literal">True</span>, <span class="symbol">&#x27;description</span>&#x27;: <span class="symbol">&#x27;Device</span> successfully released&#x27;&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：释放接口可以释放非当前账户占用的设备，释放时一定要确认udid是否为自己占用的设备，避免影响他人正常使用！</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/08/22/iOS%E7%9C%9F%E6%9C%BA%E5%AE%89%E8%A3%85WebDriverAgent/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/22/iOS%E7%9C%9F%E6%9C%BA%E5%AE%89%E8%A3%85WebDriverAgent/" class="post-title-link" itemprop="url">iOS真机安装WebDriverAgent</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-08-22 17:07:46 / 修改时间：17:18:04" itemprop="dateCreated datePublished" datetime="2019-08-22T17:07:46+08:00">2019-08-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/App%E8%87%AA%E5%8A%A8%E5%8C%96/" itemprop="url" rel="index"><span itemprop="name">App自动化</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="iOS-真机安装-WebDriverAgent"><a href="#iOS-真机安装-WebDriverAgent" class="headerlink" title="iOS 真机安装 WebDriverAgent"></a>iOS 真机安装 WebDriverAgent</h1><p>本文根据 <a target="_blank" rel="noopener" href="https://testerhome.com/topics/7220">ATX 文档 - iOS 真机如何安装 WebDriverAgent</a> 进行实践<br>参考资料<br><a target="_blank" rel="noopener" href="https://github.com/openatx/facebook-wda">https://github.com/openatx/facebook-wda</a><br><a target="_blank" rel="noopener" href="https://github.com/NetEaseGame/ATX">https://github.com/NetEaseGame/ATX</a><br><a target="_blank" rel="noopener" href="https://github.com/facebook/WebDriverAgent">https://github.com/facebook/WebDriverAgent</a><br><a target="_blank" rel="noopener" href="https://github.com/appium/WebDriverAgent">https://github.com/appium/WebDriverAgent</a></p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>注意：尽量升级Xcode到最新版本，iphone版本大于9.3</p>
+<ul>
+<li>Xcode版本：10.2.1</li>
+<li>iPhone版本：12.2</li>
+<li>OS版本：10.14.4</li>
+</ul>
+<h1 id="实践开始"><a href="#实践开始" class="headerlink" title="实践开始"></a>实践开始</h1><ul>
+<li><p>新建一个目录，从 git 下载 WDA 项目代码到本地<br>  <code>git clone https://github.com/facebook/WebDriverAgent</code></p>
+</li>
+<li><p>运行初始化脚本</p>
+  <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#进入代码目录</span></span><br><span class="line">cd xx<span class="regexp">/xx/</span>WebDriverAgent-master</span><br><span class="line"><span class="comment">#执行初始化脚本</span></span><br><span class="line">.<span class="regexp">/Scripts/</span>bootstrap.sh</span><br></pre></td></tr></table></figure></li>
+<li><p>注<br>  根据报错通过 brew 安装以下依赖</p>
+<ol>
+<li>carthage依赖：<code>brew install carthage</code></li>
+<li>npm：<code>brew install npm</code></li>
+</ol>
+</li>
+</ul>
+<h1 id="证书设置"><a href="#证书设置" class="headerlink" title="证书设置"></a>证书设置</h1><ol>
+<li><p>进入项目路径，双击打开WebDriverAgent.xcodeproj，打开xcode后按照下方数字序号依次点击，勾选第5项目，弹框内点击Enable Automatic。<br><img src="/.kim//15571122331434.jpg"></p>
+</li>
+<li><p>Team 栏添加帐户（个人账号和开发者账号兼可）选中<br><img src="/.kim//15571124398069.jpg" alt="-w1059"></p>
+</li>
+</ol>
+<ol start="3">
+<li><p>接着在TARGETS里面选中WebDriverAgentRunner，用同样的方法设置好证书<br><img src="/.kim//15570487234316.jpg" alt="-w1139"></p>
+</li>
+<li><p>个人免费版的证书，还需要修改下WebDriverAgent的BundleID，随便加后缀，不要跟别人重复就好<br><img src="/.kim//15571126202793.jpg"></p>
+</li>
+</ol>
+<h1 id="运行和测试"><a href="#运行和测试" class="headerlink" title="运行和测试"></a>运行和测试</h1><p><img src="/.kim//15570489183241.jpg" alt="-w784"></p>
+<ul>
+<li><p>点击方框选项，分别选择WebDriverAgentRunner和目标设备</p>
+</li>
+<li><p>运行 Product -&gt; Test<br>一切正常的话，手机上会出现一个无图标的WebDriverAgent应用，启动之后，马上又返回到桌面。</p>
+</li>
+<li><p>个人免费证书第一次运行需要信任证书<br>日志信息如下：</p>
+<blockquote>
+<p>Verify the Developer App certificate for your account is trusted on your device. Open Settings on Vic小叶子 and navigate to General -&gt; Device Management, then select your Developer App certificate to trust it.</p>
+</blockquote>
+</li>
+</ul>
+<p>原因：开发者人员程序未受信任<br>解决：进入手机设置-&gt; 通用-&gt; 描述文件与设备管理-&gt; 点击开发者应用，信任一下就好了。</p>
+<p>此时控制台界面可以看到设备的IP。如果看不到的话，使用这种方法打开<br><img src="/.kim//15570491084022.jpg" alt="-w607"><br><img src="/.kim//15570491892095.jpg" alt="-w1248"></p>
+<ul>
+<li><p>通过上面给出的IP和端口，加上/status合成一个url地址。例如<a target="_blank" rel="noopener" href="http://10.0.0.1:8100/status">http://10.0.0.1:8100/status</a>，然后浏览器打开。如果出现一串JSON输出，说明WDA安装成功了。</p>
+<p>  实际情况，我到这一步访问这个地址无响应：<br>  原因：部分国行的iphone机器通过IP和端口还不能访问<br>  解决：需要将手机的端口转发到Mac上（端口转发见下文）</p>
+</li>
+</ul>
+<h1 id="端口转发"><a href="#端口转发" class="headerlink" title="端口转发"></a>端口转发</h1><p>有些国产的iPhone机器通过手机的IP和端口还不能访问，此时需要将手机的端口转发到Mac上。</p>
+<ul>
+<li>安装libimobiledevice</li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">brew </span>update</span><br><span class="line"><span class="keyword">brew </span>uninstall --ignore-dependencies libimobiledevice</span><br><span class="line"><span class="keyword">brew </span>uninstall --ignore-dependencies usbmuxd</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>--HEAD usbmuxd</span><br><span class="line"><span class="keyword">brew </span>unlink usbmuxd</span><br><span class="line"><span class="keyword">brew </span>link usbmuxd</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>--HEAD libimobiledevice</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>转发端口<br><code>iproxy 8100 8100 UDID</code><br>使用iproxy –help 可以查到更具体的用法。</p>
+</li>
+<li><p>查询UDID<br>instruments -s</p>
+</li>
+</ul>
+<p>这时通过访问<code>http://localhost:8100/status</code>，如果出现一串JSON输出，说明WDA安装成功了。</p>
+<h1 id="inspector"><a href="#inspector" class="headerlink" title="inspector"></a>inspector</h1><p>是用来查看UI的图层，方便编写测试脚本<br>inspector的地址是:<code>http://localhost:8100/inspector</code><br><img src="/.kim//15571131403218.jpg" alt="-w1673"></p>
+<h1 id="使用终端替代Xcode"><a href="#使用终端替代Xcode" class="headerlink" title="使用终端替代Xcode"></a>使用终端替代Xcode</h1><p>通常来说为了持续集成，能够全部自动化比较好一些<br>启动 WebDriverAgent，官方提供了四种方式：</p>
+<ol>
+<li>Xcode</li>
+<li>xcodebuild</li>
+<li>Using fbsimctl from FBSimulatorControl framework</li>
+<li>Using FBSimulatorControl framework directly</li>
+</ol>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 解锁keychain，以便可以正常的签名应用，</span></span><br><span class="line"><span class="attribute">PASSWORD</span>=<span class="string">&quot;replace-with-your-password&quot;</span></span><br><span class="line">security unlock-keychain -p <span class="variable">$PASSWORD</span> ~/Library/Keychains/login.keychain</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取设备的UDID</span></span><br><span class="line"><span class="attribute">UDID</span>=$(idevice_id -l | head -n1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行测试</span></span><br><span class="line">xcodebuild -project WebDriverAgent.xcodeproj -scheme WebDriverAgentRunner -destination <span class="string">&quot;id=<span class="variable">$UDID</span>&quot;</span> test</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/08/21/Docker%E5%AE%89%E8%A3%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/21/Docker%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">Docker安装</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-08-21 20:10:20" itemprop="dateCreated datePublished" datetime="2019-08-21T20:10:20+08:00">2019-08-21</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/08/21/atxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/21/atxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/" class="post-title-link" itemprop="url">atxserver2设备管理平台搭建</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-08-21 19:54:24" itemprop="dateCreated datePublished" datetime="2019-08-21T19:54:24+08:00">2019-08-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-24 15:55:00" itemprop="dateModified" datetime="2019-10-24T15:55:00+08:00">2019-10-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/App%E8%87%AA%E5%8A%A8%E5%8C%96/" itemprop="url" rel="index"><span itemprop="name">App自动化</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[TOC]</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>前面分享了STF Andriod设备远程管理平台的搭建和使用，但是STF不支持iOS设备连接，虽然现在社区有了STF集成iOS设备的开源方案，但是经过实践不太稳定，后面再Testerhome社区发现了一个新的框架ATX2同时支持Android和iOS设备远程管理，经过实践设备连接非常稳定，所以这里分享下这个平台的搭建和使用</p>
+<h1 id="ATX2简介"><a href="#ATX2简介" class="headerlink" title="ATX2简介"></a>ATX2简介</h1><p>ATX2是一款可以远程控制Android和iOS设备的设备管理平台。该平台使用的技术栈为:Python3+NodeJS+RethinkDB 项目目前已经开源，作者是阿里的一位大牛:<a target="_blank" rel="noopener" href="https://github.com/codeskyblue">codeskyblue</a></p>
+<ul>
+<li>项目:Github地址:<a target="_blank" rel="noopener" href="https://github.com/openatx/atxserver2">https://github.com/openatx/atxserver2</a></li>
+<li>平台框架图如下所示：<br><img src="/.kim//atx-frame.png" alt="框架图"></li>
+</ul>
+<h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><p>系统环境:Mac Os 10.14.6(因为要使用iOS设备连接WDA，所以需要Mac Os环境)</p>
+<p>python3安装</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>python3</span><br></pre></td></tr></table></figure>
+<p>rethinkdb安装</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span> rethinkdb</span><br></pre></td></tr></table></figure>
+
+<h1 id="服务部署"><a href="#服务部署" class="headerlink" title="服务部署"></a>服务部署</h1><p>启动ATX2服务有2种方式：</p>
+<ul>
+<li>Docker部署</li>
+<li>源码部署</li>
+</ul>
+<h2 id="Docker部署"><a href="#Docker部署" class="headerlink" title="Docker部署"></a>Docker部署</h2><ul>
+<li>使用Docker部署需要安装Docker，具体安装步骤见:Docker安装</li>
+<li>代码Clone到本地</li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/openatx/</span>atxserver2</span><br></pre></td></tr></table></figure>
+<ul>
+<li>打开命令终端，切换到代码目录，执行一条命令即可</li>
+</ul>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker-compose up</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="源码部署"><a href="#源码部署" class="headerlink" title="源码部署"></a>源码部署</h2><p>先准备好一个rethinkdb服务器，并启动</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">rethinkdb</span></span><br></pre></td></tr></table></figure>
+<p>代码clone到本地</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">git</span>@github.com:openatx/atxserver2.git</span><br></pre></td></tr></table></figure>
+<p>打开命令终端，切换到代码目录，然后执行命令下面的命令安装依赖</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 <span class="keyword">install</span> -r requirements.txt</span><br></pre></td></tr></table></figure>
+<p>启动服务，命令如下</p>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#默认方式启动，使用默认的登录方式，默认端口</span></span><br><span class="line"><span class="string">python3</span> <span class="string">main</span>.<span class="string">py</span>  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定认证方式</span></span><br><span class="line"><span class="string">python3</span> <span class="string">main</span>.<span class="string">py</span> <span class="built_in">--auth</span> <span class="string">simple</span>  <span class="comment">#默认是一个非常simple的认证，输入邮箱就可以</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置监听端口</span></span><br><span class="line"><span class="string">python3</span> <span class="string">main</span>.<span class="string">py</span> <span class="built_in">--port</span> <span class="string">4000</span> <span class="comment"># 默认监听4000端口</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="打开页面"><a href="#打开页面" class="headerlink" title="打开页面"></a>打开页面</h2><p>启动之后，浏览器打开<a href="http://localhost(本机ip也可以):4000，登录之后就可以顺利的看到设备列表页了,由于还没有接入设备所以设备列表为空。">http://localhost(本机ip也可以):4000，登录之后就可以顺利的看到设备列表页了,由于还没有接入设备所以设备列表为空。</a><br><img src="/.kim//atx_index.png" alt="框架图"></p>
+<h1 id="Android设备接入atxserver2-android-provider"><a href="#Android设备接入atxserver2-android-provider" class="headerlink" title="Android设备接入atxserver2-android-provider"></a>Android设备接入<a target="_blank" rel="noopener" href="https://github.com/openatx/atxserver2-android-provider">atxserver2-android-provider</a></h1><p>依赖 Python3.6+, NodeJS 8, Git-LFS<br>NodeJS版本太高了也不行，一定要NodeJS 8，推荐使用nvm管理node版本</p>
+<h2 id="Install-git-lfs"><a href="#Install-git-lfs" class="headerlink" title="Install git-lfs"></a>Install git-lfs</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>git-lfs</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Clone代码到本地，切换到代码目录"><a href="#Clone代码到本地，切换到代码目录" class="headerlink" title="Clone代码到本地，切换到代码目录"></a>Clone代码到本地，切换到代码目录</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/openatx/</span>atxserver2-android-provider</span><br><span class="line">cd atxserver2-android-provider</span><br><span class="line">git lfs install</span><br><span class="line">git lfs pull</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span></span><br><span class="line">pip <span class="keyword">install</span> -r requirements.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="启动，需要指定atxserver2的地址-假设地址为-http-localhost-4000"><a href="#启动，需要指定atxserver2的地址-假设地址为-http-localhost-4000" class="headerlink" title="启动，需要指定atxserver2的地址, 假设地址为 http://localhost:4000"></a>启动，需要指定atxserver2的地址, 假设地址为 <a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a></h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">python3</span> main.<span class="keyword">py</span> --server localhos<span class="variable">t:4000</span></span><br></pre></td></tr></table></figure>
+<p>Provider可以通过adb track-devices自动发现已经接入的设备，当手机接入到电脑上时，会自动给手机安装minicap, minitouch, atx-agent, app-uiautomator-[test].apk, whatsinput-apk</p>
+<p>接入的设备需要配置好开发者选项, 不同设备的设置方案放到了该项目的Issue中, tag: device-settings 如果没有该机型，可以自助添加</p>
+<h1 id="iOS设备接入atxserver2-ios-provider"><a href="#iOS设备接入atxserver2-ios-provider" class="headerlink" title="iOS设备接入atxserver2-ios-provider"></a>iOS设备接入<a target="_blank" rel="noopener" href="https://github.com/openatx/atxserver2-ios-provider">atxserver2-ios-provider</a></h1><p>依赖 Python3.6+, NodeJS 8, WebDriverAgent(appium)</p>
+<h2 id="安装libimobiledevice工具包"><a href="#安装libimobiledevice工具包" class="headerlink" title="安装libimobiledevice工具包"></a>安装libimobiledevice工具包</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">brew </span>uninstall --ignore-dependencies libimobiledevice</span><br><span class="line"><span class="keyword">brew </span>uninstall --ignore-dependencies usbmuxd</span><br><span class="line"></span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>--HEAD usbmuxd</span><br><span class="line"><span class="keyword">brew </span>unlink usbmuxd</span><br><span class="line"><span class="keyword">brew </span>link usbmuxd</span><br><span class="line"></span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>--HEAD libimobiledevice</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>ideviceinstaller</span><br><span class="line"><span class="keyword">brew </span>link --overwrite ideviceinstaller</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装atxserver2-ios-provider"><a href="#安装atxserver2-ios-provider" class="headerlink" title="安装atxserver2-ios-provider,"></a>安装atxserver2-ios-provider,</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/openatx/</span>atxserver2-ios-provider --recursive</span><br><span class="line">cd atxserver2-ios-provider</span><br><span class="line">pip3 install -r requirements.txt</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="初始化其中的ATX-WebDriverAgent"><a href="#初始化其中的ATX-WebDriverAgent" class="headerlink" title="初始化其中的ATX-WebDriverAgent"></a>初始化其中的ATX-WebDriverAgent</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/appium/</span>WebDriverAgent</span><br><span class="line">cd ATX-WebDriverAgent</span><br><span class="line">brew install carthage</span><br><span class="line">.<span class="regexp">/Scripts/</span>bootstrap.sh</span><br></pre></td></tr></table></figure>
+<p>后找台手机接到苹果电脑上。 按照这个文档<a target="_blank" rel="noopener" href="https://testerhome.com/topics/7220">https://testerhome.com/topics/7220</a> 对WebDriverAgent项目进行下设置</p>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">python3</span> main.<span class="keyword">py</span></span><br></pre></td></tr></table></figure>
+<p>连接成功后，如下图所示可以看到连接的iOS设备，点击立即使用即可远程控制。<br><img src="/.kim//atx2_iOS_action.gif" alt="示例图"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/08/21/CocoaPods%E5%AE%89%E8%A3%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/21/CocoaPods%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">CocoaPods安装</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-08-21 19:26:52 / 修改时间：19:58:05" itemprop="dateCreated datePublished" datetime="2019-08-21T19:26:52+08:00">2019-08-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%B5%84%E6%96%99/" itemprop="url" rel="index"><span itemprop="name">资料</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Ruby环境搭建"><a href="#Ruby环境搭建" class="headerlink" title="Ruby环境搭建"></a>Ruby环境搭建</h1><h2 id="查看当前Ruby版本"><a href="#查看当前Ruby版本" class="headerlink" title="查看当前Ruby版本"></a>查看当前Ruby版本</h2><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ruby -v</span></span><br></pre></td></tr></table></figure>
+<h2 id="查看rvm版本"><a href="#查看rvm版本" class="headerlink" title="查看rvm版本"></a>查看rvm版本</h2><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">rvm -v</span> </span><br></pre></td></tr></table></figure>
+<p>显示如下(或者是其他版本)</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">rvm</span> <span class="number">1</span>.<span class="number">29</span>.<span class="number">3</span> (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin<span class="meta"> [https://rvm.io]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="列出ruby可安装的版本信息"><a href="#列出ruby可安装的版本信息" class="headerlink" title="列出ruby可安装的版本信息"></a>列出ruby可安装的版本信息</h2><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">rvm list known</span></span><br></pre></td></tr></table></figure>
+<p>显示如下</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># <span class="selector-tag">MRI</span> <span class="selector-tag">Rubies</span></span><br><span class="line"><span class="selector-attr">[ruby-]</span><span class="selector-tag">1</span><span class="selector-class">.8</span><span class="selector-class">.6</span><span class="selector-attr">[-p420]</span></span><br><span class="line"><span class="selector-attr">[ruby-]</span><span class="selector-tag">1</span><span class="selector-class">.8</span><span class="selector-class">.7</span><span class="selector-attr">[-head]</span> # <span class="selector-tag">security</span> <span class="selector-tag">released</span> <span class="selector-tag">on</span> <span class="selector-tag">head</span></span><br><span class="line"><span class="selector-attr">[ruby-]</span><span class="selector-tag">1</span><span class="selector-class">.9</span><span class="selector-class">.1</span><span class="selector-attr">[-p431]</span></span><br><span class="line"><span class="selector-attr">[ruby-]</span><span class="selector-tag">1</span><span class="selector-class">.9</span><span class="selector-class">.2</span><span class="selector-attr">[-p330]</span></span><br><span class="line"><span class="selector-attr">[ruby-]</span><span class="selector-tag">1</span><span class="selector-class">.9</span><span class="selector-class">.3</span><span class="selector-attr">[-p551]</span></span><br><span class="line"><span class="selector-attr">[ruby-]</span><span class="selector-tag">2</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-attr">[-p648]</span></span><br><span class="line"><span class="selector-attr">[ruby-]</span><span class="selector-tag">2</span><span class="selector-class">.1</span><span class="selector-attr">[.10]</span></span><br><span class="line"><span class="selector-attr">[ruby-]</span><span class="selector-tag">2</span><span class="selector-class">.2</span><span class="selector-attr">[.10]</span></span><br><span class="line"><span class="selector-attr">[ruby-]</span><span class="selector-tag">2</span><span class="selector-class">.3</span><span class="selector-attr">[.7]</span></span><br><span class="line"><span class="selector-attr">[ruby-]</span><span class="selector-tag">2</span><span class="selector-class">.4</span><span class="selector-attr">[.4]</span></span><br><span class="line"><span class="selector-attr">[ruby-]</span><span class="selector-tag">2</span><span class="selector-class">.5</span><span class="selector-attr">[.1]</span>  <span class="comment">// 重点在这里 重点在这里 重点在这里</span></span><br><span class="line"><span class="selector-attr">[ruby-]</span><span class="selector-tag">2</span><span class="selector-class">.6</span><span class="selector-attr">[.0-preview2]</span>   <span class="comment">// 测试版</span></span><br><span class="line"><span class="selector-tag">ruby-head</span></span><br><span class="line">.....</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装一个ruby版本（这里我选择的是2-5-1版本，当然你也可以选择其他的）"><a href="#安装一个ruby版本（这里我选择的是2-5-1版本，当然你也可以选择其他的）" class="headerlink" title="安装一个ruby版本（这里我选择的是2.5.1版本，当然你也可以选择其他的）"></a>安装一个ruby版本（这里我选择的是2.5.1版本，当然你也可以选择其他的）</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rvm install <span class="number">2.5</span>.<span class="number">1</span></span><br><span class="line"><span class="regexp">//</span> 注意:安装过程中需要两次按下 Enter 键, 第二次按下后需要输入电脑访问密码(不可见,只管输入就行);</span><br><span class="line"><span class="regexp">//</span> 如果你电脑没有安装Xcode和Command Line Tools <span class="keyword">for</span> Xcode以及Homebrew 会自动下载安装,建议提前安装这三者.</span><br></pre></td></tr></table></figure>
+
+<p>这里很多小伙伴会遇到错误，大部分是因为没有安装Homebrew造成，所以所以所以要提前安装比较好</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/usr/</span>bin<span class="regexp">/ruby -e &quot;$(curl -fsSL https:/</span><span class="regexp">/raw.githubusercontent.com/</span>Homebrew<span class="regexp">/install/m</span>aster/install)<span class="string">&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="设置为默认版本"><a href="#设置为默认版本" class="headerlink" title="设置为默认版本"></a>设置为默认版本</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">rvm</span> use <span class="number">2</span>.<span class="number">5</span>.<span class="number">1</span> --default</span><br></pre></td></tr></table></figure>
+
+<h2 id="更换源"><a href="#更换源" class="headerlink" title="更换源"></a>更换源</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo gem <span class="keyword">update</span> --<span class="built_in">system</span></span><br><span class="line">gem sources --<span class="built_in">remove</span> http<span class="variable">s:</span>//rubygems.org/</span><br><span class="line">gem sources --<span class="built_in">add</span> http<span class="variable">s:</span>//gems.<span class="keyword">ruby</span>-china.<span class="keyword">com</span>/</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="为了验证你的Ruby镜像是并且仅是ruby-china，执行以下命令查看"><a href="#为了验证你的Ruby镜像是并且仅是ruby-china，执行以下命令查看" class="headerlink" title="为了验证你的Ruby镜像是并且仅是ruby-china，执行以下命令查看"></a>为了验证你的Ruby镜像是并且仅是ruby-china，执行以下命令查看</h2><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">gem sources -l</span></span><br></pre></td></tr></table></figure>
+<p>如果是以下结果说明正确，如果有其他的请自行百度解决</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*** CURRENT SOURCES ***</span><br><span class="line">http<span class="variable">s:</span>//gems.<span class="keyword">ruby</span>-china.<span class="keyword">com</span>/</span><br></pre></td></tr></table></figure>
+<h1 id="开始安装CocoaPods"><a href="#开始安装CocoaPods" class="headerlink" title="开始安装CocoaPods"></a>开始安装CocoaPods</h1><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gem install -n <span class="regexp">/usr/</span>local/bin cocoapods</span><br></pre></td></tr></table></figure>
+<p>如果安装了多个Xcode使用下面的命令选择（一般需要选择最近的Xcode版本）</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo xcode-select -<span class="keyword">switch</span> <span class="regexp">/Applications/</span>Xcode.app<span class="regexp">/Contents/</span>Developer</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装本地库"><a href="#安装本地库" class="headerlink" title="安装本地库"></a>安装本地库</h2><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod <span class="built_in">setup</span></span><br></pre></td></tr></table></figure>
+<p>执行以上命令后</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Setting up CocoaPods <span class="keyword">master</span> <span class="title">repo</span></span><br><span class="line">  $ /usr/bin/git <span class="keyword">clone</span> <span class="title">https</span>://github.com/CocoaPods/Specs.git <span class="keyword">master</span> <span class="title">--progress</span></span><br><span class="line">  Cloning into &#x27;<span class="literal">master</span>&#x27;...</span><br><span class="line">  remote: Counting objects: <span class="number">1879515</span>, done.        </span><br><span class="line">  remote: Compressing objects: <span class="number">100</span>% (<span class="number">321</span>/<span class="number">321</span>), done.        </span><br><span class="line">  Receiving objects:  <span class="number">21</span>% (<span class="number">404525</span>/<span class="number">1879515</span>), <span class="number">73.70</span> MiB | <span class="number">22.00</span> KiB/</span><br></pre></td></tr></table></figure>
+
+<p>然后就是漫长的等待，当然,网络好的情况下会更快</p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/d326fc80c719">如果一直安装不成功请参考这里</a></p>
+<h2 id="查看你是否安裝成功"><a href="#查看你是否安裝成功" class="headerlink" title="查看你是否安裝成功"></a>查看你是否安裝成功</h2><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">pod</span></span><br></pre></td></tr></table></figure>
+<p>显示</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">Usage:</span><br><span class="line"></span><br><span class="line">    $ pod COMMAND</span><br><span class="line"></span><br><span class="line">      CocoaPods, <span class="keyword">the</span> Cocoa library package manager.</span><br><span class="line"></span><br><span class="line">Commands:</span><br><span class="line"></span><br><span class="line">    + cache         Manipulate <span class="keyword">the</span> CocoaPods cache</span><br><span class="line">    + deintegrate   Deintegrate CocoaPods <span class="built_in">from</span> your project</span><br><span class="line">    + env           Display pod environment</span><br><span class="line">    + init          Generate <span class="keyword">a</span> Podfile <span class="keyword">for</span> <span class="keyword">the</span> current <span class="built_in">directory</span></span><br><span class="line">    + install       Install project dependencies according <span class="built_in">to</span> versions <span class="built_in">from</span> <span class="keyword">a</span></span><br><span class="line">                    Podfile.lock</span><br><span class="line">    + ipc           Inter-<span class="built_in">process</span> communication</span><br><span class="line">    + lib           Develop pods</span><br><span class="line">    + list          List pods</span><br><span class="line">    + outdated      Show outdated project dependencies</span><br><span class="line">    + plugins       Show available CocoaPods plugins</span><br><span class="line">    + repo          Manage spec-repositories</span><br><span class="line">    + search        Search <span class="keyword">for</span> pods</span><br><span class="line">    + setup         Setup <span class="keyword">the</span> CocoaPods environment</span><br><span class="line">    + spec          Manage pod specs</span><br><span class="line">    + trunk         Interact <span class="keyword">with</span> <span class="keyword">the</span> CocoaPods API (e.g. publishing <span class="built_in">new</span> specs)</span><br><span class="line">    + <span class="keyword">try</span>           Try <span class="keyword">a</span> Pod!</span><br><span class="line">    + update        Update outdated project dependencies <span class="keyword">and</span> <span class="built_in">create</span> <span class="built_in">new</span></span><br><span class="line">                    Podfile.lock</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line"></span><br><span class="line">    <span class="comment">--silent        Show nothing</span></span><br><span class="line">    <span class="comment">--version       Show the version of the tool</span></span><br><span class="line">    <span class="comment">--verbose       Show more debugging information</span></span><br><span class="line">    <span class="comment">--no-ansi       Show output without ANSI codes</span></span><br><span class="line">    <span class="comment">--help          Show help banner of specified command</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="CocoaPods版本"><a href="#CocoaPods版本" class="headerlink" title="CocoaPods版本"></a>CocoaPods版本</h2><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod <span class="comment">--version</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/08/21/Mac%E7%BB%88%E7%AB%AF%E5%AE%89%E8%A3%85%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%ACnode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/21/Mac%E7%BB%88%E7%AB%AF%E5%AE%89%E8%A3%85%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%ACnode/" class="post-title-link" itemprop="url">Mac终端安装指定版本node</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-08-21 17:29:38 / 修改时间：19:17:04" itemprop="dateCreated datePublished" datetime="2019-08-21T17:29:38+08:00">2019-08-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%B5%84%E6%96%99/" itemprop="url" rel="index"><span itemprop="name">资料</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="安装brew"><a href="#安装brew" class="headerlink" title="安装brew"></a>安装brew</h1><p>终端上运行</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ruby -e “<span class="constructor">$(<span class="params">curl</span> -<span class="params">fsSL</span> <span class="params">https</span>:<span class="operator">/</span><span class="operator">/</span><span class="params">raw</span>.<span class="params">githubusercontent</span>.<span class="params">com</span><span class="operator">/</span>Homebrew<span class="operator">/</span><span class="params">install</span><span class="operator">/</span><span class="params">master</span><span class="operator">/</span><span class="params">install</span>)</span>”</span><br></pre></td></tr></table></figure>
+
+<h1 id="安装NVM"><a href="#安装NVM" class="headerlink" title="安装NVM"></a>安装NVM</h1><p><code>brew install nvm</code></p>
+<p>安装完成之后打开shell的配置文件</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> ~</span><br><span class="line">vim <span class="string">.bash_profile</span></span><br></pre></td></tr></table></figure>
+
+<p>在文件里添加以下命令</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export NVM_DIR=~/.nvm</span><br><span class="line">source <span class="constructor">$(<span class="params">brew</span> --<span class="params">prefix</span> <span class="params">nvm</span>)</span>/nvm.sh</span><br></pre></td></tr></table></figure>
+
+<p>然后重新source</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> .bash_profile</span><br></pre></td></tr></table></figure>
+
+<h1 id="使用nvm安装node"><a href="#使用nvm安装node" class="headerlink" title="使用nvm安装node"></a>使用nvm安装node</h1><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nvm ls-remote 查看 所有的<span class="keyword">node</span><span class="title">可用版本</span></span><br><span class="line"><span class="title">nvm</span> install xxx 下载你想要的版本</span><br><span class="line">nvm use xxx 使用指定版本的<span class="keyword">node</span><span class="title"></span></span><br><span class="line"><span class="title">nvm</span> alias default xxx 每次启动终端都使用该版本的<span class="keyword">node</span><span class="title"></span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Vic</p>
+  <div class="site-description" itemprop="description">人生苦短，我学Python</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vic</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

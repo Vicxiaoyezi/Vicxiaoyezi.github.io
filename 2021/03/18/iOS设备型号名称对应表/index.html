@@ -1,23 +1,548 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"vic.kim","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="名称 后盖型号 Internal Name    iPhone A1203 iPhone 1,1   iPhone 3G A1324 A1241 iPhone 1,2   iPhone 3GS A1325 A1303 iPhone 2,1   iPhone 4 A1349 A1332 iPhone 3,1 3,2 3,3   iPhone 4S A1431 A1387 iPhone 4,1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS设备型号名称对应表">
+<meta property="og:url" content="https://vic.kim/2021/03/18/iOS%E8%AE%BE%E5%A4%87%E5%9E%8B%E5%8F%B7%E5%90%8D%E7%A7%B0%E5%AF%B9%E5%BA%94%E8%A1%A8/index.html">
+<meta property="og:site_name" content="Vicの博客">
+<meta property="og:description" content="名称 后盖型号 Internal Name    iPhone A1203 iPhone 1,1   iPhone 3G A1324 A1241 iPhone 1,2   iPhone 3GS A1325 A1303 iPhone 2,1   iPhone 4 A1349 A1332 iPhone 3,1 3,2 3,3   iPhone 4S A1431 A1387 iPhone 4,1">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-18T12:19:30.000Z">
+<meta property="article:modified_time" content="2021-03-18T15:18:31.238Z">
+<meta property="article:author" content="Vic">
+<meta property="article:tag" content="资料">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://vic.kim/2021/03/18/iOS%E8%AE%BE%E5%A4%87%E5%9E%8B%E5%8F%B7%E5%90%8D%E7%A7%B0%E5%AF%B9%E5%BA%94%E8%A1%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>iOS设备型号名称对应表 | Vicの博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Vicの博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">测试攻城狮</p>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2021/03/18/iOS%E8%AE%BE%E5%A4%87%E5%9E%8B%E5%8F%B7%E5%90%8D%E7%A7%B0%E5%AF%B9%E5%BA%94%E8%A1%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          iOS设备型号名称对应表
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-03-18 20:19:30 / 修改时间：23:18:31" itemprop="dateCreated datePublished" datetime="2021-03-18T20:19:30+08:00">2021-03-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%B5%84%E6%96%99/" itemprop="url" rel="index"><span itemprop="name">资料</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <table>
+<thead>
+<tr>
+<th>名称</th>
+<th>后盖型号</th>
+<th>Internal Name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>iPhone</td>
+<td>A1203</td>
+<td>iPhone 1,1</td>
+</tr>
+<tr>
+<td>iPhone 3G</td>
+<td>A1324 A1241</td>
+<td>iPhone 1,2</td>
+</tr>
+<tr>
+<td>iPhone 3GS</td>
+<td>A1325 A1303</td>
+<td>iPhone 2,1</td>
+</tr>
+<tr>
+<td>iPhone 4</td>
+<td>A1349 A1332</td>
+<td>iPhone 3,1 3,2 3,3</td>
+</tr>
+<tr>
+<td>iPhone 4S</td>
+<td>A1431 A1387</td>
+<td>iPhone 4,1</td>
+</tr>
+<tr>
+<td>iPhone 5</td>
+<td>A1428 A1429 A1442</td>
+<td>iPhone 5,1 5,2</td>
+</tr>
+<tr>
+<td>iPhone 5C</td>
+<td>A1456 A1507 A1516 A1529 A1532</td>
+<td>iPhone 5,3 5,4</td>
+</tr>
+<tr>
+<td>iPhone 5S</td>
+<td>A1453 A1457 A1518 A1528 A1530 A1533</td>
+<td>iPhone 6,1 6,2</td>
+</tr>
+<tr>
+<td>iPhone 6</td>
+<td>A1549 A1586 A1589</td>
+<td>iPhone 7,2</td>
+</tr>
+<tr>
+<td>iPhone 6P</td>
+<td>A1522 A1524 A1593</td>
+<td>iPhone 7,1</td>
+</tr>
+<tr>
+<td>iPhone 6S</td>
+<td>A1633 A1688 A1700</td>
+<td>iPhone 8,1</td>
+</tr>
+<tr>
+<td>iPhone 6SP</td>
+<td>A1634 A1687 A1699</td>
+<td>iPhone 8,2</td>
+</tr>
+<tr>
+<td>iPhone SE</td>
+<td>A1723 A1662 A1724</td>
+<td>iPhone 8,4</td>
+</tr>
+<tr>
+<td>iPhone 7</td>
+<td>A1660 A1778 A1779</td>
+<td>iPhone 9,1 9,3</td>
+</tr>
+<tr>
+<td>iPhone 7P</td>
+<td>A1661 A1784 A1785</td>
+<td>iPhone 9,2 9,4</td>
+</tr>
+<tr>
+<td>iPhone 8</td>
+<td>A1863 A1905 A1906</td>
+<td>iPhone 10,1 10,4</td>
+</tr>
+<tr>
+<td>iPhone 8P</td>
+<td>A1864 A1897 A1898</td>
+<td>iPhone 10,2 10,5</td>
+</tr>
+<tr>
+<td>iPhone X</td>
+<td>A1865 A1901 A1902</td>
+<td>iPhone 10,3 10.6</td>
+</tr>
+<tr>
+<td>iPhone XR</td>
+<td>A1984 A2105 A2106 A2107 A2108</td>
+<td>iPhone 11,8</td>
+</tr>
+<tr>
+<td>iPhone XS</td>
+<td>A1920 A2097 A2098 A2099 A2100</td>
+<td>iPhone 11,2</td>
+</tr>
+<tr>
+<td>iPhone XS Max</td>
+<td>A1921 A2101 A2102 A2103 A2104</td>
+<td>iPhone 11,6</td>
+</tr>
+<tr>
+<td>iPhone 11</td>
+<td>A2111 A2223 A2221</td>
+<td>iPhone 12,1</td>
+</tr>
+<tr>
+<td>iPhone 11 Pro</td>
+<td>A2160 A2217 A2215</td>
+<td>iPhone 12,3</td>
+</tr>
+<tr>
+<td>iPhone 11 Pro Max</td>
+<td>A2161 A2220 A2218</td>
+<td>iPhone 12,5</td>
+</tr>
+<tr>
+<td>iPhone SE 2</td>
+<td>A2275 A2298 A2296</td>
+<td>iPhone 12,8</td>
+</tr>
+<tr>
+<td>iPhone 12 mini</td>
+<td>A2176 A2398 A2400 A2399</td>
+<td>iPhone 13,1</td>
+</tr>
+<tr>
+<td>iPhone 12</td>
+<td>A2172 A2402 A2404 A2403</td>
+<td>iPhone 13,2</td>
+</tr>
+<tr>
+<td>iPhone 12 Pro</td>
+<td>A2341 A2406 A2408 A2407</td>
+<td>iPhone 13,3</td>
+</tr>
+<tr>
+<td>iPhone 12 Pro Max</td>
+<td>A2342 A2410 A2412 A2411</td>
+<td>iPhone 13,4</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%B5%84%E6%96%99/" rel="tag"># 资料</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/31/%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/" rel="prev" title="使用 mitmproxy + python 实现移动端异常数据测试">
+      <i class="fa fa-chevron-left"></i> 使用 mitmproxy + python 实现移动端异常数据测试
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Vic</p>
+  <div class="site-description" itemprop="description">人生苦短，我学Python</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vic</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

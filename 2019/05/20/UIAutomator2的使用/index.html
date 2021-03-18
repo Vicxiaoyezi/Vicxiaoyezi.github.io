@@ -1,23 +1,627 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"vic.kim","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="简介uiautomator2是一个python库，用于Android的UI自动化测试，其底层基于Google uiautomator，Google提供的uiautomator库可以获取屏幕上任意一个APP的任意一个控件属性，并对其进行任意操作 支持平台及语言你在python-uiautomator2封装了谷歌自带的uiautomator2测试框架，提供便利的python接口。他允许测试人员直接在P">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UIAutomator2的使用">
+<meta property="og:url" content="https://vic.kim/2019/05/20/UIAutomator2%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="Vicの博客">
+<meta property="og:description" content="简介uiautomator2是一个python库，用于Android的UI自动化测试，其底层基于Google uiautomator，Google提供的uiautomator库可以获取屏幕上任意一个APP的任意一个控件属性，并对其进行任意操作 支持平台及语言你在python-uiautomator2封装了谷歌自带的uiautomator2测试框架，提供便利的python接口。他允许测试人员直接在P">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://vic.kim/.kim//%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.png">
+<meta property="og:image" content="https://vic.kim/.kim//weditor.jpeg">
+<meta property="og:image" content="https://vic.kim/.kim//weditor_connect.png">
+<meta property="og:image" content="https://vic.kim/.kim//weditor_state.png">
+<meta property="article:published_time" content="2019-05-20T09:21:36.000Z">
+<meta property="article:modified_time" content="2021-03-18T13:05:51.963Z">
+<meta property="article:author" content="Vic">
+<meta property="article:tag" content="UI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://vic.kim/.kim//%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.png">
+
+<link rel="canonical" href="https://vic.kim/2019/05/20/UIAutomator2%E7%9A%84%E4%BD%BF%E7%94%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>UIAutomator2的使用 | Vicの博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Vicの博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">测试攻城狮</p>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/20/UIAutomator2%E7%9A%84%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          UIAutomator2的使用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-20 17:21:36" itemprop="dateCreated datePublished" datetime="2019-05-20T17:21:36+08:00">2019-05-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-18 21:05:51" itemprop="dateModified" datetime="2021-03-18T21:05:51+08:00">2021-03-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UI/" itemprop="url" rel="index"><span itemprop="name">UI</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>uiautomator2是一个python库，用于Android的UI自动化测试，其底层基于Google uiautomator，Google提供的uiautomator库可以获取屏幕上任意一个APP的任意一个控件属性，并对其进行任意操作</p>
+<h1 id="支持平台及语言你在"><a href="#支持平台及语言你在" class="headerlink" title="支持平台及语言你在"></a>支持平台及语言你在</h1><p>python-uiautomator2封装了谷歌自带的uiautomator2测试框架，提供便利的python接口。他允许测试人员直接在PC上编写Python的测试代码，操作手机应用，完成自动化，大大提高了自动化代码编写的效率。</p>
+<h1 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h1><p><img src="/.kim//%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.png" alt="工作原理"><br>如图所示，python-uiautomator2主要分为两个部分，python客户端，移动设备</p>
+<ul>
+<li>python端: 运行脚本，并向移动设备发送HTTP请求</li>
+<li>移动设备：移动设备上运行了封装了uiautomator2的HTTP服务，解析收到的请求，并转化成uiautomator2的代码。</li>
+</ul>
+<p>整个过程</p>
+<ol>
+<li>在移动设备上安装atx-agent(守护进程), 随后atx-agent启动uiautomator2服务(默认7912端口)进行监听</li>
+<li>在PC上编写测试脚本并执行（相当于发送HTTP请求到移动设备的server端）</li>
+<li>移动设备通过WIFI或USB接收到PC上发来的HTTP请求，执行制定的操作</li>
+</ol>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="安装adb"><a href="#安装adb" class="headerlink" title="安装adb"></a>安装adb</h2><p>如命令行可以执行adb devices，则跳过此步骤<br>从谷歌官网下载Android Platform Tools <a target="_blank" rel="noopener" href="https://developer.android.com/studio/releases/platform-tools.html">https://developer.android.com/studio/releases/platform-tools.html</a>， 解压，并加包含adb.exe的目录加入到系统的PATH中。</p>
+<h2 id="安装uiautomator2"><a href="#安装uiautomator2" class="headerlink" title="安装uiautomator2"></a>安装uiautomator2</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install --upgrade --pre uiautomator2</span><br></pre></td></tr></table></figure>
+<h2 id="如果你需要用到截图，安装pillow"><a href="#如果你需要用到截图，安装pillow" class="headerlink" title="如果你需要用到截图，安装pillow"></a>如果你需要用到截图，安装pillow</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pillow</span><br></pre></td></tr></table></figure>
+<h2 id="设备安装atx-agent"><a href="#设备安装atx-agent" class="headerlink" title="设备安装atx-agent"></a>设备安装atx-agent</h2><p>首先设备连接到PC，并能够adb devices发现该设备。执行下面的命令会自动安装本库所需要的设备端程序：uiautomator-server，atx-agent，openstf / minicap，openstf / minitouch</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># init就是所有USB连接电脑的手机上都安装uiautomator2</span></span><br><span class="line">python -m uiautomator2 init</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 指定手机安装uiautomator2， 用 --mirror</span></span><br><span class="line">python -m uiautomator2 init --mirror --serial $SERIAL</span><br><span class="line"></span><br><span class="line"><span class="comment"># 嫌弃慢的话，可以用国内的镜像</span></span><br><span class="line">python -m uiautomator2 init --mirror</span><br></pre></td></tr></table></figure>
+<p>最后提示success，代表atx-agent初始化成功。</p>
+<h2 id="安装weditor"><a href="#安装weditor" class="headerlink" title="安装weditor"></a>安装weditor</h2><p>有了这个，方便我们快速的识别手机上的元素，方便写代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install --pre -U weditor<span class="comment">#pip install --pre weditor</span></span><br></pre></td></tr></table></figure>
+<p>Windows系统可以使用命令在桌面创建一个快捷方式 python -m weditor –shortcut</p>
+<p>启动方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m weditor </span><br></pre></td></tr></table></figure>
+<p>浏览器会自动打开一个网页 <a target="_blank" rel="noopener" href="http://atx.open.netease.com,看到如下界面/">http://atx.open.netease.com，看到如下界面</a><br><img src="/.kim//weditor.jpeg" alt="weditor"></p>
+<p>重点说下这个部分<br><img src="/.kim//weditor_connect.png" alt="weditor"><br>如何与手机连接起来呢？就是通过手机序列号或IP来实现的。打开cmd,输入adb devices，查看手机序列号，输入框中填写设备的IP或者设备的Serial（序列号）。之后点击Connect，如果一切正常就会出现一个绿色的叶子<br><img src="/.kim//weditor_state.png" alt="weditor"><br>点击蓝色的Reload，就可以在网页上看到手机的界面了。非常的强大。我们可以看到手机元素的各种定位方法，在UI自动化写代码的时候，真的是非常的方面，手机页面和weditor是实时同步的。</p>
+<h2 id="【推荐】AppetizerIO-所见即所得脚本编辑器"><a href="#【推荐】AppetizerIO-所见即所得脚本编辑器" class="headerlink" title="【推荐】AppetizerIO 所见即所得脚本编辑器"></a>【推荐】AppetizerIO 所见即所得脚本编辑器</h2><p><a target="_blank" rel="noopener" href="https://www.appetizer.io/">AppetizerIO</a> 提供了对uiautomator2的深度集成，可以图形化管理ATX设备，还有所见即所得脚本编辑器<br>     *到网站下载直接打开，首次使用需要注册账号<br>       * <code>设备管理</code> 界面里可以检查设备是否正常init，起停atx-agent，抓取atx-agent.log文件<br>       *  <code>APP测试-&gt;脚本助手</code>调出脚本助手，实时界面同步，点击界面直接插入各种代码，同时支持uiautomator和Appium<br>      * <strong><a target="_blank" rel="noopener" href="https://github.com/openatx/uiautomator2/wiki/Appetizer%E6%89%80%E8%A7%81%E5%8D%B3%E6%89%80%E5%BE%97u2%E8%84%9A%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8">视频教程 请戳这里</a></strong>  <a target="_blank" rel="noopener" href="http://doc.appetizer.io/">其他文档在此</a></p>
+<h1 id="应用及操作"><a href="#应用及操作" class="headerlink" title="应用及操作"></a>应用及操作</h1><h2 id="调用uiautomator2的过程"><a href="#调用uiautomator2的过程" class="headerlink" title="调用uiautomator2的过程"></a>调用uiautomator2的过程</h2><ol>
+<li>配置手机设备参数，设置具体操作的是哪一台手机 </li>
+<li>抓取手机上应用的控件，制定对应的控件来进行操作</li>
+<li>抓取手机上应用的控件，制定对应的控件来进行操作抓取手机上应用的控件，制定对应的控件来进行操作<br>对抓取到的控件进行操作，比如点击、填写参数等。</li>
+</ol>
+<h2 id="设备连接方法，有两种"><a href="#设备连接方法，有两种" class="headerlink" title="设备连接方法，有两种"></a>设备连接方法，有两种</h2><p>python-uiautomator2连接手机的方式有两种，一种是通过WIFI，另外一种是通过USB。两种方法各有优缺点。<br>WIFI最便利的地方要数可以不用连接数据线，USB则可以用在PC和手机网络不在一个网段用不了的情况。</p>
+<ol>
+<li>通过WiFi，假设设备IP 192.168.5.4和您的PC在同一网络中<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> uiautomator2 <span class="keyword">as</span> u2</span><br><span class="line">d = u2.connect(<span class="string">&#x27;192.168.5.4&#x27;</span>) <span class="comment"># WIFI链接设备。或者u2.connect_wifi(&#x27;10.0.0.1&#x27;)</span></span><br></pre></td></tr></table></figure></li>
+<li>通过USB， 假设设备序列是123456789F（见adb devices）<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> uiautomator2 <span class="keyword">as</span> u2</span><br><span class="line">d = u2.connect(<span class="string">&#x27;123456789F&#x27;</span>) <span class="comment"># USB链接设备。或者u2.connect_usb(&#x27;123456f&#x27;)</span></span><br><span class="line"><span class="comment">#d = u2.connect_usb()#当前只有一个设备时可以用这个</span></span><br></pre></td></tr></table></figure>
+在没有参数的情况下调用u2.connect()， uiautomator2将从环境变量ANDROID_DEVICE_IP获取设备IP。如果这个环境变量是空的，uiautomator将返回connect_usb，您需要确保只有一个设备连接到计算机。<h2 id="检查并维持设备端守护进程处于运行状态"><a href="#检查并维持设备端守护进程处于运行状态" class="headerlink" title="检查并维持设备端守护进程处于运行状态"></a>检查并维持设备端守护进程处于运行状态</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d.healthcheck()</span><br></pre></td></tr></table></figure>
+<h2 id="停用UiAutomator的守护程序"><a href="#停用UiAutomator的守护程序" class="headerlink" title="停用UiAutomator的守护程序?"></a>停用UiAutomator的守护程序?</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d.service(<span class="string">&#x27;uiautomator&#x27;</span>).stop()</span><br></pre></td></tr></table></figure>
+<h2 id="打开调试开关"><a href="#打开调试开关" class="headerlink" title="打开调试开关"></a>打开调试开关</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">d.debug = <span class="literal">True</span></span><br><span class="line">d.info</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">返回</span></span><br><span class="line"><span class="string">12:32:47.182 $ curl -X POST -d &#x27;&#123;&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;id&quot;: &quot;b80d3a488580be1f3e9cb3e926175310&quot;, &quot;method&quot;: &quot;deviceInfo&quot;, &quot;params&quot;: &#123;&#125;&#125;&#x27; &#x27;http://127.0.0.1:54179/jsonrpc/0&#x27;</span></span><br><span class="line"><span class="string">12:32:47.225 Response &gt;&gt;&gt;</span></span><br><span class="line"><span class="string">&#123;&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;id&quot;:&quot;b80d3a488580be1f3e9cb3e926175310&quot;,&quot;result&quot;:&#123;&quot;currentPackageName&quot;:&quot;com.android.mms&quot;,&quot;displayHeight&quot;:1920,&quot;displayRotation&quot;:0,&quot;displaySizeDpX&quot;:360,&quot;displaySizeDpY&quot;:640,&quot;displayWidth&quot;:1080,&quot;productName&quot;</span></span><br><span class="line"><span class="string">:&quot;odin&quot;,&quot;screenOn&quot;:true,&quot;sdkInt&quot;:25,&quot;naturalOrientation&quot;:true&#125;&#125;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+<h2 id="安装应用，只能从URL安装"><a href="#安装应用，只能从URL安装" class="headerlink" title="安装应用，只能从URL安装"></a>安装应用，只能从URL安装</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d.app_install(<span class="string">&#x27;http://some-domain.com/some.apk&#x27;</span>)<span class="comment">#引号内为下载apk地址</span></span><br></pre></td></tr></table></figure>
+<h2 id="启动应用"><a href="#启动应用" class="headerlink" title="启动应用"></a>启动应用</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d.app_start(<span class="string">&#x27;com.ruguoapp.jike&#x27;</span>)<span class="comment">#引号内为包名称</span></span><br></pre></td></tr></table></figure>
+<h2 id="停止应用"><a href="#停止应用" class="headerlink" title="停止应用"></a>停止应用</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#相当于&#x27;am force-stop&#x27;强制停止应用</span></span><br><span class="line">d.app_stop(<span class="string">&#x27;com.example.hello_world&#x27;</span>) </span><br><span class="line"><span class="comment">#相当于&#x27;pm clear&#x27; 清空App数据</span></span><br><span class="line">d.app_clear(<span class="string">&#x27;com.example.hello_world&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="停止所有正在运行的应用程序"><a href="#停止所有正在运行的应用程序" class="headerlink" title="停止所有正在运行的应用程序"></a>停止所有正在运行的应用程序</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 停止所有</span></span><br><span class="line">d.app_stop_all()</span><br><span class="line"><span class="comment"># 停止所有应用程序，除了com.examples.demo</span></span><br><span class="line">d.app_stop_all(excludes=[<span class="string">&#x27;com.examples.demo&#x27;</span>])</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="跳过弹窗，禁止弹窗"><a href="#跳过弹窗，禁止弹窗" class="headerlink" title="跳过弹窗，禁止弹窗"></a>跳过弹窗，禁止弹窗</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d.disable_popups（）<span class="comment">#自动跳过弹出窗口 </span></span><br><span class="line">d.disable_popups（假）<span class="comment">#禁用自动跳过弹出窗</span></span><br></pre></td></tr></table></figure>
+<h2 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h2><p>Session表示应用程序的生命周期。可用于启动应用，检测应用崩溃</p>
+<ul>
+<li><p>启动和关闭应用程序</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sess = d.session(<span class="string">&quot;com.netease.cloudmusic&quot;</span>) <span class="comment"># start 网易云音乐</span></span><br><span class="line">sess.close() <span class="comment"># 停止网易云音乐</span></span><br></pre></td></tr></table></figure></li>
+<li><p>使用python with启动和关闭应用程序</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> d.session(<span class="string">&quot;com.netease.cloudmusic&quot;</span>) <span class="keyword">as</span> sess:</span><br><span class="line">    sess(text=<span class="string">&quot;Play&quot;</span>).click()</span><br></pre></td></tr></table></figure></li>
+<li><p>链接正在运行的应用</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sess = d.session（“ com.netease.cloudmusic ”，attach = <span class="literal">True</span>）</span><br></pre></td></tr></table></figure></li>
+<li><p>检测应用崩溃</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># App正在运行时</span></span><br><span class="line">sess(text=<span class="string">&quot;Music&quot;</span>).click() <span class="comment"># 操作是正常的</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># App崩溃时</span></span><br><span class="line">sess(text=<span class="string">&quot;Music&quot;</span>).click() <span class="comment"># 引发会话中断错误SessionBrokenError</span></span><br><span class="line"><span class="comment"># session下的其他函数调用也会引发SessionBrokenError错误</span></span><br></pre></td></tr></table></figure>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检查会话是否正确。</span></span><br><span class="line"><span class="comment"># 警告:函数名将来可能会更改</span></span><br><span class="line">sess.running() <span class="comment"># True or False</span></span><br></pre></td></tr></table></figure>
+<h2 id="获取设备信息"><a href="#获取设备信息" class="headerlink" title="获取设备信息"></a>获取设备信息</h2></li>
+<li><p>获取基本信息</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d.info</span><br></pre></td></tr></table></figure>
+<p> 以下是可能的输出：</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123; </span><br><span class="line">    <span class="string">u&#x27;displayRotation&#x27;</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="string">u&#x27;displaySizeDpY&#x27;</span>: <span class="number">640</span>,</span><br><span class="line">    <span class="string">u&#x27;displaySizeDpX&#x27;</span>: <span class="number">360</span>,</span><br><span class="line">    <span class="string">u&#x27;currentPackageName&#x27;</span>: <span class="string">u&#x27;com.android.launcher&#x27;</span>,</span><br><span class="line">    <span class="string">u&#x27;productName&#x27;</span>: <span class="string">u&#x27;takju&#x27;</span>,</span><br><span class="line">    <span class="string">u&#x27;displayWidth&#x27;</span>: <span class="number">720</span>,</span><br><span class="line">    <span class="string">u&#x27;sdkInt&#x27;</span>: <span class="number">18</span>,</span><br><span class="line">    <span class="string">u&#x27;displayHeight&#x27;</span>: <span class="number">1184</span>,</span><br><span class="line">    <span class="string">u&#x27;naturalOrientation&#x27;</span>: <span class="literal">True</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>获取窗口大小</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d.window_size()</span><br><span class="line"><span class="comment"># 设备垂直输出示例: (1080, 1920)</span></span><br><span class="line"><span class="comment"># 设备水平输出示例: (1920, 1080)</span></span><br></pre></td></tr></table></figure></li>
+<li><p>获取当前应用程序信息。对于某些android设备，输出可以为空(参见输出示例3)</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">d.current_app()</span><br><span class="line"><span class="comment"># 输出示例 1: &#123;&#x27;package&#x27;: &#x27;com.netease.example&#x27;, &#x27;activity&#x27;: &#x27;.Client&#x27;, &#x27;pid&#x27;: 23710&#125;</span></span><br><span class="line"><span class="comment"># 输出示例 2: &#123;&#x27;package&#x27;: &#x27;com.ruguoapp.jike&#x27;, &#x27;activity&#x27;: &#x27;com.ruguoapp.jike.business.video.ui.activity.videolist.VideoListActivity&#x27;&#125;</span></span><br><span class="line"><span class="comment"># 输出示例 3: &#123;&#x27;package&#x27;: None, &#x27;activity&#x27;: None&#125;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>获取设备序列号</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d.serial</span><br><span class="line"><span class="comment"># 输出示例: 74aAEDR428Z9</span></span><br></pre></td></tr></table></figure></li>
+<li><p>获取WIFI IP</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(d.wlan_ip)</span><br><span class="line"><span class="comment">#输出示例:10.0.0.1</span></span><br></pre></td></tr></table></figure></li>
+<li><p>获取详细的设备信息</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(d.device_info)</span><br></pre></td></tr></table></figure>
+
+<p> 下面是一个可能的输出:</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">&#x27;udid&#x27;</span>: <span class="string">&#x27;3578298f-b4:0b:44:e6:1f:90-OD103&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;version&#x27;</span>: <span class="string">&#x27;7.1.1&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;serial&#x27;</span>: <span class="string">&#x27;3578298f&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;brand&#x27;</span>: <span class="string">&#x27;SMARTISAN&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;model&#x27;</span>: <span class="string">&#x27;OD103&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;hwaddr&#x27;</span>: <span class="string">&#x27;b4:0b:44:e6:1f:90&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;port&#x27;</span>: <span class="number">7912</span>,</span><br><span class="line"> <span class="string">&#x27;sdk&#x27;</span>: <span class="number">25</span>,</span><br><span class="line"> <span class="string">&#x27;agentVersion&#x27;</span>: <span class="string">&#x27;dev&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;display&#x27;</span>: &#123;<span class="string">&#x27;width&#x27;</span>: <span class="number">1080</span>, <span class="string">&#x27;height&#x27;</span>: <span class="number">1920</span>&#125;,</span><br><span class="line"> <span class="string">&#x27;battery&#x27;</span>: &#123;<span class="string">&#x27;acPowered&#x27;</span>: <span class="literal">False</span>,</span><br><span class="line">  <span class="string">&#x27;usbPowered&#x27;</span>: <span class="literal">False</span>,</span><br><span class="line">  <span class="string">&#x27;wirelessPowered&#x27;</span>: <span class="literal">False</span>,</span><br><span class="line">  <span class="string">&#x27;status&#x27;</span>: <span class="number">3</span>,</span><br><span class="line">  <span class="string">&#x27;health&#x27;</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="string">&#x27;present&#x27;</span>: <span class="literal">True</span>,</span><br><span class="line">  <span class="string">&#x27;level&#x27;</span>: <span class="number">99</span>,</span><br><span class="line">  <span class="string">&#x27;scale&#x27;</span>: <span class="number">100</span>,</span><br><span class="line">  <span class="string">&#x27;voltage&#x27;</span>: <span class="number">4316</span>,</span><br><span class="line">  <span class="string">&#x27;temperature&#x27;</span>: <span class="number">272</span>,</span><br><span class="line">  <span class="string">&#x27;technology&#x27;</span>: <span class="string">&#x27;Li-ion&#x27;</span>&#125;,</span><br><span class="line"> <span class="string">&#x27;memory&#x27;</span>: &#123;<span class="string">&#x27;total&#x27;</span>: <span class="number">3690280</span>, <span class="string">&#x27;around&#x27;</span>: <span class="string">&#x27;4 GB&#x27;</span>&#125;,</span><br><span class="line"> <span class="string">&#x27;cpu&#x27;</span>: &#123;<span class="string">&#x27;cores&#x27;</span>: <span class="number">8</span>, <span class="string">&#x27;hardware&#x27;</span>: <span class="string">&#x27;Qualcomm Technologies, Inc MSM8953Pro&#x27;</span>&#125;,</span><br><span class="line"> <span class="string">&#x27;presenceChangedAt&#x27;</span>: <span class="string">&#x27;0001-01-01T00:00:00Z&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;usingBeganAt&#x27;</span>: <span class="string">&#x27;0001-01-01T00:00:00Z&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="获取应用信息"><a href="#获取应用信息" class="headerlink" title="获取应用信息"></a>获取应用信息</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">d.app_info(<span class="string">&quot;com.examples.demo&quot;</span>)</span><br><span class="line"><span class="comment"># 会输出</span></span><br><span class="line"><span class="comment">#&#123;</span></span><br><span class="line"><span class="comment">#    &quot;mainActivity&quot;: &quot;com.github.uiautomator.MainActivity&quot;,</span></span><br><span class="line"><span class="comment">#    &quot;label&quot;: &quot;ATX&quot;,</span></span><br><span class="line"><span class="comment">#    &quot;versionName&quot;: &quot;1.1.7&quot;,</span></span><br><span class="line"><span class="comment">#    &quot;versionCode&quot;: 1001007,</span></span><br><span class="line"><span class="comment">#    &quot;size&quot;:1760809</span></span><br><span class="line"><span class="comment">#&#125;</span></span><br><span class="line"><span class="comment"># 保存应用程序图标</span></span><br><span class="line">img = d.app_icon(<span class="string">&quot;com.examples.demo&quot;</span>)</span><br><span class="line">img.save(<span class="string">&quot;icon.png&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="推拉文件"><a href="#推拉文件" class="headerlink" title="推拉文件"></a>推拉文件</h2><ul>
+<li><p>将文件推送到设备</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># push文件夹</span></span><br><span class="line">d.push(<span class="string">&quot;foo.txt&quot;</span>, <span class="string">&quot;/sdcard/&quot;</span>)</span><br><span class="line"><span class="comment"># push和重命名</span></span><br><span class="line">d.push(<span class="string">&quot;foo.txt&quot;</span>, <span class="string">&quot;/sdcard/bar.txt&quot;</span>)</span><br><span class="line"><span class="comment"># push fileobj</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;foo.txt&quot;</span>, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    d.push(f, <span class="string">&quot;/sdcard/&quot;</span>)</span><br><span class="line"><span class="comment"># 推动和更改文件访问模式</span></span><br><span class="line">d.push(<span class="string">&quot;foo.sh&quot;</span>, <span class="string">&quot;/data/local/tmp/&quot;</span>, mode=<span class="number">0o755</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>从设备中拉出一个文件</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">d.pull(<span class="string">&quot;/sdcard/tmp.txt&quot;</span>, <span class="string">&quot;tmp.txt&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果在设备上找不到文件，FileNotFoundError将引发</span></span><br><span class="line">d.pull(<span class="string">&quot;/sdcard/some-file-not-exists.txt&quot;</span>, <span class="string">&quot;tmp.txt&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="关键事件"><a href="#关键事件" class="headerlink" title="关键事件"></a>关键事件</h2><ul>
+<li>打开/关闭屏幕 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d.screen_on（）＃打开屏幕 </span><br><span class="line">d.screen_off（）＃关闭屏幕</span><br></pre></td></tr></table></figure></li>
+<li>获取当前屏幕状态 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d.info.get（<span class="string">&#x27; screenOn &#x27;</span>）<span class="comment">#需要 Android&gt; = 4.4</span></span><br></pre></td></tr></table></figure></li>
+<li>硬键盘和软键盘操作 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">d.press(<span class="string">&quot;home&quot;</span>) <span class="comment"># 点击home键</span></span><br><span class="line">d.press(<span class="string">&quot;back&quot;</span>) <span class="comment"># 点击back键</span></span><br><span class="line">d.press(<span class="string">&quot;left&quot;</span>) <span class="comment"># 点击左键</span></span><br><span class="line">d.press(<span class="string">&quot;right&quot;</span>) <span class="comment"># 点击右键</span></span><br><span class="line">d.press(<span class="string">&quot;up&quot;</span>) <span class="comment"># 点击上键</span></span><br><span class="line">d.press(<span class="string">&quot;down&quot;</span>) <span class="comment"># 点击下键</span></span><br><span class="line">d.press(<span class="string">&quot;center&quot;</span>) <span class="comment"># 点击选中</span></span><br><span class="line">d.press(<span class="string">&quot;menu&quot;</span>) <span class="comment"># 点击menu按键</span></span><br><span class="line">d.press(<span class="string">&quot;search&quot;</span>) <span class="comment"># 点击搜索按键</span></span><br><span class="line">d.press(<span class="string">&quot;enter&quot;</span>) <span class="comment"># 点击enter键</span></span><br><span class="line">d.press(<span class="string">&quot;delete&quot;</span>) <span class="comment"># 点击删除按键</span></span><br><span class="line">d.press(<span class="string">&quot;recent&quot;</span>) <span class="comment"># 点击近期活动按键</span></span><br><span class="line">d.press(<span class="string">&quot;volume_up&quot;</span>) <span class="comment"># 音量+</span></span><br><span class="line">d.press(<span class="string">&quot;volume_down&quot;</span>) <span class="comment"># 音量-</span></span><br><span class="line">d.press(<span class="string">&quot;volume_mute&quot;</span>) <span class="comment"># 静音</span></span><br><span class="line">d.press(<span class="string">&quot;camera&quot;</span>) <span class="comment"># 相机</span></span><br><span class="line">d.press(<span class="string">&quot;power&quot;</span>) <span class="comment">#电源键</span></span><br></pre></td></tr></table></figure>
+ 你可以在 <a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/view/KeyEvent.html">Android KeyEvnet</a>上找到所有的关键代码定义</li>
+<li>解锁屏幕 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">d.unlock()</span><br><span class="line"><span class="comment"># 相当于</span></span><br><span class="line"><span class="comment"># 1. 发射活动:com.github.uiautomator.ACTION_IDENTIFY</span></span><br><span class="line"><span class="comment"># 2. 按home键</span></span><br></pre></td></tr></table></figure>
+<h2 id="手势与设备的交互"><a href="#手势与设备的交互" class="headerlink" title="手势与设备的交互"></a>手势与设备的交互</h2></li>
+<li>单击屏幕 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d.click（x，y）</span><br></pre></td></tr></table></figure></li>
+<li>双击屏幕 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d.double_click（x，y）</span><br><span class="line">d.double_click（X，Y，<span class="number">0.1</span>）＃默认两个单击之间间隔时间为<span class="number">0.1</span>秒</span><br></pre></td></tr></table></figure></li>
+<li>长按 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d.long_click（x，y）</span><br><span class="line">d.long_click（X，Y，<span class="number">0.5</span>）<span class="comment">#长按0.5秒（默认）</span></span><br></pre></td></tr></table></figure></li>
+<li>滑动 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d.swipe(sx, sy, ex, ey)</span><br><span class="line">d.swipe(sx, sy, ex, ey, <span class="number">0.5</span>) <span class="comment">#滑动0.5s(default)</span></span><br></pre></td></tr></table></figure></li>
+<li>拖动 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d.drag(sx, sy, ex, ey)</span><br><span class="line">d.drag(sx, sy, ex, ey, <span class="number">0.5</span>)<span class="comment">#拖动0.5s(default)</span></span><br></pre></td></tr></table></figure></li>
+<li>滑动点 多用于九宫格解锁，提前获取到每个点的相对坐标（这里支持百分比），<br> 更详细的使用参考这个帖子 <a target="_blank" rel="noopener" href="https://testerhome.com/topics/11034">使用u2实现九宫图案解锁</a> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#从点(x0, y0)滑到点(x1, y1)再滑到点(x2, y2)</span></span><br><span class="line"><span class="comment">#两点之间的滑动速度是0.2秒</span></span><br><span class="line">d.swipe((x0, y0), (x1, y1), (x2, y2), <span class="number">0.2</span>)</span><br></pre></td></tr></table></figure>
+ 注意：单击，滑动，拖动操作支持百分比位置值。例： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d.long_click(<span class="number">0.5</span>, <span class="number">0.5</span>) 表示长按屏幕中心</span><br></pre></td></tr></table></figure>
+<h2 id="屏幕相关的"><a href="#屏幕相关的" class="headerlink" title="屏幕相关的"></a>屏幕相关的</h2></li>
+<li>检索方向 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d.orientation</span><br><span class="line"><span class="comment"># 检索方向。输出可以是 &quot;natural&quot; or &quot;left&quot; or &quot;right&quot; or &quot;upsidedown&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li>设置方向 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">d.set_orientation(<span class="string">&#x27;l&#x27;</span>) <span class="comment"># or &quot;left&quot;</span></span><br><span class="line">d.set_orientation(<span class="string">&quot;l&quot;</span>) <span class="comment"># or &quot;left&quot;</span></span><br><span class="line">d.set_orientation(<span class="string">&quot;r&quot;</span>) <span class="comment"># or &quot;right&quot;</span></span><br><span class="line">d.set_orientation(<span class="string">&quot;n&quot;</span>) <span class="comment"># or &quot;natural&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li>冻结/ 开启旋转 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d.freeze_rotation()<span class="comment"># 冻结旋转</span></span><br><span class="line">d.freeze_rotation(<span class="literal">False</span>)<span class="comment"># 开启旋转</span></span><br></pre></td></tr></table></figure></li>
+<li>截图 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 截图并保存到电脑上的一个文件中，需要Android&gt;=4.2。</span></span><br><span class="line">d.screenshot(<span class="string">&quot;home.jpg&quot;</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 得到PIL.Image格式的图像. 但你必须先安装pillow</span></span><br><span class="line">image = d.screenshot() <span class="comment"># default format=&quot;pillow&quot;</span></span><br><span class="line">image.save(<span class="string">&quot;home.jpg&quot;</span>) <span class="comment"># 或&#x27;home.png&#x27;，目前只支持png 和 jpg格式的图像</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 得到OpenCV的格式图像。当然，你需要numpy和cv2安装第一个</span></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line">image = d.screenshot(<span class="built_in">format</span>=<span class="string">&#x27;opencv&#x27;</span>)</span><br><span class="line">cv2.imwrite(<span class="string">&#x27;home.jpg&#x27;</span>, image)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 获取原始JPEG数据</span></span><br><span class="line">imagebin = d.screenshot(<span class="built_in">format</span>=<span class="string">&#x27;raw&#x27;</span>)</span><br><span class="line"><span class="built_in">open</span>(<span class="string">&quot;some.jpg&quot;</span>, <span class="string">&quot;wb&quot;</span>).write(imagebin)</span><br></pre></td></tr></table></figure></li>
+<li>转储UI层次结构 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># get the UI hierarchy dump content (unicoded).（获取UI层次结构转储内容）</span></span><br><span class="line">d.dump_hierarchy()</span><br></pre></td></tr></table></figure></li>
+<li>打开通知或快速设置 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d.open_notification（）<span class="comment">#下拉打开通知栏</span></span><br><span class="line">d.open_quick_settings（）<span class="comment">#下拉打开快速设置栏</span></span><br></pre></td></tr></table></figure>
+<h2 id="选择Ui对象"><a href="#选择Ui对象" class="headerlink" title="选择Ui对象"></a>选择Ui对象</h2>选择器是一种方便的机制，用于在当前窗口中标识特定的UI对象。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#选择带有文本&#x27;Clock&#x27;的对象，它的类名是&#x27;android.widget.TextView&#x27;</span></span><br><span class="line">d(text=<span class="string">&#x27;Clock&#x27;</span>, className=<span class="string">&#x27;android.widget.TextView&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>选择器支持以下参数。有关详细信息，请参阅 <a target="_blank" rel="noopener" href="http://developer.android.com/tools/help/uiautomator/UiSelector.html">UiSelector Java doc</a> for detailed information.</p>
+<ul>
+<li> <code>text</code>, <code>textContains</code>, <code>textMatches</code>, <code>textStartsWith</code></li>
+<li> <code>className</code>, <code>classNameMatches</code></li>
+<li> <code>description</code>, <code>descriptionContains</code>, <code>descriptionMatches</code>, <code>descriptionStartsWith</code></li>
+<li> <code>checkable</code>, <code>checked</code>, <code>clickable</code>, <code>longClickable</code></li>
+<li> <code>scrollable</code>, <code>enabled</code>,<code>focusable</code>, <code>focused</code>, <code>selected</code></li>
+<li> <code>packageName</code>, <code>packageNameMatches</code></li>
+<li> <code>resourceId</code>, <code>resourceIdMatches</code></li>
+<li> <code>index</code>, <code>instance</code></li>
+</ul>
+<p>##获取所选ui对象状态及其信息</p>
+<ul>
+<li>检查特定的UI对象是否存在 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">d(text=<span class="string">&quot;Settings&quot;</span>).exists <span class="comment"># 返回布尔值，如果存在则为True，否则为False</span></span><br><span class="line">d.exists(text=<span class="string">&quot;Settings&quot;</span>) <span class="comment"># 另一种写法</span></span><br><span class="line"><span class="comment">#高级用法</span></span><br><span class="line">d(text=<span class="string">&quot;Settings&quot;</span>).exists(timeout=<span class="number">3</span>) <span class="comment"># 等待&#x27;Settings&#x27;在3秒钟出现</span></span><br></pre></td></tr></table></figure></li>
+<li>获取特定UI对象的信息 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d(text=<span class="string">&quot;Settings&quot;</span>).info</span><br></pre></td></tr></table></figure>
+ 下面是一个可能的输出 <figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	  <span class="string">&#x27;bounds&#x27;</span>: &#123;</span><br><span class="line">		    <span class="string">&#x27;bottom&#x27;</span>: <span class="number">2744</span>,</span><br><span class="line">		    <span class="string">&#x27;left&#x27;</span>: <span class="number">386</span>,</span><br><span class="line">		    <span class="string">&#x27;right&#x27;</span>: <span class="number">478</span>,</span><br><span class="line">		    <span class="string">&#x27;top&#x27;</span>: <span class="number">2679</span>&#125;,</span><br><span class="line">	  <span class="string">&#x27;childCount&#x27;</span>: <span class="number">0</span>,</span><br><span class="line">	  <span class="string">&#x27;className&#x27;</span>: <span class="string">&#x27;android.widget.TextView&#x27;</span>,</span><br><span class="line">	  <span class="string">&#x27;contentDescription&#x27;</span>: <span class="literal">None</span>,</span><br><span class="line">	  <span class="string">&#x27;packageName&#x27;</span>: <span class="string">&#x27;com.ruguoapp.jike&#x27;</span>,</span><br><span class="line">	  <span class="string">&#x27;resourceName&#x27;</span>: <span class="string">&#x27;com.ruguoapp.jike:id/tv_main_tab_title&#x27;</span>,</span><br><span class="line">	  <span class="string">&#x27;text&#x27;</span>: <span class="string">&#x27;动态&#x27;</span>,</span><br><span class="line">	  <span class="string">&#x27;visibleBounds&#x27;</span>: &#123;</span><br><span class="line">		    <span class="string">&#x27;bottom&#x27;</span>: <span class="number">2744</span>,</span><br><span class="line">		    <span class="string">&#x27;left&#x27;</span>: <span class="number">386</span>,</span><br><span class="line">		    <span class="string">&#x27;right&#x27;</span>: <span class="number">478</span>,</span><br><span class="line">		    <span class="string">&#x27;top&#x27;</span>: <span class="number">2679</span>&#125;,</span><br><span class="line">	  <span class="string">&#x27;checkable&#x27;</span>: <span class="literal">False</span>,</span><br><span class="line">	  <span class="string">&#x27;checked&#x27;</span>: <span class="literal">False</span>,</span><br><span class="line">	  <span class="string">&#x27;clickable&#x27;</span>: <span class="literal">False</span>,</span><br><span class="line">	  <span class="string">&#x27;enabled&#x27;</span>: <span class="literal">True</span>,</span><br><span class="line">	  <span class="string">&#x27;focusable&#x27;</span>: <span class="literal">False</span>,</span><br><span class="line">	  <span class="string">&#x27;focused&#x27;</span>: <span class="literal">False</span>,</span><br><span class="line">	  <span class="string">&#x27;longClickable&#x27;</span>: <span class="literal">False</span>,</span><br><span class="line">	  <span class="string">&#x27;scrollable&#x27;</span>: <span class="literal">False</span>,</span><br><span class="line">	  <span class="string">&#x27;selected&#x27;</span>: <span class="literal">False</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>获取/设置/清除可编辑字段的文本(例如EditText小部件) <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d(text=<span class="string">&quot;Settings&quot;</span>).get_text()  <span class="comment">#得到文本小部件</span></span><br><span class="line">d(text=<span class="string">&quot;Settings&quot;</span>).set_text(<span class="string">&quot;My text...&quot;</span>)  <span class="comment">#设置文本</span></span><br><span class="line">d(text=<span class="string">&quot;Settings&quot;</span>).clear_text()  <span class="comment">#清除文本</span></span><br></pre></td></tr></table></figure></li>
+<li>获取Widget中心点 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d(text=<span class="string">&quot;Settings&quot;</span>).center()</span><br><span class="line"><span class="comment">#d(text=&quot;Settings&quot;).center(offset=(0, 0)) # 基准位置左前</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="对选定UI对象的操作"><a href="#对选定UI对象的操作" class="headerlink" title="对选定UI对象的操作"></a>对选定UI对象的操作</h2><ul>
+<li><p>UI对象有五种定位方式<br> text、resourceId、description、className、xpath、坐标</p>
+</li>
+<li><p>执行单击UI对象</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#text定位单击</span></span><br><span class="line">d(text=<span class="string">&quot;Settings&quot;</span>).click()</span><br><span class="line">d(text=<span class="string">&quot;Settings&quot;</span>, className=<span class="string">&quot;android.widget.TextView&quot;</span>).click()</span><br><span class="line"><span class="comment">#resourceId定位单击</span></span><br><span class="line">d(resourceId=<span class="string">&quot;com.ruguoapp.jike:id/tv_title&quot;</span>, className=<span class="string">&quot;android.widget.TextView&quot;</span>).click() </span><br><span class="line"><span class="comment">#description定位单击</span></span><br><span class="line">d(description=<span class="string">&quot;设置&quot;</span>).click()</span><br><span class="line">d(description=<span class="string">&quot;设置&quot;</span>, className=<span class="string">&quot;android.widget.TextView&quot;</span>).click()</span><br><span class="line"><span class="comment">#className定位单击</span></span><br><span class="line">d(className=<span class="string">&quot;android.widget.TextView&quot;</span>).click()</span><br><span class="line"><span class="comment">#xpath定位单击</span></span><br><span class="line">d.xpath(<span class="string">&quot;//android.widget.FrameLayout[@index=&#x27;0&#x27;]/android.widget.LinearLayout[@index=&#x27;0&#x27;]&quot;</span>).click()</span><br><span class="line"><span class="comment">#坐标单击</span></span><br><span class="line">d.click(<span class="number">182</span>, <span class="number">1264</span>)</span><br></pre></td></tr></table></figure>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 等待元素出现(最多10秒），出现后单击 </span></span><br><span class="line">d(text=<span class="string">&quot;Settings&quot;</span>).click(timeout=<span class="number">10</span>)</span><br><span class="line"><span class="comment"># 在10秒时点击，默认的超时0</span></span><br><span class="line">d(text=<span class="string">&#x27;Skip&#x27;</span>).click_exists(timeout=<span class="number">10.0</span>)</span><br><span class="line"><span class="comment"># 单击直到元素消失，返回布尔</span></span><br><span class="line">d(text=<span class="string">&quot;Skip&quot;</span>).click_gone(maxretry=<span class="number">10</span>, interval=<span class="number">1.0</span>) <span class="comment"># maxretry默认值10,interval默认值1.0</span></span><br><span class="line"><span class="comment"># 点击基准位置偏移</span></span><br><span class="line">d(text=<span class="string">&quot;Settings&quot;</span>).click(offset=(<span class="number">0.5</span>, <span class="number">0.5</span>)) <span class="comment"># 点击中心位置，同d(text=&quot;Settings&quot;).click()</span></span><br><span class="line">d(text=<span class="string">&quot;Settings&quot;</span>).click(offset=(<span class="number">0</span>, <span class="number">0</span>)) <span class="comment"># 点击左前位置</span></span><br><span class="line">d(text=<span class="string">&quot;Settings&quot;</span>).click(offset=(<span class="number">1</span>, <span class="number">1</span>)) <span class="comment"># 点击右下</span></span><br></pre></td></tr></table></figure></li>
+<li><p>执行双击UI对象</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d(text=<span class="string">&quot;设置&quot;</span>).double_click() <span class="comment">#双击特定ui对象的中心</span></span><br><span class="line">d.double_click(x, y, <span class="number">0.1</span>)<span class="comment">#两次单击之间的默认持续时间为0.1秒</span></span><br></pre></td></tr></table></figure></li>
+<li><p>执行长按UI对象</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 长按特定UI对象的中心</span></span><br><span class="line">d(text=<span class="string">&quot;Settings&quot;</span>).long_click()</span><br><span class="line">d.long_click(x, y, <span class="number">0.5</span>) <span class="comment"># 长按坐标位置0.5s默认</span></span><br></pre></td></tr></table></figure>
+<p>##特定UI对象的手势操作</p>
+</li>
+<li><p>将UI对象拖向另一个点或另一个UI对象</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Android&lt;4.3不能使用drag.</span></span><br><span class="line"><span class="comment"># 在0.5秒内将UI对象拖到屏幕点(x, y)</span></span><br><span class="line">d(text=<span class="string">&quot;Settings&quot;</span>).drag_to(x, y, duration=<span class="number">0.5</span>)</span><br><span class="line"><span class="comment"># 将UI对象拖到另一个UI对象的中心位置，时间为0.25秒</span></span><br><span class="line">d(text=<span class="string">&quot;Settings&quot;</span>).drag_to(text=<span class="string">&quot;Clock&quot;</span>, duration=<span class="number">0.25</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>==未懂==从UI对象的中心向其边缘滑动<br>  滑动支持4个方向:左、右、上、下</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">   d(text=<span class="string">&quot;Settings&quot;</span>).swipe(<span class="string">&quot;right&quot;</span>)</span><br><span class="line">   d(text=<span class="string">&quot;Settings&quot;</span>).swipe(<span class="string">&quot;left&quot;</span>, steps=<span class="number">10</span>)</span><br><span class="line">   d(text=<span class="string">&quot;Settings&quot;</span>).swipe(<span class="string">&quot;up&quot;</span>, steps=<span class="number">20</span>) <span class="comment"># 1步约为5ms, 20步约为0.1s</span></span><br><span class="line">   d(text=<span class="string">&quot;Settings&quot;</span>).swipe(<span class="string">&quot;down&quot;</span>, steps=<span class="number">20</span>)</span><br><span class="line">   ```	 </span><br><span class="line">- ==未懂==两点手势操作，从一个点到另一个点</span><br><span class="line">```python</span><br><span class="line">d(text=<span class="string">&quot;Settings&quot;</span>).gesture((sx1, sy1), (sx2, sy2), (ex1, ey1), (ex2, ey2))</span><br></pre></td></tr></table></figure></li>
+<li><p>特定UI对象的手势操作<br> 支持两种手势：从边缘到中心、从中心到边缘</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#注意:缩放要到安卓4.3才能设置。</span></span><br><span class="line"><span class="comment">#从边缘到中心</span></span><br><span class="line">d(text=<span class="string">&quot;Settings&quot;</span>).pinch_in(percent=<span class="number">100</span>, steps=<span class="number">10</span>)</span><br><span class="line"><span class="comment"># 从中心到边缘</span></span><br><span class="line">d(text=<span class="string">&quot;Settings&quot;</span>).pinch_out()</span><br></pre></td></tr></table></figure></li>
+<li><p>等待，直到特定的UI出现或消失</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 等待ui对象出现</span></span><br><span class="line">d(text=<span class="string">&quot;Settings&quot;</span>).wait(timeout=<span class="number">3.0</span>) <span class="comment"># 返回布尔值</span></span><br><span class="line"><span class="comment"># 等待ui对象的消失</span></span><br><span class="line">d(text=<span class="string">&quot;Settings&quot;</span>).wait_gone(timeout=<span class="number">1.0</span>)</span><br></pre></td></tr></table></figure>
+<p> 默认超时为20秒。有关详细信息，请参阅全局设置</p>
+</li>
+<li><p>==未懂==对特定的ui对象执行投掷(可滚动)<br> 可能的属性</p>
+<ol>
+<li><code>horiz</code>（水平） 或 <code>vert</code>（垂直）</li>
+<li><code>forward</code>（向前）或<code>backward</code>（向后）或<code>toBeginning</code>（开始位置）或<code>toEnd</code>（结束位置）<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#向前投掷(默认)垂直(默认)</span></span><br><span class="line">d(scrollable=<span class="literal">True</span>).fling()</span><br><span class="line"><span class="comment">#垂直向后滚动</span></span><br><span class="line">d(scrollable=<span class="literal">True</span>).fling.vert.forward()</span><br><span class="line"><span class="comment">#没搞懂</span></span><br><span class="line">d(scrollable=<span class="literal">True</span>).fling.vert.backward()</span><br><span class="line"><span class="comment">#没搞懂</span></span><br><span class="line">d(scrollable=<span class="literal">True</span>).fling.horiz.toBeginning(max_swipes=<span class="number">1000</span>)</span><br><span class="line"><span class="comment">#滚动到结束</span></span><br><span class="line">d(scrollable=<span class="literal">True</span>).fling.toEnd()</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p>==未懂==在特定的ui对象上执行滚动(可滚动)<br> 可能的属性</p>
+<ol>
+<li><code>horiz</code>（水平） 或 <code>vert</code>（垂直）</li>
+<li><code>forward</code>（向前）或<code>backward</code>（向后）或<code>toBeginning</code>（开始位置）或<code>toEnd</code>（结束位置）或 <code>to</code> 来<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 向前滚动(默认)垂直(默认)</span></span><br><span class="line">d(scrollable=<span class="literal">True</span>).scroll(steps=<span class="number">10</span>)</span><br><span class="line"><span class="comment"># 水平向前滚动</span></span><br><span class="line">d(scrollable=<span class="literal">True</span>).scroll.horiz.forward(steps=<span class="number">100</span>)</span><br><span class="line"><span class="comment">#垂直向后滚动</span></span><br><span class="line">d(scrollable=<span class="literal">True</span>).scroll.vert.backward()</span><br><span class="line"><span class="comment">#滚动到开始水平</span></span><br><span class="line">d(scrollable=<span class="literal">True</span>).scroll.horiz.toBeginning(steps=<span class="number">100</span>, max_swipes=<span class="number">1000</span>)</span><br><span class="line"><span class="comment"># 滚动到垂直结束</span></span><br><span class="line">d(scrollable=<span class="literal">True</span>).scroll.toEnd()</span><br><span class="line"><span class="comment">#垂直向前滚动，直到出现特定的ui对象</span></span><br><span class="line">d(scrollable=<span class="literal">True</span>).scroll.to(text=<span class="string">&quot;Security&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
+<h2 id="Watcher（-未懂-）"><a href="#Watcher（-未懂-）" class="headerlink" title="Watcher（==未懂==）"></a>Watcher（==未懂==）</h2><p>当选择器没有找到匹配项时，可以注册<a target="_blank" rel="noopener" href="http://developer.android.com/tools/help/uiautomator/UiWatcher.html">watchers</a> 来执行一些操作。</p>
+<ul>
+<li><p>注册 Watcher</p>
+<p> 当选择器找不到匹配项时，uiautomator2将运行所有注册的watchers.<br>  当条件匹配时单击目标</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">d.watcher(<span class="string">&quot;AUTO_FC_WHEN_ANR&quot;</span>).when(text=<span class="string">&quot;ANR&quot;</span>).when(text=<span class="string">&quot;Wait&quot;</span>) \</span><br><span class="line">                             .click(text=<span class="string">&quot;Force Close&quot;</span>)</span><br><span class="line"><span class="comment"># d.watcher(name) ## 创建一个新的名为watcher的程序。</span></span><br><span class="line"><span class="comment">#  .when(condition)  ## 监视程序的用户选择条件。</span></span><br><span class="line"><span class="comment">#  .click(target)  ## 对目标UiSelector执行单击操作</span></span><br></pre></td></tr></table></figure></li>
+<li><p>还有一个关于点击的技巧。您可以不带参数地使用click。</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d.watcher(<span class="string">&quot;ALERT&quot;</span>).when(text=<span class="string">&quot;OK&quot;</span>).click()</span><br><span class="line"><span class="comment"># 一样</span></span><br><span class="line">d.watcher(<span class="string">&quot;ALERT&quot;</span>).when(text=<span class="string">&quot;OK&quot;</span>).click(text=<span class="string">&quot;OK&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li><p>当条件为真时按下键</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">d.watcher(<span class="string">&quot;AUTO_FC_WHEN_ANR&quot;</span>).when(text=<span class="string">&quot;ANR&quot;</span>).when(text=<span class="string">&quot;Wait&quot;</span>) \</span><br><span class="line">                             .press(<span class="string">&quot;back&quot;</span>, <span class="string">&quot;home&quot;</span>)</span><br><span class="line"><span class="comment"># d.watcher(name) ## 创建一个新的名为watcher的程序</span></span><br><span class="line"><span class="comment">#  .when(condition)  ## 监视程序的用户选择条件</span></span><br><span class="line"><span class="comment">#  .press(&lt;keyname&gt;, ..., &lt;keyname&gt;.()  ## 按顺序按下一个键</span></span><br></pre></td></tr></table></figure></li>
+<li><p>检查指定的监视程序是否触发<br> 一个监视程序被触发，这意味着运行了监视程序并匹配了它的所有条件。</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d.watcher(<span class="string">&quot;watcher_name&quot;</span>).triggered</span><br><span class="line"><span class="comment"># 如果指定的监视程序被触发，则为true，否则为false</span></span><br></pre></td></tr></table></figure></li>
+<li><p>删除指定的监视程序</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除观察者</span></span><br><span class="line">d.watcher(<span class="string">&quot;watcher_name&quot;</span>).remove()</span><br></pre></td></tr></table></figure></li>
+<li><p>列出所有观察者</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d.watchers</span><br><span class="line"><span class="comment">#列出所有注册观察员的名单</span></span><br></pre></td></tr></table></figure></li>
+<li><p>检查任何触发的监视程序</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d.watchers.triggered</span><br><span class="line"><span class="comment">#  在任何监视程序触发时为真</span></span><br></pre></td></tr></table></figure></li>
+<li><p>重置所有触发观察者</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重置所有触发的观察者，然后是d.观察者。触发将为false。</span></span><br><span class="line">d.watchers.reset()</span><br></pre></td></tr></table></figure></li>
+<li><p>删除观察者</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除所有注册观察者</span></span><br><span class="line">d.watchers.remove()</span><br><span class="line"><span class="comment"># 删除指定的监视程序，与d.watcher(“watcher_name”)相同。</span></span><br><span class="line">d.watchers.remove(<span class="string">&quot;watcher_name&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>强制运行所有的观察者</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 强制运行所有注册的观察者</span></span><br><span class="line">d.watchers.run()</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li>当页面更新时运行所有观察者。<br> 通常可以用来自动点击权限确认框，或者自动安装 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">d.watcher(<span class="string">&quot;OK&quot;</span>).when(text=<span class="string">&quot;OK&quot;</span>).click(text=<span class="string">&quot;OK&quot;</span>)</span><br><span class="line"><span class="comment"># 启用自动触发监视程序</span></span><br><span class="line">d.watchers.watched = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 禁用自动触发监视程序</span></span><br><span class="line">d.watchers.watched = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取当前触发器监视者状态</span></span><br><span class="line"><span class="keyword">assert</span> d.watchers.watched == <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+另外文档还是有很多没有写，推荐直接去看源码<a href="uiautomator2/__init__.py"><strong>init</strong>.py</a></li>
+</ul>
+<h2 id="全局设置"><a href="#全局设置" class="headerlink" title="全局设置"></a>全局设置</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置每次UI点击后1.5秒的延迟</span></span><br><span class="line">d.click_post_delay = <span class="number">1.5</span> <span class="comment"># 默认没有延迟</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置默认元素等待超时(秒)</span></span><br><span class="line">d.wait_timeout = <span class="number">30.0</span> <span class="comment"># 默认的20.0</span></span><br></pre></td></tr></table></figure>
+
+<p>UiAutomator中的超时设置(隐藏方法)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; d.jsonrpc.getConfigurator() </span><br><span class="line">&#123;<span class="string">&#x27;actionAcknowledgmentTimeout&#x27;</span>: <span class="number">500</span>,</span><br><span class="line"> <span class="string">&#x27;keyInjectionDelay&#x27;</span>: <span class="number">0</span>,</span><br><span class="line"> <span class="string">&#x27;scrollAcknowledgmentTimeout&#x27;</span>: <span class="number">200</span>,</span><br><span class="line"> <span class="string">&#x27;waitForIdleTimeout&#x27;</span>: <span class="number">0</span>,</span><br><span class="line"> <span class="string">&#x27;waitForSelectorTimeout&#x27;</span>: <span class="number">0</span>&#125;</span><br><span class="line"></span><br><span class="line">&gt;&gt; d.jsonrpc.setConfigurator(&#123;<span class="string">&quot;waitForIdleTimeout&quot;</span>: <span class="number">100</span>&#125;)</span><br><span class="line">&#123;<span class="string">&#x27;actionAcknowledgmentTimeout&#x27;</span>: <span class="number">500</span>,</span><br><span class="line"> <span class="string">&#x27;keyInjectionDelay&#x27;</span>: <span class="number">0</span>,</span><br><span class="line"> <span class="string">&#x27;scrollAcknowledgmentTimeout&#x27;</span>: <span class="number">200</span>,</span><br><span class="line"> <span class="string">&#x27;waitForIdleTimeout&#x27;</span>: <span class="number">100</span>,</span><br><span class="line"> <span class="string">&#x27;waitForSelectorTimeout&#x27;</span>: <span class="number">0</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为了防止客户端程序响应超时，<code>waitForIdleTimeout</code>和<code>waitForSelectorTimeout</code>目前已改为<code>0</code></p>
+<p>Refs: <a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/support/test/uiautomator/Configurator">Google uiautomator Configurator</a></p>
+<h2 id="Input-method"><a href="#Input-method" class="headerlink" title="Input method"></a>Input method</h2><p>这种方法通常用于不知道控件的情况下的输入。第一步需要切换输入法，然后发送adb广播命令，具体使用方法如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">d.set_fastinput_ime(<span class="literal">True</span>) <span class="comment"># 切换成FastInputIME输入法</span></span><br><span class="line">d.send_keys(<span class="string">&quot;你好123abcEFG&quot;</span>) <span class="comment"># adb广播输入</span></span><br><span class="line">d.clear_text() <span class="comment"># 清除输入框所有内容(Require android-uiautomator.apk version &gt;= 1.0.7)</span></span><br><span class="line">d.set_fastinput_ime(<span class="literal">False</span>) <span class="comment"># 切换成正常的输入法</span></span><br><span class="line">d.send_action(<span class="string">&quot;search&quot;</span>) <span class="comment"># 模拟输入法的搜索</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>send_action</strong> 说明</p>
+<p>该函数可以使用的参数有 <code>go search send next done previous</code></p>
+<p><em>什么时候该使用这个函数呢？</em></p>
+<p>有些时候在EditText中输入完内容之后，调用<code>press(&quot;search&quot;)</code> or <code>press(&quot;enter&quot;)</code>发现并没有什么反应。<br>这个时候就需要<code>send_action</code>函数了，这里用到了只有输入法才能用的<a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/view/inputmethod/EditorInfo">IME_ACTION_CODE</a>。<br><code>send_action</code>先broadcast命令发送给输入法操作<code>IME_ACTION_CODE</code>，由输入法完成后续跟EditText的通信。（原理我不太清楚，有了解的，提issue告诉我)</p>
+<h2 id="Toast"><a href="#Toast" class="headerlink" title="Toast"></a>Toast</h2><ul>
+<li><p>展示Toast</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d.toast.show(<span class="string">&quot;Hello world&quot;</span>)</span><br><span class="line">d.toast.show(<span class="string">&quot;Hello world&quot;</span>, <span class="number">1.0</span>) <span class="comment"># 显示为1.0，默认为1.0</span></span><br></pre></td></tr></table></figure></li>
+<li><p>获取 Toast</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># [参数]</span></span><br><span class="line"><span class="comment"># 5.0: 最大等待超时。默认的10.0</span></span><br><span class="line"><span class="comment"># 缓存时间10.0s。如果最近10s已经出现toast，则返回缓存toast。默认10.0(将来可能会有变化)</span></span><br><span class="line"><span class="comment"># 如果最终没有toast，返回&quot;default message&quot;。默认没有</span></span><br><span class="line">d.toast.get_message(<span class="number">5.0</span>, <span class="number">10.0</span>, <span class="string">&quot;default message&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 常见的使用</span></span><br><span class="line"><span class="keyword">assert</span> <span class="string">&quot;Short message&quot;</span> <span class="keyword">in</span> d.toast.get_message(<span class="number">5.0</span>, default=<span class="string">&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#清楚缓存toast</span></span><br><span class="line">d.toast.reset()</span><br><span class="line"><span class="comment"># Now d.toast.get_message(0) is None</span></span><br></pre></td></tr></table></figure>
+<h2 id="XPath"><a href="#XPath" class="headerlink" title="XPath"></a>XPath</h2></li>
+<li><p>例如: 其中一个节点的内容</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;android.widget.TextView</span><br><span class="line">  index=<span class="string">&quot;2&quot;</span></span><br><span class="line">  text=<span class="string">&quot;05:19&quot;</span></span><br><span class="line">  resource-<span class="built_in">id</span>=<span class="string">&quot;com.netease.cloudmusic:id/qf&quot;</span></span><br><span class="line">  package=<span class="string">&quot;com.netease.cloudmusic&quot;</span></span><br><span class="line">  content-desc=<span class="string">&quot;&quot;</span></span><br><span class="line">  checkable=<span class="string">&quot;false&quot;</span> checked=<span class="string">&quot;false&quot;</span> clickable=<span class="string">&quot;false&quot;</span> enabled=<span class="string">&quot;true&quot;</span> focusable=<span class="string">&quot;false&quot;</span> focused=<span class="string">&quot;false&quot;</span></span><br><span class="line">  scrollable=<span class="string">&quot;false&quot;</span> long-clickable=<span class="string">&quot;false&quot;</span> password=<span class="string">&quot;false&quot;</span> selected=<span class="string">&quot;false&quot;</span> visible-to-user=<span class="string">&quot;true&quot;</span></span><br><span class="line">  bounds=<span class="string">&quot;[957,1602][1020,1636]&quot;</span> /&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>xpath定位和使用方法<br> 有些属性的名字有修改需要注意</p>
+ <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">description -&gt; content-desc</span><br><span class="line">resourceId -&gt; resource-id</span><br></pre></td></tr></table></figure></li>
+<li><p>常见用法</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 等待10s</span></span><br><span class="line">d.xpath(<span class="string">&quot;//android.widget.TextView&quot;</span>).wait(<span class="number">10.0</span>)</span><br><span class="line"><span class="comment"># 找到并单击</span></span><br><span class="line">d.xpath(<span class="string">&quot;//*[@content-desc=&#x27;分享&#x27;]&quot;</span>).click()</span><br><span class="line"><span class="comment"># 检查是否存在</span></span><br><span class="line"><span class="keyword">if</span> d.xpath(<span class="string">&quot;//android.widget.TextView[contains(@text, &#x27;Se&#x27;)]&quot;</span>).exists:</span><br><span class="line">    print(<span class="string">&quot;exists&quot;</span>)</span><br><span class="line"><span class="comment"># 获取所有文本视图文本、属性和中心点</span></span><br><span class="line"><span class="keyword">for</span> elem <span class="keyword">in</span> d.xpath(<span class="string">&quot;//android.widget.TextView&quot;</span>).<span class="built_in">all</span>():</span><br><span class="line">    print(<span class="string">&quot;Text:&quot;</span>, elem.text)</span><br><span class="line"><span class="comment">#获取视图文本</span></span><br><span class="line"><span class="keyword">for</span> elem <span class="keyword">in</span> d.xpath(<span class="string">&quot;//android.widget.TextView&quot;</span>).<span class="built_in">all</span>():</span><br><span class="line">    print(<span class="string">&quot;Attrib:&quot;</span>, elem.attrib)</span><br><span class="line"><span class="comment">#获取属性和中心点</span></span><br><span class="line"><span class="comment">#返回: (100, 200)</span></span><br><span class="line"><span class="keyword">for</span> elem <span class="keyword">in</span> d.xpath(<span class="string">&quot;//android.widget.TextView&quot;</span>).<span class="built_in">all</span>():</span><br><span class="line">    print(<span class="string">&quot;Position:&quot;</span>, elem.center())</span><br></pre></td></tr></table></figure></li>
+<li><p>其他XPath常见用法</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 所有元素</span></span><br><span class="line">//*</span><br><span class="line"></span><br><span class="line"><span class="comment"># resource-id包含login字符</span></span><br><span class="line">//*[contains(@resource-<span class="built_in">id</span>, <span class="string">&#x27;login&#x27;</span>)]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按钮包含账号或帐号</span></span><br><span class="line">//android.widget.Button[contains(@text, <span class="string">&#x27;账号&#x27;</span>) <span class="keyword">or</span> contains(@text, <span class="string">&#x27;帐号&#x27;</span>)]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 所有ImageView中的第二个</span></span><br><span class="line">(//android.widget.ImageView)[<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 所有ImageView中的最后一个</span></span><br><span class="line">(//android.widget.ImageView)[last()]</span><br><span class="line"></span><br><span class="line"><span class="comment"># className包含ImageView</span></span><br><span class="line">//*[contains(name(), <span class="string">&quot;ImageView&quot;</span>)]</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/UI/" rel="tag"># UI</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/05/20/SQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E5%8F%A5%E6%80%BB%E7%BB%93/" rel="prev" title="SQL基础语句总结">
+      <i class="fa fa-chevron-left"></i> SQL基础语句总结
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/05/21/Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/" rel="next" title="Mac Jenkins搭建">
+      Mac Jenkins搭建 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E5%B9%B3%E5%8F%B0%E5%8F%8A%E8%AF%AD%E8%A8%80%E4%BD%A0%E5%9C%A8"><span class="nav-number">2.</span> <span class="nav-text">支持平台及语言你在</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">工作原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">4.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85adb"><span class="nav-number">4.1.</span> <span class="nav-text">安装adb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85uiautomator2"><span class="nav-number">4.2.</span> <span class="nav-text">安装uiautomator2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E4%BD%A0%E9%9C%80%E8%A6%81%E7%94%A8%E5%88%B0%E6%88%AA%E5%9B%BE%EF%BC%8C%E5%AE%89%E8%A3%85pillow"><span class="nav-number">4.3.</span> <span class="nav-text">如果你需要用到截图，安装pillow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E5%A4%87%E5%AE%89%E8%A3%85atx-agent"><span class="nav-number">4.4.</span> <span class="nav-text">设备安装atx-agent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85weditor"><span class="nav-number">4.5.</span> <span class="nav-text">安装weditor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E3%80%90%E6%8E%A8%E8%8D%90%E3%80%91AppetizerIO-%E6%89%80%E8%A7%81%E5%8D%B3%E6%89%80%E5%BE%97%E8%84%9A%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8"><span class="nav-number">4.6.</span> <span class="nav-text">【推荐】AppetizerIO 所见即所得脚本编辑器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%8F%8A%E6%93%8D%E4%BD%9C"><span class="nav-number">5.</span> <span class="nav-text">应用及操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E7%94%A8uiautomator2%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="nav-number">5.1.</span> <span class="nav-text">调用uiautomator2的过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E5%A4%87%E8%BF%9E%E6%8E%A5%E6%96%B9%E6%B3%95%EF%BC%8C%E6%9C%89%E4%B8%A4%E7%A7%8D"><span class="nav-number">5.2.</span> <span class="nav-text">设备连接方法，有两种</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E5%B9%B6%E7%BB%B4%E6%8C%81%E8%AE%BE%E5%A4%87%E7%AB%AF%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E5%A4%84%E4%BA%8E%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81"><span class="nav-number">5.3.</span> <span class="nav-text">检查并维持设备端守护进程处于运行状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9C%E7%94%A8UiAutomator%E7%9A%84%E5%AE%88%E6%8A%A4%E7%A8%8B%E5%BA%8F"><span class="nav-number">5.4.</span> <span class="nav-text">停用UiAutomator的守护程序?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%BC%80%E8%B0%83%E8%AF%95%E5%BC%80%E5%85%B3"><span class="nav-number">5.5.</span> <span class="nav-text">打开调试开关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%BA%94%E7%94%A8%EF%BC%8C%E5%8F%AA%E8%83%BD%E4%BB%8EURL%E5%AE%89%E8%A3%85"><span class="nav-number">5.6.</span> <span class="nav-text">安装应用，只能从URL安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E5%BA%94%E7%94%A8"><span class="nav-number">5.7.</span> <span class="nav-text">启动应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9C%E6%AD%A2%E5%BA%94%E7%94%A8"><span class="nav-number">5.8.</span> <span class="nav-text">停止应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9C%E6%AD%A2%E6%89%80%E6%9C%89%E6%AD%A3%E5%9C%A8%E8%BF%90%E8%A1%8C%E7%9A%84%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F"><span class="nav-number">5.9.</span> <span class="nav-text">停止所有正在运行的应用程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%B3%E8%BF%87%E5%BC%B9%E7%AA%97%EF%BC%8C%E7%A6%81%E6%AD%A2%E5%BC%B9%E7%AA%97"><span class="nav-number">5.10.</span> <span class="nav-text">跳过弹窗，禁止弹窗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Session"><span class="nav-number">5.11.</span> <span class="nav-text">Session</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%AE%BE%E5%A4%87%E4%BF%A1%E6%81%AF"><span class="nav-number">5.12.</span> <span class="nav-text">获取设备信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%BA%94%E7%94%A8%E4%BF%A1%E6%81%AF"><span class="nav-number">5.13.</span> <span class="nav-text">获取应用信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E6%8B%89%E6%96%87%E4%BB%B6"><span class="nav-number">5.14.</span> <span class="nav-text">推拉文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E4%BA%8B%E4%BB%B6"><span class="nav-number">5.15.</span> <span class="nav-text">关键事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%8B%E5%8A%BF%E4%B8%8E%E8%AE%BE%E5%A4%87%E7%9A%84%E4%BA%A4%E4%BA%92"><span class="nav-number">5.16.</span> <span class="nav-text">手势与设备的交互</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%8F%E5%B9%95%E7%9B%B8%E5%85%B3%E7%9A%84"><span class="nav-number">5.17.</span> <span class="nav-text">屏幕相关的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9Ui%E5%AF%B9%E8%B1%A1"><span class="nav-number">5.18.</span> <span class="nav-text">选择Ui对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E9%80%89%E5%AE%9AUI%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">5.19.</span> <span class="nav-text">对选定UI对象的操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Watcher%EF%BC%88-%E6%9C%AA%E6%87%82-%EF%BC%89"><span class="nav-number">5.20.</span> <span class="nav-text">Watcher（&#x3D;&#x3D;未懂&#x3D;&#x3D;）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E8%AE%BE%E7%BD%AE"><span class="nav-number">5.21.</span> <span class="nav-text">全局设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Input-method"><span class="nav-number">5.22.</span> <span class="nav-text">Input method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Toast"><span class="nav-number">5.23.</span> <span class="nav-text">Toast</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XPath"><span class="nav-number">5.24.</span> <span class="nav-text">XPath</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Vic</p>
+  <div class="site-description" itemprop="description">人生苦短，我学Python</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vic</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

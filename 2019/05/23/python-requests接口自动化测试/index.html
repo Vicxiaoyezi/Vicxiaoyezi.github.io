@@ -1,23 +1,473 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"vic.kim","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="思路和框架正常的接口测试流程确定测试接口的工具 —&gt; 配置需要的接口参数 —&gt; 进行测试 —&gt; 检查测试结果（有的需要数据库辅助） —&gt; 生成测试报告（html报告）根据这样的过程来一步步搭建我们的框架。在这个过程中，我们需要做到业务和数据的分离，这样才能灵活，达到我们写框架的目的。接下来，我们来进行结构的划分。     common：存放一些共通的方法 result：执行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python+requests接口自动化测试">
+<meta property="og:url" content="https://vic.kim/2019/05/23/python-requests%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/index.html">
+<meta property="og:site_name" content="Vicの博客">
+<meta property="og:description" content="思路和框架正常的接口测试流程确定测试接口的工具 —&gt; 配置需要的接口参数 —&gt; 进行测试 —&gt; 检查测试结果（有的需要数据库辅助） —&gt; 生成测试报告（html报告）根据这样的过程来一步步搭建我们的框架。在这个过程中，我们需要做到业务和数据的分离，这样才能灵活，达到我们写框架的目的。接下来，我们来进行结构的划分。     common：存放一些共通的方法 result：执行">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://vic.kim/.kim//15564505722125.jpg">
+<meta property="og:image" content="https://vic.kim/.kim//15564518770914.jpg">
+<meta property="og:image" content="https://vic.kim/.kim//15564537871910.jpg">
+<meta property="og:image" content="https://vic.kim/.kim//15564540018530.jpg">
+<meta property="og:image" content="https://vic.kim/.kim//15564541032850.jpg">
+<meta property="og:image" content="https://vic.kim/.kim//15564541531336.jpg">
+<meta property="og:image" content="https://vic.kim/.kim//15564542832135.jpg">
+<meta property="article:published_time" content="2019-05-23T02:20:23.000Z">
+<meta property="article:modified_time" content="2019-05-23T02:28:10.529Z">
+<meta property="article:author" content="Vic">
+<meta property="article:tag" content="接口测试">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://vic.kim/.kim//15564505722125.jpg">
+
+<link rel="canonical" href="https://vic.kim/2019/05/23/python-requests%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>python+requests接口自动化测试 | Vicの博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Vicの博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">测试攻城狮</p>
+  </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/23/python-requests%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python+requests接口自动化测试
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-05-23 10:20:23 / 修改时间：10:28:10" itemprop="dateCreated datePublished" datetime="2019-05-23T10:20:23+08:00">2019-05-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">接口测试</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="思路和框架"><a href="#思路和框架" class="headerlink" title="思路和框架"></a>思路和框架</h1><p>正常的接口测试流程<br>确定测试接口的工具 —&gt; 配置需要的接口参数 —&gt; 进行测试 —&gt; 检查测试结果（有的需要数据库辅助） —&gt; 生成测试报告（html报告）<br>根据这样的过程来一步步搭建我们的框架。在这个过程中，我们需要做到业务和数据的分离，这样才能灵活，达到我们写框架的目的。<br>接下来，我们来进行结构的划分。</p>
+<blockquote>
+<p><img src="/.kim//15564505722125.jpg" alt="-w296"></p>
+</blockquote>
+<ul>
+<li>common：存放一些共通的方法</li>
+<li>result：执行过程中生成的文件夹，里面存放每次测试的结果</li>
+<li>testCase：用于存放具体的测试case</li>
+<li>gitignore：Git忽略提交规则（不是必要）</li>
+<li>testFile：存放测试过程中用到的文件，包括上传的文件，测试用例以及数据库的sql语句</li>
+<li>caselist：txt文件，配置每次执行的case名称</li>
+<li>config：配置一些常量，例如数据库的相关信息，接口的相关信息等</li>
+<li>readConfig： 用于读取config配置文件中的内容</li>
+<li> runAll：用于执行case</li>
+<li> token.txt：本地换持有token</li>
+</ul>
+<h1 id="config"><a href="#config" class="headerlink" title="config"></a>config</h1><p>配置一些常量，例如数据库的相关信息，接口的相关信息等<br>config.ini内容如下</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[EMAIL]</span></span><br><span class="line"><span class="attr">mail_host</span> = smtp.qq.com</span><br><span class="line"><span class="attr">mail_user</span> = xxx@qq.com</span><br><span class="line"><span class="attr">mail_pass</span> = xxx</span><br><span class="line"><span class="attr">mail_port</span> = <span class="number">465</span></span><br><span class="line"><span class="attr">mail_replyto</span> = xxx@ruguoapp.com</span><br><span class="line"><span class="attr">sender</span> = xxx@qq.com</span><br><span class="line"><span class="attr">receiver</span> = xxx@qq.com</span><br><span class="line"><span class="attr">subject</span> = <span class="string">&quot;测试报告&quot;</span></span><br><span class="line"><span class="attr">content</span> = <span class="string">&quot;今天测试一下python是否可以发送邮件成功。&quot;</span></span><br><span class="line"><span class="attr">user</span> = xx</span><br><span class="line"><span class="attr">on_off</span> = <span class="literal">on</span></span><br><span class="line"></span><br><span class="line"><span class="section">[HTTP]</span></span><br><span class="line"><span class="attr">scheme</span> =https</span><br><span class="line"><span class="attr">base_url</span> =xxx</span><br><span class="line"><span class="attr">timeout</span> = <span class="number">10.0</span></span><br><span class="line"></span><br><span class="line"><span class="section">[DATABASE]</span></span><br><span class="line"><span class="attr">host</span> = localhost</span><br><span class="line"><span class="attr">username</span> = root</span><br><span class="line"><span class="attr">password</span> = root</span><br><span class="line"><span class="attr">port</span> = <span class="number">3306</span></span><br><span class="line"><span class="attr">database</span> = test</span><br></pre></td></tr></table></figure>
+
+<h1 id="readConfig-py"><a href="#readConfig-py" class="headerlink" title="readConfig.py"></a>readConfig.py</h1><p>用来读取config配置文件中的内容，定义的方法，根据名称取对应的值<br>内容如下</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">import <span class="built_in">os</span></span><br><span class="line">import codecs</span><br><span class="line">import configparser</span><br><span class="line"></span><br><span class="line">ProDir = <span class="built_in">os</span>.<span class="built_in">path</span>.split(<span class="built_in">os</span>.<span class="built_in">path</span>.realpath(__file__))[<span class="number">0</span>]  # 该文件的绝对路径</span><br><span class="line">configPath = <span class="built_in">os</span>.<span class="built_in">path</span>.join(ProDir, <span class="string">&quot;config.ini&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class ReadConfig:</span><br><span class="line">    def __init__(<span class="built_in">self</span>):</span><br><span class="line">        fd = <span class="built_in">open</span>(configPath)</span><br><span class="line">        data = fd.<span class="built_in">read</span>()</span><br><span class="line"></span><br><span class="line">        #  <span class="built_in">remove</span> BOM</span><br><span class="line">        <span class="keyword">if</span> data[:<span class="number">3</span>] == codecs.BOM_UTF8:</span><br><span class="line">            data = data[<span class="number">3</span>:]</span><br><span class="line">            file = codecs.<span class="built_in">open</span>(configPath, <span class="string">&quot;w&quot;</span>)</span><br><span class="line">            file.<span class="built_in">write</span>(data)</span><br><span class="line">            file.<span class="built_in">close</span>()</span><br><span class="line">        fd.<span class="built_in">close</span>()</span><br><span class="line"></span><br><span class="line">        <span class="built_in">self</span>.cf = configparser.ConfigParser()</span><br><span class="line">        <span class="built_in">self</span>.cf.<span class="built_in">read</span>(configPath)</span><br><span class="line"></span><br><span class="line">    def get_email(<span class="built_in">self</span>, name):</span><br><span class="line">        value = <span class="built_in">self</span>.cf.get(<span class="string">&quot;EMAIL&quot;</span>, name)</span><br><span class="line">        <span class="keyword">return</span> value</span><br><span class="line"></span><br><span class="line">    def get_http(<span class="built_in">self</span>, name):</span><br><span class="line">        value = <span class="built_in">self</span>.cf.get(<span class="string">&quot;HTTP&quot;</span>, name)</span><br><span class="line">        <span class="keyword">return</span> value</span><br><span class="line">        </span><br><span class="line">    def get_db(<span class="built_in">self</span>, name):</span><br><span class="line">            value = <span class="built_in">self</span>.cf.get(<span class="string">&quot;DATABASE&quot;</span>, name)</span><br><span class="line">            <span class="keyword">return</span> value</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:  # 测试一下，我们读取配置文件的方法是否可用</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;HTTP中的base_url值为：&#x27;</span>, ReadConfig().get_http(<span class="string">&#x27;base_url&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<h1 id="common"><a href="#common" class="headerlink" title="common"></a>common</h1><p>存放一些共通的方法<br><img src="/.kim//15564518770914.jpg" alt="-w235"><br>conmmontest：操作本地case<br>configEmail：发送邮件<br>configHttp：配置接口文件<br>getHeades：获取请求头<br>HTMLTestRunner：测试报告<br>Token：token<br>Log：输出的日志的所有操作，主要是对输出格式的规定，输出等级的定义以及其他一些输出的定义等等<br>url：接口列表</p>
+<h2 id="Log"><a href="#Log" class="headerlink" title="Log"></a>Log</h2><p>对于这个log文件呢，我给它单独启用了一个线程，这样在整个运行过程中，我们在写log的时候也会比较方便，看名字大家也知道了，这里就是我们对输出的日志的所有操作了，主要是对输出格式的规定，输出等级的定义以及其他一些输出的定义等等。总之，你想对log做的任何事情，都可以放到这里来。</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">import <span class="keyword">os</span></span><br><span class="line">import logging</span><br><span class="line">import threading</span><br><span class="line"></span><br><span class="line">localReadConfig = readConfig.ReadConfig()</span><br><span class="line"></span><br><span class="line">class Log:</span><br><span class="line">    logging.<span class="keyword">basic</span>Config()</span><br><span class="line"></span><br><span class="line">    def __init__(<span class="literal">self</span>):</span><br><span class="line">        <span class="keyword">global</span> <span class="keyword">log</span>Path, resultPath, path, logger_name</span><br><span class="line">        path = readConfig.ProDir</span><br><span class="line">        resultPath = <span class="keyword">os</span>.path.join(path, <span class="string">&quot;result&quot;</span>)</span><br><span class="line">        logger_name = &#x27;logs&#x27;</span><br><span class="line"></span><br><span class="line">        if not <span class="keyword">os</span>.path.exists(resultPath):  <span class="comment"># 判断该文件是否存在</span></span><br><span class="line">            <span class="keyword">os</span>.mkdir(resultPath)  <span class="comment"># 创建目录</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">log</span>Path = <span class="keyword">os</span>.path.join(resultPath, str(datetime.now().strftime(<span class="string">&quot;%Y%m%d%H%M%S&quot;</span>)))</span><br><span class="line">        if not <span class="keyword">os</span>.path.exists(<span class="keyword">log</span>Path):</span><br><span class="line">            <span class="keyword">os</span>.mkdir(<span class="keyword">log</span>Path)</span><br><span class="line"></span><br><span class="line">        <span class="literal">self</span>.logger = logging.getLogger(logger_name)  <span class="comment"># 获得一个logger对象，默认是root</span></span><br><span class="line">        <span class="literal">self</span>.logger.<span class="built_in">set</span>Level(logging.INFO)  <span class="comment"># 设定INFO级别，所有等级大于等于INFO的信息都会输出</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 定义handler</span></span><br><span class="line">        handler = logging.FileHandler(<span class="keyword">os</span>.path.join(<span class="keyword">log</span>Path, <span class="string">&quot;output.log&quot;</span>))  <span class="comment"># 向文件output.log输出日志信息</span></span><br><span class="line">        <span class="comment"># 定义格式</span></span><br><span class="line">        formatter = logging.Formatter(</span><br><span class="line">            &#x27;[%(asctime)s]  <span class="variable">&lt;%(levelname)s&gt;</span>  %(message)s&#x27;)  <span class="comment"># 定义日志输出格式(&#x27;%(asctime)s] %(levelname)s [%(funcName)s: %(filename)s, %(lineno)d] %(message)s&#x27;)</span></span><br><span class="line">        handler.<span class="built_in">set</span>Formatter(formatter)  <span class="comment"># 选择一个格式</span></span><br><span class="line"></span><br><span class="line">        <span class="literal">self</span>.logger.addHandler(handler)  <span class="comment"># 增加指定的handler</span></span><br></pre></td></tr></table></figure>
+
+<p>现在，我们创建了上面的Log类，在__init__初始化方法中，我们进行了log的相关初始化操作。具体的操作内容，注释已经写得很清楚了，这样，log的基本格式已经定义完成了，至于其他的方法，就靠大家自己发挥了，毕竟每个人的需求也不同，我们就只写普遍的共用方法啦。接下来，就是把它放进一个线程内了，请看下面的代码：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> MyLog:</span><br><span class="line">    log = None</span><br><span class="line">    mutex = threading.<span class="constructor">Lock()</span>  # 多线程</span><br><span class="line"></span><br><span class="line">    def <span class="constructor">__init__(<span class="params">self</span>)</span>:</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">    @staticmethod</span><br><span class="line">    def get<span class="constructor">_log()</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="module-access"><span class="module"><span class="identifier">MyLog</span>.</span></span>log is None:</span><br><span class="line">            <span class="module-access"><span class="module"><span class="identifier">MyLog</span>.</span></span>mutex.acquire<span class="literal">()</span>  # 获取互斥锁后，进程只能在释放锁后下个进程才能进来</span><br><span class="line">            <span class="module-access"><span class="module"><span class="identifier">MyLog</span>.</span></span>log = <span class="constructor">Log()</span></span><br><span class="line">            <span class="module-access"><span class="module"><span class="identifier">MyLog</span>.</span></span>mutex.release<span class="literal">()</span>  # 互斥锁必须被释放掉</span><br><span class="line"></span><br><span class="line">        return <span class="module-access"><span class="module"><span class="identifier">MyLog</span>.</span></span>log</span><br></pre></td></tr></table></figure>
+
+<h2 id="configHttp-py"><a href="#configHttp-py" class="headerlink" title="configHttp.py"></a>configHttp.py</h2><p>配置接口文件，主要内容如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> readConfig <span class="keyword">as</span> readConfig</span><br><span class="line"><span class="keyword">from</span> common <span class="keyword">import</span> getHeaders</span><br><span class="line"><span class="keyword">from</span> common.Log <span class="keyword">import</span> MyLog <span class="keyword">as</span> Log</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">localReadConfig = readConfig.ReadConfig()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConfigHttp</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">global</span> scheme, host, timeout</span><br><span class="line">        scheme = localReadConfig.get_http(<span class="string">&quot;scheme&quot;</span>)</span><br><span class="line">        host = localReadConfig.get_http(<span class="string">&quot;base_url&quot;</span>)</span><br><span class="line">        timeout = localReadConfig.get_http(<span class="string">&quot;timeout&quot;</span>)</span><br><span class="line">        self.log = Log.get_log()</span><br><span class="line">        self.logger = self.log.get_logger()</span><br><span class="line">        self.params = &#123;&#125;</span><br><span class="line">        self.headers = <span class="literal">None</span></span><br><span class="line">        self.data = &#123;&#125;</span><br><span class="line">        self.url = <span class="literal">None</span></span><br><span class="line">        self.files = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_url</span>(<span class="params">self, url</span>):</span></span><br><span class="line">        self.url = scheme +<span class="string">&#x27;://&#x27;</span>+host+url</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_headers</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        set headers</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.headers = getHeaders.get_headers()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_local_headers</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        set local headers</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.headers = getHeaders.local_headers()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_params</span>(<span class="params">self, param</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        set params</span></span><br><span class="line"><span class="string">        :param param:</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.params = param</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_data</span>(<span class="params">self, data</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        set data</span></span><br><span class="line"><span class="string">        :param data:</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.data = data</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        defined get method</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            response = requests.get(self.url, headers=self.headers, params=self.params, data=self.data)</span><br><span class="line">            <span class="keyword">if</span> response.status_code == <span class="number">200</span>:</span><br><span class="line">                <span class="keyword">return</span> response</span><br><span class="line">            <span class="keyword">elif</span> response.status_code == <span class="number">401</span>:</span><br><span class="line">                getHeaders.refresh_tokens()</span><br><span class="line">                response = requests.get(self.url, headers=self.headers, params=self.params, data=self.data)</span><br><span class="line">                <span class="keyword">return</span> response</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> response</span><br><span class="line">        <span class="keyword">except</span> TimeoutError:</span><br><span class="line">            self.logger.error(<span class="string">&quot;Time out!&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">post</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        defined post method</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            response = requests.post(self.url, headers=self.headers, params=self.params, data=self.data)</span><br><span class="line">            <span class="keyword">if</span> response.status_code == <span class="number">200</span>:</span><br><span class="line">                <span class="keyword">return</span> response</span><br><span class="line">            <span class="keyword">elif</span> response.status_code == <span class="number">401</span>:</span><br><span class="line">                getHeaders.refresh_tokens()</span><br><span class="line">                response = requests.post(self.url, headers=self.headers, params=self.params, data=self.data)</span><br><span class="line">                <span class="keyword">return</span> response</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> response</span><br><span class="line">        <span class="keyword">except</span> TimeoutError:</span><br><span class="line">            self.logger.error(<span class="string">&quot;Time out!&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">post_with_file</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        defined post method</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            response = requests.post(self.url, headers=self.headers, data=self.data, files=self.files, timeout=<span class="built_in">float</span>(timeout))</span><br><span class="line">            <span class="keyword">return</span> response</span><br><span class="line">        <span class="keyword">except</span> TimeoutError:</span><br><span class="line">            self.logger.error(<span class="string">&quot;Time out!&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">post_with_json</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        defined post method</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            response = requests.post(self.url, headers=self.headers, json=self.data, timeout=<span class="built_in">float</span>(timeout))</span><br><span class="line">            <span class="keyword">return</span> response</span><br><span class="line">        <span class="keyword">except</span> TimeoutError:</span><br><span class="line">            self.logger.error(<span class="string">&quot;Time out!&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>用python自带的requests来进行接口测试，，拿get和post两个方法来说吧。（平时用的最多的就是这两个方法了，其他方法，大家可以仿照着自行扩展）</p>
+<ul>
+<li>get方法<pre><code>  接口测试中见到最多的就是get方法和post方法，其中，getget方法在传递参数后，url的格式是这样的：http://接口地址?key1=value1&amp;key2=value2，
+</code></pre>
+</li>
+</ul>
+<p>对于requests提供的get方法，有几个常用的参数：<br>url：显而易见，就是接口的地址url啦<br>headers：定制请求头（headers），例如：content-type = application/x-www-form-urlencoded<br>params：用于传递测试接口所要用的参数，这里我们用python中的字典形式（key：value）进行参数的传递。<br>timeout：设置接口连接的最大时间（超过该时间会抛出超时错误）</p>
+<p>举个栗子：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">url</span>=‘http://api.shein.com/v2/member/logout’</span><br><span class="line">header=&#123;‘content-type’： application/x-www-form-urlencoded&#125;</span><br><span class="line">param=&#123;‘user_id’： 123456,‘email’： 123456@163.com&#125;</span><br><span class="line"><span class="attribute">timeout</span>=0.5</span><br><span class="line">requests.get（url, <span class="attribute">headers</span>=header, <span class="attribute">params</span>=param, <span class="attribute">timeout</span>=timeout）</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>post方法<br>与get方法类似，只要设置好对应的参数，post方法中的参数，我们不在使用params进行传递，而是改用data进行传递了。</li>
+</ul>
+<p>常用的返回值的操作。<br>text：获取接口返回值的文本格式<br>json()：获取接口返回值的json()格式<br>status_code：返回状态码（成功为：200）<br>headers：返回完整的请求头信息（headers[‘name’]：返回指定的headers内容）<br>encoding：返回字符编码格式<br>url：返回接口的完整url地址</p>
+<p>举个栗子：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">url</span>=‘http://api.shein.com/v2/member/login’</span><br><span class="line">header=&#123;‘content-type’： application/x-www-form-urlencoded&#125;</span><br><span class="line">data=&#123;‘email’： 123456@163.com,‘password’： 123456&#125;</span><br><span class="line"><span class="attribute">timeout</span>=0.5</span><br><span class="line">requests.post（url, <span class="attribute">headers</span>=header, <span class="attribute">data</span>=data, <span class="attribute">timeout</span>=timeout）</span><br></pre></td></tr></table></figure>
+<p>以上这些，就是常用的方法啦，大家可自行取之。</p>
+<p>关于失败请求抛出异常，我们可以使用“raise_for_status()”来完成，那么，当我们的请求发生错误时，就会抛出异常。在这里提醒下各位朋友，如果你的接口，在地址不正确的时候，会有相应的错误提示（有时也需要进行测试），这时，千万不能使用这个方法来抛出错误，因为python自己在链接接口时就已经把错误抛出，那么，后面你将无法测试期望的内容。而且程序会直接在这里当掉，以错误来计。</p>
+<h2 id="common-py"><a href="#common-py" class="headerlink" title="common.py"></a>common.py</h2><p>内容如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> readConfig</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> xlrd <span class="keyword">import</span> open_workbook</span><br><span class="line"><span class="keyword">from</span> common <span class="keyword">import</span> configHttp</span><br><span class="line"><span class="keyword">from</span> common.Log <span class="keyword">import</span> MyLog <span class="keyword">as</span> Log</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line">localReadConfig = readConfig.ReadConfig()</span><br><span class="line">testFilePath = os.path.join(readConfig.ProDir,<span class="string">&#x27;testFile&#x27;</span>)</span><br><span class="line">localConfigHttp = configHttp.ConfigHttp()</span><br><span class="line">log = Log.get_log()</span><br><span class="line">logger = log.get_logger()</span><br><span class="line"></span><br><span class="line">caseNo = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_value_from_return_json</span>(<span class="params">response_json, name1, name2</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    get value by key</span></span><br><span class="line"><span class="string">    :param response_json:</span></span><br><span class="line"><span class="string">    :param name1:</span></span><br><span class="line"><span class="string">    :param name2:</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    group = response_json[name1]</span><br><span class="line">    value = group[name2]</span><br><span class="line">    <span class="keyword">return</span> value</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_value_dict_keys</span>(<span class="params"><span class="built_in">dict</span></span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    :param dict:</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="built_in">list</span> = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">dict</span>]</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_return_msg</span>(<span class="params">response</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    show msg detail</span></span><br><span class="line"><span class="string">    :param response:</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    url = response.url</span><br><span class="line">    msg = response.text</span><br><span class="line">    code=<span class="built_in">str</span>(response.status_code)</span><br><span class="line">    print(<span class="string">&quot;请求地址：&quot;</span>+url)</span><br><span class="line">    print(<span class="string">&quot;请求结果：&quot;</span>+code)</span><br><span class="line">    print(<span class="string">&quot;请求返回值：&quot;</span>+<span class="string">&#x27;\n&#x27;</span>+json.dumps(json.loads(msg), ensure_ascii=<span class="literal">False</span>, sort_keys=<span class="literal">True</span>, indent=<span class="number">4</span>))</span><br><span class="line">    <span class="comment"># print(&#x27;Response HTTP Response Body:&#x27;, json.dumps(self.response.json(), indent=2, sort_keys=True, ensure_ascii=False))</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># indent: 缩进空格数，indent = 0输出为一行</span></span><br><span class="line">    <span class="comment"># sort_keys = True: 将json结果的key按ascii码排序</span></span><br><span class="line">    <span class="comment"># ensure_ascii = False: 不确保ascii码，如果返回格式为utf - 8包含中文，不转化为\u...</span></span><br><span class="line"><span class="comment"># ****************************** read testCase excel ********************************</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 从excel文件中读取测试用例</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_xls_case</span>(<span class="params">xls_name, sheet_name</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    get interface data from xls file</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    cls = []</span><br><span class="line">    <span class="comment"># 获取用例文件路径</span></span><br><span class="line">    xls_path = os.path.join(testFilePath, <span class="string">&#x27;case&#x27;</span>, xls_name)</span><br><span class="line">    <span class="comment"># 打开用例Excel</span></span><br><span class="line">    file = open_workbook(xls_path)</span><br><span class="line">    <span class="comment"># 获得打开Excel的sheet</span></span><br><span class="line">    sheet = file.sheet_by_name(sheet_name)</span><br><span class="line">    <span class="comment"># 获取这个sheet内容行数</span></span><br><span class="line">    rows = sheet.nrows</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(rows):<span class="comment">#根据行数做循环</span></span><br><span class="line">        <span class="keyword">if</span> sheet.row_values(i)[<span class="number">0</span>] != <span class="string">u&#x27;case_name&#x27;</span>:<span class="comment">#如果这个Excel的这个sheet的第i行的第一列不等于case_name那么我们把这行的数据添加到cls[]</span></span><br><span class="line">            cls.append(sheet.row_values(i))</span><br><span class="line">    <span class="keyword">return</span> cls</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>上面就是common主要内容。主要利用xlrd来操作excel文件，注意啦，我们是用excel文件来管理测试用例的。</p>
+<h2 id="configEmail-py"><a href="#configEmail-py" class="headerlink" title="configEmail.py"></a>configEmail.py</h2><p>发送邮件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding:utf-8</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> smtplib</span><br><span class="line"><span class="keyword">from</span> email.mime.text <span class="keyword">import</span> MIMEText</span><br><span class="line"><span class="keyword">from</span> email.header <span class="keyword">import</span> Header</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> email.mime.application <span class="keyword">import</span> MIMEApplication  <span class="comment">#主要类型的MIME消息对象应用</span></span><br><span class="line"><span class="keyword">from</span> email.mime.multipart <span class="keyword">import</span> MIMEMultipart</span><br><span class="line"><span class="keyword">from</span> email.mime.image <span class="keyword">import</span> MIMEImage</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> readConfig <span class="keyword">as</span> readConfig</span><br><span class="line"><span class="keyword">from</span> common.Log <span class="keyword">import</span> MyLog</span><br><span class="line"></span><br><span class="line">localReadConfig = readConfig.ReadConfig()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Email</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">global</span> host, user, password, port, sender, title,receivers</span><br><span class="line"></span><br><span class="line">        sender = localReadConfig.get_email(<span class="string">&quot;sender&quot;</span>)  <span class="comment"># 发件人</span></span><br><span class="line">        receivers = [<span class="string">&#x27;8463299@qq.com&#x27;</span>]  <span class="comment"># 收件人</span></span><br><span class="line">        <span class="comment"># receivers = [&#x27;test@163.com&#x27;,&#x27;test@vip.qq.com&#x27;]  # 接收多个邮件，可设置为你的QQ邮箱或者其他邮箱</span></span><br><span class="line">        host = localReadConfig.get_email(<span class="string">&quot;mail_host&quot;</span>)<span class="comment"># 设置服务器</span></span><br><span class="line">        port = localReadConfig.get_email(<span class="string">&quot;mail_port&quot;</span>)  <span class="comment"># 设置服务器</span></span><br><span class="line">        user = localReadConfig.get_email(<span class="string">&quot;mail_user&quot;</span>)<span class="comment"># QQ邮件登录名称</span></span><br><span class="line">        password = localReadConfig.get_email(<span class="string">&quot;mail_pass&quot;</span>)<span class="comment"># QQ邮箱的授权码</span></span><br><span class="line"></span><br><span class="line">        title = localReadConfig.get_email(<span class="string">&quot;subject&quot;</span>)<span class="comment">#邮件主题</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 定义邮件主题</span></span><br><span class="line">        date = datetime.now().strftime(<span class="string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>)</span><br><span class="line">        self.subject = <span class="string">&quot;接口测试报告&quot;</span> + <span class="string">&quot; &quot;</span> + date</span><br><span class="line"></span><br><span class="line">        self.log = MyLog.get_log()</span><br><span class="line">        self.logger = self.log.get_logger()</span><br><span class="line"></span><br><span class="line">        self.msg = MIMEMultipart(<span class="string">&#x27;related&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">config_header</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        defined email header include subject, sender and receiver</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.msg[<span class="string">&#x27;Subject&#x27;</span>] = Header(self.subject)  <span class="comment"># 邮件主题</span></span><br><span class="line">        self.msg[<span class="string">&#x27;From&#x27;</span>] = Header(sender)  <span class="comment"># 发件人</span></span><br><span class="line">        self.msg[<span class="string">&#x27;To&#x27;</span>] = Header(<span class="built_in">str</span>(<span class="string">&quot;;&quot;</span>.join(receivers)))  <span class="comment"># 收件人</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">config_content</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        write the content of email</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.config_file_html_img()</span><br><span class="line">        self.config_file()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">config_file_html_img</span>(<span class="params">self</span>):</span></span><br><span class="line">        file_path = os.path.join(readConfig.ProDir, <span class="string">&#x27;testFile&#x27;</span>, <span class="string">&#x27;emailStyle.html&#x27;</span>)  <span class="comment"># 文件路径</span></span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(file_path, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> fp:  <span class="comment"># 读取文件内容</span></span><br><span class="line">            msg_text = MIMEText(fp.read(), <span class="string">&#x27;html&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>)  <span class="comment"># 创建Text对象，包括文本内容</span></span><br><span class="line">        self.msg.attach(msg_text)  <span class="comment"># 构建HTML格式的邮件内容</span></span><br><span class="line"></span><br><span class="line">        image2_path = os.path.join(readConfig.ProDir, <span class="string">&#x27;testFile&#x27;</span>, <span class="string">&#x27;img&#x27;</span>, <span class="string">&#x27;smile.jpg&#x27;</span>)  <span class="comment"># 图片路径</span></span><br><span class="line">        self.msg.attach(self.add_image(image2_path, <span class="string">&#x27;&lt;image2&gt;&#x27;</span>))  <span class="comment"># 构建HTML格式的邮件内容</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">config_file_html</span>(<span class="params">self</span>):</span></span><br><span class="line">        report_file_path = self.log.get_report_file_path()</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(report_file_path, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:  <span class="comment"># 打开html报告</span></span><br><span class="line">            email_body = f.read()  <span class="comment"># 读取报告内容</span></span><br><span class="line">        self.msg = MIMEMultipart()  <span class="comment"># 混合MIME格式</span></span><br><span class="line">        self.msg.attach(MIMEText(email_body, <span class="string">&#x27;html&#x27;</span>, <span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">config_file</span>(<span class="params">self</span>):</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.check_file():</span><br><span class="line">            report_folder_path = self.log.get_result_folder_path()</span><br><span class="line">            filename = [os.path.join(report_folder_path, <span class="string">&#x27;output.log&#x27;</span>),</span><br><span class="line">                        os.path.join(report_folder_path, <span class="string">&#x27;report.html&#x27;</span>)]</span><br><span class="line">            <span class="keyword">for</span> tmp <span class="keyword">in</span> filename:</span><br><span class="line">                <span class="keyword">with</span> <span class="built_in">open</span>(tmp, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">                    attach_files = MIMEApplication(f.read())</span><br><span class="line">                    attach_files.add_header(<span class="string">&#x27;Content-Disposition&#x27;</span>, <span class="string">&#x27;attachment&#x27;</span>, filename=tmp)</span><br><span class="line">                    self.msg.attach(attach_files)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add_image</span>(<span class="params">self,src, img_id</span>):</span></span><br><span class="line">        <span class="comment"># xml中添加图片</span></span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(src, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            msg_image = MIMEImage(f.read())  <span class="comment"># 读取图片内容</span></span><br><span class="line">        msg_image.add_header(<span class="string">&#x27;Content-ID&#x27;</span>, img_id)  <span class="comment"># 指定文件的Content-ID,&lt;img&gt;,在HTML中图片src将用到</span></span><br><span class="line">        <span class="keyword">return</span> msg_image</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">check_file</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        check test report</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        report_path = self.log.get_report_file_path()</span><br><span class="line">        <span class="keyword">if</span> os.path.isfile(report_path) <span class="keyword">and</span> <span class="keyword">not</span> os.stat(report_path) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">send_email</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        send email</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">global</span> smtp</span><br><span class="line">        self.config_content()</span><br><span class="line">        self.config_header()</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            smtp = smtplib.SMTP_SSL(host,port)</span><br><span class="line">            smtp.login(user, password)</span><br><span class="line">            smtp.sendmail(sender, receivers, self.msg.as_string())</span><br><span class="line">            self.logger.info(<span class="string">&quot;测试报告已通过电子邮件发送给开发人员&quot;</span>)</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> ex:</span><br><span class="line">            self.logger.error(<span class="built_in">str</span>(ex))</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;邮件发送失败&quot;</span></span><br><span class="line">        <span class="keyword">finally</span>:</span><br><span class="line">            smtp.quit()</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyEmail</span>:</span></span><br><span class="line">    email = <span class="literal">None</span></span><br><span class="line">    mutex = threading.Lock()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_email</span>():</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> MyEmail.email <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            MyEmail.mutex.acquire()</span><br><span class="line">            MyEmail.email = Email()</span><br><span class="line">            MyEmail.mutex.release()</span><br><span class="line">        <span class="keyword">return</span> MyEmail.email</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    email = MyEmail.get_email()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="HTMLTestRunner-py"><a href="#HTMLTestRunner-py" class="headerlink" title="HTMLTestRunner.py"></a>HTMLTestRunner.py</h2><p>HTMLTestRunner.py这个文件从网上下载的，大神写好的，用于生成html格式的测试报告<br>生成报告如下<br><img src="/.kim//15564537871910.jpg" alt="-w1142"></p>
+<h1 id="runAll-py"><a href="#runAll-py" class="headerlink" title="runAll.py"></a>runAll.py</h1><p>这是整个框架运行的入口</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"><span class="keyword">from</span> common.Log <span class="keyword">import</span> MyLog <span class="keyword">as</span> Log</span><br><span class="line"><span class="keyword">import</span> readConfig <span class="keyword">as</span> readConfig</span><br><span class="line"><span class="keyword">from</span> common <span class="keyword">import</span> HTMLTestRunner</span><br><span class="line"><span class="keyword">from</span> common.configEmail <span class="keyword">import</span> MyEmail</span><br><span class="line"></span><br><span class="line">localReadConfig = readConfig.ReadConfig()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AllTest</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">global</span> log, logger, resultPath, on_off</span><br><span class="line">        log = Log.get_log()</span><br><span class="line">        logger = log.get_logger()</span><br><span class="line">        resultPath = log.get_report_file_path()</span><br><span class="line">        on_off = localReadConfig.get_email(<span class="string">&quot;on_off&quot;</span>)</span><br><span class="line">        self.caseListFile = os.path.join(readConfig.ProDir, <span class="string">&quot;caseList.txt&quot;</span>)</span><br><span class="line">        self.caseFile = os.path.join(readConfig.ProDir, <span class="string">&quot;testCase&quot;</span>)</span><br><span class="line">        self.caseList = []</span><br><span class="line">        self.email = MyEmail.get_email()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_case_list</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        set case list</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        fb = <span class="built_in">open</span>(self.caseListFile)</span><br><span class="line">        <span class="keyword">for</span> value <span class="keyword">in</span> fb.readlines():</span><br><span class="line">            data = <span class="built_in">str</span>(value)</span><br><span class="line">            <span class="keyword">if</span> data != <span class="string">&#x27;&#x27;</span> <span class="keyword">and</span> <span class="keyword">not</span> data.startswith(<span class="string">&quot;#&quot;</span>):</span><br><span class="line">                self.caseList.append(data.replace(<span class="string">&quot;\n&quot;</span>, <span class="string">&quot;&quot;</span>))</span><br><span class="line">        fb.close()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_case_suite</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        set case suite</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.set_case_list()</span><br><span class="line">        test_suite = unittest.TestSuite()</span><br><span class="line">        suite_module = []</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> case <span class="keyword">in</span> self.caseList:</span><br><span class="line">            case_name = case.split(<span class="string">&quot;/&quot;</span>)[-<span class="number">1</span>]</span><br><span class="line">            print(case_name + <span class="string">&quot;.py&quot;</span>)</span><br><span class="line">            discover = unittest.defaultTestLoader.discover(self.caseFile, pattern=case_name + <span class="string">&#x27;.py&#x27;</span>, top_level_dir=<span class="literal">None</span>)</span><br><span class="line">            suite_module.append(discover)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(suite_module) &gt; <span class="number">0</span>:</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> suite <span class="keyword">in</span> suite_module:</span><br><span class="line">                <span class="keyword">for</span> test_name <span class="keyword">in</span> suite:</span><br><span class="line">                    test_suite.addTest(test_name)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> test_suite</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        run test</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            suit = self.set_case_suite()</span><br><span class="line">            <span class="keyword">if</span> suit <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                logger.info(<span class="string">&quot;================================== 测试开始 ==================================&quot;</span>)</span><br><span class="line">                fp = <span class="built_in">open</span>(resultPath, <span class="string">&#x27;wb&#x27;</span>)</span><br><span class="line">                runner = HTMLTestRunner.HTMLTestRunner(stream=fp, title=<span class="string">&#x27;即刻接口测试报告&#x27;</span>, description=<span class="string">&#x27;用例执行情况&#x27;</span>)</span><br><span class="line">                runner.run(suit)</span><br><span class="line">                fp.close()</span><br><span class="line"></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                logger.info(<span class="string">&quot;没有需要测试的案例&quot;</span>)</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> ex:</span><br><span class="line">            logger.error(<span class="built_in">str</span>(ex))</span><br><span class="line">        <span class="keyword">finally</span>:</span><br><span class="line">            <span class="comment"># 通过电子邮件发送测试报告</span></span><br><span class="line">            <span class="keyword">if</span> on_off == <span class="string">&#x27;on&#x27;</span>:</span><br><span class="line">                self.email.send_email()</span><br><span class="line">            <span class="keyword">elif</span> on_off == <span class="string">&#x27;off&#x27;</span>:</span><br><span class="line">                logger.info(<span class="string">&quot;不向开发人员发送报告电子邮件&quot;</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                logger.info(<span class="string">&quot;未知状态&quot;</span>)</span><br><span class="line"></span><br><span class="line">            logger.info(<span class="string">&quot;================================== 测试结束 ==================================&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    obj = AllTest()</span><br><span class="line">    obj.run()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>上面贴出了runAll里面的主要部分，首先我们要从caselist.txt文件中读取需要执行的case名称，然后将他们添加到python自带的unittest测试集中，最后执行run()函数，执行测试集。</p>
+<h1 id="result"><a href="#result" class="headerlink" title="result"></a>result</h1><p>result文件夹会在首次执行case时生成，并且以后的测试结果都会被保存在该文件夹下，同时每次测试的文件夹都是用系统时间命名，里面包含了两个文件，log文件和测试报告<br><img src="/.kim//15564540018530.jpg"></p>
+<h1 id="testCase"><a href="#testCase" class="headerlink" title="testCase"></a>testCase</h1><p>testCase文件夹下，存放我们写的具体的测试case。注意，所有的case名称都要以test开头来命名，因为unittest在进行测试时会自动匹配testCase文件夹下面所有test开头的.py文件<br><img src="/.kim//15564541032850.jpg" alt="-w345"></p>
+<h1 id="testFile"><a href="#testFile" class="headerlink" title="testFile"></a>testFile</h1><p>testFile文件夹下，放置我们测试时用来管理测试用例的excel文件和用于数据库查询的sql语句的xml文件。<br><img src="/.kim//15564541531336.jpg" alt="-w238"></p>
+<h1 id="caselist-txt"><a href="#caselist-txt" class="headerlink" title="caselist.txt"></a>caselist.txt</h1><p>凡是没有被注释掉的，都是要被执行的case名称啦。在这里写上你要执行的case名称就可以啦。<br><img src="/.kim//15564542832135.jpg" alt="-w326"></p>
+<blockquote>
+<p>参考<br><a target="_blank" rel="noopener" href="https://my.oschina.net/u/3041656/blog/820023?p=7">https://my.oschina.net/u/3041656/blog/820023?p=7</a><br>参考源码<br><a target="_blank" rel="noopener" href="https://gitee.com/null_534_6629/interfacetest/tree/master">https://gitee.com/null_534_6629/interfacetest/tree/master</a></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/" rel="tag"># 接口测试</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/05/22/Hexo%20Next%20%E4%B8%BB%E9%A2%98%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD/" rel="prev" title="Hexo Next 主题中添加本地搜索功能">
+      <i class="fa fa-chevron-left"></i> Hexo Next 主题中添加本地搜索功能
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/05/23/Hexo%E5%8D%9A%E5%AE%A2%E5%BB%BA%E7%AB%8B%E6%A0%87%E7%AD%BE%E4%BA%91%E5%8F%8A%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA/" rel="next" title="Hexo博客建立标签云及效果展示">
+      Hexo博客建立标签云及效果展示 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF%E5%92%8C%E6%A1%86%E6%9E%B6"><span class="nav-number">1.</span> <span class="nav-text">思路和框架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#config"><span class="nav-number">2.</span> <span class="nav-text">config</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#readConfig-py"><span class="nav-number">3.</span> <span class="nav-text">readConfig.py</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#common"><span class="nav-number">4.</span> <span class="nav-text">common</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Log"><span class="nav-number">4.1.</span> <span class="nav-text">Log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#configHttp-py"><span class="nav-number">4.2.</span> <span class="nav-text">configHttp.py</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#common-py"><span class="nav-number">4.3.</span> <span class="nav-text">common.py</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#configEmail-py"><span class="nav-number">4.4.</span> <span class="nav-text">configEmail.py</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTMLTestRunner-py"><span class="nav-number">4.5.</span> <span class="nav-text">HTMLTestRunner.py</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#runAll-py"><span class="nav-number">5.</span> <span class="nav-text">runAll.py</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#result"><span class="nav-number">6.</span> <span class="nav-text">result</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#testCase"><span class="nav-number">7.</span> <span class="nav-text">testCase</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#testFile"><span class="nav-number">8.</span> <span class="nav-text">testFile</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#caselist-txt"><span class="nav-number">9.</span> <span class="nav-text">caselist.txt</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Vic</p>
+  <div class="site-description" itemprop="description">人生苦短，我学Python</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vic</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
