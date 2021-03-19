@@ -7,12 +7,12 @@
 <meta name="generator" content="Hexo 5.4.0">
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/cat-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/cat-16x16-next.png">
-  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cat-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cat-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/blog/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
 
@@ -22,31 +22,31 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"vic.kim","root":"/blog/","images":"/blog/images","scheme":"Gemini","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blog/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"vic.kim","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 <meta name="description" content="背景2010年，几个搞IT的年轻人，在美国旧金山成立了一家名叫“dotCloud”的公司。这家公司主要提供基于PaaS的云计算技术服务。具体来说，是和LXC有关的容器技术。LXC，就是Linux容器虚拟技术（Linux container） 后来，dotCloud公司将自己的容器技术进行了简化和标准化，并命名为——Docker。 Docker技术诞生之后，并没有引起行业的关注。而dotCloud公">
 <meta property="og:type" content="article">
 <meta property="og:title" content="10分钟看懂Docker和K8S">
-<meta property="og:url" content="https://vic.kim/blog/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/index.html">
+<meta property="og:url" content="https://vic.kim/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/index.html">
 <meta property="og:site_name" content="Vicの博客">
 <meta property="og:description" content="背景2010年，几个搞IT的年轻人，在美国旧金山成立了一家名叫“dotCloud”的公司。这家公司主要提供基于PaaS的云计算技术服务。具体来说，是和LXC有关的容器技术。LXC，就是Linux容器虚拟技术（Linux container） 后来，dotCloud公司将自己的容器技术进行了简化和标准化，并命名为——Docker。 Docker技术诞生之后，并没有引起行业的关注。而dotCloud公">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://vic.kim/blog/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/149930-20190731223405786-383145862.jpg">
-<meta property="og:image" content="https://vic.kim/blog/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/149930-20190731223738304-439883279.jpg">
-<meta property="og:image" content="https://vic.kim/blog/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/WechatIMG14.png">
-<meta property="og:image" content="https://vic.kim/blog/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/WechatIMG15.png">
-<meta property="og:image" content="https://vic.kim/blog/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/WechatIMG16.png">
-<meta property="og:image" content="https://vic.kim/blog/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/%E7%B2%BE%E7%BB%86%E5%8C%96%E5%88%86%E5%B7%A5.jpg">
-<meta property="og:image" content="https://vic.kim/blog/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/WechatIMG17.png">
+<meta property="og:image" content="https://vic.kim/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/149930-20190731223405786-383145862.jpg">
+<meta property="og:image" content="https://vic.kim/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/149930-20190731223738304-439883279.jpg">
+<meta property="og:image" content="https://vic.kim/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/WechatIMG14.png">
+<meta property="og:image" content="https://vic.kim/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/WechatIMG15.png">
+<meta property="og:image" content="https://vic.kim/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/WechatIMG16.png">
+<meta property="og:image" content="https://vic.kim/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/%E7%B2%BE%E7%BB%86%E5%8C%96%E5%88%86%E5%B7%A5.jpg">
+<meta property="og:image" content="https://vic.kim/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/WechatIMG17.png">
 <meta property="article:published_time" content="2019-05-23T07:59:51.000Z">
 <meta property="article:modified_time" content="2019-08-22T12:36:54.240Z">
 <meta property="article:author" content="Vic">
 <meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://vic.kim/blog/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/149930-20190731223405786-383145862.jpg">
+<meta name="twitter:image" content="https://vic.kim/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/149930-20190731223405786-383145862.jpg">
 
 
-<link rel="canonical" href="https://vic.kim/blog/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/">
+<link rel="canonical" href="https://vic.kim/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/">
 
 
 <script class="page-configurations">
@@ -117,7 +117,7 @@
 
   <div class="site-meta">
 
-    <a href="/blog/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
       <h1 class="site-title">Vicの博客</h1>
       <i class="logo-line"></i>
@@ -136,11 +136,11 @@
 
 <nav class="site-nav">
   <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-about"><a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
-        <li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">13</span></a></li>
-        <li class="menu-item menu-item-categories"><a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">12</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">46</span></a></li>
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">13</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">12</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">46</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -204,27 +204,27 @@
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Vic"
-      src="/blog/images/smile.jpg">
+      src="/images/smile.jpg">
   <p class="site-author-name" itemprop="name">Vic</p>
   <div class="site-description" itemprop="description">人生苦短，我学Python</div>
 </div>
 <div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/blog/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">46</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/blog/categories/">
+            <a href="/categories/">
           
         <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/blog/tags/">
+            <a href="/tags/">
           
         <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">标签</span></a>
@@ -242,13 +242,13 @@
         </div>
 
       
-      <script type="text/javascript" charset="utf-8" src="/blog/js/tagcloud.js"></script>
-      <script type="text/javascript" charset="utf-8" src="/blog/js/tagcanvas.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
       <div class="widget-wrap">
           <h3 class="widget-title">Tag Cloud</h3>
           <div id="myCanvasContainer" class="widget tagcloud">
               <canvas width="250" height="250" id="resCanvas" style="width:100%">
-                  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/App%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag">App自动化</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Hexo-Next/" rel="tag">Hexo Next</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/JMeter/" rel="tag">JMeter</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Jenkins/" rel="tag">Jenkins</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/UI/" rel="tag">UI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%A4%87%E5%BF%98/" rel="tag">备忘</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/" rel="tag">接口测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" rel="tag">接口自动化测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%A7%BB%E5%8A%A8%E6%80%A7%E8%83%BD/" rel="tag">移动性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/" rel="tag">设备管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E8%B5%84%E6%96%99/" rel="tag">资料</a><span class="tag-list-count">8</span></li></ul>
+                  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/App%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag">App自动化</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-Next/" rel="tag">Hexo Next</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMeter/" rel="tag">JMeter</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jenkins/" rel="tag">Jenkins</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/" rel="tag">UI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%87%E5%BF%98/" rel="tag">备忘</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/" rel="tag">接口测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" rel="tag">接口自动化测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E6%80%A7%E8%83%BD/" rel="tag">移动性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/" rel="tag">设备管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B5%84%E6%96%99/" rel="tag">资料</a><span class="tag-list-count">8</span></li></ul>
               </canvas>
           </div>
       </div>
@@ -279,10 +279,10 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://vic.kim/blog/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/smile.jpg">
+      <meta itemprop="image" content="/images/smile.jpg">
       <meta itemprop="name" content="Vic">
       <meta itemprop="description" content="人生苦短，我学Python">
     </span>
@@ -318,7 +318,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blog/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a>
+          <a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a>
         </span>
     </span>
 
@@ -392,19 +392,19 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/blog/tags/Docker/" rel="tag"># Docker</a>
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/blog/2019/05/23/%E4%BA%91%E5%82%A8%E5%AD%98%E9%80%89%E6%8B%A9%E5%81%9AHexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%EF%BC%88%E8%85%BE%E8%AE%AF%E4%BA%91%E3%80%81%E4%B8%83%E7%89%9B%E4%BA%91%E3%80%81%E7%BD%91%E6%98%93%E4%BA%91%EF%BC%89/" rel="prev" title="云储存选择做Hexo博客图床（腾讯云、七牛云、网易云）">
+                <a href="/2019/05/23/%E4%BA%91%E5%82%A8%E5%AD%98%E9%80%89%E6%8B%A9%E5%81%9AHexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%EF%BC%88%E8%85%BE%E8%AE%AF%E4%BA%91%E3%80%81%E4%B8%83%E7%89%9B%E4%BA%91%E3%80%81%E7%BD%91%E6%98%93%E4%BA%91%EF%BC%89/" rel="prev" title="云储存选择做Hexo博客图床（腾讯云、七牛云、网易云）">
                   <i class="fa fa-chevron-left"></i> 云储存选择做Hexo博客图床（腾讯云、七牛云、网易云）
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/blog/2019/05/25/Mac%E4%B8%8B%E4%BD%BF%E7%94%A8Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" rel="next" title="Mac下使用Hexo+Github搭建个人博客">
+                <a href="/2019/05/25/Mac%E4%B8%8B%E4%BD%BF%E7%94%A8Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" rel="next" title="Mac下使用Hexo+Github搭建个人博客">
                   Mac下使用Hexo+Github搭建个人博客 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
@@ -466,10 +466,10 @@
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
-<script src="/blog/js/utils.js"></script><script src="/blog/js/motion.js"></script><script src="/blog/js/next-boot.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
-<script src="/blog/js/local-search.js"></script>
+<script src="/js/local-search.js"></script>
 
 
 
