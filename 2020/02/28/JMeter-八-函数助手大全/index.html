@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.4.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/cat-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/cat-16x16-next.png">
@@ -13,15 +15,16 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
 
-<script id="hexo-configurations">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"vic.kim","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"vic.kim","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-
-  <meta name="description" content="官方文档 常用__BeanShell 入参：BeanShell语法的程序语句或者Bean Shell脚本文件  示例：   12$&amp;#123;__BeanShell(123*456,)&amp;#125;：返回56088；$&amp;#123;__BeanShell(source(&quot;function.bsh&quot;,))&amp;#125;：执行在function.bsh中的脚本；    __Random">
+<meta name="description" content="官方文档 常用__BeanShell 入参：BeanShell语法的程序语句或者Bean Shell脚本文件  示例：   12$&amp;#123;__BeanShell(123*456,)&amp;#125;：返回56088；$&amp;#123;__BeanShell(source(&quot;function.bsh&quot;,))&amp;#125;：执行在function.bsh中的脚本；    __Random">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JMeter(八)_函数助手大全">
 <meta property="og:url" content="https://vic.kim/2020/02/28/JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/index.html">
@@ -47,10 +50,11 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://vic.kim/2020/02/28/JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/BeanShell.png">
 
+
 <link rel="canonical" href="https://vic.kim/2020/02/28/JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -59,60 +63,69 @@
     lang   : 'zh-CN'
   };
 </script>
-
-  <title>JMeter(八)_函数助手大全 | Vicの博客</title>
+<title>JMeter(八)_函数助手大全 | Vicの博客</title>
   
-
-
 
 
 
 
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">Vicの博客</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">测试攻城狮</p>
   </div>
@@ -126,34 +139,13 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">13</span></a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">12</span></a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">46</span></a>
-
-  </li>
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">13</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">12</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">46</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -164,23 +156,22 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
-  <span class="popup-btn-close">
+  <span class="popup-btn-close" role="button">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -188,279 +179,18 @@
   </div>
 
 </div>
-    </header>
-
-    
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://vic.kim/2020/02/28/JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/smile.jpg">
-      <meta itemprop="name" content="Vic">
-      <meta itemprop="description" content="人生苦短，我学Python">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Vicの博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          JMeter(八)_函数助手大全
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-02-28 15:59:03" itemprop="dateCreated datePublished" datetime="2020-02-28T15:59:03+08:00">2020-02-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-29 10:45:50" itemprop="dateModified" datetime="2020-02-29T10:45:50+08:00">2020-02-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JMeter/" itemprop="url" rel="index"><span itemprop="name">JMeter</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <p><a target="_blank" rel="noopener" href="https://jmeter.apache.org/usermanual/functions.html">官方文档</a></p>
-<h1 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h1><h2 id="BeanShell"><a href="#BeanShell" class="headerlink" title="__BeanShell"></a>__BeanShell</h2><ul>
-<li><p>入参：BeanShell语法的程序语句或者Bean Shell脚本文件</p>
-</li>
-<li><p>示例：</p>
-  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">&#123;__BeanShell(123*456,)&#125;：返回56088；</span></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;__BeanShell(<span class="built_in">source</span>(<span class="string">&quot;function.bsh&quot;</span>,))&#125;：执行在function.bsh中的脚本；</span></span><br></pre></td></tr></table></figure>
-<p><img data-src="JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/BeanShell.png" alt="BeanShell"></p>
-</li>
-</ul>
-<h2 id="Random"><a href="#Random" class="headerlink" title="__Random"></a>__Random</h2><ul>
-<li>作用：生成指定范围内的随机数</li>
-<li>入参：左右范围；变量名</li>
-<li>示例：</li>
-</ul>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;__Random(1,20,random_num)&#125;</span></span><br></pre></td></tr></table></figure>
-<p><img data-src="JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/Random.png" alt="__Random"></p>
-<h2 id="RandomDate"><a href="#RandomDate" class="headerlink" title="__RandomDate"></a>__RandomDate</h2><ul>
-<li>作用：生成指定范围内的日期</li>
-<li>入参：日期格式；左右范围；语言；变量名</li>
-<li>示例：</li>
-</ul>
-<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;__RandomDate(,,<span class="number">2050</span>-<span class="number">07</span>-<span class="number">08</span>,,)&#125;</span><br></pre></td></tr></table></figure>
-<p><img data-src="JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/RandomDate.png" alt="__RandomDate"></p>
-<h2 id="RandomFromMultipleVars"><a href="#RandomFromMultipleVars" class="headerlink" title="__RandomFromMultipleVars"></a>__RandomFromMultipleVars</h2><p>首先要创建用户定义的变量name1,name2,areaCode</p>
-<ul>
-<li>作用：在设定的几个值中随机使用其一，如下在name1、nema2、areaCode中随机使用</li>
-<li>入参：多个值，使用|分隔；变量名</li>
-<li>示例：</li>
-</ul>
-<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;__RandomFromMultipleVars(name1|<span class="type">name2</span>|<span class="type">areaCode</span>,name)&#125;</span><br></pre></td></tr></table></figure>
-<p><img data-src="JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/RandomFromMultipleVars.png" alt="__RandomFromMultipleVars"></p>
-<h2 id="RandomString"><a href="#RandomString" class="headerlink" title="__RandomString"></a>__RandomString</h2><ul>
-<li>作用：生成指定长度的字符串</li>
-<li>入参：字符串长度；可选字符串；变量名</li>
-<li>示例：</li>
-</ul>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;__RandomString(2,我爱你祖国,random_char)&#125;</span></span><br></pre></td></tr></table></figure>
-<p><img data-src="JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/RandomString.png" alt="__RandomString"></p>
-<h2 id="UUID"><a href="#UUID" class="headerlink" title="__UUID"></a>__UUID</h2><ul>
-<li>作用：获取UUID</li>
-<li>入参：无</li>
-<li>示例：</li>
-</ul>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;__UUID&#125;</span></span><br></pre></td></tr></table></figure>
-<p><img data-src="JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/UUID.png" alt="__UUID"></p>
-<h2 id="time"><a href="#time" class="headerlink" title="__time"></a>__time</h2><ul>
-<li>作用：返回当前时间，可指定返回格式，由SimpleDateFormat类处理函数格式<ul>
-<li>年：yyyy</li>
-<li>月：MM</li>
-<li>日：dd</li>
-<li>时：hh</li>
-<li>分：mm</li>
-<li>秒：ss</li>
-</ul>
-</li>
-<li>入参：返回格式；变量名</li>
-<li>示例：</li>
-</ul>
-<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;__time(yyyy-MM-<span class="built_in">dd</span> hh:mm:<span class="built_in">ss</span>,)&#125;</span><br></pre></td></tr></table></figure>
-<p><img data-src="JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/time.png" alt="__time"></p>
-<h2 id="timeShift"><a href="#timeShift" class="headerlink" title="__timeShift"></a>__timeShift</h2><ul>
-<li>作用：</li>
-<li>入参：<ul>
-<li>格式：创建日期的格式。如果该值未被传递，则以毫秒为单位创建日期。</li>
-<li>日期：日期值</li>
-<li>移位：从日期参数的值中添加或减去多少天，几小时或几分钟<ul>
-<li>“PT20.345S”解析为“20.345秒”</li>
-<li>“PT15M”解析为“15分钟”</li>
-<li>“PT10H”解析为“10小时”</li>
-<li>“P2D”解析为“2天”</li>
-<li>“P2DT3H4M”解析为“2天，3小时和4分钟”</li>
-<li>“P-6H3M”解析为“-6小时+3分钟”</li>
-<li>“-P6H3M”解析为“-6小时-3分钟”</li>
-<li>“-P-6H + 3M”解析为“+6小时和-3分钟”</li>
-</ul>
-</li>
-<li>区域设置：设置创建日期的显示语言</li>
-<li>变量名</li>
-</ul>
-</li>
-<li>示例：</li>
-</ul>
-<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">$&#123;__timeShift(yyyy-MM-dd HH:mm:</span>ss,,P2D,,c)&#125;</span><br></pre></td></tr></table></figure>
-<p><img data-src="JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/timeShift.png" alt="__timeShift"></p>
-<p>##__counter</p>
-<ul>
-<li>作用：作为一个计数器使用，支持多线程（多用户）</li>
-<li>入参：计数变量i，是否为线程计数器True/False</li>
-<li>示例</li>
-</ul>
-<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$&#123;<span class="variable">__counter</span>(<span class="literal">FALSE</span>,<span class="built_in">count</span>)&#125;; 全局计数器</span><br><span class="line">$&#123;<span class="variable">__counter</span>(<span class="literal">TRUE</span>,<span class="built_in">count</span>)&#125;; 每个用户有自己的计数器</span><br></pre></td></tr></table></figure>
-<p><img data-src="JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/counter.png" alt="__counter"></p>
-<h2 id="intSum"><a href="#intSum" class="headerlink" title="__intSum"></a>__intSum</h2><ul>
-<li>作用：整数求和，多个数字之间用逗号分隔</li>
-<li>入参：第一个整数；第二个及之后的整数；变量名</li>
-<li>示例：</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">&#123;__intSum(1,2,<span class="built_in">test</span>)&#125;</span></span><br></pre></td></tr></table></figure>
-<p><img data-src="JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/intSum.png" alt="__intSum"></p>
-<h2 id="longSum"><a href="#longSum" class="headerlink" title="__longSum"></a>__longSum</h2><ul>
-<li>作用：计算长整型的和</li>
-<li>入参：整数</li>
-<li>示例</li>
-</ul>
-<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span>&#123;__longSum(<span class="number">1</span>,<span class="number">2</span>],<span class="keyword">sum</span>)&#125;</span><br></pre></td></tr></table></figure>
-<p><img data-src="JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/longSum.png" alt="__longSum"></p>
-<h2 id="CSVRead"><a href="#CSVRead" class="headerlink" title="__CSVRead"></a>__CSVRead</h2><ul>
-<li>作用：从文件读取指定列的值（读取固定值/读取动态值/使用文件别名）</li>
-<li>入参：文件路径；读取方式；</li>
-<li>示例</li>
-</ul>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$&#123;__CSVRead(<span class="regexp">/Users/</span>vic<span class="regexp">/Downloads/</span>Jmeter ALY/phone_numbers.csv,<span class="number">0</span>)&#125;;读取第一列的值</span><br><span class="line">$&#123;__CSVRead(<span class="regexp">/Users/</span>vic<span class="regexp">/Downloads/</span>Jmeter ALY/phone_numbers.csv,<span class="keyword">next</span>())&#125;; 每次读取下一次的值，配合第一条使用，否则不知道从哪里开始</span><br><span class="line"></span><br><span class="line">$&#123;__CSVRead(<span class="regexp">/Users/</span>vic<span class="regexp">/Downloads/</span>Jmeter ALY/phone_numbers.csv,*user_info)&#125;;使用别名，然后通过以下方法获取数据</span><br><span class="line">$&#123;__CSVRead(*user_info, <span class="number">1</span>)&#125;</span><br></pre></td></tr></table></figure>
-<p><img data-src="JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/CSVRead.png" alt="__CSVRead"></p>
-<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1>
-    </div>
-
-    
-    
-    
         
-
-<div>
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>本文作者： </strong>Vic
-  </li>
-  <li class="post-copyright-link">
-    <strong>本文链接：</strong>
-    <a href="https://vic.kim/2020/02/28/JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/" title="JMeter(八)_函数助手大全">https://vic.kim/2020/02/28/JMeter-八-函数助手大全/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
-  </li>
-</ul>
-</div>
-
-
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/JMeter/" rel="tag"># JMeter</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2020/02/27/JMeter-%E4%B8%83-%E5%85%B3%E8%81%94%E4%B9%8B%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8F%90%E5%8F%96%E5%99%A8/" rel="prev" title="JMeter(七)_关联之正则表达式提取器">
-      <i class="fa fa-chevron-left"></i> JMeter(七)_关联之正则表达式提取器
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/03/10/JMeter-%E4%B9%9D-%E5%AE%9A%E6%97%B6%E5%99%A8/" rel="next" title="JMeter(九)_定时器">
-      JMeter(九)_定时器 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
   
-  
-  
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
   </div>
 
   <aside class="sidebar">
-    <div class="sidebar-inner">
 
-      <ul class="sidebar-nav motion-element">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
         </li>
@@ -469,20 +199,21 @@
         </li>
       </ul>
 
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">常用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#BeanShell"><span class="nav-number">1.1.</span> <span class="nav-text">__BeanShell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Random"><span class="nav-number">1.2.</span> <span class="nav-text">__Random</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RandomDate"><span class="nav-number">1.3.</span> <span class="nav-text">__RandomDate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RandomFromMultipleVars"><span class="nav-number">1.4.</span> <span class="nav-text">__RandomFromMultipleVars</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RandomString"><span class="nav-number">1.5.</span> <span class="nav-text">__RandomString</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UUID"><span class="nav-number">1.6.</span> <span class="nav-text">__UUID</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#time"><span class="nav-number">1.7.</span> <span class="nav-text">__time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#timeShift"><span class="nav-number">1.8.</span> <span class="nav-text">__timeShift</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#intSum"><span class="nav-number">1.9.</span> <span class="nav-text">__intSum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#longSum"><span class="nav-number">1.10.</span> <span class="nav-text">__longSum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSVRead"><span class="nav-number">1.11.</span> <span class="nav-text">__CSVRead</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">2.</span> <span class="nav-text">其他</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">常用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#BeanShell"><span class="nav-number">1.1.</span> <span class="nav-text">__BeanShell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Random"><span class="nav-number">1.2.</span> <span class="nav-text">__Random</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RandomDate"><span class="nav-number">1.3.</span> <span class="nav-text">__RandomDate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RandomFromMultipleVars"><span class="nav-number">1.4.</span> <span class="nav-text">__RandomFromMultipleVars</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RandomString"><span class="nav-number">1.5.</span> <span class="nav-text">__RandomString</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UUID"><span class="nav-number">1.6.</span> <span class="nav-text">__UUID</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#time"><span class="nav-number">1.7.</span> <span class="nav-text">__time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#timeShift"><span class="nav-number">1.8.</span> <span class="nav-text">__timeShift</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#intSum"><span class="nav-number">1.9.</span> <span class="nav-text">__intSum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#longSum"><span class="nav-number">1.10.</span> <span class="nav-text">__longSum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSVRead"><span class="nav-number">1.11.</span> <span class="nav-text">__CSVRead</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">2.</span> <span class="nav-text">其他</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
 
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Vic"
       src="/images/smile.jpg">
   <p class="site-author-name" itemprop="name">Vic</p>
   <div class="site-description" itemprop="description">人生苦短，我学Python</div>
 </div>
-<div class="site-state-wrap motion-element">
+<div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
@@ -508,8 +239,9 @@
 
 
 
+        </div>
       </div>
-        <div class="back-to-top motion-element">
+        <div class="back-to-top animated" role="button">
           <i class="fa fa-arrow-up"></i>
           <span>0%</span>
         </div>
@@ -520,7 +252,7 @@
       <div class="widget-wrap">
           <h3 class="widget-title">Tag Cloud</h3>
           <div id="myCanvasContainer" class="widget tagcloud">
-              <canvas width="250" height="250" id="resCanvas" style="width=100%">
+              <canvas width="250" height="250" id="resCanvas" style="width:100%">
                   <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/App%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag">App自动化</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-Next/" rel="tag">Hexo Next</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMeter/" rel="tag">JMeter</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jenkins/" rel="tag">Jenkins</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/" rel="tag">UI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%87%E5%BF%98/" rel="tag">备忘</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/" rel="tag">接口测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" rel="tag">接口自动化测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E6%80%A7%E8%83%BD/" rel="tag">移动性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/" rel="tag">设备管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B5%84%E6%96%99/" rel="tag">资料</a><span class="tag-list-count">8</span></li></ul>
               </canvas>
           </div>
@@ -529,20 +261,260 @@
 
     </div>
   </aside>
-  <div id="sidebar-dimmer"></div>
+  <div class="sidebar-dimmer"></div>
 
 
-      </div>
-    </main>
+    </header>
 
-    <footer class="footer">
-      <div class="footer-inner">
+    
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2020/02/28/JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/smile.jpg">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JMeter(八)_函数助手大全
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-02-28 15:59:03" itemprop="dateCreated datePublished" datetime="2020-02-28T15:59:03+08:00">2020-02-28</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-02-29 10:45:50" itemprop="dateModified" datetime="2020-02-29T10:45:50+08:00">2020-02-29</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/JMeter/" itemprop="url" rel="index"><span itemprop="name">JMeter</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><a target="_blank" rel="noopener" href="https://jmeter.apache.org/usermanual/functions.html">官方文档</a></p>
+<h1 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h1><h2 id="BeanShell"><a href="#BeanShell" class="headerlink" title="__BeanShell"></a>__BeanShell</h2><ul>
+<li><p>入参：BeanShell语法的程序语句或者Bean Shell脚本文件</p>
+</li>
+<li><p>示例：</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">&#123;__BeanShell(123*456,)&#125;：返回56088；</span></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;__BeanShell(<span class="built_in">source</span>(<span class="string">&quot;function.bsh&quot;</span>,))&#125;：执行在function.bsh中的脚本；</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/loading.gif" data-original="JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/BeanShell.png" alt="BeanShell"></p>
+</li>
+</ul>
+<h2 id="Random"><a href="#Random" class="headerlink" title="__Random"></a>__Random</h2><ul>
+<li>作用：生成指定范围内的随机数</li>
+<li>入参：左右范围；变量名</li>
+<li>示例：</li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;__Random(1,20,random_num)&#125;</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/loading.gif" data-original="JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/Random.png" alt="__Random"></p>
+<h2 id="RandomDate"><a href="#RandomDate" class="headerlink" title="__RandomDate"></a>__RandomDate</h2><ul>
+<li>作用：生成指定范围内的日期</li>
+<li>入参：日期格式；左右范围；语言；变量名</li>
+<li>示例：</li>
+</ul>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;__RandomDate(,,<span class="number">2050</span>-<span class="number">07</span>-<span class="number">08</span>,,)&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/loading.gif" data-original="JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/RandomDate.png" alt="__RandomDate"></p>
+<h2 id="RandomFromMultipleVars"><a href="#RandomFromMultipleVars" class="headerlink" title="__RandomFromMultipleVars"></a>__RandomFromMultipleVars</h2><p>首先要创建用户定义的变量name1,name2,areaCode</p>
+<ul>
+<li>作用：在设定的几个值中随机使用其一，如下在name1、nema2、areaCode中随机使用</li>
+<li>入参：多个值，使用|分隔；变量名</li>
+<li>示例：</li>
+</ul>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;__RandomFromMultipleVars(name1|<span class="type">name2</span>|<span class="type">areaCode</span>,name)&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/loading.gif" data-original="JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/RandomFromMultipleVars.png" alt="__RandomFromMultipleVars"></p>
+<h2 id="RandomString"><a href="#RandomString" class="headerlink" title="__RandomString"></a>__RandomString</h2><ul>
+<li>作用：生成指定长度的字符串</li>
+<li>入参：字符串长度；可选字符串；变量名</li>
+<li>示例：</li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;__RandomString(2,我爱你祖国,random_char)&#125;</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/loading.gif" data-original="JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/RandomString.png" alt="__RandomString"></p>
+<h2 id="UUID"><a href="#UUID" class="headerlink" title="__UUID"></a>__UUID</h2><ul>
+<li>作用：获取UUID</li>
+<li>入参：无</li>
+<li>示例：</li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;__UUID&#125;</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/loading.gif" data-original="JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/UUID.png" alt="__UUID"></p>
+<h2 id="time"><a href="#time" class="headerlink" title="__time"></a>__time</h2><ul>
+<li>作用：返回当前时间，可指定返回格式，由SimpleDateFormat类处理函数格式<ul>
+<li>年：yyyy</li>
+<li>月：MM</li>
+<li>日：dd</li>
+<li>时：hh</li>
+<li>分：mm</li>
+<li>秒：ss</li>
+</ul>
+</li>
+<li>入参：返回格式；变量名</li>
+<li>示例：</li>
+</ul>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;__time(yyyy-MM-<span class="built_in">dd</span> hh:mm:<span class="built_in">ss</span>,)&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/loading.gif" data-original="JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/time.png" alt="__time"></p>
+<h2 id="timeShift"><a href="#timeShift" class="headerlink" title="__timeShift"></a>__timeShift</h2><ul>
+<li>作用：</li>
+<li>入参：<ul>
+<li>格式：创建日期的格式。如果该值未被传递，则以毫秒为单位创建日期。</li>
+<li>日期：日期值</li>
+<li>移位：从日期参数的值中添加或减去多少天，几小时或几分钟<ul>
+<li>“PT20.345S”解析为“20.345秒”</li>
+<li>“PT15M”解析为“15分钟”</li>
+<li>“PT10H”解析为“10小时”</li>
+<li>“P2D”解析为“2天”</li>
+<li>“P2DT3H4M”解析为“2天，3小时和4分钟”</li>
+<li>“P-6H3M”解析为“-6小时+3分钟”</li>
+<li>“-P6H3M”解析为“-6小时-3分钟”</li>
+<li>“-P-6H + 3M”解析为“+6小时和-3分钟”</li>
+</ul>
+</li>
+<li>区域设置：设置创建日期的显示语言</li>
+<li>变量名</li>
+</ul>
+</li>
+<li>示例：</li>
+</ul>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">$&#123;__timeShift(yyyy-MM-dd HH:mm:</span>ss,,P2D,,c)&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/loading.gif" data-original="JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/timeShift.png" alt="__timeShift"></p>
+<p>##__counter</p>
+<ul>
+<li>作用：作为一个计数器使用，支持多线程（多用户）</li>
+<li>入参：计数变量i，是否为线程计数器True/False</li>
+<li>示例</li>
+</ul>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$&#123;<span class="variable">__counter</span>(<span class="literal">FALSE</span>,<span class="built_in">count</span>)&#125;; 全局计数器</span><br><span class="line">$&#123;<span class="variable">__counter</span>(<span class="literal">TRUE</span>,<span class="built_in">count</span>)&#125;; 每个用户有自己的计数器</span><br></pre></td></tr></table></figure>
+<p><img src="/images/loading.gif" data-original="JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/counter.png" alt="__counter"></p>
+<h2 id="intSum"><a href="#intSum" class="headerlink" title="__intSum"></a>__intSum</h2><ul>
+<li>作用：整数求和，多个数字之间用逗号分隔</li>
+<li>入参：第一个整数；第二个及之后的整数；变量名</li>
+<li>示例：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">&#123;__intSum(1,2,<span class="built_in">test</span>)&#125;</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/loading.gif" data-original="JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/intSum.png" alt="__intSum"></p>
+<h2 id="longSum"><a href="#longSum" class="headerlink" title="__longSum"></a>__longSum</h2><ul>
+<li>作用：计算长整型的和</li>
+<li>入参：整数</li>
+<li>示例</li>
+</ul>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span>&#123;__longSum(<span class="number">1</span>,<span class="number">2</span>],<span class="keyword">sum</span>)&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/loading.gif" data-original="JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/longSum.png" alt="__longSum"></p>
+<h2 id="CSVRead"><a href="#CSVRead" class="headerlink" title="__CSVRead"></a>__CSVRead</h2><ul>
+<li>作用：从文件读取指定列的值（读取固定值/读取动态值/使用文件别名）</li>
+<li>入参：文件路径；读取方式；</li>
+<li>示例</li>
+</ul>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$&#123;__CSVRead(<span class="regexp">/Users/</span>vic<span class="regexp">/Downloads/</span>Jmeter ALY/phone_numbers.csv,<span class="number">0</span>)&#125;;读取第一列的值</span><br><span class="line">$&#123;__CSVRead(<span class="regexp">/Users/</span>vic<span class="regexp">/Downloads/</span>Jmeter ALY/phone_numbers.csv,<span class="keyword">next</span>())&#125;; 每次读取下一次的值，配合第一条使用，否则不知道从哪里开始</span><br><span class="line"></span><br><span class="line">$&#123;__CSVRead(<span class="regexp">/Users/</span>vic<span class="regexp">/Downloads/</span>Jmeter ALY/phone_numbers.csv,*user_info)&#125;;使用别名，然后通过以下方法获取数据</span><br><span class="line">$&#123;__CSVRead(*user_info, <span class="number">1</span>)&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/loading.gif" data-original="JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/CSVRead.png" alt="__CSVRead"></p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JMeter/" rel="tag"># JMeter</a>
+          </div>
+
         
 
-        
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/02/27/JMeter-%E4%B8%83-%E5%85%B3%E8%81%94%E4%B9%8B%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8F%90%E5%8F%96%E5%99%A8/" rel="prev" title="JMeter(七)_关联之正则表达式提取器">
+                  <i class="fa fa-chevron-left"></i> JMeter(七)_关联之正则表达式提取器
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/03/10/JMeter-%E4%B9%9D-%E5%AE%9A%E6%97%B6%E5%99%A8/" rel="next" title="JMeter(九)_定时器">
+                  JMeter(九)_定时器 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
 
 <div class="copyright">
-  
   &copy; 
   <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
@@ -550,49 +522,18 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Vic</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
-  </div>
-
-        
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
 
 
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  
-  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
 <script src="/js/local-search.js"></script>
@@ -602,19 +543,21 @@
 
 
 
-
-
-
-
-
-
-
   
 
+
+
+
+
+
+  <!-- 页面点击小红心 -->
   
 
-</body>
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
 </html>
-
-<!-- 页面点击小红心 -->
-<script type="text/javascript" src="/js/src/clicklove.js"></script>

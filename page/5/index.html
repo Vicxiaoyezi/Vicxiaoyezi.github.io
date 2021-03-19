@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.4.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/cat-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/cat-16x16-next.png">
@@ -13,15 +15,16 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
 
-<script id="hexo-configurations">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"vic.kim","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"vic.kim","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-
-  <meta name="description" content="人生苦短，我学Python">
+<meta name="description" content="人生苦短，我学Python">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Vicの博客">
 <meta property="og:url" content="https://vic.kim/page/5/index.html">
@@ -31,10 +34,11 @@
 <meta property="article:author" content="Vic">
 <meta name="twitter:card" content="summary">
 
+
 <link rel="canonical" href="https://vic.kim/page/5/">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -43,60 +47,69 @@
     lang   : 'zh-CN'
   };
 </script>
-
-  <title>Vicの博客</title>
+<title>Vicの博客</title>
   
-
-
 
 
 
 
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">Vicの博客</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">测试攻城狮</p>
   </div>
@@ -110,34 +123,13 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">13</span></a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">12</span></a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">46</span></a>
-
-  </li>
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">13</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">12</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">46</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -148,23 +140,22 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
-  <span class="popup-btn-close">
+  <span class="popup-btn-close" role="button">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -172,22 +163,109 @@
   </div>
 
 </div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Vic"
+      src="/images/smile.jpg">
+  <p class="site-author-name" itemprop="name">Vic</p>
+  <div class="site-description" itemprop="description">人生苦短，我学Python</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+          <h3 class="widget-title">Tag Cloud</h3>
+          <div id="myCanvasContainer" class="widget tagcloud">
+              <canvas width="250" height="250" id="resCanvas" style="width:100%">
+                  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/App%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag">App自动化</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-Next/" rel="tag">Hexo Next</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMeter/" rel="tag">JMeter</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jenkins/" rel="tag">Jenkins</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/" rel="tag">UI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%87%E5%BF%98/" rel="tag">备忘</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/" rel="tag">接口测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" rel="tag">接口自动化测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E6%80%A7%E8%83%BD/" rel="tag">移动性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/" rel="tag">设备管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B5%84%E6%96%99/" rel="tag">资料</a><span class="tag-list-count">8</span></li></ul>
+              </canvas>
+          </div>
+      </div>
+      
+
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content index posts-expand">
-            
-      
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/20/UIAutomator2%E7%9A%84%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -201,37 +279,38 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/20/UIAutomator2%E7%9A%84%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">UIAutomator2的使用</a>
+          <a href="/2019/05/20/UIAutomator2%E7%9A%84%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">UIAutomator2的使用</a>
         </h2>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-05-20 17:21:36" itemprop="dateCreated datePublished" datetime="2019-05-20T17:21:36+08:00">2019-05-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-18 21:05:51" itemprop="dateModified" datetime="2021-03-18T21:05:51+08:00">2021-03-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/UI/" itemprop="url" rel="index"><span itemprop="name">UI</span></a>
-                </span>
-            </span>
+      <time title="创建时间：2019-05-20 17:21:36" itemprop="dateCreated datePublished" datetime="2019-05-20T17:21:36+08:00">2019-05-20</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-03-18 21:05:51" itemprop="dateModified" datetime="2021-03-18T21:05:51+08:00">2021-03-18</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/UI/" itemprop="url" rel="index"><span itemprop="name">UI</span></a>
+        </span>
+    </span>
 
-          
+  
+</div>
 
         </div>
       </header>
@@ -240,11 +319,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>uiautomator2是一个python库，用于Android的UI自动化测试，其底层基于Google uiautomator，Google提供的uiautomator库可以获取屏幕上任意一个APP的任意一个控件属性，并对其进行任意操作</p>
 <h1 id="支持平台及语言你在"><a href="#支持平台及语言你在" class="headerlink" title="支持平台及语言你在"></a>支持平台及语言你在</h1><p>python-uiautomator2封装了谷歌自带的uiautomator2测试框架，提供便利的python接口。他允许测试人员直接在PC上编写Python的测试代码，操作手机应用，完成自动化，大大提高了自动化代码编写的效率。</p>
-<h1 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h1><p><img data-src="UIAutomator2%E7%9A%84%E4%BD%BF%E7%94%A8/%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.png" alt="工作原理"><br>如图所示，python-uiautomator2主要分为两个部分，python客户端，移动设备</p>
+<h1 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h1><p><img src="/images/loading.gif" data-original="UIAutomator2%E7%9A%84%E4%BD%BF%E7%94%A8/%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.png" alt="工作原理"><br>如图所示，python-uiautomator2主要分为两个部分，python客户端，移动设备</p>
 <ul>
 <li>python端: 运行脚本，并向移动设备发送HTTP请求</li>
 <li>移动设备：移动设备上运行了封装了uiautomator2的HTTP服务，解析收到的请求，并转化成uiautomator2的代码。</li>
@@ -266,8 +343,8 @@
 <p>Windows系统可以使用命令在桌面创建一个快捷方式 python -m weditor –shortcut</p>
 <p>启动方法：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m weditor </span><br></pre></td></tr></table></figure>
-<p>浏览器会自动打开一个网页 <a target="_blank" rel="noopener" href="http://atx.open.netease.com,看到如下界面/">http://atx.open.netease.com，看到如下界面</a><br><img data-src="UIAutomator2%E7%9A%84%E4%BD%BF%E7%94%A8/weditor.jpeg" alt="weditor"></p>
-<p>重点说下这个部分<br><img data-src="UIAutomator2%E7%9A%84%E4%BD%BF%E7%94%A8/weditor_connect.png" alt="weditor"><br>如何与手机连接起来呢？就是通过手机序列号或IP来实现的。打开cmd,输入adb devices，查看手机序列号，输入框中填写设备的IP或者设备的Serial（序列号）。之后点击Connect，如果一切正常就会出现一个绿色的叶子<br><img data-src="UIAutomator2%E7%9A%84%E4%BD%BF%E7%94%A8/weditor_state.png" alt="weditor"><br>点击蓝色的Reload，就可以在网页上看到手机的界面了。非常的强大。我们可以看到手机元素的各种定位方法，在UI自动化写代码的时候，真的是非常的方面，手机页面和weditor是实时同步的。</p>
+<p>浏览器会自动打开一个网页 <a target="_blank" rel="noopener" href="http://atx.open.netease.com,看到如下界面/">http://atx.open.netease.com，看到如下界面</a><br><img src="/images/loading.gif" data-original="UIAutomator2%E7%9A%84%E4%BD%BF%E7%94%A8/weditor.jpeg" alt="weditor"></p>
+<p>重点说下这个部分<br><img src="/images/loading.gif" data-original="UIAutomator2%E7%9A%84%E4%BD%BF%E7%94%A8/weditor_connect.png" alt="weditor"><br>如何与手机连接起来呢？就是通过手机序列号或IP来实现的。打开cmd,输入adb devices，查看手机序列号，输入框中填写设备的IP或者设备的Serial（序列号）。之后点击Connect，如果一切正常就会出现一个绿色的叶子<br><img src="/images/loading.gif" data-original="UIAutomator2%E7%9A%84%E4%BD%BF%E7%94%A8/weditor_state.png" alt="weditor"><br>点击蓝色的Reload，就可以在网页上看到手机的界面了。非常的强大。我们可以看到手机元素的各种定位方法，在UI自动化写代码的时候，真的是非常的方面，手机页面和weditor是实时同步的。</p>
 <h2 id="【推荐】AppetizerIO-所见即所得脚本编辑器"><a href="#【推荐】AppetizerIO-所见即所得脚本编辑器" class="headerlink" title="【推荐】AppetizerIO 所见即所得脚本编辑器"></a>【推荐】AppetizerIO 所见即所得脚本编辑器</h2><p><a target="_blank" rel="noopener" href="https://www.appetizer.io/">AppetizerIO</a> 提供了对uiautomator2的深度集成，可以图形化管理ATX设备，还有所见即所得脚本编辑器<br>     *到网站下载直接打开，首次使用需要注册账号<br>       * <code>设备管理</code> 界面里可以检查设备是否正常init，起停atx-agent，抓取atx-agent.log文件<br>       *  <code>APP测试-&gt;脚本助手</code>调出脚本助手，实时界面同步，点击界面直接插入各种代码，同时支持uiautomator和Appium<br>      * <strong><a target="_blank" rel="noopener" href="https://github.com/openatx/uiautomator2/wiki/Appetizer%E6%89%80%E8%A7%81%E5%8D%B3%E6%89%80%E5%BE%97u2%E8%84%9A%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8">视频教程 请戳这里</a></strong>  <a target="_blank" rel="noopener" href="http://doc.appetizer.io/">其他文档在此</a></p>
 <h1 id="应用及操作"><a href="#应用及操作" class="headerlink" title="应用及操作"></a>应用及操作</h1><h2 id="调用uiautomator2的过程"><a href="#调用uiautomator2的过程" class="headerlink" title="调用uiautomator2的过程"></a>调用uiautomator2的过程</h2><ol>
 <li>配置手机设备参数，设置具体操作的是哪一台手机 </li>
@@ -467,18 +544,25 @@
     
     
     
-      <footer class="post-footer">
+
+    <footer class="post-footer">
         <div class="post-eof"></div>
-      </footer>
+      
+    </footer>
   </article>
-  
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/20/SQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E5%8F%A5%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -492,22 +576,23 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/20/SQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E5%8F%A5%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">SQL基础语句总结</a>
+          <a href="/2019/05/20/SQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E5%8F%A5%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">SQL基础语句总结</a>
         </h2>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
 
-              <time title="创建时间：2019-05-20 17:09:14 / 修改时间：19:31:46" itemprop="dateCreated datePublished" datetime="2019-05-20T17:09:14+08:00">2019-05-20</time>
-            </span>
+      <time title="创建时间：2019-05-20 17:09:14 / 修改时间：19:31:46" itemprop="dateCreated datePublished" datetime="2019-05-20T17:09:14+08:00">2019-05-20</time>
+    </span>
 
-          
+  
+</div>
 
         </div>
       </header>
@@ -516,8 +601,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <h1 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h1><p>SQL 是用于访问和处理数据库的标准的计算机语言。</p>
 <h1 id="什么是-SQL？"><a href="#什么是-SQL？" class="headerlink" title="什么是 SQL？"></a>什么是 SQL？</h1><p>SQL 指结构化查询语言<br>SQL 使我们有能力访问数据库<br>SQL 是一种 ANSI 的标准计算机语言<br>编者注：ANSI，美国国家标准化组织</p>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line">#显示数据库</span><br><span class="line"><span class="keyword">show</span> databases;</span><br><span class="line"></span><br><span class="line">#判断是否存在数据库test_mysql,有的话先删除</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">database</span> <span class="keyword">if</span> <span class="keyword">exists</span> test_mysql;</span><br><span class="line"></span><br><span class="line">#创建数据库</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> test_mysql;</span><br><span class="line"></span><br><span class="line">#删除数据库</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">database</span> test_mysql;</span><br><span class="line"></span><br><span class="line">#使用该数据库</span><br><span class="line">use test_mysql;</span><br><span class="line"></span><br><span class="line">#显示数据库中的表</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">tables</span>;</span><br><span class="line"></span><br><span class="line">#先判断表是否存在,存在先删除</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> student;</span><br><span class="line"></span><br><span class="line">#创建表</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> student(</span><br><span class="line">id <span class="type">int</span> auto_increment <span class="keyword">primary key</span>,</span><br><span class="line"><span class="type">name</span> <span class="type">varchar</span>(<span class="number">50</span>),</span><br><span class="line">sex <span class="type">varchar</span>(<span class="number">20</span>),</span><br><span class="line"><span class="type">date</span> <span class="type">varchar</span>(<span class="number">50</span>),</span><br><span class="line">)<span class="keyword">default</span> charset=utf8;</span><br><span class="line"></span><br><span class="line">#删除表</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> student;</span><br><span class="line"></span><br><span class="line">#查看表的结构</span><br><span class="line">describe student;  #可以简写为<span class="keyword">desc</span> student;</span><br><span class="line"></span><br><span class="line">#插入数据</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> student <span class="keyword">values</span>(<span class="keyword">null</span>,<span class="string">&#x27;test&#x27;</span>,<span class="string">&#x27;2018-10-2&#x27;</span>);</span><br><span class="line"></span><br><span class="line">#查询表中的数据</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student;</span><br><span class="line"><span class="keyword">select</span> id,<span class="type">name</span> <span class="keyword">from</span> student;</span><br><span class="line"></span><br><span class="line">#修改某一条数据</span><br><span class="line"><span class="keyword">update</span> student <span class="keyword">set</span> <span class="type">name</span>=<span class="string">&#x27;jack&#x27;</span> <span class="keyword">where</span> id=<span class="number">4</span>;</span><br><span class="line"></span><br><span class="line">#删除数据</span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> student <span class="keyword">where</span> id=<span class="number">8</span>;</span><br><span class="line"></span><br><span class="line"># <span class="keyword">and</span> 且</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="type">date</span>&gt;<span class="string">&#x27;2018-1-2&#x27;</span> <span class="keyword">and</span> <span class="type">date</span>&lt;<span class="string">&#x27;2018-12-1&#x27;</span>;</span><br><span class="line"></span><br><span class="line"># <span class="keyword">or</span> 或</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="type">date</span>&lt;<span class="string">&#x27;2018-11-2&#x27;</span> <span class="keyword">or</span> <span class="type">date</span>&gt;<span class="string">&#x27;2018-12-1&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#between</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="type">date</span> <span class="keyword">between</span> <span class="string">&#x27;2018-1-2&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;2018-12-1&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#in 查询制定集合内的数据</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> id <span class="keyword">in</span> (<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">#排序 <span class="keyword">asc</span> 升序  <span class="keyword">desc</span> 降序</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">order</span> <span class="keyword">by</span> id <span class="keyword">asc</span>;</span><br><span class="line"></span><br><span class="line">#分组查询 #聚合函数</span><br><span class="line"><span class="keyword">select</span> max(id),<span class="type">name</span>,sex <span class="keyword">from</span> student <span class="keyword">group</span> <span class="keyword">by</span> sex;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> min(<span class="type">date</span>) <span class="keyword">from</span> student;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> avg(id) <span class="keyword">as</span> <span class="string">&#x27;Avg&#x27;</span> <span class="keyword">from</span> student;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> count(*) <span class="keyword">from</span> student;   #统计表中总数</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> count(sex) <span class="keyword">from</span> student;   #统计表中性别总数  若有一条数据中sex为空的话,就不予以统计~</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> sum(id) <span class="keyword">from</span> student;</span><br><span class="line"></span><br><span class="line">#查询第i条以后到第j条的数据(不包括第i条)</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">limit</span> <span class="number">2</span>,<span class="number">5</span>;  #显示<span class="number">3</span><span class="number">-5</span>条数据</span><br><span class="line"></span><br><span class="line">#修改数据</span><br><span class="line"><span class="keyword">update</span> student <span class="keyword">set</span> <span class="type">name</span>=<span class="string">&#x27;test&#x27;</span> <span class="keyword">where</span> id=<span class="number">2</span>;</span><br><span class="line"><span class="keyword">update</span> student <span class="keyword">set</span> <span class="type">name</span>=<span class="string">&#x27;花花&#x27;</span>,sex=<span class="string">&#x27;女&#x27;</span> <span class="keyword">where</span> id=<span class="number">2</span></span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> student <span class="keyword">where</span> id=<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">#修改表的名字</span><br><span class="line">#格式:<span class="keyword">alter</span> <span class="keyword">table</span> tbl_name <span class="keyword">rename</span> <span class="keyword">to</span> new_name</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">rename</span> <span class="keyword">to</span> test_1;</span><br><span class="line"></span><br><span class="line">#向表中增加一个字段(列)</span><br><span class="line">#格式:<span class="keyword">alter</span> <span class="keyword">table</span> tablename <span class="keyword">add</span> columnname <span class="keyword">type</span>;/<span class="keyword">alter</span> <span class="keyword">table</span> tablename <span class="keyword">add</span>(columnname <span class="keyword">type</span>);</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">add</span>  age <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">set</span> <span class="keyword">default</span> <span class="string">&#x27;1&#x27;</span>; #<span class="keyword">set</span> <span class="keyword">default</span> 设置默认值</span><br><span class="line"></span><br><span class="line">#修改表中某个字段的名字</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> tablename change columnname newcolumnname <span class="keyword">type</span>;  #修改一个表的字段名</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student change <span class="type">name</span> test_name <span class="type">varchar</span>(<span class="number">50</span>);</span><br><span class="line"></span><br><span class="line">#去掉表中字段age的默认值</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">alter</span> age <span class="keyword">drop</span> <span class="keyword">default</span>;</span><br><span class="line"></span><br><span class="line">#去掉表中字段age</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">drop</span> <span class="keyword">column</span> age;</span><br><span class="line"></span><br><span class="line">#删除表中主键</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">drop</span> <span class="keyword">primary key</span>;</span><br><span class="line"></span><br><span class="line">#表中增加主键</span><br><span class="line"><span class="meta">#alter table add primary key (column1,column2,....,column)</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">add</span> <span class="keyword">primary key</span> (student_id);</span><br><span class="line"></span><br><span class="line">#用文本方式将数据装入数据库表中（例如D:/mysql.txt）</span><br><span class="line"><span class="keyword">load</span> data <span class="keyword">local</span> infile &quot;D:/mysql.txt&quot; <span class="keyword">into</span> <span class="keyword">table</span> MYTABLE;</span><br><span class="line"></span><br><span class="line">#导入.<span class="keyword">sql</span>文件命令（例如D:/mysql.<span class="keyword">sql</span>）</span><br><span class="line">source d:/mysql.<span class="keyword">sql</span>;  #或者  /. d:/mysql.<span class="keyword">sql</span>;</span><br></pre></td></tr></table></figure>
@@ -527,18 +610,25 @@
     
     
     
-      <footer class="post-footer">
+
+    <footer class="post-footer">
         <div class="post-eof"></div>
-      </footer>
+      
+    </footer>
   </article>
-  
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/20/Homebrew/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -552,37 +642,38 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/20/Homebrew/" class="post-title-link" itemprop="url">Homebrew</a>
+          <a href="/2019/05/20/Homebrew/" class="post-title-link" itemprop="url">Homebrew</a>
         </h2>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-05-20 16:55:06" itemprop="dateCreated datePublished" datetime="2019-05-20T16:55:06+08:00">2019-05-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-05-21 21:49:30" itemprop="dateModified" datetime="2019-05-21T21:49:30+08:00">2019-05-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%B5%84%E6%96%99/" itemprop="url" rel="index"><span itemprop="name">资料</span></a>
-                </span>
-            </span>
+      <time title="创建时间：2019-05-20 16:55:06" itemprop="dateCreated datePublished" datetime="2019-05-20T16:55:06+08:00">2019-05-20</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-05-21 21:49:30" itemprop="dateModified" datetime="2019-05-21T21:49:30+08:00">2019-05-21</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%B5%84%E6%96%99/" itemprop="url" rel="index"><span itemprop="name">资料</span></a>
+        </span>
+    </span>
 
-          
+  
+</div>
 
         </div>
       </header>
@@ -591,8 +682,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <h1 id="什么是Homebrew？"><a href="#什么是Homebrew？" class="headerlink" title="什么是Homebrew？"></a>什么是Homebrew？</h1><p>Homebrew是一款Mac OS平台下的软件包管理工具，拥有安装、卸载、更新、查看、搜索等很多实用的功能。简单的一条指令，就可以实现包管理，而不用你关心各种依赖和文件路径的情况，十分方便快捷。</p>
 <p><a target="_blank" rel="noopener" href="https://brew.sh/index_zh-cn.html">官方网站</a>：又提示缺少套件啦？别担心，Homebrew 随时守候。Homebrew —— OS X 不可或缺的套件管理器。</p>
 <h1 id="安装Homebrew"><a href="#安装Homebrew" class="headerlink" title="安装Homebrew"></a>安装Homebrew</h1><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#安装</span></span><br><span class="line">/usr/bin/ruby -e <span class="string">&quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span>`</span><br><span class="line"></span><br><span class="line"><span class="meta">#验证是否安装成功</span></span><br><span class="line">brew doctor</span><br><span class="line"></span><br><span class="line"><span class="meta">#查看brew版本</span></span><br><span class="line">brew -v</span><br><span class="line"></span><br><span class="line"><span class="meta">#查看brew帮助文档</span></span><br><span class="line">brew –help</span><br><span class="line"></span><br><span class="line"><span class="meta">#更新Homebrew</span></span><br><span class="line">brew update</span><br></pre></td></tr></table></figure>
@@ -603,18 +692,25 @@
     
     
     
-      <footer class="post-footer">
+
+    <footer class="post-footer">
         <div class="post-eof"></div>
-      </footer>
+      
+    </footer>
   </article>
-  
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/20/item2%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -628,31 +724,32 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/20/item2%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="post-title-link" itemprop="url">item2常用快捷键</a>
+          <a href="/2019/05/20/item2%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="post-title-link" itemprop="url">item2常用快捷键</a>
         </h2>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
 
-              <time title="创建时间：2019-05-20 16:34:56 / 修改时间：19:31:25" itemprop="dateCreated datePublished" datetime="2019-05-20T16:34:56+08:00">2019-05-20</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%B5%84%E6%96%99/" itemprop="url" rel="index"><span itemprop="name">资料</span></a>
-                </span>
-            </span>
+      <time title="创建时间：2019-05-20 16:34:56 / 修改时间：19:31:25" itemprop="dateCreated datePublished" datetime="2019-05-20T16:34:56+08:00">2019-05-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%B5%84%E6%96%99/" itemprop="url" rel="index"><span itemprop="name">资料</span></a>
+        </span>
+    </span>
 
-          
+  
+</div>
 
         </div>
       </header>
@@ -661,8 +758,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <h1 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h1><ul>
 <li>新建标签：command + t</li>
 <li>关闭标签：command + w</li>
@@ -739,18 +834,25 @@
     
     
     
-      <footer class="post-footer">
+
+    <footer class="post-footer">
         <div class="post-eof"></div>
-      </footer>
+      
+    </footer>
   </article>
-  
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/20/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -764,37 +866,38 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/20/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">Linux常用命令总结</a>
+          <a href="/2019/05/20/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">Linux常用命令总结</a>
         </h2>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-05-20 16:20:56" itemprop="dateCreated datePublished" datetime="2019-05-20T16:20:56+08:00">2019-05-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-05-22 09:51:00" itemprop="dateModified" datetime="2019-05-22T09:51:00+08:00">2019-05-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%B5%84%E6%96%99/" itemprop="url" rel="index"><span itemprop="name">资料</span></a>
-                </span>
-            </span>
+      <time title="创建时间：2019-05-20 16:20:56" itemprop="dateCreated datePublished" datetime="2019-05-20T16:20:56+08:00">2019-05-20</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-05-22 09:51:00" itemprop="dateModified" datetime="2019-05-22T09:51:00+08:00">2019-05-22</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%B5%84%E6%96%99/" itemprop="url" rel="index"><span itemprop="name">资料</span></a>
+        </span>
+    </span>
 
-          
+  
+</div>
 
         </div>
       </header>
@@ -803,8 +906,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <h1 id="系统信息"><a href="#系统信息" class="headerlink" title="系统信息"></a>系统信息</h1><figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">arch 显示机器的处理器架构(<span class="number">1</span>) </span><br><span class="line">uname -m 显示机器的处理器架构(<span class="number">2</span>) </span><br><span class="line">uname -r 显示正在使用的内核版本 </span><br><span class="line">dmidecode -q 显示硬件系统部件 - (SMBIOS / DMI) </span><br><span class="line">hdparm -i /dev/hda 罗列一个磁盘的架构特性 </span><br><span class="line">hdparm -tT /dev/sda 在磁盘上执行测试性读取操作 </span><br><span class="line">cat /<span class="keyword">proc</span>/cpuinfo 显示CPU<span class="title"> info的信息</span> </span><br><span class="line">cat /<span class="keyword">proc</span>/interrupts 显示中断 </span><br><span class="line">cat /<span class="keyword">proc</span>/meminfo 校验内存使用 </span><br><span class="line">cat /<span class="keyword">proc</span>/swaps 显示哪些swap被使用 </span><br><span class="line">cat /<span class="keyword">proc</span>/version 显示内核的版本 </span><br><span class="line">cat /<span class="keyword">proc</span>/net/dev 显示网络适配器及统计 </span><br><span class="line">cat /<span class="keyword">proc</span>/mounts 显示已加载的文件系统 </span><br><span class="line">lspci -tv 罗列<span class="title"> PCI</span> 设备 </span><br><span class="line">lsusb -tv 显示<span class="title"> USB</span> 设备 </span><br><span class="line">date 显示系统日期 </span><br><span class="line">cal 2007 显示2007年的日历表 </span><br><span class="line">date 041217002007.00 设置日期和时间 - 月日时分年.秒 </span><br><span class="line">clock -w 将时间修改保存到<span class="title"> BIOS</span> </span><br></pre></td></tr></table></figure>
 <h1 id="关机-系统的关机、重启以及登出"><a href="#关机-系统的关机、重启以及登出" class="headerlink" title="关机 (系统的关机、重启以及登出 )"></a>关机 (系统的关机、重启以及登出 )</h1><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">shutdown</span> -h now 关闭系统(<span class="number">1</span>) </span><br><span class="line"><span class="attribute">init</span> <span class="number">0</span> 关闭系统(<span class="number">2</span>) </span><br><span class="line"><span class="attribute">telinit</span> <span class="number">0</span> 关闭系统(<span class="number">3</span>) </span><br><span class="line"><span class="attribute">shutdown</span> -h hours:minutes &amp; 按预定时间关闭系统 </span><br><span class="line"><span class="attribute">shutdown</span> -c 取消按预定时间关闭系统 </span><br><span class="line"><span class="attribute">shutdown</span> -r now 重启(<span class="number">1</span>) </span><br><span class="line"><span class="attribute">reboot</span> 重启(<span class="number">2</span>) </span><br><span class="line"><span class="attribute">logout</span> 注销 </span><br></pre></td></tr></table></figure>
 <h1 id="文件和目录"><a href="#文件和目录" class="headerlink" title="文件和目录"></a>文件和目录</h1><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">cd</span> /home 进入 &#x27;/ home&#x27; 目录</span><br><span class="line"><span class="attribute">cd</span> .. 返回上一级目录 </span><br><span class="line"><span class="attribute">cd</span> ../.. 返回上两级目录 </span><br><span class="line"><span class="attribute">cd</span> 进入个人的主目录 </span><br><span class="line"><span class="attribute">cd</span> ~user<span class="number">1</span> 进入个人的主目录 </span><br><span class="line"><span class="attribute">cd</span> - 返回上次所在的目录 </span><br><span class="line"><span class="attribute">pwd</span> 显示工作路径 </span><br><span class="line"><span class="attribute">ls</span> 查看目录中的文件 </span><br><span class="line"><span class="attribute">ls</span> -F 查看目录中的文件 </span><br><span class="line"><span class="attribute">ls</span> -l 显示文件和目录的详细资料 </span><br><span class="line"><span class="attribute">ls</span> -a 显示隐藏文件 </span><br><span class="line"><span class="attribute">ls</span> *[<span class="number">0</span>-<span class="number">9</span>]* 显示包含数字的文件名和目录名 </span><br><span class="line"><span class="attribute">tree</span> 显示文件和目录由根目录开始的树形结构(<span class="number">1</span>) </span><br><span class="line"><span class="attribute">lstree</span> 显示文件和目录由根目录开始的树形结构(<span class="number">2</span>) </span><br><span class="line"><span class="attribute">mkdir</span> dir<span class="number">1</span> 创建一个叫做 &#x27;dir<span class="number">1</span>&#x27; 的目录</span><br><span class="line"><span class="attribute">mkdir</span> dir<span class="number">1</span> dir<span class="number">2</span> 同时创建两个目录 </span><br><span class="line"><span class="attribute">mkdir</span> -p /tmp/dir<span class="number">1</span>/dir<span class="number">2</span> 创建一个目录树 </span><br><span class="line"><span class="attribute">rm</span> -f file<span class="number">1</span> 删除一个叫做 &#x27;file<span class="number">1</span>&#x27; 的文件</span><br><span class="line"><span class="attribute">rmdir</span> dir<span class="number">1</span> 删除一个叫做 &#x27;dir<span class="number">1</span>&#x27; 的目录</span><br><span class="line"><span class="attribute">rm</span> -rf dir<span class="number">1</span> 删除一个叫做 &#x27;dir<span class="number">1</span>&#x27; 的目录并同时删除其内容 </span><br><span class="line"><span class="attribute">rm</span> -rf dir<span class="number">1</span> dir<span class="number">2</span> 同时删除两个目录及它们的内容 </span><br><span class="line"><span class="attribute">mv</span> dir<span class="number">1</span> new_dir 重命名/移动 一个目录 </span><br><span class="line"><span class="attribute">cp</span> file<span class="number">1</span> file<span class="number">2</span> 复制一个文件 </span><br><span class="line"><span class="attribute">cp</span> dir/ * . 复制一个目录下的所有文件到当前工作目录 </span><br><span class="line"><span class="attribute">cp</span> -a /tmp/dir<span class="number">1</span> . 复制一个目录到当前工作目录 </span><br><span class="line"><span class="attribute">cp</span> -a dir<span class="number">1</span> dir<span class="number">2</span> 复制一个目录 </span><br><span class="line"><span class="attribute">ln</span> -s file<span class="number">1</span> lnk<span class="number">1</span> 创建一个指向文件或目录的软链接 </span><br><span class="line"><span class="attribute">ln</span> file<span class="number">1</span> lnk<span class="number">1</span> 创建一个指向文件或目录的物理链接 </span><br><span class="line"><span class="attribute">touch</span> -t <span class="number">0712250000</span> file<span class="number">1</span> 修改一个文件或目录的时间戳 - (YYMMDDhhmm) </span><br></pre></td></tr></table></figure>
@@ -824,18 +925,25 @@
     
     
     
-      <footer class="post-footer">
+
+    <footer class="post-footer">
         <div class="post-eof"></div>
-      </footer>
+      
+    </footer>
   </article>
-  
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/20/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -849,21 +957,22 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/20/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+          <a href="/2019/05/20/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
         </h2>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-05-20 13:41:56" itemprop="dateCreated datePublished" datetime="2019-05-20T13:41:56+08:00">2019-05-20</time>
-            </span>
+      <time title="创建时间：2019-05-20 13:41:56" itemprop="dateCreated datePublished" datetime="2019-05-20T13:41:56+08:00">2019-05-20</time>
+    </span>
 
-          
+  
+</div>
 
         </div>
       </header>
@@ -872,8 +981,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
@@ -894,24 +1001,21 @@
     
     
     
-      <footer class="post-footer">
+
+    <footer class="post-footer">
         <div class="post-eof"></div>
-      </footer>
+      
+    </footer>
   </article>
-  
-  
-  
+</div>
 
 
-  
+
+
   <nav class="pagination">
     <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
   </nav>
 
-
-
-          </div>
-          
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -920,7 +1024,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -929,106 +1033,19 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Vic"
-      src="/images/smile.jpg">
-  <p class="site-author-name" itemprop="name">Vic</p>
-  <div class="site-description" itemprop="description">人生苦短，我学Python</div>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">46</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">12</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">13</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-
-      </div>
-        <div class="back-to-top motion-element">
-          <i class="fa fa-arrow-up"></i>
-          <span>0%</span>
-        </div>
-
-      
-      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
-      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
-      <div class="widget-wrap">
-          <h3 class="widget-title">Tag Cloud</h3>
-          <div id="myCanvasContainer" class="widget tagcloud">
-              <canvas width="250" height="250" id="resCanvas" style="width=100%">
-                  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/App%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag">App自动化</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-Next/" rel="tag">Hexo Next</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMeter/" rel="tag">JMeter</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jenkins/" rel="tag">Jenkins</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/" rel="tag">UI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%87%E5%BF%98/" rel="tag">备忘</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/" rel="tag">接口测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" rel="tag">接口自动化测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E6%80%A7%E8%83%BD/" rel="tag">移动性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/" rel="tag">设备管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B5%84%E6%96%99/" rel="tag">资料</a><span class="tag-list-count">8</span></li></ul>
-              </canvas>
-          </div>
-      </div>
-      
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
 
 <div class="copyright">
-  
   &copy; 
   <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
@@ -1036,49 +1053,18 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Vic</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
-  </div>
-
-        
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
 
 
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  
-  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
 <script src="/js/local-search.js"></script>
@@ -1088,19 +1074,21 @@
 
 
 
-
-
-
-
-
-
-
   
 
+
+
+
+
+
+  <!-- 页面点击小红心 -->
   
 
-</body>
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
 </html>
-
-<!-- 页面点击小红心 -->
-<script type="text/javascript" src="/js/src/clicklove.js"></script>

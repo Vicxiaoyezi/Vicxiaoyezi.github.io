@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.4.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/cat-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/cat-16x16-next.png">
@@ -13,15 +15,16 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
 
-<script id="hexo-configurations">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"vic.kim","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"vic.kim","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-
-  <meta name="description" content="背景2010年，几个搞IT的年轻人，在美国旧金山成立了一家名叫“dotCloud”的公司。这家公司主要提供基于PaaS的云计算技术服务。具体来说，是和LXC有关的容器技术。LXC，就是Linux容器虚拟技术（Linux container） 后来，dotCloud公司将自己的容器技术进行了简化和标准化，并命名为——Docker。 Docker技术诞生之后，并没有引起行业的关注。而dotCloud公">
+<meta name="description" content="背景2010年，几个搞IT的年轻人，在美国旧金山成立了一家名叫“dotCloud”的公司。这家公司主要提供基于PaaS的云计算技术服务。具体来说，是和LXC有关的容器技术。LXC，就是Linux容器虚拟技术（Linux container） 后来，dotCloud公司将自己的容器技术进行了简化和标准化，并命名为——Docker。 Docker技术诞生之后，并没有引起行业的关注。而dotCloud公">
 <meta property="og:type" content="article">
 <meta property="og:title" content="10分钟看懂Docker和K8S">
 <meta property="og:url" content="https://vic.kim/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/index.html">
@@ -42,10 +45,11 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://vic.kim/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/149930-20190731223405786-383145862.jpg">
 
+
 <link rel="canonical" href="https://vic.kim/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -54,60 +58,69 @@
     lang   : 'zh-CN'
   };
 </script>
-
-  <title>10分钟看懂Docker和K8S | Vicの博客</title>
+<title>10分钟看懂Docker和K8S | Vicの博客</title>
   
-
-
 
 
 
 
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">Vicの博客</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">测试攻城狮</p>
   </div>
@@ -121,34 +134,13 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">13</span></a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">12</span></a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">46</span></a>
-
-  </li>
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">13</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">12</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">46</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -159,23 +151,22 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
-  <span class="popup-btn-close">
+  <span class="popup-btn-close" role="button">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -183,217 +174,18 @@
   </div>
 
 </div>
-    </header>
-
-    
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/smile.jpg">
-      <meta itemprop="name" content="Vic">
-      <meta itemprop="description" content="人生苦短，我学Python">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Vicの博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          10分钟看懂Docker和K8S
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-05-23 15:59:51" itemprop="dateCreated datePublished" datetime="2019-05-23T15:59:51+08:00">2019-05-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-22 20:36:54" itemprop="dateModified" datetime="2019-08-22T20:36:54+08:00">2019-08-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>2010年，几个搞IT的年轻人，在美国旧金山成立了一家名叫“dotCloud”的公司。这家公司主要提供基于PaaS的云计算技术服务。具体来说，是和LXC有关的容器技术。<br>LXC，就是Linux容器虚拟技术（Linux container）</p>
-<p>后来，dotCloud公司将自己的容器技术进行了简化和标准化，并命名为——Docker。<br><img data-src="10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/149930-20190731223405786-383145862.jpg" alt="Docker"></p>
-<p>Docker技术诞生之后，并没有引起行业的关注。而dotCloud公司，作为一家小型创业企业，在激烈的竞争之下，也步履维艰。正当他们快要坚持不下去的时候，脑子里蹦出了“开源”的想法。什么是“开源”？开源，就是开放源代码。也就是将原来内部保密的程序源代码开放给所有人，然后让大家一起参与进来，贡献代码和意见。</p>
-<p>有的软件是一开始就开源的。也有的软件，是混不下去，创造者又不想放弃，所以选择开源。自己养不活，就吃“百家饭”嘛。2013年3月，dotCloud公司的创始人之一，Docker之父，28岁的Solomon Hykes正式决定，将Docker项目开源。</p>
-<p>不开则已，一开惊人。越来越多的IT工程师发现了Docker的优点，然后蜂拥而至，加入Docker开源社区。Docker的人气迅速攀升，速度之快，令人瞠目结舌。开源当月，Docker 0.1 版本发布。此后的每一个月，Docker都会发布一个版本。到2014年6月9日，Docker 1.0 版本正式发布。此时的Docker，已经成为行业里人气最火爆的开源技术，没有之一。甚至像Google、微软、Amazon、VMware这样的巨头，都对它青睐有加，表示将全力支持。Docker火了之后，dotCloud公司干脆把公司名字也改成了Docker Inc. 。</p>
-<p> Docker和容器技术为什么会这么火爆？说白了，就是因为它“轻”。在容器技术之前，业界的网红是虚拟机。虚拟机技术的代表，是VMWare和OpenStack。</p>
-<p>相信很多人都用过虚拟机。虚拟机，就是在你的操作系统里面，装一个软件，然后通过这个软件，再模拟一台甚至多台“子电脑”出来。在“子电脑”里，你可以和正常电脑一样运行程序，例如开QQ。如果你愿意，你可以变出好几个“子电脑”，里面都开上QQ。“子电脑”和“子电脑”之间，是相互隔离的，互不影响。虚拟机属于虚拟化技术。</p>
-<p>而Docker这样的容器技术，也是虚拟化技术，属于轻量级的虚拟化。虚拟机虽然可以隔离出很多“子电脑”，但占用空间更大，启动更慢，虚拟机软件可能还要花钱（例如VMWare）。而容器技术恰好没有这些缺点。它不需要虚拟出整个操作系统，只需要虚拟一个小规模的环境（类似“沙箱”）。</p>
-<p>它启动时间很快，几秒钟就能完成。而且，它对资源的利用率很高（一台主机可以同时运行几千个Docker容器）。此外，它占的空间很小，虚拟机一般要几GB到几十GB的空间，而容器只需要MB级甚至KB级。正因为如此，容器技术受到了热烈的欢迎和追捧，发展迅速。<br><img data-src="10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/149930-20190731223738304-439883279.jpg" alt="容器和虚拟机的对比"></p>
-<h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><p>我们具体来看看Docker。大家需要注意，Docker本身并不是容器，它是创建容器的工具，是应用容器<br>引擎。想要搞懂Docker，其实看它的两句口号就行。</p>
-<p><strong>第一句，是“Build, Ship and Run”</strong>。<br>也就是，“搭建、发送、运行”，三板斧。</p>
-<p>举个例子：我来到一片空地，想建个房子，于是我搬石头、砍木头、画图纸，一顿操作，终于把这个房子盖好了。</p>
-<p>结果，我住了一段时间，想搬到另一片空地去。这时候，按以往的办法，我只能再次搬石头、砍木头、画图纸、盖房子。但是，跑来一个老巫婆，教会我一种魔法。这种魔法，可以把我盖好的房子复制一份，做成“镜像”，放在我的背包里。等我到了另一片空地，就用这个“镜像”，复制一套房子，摆在那<br>边，拎包入住。怎么样？是不是很神奇？</p>
-<p><strong>Docker的第二句口号就是：“Build once，Run anywhere（搭建一次，到处能用）”</strong>。<br>Docker技术的三大核心概念，分别是：</p>
-<ul>
-<li>镜像（Image）</li>
-<li>容器（Container）</li>
-<li>仓库（Repository）<br>我刚才例子里面，那个放在包里的“镜像”，就是<strong>Docker镜像</strong>。而我的背包，就是<strong>Docker仓库</strong>。我在空地上，用魔法造好的房子，就是一个<strong>Docker容器</strong>。</li>
-</ul>
-<p>说白了，这个Docker镜像，是一个特殊的文件系统。它除了提供容器运行时所需的程序、库、资源、配置等文件外，还包含了一些为运行时准备的一些配置参数（例如环境变量）。镜像不包含任何动态数据，其内容在构建之后也不会被改变。也就是说，每次变出房子，房子是一样的，但生活用品之类的，都是不管的。谁住谁负责添置。</p>
-<p>每一个镜像可以变出一种房子。那么，我可以有多个镜像呀！也就是说，我盖了一个欧式别墅，生成了镜像。另一个哥们可能盖了一个中国四合院，也生成了镜像。还有哥们，盖了一个非洲茅草屋，也生成了镜像。。。这么一来，我们可以交换镜像，你用我的，我用你的，岂不是很爽？</p>
-<p>于是乎，就变成了一个大的公共仓库。负责对Docker镜像进行管理的，是<strong>Docker Registry服务</strong>（类似仓库管理员）。不是任何人建的任何镜像都是合法的。万一有人盖了一个有问题的房子呢？所以，Docker Registry服务对镜像的管理是非常严格的。最常使用的Registry公开服务，是官方的Docker Hub，这也是默认的 Registry，并拥有大量的高质量的官方镜像。</p>
-<h1 id="K8S"><a href="#K8S" class="headerlink" title="K8S"></a>K8S</h1><p>好了，说完了Docker，我们再把目光转向K8S。</p>
-<p>就在Docker容器技术被炒得热火朝天之时，大家发现，如果想要将Docker应用于具体的业务实现，是存在困难的——编排、管理和调度等各个方面，都不容易。于是，人们迫切需要一套管理系统，对Docker及容器进行更高级更灵活的管理。</p>
-<p>就在这个时候，K8S出现了。</p>
-<p>K8S，就是基于容器的集群管理平台，它的全称，是kubernetes。</p>
-<p>Kubernetes 这个单词来自于希腊语，含义是舵手或领航员。K8S是它的缩写，用“8”字替代了了“ubernete”这8个字符。和Docker不同，K8S的创造者，是众人皆知的行业巨头——<strong>Google</strong>。然而，K8S并不是一件全新的发明。它的前身，是Google自己捣鼓了十多年的<strong>Borg系统</strong>。K8S是2014年6月由Google公司正式公布出来并宣布开源的。同年7月，微软、Red Hat、IBM、Docker、CoreOS、 Mesosphere和Saltstack 等公司，相继加入K8S。之后的一年内，VMware、HP、Intel等公司，也陆续加入。2015年7月，Google正式加入OpenStack基金会。与此同时，Kuberentes v1.0正式发布。目前，kubernetes的版本已经发展到V1.13。K8S的架构，略微有一点复杂，我们简单来看一下。</p>
-<p>一个K8S系统，通常称为一个K8S集群（Cluster）。<br>这个集群主要包括两个部分：<br>    * 一个Master节点（主节点）<br>    * 一群Node节点（计算节点）<br><img data-src="10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/WechatIMG14.png"></p>
-<p>一看就明白：Master节点主要还是负责管理和控制。Node节点是工作负载节点，里面是具体的容器。深入来看这两种节点。首先是Master节点。<br><img data-src="10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/WechatIMG15.png"></p>
-<p>Master节点包括API Server、Scheduler、Controller manager、etcd。</p>
-<ul>
-<li>API Server是整个系统的对外接口，供客户端和其它组件调用，相当于“营业厅”。</li>
-<li>Scheduler负责对集群内部的资源进行调度，相当于“调度室”。</li>
-<li>Controller manager负责管理控制器，相当于“大总管”。<br>然后是Node节点。<br><img data-src="10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/WechatIMG16.png"></li>
-</ul>
-<p>Node节点包括Docker、kubelet、kube-proxy、Fluentd、kube-dns（可选），还有就是Pod。</p>
-<p>Pod是Kubernetes最基本的操作单元。一个Pod代表着集群中运行的一个进程，它内部封装了一个或多个紧密相关的容器。除了Pod之外，K8S还有一个Service的概念，一个Service可以看作一组提供相同服务的Pod的对外访问接口。这段不太好理解，跳过吧。</p>
-<p>Docker，不用说了，创建容器的。<br>Kubelet，主要负责监视指派到它所在Node上的Pod，包括创建、修改、监控、删除等。<br>Kube-proxy，主要负责为Pod对象提供代理。<br>Fluentd，主要负责日志收集、存储与查询。<br>是不是有点懵？唉，三言两语真的很难讲清楚，继续跳过吧。</p>
-<p>Docker和K8S都介绍完了，然而文章并没有结束。</p>
-<p><strong>接下来的部分，是写给核心网工程师甚至所有通信工程师看的</strong>。</p>
-<p>从几十年前的1G，到现在的4G，再到将来的5G，移动通信发生了翻天覆地的变化，核心网亦是如此。</p>
-<p>但是，如果你仔细洞察这些变化，会发现，所谓的核心网，其实本质上并没有发生改变，无非就是很多的服务器而已。不同的核心网网元，就是不同的服务器，不同的计算节点。</p>
-<p>变化的，是这些“服务器”的形态和接口：形态，从机柜单板，变成机柜刀片，从机柜刀片，变成X86通用刀片服务器；接口，从中继线缆，变成网线，从网线，变成光纤。</p>
-<p>就算变来变去，还是服务器，是计算节点，是CPU。</p>
-<p>既然是服务器，那么就势必会和IT云计算一样，走上虚拟化的道路。毕竟，虚拟化有太多的优势，例如前文所说的低成本、高利用率、充分灵活、动态调度，等等。</p>
-<p>前几年，大家以为虚拟机是核心网的终极形态。目前看来，更有可能是容器化。这几年经常说的NFV（网元功能虚拟化），也有可能改口为NFC（网元功能容器化）。</p>
-<p>以VoLTE为例，如果按以前2G/3G的方式，那需要大量的专用设备，分别充当EPC和IMS的不同网元。而采用容器之后，很可能只需要一台服务器，创建十几个容器，用不同的容器，来分别运行不同网元的服务程序。这些容器，随时可以创建，也可以随时销毁。还能够在不停机的情况下，随意变大，随意变小，随意变强，随意变弱，在性能和功耗之间动态平衡。简直完美！</p>
-<p>5G时代，核心网采用微服务架构，也是和容器完美搭配——单体式架构（Monolithic）变成微服务架构（Microservices），相当于一个全能型变成N个专能型。每个专能型，分配给一个隔离的容器，赋予了最大程度的灵活。<br><img data-src="10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/%E7%B2%BE%E7%BB%86%E5%8C%96%E5%88%86%E5%B7%A5.jpg" alt="精细化分工"></p>
-<p>按照这样的发展趋势，在移动通信系统中，除了天线，剩下的部分都有可能虚拟化。核心网是第一个，但不是最后一个。虚拟化之后的核心网，与其说属于通信，实际上更应该归为IT。核心网的功能，只是容器中普通一个软件功能而已。</p>
-<p>至于说在座的各位核心网工程师，恭喜你们，马上就要成功转型啦！<br><img data-src="10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/WechatIMG17.png"></p>
-<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/f1f94c6968f5">https://www.jianshu.com/p/f1f94c6968f5</a></p>
-
-    </div>
-
-    
-    
-    
         
-
-<div>
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>本文作者： </strong>Vic
-  </li>
-  <li class="post-copyright-link">
-    <strong>本文链接：</strong>
-    <a href="https://vic.kim/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/" title="10分钟看懂Docker和K8S">https://vic.kim/2019/05/23/10分钟看懂Docker和K8S/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
-  </li>
-</ul>
-</div>
-
-
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/Docker/" rel="tag"># Docker</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2019/05/23/%E4%BA%91%E5%82%A8%E5%AD%98%E9%80%89%E6%8B%A9%E5%81%9AHexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%EF%BC%88%E8%85%BE%E8%AE%AF%E4%BA%91%E3%80%81%E4%B8%83%E7%89%9B%E4%BA%91%E3%80%81%E7%BD%91%E6%98%93%E4%BA%91%EF%BC%89/" rel="prev" title="云储存选择做Hexo博客图床（腾讯云、七牛云、网易云）">
-      <i class="fa fa-chevron-left"></i> 云储存选择做Hexo博客图床（腾讯云、七牛云、网易云）
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2019/05/25/Mac%E4%B8%8B%E4%BD%BF%E7%94%A8Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" rel="next" title="Mac下使用Hexo+Github搭建个人博客">
-      Mac下使用Hexo+Github搭建个人博客 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
   
-  
-  
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
   </div>
 
   <aside class="sidebar">
-    <div class="sidebar-inner">
 
-      <ul class="sidebar-nav motion-element">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
         </li>
@@ -402,20 +194,21 @@
         </li>
       </ul>
 
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker"><span class="nav-number">2.</span> <span class="nav-text">Docker</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#K8S"><span class="nav-number">3.</span> <span class="nav-text">K8S</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker"><span class="nav-number">2.</span> <span class="nav-text">Docker</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#K8S"><span class="nav-number">3.</span> <span class="nav-text">K8S</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
 
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Vic"
       src="/images/smile.jpg">
   <p class="site-author-name" itemprop="name">Vic</p>
   <div class="site-description" itemprop="description">人生苦短，我学Python</div>
 </div>
-<div class="site-state-wrap motion-element">
+<div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
@@ -441,8 +234,9 @@
 
 
 
+        </div>
       </div>
-        <div class="back-to-top motion-element">
+        <div class="back-to-top animated" role="button">
           <i class="fa fa-arrow-up"></i>
           <span>0%</span>
         </div>
@@ -453,7 +247,7 @@
       <div class="widget-wrap">
           <h3 class="widget-title">Tag Cloud</h3>
           <div id="myCanvasContainer" class="widget tagcloud">
-              <canvas width="250" height="250" id="resCanvas" style="width=100%">
+              <canvas width="250" height="250" id="resCanvas" style="width:100%">
                   <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/App%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag">App自动化</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-Next/" rel="tag">Hexo Next</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMeter/" rel="tag">JMeter</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jenkins/" rel="tag">Jenkins</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/" rel="tag">UI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%87%E5%BF%98/" rel="tag">备忘</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/" rel="tag">接口测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" rel="tag">接口自动化测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E6%80%A7%E8%83%BD/" rel="tag">移动性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/" rel="tag">设备管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B5%84%E6%96%99/" rel="tag">资料</a><span class="tag-list-count">8</span></li></ul>
               </canvas>
           </div>
@@ -462,20 +256,198 @@
 
     </div>
   </aside>
-  <div id="sidebar-dimmer"></div>
+  <div class="sidebar-dimmer"></div>
 
 
-      </div>
-    </main>
+    </header>
 
-    <footer class="footer">
-      <div class="footer-inner">
+    
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/smile.jpg">
+      <meta itemprop="name" content="Vic">
+      <meta itemprop="description" content="人生苦短，我学Python">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vicの博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          10分钟看懂Docker和K8S
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-05-23 15:59:51" itemprop="dateCreated datePublished" datetime="2019-05-23T15:59:51+08:00">2019-05-23</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-08-22 20:36:54" itemprop="dateModified" datetime="2019-08-22T20:36:54+08:00">2019-08-22</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>2010年，几个搞IT的年轻人，在美国旧金山成立了一家名叫“dotCloud”的公司。这家公司主要提供基于PaaS的云计算技术服务。具体来说，是和LXC有关的容器技术。<br>LXC，就是Linux容器虚拟技术（Linux container）</p>
+<p>后来，dotCloud公司将自己的容器技术进行了简化和标准化，并命名为——Docker。<br><img src="/images/loading.gif" data-original="10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/149930-20190731223405786-383145862.jpg" alt="Docker"></p>
+<p>Docker技术诞生之后，并没有引起行业的关注。而dotCloud公司，作为一家小型创业企业，在激烈的竞争之下，也步履维艰。正当他们快要坚持不下去的时候，脑子里蹦出了“开源”的想法。什么是“开源”？开源，就是开放源代码。也就是将原来内部保密的程序源代码开放给所有人，然后让大家一起参与进来，贡献代码和意见。</p>
+<p>有的软件是一开始就开源的。也有的软件，是混不下去，创造者又不想放弃，所以选择开源。自己养不活，就吃“百家饭”嘛。2013年3月，dotCloud公司的创始人之一，Docker之父，28岁的Solomon Hykes正式决定，将Docker项目开源。</p>
+<p>不开则已，一开惊人。越来越多的IT工程师发现了Docker的优点，然后蜂拥而至，加入Docker开源社区。Docker的人气迅速攀升，速度之快，令人瞠目结舌。开源当月，Docker 0.1 版本发布。此后的每一个月，Docker都会发布一个版本。到2014年6月9日，Docker 1.0 版本正式发布。此时的Docker，已经成为行业里人气最火爆的开源技术，没有之一。甚至像Google、微软、Amazon、VMware这样的巨头，都对它青睐有加，表示将全力支持。Docker火了之后，dotCloud公司干脆把公司名字也改成了Docker Inc. 。</p>
+<p> Docker和容器技术为什么会这么火爆？说白了，就是因为它“轻”。在容器技术之前，业界的网红是虚拟机。虚拟机技术的代表，是VMWare和OpenStack。</p>
+<p>相信很多人都用过虚拟机。虚拟机，就是在你的操作系统里面，装一个软件，然后通过这个软件，再模拟一台甚至多台“子电脑”出来。在“子电脑”里，你可以和正常电脑一样运行程序，例如开QQ。如果你愿意，你可以变出好几个“子电脑”，里面都开上QQ。“子电脑”和“子电脑”之间，是相互隔离的，互不影响。虚拟机属于虚拟化技术。</p>
+<p>而Docker这样的容器技术，也是虚拟化技术，属于轻量级的虚拟化。虚拟机虽然可以隔离出很多“子电脑”，但占用空间更大，启动更慢，虚拟机软件可能还要花钱（例如VMWare）。而容器技术恰好没有这些缺点。它不需要虚拟出整个操作系统，只需要虚拟一个小规模的环境（类似“沙箱”）。</p>
+<p>它启动时间很快，几秒钟就能完成。而且，它对资源的利用率很高（一台主机可以同时运行几千个Docker容器）。此外，它占的空间很小，虚拟机一般要几GB到几十GB的空间，而容器只需要MB级甚至KB级。正因为如此，容器技术受到了热烈的欢迎和追捧，发展迅速。<br><img src="/images/loading.gif" data-original="10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/149930-20190731223738304-439883279.jpg" alt="容器和虚拟机的对比"></p>
+<h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><p>我们具体来看看Docker。大家需要注意，Docker本身并不是容器，它是创建容器的工具，是应用容器<br>引擎。想要搞懂Docker，其实看它的两句口号就行。</p>
+<p><strong>第一句，是“Build, Ship and Run”</strong>。<br>也就是，“搭建、发送、运行”，三板斧。</p>
+<p>举个例子：我来到一片空地，想建个房子，于是我搬石头、砍木头、画图纸，一顿操作，终于把这个房子盖好了。</p>
+<p>结果，我住了一段时间，想搬到另一片空地去。这时候，按以往的办法，我只能再次搬石头、砍木头、画图纸、盖房子。但是，跑来一个老巫婆，教会我一种魔法。这种魔法，可以把我盖好的房子复制一份，做成“镜像”，放在我的背包里。等我到了另一片空地，就用这个“镜像”，复制一套房子，摆在那<br>边，拎包入住。怎么样？是不是很神奇？</p>
+<p><strong>Docker的第二句口号就是：“Build once，Run anywhere（搭建一次，到处能用）”</strong>。<br>Docker技术的三大核心概念，分别是：</p>
+<ul>
+<li>镜像（Image）</li>
+<li>容器（Container）</li>
+<li>仓库（Repository）<br>我刚才例子里面，那个放在包里的“镜像”，就是<strong>Docker镜像</strong>。而我的背包，就是<strong>Docker仓库</strong>。我在空地上，用魔法造好的房子，就是一个<strong>Docker容器</strong>。</li>
+</ul>
+<p>说白了，这个Docker镜像，是一个特殊的文件系统。它除了提供容器运行时所需的程序、库、资源、配置等文件外，还包含了一些为运行时准备的一些配置参数（例如环境变量）。镜像不包含任何动态数据，其内容在构建之后也不会被改变。也就是说，每次变出房子，房子是一样的，但生活用品之类的，都是不管的。谁住谁负责添置。</p>
+<p>每一个镜像可以变出一种房子。那么，我可以有多个镜像呀！也就是说，我盖了一个欧式别墅，生成了镜像。另一个哥们可能盖了一个中国四合院，也生成了镜像。还有哥们，盖了一个非洲茅草屋，也生成了镜像。。。这么一来，我们可以交换镜像，你用我的，我用你的，岂不是很爽？</p>
+<p>于是乎，就变成了一个大的公共仓库。负责对Docker镜像进行管理的，是<strong>Docker Registry服务</strong>（类似仓库管理员）。不是任何人建的任何镜像都是合法的。万一有人盖了一个有问题的房子呢？所以，Docker Registry服务对镜像的管理是非常严格的。最常使用的Registry公开服务，是官方的Docker Hub，这也是默认的 Registry，并拥有大量的高质量的官方镜像。</p>
+<h1 id="K8S"><a href="#K8S" class="headerlink" title="K8S"></a>K8S</h1><p>好了，说完了Docker，我们再把目光转向K8S。</p>
+<p>就在Docker容器技术被炒得热火朝天之时，大家发现，如果想要将Docker应用于具体的业务实现，是存在困难的——编排、管理和调度等各个方面，都不容易。于是，人们迫切需要一套管理系统，对Docker及容器进行更高级更灵活的管理。</p>
+<p>就在这个时候，K8S出现了。</p>
+<p>K8S，就是基于容器的集群管理平台，它的全称，是kubernetes。</p>
+<p>Kubernetes 这个单词来自于希腊语，含义是舵手或领航员。K8S是它的缩写，用“8”字替代了了“ubernete”这8个字符。和Docker不同，K8S的创造者，是众人皆知的行业巨头——<strong>Google</strong>。然而，K8S并不是一件全新的发明。它的前身，是Google自己捣鼓了十多年的<strong>Borg系统</strong>。K8S是2014年6月由Google公司正式公布出来并宣布开源的。同年7月，微软、Red Hat、IBM、Docker、CoreOS、 Mesosphere和Saltstack 等公司，相继加入K8S。之后的一年内，VMware、HP、Intel等公司，也陆续加入。2015年7月，Google正式加入OpenStack基金会。与此同时，Kuberentes v1.0正式发布。目前，kubernetes的版本已经发展到V1.13。K8S的架构，略微有一点复杂，我们简单来看一下。</p>
+<p>一个K8S系统，通常称为一个K8S集群（Cluster）。<br>这个集群主要包括两个部分：<br>    * 一个Master节点（主节点）<br>    * 一群Node节点（计算节点）<br><img src="/images/loading.gif" data-original="10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/WechatIMG14.png"></p>
+<p>一看就明白：Master节点主要还是负责管理和控制。Node节点是工作负载节点，里面是具体的容器。深入来看这两种节点。首先是Master节点。<br><img src="/images/loading.gif" data-original="10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/WechatIMG15.png"></p>
+<p>Master节点包括API Server、Scheduler、Controller manager、etcd。</p>
+<ul>
+<li>API Server是整个系统的对外接口，供客户端和其它组件调用，相当于“营业厅”。</li>
+<li>Scheduler负责对集群内部的资源进行调度，相当于“调度室”。</li>
+<li>Controller manager负责管理控制器，相当于“大总管”。<br>然后是Node节点。<br><img src="/images/loading.gif" data-original="10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/WechatIMG16.png"></li>
+</ul>
+<p>Node节点包括Docker、kubelet、kube-proxy、Fluentd、kube-dns（可选），还有就是Pod。</p>
+<p>Pod是Kubernetes最基本的操作单元。一个Pod代表着集群中运行的一个进程，它内部封装了一个或多个紧密相关的容器。除了Pod之外，K8S还有一个Service的概念，一个Service可以看作一组提供相同服务的Pod的对外访问接口。这段不太好理解，跳过吧。</p>
+<p>Docker，不用说了，创建容器的。<br>Kubelet，主要负责监视指派到它所在Node上的Pod，包括创建、修改、监控、删除等。<br>Kube-proxy，主要负责为Pod对象提供代理。<br>Fluentd，主要负责日志收集、存储与查询。<br>是不是有点懵？唉，三言两语真的很难讲清楚，继续跳过吧。</p>
+<p>Docker和K8S都介绍完了，然而文章并没有结束。</p>
+<p><strong>接下来的部分，是写给核心网工程师甚至所有通信工程师看的</strong>。</p>
+<p>从几十年前的1G，到现在的4G，再到将来的5G，移动通信发生了翻天覆地的变化，核心网亦是如此。</p>
+<p>但是，如果你仔细洞察这些变化，会发现，所谓的核心网，其实本质上并没有发生改变，无非就是很多的服务器而已。不同的核心网网元，就是不同的服务器，不同的计算节点。</p>
+<p>变化的，是这些“服务器”的形态和接口：形态，从机柜单板，变成机柜刀片，从机柜刀片，变成X86通用刀片服务器；接口，从中继线缆，变成网线，从网线，变成光纤。</p>
+<p>就算变来变去，还是服务器，是计算节点，是CPU。</p>
+<p>既然是服务器，那么就势必会和IT云计算一样，走上虚拟化的道路。毕竟，虚拟化有太多的优势，例如前文所说的低成本、高利用率、充分灵活、动态调度，等等。</p>
+<p>前几年，大家以为虚拟机是核心网的终极形态。目前看来，更有可能是容器化。这几年经常说的NFV（网元功能虚拟化），也有可能改口为NFC（网元功能容器化）。</p>
+<p>以VoLTE为例，如果按以前2G/3G的方式，那需要大量的专用设备，分别充当EPC和IMS的不同网元。而采用容器之后，很可能只需要一台服务器，创建十几个容器，用不同的容器，来分别运行不同网元的服务程序。这些容器，随时可以创建，也可以随时销毁。还能够在不停机的情况下，随意变大，随意变小，随意变强，随意变弱，在性能和功耗之间动态平衡。简直完美！</p>
+<p>5G时代，核心网采用微服务架构，也是和容器完美搭配——单体式架构（Monolithic）变成微服务架构（Microservices），相当于一个全能型变成N个专能型。每个专能型，分配给一个隔离的容器，赋予了最大程度的灵活。<br><img src="/images/loading.gif" data-original="10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/%E7%B2%BE%E7%BB%86%E5%8C%96%E5%88%86%E5%B7%A5.jpg" alt="精细化分工"></p>
+<p>按照这样的发展趋势，在移动通信系统中，除了天线，剩下的部分都有可能虚拟化。核心网是第一个，但不是最后一个。虚拟化之后的核心网，与其说属于通信，实际上更应该归为IT。核心网的功能，只是容器中普通一个软件功能而已。</p>
+<p>至于说在座的各位核心网工程师，恭喜你们，马上就要成功转型啦！<br><img src="/images/loading.gif" data-original="10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/WechatIMG17.png"></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/f1f94c6968f5">https://www.jianshu.com/p/f1f94c6968f5</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+          </div>
+
         
 
-        
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/05/23/%E4%BA%91%E5%82%A8%E5%AD%98%E9%80%89%E6%8B%A9%E5%81%9AHexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%EF%BC%88%E8%85%BE%E8%AE%AF%E4%BA%91%E3%80%81%E4%B8%83%E7%89%9B%E4%BA%91%E3%80%81%E7%BD%91%E6%98%93%E4%BA%91%EF%BC%89/" rel="prev" title="云储存选择做Hexo博客图床（腾讯云、七牛云、网易云）">
+                  <i class="fa fa-chevron-left"></i> 云储存选择做Hexo博客图床（腾讯云、七牛云、网易云）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/05/25/Mac%E4%B8%8B%E4%BD%BF%E7%94%A8Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" rel="next" title="Mac下使用Hexo+Github搭建个人博客">
+                  Mac下使用Hexo+Github搭建个人博客 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
 
 <div class="copyright">
-  
   &copy; 
   <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
@@ -483,49 +455,18 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Vic</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
-  </div>
-
-        
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
 
 
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  
-  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
 <script src="/js/local-search.js"></script>
@@ -535,19 +476,21 @@
 
 
 
-
-
-
-
-
-
-
   
 
+
+
+
+
+
+  <!-- 页面点击小红心 -->
   
 
-</body>
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
 </html>
-
-<!-- 页面点击小红心 -->
-<script type="text/javascript" src="/js/src/clicklove.js"></script>
