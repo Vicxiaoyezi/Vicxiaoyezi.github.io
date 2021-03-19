@@ -31,11 +31,13 @@
 <meta property="og:site_name" content="Vicの博客">
 <meta property="og:description" content="前言STF（Smartphone Test Farm）是一个Web应用程序，用于从浏览器中远程调试智能手机，智能手表和其他小工具。openstf GitHub开源地址 功能：  支持的系统：Android 版本限制：2.3.3 (SDK 版本 10) to 9.0 (SDK 版本 28)   Android Wear 5.1（由于权限问题不支持5.0）   Fire OS, CyanogenMod">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://vic.kim/2019/08/21/Mac%20OS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BASTF/stf-login.png">
 <meta property="article:published_time" content="2019-08-21T08:59:44.000Z">
 <meta property="article:modified_time" content="2019-08-21T11:56:21.831Z">
 <meta property="article:author" content="Vic">
 <meta property="article:tag" content="设备管理">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://vic.kim/2019/08/21/Mac%20OS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BASTF/stf-login.png">
 
 
 <link rel="canonical" href="https://vic.kim/2019/08/21/Mac%20OS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BASTF/">
@@ -378,7 +380,7 @@
 <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stf <span class="keyword">local</span></span><br></pre></td></tr></table></figure>
 <p>如果想让其他机器连接到stf需要加上 –public-ip</p>
 <figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stf local --<span class="meta">public</span>-<span class="built_in">ip</span> &lt;本机的<span class="built_in">IP</span>地址&gt;</span><br></pre></td></tr></table></figure>
-<p>最后输入<a target="_blank" rel="noopener" href="http://localhost:7100/">http://localhost:7100</a>或者 http://&lt;ip地址&gt;:7100即可访问stf地址，界面如下:<br>![stf-login](Mac OS环境搭建STF/stf-login.png)</p>
+<p>最后输入<a target="_blank" rel="noopener" href="http://localhost:7100/">http://localhost:7100</a>或者 http://&lt;ip地址&gt;:7100即可访问stf地址，界面如下:<br><img src="/2019/08/21/Mac%20OS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BASTF/stf-login.png" alt="stf-login"></p>
 <p>输入用户名和邮箱即可登录，用户名和邮箱可以随便填写。<br>USB链接Android设备，开发者模式打开USB调试，就可以看到设备了</p>
 
     </div>
