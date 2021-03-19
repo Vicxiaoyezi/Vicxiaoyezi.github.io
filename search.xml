@@ -445,6 +445,34 @@
       </tags>
   </entry>
   <entry>
+    <title>JMeter(三)_脚本录制之基于HTTP代理服务器</title>
+    <url>/blog/2020/02/25/JMeter-%E4%B8%89-%E8%84%9A%E6%9C%AC%E5%BD%95%E5%88%B6%E4%B9%8B%E5%9F%BA%E4%BA%8EHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+    <content><![CDATA[<h1 id="一、添加录制控制器"><a href="#一、添加录制控制器" class="headerlink" title="一、添加录制控制器"></a>一、添加录制控制器</h1><p>启动jmeter：在测试计划中添加线程组，线程组中添加逻辑控制器→录制控制器</p>
+<h1 id="二、添加HTTP代理服务器"><a href="#二、添加HTTP代理服务器" class="headerlink" title="二、添加HTTP代理服务器"></a>二、添加HTTP代理服务器</h1><p>工作台：添加非测试元件→HTTP代理服务器</p>
+<h1 id="三、配置代理服务器"><a href="#三、配置代理服务器" class="headerlink" title="三、配置代理服务器"></a>三、配置代理服务器</h1><p>服务器的配置，可以根据下面的代理服务器详细说明，根据需要配置不同代理模式。<br><img src="JMeter-%E4%B8%89-%E8%84%9A%E6%9C%AC%E5%BD%95%E5%88%B6%E4%B9%8B%E5%9F%BA%E4%BA%8EHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/WX20200225-165933@2x.png" alt="HTTP代理服务器"></p>
+<h2 id="代理服务器说明"><a href="#代理服务器说明" class="headerlink" title="代理服务器说明"></a>代理服务器说明</h2><p>1）名称：代理服务器名称，可以自定义<br>2）注释：对此代理服务器的说明，可自定义，默认为空<br>3）Global Settings</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">端口：JMeter代理服务器端口，需要检查端口是否被占用</span><br><span class="line">HTTPS Domains：https协议要监听的域名，如访问：https:<span class="regexp">//</span>api.xiaoyuzhoufm.com/</span><br></pre></td></tr></table></figure>
+<p>4）Test plan content</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">目标控制器：下拉选项，表明在哪个模块下面保存录制的请求</span><br><span class="line">分组：下拉框；对录制的请求按照一定方式进行进行分组，一般默认使用【不对样本分组】即可</span><br><span class="line">记录http信息头、添加断言、Regex matching：勾选框；记录每个请求的request <span class="selector-tag">header</span>、断言、正则表达式匹配等，录制一般使用默认勾选就行</span><br></pre></td></tr></table></figure>
+<p>5）HTTP Sampler settings</p>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">A）<span class="keyword">Type</span>：http采样器的<span class="keyword">type</span>类型，默认为空</span><br><span class="line"> B）Prefix：对每个录制的http请求的前缀命名，默认为空，则录制的请求会按照数字递增的方式进行命名，如：<span class="number">0</span>，<span class="number">1</span>，<span class="number">2</span>......</span><br><span class="line">C）自动重定向：勾选框；表示请求是否自动重定向</span><br><span class="line">D）跟随重定向：勾选框；表示请求是否跟随重定向</span><br><span class="line">E）<span class="keyword">User</span> <span class="title">KeepAlive</span>：勾选框；表示此http请求的TCP链接是否保持不中断</span><br><span class="line">F）从HTML文件获取所有内涵的资源：勾选框，表示是否获取html文件中的资源信息，录制时一般默认不勾选</span><br></pre></td></tr></table></figure>
+<p>6）Content-Type filter</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">A</span>）Include：<span class="attribute">Content</span>-Type的白名单，表示那些<span class="attribute">Content</span>-Type可以通过</span><br><span class="line"><span class="selector-tag">B</span>）Exclude：<span class="attribute">Content</span>-Type黑名单，表示那些<span class="attribute">Content</span>-Type被拒绝</span><br></pre></td></tr></table></figure>
+<p>7）包含模式：表示哪些请求信息会被录制，如：*.html<br>8）排除模式：表示那些请求信息不会被录制，可点击Add suggested Excludes使用默认排除方式，<br>包含模式&amp;排除模式 就是我们需要的和我们不需要的。一般情况下，我们只需要排除我们不需要的。<br>格式：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"> .*\<span class="string">.css</span> 排除css文件，<span class="string">&quot; .* &quot;</span> 匹配任意字符的意思 <span class="string">&quot; \ &quot;</span>是转义的意思</span><br><span class="line"></span><br><span class="line"> .*\<span class="string">.js</span> 排除js文件</span><br><span class="line"></span><br><span class="line">.*\<span class="string">.png</span> 排除png文件</span><br></pre></td></tr></table></figure>
+<p>9）Notify Child Listeners of filtered samplers：是否唤起过滤取样器的后台监听，默认勾选即可</p>
+<h1 id="四、本地设置代理"><a href="#四、本地设置代理" class="headerlink" title="四、本地设置代理"></a>四、本地设置代理</h1><p>浏览器或手机设置为电脑代理</p>
+<h1 id="五、SSL问题"><a href="#五、SSL问题" class="headerlink" title="五、SSL问题"></a>五、SSL问题</h1><p>如果在录制过程中提示：SSL问题 ，那就需要安装SSL安全证书。<br><img src="JMeter-%E4%B8%89-%E8%84%9A%E6%9C%AC%E5%BD%95%E5%88%B6%E4%B9%8B%E5%9F%BA%E4%BA%8EHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/WX20200225-171508@2x.png" alt="SSL"><br>1）生成证书，在点击HTTP代理服务器的“启动”按钮后，弹出提示框：提示我们，CA证书已经创建，在jmeter的bin目录下<br> 2）安装证书（jmeter） 选择菜单栏“选项—SSL管理器”，再打开的对话框中选择bin目录下的证书<br>3）手机需要安装<code>apache-jmeter-5.1.1/bin</code>目录下<code>ApacheJMeterTemporaryRootCA.crt</code>证书</p>
+<h1 id="六、脚本录制"><a href="#六、脚本录制" class="headerlink" title="六、脚本录制"></a>六、脚本录制</h1><p>代理服务器配置后之后，点击启动，代理服务器就会开始记录所接受的http请求</p>
+]]></content>
+      <categories>
+        <category>JMeter</category>
+      </categories>
+      <tags>
+        <tag>JMeter</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JMeter(七)_关联之正则表达式提取器</title>
     <url>/blog/2020/02/27/JMeter-%E4%B8%83-%E5%85%B3%E8%81%94%E4%B9%8B%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8F%90%E5%8F%96%E5%99%A8/</url>
     <content><![CDATA[<h2 id="应用场景："><a href="#应用场景：" class="headerlink" title="应用场景："></a>应用场景：</h2><p>在一个线程组中，从前一个请求的响应结果中，提取到某些需要的内容，可以作为下一个接口需要的入参从而实现关联<br>添加路径：HTTP请求-&gt;添加-&gt;后置处理器-&gt;正则表达式提取器<br><img src="JMeter-%E4%B8%83-%E5%85%B3%E8%81%94%E4%B9%8B%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8F%90%E5%8F%96%E5%99%A8/%E6%B7%BB%E5%8A%A0%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8F%90%E5%8F%96%E5%99%A8.png" alt="添加正则表达式提取器"></p>
@@ -509,34 +537,6 @@
 <p>一个合适的正则表达式是： id?test\“:”(.+?)”</p>
 </blockquote>
 <h4 id="4、从消息头（header）提取token"><a href="#4、从消息头（header）提取token" class="headerlink" title="4、从消息头（header）提取token:"></a>4、从消息头（header）提取token:</h4><p><img src="JMeter-%E4%B8%83-%E5%85%B3%E8%81%94%E4%B9%8B%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8F%90%E5%8F%96%E5%99%A8/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8F%90%E5%8F%96%E5%99%A8.png" alt="正则表达式提取器"></p>
-]]></content>
-      <categories>
-        <category>JMeter</category>
-      </categories>
-      <tags>
-        <tag>JMeter</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JMeter(三)_脚本录制之基于HTTP代理服务器</title>
-    <url>/blog/2020/02/25/JMeter-%E4%B8%89-%E8%84%9A%E6%9C%AC%E5%BD%95%E5%88%B6%E4%B9%8B%E5%9F%BA%E4%BA%8EHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
-    <content><![CDATA[<h1 id="一、添加录制控制器"><a href="#一、添加录制控制器" class="headerlink" title="一、添加录制控制器"></a>一、添加录制控制器</h1><p>启动jmeter：在测试计划中添加线程组，线程组中添加逻辑控制器→录制控制器</p>
-<h1 id="二、添加HTTP代理服务器"><a href="#二、添加HTTP代理服务器" class="headerlink" title="二、添加HTTP代理服务器"></a>二、添加HTTP代理服务器</h1><p>工作台：添加非测试元件→HTTP代理服务器</p>
-<h1 id="三、配置代理服务器"><a href="#三、配置代理服务器" class="headerlink" title="三、配置代理服务器"></a>三、配置代理服务器</h1><p>服务器的配置，可以根据下面的代理服务器详细说明，根据需要配置不同代理模式。<br><img src="JMeter-%E4%B8%89-%E8%84%9A%E6%9C%AC%E5%BD%95%E5%88%B6%E4%B9%8B%E5%9F%BA%E4%BA%8EHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/WX20200225-165933@2x.png" alt="HTTP代理服务器"></p>
-<h2 id="代理服务器说明"><a href="#代理服务器说明" class="headerlink" title="代理服务器说明"></a>代理服务器说明</h2><p>1）名称：代理服务器名称，可以自定义<br>2）注释：对此代理服务器的说明，可自定义，默认为空<br>3）Global Settings</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">端口：JMeter代理服务器端口，需要检查端口是否被占用</span><br><span class="line">HTTPS Domains：https协议要监听的域名，如访问：https:<span class="regexp">//</span>api.xiaoyuzhoufm.com/</span><br></pre></td></tr></table></figure>
-<p>4）Test plan content</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">目标控制器：下拉选项，表明在哪个模块下面保存录制的请求</span><br><span class="line">分组：下拉框；对录制的请求按照一定方式进行进行分组，一般默认使用【不对样本分组】即可</span><br><span class="line">记录http信息头、添加断言、Regex matching：勾选框；记录每个请求的request <span class="selector-tag">header</span>、断言、正则表达式匹配等，录制一般使用默认勾选就行</span><br></pre></td></tr></table></figure>
-<p>5）HTTP Sampler settings</p>
-<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">A）<span class="keyword">Type</span>：http采样器的<span class="keyword">type</span>类型，默认为空</span><br><span class="line"> B）Prefix：对每个录制的http请求的前缀命名，默认为空，则录制的请求会按照数字递增的方式进行命名，如：<span class="number">0</span>，<span class="number">1</span>，<span class="number">2</span>......</span><br><span class="line">C）自动重定向：勾选框；表示请求是否自动重定向</span><br><span class="line">D）跟随重定向：勾选框；表示请求是否跟随重定向</span><br><span class="line">E）<span class="keyword">User</span> <span class="title">KeepAlive</span>：勾选框；表示此http请求的TCP链接是否保持不中断</span><br><span class="line">F）从HTML文件获取所有内涵的资源：勾选框，表示是否获取html文件中的资源信息，录制时一般默认不勾选</span><br></pre></td></tr></table></figure>
-<p>6）Content-Type filter</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">A</span>）Include：<span class="attribute">Content</span>-Type的白名单，表示那些<span class="attribute">Content</span>-Type可以通过</span><br><span class="line"><span class="selector-tag">B</span>）Exclude：<span class="attribute">Content</span>-Type黑名单，表示那些<span class="attribute">Content</span>-Type被拒绝</span><br></pre></td></tr></table></figure>
-<p>7）包含模式：表示哪些请求信息会被录制，如：*.html<br>8）排除模式：表示那些请求信息不会被录制，可点击Add suggested Excludes使用默认排除方式，<br>包含模式&amp;排除模式 就是我们需要的和我们不需要的。一般情况下，我们只需要排除我们不需要的。<br>格式：</p>
-<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"> .*\<span class="string">.css</span> 排除css文件，<span class="string">&quot; .* &quot;</span> 匹配任意字符的意思 <span class="string">&quot; \ &quot;</span>是转义的意思</span><br><span class="line"></span><br><span class="line"> .*\<span class="string">.js</span> 排除js文件</span><br><span class="line"></span><br><span class="line">.*\<span class="string">.png</span> 排除png文件</span><br></pre></td></tr></table></figure>
-<p>9）Notify Child Listeners of filtered samplers：是否唤起过滤取样器的后台监听，默认勾选即可</p>
-<h1 id="四、本地设置代理"><a href="#四、本地设置代理" class="headerlink" title="四、本地设置代理"></a>四、本地设置代理</h1><p>浏览器或手机设置为电脑代理</p>
-<h1 id="五、SSL问题"><a href="#五、SSL问题" class="headerlink" title="五、SSL问题"></a>五、SSL问题</h1><p>如果在录制过程中提示：SSL问题 ，那就需要安装SSL安全证书。<br><img src="JMeter-%E4%B8%89-%E8%84%9A%E6%9C%AC%E5%BD%95%E5%88%B6%E4%B9%8B%E5%9F%BA%E4%BA%8EHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/WX20200225-171508@2x.png" alt="SSL"><br>1）生成证书，在点击HTTP代理服务器的“启动”按钮后，弹出提示框：提示我们，CA证书已经创建，在jmeter的bin目录下<br> 2）安装证书（jmeter） 选择菜单栏“选项—SSL管理器”，再打开的对话框中选择bin目录下的证书<br>3）手机需要安装<code>apache-jmeter-5.1.1/bin</code>目录下<code>ApacheJMeterTemporaryRootCA.crt</code>证书</p>
-<h1 id="六、脚本录制"><a href="#六、脚本录制" class="headerlink" title="六、脚本录制"></a>六、脚本录制</h1><p>代理服务器配置后之后，点击启动，代理服务器就会开始记录所接受的http请求</p>
 ]]></content>
       <categories>
         <category>JMeter</category>
@@ -889,6 +889,29 @@
       </tags>
   </entry>
   <entry>
+    <title>Linux常用命令总结</title>
+    <url>/blog/2019/05/20/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h1 id="系统信息"><a href="#系统信息" class="headerlink" title="系统信息"></a>系统信息</h1><figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">arch 显示机器的处理器架构(<span class="number">1</span>) </span><br><span class="line">uname -m 显示机器的处理器架构(<span class="number">2</span>) </span><br><span class="line">uname -r 显示正在使用的内核版本 </span><br><span class="line">dmidecode -q 显示硬件系统部件 - (SMBIOS / DMI) </span><br><span class="line">hdparm -i /dev/hda 罗列一个磁盘的架构特性 </span><br><span class="line">hdparm -tT /dev/sda 在磁盘上执行测试性读取操作 </span><br><span class="line">cat /<span class="keyword">proc</span>/cpuinfo 显示CPU<span class="title"> info的信息</span> </span><br><span class="line">cat /<span class="keyword">proc</span>/interrupts 显示中断 </span><br><span class="line">cat /<span class="keyword">proc</span>/meminfo 校验内存使用 </span><br><span class="line">cat /<span class="keyword">proc</span>/swaps 显示哪些swap被使用 </span><br><span class="line">cat /<span class="keyword">proc</span>/version 显示内核的版本 </span><br><span class="line">cat /<span class="keyword">proc</span>/net/dev 显示网络适配器及统计 </span><br><span class="line">cat /<span class="keyword">proc</span>/mounts 显示已加载的文件系统 </span><br><span class="line">lspci -tv 罗列<span class="title"> PCI</span> 设备 </span><br><span class="line">lsusb -tv 显示<span class="title"> USB</span> 设备 </span><br><span class="line">date 显示系统日期 </span><br><span class="line">cal 2007 显示2007年的日历表 </span><br><span class="line">date 041217002007.00 设置日期和时间 - 月日时分年.秒 </span><br><span class="line">clock -w 将时间修改保存到<span class="title"> BIOS</span> </span><br></pre></td></tr></table></figure>
+<h1 id="关机-系统的关机、重启以及登出"><a href="#关机-系统的关机、重启以及登出" class="headerlink" title="关机 (系统的关机、重启以及登出 )"></a>关机 (系统的关机、重启以及登出 )</h1><figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">shutdown</span> -h now 关闭系统(<span class="number">1</span>) </span><br><span class="line"><span class="attribute">init</span> <span class="number">0</span> 关闭系统(<span class="number">2</span>) </span><br><span class="line"><span class="attribute">telinit</span> <span class="number">0</span> 关闭系统(<span class="number">3</span>) </span><br><span class="line"><span class="attribute">shutdown</span> -h hours:minutes &amp; 按预定时间关闭系统 </span><br><span class="line"><span class="attribute">shutdown</span> -c 取消按预定时间关闭系统 </span><br><span class="line"><span class="attribute">shutdown</span> -r now 重启(<span class="number">1</span>) </span><br><span class="line"><span class="attribute">reboot</span> 重启(<span class="number">2</span>) </span><br><span class="line"><span class="attribute">logout</span> 注销 </span><br></pre></td></tr></table></figure>
+<h1 id="文件和目录"><a href="#文件和目录" class="headerlink" title="文件和目录"></a>文件和目录</h1><figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">cd</span> /home 进入 &#x27;/ home&#x27; 目录</span><br><span class="line"><span class="attribute">cd</span> .. 返回上一级目录 </span><br><span class="line"><span class="attribute">cd</span> ../.. 返回上两级目录 </span><br><span class="line"><span class="attribute">cd</span> 进入个人的主目录 </span><br><span class="line"><span class="attribute">cd</span> ~user<span class="number">1</span> 进入个人的主目录 </span><br><span class="line"><span class="attribute">cd</span> - 返回上次所在的目录 </span><br><span class="line"><span class="attribute">pwd</span> 显示工作路径 </span><br><span class="line"><span class="attribute">ls</span> 查看目录中的文件 </span><br><span class="line"><span class="attribute">ls</span> -F 查看目录中的文件 </span><br><span class="line"><span class="attribute">ls</span> -l 显示文件和目录的详细资料 </span><br><span class="line"><span class="attribute">ls</span> -a 显示隐藏文件 </span><br><span class="line"><span class="attribute">ls</span> *[<span class="number">0</span>-<span class="number">9</span>]* 显示包含数字的文件名和目录名 </span><br><span class="line"><span class="attribute">tree</span> 显示文件和目录由根目录开始的树形结构(<span class="number">1</span>) </span><br><span class="line"><span class="attribute">lstree</span> 显示文件和目录由根目录开始的树形结构(<span class="number">2</span>) </span><br><span class="line"><span class="attribute">mkdir</span> dir<span class="number">1</span> 创建一个叫做 &#x27;dir<span class="number">1</span>&#x27; 的目录</span><br><span class="line"><span class="attribute">mkdir</span> dir<span class="number">1</span> dir<span class="number">2</span> 同时创建两个目录 </span><br><span class="line"><span class="attribute">mkdir</span> -p /tmp/dir<span class="number">1</span>/dir<span class="number">2</span> 创建一个目录树 </span><br><span class="line"><span class="attribute">rm</span> -f file<span class="number">1</span> 删除一个叫做 &#x27;file<span class="number">1</span>&#x27; 的文件</span><br><span class="line"><span class="attribute">rmdir</span> dir<span class="number">1</span> 删除一个叫做 &#x27;dir<span class="number">1</span>&#x27; 的目录</span><br><span class="line"><span class="attribute">rm</span> -rf dir<span class="number">1</span> 删除一个叫做 &#x27;dir<span class="number">1</span>&#x27; 的目录并同时删除其内容 </span><br><span class="line"><span class="attribute">rm</span> -rf dir<span class="number">1</span> dir<span class="number">2</span> 同时删除两个目录及它们的内容 </span><br><span class="line"><span class="attribute">mv</span> dir<span class="number">1</span> new_dir 重命名/移动 一个目录 </span><br><span class="line"><span class="attribute">cp</span> file<span class="number">1</span> file<span class="number">2</span> 复制一个文件 </span><br><span class="line"><span class="attribute">cp</span> dir/ * . 复制一个目录下的所有文件到当前工作目录 </span><br><span class="line"><span class="attribute">cp</span> -a /tmp/dir<span class="number">1</span> . 复制一个目录到当前工作目录 </span><br><span class="line"><span class="attribute">cp</span> -a dir<span class="number">1</span> dir<span class="number">2</span> 复制一个目录 </span><br><span class="line"><span class="attribute">ln</span> -s file<span class="number">1</span> lnk<span class="number">1</span> 创建一个指向文件或目录的软链接 </span><br><span class="line"><span class="attribute">ln</span> file<span class="number">1</span> lnk<span class="number">1</span> 创建一个指向文件或目录的物理链接 </span><br><span class="line"><span class="attribute">touch</span> -t <span class="number">0712250000</span> file<span class="number">1</span> 修改一个文件或目录的时间戳 - (YYMMDDhhmm) </span><br></pre></td></tr></table></figure>
+<h1 id="文件搜索"><a href="#文件搜索" class="headerlink" title="文件搜索"></a>文件搜索</h1><figure class="highlight sqf"><table><tr><td class="code"><pre><span class="line"><span class="built_in">find</span> / -<span class="built_in">name</span> file1 从 <span class="string">&#x27;/&#x27;</span> 开始进入根文件系统搜索文件和目录 </span><br><span class="line"><span class="built_in">find</span> / -user user1 搜索属于用户 <span class="string">&#x27;user1&#x27;</span> 的文件和目录 </span><br><span class="line"><span class="built_in">find</span> /home/user1 -<span class="built_in">name</span> \*.bin 在目录 <span class="string">&#x27;/ home/user1&#x27;</span> 中搜索带有<span class="string">&#x27;.bin&#x27;</span> 结尾的文件 </span><br><span class="line"><span class="built_in">find</span> /usr/bin -<span class="built_in">type</span> f -atime +<span class="number">100</span> 搜索在过去<span class="number">100</span>天内未被使用过的执行文件 </span><br><span class="line"><span class="built_in">find</span> /usr/bin -<span class="built_in">type</span> f -mtime -<span class="number">10</span> 搜索在<span class="number">10</span>天内被创建或者修改过的文件 </span><br><span class="line"><span class="built_in">find</span> / -<span class="built_in">name</span> \*.rpm -<span class="built_in">exec</span> chmod <span class="number">755</span> <span class="string">&#x27;&#123;&#125;&#x27;</span> \; 搜索以 <span class="string">&#x27;.rpm&#x27;</span> 结尾的文件并定义其权限 </span><br><span class="line"><span class="built_in">find</span> / -xdev -<span class="built_in">name</span> \*.rpm 搜索以 <span class="string">&#x27;.rpm&#x27;</span> 结尾的文件，忽略光驱、捷盘等可移动设备 </span><br><span class="line">locate \*.ps 寻找以 <span class="string">&#x27;.ps&#x27;</span> 结尾的文件 - 先运行 <span class="string">&#x27;updatedb&#x27;</span> 命令 </span><br><span class="line">whereis <span class="built_in">halt</span> 显示一个二进制文件、源码或man的位置 </span><br><span class="line">which <span class="built_in">halt</span> 显示一个二进制文件或可执行文件的完整路径 </span><br></pre></td></tr></table></figure>
+<h1 id="文件的权限-使用-“-”-设置权限，使用-“-“-用于取消"><a href="#文件的权限-使用-“-”-设置权限，使用-“-“-用于取消" class="headerlink" title="文件的权限 - 使用 “+” 设置权限，使用 “-“ 用于取消"></a>文件的权限 - 使用 “+” 设置权限，使用 “-“ 用于取消</h1><figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">ls -lh 显示权限 </span><br><span class="line">ls /tmp | pr -T5 -W$COLUMNS 将终端划分成<span class="number">5</span>栏显示 </span><br><span class="line">chmod ugo+rwx directory1 设置目录的所有人(u)、群组(g)以及其他人(o)以读（r ）、写(w)和执行(x)的权限 </span><br><span class="line">chmod go-rwx directory1 删除群组(g)与其他人(o)对目录的读写执行权限 </span><br><span class="line">chown user1 file1 改变一个文件的所有人属性 </span><br><span class="line">chown -R user1 directory1 改变一个目录的所有人属性并同时改变改目录下所有文件的属性 </span><br><span class="line">chgrp group1 file1 改变文件的群组 </span><br><span class="line">chown user1:group1 file1 改变一个文件的所有人和群组属性 </span><br><span class="line"><span class="keyword">find</span> / -perm -u+s 罗列一个系统中所有使用了SUID控制的文件 </span><br><span class="line">chmod u+s <span class="regexp">/bin/</span>file1 设置一个二进制文件的 SUID 位 - 运行该文件的用户也被赋予和所有者同样的权限 </span><br><span class="line">chmod u-s <span class="regexp">/bin/</span>file1 禁用一个二进制文件的 SUID位 </span><br><span class="line">chmod g+s <span class="regexp">/home/</span><span class="keyword">public</span> 设置一个目录的SGID 位 - 类似SUID ，不过这是针对目录的 </span><br><span class="line">chmod g-s <span class="regexp">/home/</span><span class="keyword">public</span> 禁用一个目录的 SGID 位 </span><br><span class="line">chmod o+t <span class="regexp">/home/</span><span class="keyword">public</span> 设置一个文件的 STIKY 位 - 只允许合法所有人删除文件 </span><br><span class="line">chmod o-t <span class="regexp">/home/</span><span class="keyword">public</span> 禁用一个目录的 STIKY 位 </span><br></pre></td></tr></table></figure>
+<h1 id="打包和压缩文件"><a href="#打包和压缩文件" class="headerlink" title="打包和压缩文件"></a>打包和压缩文件</h1><figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">bunzip2</span> file<span class="number">1</span>.bz<span class="number">2</span> 解压一个叫做 &#x27;file<span class="number">1</span>.bz<span class="number">2</span>&#x27;的文件 </span><br><span class="line"><span class="attribute">bzip2</span> file<span class="number">1</span> 压缩一个叫做 &#x27;file<span class="number">1</span>&#x27; 的文件 </span><br><span class="line"><span class="attribute">gunzip</span> file<span class="number">1</span>.gz 解压一个叫做 &#x27;file<span class="number">1</span>.gz&#x27;的文件 </span><br><span class="line"><span class="attribute">gzip</span> file<span class="number">1</span> 压缩一个叫做 &#x27;file<span class="number">1</span>&#x27;的文件 </span><br><span class="line"><span class="attribute">gzip</span> -<span class="number">9</span> file<span class="number">1</span> 最大程度压缩 </span><br><span class="line"><span class="attribute">rar</span> a file<span class="number">1</span>.rar test_file 创建一个叫做 &#x27;file<span class="number">1</span>.rar&#x27; 的包 </span><br><span class="line"><span class="attribute">rar</span> a file<span class="number">1</span>.rar file<span class="number">1</span> file<span class="number">2</span> dir<span class="number">1</span> 同时压缩 &#x27;file<span class="number">1</span>&#x27;, &#x27;file<span class="number">2</span>&#x27; 以及目录 &#x27;dir<span class="number">1</span>&#x27; </span><br><span class="line"><span class="attribute">rar</span> x file<span class="number">1</span>.rar 解压rar包 </span><br><span class="line"><span class="attribute">unrar</span> x file<span class="number">1</span>.rar 解压rar包 </span><br><span class="line"><span class="attribute">tar</span> -cvf archive.tar file<span class="number">1</span> 创建一个非压缩的 tarball </span><br><span class="line"><span class="attribute">tar</span> -cvf archive.tar file<span class="number">1</span> file<span class="number">2</span> dir<span class="number">1</span> 创建一个包含了 &#x27;file<span class="number">1</span>&#x27;, &#x27;file<span class="number">2</span>&#x27; 以及 &#x27;dir<span class="number">1</span>&#x27;的档案文件 </span><br><span class="line"><span class="attribute">tar</span> -tf archive.tar 显示一个包中的内容 </span><br><span class="line"><span class="attribute">tar</span> -xvf archive.tar 释放一个包 </span><br><span class="line"><span class="attribute">tar</span> -xvf archive.tar -C /tmp 将压缩包释放到 /tmp目录下 </span><br><span class="line"><span class="attribute">tar</span> -cvfj archive.tar.bz<span class="number">2</span> dir<span class="number">1</span> 创建一个bzip<span class="number">2</span>格式的压缩包 </span><br><span class="line"><span class="attribute">tar</span> -xvfj archive.tar.bz<span class="number">2</span> 解压一个bzip<span class="number">2</span>格式的压缩包 </span><br><span class="line"><span class="attribute">tar</span> -cvfz archive.tar.gz dir<span class="number">1</span> 创建一个gzip格式的压缩包 </span><br><span class="line"><span class="attribute">tar</span> -xvfz archive.tar.gz 解压一个gzip格式的压缩包 </span><br><span class="line"><span class="attribute">zip</span> file<span class="number">1</span>.zip file<span class="number">1</span> 创建一个zip格式的压缩包 </span><br><span class="line"><span class="attribute">zip</span> -r file<span class="number">1</span>.zip file<span class="number">1</span> file<span class="number">2</span> dir<span class="number">1</span> 将几个文件和目录同时压缩成一个zip格式的压缩包 </span><br><span class="line"><span class="attribute">unzip</span> file<span class="number">1</span>.zip 解压一个zip格式压缩包 </span><br></pre></td></tr></table></figure>
+<h1 id="APT-软件工具-Debian-Ubuntu-以及类似系统"><a href="#APT-软件工具-Debian-Ubuntu-以及类似系统" class="headerlink" title="APT 软件工具 (Debian, Ubuntu 以及类似系统)"></a>APT 软件工具 (Debian, Ubuntu 以及类似系统)</h1><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">apt-<span class="builtin-name">get</span> install package_name 安装/更新一个 deb 包 </span><br><span class="line">apt-cdrom install package_name 从光盘安装/更新一个 deb 包 </span><br><span class="line">apt-<span class="builtin-name">get</span> update 升级列表中的软件包 </span><br><span class="line">apt-<span class="builtin-name">get</span><span class="built_in"> upgrade </span>升级所有已安装的软件 </span><br><span class="line">apt-<span class="builtin-name">get</span> <span class="builtin-name">remove</span> package_name 从系统删除一个deb包 </span><br><span class="line">apt-<span class="builtin-name">get</span> check 确认依赖的软件仓库正确 </span><br><span class="line">apt-<span class="builtin-name">get</span> clean 从下载的软件包中清理缓存 </span><br><span class="line">apt-cache search searched-package 返回包含所要搜索字符串的软件包名称 </span><br></pre></td></tr></table></figure>
+<h1 id="查看文件内容"><a href="#查看文件内容" class="headerlink" title="查看文件内容"></a>查看文件内容</h1><figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">cat</span> file<span class="number">1</span> 从第一个字节开始正向查看文件的内容 </span><br><span class="line"><span class="attribute">tac</span> file<span class="number">1</span> 从最后一行开始反向查看一个文件的内容 </span><br><span class="line"><span class="attribute">more</span> file<span class="number">1</span> 查看一个长文件的内容 </span><br><span class="line"><span class="attribute">less</span> file<span class="number">1</span> 类似于 &#x27;more&#x27; 命令，但是它允许在文件中和正向操作一样的反向操作 </span><br><span class="line"><span class="attribute">head</span> -<span class="number">2</span> file<span class="number">1</span> 查看一个文件的前两行 </span><br><span class="line"><span class="attribute">tail</span> -<span class="number">2</span> file<span class="number">1</span> 查看一个文件的最后两行 </span><br><span class="line"><span class="attribute">tail</span> -f /var/log/messages 实时查看被添加到一个文件中的内容 </span><br></pre></td></tr></table></figure>
+<h1 id="网络配置管理"><a href="#网络配置管理" class="headerlink" title="网络配置管理"></a>网络配置管理</h1><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">ifconfig ‐a <span class="regexp">//</span>查ip信息 </span><br><span class="line">ping ‐C <span class="number">4</span> <span class="number">192.168</span>.xxx.xxx <span class="regexp">//</span>ping4次</span><br><span class="line">setup <span class="regexp">//</span>配置ip、防火墙、服务等，需要root用户执行</span><br><span class="line">ifconfig eth0 <span class="number">192.168</span>.<span class="number">1.100</span> netmask <span class="number">255.255</span>.<span class="number">255.0</span> <span class="regexp">//</span>临时设置ip </span><br><span class="line">vi <span class="regexp">/etc/</span>sysconfig<span class="regexp">/network‐scrippts/i</span>fcfg‐eth0 <span class="regexp">//</span>永久设置ip </span><br><span class="line">dhclient eth0 <span class="regexp">//</span>启用dhcp模式</span><br><span class="line">service network restart <span class="regexp">//</span>重启网络服务[stop、start]</span><br><span class="line">service iptables stop <span class="regexp">//</span>关闭防火墙，[start]开启，[status]查看状态</span><br><span class="line">hostname  <span class="regexp">//</span>查看主机名</span><br><span class="line">netstat ‐an <span class="regexp">//</span>查看所有端口</span><br><span class="line">lsof ‐i :<span class="number">8080</span> <span class="regexp">//</span>查看具体端口号运行的程序<span class="number">12</span>. </span><br><span class="line">nmap <span class="number">10.1</span>.<span class="number">252.121</span>    <span class="regexp">//</span>扫描端口</span><br></pre></td></tr></table></figure>
+<h1 id="VI底行模式"><a href="#VI底行模式" class="headerlink" title="VI底行模式"></a>VI底行模式</h1><figure class="highlight gams"><table><tr><td class="code"><pre><span class="line">:<span class="keyword">set</span> nu    //显示行号</span><br><span class="line">:<span class="keyword">set</span> <span class="comment">nonu</span>    //不显示行号 </span><br><span class="line">:n    //跳转到指的第<span class="comment">n</span>行</span><br><span class="line">:w <span class="comment">file</span>    //另存为</span><br><span class="line">:n1,n2 <span class="comment">s</span>/string1/<span class="comment">string2</span>/g    <span class="comment">//从n1行到n2行将string1替换为string2</span></span><br><span class="line">:%s/<span class="comment">string1</span>/string2/<span class="comment">g</span>       //将所有行<span class="comment">string1</span>替换为<span class="comment">string2</span>，<span class="comment">%</span>代表所有行，<span class="comment">g</span>表示所有<span class="comment">string1</span>字</span><br><span class="line">:%s+/usr/local/bin+/usr/bin+g    <span class="comment">//替换的字符中含有“/”时，用+来代替/</span></span><br><span class="line">:wq    <span class="comment">//保存并退出</span></span><br><span class="line">:q!    <span class="comment">//强制退出，不保存</span></span><br></pre></td></tr></table></figure>
+<h1 id="VI命令模式"><a href="#VI命令模式" class="headerlink" title="VI命令模式"></a>VI命令模式</h1><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">G      <span class="regexp">//</span>到末行</span><br><span class="line">gg     <span class="regexp">//</span>到首行</span><br><span class="line">dd     <span class="regexp">//</span>删除行</span><br><span class="line">u      <span class="regexp">//</span>撤销</span><br><span class="line">yy     <span class="regexp">//</span>复制一行</span><br><span class="line">nyy    <span class="regexp">//</span>复制n行 </span><br><span class="line">p      <span class="regexp">//</span>粘贴</span><br></pre></td></tr></table></figure>
+<h1 id="nmon性能测试监控工具"><a href="#nmon性能测试监控工具" class="headerlink" title="nmon性能测试监控工具"></a>nmon性能测试监控工具</h1><figure class="highlight haml"><table><tr><td class="code"><pre><span class="line">1、./ nmon -f -t -s 30 -c 180</span><br><span class="line">      -<span class="ruby">f：按标准格式输出文件：&lt;hostname&gt;_YYYYMMDD_HHMM.nmon；</span></span><br><span class="line"><span class="ruby">      -t：输出中包括占用率较高的进程；</span></span><br><span class="line"><span class="ruby">      -s <span class="number">30</span>：每<span class="number">30</span>秒进行一次数据采集</span></span><br><span class="line"><span class="ruby">      -c <span class="number">180</span>：一共采集<span class="number">180</span>次</span></span><br><span class="line"><span class="ruby"><span class="number">2</span>、sort -A test.nmon &gt; test.csv  /<span class="regexp">/通过sort命令可以将nmon结果文件转换为csv文件</span></span></span><br></pre></td></tr></table></figure>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">ctrl+u   <span class="regexp">//</span>从光标处向前批量删除命令串  </span><br><span class="line">ctrl+k  <span class="regexp">//</span>从光标处向后批量删除命令串  </span><br><span class="line">ctrl+a  <span class="regexp">//</span>将光标移动到最前</span><br><span class="line">ctrl+e  <span class="regexp">//</span>将光标移动到最后</span><br><span class="line">rz  <span class="regexp">//</span>运行该命令会弹出一个文件选择窗口，从本地选择文件上传到服务器</span><br><span class="line">sz file <span class="regexp">//</span>将选定的文件file发送到本地机器</span><br><span class="line">vifm、ranger  <span class="regexp">//</span>图形的文件管理操作</span><br><span class="line">dos2unix file  <span class="regexp">//</span>将DOS格式的文本文件转换成UNIX格式</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>资料</category>
+      </categories>
+      <tags>
+        <tag>资料</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Mac OS环境搭建STF</title>
     <url>/blog/2019/08/21/Mac%20OS%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BASTF/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>STF（Smartphone Test Farm）是一个Web应用程序，用于从浏览器中远程调试智能手机，智能手表和其他小工具。<br><a href="https://github.com/openstf/stf">openstf GitHub开源地址</a></p>
@@ -959,29 +982,6 @@
       </categories>
       <tags>
         <tag>设备管理</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux常用命令总结</title>
-    <url>/blog/2019/05/20/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<h1 id="系统信息"><a href="#系统信息" class="headerlink" title="系统信息"></a>系统信息</h1><figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">arch 显示机器的处理器架构(<span class="number">1</span>) </span><br><span class="line">uname -m 显示机器的处理器架构(<span class="number">2</span>) </span><br><span class="line">uname -r 显示正在使用的内核版本 </span><br><span class="line">dmidecode -q 显示硬件系统部件 - (SMBIOS / DMI) </span><br><span class="line">hdparm -i /dev/hda 罗列一个磁盘的架构特性 </span><br><span class="line">hdparm -tT /dev/sda 在磁盘上执行测试性读取操作 </span><br><span class="line">cat /<span class="keyword">proc</span>/cpuinfo 显示CPU<span class="title"> info的信息</span> </span><br><span class="line">cat /<span class="keyword">proc</span>/interrupts 显示中断 </span><br><span class="line">cat /<span class="keyword">proc</span>/meminfo 校验内存使用 </span><br><span class="line">cat /<span class="keyword">proc</span>/swaps 显示哪些swap被使用 </span><br><span class="line">cat /<span class="keyword">proc</span>/version 显示内核的版本 </span><br><span class="line">cat /<span class="keyword">proc</span>/net/dev 显示网络适配器及统计 </span><br><span class="line">cat /<span class="keyword">proc</span>/mounts 显示已加载的文件系统 </span><br><span class="line">lspci -tv 罗列<span class="title"> PCI</span> 设备 </span><br><span class="line">lsusb -tv 显示<span class="title"> USB</span> 设备 </span><br><span class="line">date 显示系统日期 </span><br><span class="line">cal 2007 显示2007年的日历表 </span><br><span class="line">date 041217002007.00 设置日期和时间 - 月日时分年.秒 </span><br><span class="line">clock -w 将时间修改保存到<span class="title"> BIOS</span> </span><br></pre></td></tr></table></figure>
-<h1 id="关机-系统的关机、重启以及登出"><a href="#关机-系统的关机、重启以及登出" class="headerlink" title="关机 (系统的关机、重启以及登出 )"></a>关机 (系统的关机、重启以及登出 )</h1><figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">shutdown</span> -h now 关闭系统(<span class="number">1</span>) </span><br><span class="line"><span class="attribute">init</span> <span class="number">0</span> 关闭系统(<span class="number">2</span>) </span><br><span class="line"><span class="attribute">telinit</span> <span class="number">0</span> 关闭系统(<span class="number">3</span>) </span><br><span class="line"><span class="attribute">shutdown</span> -h hours:minutes &amp; 按预定时间关闭系统 </span><br><span class="line"><span class="attribute">shutdown</span> -c 取消按预定时间关闭系统 </span><br><span class="line"><span class="attribute">shutdown</span> -r now 重启(<span class="number">1</span>) </span><br><span class="line"><span class="attribute">reboot</span> 重启(<span class="number">2</span>) </span><br><span class="line"><span class="attribute">logout</span> 注销 </span><br></pre></td></tr></table></figure>
-<h1 id="文件和目录"><a href="#文件和目录" class="headerlink" title="文件和目录"></a>文件和目录</h1><figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">cd</span> /home 进入 &#x27;/ home&#x27; 目录</span><br><span class="line"><span class="attribute">cd</span> .. 返回上一级目录 </span><br><span class="line"><span class="attribute">cd</span> ../.. 返回上两级目录 </span><br><span class="line"><span class="attribute">cd</span> 进入个人的主目录 </span><br><span class="line"><span class="attribute">cd</span> ~user<span class="number">1</span> 进入个人的主目录 </span><br><span class="line"><span class="attribute">cd</span> - 返回上次所在的目录 </span><br><span class="line"><span class="attribute">pwd</span> 显示工作路径 </span><br><span class="line"><span class="attribute">ls</span> 查看目录中的文件 </span><br><span class="line"><span class="attribute">ls</span> -F 查看目录中的文件 </span><br><span class="line"><span class="attribute">ls</span> -l 显示文件和目录的详细资料 </span><br><span class="line"><span class="attribute">ls</span> -a 显示隐藏文件 </span><br><span class="line"><span class="attribute">ls</span> *[<span class="number">0</span>-<span class="number">9</span>]* 显示包含数字的文件名和目录名 </span><br><span class="line"><span class="attribute">tree</span> 显示文件和目录由根目录开始的树形结构(<span class="number">1</span>) </span><br><span class="line"><span class="attribute">lstree</span> 显示文件和目录由根目录开始的树形结构(<span class="number">2</span>) </span><br><span class="line"><span class="attribute">mkdir</span> dir<span class="number">1</span> 创建一个叫做 &#x27;dir<span class="number">1</span>&#x27; 的目录</span><br><span class="line"><span class="attribute">mkdir</span> dir<span class="number">1</span> dir<span class="number">2</span> 同时创建两个目录 </span><br><span class="line"><span class="attribute">mkdir</span> -p /tmp/dir<span class="number">1</span>/dir<span class="number">2</span> 创建一个目录树 </span><br><span class="line"><span class="attribute">rm</span> -f file<span class="number">1</span> 删除一个叫做 &#x27;file<span class="number">1</span>&#x27; 的文件</span><br><span class="line"><span class="attribute">rmdir</span> dir<span class="number">1</span> 删除一个叫做 &#x27;dir<span class="number">1</span>&#x27; 的目录</span><br><span class="line"><span class="attribute">rm</span> -rf dir<span class="number">1</span> 删除一个叫做 &#x27;dir<span class="number">1</span>&#x27; 的目录并同时删除其内容 </span><br><span class="line"><span class="attribute">rm</span> -rf dir<span class="number">1</span> dir<span class="number">2</span> 同时删除两个目录及它们的内容 </span><br><span class="line"><span class="attribute">mv</span> dir<span class="number">1</span> new_dir 重命名/移动 一个目录 </span><br><span class="line"><span class="attribute">cp</span> file<span class="number">1</span> file<span class="number">2</span> 复制一个文件 </span><br><span class="line"><span class="attribute">cp</span> dir/ * . 复制一个目录下的所有文件到当前工作目录 </span><br><span class="line"><span class="attribute">cp</span> -a /tmp/dir<span class="number">1</span> . 复制一个目录到当前工作目录 </span><br><span class="line"><span class="attribute">cp</span> -a dir<span class="number">1</span> dir<span class="number">2</span> 复制一个目录 </span><br><span class="line"><span class="attribute">ln</span> -s file<span class="number">1</span> lnk<span class="number">1</span> 创建一个指向文件或目录的软链接 </span><br><span class="line"><span class="attribute">ln</span> file<span class="number">1</span> lnk<span class="number">1</span> 创建一个指向文件或目录的物理链接 </span><br><span class="line"><span class="attribute">touch</span> -t <span class="number">0712250000</span> file<span class="number">1</span> 修改一个文件或目录的时间戳 - (YYMMDDhhmm) </span><br></pre></td></tr></table></figure>
-<h1 id="文件搜索"><a href="#文件搜索" class="headerlink" title="文件搜索"></a>文件搜索</h1><figure class="highlight sqf"><table><tr><td class="code"><pre><span class="line"><span class="built_in">find</span> / -<span class="built_in">name</span> file1 从 <span class="string">&#x27;/&#x27;</span> 开始进入根文件系统搜索文件和目录 </span><br><span class="line"><span class="built_in">find</span> / -user user1 搜索属于用户 <span class="string">&#x27;user1&#x27;</span> 的文件和目录 </span><br><span class="line"><span class="built_in">find</span> /home/user1 -<span class="built_in">name</span> \*.bin 在目录 <span class="string">&#x27;/ home/user1&#x27;</span> 中搜索带有<span class="string">&#x27;.bin&#x27;</span> 结尾的文件 </span><br><span class="line"><span class="built_in">find</span> /usr/bin -<span class="built_in">type</span> f -atime +<span class="number">100</span> 搜索在过去<span class="number">100</span>天内未被使用过的执行文件 </span><br><span class="line"><span class="built_in">find</span> /usr/bin -<span class="built_in">type</span> f -mtime -<span class="number">10</span> 搜索在<span class="number">10</span>天内被创建或者修改过的文件 </span><br><span class="line"><span class="built_in">find</span> / -<span class="built_in">name</span> \*.rpm -<span class="built_in">exec</span> chmod <span class="number">755</span> <span class="string">&#x27;&#123;&#125;&#x27;</span> \; 搜索以 <span class="string">&#x27;.rpm&#x27;</span> 结尾的文件并定义其权限 </span><br><span class="line"><span class="built_in">find</span> / -xdev -<span class="built_in">name</span> \*.rpm 搜索以 <span class="string">&#x27;.rpm&#x27;</span> 结尾的文件，忽略光驱、捷盘等可移动设备 </span><br><span class="line">locate \*.ps 寻找以 <span class="string">&#x27;.ps&#x27;</span> 结尾的文件 - 先运行 <span class="string">&#x27;updatedb&#x27;</span> 命令 </span><br><span class="line">whereis <span class="built_in">halt</span> 显示一个二进制文件、源码或man的位置 </span><br><span class="line">which <span class="built_in">halt</span> 显示一个二进制文件或可执行文件的完整路径 </span><br></pre></td></tr></table></figure>
-<h1 id="文件的权限-使用-“-”-设置权限，使用-“-“-用于取消"><a href="#文件的权限-使用-“-”-设置权限，使用-“-“-用于取消" class="headerlink" title="文件的权限 - 使用 “+” 设置权限，使用 “-“ 用于取消"></a>文件的权限 - 使用 “+” 设置权限，使用 “-“ 用于取消</h1><figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">ls -lh 显示权限 </span><br><span class="line">ls /tmp | pr -T5 -W$COLUMNS 将终端划分成<span class="number">5</span>栏显示 </span><br><span class="line">chmod ugo+rwx directory1 设置目录的所有人(u)、群组(g)以及其他人(o)以读（r ）、写(w)和执行(x)的权限 </span><br><span class="line">chmod go-rwx directory1 删除群组(g)与其他人(o)对目录的读写执行权限 </span><br><span class="line">chown user1 file1 改变一个文件的所有人属性 </span><br><span class="line">chown -R user1 directory1 改变一个目录的所有人属性并同时改变改目录下所有文件的属性 </span><br><span class="line">chgrp group1 file1 改变文件的群组 </span><br><span class="line">chown user1:group1 file1 改变一个文件的所有人和群组属性 </span><br><span class="line"><span class="keyword">find</span> / -perm -u+s 罗列一个系统中所有使用了SUID控制的文件 </span><br><span class="line">chmod u+s <span class="regexp">/bin/</span>file1 设置一个二进制文件的 SUID 位 - 运行该文件的用户也被赋予和所有者同样的权限 </span><br><span class="line">chmod u-s <span class="regexp">/bin/</span>file1 禁用一个二进制文件的 SUID位 </span><br><span class="line">chmod g+s <span class="regexp">/home/</span><span class="keyword">public</span> 设置一个目录的SGID 位 - 类似SUID ，不过这是针对目录的 </span><br><span class="line">chmod g-s <span class="regexp">/home/</span><span class="keyword">public</span> 禁用一个目录的 SGID 位 </span><br><span class="line">chmod o+t <span class="regexp">/home/</span><span class="keyword">public</span> 设置一个文件的 STIKY 位 - 只允许合法所有人删除文件 </span><br><span class="line">chmod o-t <span class="regexp">/home/</span><span class="keyword">public</span> 禁用一个目录的 STIKY 位 </span><br></pre></td></tr></table></figure>
-<h1 id="打包和压缩文件"><a href="#打包和压缩文件" class="headerlink" title="打包和压缩文件"></a>打包和压缩文件</h1><figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">bunzip2</span> file<span class="number">1</span>.bz<span class="number">2</span> 解压一个叫做 &#x27;file<span class="number">1</span>.bz<span class="number">2</span>&#x27;的文件 </span><br><span class="line"><span class="attribute">bzip2</span> file<span class="number">1</span> 压缩一个叫做 &#x27;file<span class="number">1</span>&#x27; 的文件 </span><br><span class="line"><span class="attribute">gunzip</span> file<span class="number">1</span>.gz 解压一个叫做 &#x27;file<span class="number">1</span>.gz&#x27;的文件 </span><br><span class="line"><span class="attribute">gzip</span> file<span class="number">1</span> 压缩一个叫做 &#x27;file<span class="number">1</span>&#x27;的文件 </span><br><span class="line"><span class="attribute">gzip</span> -<span class="number">9</span> file<span class="number">1</span> 最大程度压缩 </span><br><span class="line"><span class="attribute">rar</span> a file<span class="number">1</span>.rar test_file 创建一个叫做 &#x27;file<span class="number">1</span>.rar&#x27; 的包 </span><br><span class="line"><span class="attribute">rar</span> a file<span class="number">1</span>.rar file<span class="number">1</span> file<span class="number">2</span> dir<span class="number">1</span> 同时压缩 &#x27;file<span class="number">1</span>&#x27;, &#x27;file<span class="number">2</span>&#x27; 以及目录 &#x27;dir<span class="number">1</span>&#x27; </span><br><span class="line"><span class="attribute">rar</span> x file<span class="number">1</span>.rar 解压rar包 </span><br><span class="line"><span class="attribute">unrar</span> x file<span class="number">1</span>.rar 解压rar包 </span><br><span class="line"><span class="attribute">tar</span> -cvf archive.tar file<span class="number">1</span> 创建一个非压缩的 tarball </span><br><span class="line"><span class="attribute">tar</span> -cvf archive.tar file<span class="number">1</span> file<span class="number">2</span> dir<span class="number">1</span> 创建一个包含了 &#x27;file<span class="number">1</span>&#x27;, &#x27;file<span class="number">2</span>&#x27; 以及 &#x27;dir<span class="number">1</span>&#x27;的档案文件 </span><br><span class="line"><span class="attribute">tar</span> -tf archive.tar 显示一个包中的内容 </span><br><span class="line"><span class="attribute">tar</span> -xvf archive.tar 释放一个包 </span><br><span class="line"><span class="attribute">tar</span> -xvf archive.tar -C /tmp 将压缩包释放到 /tmp目录下 </span><br><span class="line"><span class="attribute">tar</span> -cvfj archive.tar.bz<span class="number">2</span> dir<span class="number">1</span> 创建一个bzip<span class="number">2</span>格式的压缩包 </span><br><span class="line"><span class="attribute">tar</span> -xvfj archive.tar.bz<span class="number">2</span> 解压一个bzip<span class="number">2</span>格式的压缩包 </span><br><span class="line"><span class="attribute">tar</span> -cvfz archive.tar.gz dir<span class="number">1</span> 创建一个gzip格式的压缩包 </span><br><span class="line"><span class="attribute">tar</span> -xvfz archive.tar.gz 解压一个gzip格式的压缩包 </span><br><span class="line"><span class="attribute">zip</span> file<span class="number">1</span>.zip file<span class="number">1</span> 创建一个zip格式的压缩包 </span><br><span class="line"><span class="attribute">zip</span> -r file<span class="number">1</span>.zip file<span class="number">1</span> file<span class="number">2</span> dir<span class="number">1</span> 将几个文件和目录同时压缩成一个zip格式的压缩包 </span><br><span class="line"><span class="attribute">unzip</span> file<span class="number">1</span>.zip 解压一个zip格式压缩包 </span><br></pre></td></tr></table></figure>
-<h1 id="APT-软件工具-Debian-Ubuntu-以及类似系统"><a href="#APT-软件工具-Debian-Ubuntu-以及类似系统" class="headerlink" title="APT 软件工具 (Debian, Ubuntu 以及类似系统)"></a>APT 软件工具 (Debian, Ubuntu 以及类似系统)</h1><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">apt-<span class="builtin-name">get</span> install package_name 安装/更新一个 deb 包 </span><br><span class="line">apt-cdrom install package_name 从光盘安装/更新一个 deb 包 </span><br><span class="line">apt-<span class="builtin-name">get</span> update 升级列表中的软件包 </span><br><span class="line">apt-<span class="builtin-name">get</span><span class="built_in"> upgrade </span>升级所有已安装的软件 </span><br><span class="line">apt-<span class="builtin-name">get</span> <span class="builtin-name">remove</span> package_name 从系统删除一个deb包 </span><br><span class="line">apt-<span class="builtin-name">get</span> check 确认依赖的软件仓库正确 </span><br><span class="line">apt-<span class="builtin-name">get</span> clean 从下载的软件包中清理缓存 </span><br><span class="line">apt-cache search searched-package 返回包含所要搜索字符串的软件包名称 </span><br></pre></td></tr></table></figure>
-<h1 id="查看文件内容"><a href="#查看文件内容" class="headerlink" title="查看文件内容"></a>查看文件内容</h1><figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">cat</span> file<span class="number">1</span> 从第一个字节开始正向查看文件的内容 </span><br><span class="line"><span class="attribute">tac</span> file<span class="number">1</span> 从最后一行开始反向查看一个文件的内容 </span><br><span class="line"><span class="attribute">more</span> file<span class="number">1</span> 查看一个长文件的内容 </span><br><span class="line"><span class="attribute">less</span> file<span class="number">1</span> 类似于 &#x27;more&#x27; 命令，但是它允许在文件中和正向操作一样的反向操作 </span><br><span class="line"><span class="attribute">head</span> -<span class="number">2</span> file<span class="number">1</span> 查看一个文件的前两行 </span><br><span class="line"><span class="attribute">tail</span> -<span class="number">2</span> file<span class="number">1</span> 查看一个文件的最后两行 </span><br><span class="line"><span class="attribute">tail</span> -f /var/log/messages 实时查看被添加到一个文件中的内容 </span><br></pre></td></tr></table></figure>
-<h1 id="网络配置管理"><a href="#网络配置管理" class="headerlink" title="网络配置管理"></a>网络配置管理</h1><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">ifconfig ‐a <span class="regexp">//</span>查ip信息 </span><br><span class="line">ping ‐C <span class="number">4</span> <span class="number">192.168</span>.xxx.xxx <span class="regexp">//</span>ping4次</span><br><span class="line">setup <span class="regexp">//</span>配置ip、防火墙、服务等，需要root用户执行</span><br><span class="line">ifconfig eth0 <span class="number">192.168</span>.<span class="number">1.100</span> netmask <span class="number">255.255</span>.<span class="number">255.0</span> <span class="regexp">//</span>临时设置ip </span><br><span class="line">vi <span class="regexp">/etc/</span>sysconfig<span class="regexp">/network‐scrippts/i</span>fcfg‐eth0 <span class="regexp">//</span>永久设置ip </span><br><span class="line">dhclient eth0 <span class="regexp">//</span>启用dhcp模式</span><br><span class="line">service network restart <span class="regexp">//</span>重启网络服务[stop、start]</span><br><span class="line">service iptables stop <span class="regexp">//</span>关闭防火墙，[start]开启，[status]查看状态</span><br><span class="line">hostname  <span class="regexp">//</span>查看主机名</span><br><span class="line">netstat ‐an <span class="regexp">//</span>查看所有端口</span><br><span class="line">lsof ‐i :<span class="number">8080</span> <span class="regexp">//</span>查看具体端口号运行的程序<span class="number">12</span>. </span><br><span class="line">nmap <span class="number">10.1</span>.<span class="number">252.121</span>    <span class="regexp">//</span>扫描端口</span><br></pre></td></tr></table></figure>
-<h1 id="VI底行模式"><a href="#VI底行模式" class="headerlink" title="VI底行模式"></a>VI底行模式</h1><figure class="highlight gams"><table><tr><td class="code"><pre><span class="line">:<span class="keyword">set</span> nu    //显示行号</span><br><span class="line">:<span class="keyword">set</span> <span class="comment">nonu</span>    //不显示行号 </span><br><span class="line">:n    //跳转到指的第<span class="comment">n</span>行</span><br><span class="line">:w <span class="comment">file</span>    //另存为</span><br><span class="line">:n1,n2 <span class="comment">s</span>/string1/<span class="comment">string2</span>/g    <span class="comment">//从n1行到n2行将string1替换为string2</span></span><br><span class="line">:%s/<span class="comment">string1</span>/string2/<span class="comment">g</span>       //将所有行<span class="comment">string1</span>替换为<span class="comment">string2</span>，<span class="comment">%</span>代表所有行，<span class="comment">g</span>表示所有<span class="comment">string1</span>字</span><br><span class="line">:%s+/usr/local/bin+/usr/bin+g    <span class="comment">//替换的字符中含有“/”时，用+来代替/</span></span><br><span class="line">:wq    <span class="comment">//保存并退出</span></span><br><span class="line">:q!    <span class="comment">//强制退出，不保存</span></span><br></pre></td></tr></table></figure>
-<h1 id="VI命令模式"><a href="#VI命令模式" class="headerlink" title="VI命令模式"></a>VI命令模式</h1><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">G      <span class="regexp">//</span>到末行</span><br><span class="line">gg     <span class="regexp">//</span>到首行</span><br><span class="line">dd     <span class="regexp">//</span>删除行</span><br><span class="line">u      <span class="regexp">//</span>撤销</span><br><span class="line">yy     <span class="regexp">//</span>复制一行</span><br><span class="line">nyy    <span class="regexp">//</span>复制n行 </span><br><span class="line">p      <span class="regexp">//</span>粘贴</span><br></pre></td></tr></table></figure>
-<h1 id="nmon性能测试监控工具"><a href="#nmon性能测试监控工具" class="headerlink" title="nmon性能测试监控工具"></a>nmon性能测试监控工具</h1><figure class="highlight haml"><table><tr><td class="code"><pre><span class="line">1、./ nmon -f -t -s 30 -c 180</span><br><span class="line">      -<span class="ruby">f：按标准格式输出文件：&lt;hostname&gt;_YYYYMMDD_HHMM.nmon；</span></span><br><span class="line"><span class="ruby">      -t：输出中包括占用率较高的进程；</span></span><br><span class="line"><span class="ruby">      -s <span class="number">30</span>：每<span class="number">30</span>秒进行一次数据采集</span></span><br><span class="line"><span class="ruby">      -c <span class="number">180</span>：一共采集<span class="number">180</span>次</span></span><br><span class="line"><span class="ruby"><span class="number">2</span>、sort -A test.nmon &gt; test.csv  /<span class="regexp">/通过sort命令可以将nmon结果文件转换为csv文件</span></span></span><br></pre></td></tr></table></figure>
-<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">ctrl+u   <span class="regexp">//</span>从光标处向前批量删除命令串  </span><br><span class="line">ctrl+k  <span class="regexp">//</span>从光标处向后批量删除命令串  </span><br><span class="line">ctrl+a  <span class="regexp">//</span>将光标移动到最前</span><br><span class="line">ctrl+e  <span class="regexp">//</span>将光标移动到最后</span><br><span class="line">rz  <span class="regexp">//</span>运行该命令会弹出一个文件选择窗口，从本地选择文件上传到服务器</span><br><span class="line">sz file <span class="regexp">//</span>将选定的文件file发送到本地机器</span><br><span class="line">vifm、ranger  <span class="regexp">//</span>图形的文件管理操作</span><br><span class="line">dos2unix file  <span class="regexp">//</span>将DOS格式的文本文件转换成UNIX格式</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>资料</category>
-      </categories>
-      <tags>
-        <tag>资料</tag>
       </tags>
   </entry>
   <entry>
@@ -1157,7 +1157,7 @@
 </ol>
 <p>成功后，终端显示</p>
 <blockquote>
-<p>Your identitification has been saved in /Users/xxx/.ssh/id_rsa.<br>Your public key has been saved in /user/xxx/id_rsa.pub.<br>the key fingerprint is xxxxxxxxxx…….xxxxxxxx <a href="mailto:&#121;&#x6f;&#x75;&#114;&#95;&#101;&#109;&#97;&#105;&#x6c;&#64;&#x65;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#99;&#x6f;&#109;">&#121;&#x6f;&#x75;&#114;&#95;&#101;&#109;&#97;&#105;&#x6c;&#64;&#x65;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#99;&#x6f;&#109;</a><br>The key’s randomart image is:<br>![-w465](Mac电脑用终端生成SSH key 访问自己的Github/15577192525730.jpg)</p>
+<p>Your identitification has been saved in /Users/xxx/.ssh/id_rsa.<br>Your public key has been saved in /user/xxx/id_rsa.pub.<br>the key fingerprint is xxxxxxxxxx…….xxxxxxxx <a href="mailto:&#x79;&#111;&#x75;&#114;&#95;&#101;&#x6d;&#97;&#105;&#108;&#x40;&#101;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#109;">&#x79;&#111;&#x75;&#114;&#95;&#101;&#x6d;&#97;&#105;&#108;&#x40;&#101;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#109;</a><br>The key’s randomart image is:<br>![-w465](Mac电脑用终端生成SSH key 访问自己的Github/15577192525730.jpg)</p>
 </blockquote>
 <h1 id="将SSH密钥添加到ssh-agent"><a href="#将SSH密钥添加到ssh-agent" class="headerlink" title="将SSH密钥添加到ssh-agent"></a>将SSH密钥添加到ssh-agent</h1><ol>
 <li><p>在后台启动ssh-agent</p>
@@ -1167,7 +1167,7 @@
 </ol>
 <p>成功后，中选显示：</p>
 <blockquote>
-<p> Identity added: /Users/xxx/.ssh/id_rsa (<a href="mailto:&#121;&#x6f;&#117;&#114;&#95;&#x65;&#x6d;&#x61;&#105;&#108;&#x40;&#101;&#120;&#x61;&#109;&#x70;&#x6c;&#x65;&#46;&#x63;&#111;&#x6d;">&#121;&#x6f;&#117;&#114;&#95;&#x65;&#x6d;&#x61;&#105;&#108;&#x40;&#101;&#120;&#x61;&#109;&#x70;&#x6c;&#x65;&#46;&#x63;&#111;&#x6d;</a>)</p>
+<p> Identity added: /Users/xxx/.ssh/id_rsa (<a href="mailto:&#121;&#x6f;&#117;&#x72;&#95;&#x65;&#109;&#97;&#x69;&#x6c;&#64;&#x65;&#120;&#x61;&#109;&#x70;&#x6c;&#101;&#x2e;&#99;&#x6f;&#109;">&#121;&#x6f;&#117;&#x72;&#95;&#x65;&#109;&#97;&#x69;&#x6c;&#64;&#x65;&#120;&#x61;&#109;&#x70;&#x6c;&#101;&#x2e;&#99;&#x6f;&#109;</a>)</p>
 </blockquote>
 <h1 id="添加SSH-key-到Github-上"><a href="#添加SSH-key-到Github-上" class="headerlink" title="添加SSH key 到Github 上"></a>添加SSH key 到Github 上</h1><ol>
 <li><p>将SSH密钥复制到剪贴板。</p>
@@ -1617,381 +1617,6 @@
       </tags>
   </entry>
   <entry>
-    <title>item2常用快捷键</title>
-    <url>/blog/2019/05/20/item2%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
-    <content><![CDATA[<h1 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h1><ul>
-<li>新建标签：command + t</li>
-<li>关闭标签：command + w</li>
-<li>切换标签：command + 数字 command + 左右方向键</li>
-<li>切换全屏：command + enter</li>
-<li>查找：command + f</li>
-</ul>
-<h1 id="分屏"><a href="#分屏" class="headerlink" title="分屏"></a>分屏</h1><ul>
-<li>垂直分屏：command + d</li>
-<li>水平分屏：command + shift + d</li>
-<li>切换屏幕：command + option + 方向键 command + [ 或 command + ]</li>
-<li>查看历史命令：command + ;</li>
-<li>查看剪贴板历史：command + shift + h</li>
-</ul>
-<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><ul>
-<li>清除当前行：ctrl + u</li>
-<li>到行首：ctrl + a</li>
-<li>到行尾：ctrl + e</li>
-<li>前进后退：ctrl + f/b (相当于左右方向键)</li>
-<li>上一条命令：ctrl + p</li>
-<li>搜索命令历史：ctrl + r</li>
-<li>删除当前光标的字符：ctrl + d</li>
-<li>删除光标之前的字符：ctrl + h</li>
-<li>删除光标之前的单词：ctrl + w</li>
-<li>删除到文本末尾：ctrl + k</li>
-<li>交换光标处文本：ctrl + t</li>
-<li>清屏1：command + r</li>
-<li>清屏2：ctrl + l</li>
-</ul>
-<h1 id="自带有哪些很实用的功能-快捷键"><a href="#自带有哪些很实用的功能-快捷键" class="headerlink" title="自带有哪些很实用的功能/快捷键"></a>自带有哪些很实用的功能/快捷键</h1><ul>
-<li>⌘ + 数字在各 tab 标签直接来回切换</li>
-<li>选择即复制 + 鼠标中键粘贴，这个很实用</li>
-<li>⌘ + f 所查找的内容会被自动复制</li>
-<li>⌘ + d 横着分屏 / ⌘ + shift + d 竖着分屏</li>
-<li>⌘ + r = clear，而且只是换到新一屏，不会想 clear 一样创建一个空屏</li>
-<li>ctrl + u 清空当前行，无论光标在什么位置</li>
-<li>输入开头命令后 按 ⌘ + ; 会自动列出输入过的命令</li>
-<li>⌘ + shift + h 会列出剪切板历史</li>
-<li>可以在 Preferences &gt; keys 设置全局快捷键调出 iterm，这个也可以用过 Alfred 实现</li>
-</ul>
-<h1 id="我常用的一些快捷键"><a href="#我常用的一些快捷键" class="headerlink" title="我常用的一些快捷键"></a>我常用的一些快捷键</h1><ul>
-<li>⌘ + 1 / 2 左右 tab 之间来回切换，这个在 前面 已经介绍过了</li>
-<li>⌘← / ⌘→ 到一行命令最左边/最右边 ，这个功能同 C+a / C+e</li>
-<li>⌥← / ⌥→ 按单词前移/后移，相当与 C+f / C+b，其实这个功能在Iterm中已经预定义好了，⌥f / ⌥b，看个人习惯了</li>
-</ul>
-<h1 id="设置方法如下"><a href="#设置方法如下" class="headerlink" title="设置方法如下"></a>设置方法如下</h1><p>当然除了这些可以自定义的也不能忘了 linux 下那些好用的组合</p>
-<ul>
-<li>C+a / C+e 这个几乎在哪都可以使用</li>
-<li>C+p / !! 上一条命令</li>
-<li>C+k 从光标处删至命令行尾 (本来 C+u 是删至命令行首，但iterm中是删掉整行)</li>
-<li>C+w A+d 从光标处删至字首/尾</li>
-<li>C+h C+d 删掉光标前后的自负</li>
-<li>C+y 粘贴至光标后</li>
-<li>C+r 搜索命令历史，这个较常用</li>
-</ul>
-<h1 id="选择喜欢的配色方案。"><a href="#选择喜欢的配色方案。" class="headerlink" title="选择喜欢的配色方案。"></a>选择喜欢的配色方案。</h1><p>在Preferences-&gt;Profiles-&gt;Colors的load presets可以选择某个配色方案。也可以自己下载。在网站<a href="http://iterm2colorschemes.com/%EF%BC%8C%E5%87%A0%E4%B9%8E%E5%8F%AF%E4%BB%A5%E6%89%BE%E5%88%B0%E6%89%80%E6%9C%89%E5%8F%AF%E7%94%A8%E7%9A%84%E9%85%8D%E8%89%B2%E6%96%B9%E6%A1%88%E3%80%82">http://iterm2colorschemes.com/，几乎可以找到所有可用的配色方案。</a></p>
-<h1 id="选中即复制"><a href="#选中即复制" class="headerlink" title="选中即复制"></a>选中即复制</h1><p>iterm2有2种好用的选中即复制模式。</p>
-<ul>
-<li>一种是用鼠标，在iterm2中，选中某个路径或者某个词汇，那么，iterm2就自动复制了。</li>
-<li>另一种是无鼠标模式，command+f,弹出iterm2的查找模式，输入要查找并复制的内容的前几个字母，确认找到的是自己的内容之后，输入tab，查找窗口将自动变化内容，并将其复制。如果输入的是shift+tab，则自动将查找内容的左边选中并复制。</li>
-</ul>
-<h1 id="屏幕切割"><a href="#屏幕切割" class="headerlink" title="屏幕切割"></a>屏幕切割</h1><ul>
-<li>command+d：垂直分割；</li>
-<li>command+shift+d：水平分割</li>
-</ul>
-<h1 id="自动完成"><a href="#自动完成" class="headerlink" title="自动完成"></a>自动完成</h1><p>输入打头几个字母，然后输入command+; iterm2将自动列出之前输入过的类似命令。</p>
-<h1 id="剪切历史"><a href="#剪切历史" class="headerlink" title="剪切历史"></a>剪切历史</h1><p>输入command+shift+h，iterm2将自动列出剪切板的历史记录。如果需要将剪切板的历史记录保存到磁盘，在Preferences &gt; General &gt; Save copy/paste history to disk.中设置。</p>
-<h1 id="全屏切换"><a href="#全屏切换" class="headerlink" title="全屏切换"></a>全屏切换</h1><p>command+enter进入与返回全屏模式</p>
-<h1 id="Expose所有Tab"><a href="#Expose所有Tab" class="headerlink" title="Exposé所有Tab"></a>Exposé所有Tab</h1><p>command+option+e,并且可以搜索</p>
-]]></content>
-      <categories>
-        <category>资料</category>
-      </categories>
-      <tags>
-        <tag>备忘</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>libimobiledevice命令</title>
-    <url>/blog/2019/05/21/libimobiledevice%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>A library to communicate with services of Apple iOS devices using native protocols.</p>
-<h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><ul>
-<li><p>打印app列表</p>
-  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">ideviceinstaller -l</span></span><br></pre></td></tr></table></figure></li>
-<li><p>查看当前已连接的设备的UUID</p>
-  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">idevice_id -l</span></span><br></pre></td></tr></table></figure></li>
-<li><p>获取设备信息</p>
-  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">ideviceinfo</span></span><br></pre></td></tr></table></figure></li>
-<li><p>获取设备时间</p>
-  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">idevicedate</span></span><br></pre></td></tr></table></figure></li>
-<li><p>重启设备</p>
-  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">idevicediagnostics restart</span></span><br></pre></td></tr></table></figure></li>
-<li><p>安装ipa包，卸载应用</p>
-  <figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">ideviceinstaller -<span class="selector-tag">i</span> xxx.ipa</span><br><span class="line"><span class="comment">//命令安装一个ipa文件到手机上，如果是企业签名的，非越狱机器也可以直接安装了。</span></span><br><span class="line"></span><br><span class="line">ideviceinstaller -U <span class="selector-attr">[bundleID]</span></span><br><span class="line"><span class="comment">//命令卸载应用，需要知道此应用的bundleID</span></span><br></pre></td></tr></table></figure></li>
-<li><p>查看系统日志</p>
-  <figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">idevicesyslog</span><br><span class="line"><span class="comment">//屏幕上即可看见手机上所有的日志</span></span><br><span class="line"></span><br><span class="line">idevicesyslog &gt;&gt; iphone.<span class="built_in">log</span> <span class="meta">&amp;</span></span><br><span class="line"><span class="comment">//该命令是将日志导入到iphone.log这个文件，并且是在后台执行。</span></span><br><span class="line"><span class="comment">//然后用tail -f和grep查看log</span></span><br><span class="line"></span><br><span class="line">tail -f iphone.<span class="built_in">log</span></span><br><span class="line">tail -f iphone.<span class="built_in">log</span> <span class="string">| grep &#x27;WeChat’  # 查看包含WeChat的行</span></span><br></pre></td></tr></table></figure></li>
-<li><p>截图</p>
-  <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">idevicescreenshot</span><br><span class="line"><span class="regexp">//</span>如果在使用截图的时候出现报错信息，那么就去把相应版本的DeveloperDiskImage的两个文件复制到libimobiledevice文件下面。</span><br><span class="line"></span><br><span class="line">路径：</span><br><span class="line"><span class="regexp">/Applications/</span>Xcode.app<span class="regexp">/Contents/</span>Developer<span class="regexp">/Platforms/i</span>PhoneOS.platform<span class="regexp">/DeviceSupport/</span>对应版本/</span><br><span class="line"></span><br><span class="line">获取版本号命令：</span><br><span class="line">ideviceinfo -k ProductVersion</span><br><span class="line"></span><br><span class="line">安装DeveloperDiskImage命令：</span><br><span class="line">ideviceimagemounter DeveloperDiskImage.dmg</span><br><span class="line"><span class="regexp">//</span>然后就可以正常截图了</span><br></pre></td></tr></table></figure></li>
-<li><p>遇到报错</p>
-  <figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line">解决方法：卸载重装</span><br><span class="line"><span class="keyword">brew </span>uninstall ideviceinstaller</span><br><span class="line"><span class="keyword">brew </span>uninstall libimobiledevice</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>--HEAD libimobiledevice</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>ideviceinstaller</span><br></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
-      <categories>
-        <category>资料</category>
-      </categories>
-      <tags>
-        <tag>资料</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用 mitmproxy + python 实现移动端异常数据测试</title>
-    <url>/blog/2020/08/31/%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<p><a href="https://github.com/mitmproxy/mitmproxy">mitmproxy github地址（Man-in-the-middle attack）</a></p>
-<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>Crash率是衡量一个App好坏的重要指标之一，如果你忽略了它的存在，它就会愈演愈烈<br>客户端的很大一部分的Crash是因为API返回的脏数据。比如当API返回空值、空数组或返回不是约定类型的数据，App收到这些数据，就极有可能发生空指针、数组越界和类型转换错误等Crash。而且这样的脏数据，特别容易引起线上大面积的崩溃。</p>
-<h1 id="异常数据测试方法"><a href="#异常数据测试方法" class="headerlink" title="异常数据测试方法"></a>异常数据测试方法</h1><p>手工测试时，借助charles等抓包工具，对返回结果拦截修改数据，再进行数据的maplocal</p>
-<h2 id="异常数据修改规则"><a href="#异常数据修改规则" class="headerlink" title="异常数据修改规则"></a>异常数据修改规则</h2><p>字符：非法字符、超长、null<br>数组：空数组、非法序列<br>接口超时：5s、10s<br>接口状态码：404、500、503<br>增加删除数据：数组、字典</p>
-<h1 id="mitmproxy是什么"><a href="#mitmproxy是什么" class="headerlink" title="mitmproxy是什么"></a>mitmproxy是什么</h1><p>顾名思义，mitmproxy 就是用于 MITM 的 proxy，MITM 即中间人攻击（Man-in-the-middle attack）。<br>    <img src="%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/mitmproxy.png" alt="mitmproxy"><br>    mitmproxy是一个支持HTTP和HTTPS的抓包程序，有类似Fiddler、Charles的功能，只不过它是一个控制台的形式操作。mitmproxy还有两个关联组件。一个是mitmdump，它是mitmproxy的命令行接口，利用它我们可以对接Python脚本，用Python实现监听后的处理。另一个是mitmweb，它是一个Web程序，通过它我们可以清楚观察mitmproxy捕获的请求。</p>
-<h2 id="mitmproxy有如下几项功能"><a href="#mitmproxy有如下几项功能" class="headerlink" title="mitmproxy有如下几项功能"></a>mitmproxy有如下几项功能</h2><ul>
-<li>拦截HTTP和HTTPS请求和响应。</li>
-<li>保存HTTP会话并进行分析。</li>
-<li>模拟客户端发起请求，模拟服务端返回响应。</li>
-<li>利用反向代理将流量转发给指定的服务器。</li>
-<li>支持Mac和Linux上的透明代理。</li>
-<li>利用Python对HTTP请求和响应进行实时处理。</li>
-</ul>
-<h1 id="安装mitmproxy"><a href="#安装mitmproxy" class="headerlink" title="安装mitmproxy"></a>安装mitmproxy</h1><p><code>brew install mitmproxy</code><br>安装完成后，系统将拥有 mitmproxy、mitmdump、mitmweb 三个命令<br>验证安装成功<br><code>mitmdump --version</code><br>应当可以看到类似于这样的输出：</p>
-<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">Mitmproxy</span>: <span class="number">5</span>.<span class="number">2</span></span><br><span class="line"><span class="attribute">Python</span>:    <span class="number">3</span>.<span class="number">7</span>.<span class="number">7</span></span><br><span class="line"><span class="attribute">OpenSSL</span>:   OpenSSL <span class="number">1</span>.<span class="number">1</span>.<span class="number">1</span>g  <span class="number">21</span> Apr <span class="number">2020</span></span><br><span class="line"><span class="attribute">Platform</span>:  Darwin-<span class="number">19</span>.<span class="number">6</span>.<span class="number">0</span>-x<span class="number">86</span>_<span class="number">64</span>-i<span class="number">386</span>-<span class="number">64</span>bit</span><br></pre></td></tr></table></figure>
-<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>要启动 mitmproxy 用 <code>mitmproxy</code>、<code>mitmdump</code>、<code>mitmweb</code> 这三个命令中的任意一个即可，这三个命令功能一致，且都可以加载自定义脚本，唯一的区别是交互界面的不同。<br>mitmproxy 命令启动后，会提供一个命令行界面，用户可以实时看到发生的请求，并通过命令过滤请求，查看请求数据。形如：<br>启动 mitmproxy：<br><code>mitmweb</code><br>应当看到如下输出：</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">Web server listening at http:<span class="regexp">//</span><span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">8081</span>/</span><br><span class="line">Proxy server listening at http:<span class="regexp">//</span>*:<span class="number">8080</span></span><br></pre></td></tr></table></figure>
-<h1 id="设置代理-https证书安装"><a href="#设置代理-https证书安装" class="headerlink" title="设置代理+https证书安装"></a>设置代理+https证书安装</h1><p>移动设备和电脑保存在一个wifi网络下，在移动设备在网络代理填写：电脑ip+8080(端口)<br>在浏览器输入:<code>mitm.it</code>，选择对应设备类型安装证书</p>
-<h1 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h1><p>完成了上述工作，我们已经具备了操作 mitmproxy 的基本能力 了。接下来开始开发自定义脚本，这才是 mitmproxy 真正强大的地方。<br>脚本的编写需要遵循 mitmproxy 规定的套路，这样的套路有两个，使用时选其中一个套路即可。<br>##第一个套路<br>编写一个 py 文件供 mitmproxy 加载，文件中定义了若干函数，这些函数实现了某些 mitmproxy 提供的事件，mitmproxy 会在某个事件发生时调用对应的函数，形如：</p>
-<figure class="highlight livecodeserver"><table><tr><td class="code"><pre><span class="line"><span class="built_in">from</span> mitmproxy import <span class="keyword">http</span></span><br><span class="line"><span class="built_in">from</span> mitmproxy import ctx</span><br><span class="line"></span><br><span class="line"><span class="built_in">num</span> = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def request(flow: <span class="keyword">http</span>.HTTPFlow):</span><br><span class="line">    <span class="built_in">global</span> <span class="built_in">num</span></span><br><span class="line">    <span class="built_in">num</span> = <span class="built_in">num</span> + <span class="number">1</span></span><br><span class="line">    ctx.<span class="built_in">log</span>.info(<span class="string">&quot;We&#x27;ve seen %d flows&quot;</span> % <span class="built_in">num</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="第二个套路"><a href="#第二个套路" class="headerlink" title="第二个套路"></a>第二个套路</h2><p>编写一个 py 文件供 mitmproxy 加载，文件定义了变量 addons，addons 是个数组，每个元素是一个类实例，这些类有若干方法，这些方法实现了某些 mitmproxy 提供的事件，mitmproxy 会在某个事件发生时调用对应的方法。这些类，称为一个个 addon，比如一个叫 Counter 的 addon：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> mitmproxy <span class="keyword">import</span> http</span><br><span class="line"><span class="keyword">from</span> mitmproxy <span class="keyword">import</span> ctx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.num = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">request</span>(<span class="params">self, flow: http.HTTPFlow</span>):</span></span><br><span class="line">        self.num = self.num + <span class="number">1</span></span><br><span class="line">        ctx.log.info(<span class="string">&quot;We&#x27;ve seen %d flows&quot;</span> % self.num)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">addons = [</span><br><span class="line">    Counter()</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<h2 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h2><p>这里强烈建议使用第二种套路，这也是官方内置的一些 addon 的实现方式。</p>
-<p>我们将上面第二种套路的示例代码存为 addons.py，再重新启动 mitmproxy：</p>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">mitmweb</span> -s addons.py</span><br></pre></td></tr></table></figure>
-<p>这个脚本是当 request 发生时，计数器加一，并打印日志。这里对应的是 request 事件</p>
-<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>事件针对不同生命周期分为 5 类：HTTP 生命周期、 TCP 生命周期、Websocket 生命周期、网络连接生命周期、通用生命周期</p>
-<p>这里我们只介绍HTTP 生命周期的事件：<br><code>def http_connect(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 收到了来自客户端的 HTTP CONNECT 请求。在 flow 上设置非 2xx 响应将返回该响应并断开连接。CONNECT 不是常用的 HTTP 请求方法，目的是与服务器建立代理连接，仅是 client 与 proxy 的之间的交流，所以 CONNECT 请求不会触发 request、response 等其他常规的 HTTP 事件。</p>
-<p><code>def requestheaders(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自客户端的 HTTP 请求的头部被成功读取。此时 flow 中的 request 的 body 是空的。</p>
-<p><code>def request(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自客户端的 HTTP 请求被成功完整读取。</p>
-<p><code>def responseheaders(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自服务端的 HTTP 响应的头部被成功读取。此时 flow 中的 response 的 body 是空的。</p>
-<p><code>def response(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自服务端端的 HTTP 响应被成功完整读取。</p>
-<p><code>def error(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 发生了一个 HTTP 错误。比如无效的服务端响应、连接断开等。注意与“有效的 HTTP 错误返回”不是一回事，后者是一个正确的服务端响应，只是 HTTP code 表示错误而已。</p>
-<p>大多数情况下我们只会用到针对 HTTP 生命周期的几个事件。再精简一点，甚至只需要用到 http_connect、request、response 三个事件就能完成大多数需求了。</p>
-<h2 id="脚本示例"><a href="#脚本示例" class="headerlink" title="脚本示例"></a>脚本示例</h2><figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">&quot;&quot;&quot;</span><br><span class="line">拦截请求的request</span><br><span class="line">拦截返回的response</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> mitmproxy <span class="keyword">import</span> http</span><br><span class="line"></span><br><span class="line">def request(flow: http.HTTPFlow):</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== intercept request start ==========================&quot;)</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== host is:&#123;&#125; ========================== &quot;.format(flow.request.host))</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== url is:&#123;&#125; ========================== &quot;.format(flow.request.url))</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== method is:&#123;&#125; ========================== &quot;.format(flow.request.<span class="keyword">method</span>))</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== intercept request end ==========================\n\n\n&quot;)</span><br><span class="line"></span><br><span class="line">def response(flow: http.HTTPFlow):</span><br><span class="line">        code = flow.response.status_code</span><br></pre></td></tr></table></figure>
-<h2 id="常用Api有"><a href="#常用Api有" class="headerlink" title="常用Api有"></a>常用Api有</h2><h3 id="request"><a href="#request" class="headerlink" title="request"></a>request</h3><figure class="highlight vbscript"><table><tr><td class="code"><pre><span class="line">flow.<span class="built_in">request</span>.headers # 获取所有头信息，包含Host、User-Agent、Content-type等字段</span><br><span class="line">flow.<span class="built_in">request</span>.url # 完整的请求地址，包含域名及请求参数，但是不包含放在body里面的请求参数</span><br><span class="line">flow.<span class="built_in">request</span>.pretty_url # 同flow.<span class="built_in">request</span>.url目前没看出什么差别</span><br><span class="line">flow.<span class="built_in">request</span>.host # 域名</span><br><span class="line">flow.<span class="built_in">request</span>.method # 请求方式。POST、<span class="keyword">GET</span>等</span><br><span class="line">flow.<span class="built_in">request</span>.scheme # 什么请求 ，如https</span><br><span class="line">flow.<span class="built_in">request</span>.path # 请求的路径，url除域名之外的内容</span><br><span class="line">flow.<span class="built_in">request</span>.get_text() # 请求中body内容，有一些http会把请求参数放在body里面，那么可通过此方法获取，返回字典类型</span><br><span class="line">flow.<span class="built_in">request</span>.query # 返回MultiDictView类型的数据，url直接带的键值参数</span><br><span class="line">flow.<span class="built_in">request</span>.get_content() # bytes,结果如flow.<span class="built_in">request</span>.get_text()</span><br><span class="line">flow.<span class="built_in">request</span>.raw_content # bytes,结果如flow.<span class="built_in">request</span>.get_content()</span><br><span class="line">flow.<span class="built_in">request</span>.urlencoded_form # MultiDictView，content-type：application/x-www-form-urlencoded时的请求参数，不包含url直接带的键值参数</span><br><span class="line">flow.<span class="built_in">request</span>.multipart_form # MultiDictView，content-type：multipart/form-data时的请求参数，不包含url直接带的键值参数</span><br></pre></td></tr></table></figure>
-<h3 id="response"><a href="#response" class="headerlink" title="response"></a>response</h3><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">flow<span class="selector-class">.response</span><span class="selector-class">.status_code</span> #状态码</span><br><span class="line">flow<span class="selector-class">.response</span>.text#返回内容，已解码</span><br><span class="line">flow<span class="selector-class">.response</span><span class="selector-class">.content</span> #返回内容，二进制</span><br><span class="line">flow<span class="selector-class">.response</span><span class="selector-class">.setText</span>()#修改返回内容，不需要转码</span><br></pre></td></tr></table></figure>
-
-<h1 id="设计流程"><a href="#设计流程" class="headerlink" title="设计流程"></a>设计流程</h1><p>在上面提到可以拦截request和response,那么就可以对response数据做修改，再返回修改后的数据.<br>基于上面提到修改数据规则，随机多拦截数据做随机修改.<br>保存修改前和修改后的数据，方便数据diff.<br><img src="%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/%E8%AE%BE%E8%AE%A1%E6%B5%81%E7%A8%8B.jpg" alt="设计流程"></p>
-]]></content>
-      <categories>
-        <category>移动性能</category>
-      </categories>
-      <tags>
-        <tag>移动性能</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>云储存选择做Hexo博客图床（腾讯云、七牛云、网易云）</title>
-    <url>/blog/2019/05/23/%E4%BA%91%E5%82%A8%E5%AD%98%E9%80%89%E6%8B%A9%E5%81%9AHexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%EF%BC%88%E8%85%BE%E8%AE%AF%E4%BA%91%E3%80%81%E4%B8%83%E7%89%9B%E4%BA%91%E3%80%81%E7%BD%91%E6%98%93%E4%BA%91%EF%BC%89/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>博客里需要添加很多图片作为内容的补充，但是把图片放在本地博客文件夹里，上传到网上后，加载这些图片就是一个很大的问题，他们会拖累网页加载的速度，所以建议把图片放图床里，通过外链来访问和加载这些图片。</p>
-<h1 id="云对象储存服务商"><a href="#云对象储存服务商" class="headerlink" title="云对象储存服务商"></a>云对象储存服务商</h1><p>国内免费的云对象储存的服务商(网易云、七牛云、腾讯云)</p>
-<h2 id="1-网易云"><a href="#1-网易云" class="headerlink" title="1.网易云"></a>1.网易云</h2><p>官网：<a href="https://www.163yun.com/">https://www.163yun.com/</a></p>
-<p>网易NOS（Netease Object Storage）网易对象存储为你提供基于互联网的数据存取服务，通过使用 NOS，你可以随时通过网络将你的文本、图片、音视频等各类文件存储到 NOS 系统中，并随时可以通过网络进行安全访问。</p>
-<p>NOS 对象存储从三个维度进行计量收费：存储容量、流量、接口调用次数。存储容量0-50 GB是免费，下载流量在0-20 GB免费，每月前 10 万次 Put 请求免费，每月前 100 万次 Get 请求免费。</p>
-<h2 id="2-七牛云"><a href="#2-七牛云" class="headerlink" title="2.七牛云"></a>2.七牛云</h2><p>官网：<a href="https://www.qiniu.com/">https://www.qiniu.com/</a></p>
-<p>七牛云存储提供云存储、云处理、云加速分发一站式服务，注册成为标准用户后可获得10GB免费存储空间、每月10GB下载流量、每月10万次Put请求、每月100万次Get请求。</p>
-<p>缺点：<br>临时域名仅有三个月，三个月后没有自己的备案域名，所有图片均会失效</p>
-<h2 id="3-腾讯云"><a href="#3-腾讯云" class="headerlink" title="3.腾讯云"></a>3.腾讯云</h2><p>官网：<a href="https://cloud.tencent.com/">https://cloud.tencent.com/</a></p>
-<p>腾讯云对象存储服务COS，全称为Cloud Object Service，主要是为开发者提供安全、稳定、高效、实惠的对象存储服务，开发者可以将任意动态、静态生成的数据，存放到COS上，再通过HTTP的方式进行访问。</p>
-<p>缺点：<br>自2019年后新建用户可以领取一个6月有效期，50G的存储量。6月过后，按照存储量和流量收费。</p>
-<h1 id="在线图床选择"><a href="#在线图床选择" class="headerlink" title="在线图床选择"></a>在线图床选择</h1><p><a href="https://sm.ms/">https://sm.ms</a> SM图床</p>
-<p><a href="https://tu.aixinxi.net/">https://tu.aixinxi.net/</a> 爱信息图床</p>
-<p><a href="https://imgchr.com/">https://imgchr.com/</a> 路过图床</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>云储存选择<code>网易云</code>，因为网易云对新用户的限制，免费的云储存有待选择</p>
-<p>图床选择<code>路过图床</code></p>
-<p>目前还在用路过图床，缺点是图片链接不能看到任何图片名称等图片信息，不方便插入在博客里</p>
-]]></content>
-      <categories>
-        <category>Hexo Next</category>
-      </categories>
-      <tags>
-        <tag>Hexo Next</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>（Mac）Android自动打包（Jenkins+Gradle+pgy）</title>
-    <url>/blog/2019/05/21/%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/</url>
-    <content><![CDATA[<h1 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h1><h2 id="配置Android-ADB环境"><a href="#配置Android-ADB环境" class="headerlink" title="配置Android ADB环境"></a>配置Android ADB环境</h2><p>关于Android整个开发环境的搭建，SDK的下载安装这里就不赘述了，配置adb环境可以参考、</p>
-<p>这里查看adb是否配置成功可以在终端输入</p>
-<figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">adb <span class="built_in">version</span></span><br></pre></td></tr></table></figure>
-<p>显示以下信息则证明配置成功</p>
-<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">Android</span> Debug Bridge version <span class="number">1</span>.<span class="number">0</span>.<span class="number">41</span></span><br><span class="line"><span class="attribute">Version</span> <span class="number">28</span>.<span class="number">0</span>.<span class="number">3</span>-<span class="number">5475833</span></span><br><span class="line"><span class="attribute">Installed</span> as /Users/vic/Library/Android/sdk/platform-tools/adb</span><br></pre></td></tr></table></figure>
-
-<h2 id="配置Gradle环境"><a href="#配置Gradle环境" class="headerlink" title="配置Gradle环境"></a>配置Gradle环境</h2><p>配置gradle环境可以看一下我之前写的这篇文章Mac 配置gradle环境变量.</p>
-<p>这里查看gradle是否配置成功可以在终端输入</p>
-<figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">gradle -<span class="built_in">version</span></span><br></pre></td></tr></table></figure>
-<p>显示如下信息则表示配置成功<br><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578015087253.jpg" alt="-w547"></p>
-<h1 id="下载安装Jenkins"><a href="#下载安装Jenkins" class="headerlink" title="下载安装Jenkins"></a>下载安装Jenkins</h1><p>这里有两种方法可以用。参考<a href="https://vic.kim/2019/05/21/Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/#more">Mac下Jenkins搭建</a></p>
-<h1 id="Jenkins环境变量的配置"><a href="#Jenkins环境变量的配置" class="headerlink" title="Jenkins环境变量的配置"></a>Jenkins环境变量的配置</h1><h2 id="左侧系统管理-gt-系统设置，进入系统设置页面"><a href="#左侧系统管理-gt-系统设置，进入系统设置页面" class="headerlink" title="左侧系统管理-&gt;系统设置，进入系统设置页面"></a>左侧系统管理-&gt;系统设置，进入系统设置页面</h2><p>全局属性下的环境变量，添加键值对<br><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578054807625.jpg" alt="-w1284"></p>
-<h2 id="左侧系统管理-gt-全局工具设置，进入全局工具设置页面"><a href="#左侧系统管理-gt-全局工具设置，进入全局工具设置页面" class="headerlink" title="左侧系统管理-&gt;全局工具设置，进入全局工具设置页面"></a>左侧系统管理-&gt;全局工具设置，进入全局工具设置页面</h2><pre><code>1. JDK
-    JDK installations一栏里面点击Add JDK，Name随便取，不过最好对应好版本号；JAVE_HOME就设置为当前Mac下Java的安装路径。当然也可以设置成自动安装
-</code></pre>
-<p><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578058867250.jpg" alt="-w1268"></p>
-<pre><code>2. Gradle
-    gradle配置：一样名字最好跟着版本号，GRADLE_HOME就设置为gradle的安装目录
-</code></pre>
-<p><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578059009464.jpg" alt="-w1294"></p>
-<h1 id="项目配置"><a href="#项目配置" class="headerlink" title="项目配置"></a>项目配置</h1><h2 id="构建一个自由风格的软件项目"><a href="#构建一个自由风格的软件项目" class="headerlink" title="构建一个自由风格的软件项目"></a>构建一个自由风格的软件项目</h2><p>点击左侧菜单中的新建任务,然后在新的界面输入项目名字,选择构建一个自由风格的软件项目选项完成创建<br><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578064782260.jpg" alt="-w1020"></p>
-<h2 id="项目基本配置"><a href="#项目基本配置" class="headerlink" title="项目基本配置"></a>项目基本配置</h2><p>点击左边的配置，从上到下一共6个tab，我们去一一配置自己想要的功能： </p>
-<h3 id="General"><a href="#General" class="headerlink" title="General"></a>General</h3><ul>
-<li><p>描述里面我们可以写工程简介</p>
-</li>
-<li><p>“This project is parameterized”参数化构建<br><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578155499359.jpg" alt="-w931"></p>
-</li>
-<li><p>“Discard old builds”丢弃旧的仓库<br><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578155286650.jpg" alt="-w920"></p>
-</li>
-</ul>
-<h3 id="源码管理"><a href="#源码管理" class="headerlink" title="源码管理"></a>源码管理</h3><ul>
-<li><p>源码管理，使用github选择git，使用svn选择subversion<br><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578157952790.jpg" alt="-w949"></p>
-</li>
-<li><p>点击add以后，进入选择身份验证的页面，没有ssh key的，选择用户名和密码，有ssh key的选择ssh验证（注意，这里填写的是private key，id_rsa文件中的key，不是id_rsa.pub中的key），填写完成后，点击add即可完成身份验证的添加。然后选择对应的身份验证<br><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578162180467.jpg" alt="-w1250"></p>
-</li>
-<li><p>项目的分支，填写你需要的分支</p>
-</li>
-</ul>
-<h3 id="构建触发器"><a href="#构建触发器" class="headerlink" title="构建触发器"></a>构建触发器</h3><ul>
-<li><p>选择Build periodically，输入：</p>
-<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">H</span> <span class="number">2</span> * * *</span><br></pre></td></tr></table></figure>
-<p>周期性的执行编译任务，强制每天凌晨两点构建一次<br><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578167070841.jpg" alt="-w945"></p>
-</li>
-<li><p>选择Poll SCM，输入</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">H/5 <span class="emphasis">* *</span> <span class="emphasis">* *</span></span><br></pre></td></tr></table></figure>
-<p>表示的就是每5分钟检查一次源码变化。<br><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578168071497.jpg" alt="-w934"></p>
-<blockquote>
-<p>第一个参数代表的是分钟 minute，取值 0<del>59；<br>第二个参数代表的是小时 hour，取值 0</del>23；<br>第三个参数代表的是天 day，取值 1<del>31；<br>第四个参数代表的是月 month，取值 1</del>12；<br>最后一个参数代表的是星期 week，取值 0~7，0 和 7 都是表示星期天。</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="构建环境"><a href="#构建环境" class="headerlink" title="构建环境"></a>构建环境</h3><p>这里可以设置一些项目信息，比如在构建之前删除工作目录，设置构建名称等等。。。（但是我没有设置）</p>
-<h3 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h3><p><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578170815187.jpg" alt="-w299"></p>
-<ul>
-<li><p>增加构建步骤，选择Invoke Gradle script（编译）<br><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578174201446.jpg" alt="-w948"></p>
-<ul>
-<li>Gradle选择你配置的版本</li>
-<li>Task中填写构建执行的语句（注意：不要选择Use Gradle Wrapper），一般要填写“clean assembleRelease”。先clean再build  <figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">clean</span><br><span class="line">assembleReleaseChannels <span class="attribute">-PchannelFile</span>=markets.txt</span><br></pre></td></tr></table></figure></li>
-<li>在Root Build script中输入你想要包生成的位置，在Build File中输入项目的build.gradle的路径。即在Root Build script路径的后边加/build.gradle，可以不输入这两项，项目会有个默认构建地址，具体地址可以再jenkins的系统管理中查看。 </li>
-</ul>
-</li>
-<li><p>继续添加构建步骤，选择“Execute shell”，在command中填入（上传蒲公英）</p>
-  <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">.<span class="regexp">/gitswitch dev/</span>ci</span><br><span class="line">cd Source</span><br><span class="line"></span><br><span class="line">filepath=`pwd`<span class="regexp">/app/</span>build<span class="regexp">/outputs/</span>channels/*pgy*.apk</span><br><span class="line">file=`ls <span class="variable">$filepath</span>`</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$uploadPgy</span> = true ]</span><br><span class="line">then</span><br><span class="line">    curl -F <span class="string">&quot;installType=2&quot;</span> -F <span class="string">&quot;password=alpha&quot;</span> -F <span class="string">&quot;file=@$file&quot;</span> -F <span class="string">&quot;uKey=542e73b113b5908da8b028805bf7e837&quot;</span> -F <span class="string">&quot;_api_key=8e860ee5ba4996f9b19e56c28e07846a&quot;</span> https:<span class="regexp">//</span>qiniu-storage.pgyer.com<span class="regexp">/apiv1/</span>app/upload</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="构建后操作"><a href="#构建后操作" class="headerlink" title="构建后操作"></a>构建后操作</h3><p>Archive the artifacts（归档成品），输入内容</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">**<span class="regexp">/app/</span>build<span class="regexp">/outputs/</span>channels<span class="regexp">/*.apk, **/</span>apk-checker-result.*</span><br></pre></td></tr></table></figure>
-
-<h2 id="上传蒲公英"><a href="#上传蒲公英" class="headerlink" title="上传蒲公英"></a>上传蒲公英</h2><p>增加一个构建步骤，选择Execute shell，在command中填入</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">.<span class="regexp">/gitswitch dev/</span>ci</span><br><span class="line">cd Source</span><br><span class="line"></span><br><span class="line">filepath=`pwd`<span class="regexp">/app/</span>build<span class="regexp">/outputs/</span>channels/*pgy*.apk</span><br><span class="line">file=`ls <span class="variable">$filepath</span>`</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$uploadPgy</span> = true ]</span><br><span class="line">then</span><br><span class="line">    curl -F <span class="string">&quot;installType=2&quot;</span> -F <span class="string">&quot;password=alpha&quot;</span> -F <span class="string">&quot;file=@$file&quot;</span> -F <span class="string">&quot;uKey=542e73b113b5908da8b028805bf7e837&quot;</span> -F <span class="string">&quot;_api_key=8e860ee5ba4996f9b19e56c28e07846a&quot;</span> https:<span class="regexp">//</span>qiniu-storage.pgyer.com<span class="regexp">/apiv1/</span>app/upload</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-<p>蒲公英官方文档地址<a href="https://www.pgyer.com/doc/api#uploadApp">https://www.pgyer.com/doc/api#uploadApp</a></p>
-<h1 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h1><p>构建历史-&gt;控制台输出，可以查看构建日志，根据报错来具体定位问题<br><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578187257664.jpg" alt="-w370"><br><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578188007960.jpg" alt="-w1064"></p>
-]]></content>
-      <categories>
-        <category>Jenkins</category>
-      </categories>
-      <tags>
-        <tag>Jenkins</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>（Mac）iOS自动化打包（Jenkins+fastlane+pgy</title>
-    <url>/blog/2019/05/21/%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-fastlane-pgy/</url>
-    <content><![CDATA[<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p>| 名称 | 版本 |<br>| — | — | — |<br>| macOS | 10.14.4 (18E226) |<br>| Xcode | Version 10.2.1 |<br>| ruby | 2.6.3 |<br>| fastlane  | 2.123.0  |</p>
-<h1 id="Fastlane安装"><a href="#Fastlane安装" class="headerlink" title="Fastlane安装"></a>Fastlane安装</h1><p>Fastlane是一套使用Ruby写的自动化工具集，用于iOS和Android的自动化打包、发布等工作，可以节省大量的时间。<br>安装过程如下</p>
-<h2 id="安装ruby（brew安装最新版）"><a href="#安装ruby（brew安装最新版）" class="headerlink" title="安装ruby（brew安装最新版）"></a>安装ruby（brew安装最新版）</h2><figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"><span class="meta">#直接在终端执行，未安装brew，先安装brew</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">#安装最新的2.6.3</span></span><br><span class="line">brew install ruby   </span><br><span class="line"> </span><br><span class="line"><span class="meta">#安装完根据提示执行</span></span><br><span class="line">echo <span class="string">&#x27;export PATH=&quot;/usr/local/opt/ruby/bin:$PATH&quot;&#x27;</span> &gt;&gt; ~/.zshrc</span><br><span class="line"> </span><br><span class="line"><span class="meta">#退出终端查看ruby版本</span></span><br><span class="line">ruby -v </span><br><span class="line"> </span><br><span class="line"><span class="meta">#检查安装路径</span></span><br><span class="line">which -a ruby</span><br></pre></td></tr></table></figure>
-<h2 id="更改gem源"><a href="#更改gem源" class="headerlink" title="更改gem源"></a>更改gem源</h2><ul>
-<li>更改  <figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">gem sources --<span class="built_in">remove</span> http<span class="variable">s:</span>//rubygems.org/</span><br><span class="line">gem sources --<span class="built_in">add</span> http<span class="variable">s:</span>//gems.<span class="keyword">ruby</span>-china.<span class="keyword">com</span>/</span><br></pre></td></tr></table></figure></li>
-<li>查看   <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">gem sources -l</span></span><br></pre></td></tr></table></figure>
-  如果是以下结果说明正确，如果有其他的请自行百度解决  <figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">*** CURRENT SOURCES ***</span><br><span class="line">http<span class="variable">s:</span>//gems.<span class="keyword">ruby</span>-china.<span class="keyword">com</span>/</span><br></pre></td></tr></table></figure></li>
-<li>安装fastlane  <figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">#安装</span></span><br><span class="line">gem install -n /usr/<span class="keyword">local</span>/bin fastlane -NV</span><br><span class="line"></span><br><span class="line"><span class="comment">#检查是否安装成</span></span><br><span class="line">fastlane <span class="comment">--version</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<blockquote>
-<p>至此，我们已经可以使用fastlane自动化打包了</p>
-</blockquote>
-<h1 id="Fastlane配置"><a href="#Fastlane配置" class="headerlink" title="Fastlane配置"></a>Fastlane配置</h1><h2 id="fastlane-init"><a href="#fastlane-init" class="headerlink" title="fastlane init"></a>fastlane init</h2><p>cd 到工程主目录执行<code>fastlane init </code>我这里选择的是手动配置</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">cd <span class="regexp">/Users/</span>vic<span class="regexp">/.jenkins/</span>workspace/jike-iOS-Fastlan</span><br><span class="line">fastlane init</span><br></pre></td></tr></table></figure>
-<p>会在你项目工程的目录下生成一个fastlane文件夹，里面有Fastlane的配置文件，一个是Appfile文件(保存了苹果开发者的相关信息)，一个是Fastfile文件（运行脚本）</p>
-<h2 id="编辑Fastfile文件（运行脚本）"><a href="#编辑Fastfile文件（运行脚本）" class="headerlink" title="编辑Fastfile文件（运行脚本）"></a>编辑Fastfile文件（运行脚本）</h2><p>有时候一天需要打好几个包，为了区分，我们这里实现一个递增build号的功能。</p>
-<ul>
-<li>定义一个递增build号的函数，添加到Fastfile中  <figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line">def updateProjectBuildNumber</span><br><span class="line"></span><br><span class="line">currentTime = Time.new.strftime(&quot;%Y%m%d&quot;)</span><br><span class="line"><span class="keyword">build</span> = get_build_number()</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">build</span>.<span class="keyword">include</span>?<span class="string">&quot;#&#123;currentTime&#125;.&quot;</span></span><br><span class="line"># =&gt; 为当天版本 计算迭代版本号</span><br><span class="line">lastStr = <span class="keyword">build</span>[<span class="keyword">build</span>.<span class="built_in">length</span><span class="number">-2.</span>.<span class="keyword">build</span>.<span class="built_in">length</span><span class="number">-1</span>]</span><br><span class="line">lastNum = lastStr.to_i</span><br><span class="line">lastNum = lastNum + <span class="number">1</span></span><br><span class="line">lastStr = lastNum.to_s</span><br><span class="line"><span class="keyword">if</span> lastNum &lt; <span class="number">10</span></span><br><span class="line">lastStr = lastStr.<span class="keyword">insert</span>(<span class="number">0</span>,<span class="string">&quot;0&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">build</span> = <span class="string">&quot;#&#123;currentTime&#125;.#&#123;lastStr&#125;&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"># =&gt; 非当天版本 <span class="keyword">build</span> 号重置</span><br><span class="line"><span class="keyword">build</span> = <span class="string">&quot;#&#123;currentTime&#125;.01&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">puts(<span class="string">&quot;*************| 更新build #&#123;build&#125; |*************&quot;</span>)</span><br><span class="line"># =&gt; 更改项目 <span class="keyword">build</span> 号</span><br><span class="line">increment_build_number(</span><br><span class="line">build_number: <span class="string">&quot;#&#123;build&#125;&quot;</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>实现自动打包的完整Fastfile如下:  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 定义fastlane版本号</span></span><br><span class="line">fastlane_version <span class="string">&quot;2.123.0&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义打包平台</span></span><br><span class="line">default_platform <span class="symbol">:ios</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">updateProjectBuildNumber</span></span></span><br><span class="line"></span><br><span class="line">currentTime = Time.new.strftime(<span class="string">&quot;%Y%m%d&quot;</span>)</span><br><span class="line">build = get_build_number()</span><br><span class="line"><span class="keyword">if</span> build.<span class="keyword">include</span>?<span class="string">&quot;<span class="subst">#&#123;currentTime&#125;</span>.&quot;</span></span><br><span class="line"><span class="comment"># =&gt; 为当天版本 计算迭代版本号</span></span><br><span class="line">lastStr = build[build.length-<span class="number">2</span>..build.length-<span class="number">1</span>]</span><br><span class="line">lastNum = lastStr.to_i</span><br><span class="line">lastNum = lastNum + <span class="number">1</span></span><br><span class="line">lastStr = lastNum.to_s</span><br><span class="line"><span class="keyword">if</span> lastNum &lt; <span class="number">10</span></span><br><span class="line">lastStr = lastStr.insert(<span class="number">0</span>,<span class="string">&quot;0&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">build = <span class="string">&quot;<span class="subst">#&#123;currentTime&#125;</span>.<span class="subst">#&#123;lastStr&#125;</span>&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"><span class="comment"># =&gt; 非当天版本 build 号重置</span></span><br><span class="line">build = <span class="string">&quot;<span class="subst">#&#123;currentTime&#125;</span>.01&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">puts(<span class="string">&quot;*************| 更新build <span class="subst">#&#123;build&#125;</span> |*************&quot;</span>)</span><br><span class="line"><span class="comment"># =&gt; 更改项目 build 号</span></span><br><span class="line">increment_build_number(</span><br><span class="line"><span class="symbol">build_number:</span> <span class="string">&quot;<span class="subst">#&#123;build&#125;</span>&quot;</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#指定项目的scheme名称</span></span><br><span class="line">scheme=<span class="string">&quot;Ruguo&quot;</span></span><br><span class="line"><span class="comment">#蒲公英api_key和user_key</span></span><br><span class="line">api_key=<span class="string">&quot;8e860ee5ba4996f9b19e56c28e07846a&quot;</span></span><br><span class="line">user_key=<span class="string">&quot;542e73b113b5908da8b028805bf7e837&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 任务脚本</span></span><br><span class="line">platform <span class="symbol">:ios</span> <span class="keyword">do</span></span><br><span class="line">lane <span class="symbol">:development_build</span> <span class="keyword">do</span><span class="params">|options|</span></span><br><span class="line">branch = options[<span class="symbol">:branch</span>]</span><br><span class="line"></span><br><span class="line">puts <span class="string">&quot;开始打development ipa&quot;</span></span><br><span class="line"></span><br><span class="line">updateProjectBuildNumber <span class="comment">#更改项目build号</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始打包</span></span><br><span class="line">gym(</span><br><span class="line"><span class="comment">#指定需要编译的scheme</span></span><br><span class="line"><span class="symbol">scheme:</span><span class="string">&quot;<span class="subst">#&#123;scheme&#125;</span>&quot;</span>,</span><br><span class="line"><span class="comment">#输出的ipa名称</span></span><br><span class="line"><span class="symbol">output_name:</span><span class="string">&quot;<span class="subst">#&#123;scheme&#125;</span>_<span class="subst">#&#123;get_build_number()&#125;</span>&quot;</span>,</span><br><span class="line"><span class="comment"># 是否清空以前的编译信息 true：是</span></span><br><span class="line"><span class="symbol">clean:</span><span class="literal">true</span>,</span><br><span class="line"><span class="comment"># 指定打包方式，Release 或者 Debug</span></span><br><span class="line"><span class="symbol">configuration:</span><span class="string">&quot;Release&quot;</span>,</span><br><span class="line"><span class="comment"># 指定打包所使用的输出方式，目前支持app-store, package, ad-hoc, enterprise, development</span></span><br><span class="line"><span class="symbol">export_method:</span><span class="string">&quot;development&quot;</span>,</span><br><span class="line"><span class="comment"># 指定输出文件夹</span></span><br><span class="line"><span class="symbol">output_directory:</span><span class="string">&quot;./fastlane/build&quot;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">#puts &quot;开始上传蒲公英&quot;</span></span><br><span class="line"><span class="comment"># 开始上传蒲公英</span></span><br><span class="line"><span class="comment">#pgyer(api_key: &quot;#&#123;api_key&#125;&quot;, user_key: &quot;#&#123;user_key&#125;&quot;, password: &quot;alpha&quot;, install_type: &quot;2&quot;)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-  注意：蒲公英的 api_key 和 user_key，开发者在自己账号下的 账号设置-API信息 中可以找到。打其它类型的包的方法与development类似，可自定义一个新的lane实现。</li>
-</ul>
-<h2 id="自动打包并上传蒲公英，"><a href="#自动打包并上传蒲公英，" class="headerlink" title="自动打包并上传蒲公英，"></a>自动打包并上传蒲公英，</h2><p>在终端输入便会进行自动打包并上传蒲公英了。</p>
-<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">fastlane development_build</span></span><br></pre></td></tr></table></figure>
-<h1 id="Jenkins安装"><a href="#Jenkins安装" class="headerlink" title="Jenkins安装"></a>Jenkins安装</h1><p>下载安装Jenkins。具体安装过程可参考 <a href="https://vic.kim/2019/05/21/Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/">Mac Jenkins搭建</a></p>
-<h1 id="Jenkins配置"><a href="#Jenkins配置" class="headerlink" title="Jenkins配置"></a>Jenkins配置</h1><ul>
-<li><p>点击新建，输入名称，构建一个自由风格的软件项目</p>
-</li>
-<li><p>添加Git仓库地址，可以是HTTP也可以是SSH。点击Add</p>
-</li>
-<li><p>构建，点击“添加构建步骤”，选择Execute shell。<br>  <img src="%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-fastlane-pgy/15584430633082.jpg"></p>
-  <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">export PATH=<span class="regexp">/usr/</span>local/bin:<span class="variable">$PATH</span></span><br><span class="line">fastlane development_build</span><br><span class="line"></span><br><span class="line">filepath=`pwd`fastlane<span class="regexp">/build/</span>Ruguo*.api</span><br><span class="line">file=`ls <span class="variable">$filepath</span>`</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$uploadPgy</span> = true ]</span><br><span class="line">then</span><br><span class="line">    curl -F <span class="string">&quot;installType=2&quot;</span> -F <span class="string">&quot;password=alpha&quot;</span> -F <span class="string">&quot;file=@$file&quot;</span> -F <span class="string">&quot;uKey=542e73b113b5908da8b028805bf7e837&quot;</span> -F <span class="string">&quot;_api_key=8e860ee5ba4996f9b19e56c28e07846a&quot;</span> https:<span class="regexp">//</span>qiniu-storage.pgyer.com<span class="regexp">/apiv1/</span>app/upload</span><br><span class="line">fi</span><br></pre></td></tr></table></figure></li>
-<li><p>添加完成之后保存，点击立即构建</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Jenkins</category>
-      </categories>
-      <tags>
-        <tag>Jenkins</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>（Mac）iOS自动化打包（Jenkins+xcodebuild+fir）</title>
-    <url>/blog/2019/05/21/%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-xcodebuild-fir%EF%BC%89/</url>
-    <content><![CDATA[<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p>| 名称 | 版本 |<br>| — | — | — |<br>| macOS | 10.14.4 (18E226) |<br>| Xcode | Version 10.2.1 |<br>| ruby | 2.6.3 |<br>| fir-cli  | 1.7.1  |</p>
-<h1 id="下载安装Jenkins"><a href="#下载安装Jenkins" class="headerlink" title="下载安装Jenkins"></a>下载安装Jenkins</h1><p><img src="%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-xcodebuild-fir%EF%BC%89/15580614334038.jpg"></p>
-<ul>
-<li>Jenkins是基于Java环境的，所以电脑上必须先安装Java，Jenkins官网（<a href="https://jenkins.io/">https://jenkins.io</a>）</li>
-<li>下载安装Jenkins。具体安装过程可参考 <a href="https://vic.kim/2019/05/21/Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/">Mac Jenkins搭建</a></li>
-<li>安装完成后会自动打开<a href="http://localhost:8080/">http://localhost:8080</a>这个网址，如果没有自动打开可以手动打开。有些教程还有添加<code>Xcode integration</code> 、<code>Keychains and Provisioning Profiles Plugin</code>之类插件的步骤，我们不需要。因为我们是用xcode脚本构建，所以不需要安装任何插件。</li>
-</ul>
-<h1 id="新建任务"><a href="#新建任务" class="headerlink" title="新建任务"></a>新建任务</h1><h2 id="构建一个自由风格的软件项目"><a href="#构建一个自由风格的软件项目" class="headerlink" title="构建一个自由风格的软件项目"></a>构建一个自由风格的软件项目</h2><p>点击左侧菜单中的新建任务,然后在新的界面输入项目名字,选择<code>构建一个自由风格的软件项目</code>选项完成创建<br><img src="%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-xcodebuild-fir%EF%BC%89/15580618394386.jpg"></p>
-<h2 id="填写工程相关介绍"><a href="#填写工程相关介绍" class="headerlink" title="填写工程相关介绍"></a>填写工程相关介绍</h2><p><img src="%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-xcodebuild-fir%EF%BC%89/15580620272901.jpg" alt="-w960"></p>
-<h2 id="源码管理"><a href="#源码管理" class="headerlink" title="源码管理"></a>源码管理</h2><p>  源码管理，使用github选择git<br>  <img src="%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-xcodebuild-fir%EF%BC%89/15580620765523.jpg" alt="-w949"></p>
-<h2 id="构建触发器"><a href="#构建触发器" class="headerlink" title="构建触发器"></a>构建触发器</h2><ul>
-<li>选择Build periodically，输入：  <figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">H</span> <span class="number">2</span> * * *</span><br></pre></td></tr></table></figure>
-周期性的执行编译任务，强制每天凌晨两点构建一次<br><img src="%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-xcodebuild-fir%EF%BC%89/15580621994075.jpg"></li>
-</ul>
-<ul>
-<li><p>选择Poll SCM，输入</p>
-  <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">H/5 <span class="emphasis">* *</span> <span class="emphasis">* *</span></span><br></pre></td></tr></table></figure>
-<p>  表示的就是每5分钟检查一次源码变化。<br> <img src="%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-xcodebuild-fir%EF%BC%89/15580622588816.jpg"></p>
-<blockquote>
-<pre><code>第一个参数代表的是分钟 minute，取值 0~59；
-第二个参数代表的是小时 hour，取值 0~23；
-第三个参数代表的是天 day，取值 1~31；
-第四个参数代表的是月 month，取值 1~12；
-最后一个参数代表的是星期 week，取值 0~7，0 和 7 都是表示星期天。
-</code></pre>
-</blockquote>
-</li>
-</ul>
-<h2 id="构建环境"><a href="#构建环境" class="headerlink" title="构建环境"></a>构建环境</h2><p>  通过<code>xcodebuild</code>脚本的方式构建，这里不用做任何设置。</p>
-<h2 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h2><p>重点来了。<br>点击“添加构建步骤”，选择Execute shell。<br><img src="%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-xcodebuild-fir%EF%BC%89/15580626158656.jpg" alt="-w951"></p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/bin/sh +x</span></span><br><span class="line">xcodebuild clean -workspace <span class="regexp">/Users/</span>vic<span class="regexp">/.jenkins/</span>workspace<span class="regexp">/jike-iOS/</span>Ruguo.xcworkspace \</span><br><span class="line">                 -scheme Ruguo \</span><br><span class="line"></span><br><span class="line">xcodebuild archive -workspace <span class="regexp">/Users/</span>vic<span class="regexp">/.jenkins/</span>workspace<span class="regexp">/jike-iOS/</span>Ruguo.xcworkspace \</span><br><span class="line">                   -scheme Ruguo \</span><br><span class="line">                   -archivePath <span class="string">&quot;$WORKSPACE/Ruguo.xcarchive&quot;</span> \</span><br><span class="line">                   -configuration Debug \</span><br><span class="line"></span><br><span class="line">xcodebuild -exportArchive -archivePath <span class="string">&quot;$WORKSPACE/Ruguo.xcarchive&quot;</span> \</span><br><span class="line">                          -exportPath <span class="string">&quot;$WORKSPACE/Export/Ruguo&quot;</span> \</span><br><span class="line">                          -exportOptionsPlist <span class="string">&quot;$WORKSPACE/ExportOptions.plist&quot;</span> \</span><br><span class="line">                          -configuration Debug \</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">export PATH=<span class="regexp">/usr/</span>local/bin:<span class="variable">$PATH</span></span><br><span class="line"></span><br><span class="line">fir publish <span class="regexp">/Users/</span>vic<span class="regexp">/.jenkins/</span>workspace<span class="regexp">/jike-iOS/</span>Export<span class="regexp">/Ruguo/</span>Ruguo.ipa -T <span class="number">4554</span>bab16fc50b5b8ee20d9663fa64c7 --password=jikebeta</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>说明：<br>-archivePath：.xcarchive文件的存放路径。<br>-exportPath：导出文件的路径。Export文件夹是自己建的。<br>-ExportOptions.plist：这个文件的内容其实是ipa的打包信息。手动archive并export时，这个文件就包含在最终输出的文件夹内，可以copy一份出来使用。<br>-configuration ：默认Debug或Release。<br>这里有个坑要说明一下。archive和ipa文件的导出目录最好位于Jenkins用户下的那个工程中，我之前选择的是导出到当前用户的桌面，结果一直报读写权限的问题。</p>
-<h2 id="上传到fir"><a href="#上传到fir" class="headerlink" title="上传到fir"></a>上传到fir</h2><p>要实现自动上传到fir，要先安装fir-cli<br>fir-cli由ruby实现，所以先安装ruby</p>
-<ul>
-<li><p>安装ruby，<a href="http://www.ruby-lang.org/en/documentation/installation/">ruby官网安装文档</a>（我使用了brew安装）</p>
-  <figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"><span class="meta">#直接在终端执行，未安装brew，先安装brew</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#安装最新的2.6.3</span></span><br><span class="line">brew install ruby   </span><br><span class="line"> </span><br><span class="line"><span class="meta">#安装完根据提示执行</span></span><br><span class="line">echo <span class="string">&#x27;export PATH=&quot;/usr/local/opt/ruby/bin:$PATH&quot;&#x27;</span> &gt;&gt; ~/.zshrc</span><br><span class="line"> </span><br><span class="line"><span class="meta">#退出终端查看ruby版本</span></span><br><span class="line">ruby -v </span><br><span class="line"> </span><br><span class="line"><span class="meta">#检查安装路径</span></span><br><span class="line">which -a ruby</span><br></pre></td></tr></table></figure></li>
-<li><p>安装fir-cli。要实现自动上传到fir，要先安装fir-cli。Github: <a href="https://github.com/FIRHQ/fir-cli">fir-cli</a></p>
-  <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">gem install -n <span class="regexp">/usr/</span>local/bin fir-cli </span><br></pre></td></tr></table></figure></li>
-<li><p>fir token查看方法：<br><img src="%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-xcodebuild-fir%EF%BC%89/15580629118728.jpg" alt="-w459"></p>
-</li>
-<li><p>脚本</p>
-  <figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">fir</span> publish /Users/vic/.jenkins/workspace/jike-iOS/Export/Ruguo/Ruguo.ipa -T <span class="number">4554</span>bab<span class="number">16</span>fc<span class="number">50</span>b<span class="number">5</span>b<span class="number">8</span>ee<span class="number">20</span>d<span class="number">9663</span>fa<span class="number">64</span>c<span class="number">7</span> --password=jikebeta</span><br></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Jenkins</category>
-      </categories>
-      <tags>
-        <tag>Jenkins</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>iOS设备型号名称对应表</title>
     <url>/blog/2021/03/18/iOS%E8%AE%BE%E5%A4%87%E5%9E%8B%E5%8F%B7%E5%90%8D%E7%A7%B0%E5%AF%B9%E5%BA%94%E8%A1%A8/</url>
     <content><![CDATA[<table>
@@ -2154,6 +1779,381 @@
       </categories>
       <tags>
         <tag>资料</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>item2常用快捷键</title>
+    <url>/blog/2019/05/20/item2%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
+    <content><![CDATA[<h1 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h1><ul>
+<li>新建标签：command + t</li>
+<li>关闭标签：command + w</li>
+<li>切换标签：command + 数字 command + 左右方向键</li>
+<li>切换全屏：command + enter</li>
+<li>查找：command + f</li>
+</ul>
+<h1 id="分屏"><a href="#分屏" class="headerlink" title="分屏"></a>分屏</h1><ul>
+<li>垂直分屏：command + d</li>
+<li>水平分屏：command + shift + d</li>
+<li>切换屏幕：command + option + 方向键 command + [ 或 command + ]</li>
+<li>查看历史命令：command + ;</li>
+<li>查看剪贴板历史：command + shift + h</li>
+</ul>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><ul>
+<li>清除当前行：ctrl + u</li>
+<li>到行首：ctrl + a</li>
+<li>到行尾：ctrl + e</li>
+<li>前进后退：ctrl + f/b (相当于左右方向键)</li>
+<li>上一条命令：ctrl + p</li>
+<li>搜索命令历史：ctrl + r</li>
+<li>删除当前光标的字符：ctrl + d</li>
+<li>删除光标之前的字符：ctrl + h</li>
+<li>删除光标之前的单词：ctrl + w</li>
+<li>删除到文本末尾：ctrl + k</li>
+<li>交换光标处文本：ctrl + t</li>
+<li>清屏1：command + r</li>
+<li>清屏2：ctrl + l</li>
+</ul>
+<h1 id="自带有哪些很实用的功能-快捷键"><a href="#自带有哪些很实用的功能-快捷键" class="headerlink" title="自带有哪些很实用的功能/快捷键"></a>自带有哪些很实用的功能/快捷键</h1><ul>
+<li>⌘ + 数字在各 tab 标签直接来回切换</li>
+<li>选择即复制 + 鼠标中键粘贴，这个很实用</li>
+<li>⌘ + f 所查找的内容会被自动复制</li>
+<li>⌘ + d 横着分屏 / ⌘ + shift + d 竖着分屏</li>
+<li>⌘ + r = clear，而且只是换到新一屏，不会想 clear 一样创建一个空屏</li>
+<li>ctrl + u 清空当前行，无论光标在什么位置</li>
+<li>输入开头命令后 按 ⌘ + ; 会自动列出输入过的命令</li>
+<li>⌘ + shift + h 会列出剪切板历史</li>
+<li>可以在 Preferences &gt; keys 设置全局快捷键调出 iterm，这个也可以用过 Alfred 实现</li>
+</ul>
+<h1 id="我常用的一些快捷键"><a href="#我常用的一些快捷键" class="headerlink" title="我常用的一些快捷键"></a>我常用的一些快捷键</h1><ul>
+<li>⌘ + 1 / 2 左右 tab 之间来回切换，这个在 前面 已经介绍过了</li>
+<li>⌘← / ⌘→ 到一行命令最左边/最右边 ，这个功能同 C+a / C+e</li>
+<li>⌥← / ⌥→ 按单词前移/后移，相当与 C+f / C+b，其实这个功能在Iterm中已经预定义好了，⌥f / ⌥b，看个人习惯了</li>
+</ul>
+<h1 id="设置方法如下"><a href="#设置方法如下" class="headerlink" title="设置方法如下"></a>设置方法如下</h1><p>当然除了这些可以自定义的也不能忘了 linux 下那些好用的组合</p>
+<ul>
+<li>C+a / C+e 这个几乎在哪都可以使用</li>
+<li>C+p / !! 上一条命令</li>
+<li>C+k 从光标处删至命令行尾 (本来 C+u 是删至命令行首，但iterm中是删掉整行)</li>
+<li>C+w A+d 从光标处删至字首/尾</li>
+<li>C+h C+d 删掉光标前后的自负</li>
+<li>C+y 粘贴至光标后</li>
+<li>C+r 搜索命令历史，这个较常用</li>
+</ul>
+<h1 id="选择喜欢的配色方案。"><a href="#选择喜欢的配色方案。" class="headerlink" title="选择喜欢的配色方案。"></a>选择喜欢的配色方案。</h1><p>在Preferences-&gt;Profiles-&gt;Colors的load presets可以选择某个配色方案。也可以自己下载。在网站<a href="http://iterm2colorschemes.com/%EF%BC%8C%E5%87%A0%E4%B9%8E%E5%8F%AF%E4%BB%A5%E6%89%BE%E5%88%B0%E6%89%80%E6%9C%89%E5%8F%AF%E7%94%A8%E7%9A%84%E9%85%8D%E8%89%B2%E6%96%B9%E6%A1%88%E3%80%82">http://iterm2colorschemes.com/，几乎可以找到所有可用的配色方案。</a></p>
+<h1 id="选中即复制"><a href="#选中即复制" class="headerlink" title="选中即复制"></a>选中即复制</h1><p>iterm2有2种好用的选中即复制模式。</p>
+<ul>
+<li>一种是用鼠标，在iterm2中，选中某个路径或者某个词汇，那么，iterm2就自动复制了。</li>
+<li>另一种是无鼠标模式，command+f,弹出iterm2的查找模式，输入要查找并复制的内容的前几个字母，确认找到的是自己的内容之后，输入tab，查找窗口将自动变化内容，并将其复制。如果输入的是shift+tab，则自动将查找内容的左边选中并复制。</li>
+</ul>
+<h1 id="屏幕切割"><a href="#屏幕切割" class="headerlink" title="屏幕切割"></a>屏幕切割</h1><ul>
+<li>command+d：垂直分割；</li>
+<li>command+shift+d：水平分割</li>
+</ul>
+<h1 id="自动完成"><a href="#自动完成" class="headerlink" title="自动完成"></a>自动完成</h1><p>输入打头几个字母，然后输入command+; iterm2将自动列出之前输入过的类似命令。</p>
+<h1 id="剪切历史"><a href="#剪切历史" class="headerlink" title="剪切历史"></a>剪切历史</h1><p>输入command+shift+h，iterm2将自动列出剪切板的历史记录。如果需要将剪切板的历史记录保存到磁盘，在Preferences &gt; General &gt; Save copy/paste history to disk.中设置。</p>
+<h1 id="全屏切换"><a href="#全屏切换" class="headerlink" title="全屏切换"></a>全屏切换</h1><p>command+enter进入与返回全屏模式</p>
+<h1 id="Expose所有Tab"><a href="#Expose所有Tab" class="headerlink" title="Exposé所有Tab"></a>Exposé所有Tab</h1><p>command+option+e,并且可以搜索</p>
+]]></content>
+      <categories>
+        <category>资料</category>
+      </categories>
+      <tags>
+        <tag>备忘</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>libimobiledevice命令</title>
+    <url>/blog/2019/05/21/libimobiledevice%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>A library to communicate with services of Apple iOS devices using native protocols.</p>
+<h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><ul>
+<li><p>打印app列表</p>
+  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">ideviceinstaller -l</span></span><br></pre></td></tr></table></figure></li>
+<li><p>查看当前已连接的设备的UUID</p>
+  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">idevice_id -l</span></span><br></pre></td></tr></table></figure></li>
+<li><p>获取设备信息</p>
+  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">ideviceinfo</span></span><br></pre></td></tr></table></figure></li>
+<li><p>获取设备时间</p>
+  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">idevicedate</span></span><br></pre></td></tr></table></figure></li>
+<li><p>重启设备</p>
+  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">idevicediagnostics restart</span></span><br></pre></td></tr></table></figure></li>
+<li><p>安装ipa包，卸载应用</p>
+  <figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">ideviceinstaller -<span class="selector-tag">i</span> xxx.ipa</span><br><span class="line"><span class="comment">//命令安装一个ipa文件到手机上，如果是企业签名的，非越狱机器也可以直接安装了。</span></span><br><span class="line"></span><br><span class="line">ideviceinstaller -U <span class="selector-attr">[bundleID]</span></span><br><span class="line"><span class="comment">//命令卸载应用，需要知道此应用的bundleID</span></span><br></pre></td></tr></table></figure></li>
+<li><p>查看系统日志</p>
+  <figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">idevicesyslog</span><br><span class="line"><span class="comment">//屏幕上即可看见手机上所有的日志</span></span><br><span class="line"></span><br><span class="line">idevicesyslog &gt;&gt; iphone.<span class="built_in">log</span> <span class="meta">&amp;</span></span><br><span class="line"><span class="comment">//该命令是将日志导入到iphone.log这个文件，并且是在后台执行。</span></span><br><span class="line"><span class="comment">//然后用tail -f和grep查看log</span></span><br><span class="line"></span><br><span class="line">tail -f iphone.<span class="built_in">log</span></span><br><span class="line">tail -f iphone.<span class="built_in">log</span> <span class="string">| grep &#x27;WeChat’  # 查看包含WeChat的行</span></span><br></pre></td></tr></table></figure></li>
+<li><p>截图</p>
+  <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">idevicescreenshot</span><br><span class="line"><span class="regexp">//</span>如果在使用截图的时候出现报错信息，那么就去把相应版本的DeveloperDiskImage的两个文件复制到libimobiledevice文件下面。</span><br><span class="line"></span><br><span class="line">路径：</span><br><span class="line"><span class="regexp">/Applications/</span>Xcode.app<span class="regexp">/Contents/</span>Developer<span class="regexp">/Platforms/i</span>PhoneOS.platform<span class="regexp">/DeviceSupport/</span>对应版本/</span><br><span class="line"></span><br><span class="line">获取版本号命令：</span><br><span class="line">ideviceinfo -k ProductVersion</span><br><span class="line"></span><br><span class="line">安装DeveloperDiskImage命令：</span><br><span class="line">ideviceimagemounter DeveloperDiskImage.dmg</span><br><span class="line"><span class="regexp">//</span>然后就可以正常截图了</span><br></pre></td></tr></table></figure></li>
+<li><p>遇到报错</p>
+  <figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line">解决方法：卸载重装</span><br><span class="line"><span class="keyword">brew </span>uninstall ideviceinstaller</span><br><span class="line"><span class="keyword">brew </span>uninstall libimobiledevice</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>--HEAD libimobiledevice</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>ideviceinstaller</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>资料</category>
+      </categories>
+      <tags>
+        <tag>资料</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>云储存选择做Hexo博客图床（腾讯云、七牛云、网易云）</title>
+    <url>/blog/2019/05/23/%E4%BA%91%E5%82%A8%E5%AD%98%E9%80%89%E6%8B%A9%E5%81%9AHexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%EF%BC%88%E8%85%BE%E8%AE%AF%E4%BA%91%E3%80%81%E4%B8%83%E7%89%9B%E4%BA%91%E3%80%81%E7%BD%91%E6%98%93%E4%BA%91%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>博客里需要添加很多图片作为内容的补充，但是把图片放在本地博客文件夹里，上传到网上后，加载这些图片就是一个很大的问题，他们会拖累网页加载的速度，所以建议把图片放图床里，通过外链来访问和加载这些图片。</p>
+<h1 id="云对象储存服务商"><a href="#云对象储存服务商" class="headerlink" title="云对象储存服务商"></a>云对象储存服务商</h1><p>国内免费的云对象储存的服务商(网易云、七牛云、腾讯云)</p>
+<h2 id="1-网易云"><a href="#1-网易云" class="headerlink" title="1.网易云"></a>1.网易云</h2><p>官网：<a href="https://www.163yun.com/">https://www.163yun.com/</a></p>
+<p>网易NOS（Netease Object Storage）网易对象存储为你提供基于互联网的数据存取服务，通过使用 NOS，你可以随时通过网络将你的文本、图片、音视频等各类文件存储到 NOS 系统中，并随时可以通过网络进行安全访问。</p>
+<p>NOS 对象存储从三个维度进行计量收费：存储容量、流量、接口调用次数。存储容量0-50 GB是免费，下载流量在0-20 GB免费，每月前 10 万次 Put 请求免费，每月前 100 万次 Get 请求免费。</p>
+<h2 id="2-七牛云"><a href="#2-七牛云" class="headerlink" title="2.七牛云"></a>2.七牛云</h2><p>官网：<a href="https://www.qiniu.com/">https://www.qiniu.com/</a></p>
+<p>七牛云存储提供云存储、云处理、云加速分发一站式服务，注册成为标准用户后可获得10GB免费存储空间、每月10GB下载流量、每月10万次Put请求、每月100万次Get请求。</p>
+<p>缺点：<br>临时域名仅有三个月，三个月后没有自己的备案域名，所有图片均会失效</p>
+<h2 id="3-腾讯云"><a href="#3-腾讯云" class="headerlink" title="3.腾讯云"></a>3.腾讯云</h2><p>官网：<a href="https://cloud.tencent.com/">https://cloud.tencent.com/</a></p>
+<p>腾讯云对象存储服务COS，全称为Cloud Object Service，主要是为开发者提供安全、稳定、高效、实惠的对象存储服务，开发者可以将任意动态、静态生成的数据，存放到COS上，再通过HTTP的方式进行访问。</p>
+<p>缺点：<br>自2019年后新建用户可以领取一个6月有效期，50G的存储量。6月过后，按照存储量和流量收费。</p>
+<h1 id="在线图床选择"><a href="#在线图床选择" class="headerlink" title="在线图床选择"></a>在线图床选择</h1><p><a href="https://sm.ms/">https://sm.ms</a> SM图床</p>
+<p><a href="https://tu.aixinxi.net/">https://tu.aixinxi.net/</a> 爱信息图床</p>
+<p><a href="https://imgchr.com/">https://imgchr.com/</a> 路过图床</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>云储存选择<code>网易云</code>，因为网易云对新用户的限制，免费的云储存有待选择</p>
+<p>图床选择<code>路过图床</code></p>
+<p>目前还在用路过图床，缺点是图片链接不能看到任何图片名称等图片信息，不方便插入在博客里</p>
+]]></content>
+      <categories>
+        <category>Hexo Next</category>
+      </categories>
+      <tags>
+        <tag>Hexo Next</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 mitmproxy + python 实现移动端异常数据测试</title>
+    <url>/blog/2020/08/31/%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<p><a href="https://github.com/mitmproxy/mitmproxy">mitmproxy github地址（Man-in-the-middle attack）</a></p>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>Crash率是衡量一个App好坏的重要指标之一，如果你忽略了它的存在，它就会愈演愈烈<br>客户端的很大一部分的Crash是因为API返回的脏数据。比如当API返回空值、空数组或返回不是约定类型的数据，App收到这些数据，就极有可能发生空指针、数组越界和类型转换错误等Crash。而且这样的脏数据，特别容易引起线上大面积的崩溃。</p>
+<h1 id="异常数据测试方法"><a href="#异常数据测试方法" class="headerlink" title="异常数据测试方法"></a>异常数据测试方法</h1><p>手工测试时，借助charles等抓包工具，对返回结果拦截修改数据，再进行数据的maplocal</p>
+<h2 id="异常数据修改规则"><a href="#异常数据修改规则" class="headerlink" title="异常数据修改规则"></a>异常数据修改规则</h2><p>字符：非法字符、超长、null<br>数组：空数组、非法序列<br>接口超时：5s、10s<br>接口状态码：404、500、503<br>增加删除数据：数组、字典</p>
+<h1 id="mitmproxy是什么"><a href="#mitmproxy是什么" class="headerlink" title="mitmproxy是什么"></a>mitmproxy是什么</h1><p>顾名思义，mitmproxy 就是用于 MITM 的 proxy，MITM 即中间人攻击（Man-in-the-middle attack）。<br>    <img src="%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/mitmproxy.png" alt="mitmproxy"><br>    mitmproxy是一个支持HTTP和HTTPS的抓包程序，有类似Fiddler、Charles的功能，只不过它是一个控制台的形式操作。mitmproxy还有两个关联组件。一个是mitmdump，它是mitmproxy的命令行接口，利用它我们可以对接Python脚本，用Python实现监听后的处理。另一个是mitmweb，它是一个Web程序，通过它我们可以清楚观察mitmproxy捕获的请求。</p>
+<h2 id="mitmproxy有如下几项功能"><a href="#mitmproxy有如下几项功能" class="headerlink" title="mitmproxy有如下几项功能"></a>mitmproxy有如下几项功能</h2><ul>
+<li>拦截HTTP和HTTPS请求和响应。</li>
+<li>保存HTTP会话并进行分析。</li>
+<li>模拟客户端发起请求，模拟服务端返回响应。</li>
+<li>利用反向代理将流量转发给指定的服务器。</li>
+<li>支持Mac和Linux上的透明代理。</li>
+<li>利用Python对HTTP请求和响应进行实时处理。</li>
+</ul>
+<h1 id="安装mitmproxy"><a href="#安装mitmproxy" class="headerlink" title="安装mitmproxy"></a>安装mitmproxy</h1><p><code>brew install mitmproxy</code><br>安装完成后，系统将拥有 mitmproxy、mitmdump、mitmweb 三个命令<br>验证安装成功<br><code>mitmdump --version</code><br>应当可以看到类似于这样的输出：</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">Mitmproxy</span>: <span class="number">5</span>.<span class="number">2</span></span><br><span class="line"><span class="attribute">Python</span>:    <span class="number">3</span>.<span class="number">7</span>.<span class="number">7</span></span><br><span class="line"><span class="attribute">OpenSSL</span>:   OpenSSL <span class="number">1</span>.<span class="number">1</span>.<span class="number">1</span>g  <span class="number">21</span> Apr <span class="number">2020</span></span><br><span class="line"><span class="attribute">Platform</span>:  Darwin-<span class="number">19</span>.<span class="number">6</span>.<span class="number">0</span>-x<span class="number">86</span>_<span class="number">64</span>-i<span class="number">386</span>-<span class="number">64</span>bit</span><br></pre></td></tr></table></figure>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>要启动 mitmproxy 用 <code>mitmproxy</code>、<code>mitmdump</code>、<code>mitmweb</code> 这三个命令中的任意一个即可，这三个命令功能一致，且都可以加载自定义脚本，唯一的区别是交互界面的不同。<br>mitmproxy 命令启动后，会提供一个命令行界面，用户可以实时看到发生的请求，并通过命令过滤请求，查看请求数据。形如：<br>启动 mitmproxy：<br><code>mitmweb</code><br>应当看到如下输出：</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">Web server listening at http:<span class="regexp">//</span><span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">8081</span>/</span><br><span class="line">Proxy server listening at http:<span class="regexp">//</span>*:<span class="number">8080</span></span><br></pre></td></tr></table></figure>
+<h1 id="设置代理-https证书安装"><a href="#设置代理-https证书安装" class="headerlink" title="设置代理+https证书安装"></a>设置代理+https证书安装</h1><p>移动设备和电脑保存在一个wifi网络下，在移动设备在网络代理填写：电脑ip+8080(端口)<br>在浏览器输入:<code>mitm.it</code>，选择对应设备类型安装证书</p>
+<h1 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h1><p>完成了上述工作，我们已经具备了操作 mitmproxy 的基本能力 了。接下来开始开发自定义脚本，这才是 mitmproxy 真正强大的地方。<br>脚本的编写需要遵循 mitmproxy 规定的套路，这样的套路有两个，使用时选其中一个套路即可。<br>##第一个套路<br>编写一个 py 文件供 mitmproxy 加载，文件中定义了若干函数，这些函数实现了某些 mitmproxy 提供的事件，mitmproxy 会在某个事件发生时调用对应的函数，形如：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="code"><pre><span class="line"><span class="built_in">from</span> mitmproxy import <span class="keyword">http</span></span><br><span class="line"><span class="built_in">from</span> mitmproxy import ctx</span><br><span class="line"></span><br><span class="line"><span class="built_in">num</span> = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def request(flow: <span class="keyword">http</span>.HTTPFlow):</span><br><span class="line">    <span class="built_in">global</span> <span class="built_in">num</span></span><br><span class="line">    <span class="built_in">num</span> = <span class="built_in">num</span> + <span class="number">1</span></span><br><span class="line">    ctx.<span class="built_in">log</span>.info(<span class="string">&quot;We&#x27;ve seen %d flows&quot;</span> % <span class="built_in">num</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="第二个套路"><a href="#第二个套路" class="headerlink" title="第二个套路"></a>第二个套路</h2><p>编写一个 py 文件供 mitmproxy 加载，文件定义了变量 addons，addons 是个数组，每个元素是一个类实例，这些类有若干方法，这些方法实现了某些 mitmproxy 提供的事件，mitmproxy 会在某个事件发生时调用对应的方法。这些类，称为一个个 addon，比如一个叫 Counter 的 addon：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> mitmproxy <span class="keyword">import</span> http</span><br><span class="line"><span class="keyword">from</span> mitmproxy <span class="keyword">import</span> ctx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.num = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">request</span>(<span class="params">self, flow: http.HTTPFlow</span>):</span></span><br><span class="line">        self.num = self.num + <span class="number">1</span></span><br><span class="line">        ctx.log.info(<span class="string">&quot;We&#x27;ve seen %d flows&quot;</span> % self.num)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">addons = [</span><br><span class="line">    Counter()</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h2 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h2><p>这里强烈建议使用第二种套路，这也是官方内置的一些 addon 的实现方式。</p>
+<p>我们将上面第二种套路的示例代码存为 addons.py，再重新启动 mitmproxy：</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">mitmweb</span> -s addons.py</span><br></pre></td></tr></table></figure>
+<p>这个脚本是当 request 发生时，计数器加一，并打印日志。这里对应的是 request 事件</p>
+<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>事件针对不同生命周期分为 5 类：HTTP 生命周期、 TCP 生命周期、Websocket 生命周期、网络连接生命周期、通用生命周期</p>
+<p>这里我们只介绍HTTP 生命周期的事件：<br><code>def http_connect(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 收到了来自客户端的 HTTP CONNECT 请求。在 flow 上设置非 2xx 响应将返回该响应并断开连接。CONNECT 不是常用的 HTTP 请求方法，目的是与服务器建立代理连接，仅是 client 与 proxy 的之间的交流，所以 CONNECT 请求不会触发 request、response 等其他常规的 HTTP 事件。</p>
+<p><code>def requestheaders(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自客户端的 HTTP 请求的头部被成功读取。此时 flow 中的 request 的 body 是空的。</p>
+<p><code>def request(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自客户端的 HTTP 请求被成功完整读取。</p>
+<p><code>def responseheaders(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自服务端的 HTTP 响应的头部被成功读取。此时 flow 中的 response 的 body 是空的。</p>
+<p><code>def response(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自服务端端的 HTTP 响应被成功完整读取。</p>
+<p><code>def error(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 发生了一个 HTTP 错误。比如无效的服务端响应、连接断开等。注意与“有效的 HTTP 错误返回”不是一回事，后者是一个正确的服务端响应，只是 HTTP code 表示错误而已。</p>
+<p>大多数情况下我们只会用到针对 HTTP 生命周期的几个事件。再精简一点，甚至只需要用到 http_connect、request、response 三个事件就能完成大多数需求了。</p>
+<h2 id="脚本示例"><a href="#脚本示例" class="headerlink" title="脚本示例"></a>脚本示例</h2><figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">&quot;&quot;&quot;</span><br><span class="line">拦截请求的request</span><br><span class="line">拦截返回的response</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> mitmproxy <span class="keyword">import</span> http</span><br><span class="line"></span><br><span class="line">def request(flow: http.HTTPFlow):</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== intercept request start ==========================&quot;)</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== host is:&#123;&#125; ========================== &quot;.format(flow.request.host))</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== url is:&#123;&#125; ========================== &quot;.format(flow.request.url))</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== method is:&#123;&#125; ========================== &quot;.format(flow.request.<span class="keyword">method</span>))</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== intercept request end ==========================\n\n\n&quot;)</span><br><span class="line"></span><br><span class="line">def response(flow: http.HTTPFlow):</span><br><span class="line">        code = flow.response.status_code</span><br></pre></td></tr></table></figure>
+<h2 id="常用Api有"><a href="#常用Api有" class="headerlink" title="常用Api有"></a>常用Api有</h2><h3 id="request"><a href="#request" class="headerlink" title="request"></a>request</h3><figure class="highlight vbscript"><table><tr><td class="code"><pre><span class="line">flow.<span class="built_in">request</span>.headers # 获取所有头信息，包含Host、User-Agent、Content-type等字段</span><br><span class="line">flow.<span class="built_in">request</span>.url # 完整的请求地址，包含域名及请求参数，但是不包含放在body里面的请求参数</span><br><span class="line">flow.<span class="built_in">request</span>.pretty_url # 同flow.<span class="built_in">request</span>.url目前没看出什么差别</span><br><span class="line">flow.<span class="built_in">request</span>.host # 域名</span><br><span class="line">flow.<span class="built_in">request</span>.method # 请求方式。POST、<span class="keyword">GET</span>等</span><br><span class="line">flow.<span class="built_in">request</span>.scheme # 什么请求 ，如https</span><br><span class="line">flow.<span class="built_in">request</span>.path # 请求的路径，url除域名之外的内容</span><br><span class="line">flow.<span class="built_in">request</span>.get_text() # 请求中body内容，有一些http会把请求参数放在body里面，那么可通过此方法获取，返回字典类型</span><br><span class="line">flow.<span class="built_in">request</span>.query # 返回MultiDictView类型的数据，url直接带的键值参数</span><br><span class="line">flow.<span class="built_in">request</span>.get_content() # bytes,结果如flow.<span class="built_in">request</span>.get_text()</span><br><span class="line">flow.<span class="built_in">request</span>.raw_content # bytes,结果如flow.<span class="built_in">request</span>.get_content()</span><br><span class="line">flow.<span class="built_in">request</span>.urlencoded_form # MultiDictView，content-type：application/x-www-form-urlencoded时的请求参数，不包含url直接带的键值参数</span><br><span class="line">flow.<span class="built_in">request</span>.multipart_form # MultiDictView，content-type：multipart/form-data时的请求参数，不包含url直接带的键值参数</span><br></pre></td></tr></table></figure>
+<h3 id="response"><a href="#response" class="headerlink" title="response"></a>response</h3><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">flow<span class="selector-class">.response</span><span class="selector-class">.status_code</span> #状态码</span><br><span class="line">flow<span class="selector-class">.response</span>.text#返回内容，已解码</span><br><span class="line">flow<span class="selector-class">.response</span><span class="selector-class">.content</span> #返回内容，二进制</span><br><span class="line">flow<span class="selector-class">.response</span><span class="selector-class">.setText</span>()#修改返回内容，不需要转码</span><br></pre></td></tr></table></figure>
+
+<h1 id="设计流程"><a href="#设计流程" class="headerlink" title="设计流程"></a>设计流程</h1><p>在上面提到可以拦截request和response,那么就可以对response数据做修改，再返回修改后的数据.<br>基于上面提到修改数据规则，随机多拦截数据做随机修改.<br>保存修改前和修改后的数据，方便数据diff.<br><img src="%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/%E8%AE%BE%E8%AE%A1%E6%B5%81%E7%A8%8B.jpg" alt="设计流程"></p>
+]]></content>
+      <categories>
+        <category>移动性能</category>
+      </categories>
+      <tags>
+        <tag>移动性能</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>（Mac）Android自动打包（Jenkins+Gradle+pgy）</title>
+    <url>/blog/2019/05/21/%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h1><h2 id="配置Android-ADB环境"><a href="#配置Android-ADB环境" class="headerlink" title="配置Android ADB环境"></a>配置Android ADB环境</h2><p>关于Android整个开发环境的搭建，SDK的下载安装这里就不赘述了，配置adb环境可以参考、</p>
+<p>这里查看adb是否配置成功可以在终端输入</p>
+<figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">adb <span class="built_in">version</span></span><br></pre></td></tr></table></figure>
+<p>显示以下信息则证明配置成功</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">Android</span> Debug Bridge version <span class="number">1</span>.<span class="number">0</span>.<span class="number">41</span></span><br><span class="line"><span class="attribute">Version</span> <span class="number">28</span>.<span class="number">0</span>.<span class="number">3</span>-<span class="number">5475833</span></span><br><span class="line"><span class="attribute">Installed</span> as /Users/vic/Library/Android/sdk/platform-tools/adb</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置Gradle环境"><a href="#配置Gradle环境" class="headerlink" title="配置Gradle环境"></a>配置Gradle环境</h2><p>配置gradle环境可以看一下我之前写的这篇文章Mac 配置gradle环境变量.</p>
+<p>这里查看gradle是否配置成功可以在终端输入</p>
+<figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">gradle -<span class="built_in">version</span></span><br></pre></td></tr></table></figure>
+<p>显示如下信息则表示配置成功<br><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578015087253.jpg" alt="-w547"></p>
+<h1 id="下载安装Jenkins"><a href="#下载安装Jenkins" class="headerlink" title="下载安装Jenkins"></a>下载安装Jenkins</h1><p>这里有两种方法可以用。参考<a href="https://vic.kim/2019/05/21/Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/#more">Mac下Jenkins搭建</a></p>
+<h1 id="Jenkins环境变量的配置"><a href="#Jenkins环境变量的配置" class="headerlink" title="Jenkins环境变量的配置"></a>Jenkins环境变量的配置</h1><h2 id="左侧系统管理-gt-系统设置，进入系统设置页面"><a href="#左侧系统管理-gt-系统设置，进入系统设置页面" class="headerlink" title="左侧系统管理-&gt;系统设置，进入系统设置页面"></a>左侧系统管理-&gt;系统设置，进入系统设置页面</h2><p>全局属性下的环境变量，添加键值对<br><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578054807625.jpg" alt="-w1284"></p>
+<h2 id="左侧系统管理-gt-全局工具设置，进入全局工具设置页面"><a href="#左侧系统管理-gt-全局工具设置，进入全局工具设置页面" class="headerlink" title="左侧系统管理-&gt;全局工具设置，进入全局工具设置页面"></a>左侧系统管理-&gt;全局工具设置，进入全局工具设置页面</h2><pre><code>1. JDK
+    JDK installations一栏里面点击Add JDK，Name随便取，不过最好对应好版本号；JAVE_HOME就设置为当前Mac下Java的安装路径。当然也可以设置成自动安装
+</code></pre>
+<p><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578058867250.jpg" alt="-w1268"></p>
+<pre><code>2. Gradle
+    gradle配置：一样名字最好跟着版本号，GRADLE_HOME就设置为gradle的安装目录
+</code></pre>
+<p><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578059009464.jpg" alt="-w1294"></p>
+<h1 id="项目配置"><a href="#项目配置" class="headerlink" title="项目配置"></a>项目配置</h1><h2 id="构建一个自由风格的软件项目"><a href="#构建一个自由风格的软件项目" class="headerlink" title="构建一个自由风格的软件项目"></a>构建一个自由风格的软件项目</h2><p>点击左侧菜单中的新建任务,然后在新的界面输入项目名字,选择构建一个自由风格的软件项目选项完成创建<br><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578064782260.jpg" alt="-w1020"></p>
+<h2 id="项目基本配置"><a href="#项目基本配置" class="headerlink" title="项目基本配置"></a>项目基本配置</h2><p>点击左边的配置，从上到下一共6个tab，我们去一一配置自己想要的功能： </p>
+<h3 id="General"><a href="#General" class="headerlink" title="General"></a>General</h3><ul>
+<li><p>描述里面我们可以写工程简介</p>
+</li>
+<li><p>“This project is parameterized”参数化构建<br><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578155499359.jpg" alt="-w931"></p>
+</li>
+<li><p>“Discard old builds”丢弃旧的仓库<br><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578155286650.jpg" alt="-w920"></p>
+</li>
+</ul>
+<h3 id="源码管理"><a href="#源码管理" class="headerlink" title="源码管理"></a>源码管理</h3><ul>
+<li><p>源码管理，使用github选择git，使用svn选择subversion<br><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578157952790.jpg" alt="-w949"></p>
+</li>
+<li><p>点击add以后，进入选择身份验证的页面，没有ssh key的，选择用户名和密码，有ssh key的选择ssh验证（注意，这里填写的是private key，id_rsa文件中的key，不是id_rsa.pub中的key），填写完成后，点击add即可完成身份验证的添加。然后选择对应的身份验证<br><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578162180467.jpg" alt="-w1250"></p>
+</li>
+<li><p>项目的分支，填写你需要的分支</p>
+</li>
+</ul>
+<h3 id="构建触发器"><a href="#构建触发器" class="headerlink" title="构建触发器"></a>构建触发器</h3><ul>
+<li><p>选择Build periodically，输入：</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">H</span> <span class="number">2</span> * * *</span><br></pre></td></tr></table></figure>
+<p>周期性的执行编译任务，强制每天凌晨两点构建一次<br><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578167070841.jpg" alt="-w945"></p>
+</li>
+<li><p>选择Poll SCM，输入</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">H/5 <span class="emphasis">* *</span> <span class="emphasis">* *</span></span><br></pre></td></tr></table></figure>
+<p>表示的就是每5分钟检查一次源码变化。<br><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578168071497.jpg" alt="-w934"></p>
+<blockquote>
+<p>第一个参数代表的是分钟 minute，取值 0<del>59；<br>第二个参数代表的是小时 hour，取值 0</del>23；<br>第三个参数代表的是天 day，取值 1<del>31；<br>第四个参数代表的是月 month，取值 1</del>12；<br>最后一个参数代表的是星期 week，取值 0~7，0 和 7 都是表示星期天。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="构建环境"><a href="#构建环境" class="headerlink" title="构建环境"></a>构建环境</h3><p>这里可以设置一些项目信息，比如在构建之前删除工作目录，设置构建名称等等。。。（但是我没有设置）</p>
+<h3 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h3><p><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578170815187.jpg" alt="-w299"></p>
+<ul>
+<li><p>增加构建步骤，选择Invoke Gradle script（编译）<br><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578174201446.jpg" alt="-w948"></p>
+<ul>
+<li>Gradle选择你配置的版本</li>
+<li>Task中填写构建执行的语句（注意：不要选择Use Gradle Wrapper），一般要填写“clean assembleRelease”。先clean再build  <figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">clean</span><br><span class="line">assembleReleaseChannels <span class="attribute">-PchannelFile</span>=markets.txt</span><br></pre></td></tr></table></figure></li>
+<li>在Root Build script中输入你想要包生成的位置，在Build File中输入项目的build.gradle的路径。即在Root Build script路径的后边加/build.gradle，可以不输入这两项，项目会有个默认构建地址，具体地址可以再jenkins的系统管理中查看。 </li>
+</ul>
+</li>
+<li><p>继续添加构建步骤，选择“Execute shell”，在command中填入（上传蒲公英）</p>
+  <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">.<span class="regexp">/gitswitch dev/</span>ci</span><br><span class="line">cd Source</span><br><span class="line"></span><br><span class="line">filepath=`pwd`<span class="regexp">/app/</span>build<span class="regexp">/outputs/</span>channels/*pgy*.apk</span><br><span class="line">file=`ls <span class="variable">$filepath</span>`</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$uploadPgy</span> = true ]</span><br><span class="line">then</span><br><span class="line">    curl -F <span class="string">&quot;installType=2&quot;</span> -F <span class="string">&quot;password=alpha&quot;</span> -F <span class="string">&quot;file=@$file&quot;</span> -F <span class="string">&quot;uKey=542e73b113b5908da8b028805bf7e837&quot;</span> -F <span class="string">&quot;_api_key=8e860ee5ba4996f9b19e56c28e07846a&quot;</span> https:<span class="regexp">//</span>qiniu-storage.pgyer.com<span class="regexp">/apiv1/</span>app/upload</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="构建后操作"><a href="#构建后操作" class="headerlink" title="构建后操作"></a>构建后操作</h3><p>Archive the artifacts（归档成品），输入内容</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">**<span class="regexp">/app/</span>build<span class="regexp">/outputs/</span>channels<span class="regexp">/*.apk, **/</span>apk-checker-result.*</span><br></pre></td></tr></table></figure>
+
+<h2 id="上传蒲公英"><a href="#上传蒲公英" class="headerlink" title="上传蒲公英"></a>上传蒲公英</h2><p>增加一个构建步骤，选择Execute shell，在command中填入</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">.<span class="regexp">/gitswitch dev/</span>ci</span><br><span class="line">cd Source</span><br><span class="line"></span><br><span class="line">filepath=`pwd`<span class="regexp">/app/</span>build<span class="regexp">/outputs/</span>channels/*pgy*.apk</span><br><span class="line">file=`ls <span class="variable">$filepath</span>`</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$uploadPgy</span> = true ]</span><br><span class="line">then</span><br><span class="line">    curl -F <span class="string">&quot;installType=2&quot;</span> -F <span class="string">&quot;password=alpha&quot;</span> -F <span class="string">&quot;file=@$file&quot;</span> -F <span class="string">&quot;uKey=542e73b113b5908da8b028805bf7e837&quot;</span> -F <span class="string">&quot;_api_key=8e860ee5ba4996f9b19e56c28e07846a&quot;</span> https:<span class="regexp">//</span>qiniu-storage.pgyer.com<span class="regexp">/apiv1/</span>app/upload</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>蒲公英官方文档地址<a href="https://www.pgyer.com/doc/api#uploadApp">https://www.pgyer.com/doc/api#uploadApp</a></p>
+<h1 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h1><p>构建历史-&gt;控制台输出，可以查看构建日志，根据报错来具体定位问题<br><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578187257664.jpg" alt="-w370"><br><img src="%EF%BC%88Mac%EF%BC%89Android%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85%EF%BC%88Jenkins-Gradle-pgy%EF%BC%89/15578188007960.jpg" alt="-w1064"></p>
+]]></content>
+      <categories>
+        <category>Jenkins</category>
+      </categories>
+      <tags>
+        <tag>Jenkins</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>（Mac）iOS自动化打包（Jenkins+xcodebuild+fir）</title>
+    <url>/blog/2019/05/21/%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-xcodebuild-fir%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p>| 名称 | 版本 |<br>| — | — | — |<br>| macOS | 10.14.4 (18E226) |<br>| Xcode | Version 10.2.1 |<br>| ruby | 2.6.3 |<br>| fir-cli  | 1.7.1  |</p>
+<h1 id="下载安装Jenkins"><a href="#下载安装Jenkins" class="headerlink" title="下载安装Jenkins"></a>下载安装Jenkins</h1><p><img src="%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-xcodebuild-fir%EF%BC%89/15580614334038.jpg"></p>
+<ul>
+<li>Jenkins是基于Java环境的，所以电脑上必须先安装Java，Jenkins官网（<a href="https://jenkins.io/">https://jenkins.io</a>）</li>
+<li>下载安装Jenkins。具体安装过程可参考 <a href="https://vic.kim/2019/05/21/Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/">Mac Jenkins搭建</a></li>
+<li>安装完成后会自动打开<a href="http://localhost:8080/">http://localhost:8080</a>这个网址，如果没有自动打开可以手动打开。有些教程还有添加<code>Xcode integration</code> 、<code>Keychains and Provisioning Profiles Plugin</code>之类插件的步骤，我们不需要。因为我们是用xcode脚本构建，所以不需要安装任何插件。</li>
+</ul>
+<h1 id="新建任务"><a href="#新建任务" class="headerlink" title="新建任务"></a>新建任务</h1><h2 id="构建一个自由风格的软件项目"><a href="#构建一个自由风格的软件项目" class="headerlink" title="构建一个自由风格的软件项目"></a>构建一个自由风格的软件项目</h2><p>点击左侧菜单中的新建任务,然后在新的界面输入项目名字,选择<code>构建一个自由风格的软件项目</code>选项完成创建<br><img src="%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-xcodebuild-fir%EF%BC%89/15580618394386.jpg"></p>
+<h2 id="填写工程相关介绍"><a href="#填写工程相关介绍" class="headerlink" title="填写工程相关介绍"></a>填写工程相关介绍</h2><p><img src="%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-xcodebuild-fir%EF%BC%89/15580620272901.jpg" alt="-w960"></p>
+<h2 id="源码管理"><a href="#源码管理" class="headerlink" title="源码管理"></a>源码管理</h2><p>  源码管理，使用github选择git<br>  <img src="%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-xcodebuild-fir%EF%BC%89/15580620765523.jpg" alt="-w949"></p>
+<h2 id="构建触发器"><a href="#构建触发器" class="headerlink" title="构建触发器"></a>构建触发器</h2><ul>
+<li>选择Build periodically，输入：  <figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">H</span> <span class="number">2</span> * * *</span><br></pre></td></tr></table></figure>
+周期性的执行编译任务，强制每天凌晨两点构建一次<br><img src="%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-xcodebuild-fir%EF%BC%89/15580621994075.jpg"></li>
+</ul>
+<ul>
+<li><p>选择Poll SCM，输入</p>
+  <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">H/5 <span class="emphasis">* *</span> <span class="emphasis">* *</span></span><br></pre></td></tr></table></figure>
+<p>  表示的就是每5分钟检查一次源码变化。<br> <img src="%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-xcodebuild-fir%EF%BC%89/15580622588816.jpg"></p>
+<blockquote>
+<pre><code>第一个参数代表的是分钟 minute，取值 0~59；
+第二个参数代表的是小时 hour，取值 0~23；
+第三个参数代表的是天 day，取值 1~31；
+第四个参数代表的是月 month，取值 1~12；
+最后一个参数代表的是星期 week，取值 0~7，0 和 7 都是表示星期天。
+</code></pre>
+</blockquote>
+</li>
+</ul>
+<h2 id="构建环境"><a href="#构建环境" class="headerlink" title="构建环境"></a>构建环境</h2><p>  通过<code>xcodebuild</code>脚本的方式构建，这里不用做任何设置。</p>
+<h2 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h2><p>重点来了。<br>点击“添加构建步骤”，选择Execute shell。<br><img src="%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-xcodebuild-fir%EF%BC%89/15580626158656.jpg" alt="-w951"></p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/bin/sh +x</span></span><br><span class="line">xcodebuild clean -workspace <span class="regexp">/Users/</span>vic<span class="regexp">/.jenkins/</span>workspace<span class="regexp">/jike-iOS/</span>Ruguo.xcworkspace \</span><br><span class="line">                 -scheme Ruguo \</span><br><span class="line"></span><br><span class="line">xcodebuild archive -workspace <span class="regexp">/Users/</span>vic<span class="regexp">/.jenkins/</span>workspace<span class="regexp">/jike-iOS/</span>Ruguo.xcworkspace \</span><br><span class="line">                   -scheme Ruguo \</span><br><span class="line">                   -archivePath <span class="string">&quot;$WORKSPACE/Ruguo.xcarchive&quot;</span> \</span><br><span class="line">                   -configuration Debug \</span><br><span class="line"></span><br><span class="line">xcodebuild -exportArchive -archivePath <span class="string">&quot;$WORKSPACE/Ruguo.xcarchive&quot;</span> \</span><br><span class="line">                          -exportPath <span class="string">&quot;$WORKSPACE/Export/Ruguo&quot;</span> \</span><br><span class="line">                          -exportOptionsPlist <span class="string">&quot;$WORKSPACE/ExportOptions.plist&quot;</span> \</span><br><span class="line">                          -configuration Debug \</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">export PATH=<span class="regexp">/usr/</span>local/bin:<span class="variable">$PATH</span></span><br><span class="line"></span><br><span class="line">fir publish <span class="regexp">/Users/</span>vic<span class="regexp">/.jenkins/</span>workspace<span class="regexp">/jike-iOS/</span>Export<span class="regexp">/Ruguo/</span>Ruguo.ipa -T <span class="number">4554</span>bab16fc50b5b8ee20d9663fa64c7 --password=jikebeta</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>说明：<br>-archivePath：.xcarchive文件的存放路径。<br>-exportPath：导出文件的路径。Export文件夹是自己建的。<br>-ExportOptions.plist：这个文件的内容其实是ipa的打包信息。手动archive并export时，这个文件就包含在最终输出的文件夹内，可以copy一份出来使用。<br>-configuration ：默认Debug或Release。<br>这里有个坑要说明一下。archive和ipa文件的导出目录最好位于Jenkins用户下的那个工程中，我之前选择的是导出到当前用户的桌面，结果一直报读写权限的问题。</p>
+<h2 id="上传到fir"><a href="#上传到fir" class="headerlink" title="上传到fir"></a>上传到fir</h2><p>要实现自动上传到fir，要先安装fir-cli<br>fir-cli由ruby实现，所以先安装ruby</p>
+<ul>
+<li><p>安装ruby，<a href="http://www.ruby-lang.org/en/documentation/installation/">ruby官网安装文档</a>（我使用了brew安装）</p>
+  <figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"><span class="meta">#直接在终端执行，未安装brew，先安装brew</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#安装最新的2.6.3</span></span><br><span class="line">brew install ruby   </span><br><span class="line"> </span><br><span class="line"><span class="meta">#安装完根据提示执行</span></span><br><span class="line">echo <span class="string">&#x27;export PATH=&quot;/usr/local/opt/ruby/bin:$PATH&quot;&#x27;</span> &gt;&gt; ~/.zshrc</span><br><span class="line"> </span><br><span class="line"><span class="meta">#退出终端查看ruby版本</span></span><br><span class="line">ruby -v </span><br><span class="line"> </span><br><span class="line"><span class="meta">#检查安装路径</span></span><br><span class="line">which -a ruby</span><br></pre></td></tr></table></figure></li>
+<li><p>安装fir-cli。要实现自动上传到fir，要先安装fir-cli。Github: <a href="https://github.com/FIRHQ/fir-cli">fir-cli</a></p>
+  <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">gem install -n <span class="regexp">/usr/</span>local/bin fir-cli </span><br></pre></td></tr></table></figure></li>
+<li><p>fir token查看方法：<br><img src="%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-xcodebuild-fir%EF%BC%89/15580629118728.jpg" alt="-w459"></p>
+</li>
+<li><p>脚本</p>
+  <figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">fir</span> publish /Users/vic/.jenkins/workspace/jike-iOS/Export/Ruguo/Ruguo.ipa -T <span class="number">4554</span>bab<span class="number">16</span>fc<span class="number">50</span>b<span class="number">5</span>b<span class="number">8</span>ee<span class="number">20</span>d<span class="number">9663</span>fa<span class="number">64</span>c<span class="number">7</span> --password=jikebeta</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Jenkins</category>
+      </categories>
+      <tags>
+        <tag>Jenkins</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>（Mac）iOS自动化打包（Jenkins+fastlane+pgy</title>
+    <url>/blog/2019/05/21/%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-fastlane-pgy/</url>
+    <content><![CDATA[<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p>| 名称 | 版本 |<br>| — | — | — |<br>| macOS | 10.14.4 (18E226) |<br>| Xcode | Version 10.2.1 |<br>| ruby | 2.6.3 |<br>| fastlane  | 2.123.0  |</p>
+<h1 id="Fastlane安装"><a href="#Fastlane安装" class="headerlink" title="Fastlane安装"></a>Fastlane安装</h1><p>Fastlane是一套使用Ruby写的自动化工具集，用于iOS和Android的自动化打包、发布等工作，可以节省大量的时间。<br>安装过程如下</p>
+<h2 id="安装ruby（brew安装最新版）"><a href="#安装ruby（brew安装最新版）" class="headerlink" title="安装ruby（brew安装最新版）"></a>安装ruby（brew安装最新版）</h2><figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"><span class="meta">#直接在终端执行，未安装brew，先安装brew</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">#安装最新的2.6.3</span></span><br><span class="line">brew install ruby   </span><br><span class="line"> </span><br><span class="line"><span class="meta">#安装完根据提示执行</span></span><br><span class="line">echo <span class="string">&#x27;export PATH=&quot;/usr/local/opt/ruby/bin:$PATH&quot;&#x27;</span> &gt;&gt; ~/.zshrc</span><br><span class="line"> </span><br><span class="line"><span class="meta">#退出终端查看ruby版本</span></span><br><span class="line">ruby -v </span><br><span class="line"> </span><br><span class="line"><span class="meta">#检查安装路径</span></span><br><span class="line">which -a ruby</span><br></pre></td></tr></table></figure>
+<h2 id="更改gem源"><a href="#更改gem源" class="headerlink" title="更改gem源"></a>更改gem源</h2><ul>
+<li>更改  <figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">gem sources --<span class="built_in">remove</span> http<span class="variable">s:</span>//rubygems.org/</span><br><span class="line">gem sources --<span class="built_in">add</span> http<span class="variable">s:</span>//gems.<span class="keyword">ruby</span>-china.<span class="keyword">com</span>/</span><br></pre></td></tr></table></figure></li>
+<li>查看   <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">gem sources -l</span></span><br></pre></td></tr></table></figure>
+  如果是以下结果说明正确，如果有其他的请自行百度解决  <figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">*** CURRENT SOURCES ***</span><br><span class="line">http<span class="variable">s:</span>//gems.<span class="keyword">ruby</span>-china.<span class="keyword">com</span>/</span><br></pre></td></tr></table></figure></li>
+<li>安装fastlane  <figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">#安装</span></span><br><span class="line">gem install -n /usr/<span class="keyword">local</span>/bin fastlane -NV</span><br><span class="line"></span><br><span class="line"><span class="comment">#检查是否安装成</span></span><br><span class="line">fastlane <span class="comment">--version</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p>至此，我们已经可以使用fastlane自动化打包了</p>
+</blockquote>
+<h1 id="Fastlane配置"><a href="#Fastlane配置" class="headerlink" title="Fastlane配置"></a>Fastlane配置</h1><h2 id="fastlane-init"><a href="#fastlane-init" class="headerlink" title="fastlane init"></a>fastlane init</h2><p>cd 到工程主目录执行<code>fastlane init </code>我这里选择的是手动配置</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">cd <span class="regexp">/Users/</span>vic<span class="regexp">/.jenkins/</span>workspace/jike-iOS-Fastlan</span><br><span class="line">fastlane init</span><br></pre></td></tr></table></figure>
+<p>会在你项目工程的目录下生成一个fastlane文件夹，里面有Fastlane的配置文件，一个是Appfile文件(保存了苹果开发者的相关信息)，一个是Fastfile文件（运行脚本）</p>
+<h2 id="编辑Fastfile文件（运行脚本）"><a href="#编辑Fastfile文件（运行脚本）" class="headerlink" title="编辑Fastfile文件（运行脚本）"></a>编辑Fastfile文件（运行脚本）</h2><p>有时候一天需要打好几个包，为了区分，我们这里实现一个递增build号的功能。</p>
+<ul>
+<li>定义一个递增build号的函数，添加到Fastfile中  <figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line">def updateProjectBuildNumber</span><br><span class="line"></span><br><span class="line">currentTime = Time.new.strftime(&quot;%Y%m%d&quot;)</span><br><span class="line"><span class="keyword">build</span> = get_build_number()</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">build</span>.<span class="keyword">include</span>?<span class="string">&quot;#&#123;currentTime&#125;.&quot;</span></span><br><span class="line"># =&gt; 为当天版本 计算迭代版本号</span><br><span class="line">lastStr = <span class="keyword">build</span>[<span class="keyword">build</span>.<span class="built_in">length</span><span class="number">-2.</span>.<span class="keyword">build</span>.<span class="built_in">length</span><span class="number">-1</span>]</span><br><span class="line">lastNum = lastStr.to_i</span><br><span class="line">lastNum = lastNum + <span class="number">1</span></span><br><span class="line">lastStr = lastNum.to_s</span><br><span class="line"><span class="keyword">if</span> lastNum &lt; <span class="number">10</span></span><br><span class="line">lastStr = lastStr.<span class="keyword">insert</span>(<span class="number">0</span>,<span class="string">&quot;0&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">build</span> = <span class="string">&quot;#&#123;currentTime&#125;.#&#123;lastStr&#125;&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"># =&gt; 非当天版本 <span class="keyword">build</span> 号重置</span><br><span class="line"><span class="keyword">build</span> = <span class="string">&quot;#&#123;currentTime&#125;.01&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">puts(<span class="string">&quot;*************| 更新build #&#123;build&#125; |*************&quot;</span>)</span><br><span class="line"># =&gt; 更改项目 <span class="keyword">build</span> 号</span><br><span class="line">increment_build_number(</span><br><span class="line">build_number: <span class="string">&quot;#&#123;build&#125;&quot;</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>实现自动打包的完整Fastfile如下:  <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 定义fastlane版本号</span></span><br><span class="line">fastlane_version <span class="string">&quot;2.123.0&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义打包平台</span></span><br><span class="line">default_platform <span class="symbol">:ios</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">updateProjectBuildNumber</span></span></span><br><span class="line"></span><br><span class="line">currentTime = Time.new.strftime(<span class="string">&quot;%Y%m%d&quot;</span>)</span><br><span class="line">build = get_build_number()</span><br><span class="line"><span class="keyword">if</span> build.<span class="keyword">include</span>?<span class="string">&quot;<span class="subst">#&#123;currentTime&#125;</span>.&quot;</span></span><br><span class="line"><span class="comment"># =&gt; 为当天版本 计算迭代版本号</span></span><br><span class="line">lastStr = build[build.length-<span class="number">2</span>..build.length-<span class="number">1</span>]</span><br><span class="line">lastNum = lastStr.to_i</span><br><span class="line">lastNum = lastNum + <span class="number">1</span></span><br><span class="line">lastStr = lastNum.to_s</span><br><span class="line"><span class="keyword">if</span> lastNum &lt; <span class="number">10</span></span><br><span class="line">lastStr = lastStr.insert(<span class="number">0</span>,<span class="string">&quot;0&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">build = <span class="string">&quot;<span class="subst">#&#123;currentTime&#125;</span>.<span class="subst">#&#123;lastStr&#125;</span>&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"><span class="comment"># =&gt; 非当天版本 build 号重置</span></span><br><span class="line">build = <span class="string">&quot;<span class="subst">#&#123;currentTime&#125;</span>.01&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">puts(<span class="string">&quot;*************| 更新build <span class="subst">#&#123;build&#125;</span> |*************&quot;</span>)</span><br><span class="line"><span class="comment"># =&gt; 更改项目 build 号</span></span><br><span class="line">increment_build_number(</span><br><span class="line"><span class="symbol">build_number:</span> <span class="string">&quot;<span class="subst">#&#123;build&#125;</span>&quot;</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#指定项目的scheme名称</span></span><br><span class="line">scheme=<span class="string">&quot;Ruguo&quot;</span></span><br><span class="line"><span class="comment">#蒲公英api_key和user_key</span></span><br><span class="line">api_key=<span class="string">&quot;8e860ee5ba4996f9b19e56c28e07846a&quot;</span></span><br><span class="line">user_key=<span class="string">&quot;542e73b113b5908da8b028805bf7e837&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 任务脚本</span></span><br><span class="line">platform <span class="symbol">:ios</span> <span class="keyword">do</span></span><br><span class="line">lane <span class="symbol">:development_build</span> <span class="keyword">do</span><span class="params">|options|</span></span><br><span class="line">branch = options[<span class="symbol">:branch</span>]</span><br><span class="line"></span><br><span class="line">puts <span class="string">&quot;开始打development ipa&quot;</span></span><br><span class="line"></span><br><span class="line">updateProjectBuildNumber <span class="comment">#更改项目build号</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始打包</span></span><br><span class="line">gym(</span><br><span class="line"><span class="comment">#指定需要编译的scheme</span></span><br><span class="line"><span class="symbol">scheme:</span><span class="string">&quot;<span class="subst">#&#123;scheme&#125;</span>&quot;</span>,</span><br><span class="line"><span class="comment">#输出的ipa名称</span></span><br><span class="line"><span class="symbol">output_name:</span><span class="string">&quot;<span class="subst">#&#123;scheme&#125;</span>_<span class="subst">#&#123;get_build_number()&#125;</span>&quot;</span>,</span><br><span class="line"><span class="comment"># 是否清空以前的编译信息 true：是</span></span><br><span class="line"><span class="symbol">clean:</span><span class="literal">true</span>,</span><br><span class="line"><span class="comment"># 指定打包方式，Release 或者 Debug</span></span><br><span class="line"><span class="symbol">configuration:</span><span class="string">&quot;Release&quot;</span>,</span><br><span class="line"><span class="comment"># 指定打包所使用的输出方式，目前支持app-store, package, ad-hoc, enterprise, development</span></span><br><span class="line"><span class="symbol">export_method:</span><span class="string">&quot;development&quot;</span>,</span><br><span class="line"><span class="comment"># 指定输出文件夹</span></span><br><span class="line"><span class="symbol">output_directory:</span><span class="string">&quot;./fastlane/build&quot;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">#puts &quot;开始上传蒲公英&quot;</span></span><br><span class="line"><span class="comment"># 开始上传蒲公英</span></span><br><span class="line"><span class="comment">#pgyer(api_key: &quot;#&#123;api_key&#125;&quot;, user_key: &quot;#&#123;user_key&#125;&quot;, password: &quot;alpha&quot;, install_type: &quot;2&quot;)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+  注意：蒲公英的 api_key 和 user_key，开发者在自己账号下的 账号设置-API信息 中可以找到。打其它类型的包的方法与development类似，可自定义一个新的lane实现。</li>
+</ul>
+<h2 id="自动打包并上传蒲公英，"><a href="#自动打包并上传蒲公英，" class="headerlink" title="自动打包并上传蒲公英，"></a>自动打包并上传蒲公英，</h2><p>在终端输入便会进行自动打包并上传蒲公英了。</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">fastlane development_build</span></span><br></pre></td></tr></table></figure>
+<h1 id="Jenkins安装"><a href="#Jenkins安装" class="headerlink" title="Jenkins安装"></a>Jenkins安装</h1><p>下载安装Jenkins。具体安装过程可参考 <a href="https://vic.kim/2019/05/21/Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/">Mac Jenkins搭建</a></p>
+<h1 id="Jenkins配置"><a href="#Jenkins配置" class="headerlink" title="Jenkins配置"></a>Jenkins配置</h1><ul>
+<li><p>点击新建，输入名称，构建一个自由风格的软件项目</p>
+</li>
+<li><p>添加Git仓库地址，可以是HTTP也可以是SSH。点击Add</p>
+</li>
+<li><p>构建，点击“添加构建步骤”，选择Execute shell。<br>  <img src="%EF%BC%88Mac%EF%BC%89iOS%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85%EF%BC%88Jenkins-fastlane-pgy/15584430633082.jpg"></p>
+  <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">export PATH=<span class="regexp">/usr/</span>local/bin:<span class="variable">$PATH</span></span><br><span class="line">fastlane development_build</span><br><span class="line"></span><br><span class="line">filepath=`pwd`fastlane<span class="regexp">/build/</span>Ruguo*.api</span><br><span class="line">file=`ls <span class="variable">$filepath</span>`</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$uploadPgy</span> = true ]</span><br><span class="line">then</span><br><span class="line">    curl -F <span class="string">&quot;installType=2&quot;</span> -F <span class="string">&quot;password=alpha&quot;</span> -F <span class="string">&quot;file=@$file&quot;</span> -F <span class="string">&quot;uKey=542e73b113b5908da8b028805bf7e837&quot;</span> -F <span class="string">&quot;_api_key=8e860ee5ba4996f9b19e56c28e07846a&quot;</span> https:<span class="regexp">//</span>qiniu-storage.pgyer.com<span class="regexp">/apiv1/</span>app/upload</span><br><span class="line">fi</span><br></pre></td></tr></table></figure></li>
+<li><p>添加完成之后保存，点击立即构建</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Jenkins</category>
+      </categories>
+      <tags>
+        <tag>Jenkins</tag>
       </tags>
   </entry>
   <entry>
