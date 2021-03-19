@@ -518,6 +518,34 @@
       </tags>
   </entry>
   <entry>
+    <title>JMeter(三)_脚本录制之基于HTTP代理服务器</title>
+    <url>/2020/02/25/JMeter-%E4%B8%89-%E8%84%9A%E6%9C%AC%E5%BD%95%E5%88%B6%E4%B9%8B%E5%9F%BA%E4%BA%8EHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+    <content><![CDATA[<h1 id="一、添加录制控制器"><a href="#一、添加录制控制器" class="headerlink" title="一、添加录制控制器"></a>一、添加录制控制器</h1><p>启动jmeter：在测试计划中添加线程组，线程组中添加逻辑控制器→录制控制器</p>
+<h1 id="二、添加HTTP代理服务器"><a href="#二、添加HTTP代理服务器" class="headerlink" title="二、添加HTTP代理服务器"></a>二、添加HTTP代理服务器</h1><p>工作台：添加非测试元件→HTTP代理服务器</p>
+<h1 id="三、配置代理服务器"><a href="#三、配置代理服务器" class="headerlink" title="三、配置代理服务器"></a>三、配置代理服务器</h1><p>服务器的配置，可以根据下面的代理服务器详细说明，根据需要配置不同代理模式。<br><img src="JMeter-%E4%B8%89-%E8%84%9A%E6%9C%AC%E5%BD%95%E5%88%B6%E4%B9%8B%E5%9F%BA%E4%BA%8EHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/WX20200225-165933@2x.png" alt="HTTP代理服务器"></p>
+<h2 id="代理服务器说明"><a href="#代理服务器说明" class="headerlink" title="代理服务器说明"></a>代理服务器说明</h2><p>1）名称：代理服务器名称，可以自定义<br>2）注释：对此代理服务器的说明，可自定义，默认为空<br>3）Global Settings</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">端口：JMeter代理服务器端口，需要检查端口是否被占用</span><br><span class="line">HTTPS Domains：https协议要监听的域名，如访问：https:<span class="regexp">//</span>api.xiaoyuzhoufm.com/</span><br></pre></td></tr></table></figure>
+<p>4）Test plan content</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">目标控制器：下拉选项，表明在哪个模块下面保存录制的请求</span><br><span class="line">分组：下拉框；对录制的请求按照一定方式进行进行分组，一般默认使用【不对样本分组】即可</span><br><span class="line">记录http信息头、添加断言、Regex matching：勾选框；记录每个请求的request <span class="selector-tag">header</span>、断言、正则表达式匹配等，录制一般使用默认勾选就行</span><br></pre></td></tr></table></figure>
+<p>5）HTTP Sampler settings</p>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">A）<span class="keyword">Type</span>：http采样器的<span class="keyword">type</span>类型，默认为空</span><br><span class="line"> B）Prefix：对每个录制的http请求的前缀命名，默认为空，则录制的请求会按照数字递增的方式进行命名，如：<span class="number">0</span>，<span class="number">1</span>，<span class="number">2</span>......</span><br><span class="line">C）自动重定向：勾选框；表示请求是否自动重定向</span><br><span class="line">D）跟随重定向：勾选框；表示请求是否跟随重定向</span><br><span class="line">E）<span class="keyword">User</span> <span class="title">KeepAlive</span>：勾选框；表示此http请求的TCP链接是否保持不中断</span><br><span class="line">F）从HTML文件获取所有内涵的资源：勾选框，表示是否获取html文件中的资源信息，录制时一般默认不勾选</span><br></pre></td></tr></table></figure>
+<p>6）Content-Type filter</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">A</span>）Include：<span class="attribute">Content</span>-Type的白名单，表示那些<span class="attribute">Content</span>-Type可以通过</span><br><span class="line"><span class="selector-tag">B</span>）Exclude：<span class="attribute">Content</span>-Type黑名单，表示那些<span class="attribute">Content</span>-Type被拒绝</span><br></pre></td></tr></table></figure>
+<p>7）包含模式：表示哪些请求信息会被录制，如：*.html<br>8）排除模式：表示那些请求信息不会被录制，可点击Add suggested Excludes使用默认排除方式，<br>包含模式&amp;排除模式 就是我们需要的和我们不需要的。一般情况下，我们只需要排除我们不需要的。<br>格式：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"> .*\<span class="string">.css</span> 排除css文件，<span class="string">&quot; .* &quot;</span> 匹配任意字符的意思 <span class="string">&quot; \ &quot;</span>是转义的意思</span><br><span class="line"></span><br><span class="line"> .*\<span class="string">.js</span> 排除js文件</span><br><span class="line"></span><br><span class="line">.*\<span class="string">.png</span> 排除png文件</span><br></pre></td></tr></table></figure>
+<p>9）Notify Child Listeners of filtered samplers：是否唤起过滤取样器的后台监听，默认勾选即可</p>
+<h1 id="四、本地设置代理"><a href="#四、本地设置代理" class="headerlink" title="四、本地设置代理"></a>四、本地设置代理</h1><p>浏览器或手机设置为电脑代理</p>
+<h1 id="五、SSL问题"><a href="#五、SSL问题" class="headerlink" title="五、SSL问题"></a>五、SSL问题</h1><p>如果在录制过程中提示：SSL问题 ，那就需要安装SSL安全证书。<br><img src="JMeter-%E4%B8%89-%E8%84%9A%E6%9C%AC%E5%BD%95%E5%88%B6%E4%B9%8B%E5%9F%BA%E4%BA%8EHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/WX20200225-171508@2x.png" alt="SSL"><br>1）生成证书，在点击HTTP代理服务器的“启动”按钮后，弹出提示框：提示我们，CA证书已经创建，在jmeter的bin目录下<br> 2）安装证书（jmeter） 选择菜单栏“选项—SSL管理器”，再打开的对话框中选择bin目录下的证书<br>3）手机需要安装<code>apache-jmeter-5.1.1/bin</code>目录下<code>ApacheJMeterTemporaryRootCA.crt</code>证书</p>
+<h1 id="六、脚本录制"><a href="#六、脚本录制" class="headerlink" title="六、脚本录制"></a>六、脚本录制</h1><p>代理服务器配置后之后，点击启动，代理服务器就会开始记录所接受的http请求</p>
+]]></content>
+      <categories>
+        <category>JMeter</category>
+      </categories>
+      <tags>
+        <tag>JMeter</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JMeter(九)_定时器</title>
     <url>/2020/03/10/JMeter-%E4%B9%9D-%E5%AE%9A%E6%97%B6%E5%99%A8/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在默认情况下，jmeter 发送每个请求之间是没有延时的，如果采用默认方式，如果线程数足够大，瞬间就会将服务器压死。再则在实际的业务过程中，请求之间是有一定时间的停顿的所以在请求之间设置合理的延时是必须的，也是更接近用户真实业务情况。在 jmeter 中，定时器组件提供了系列不同类型的延时控制。合理使用定时器组件，能让你的性能测试更接近真实，更能挖掘出系统的瓶颈和评估系统的性能指标。</p>
@@ -539,34 +567,6 @@
 <p>Target Throught：目标吞吐量<br>Throught Period：表示在多长时间内发送Target Throught指定的请求数(以秒为单位)<br>Test Druation：指定测试运行时间(以秒为单位)<br>Number of threads in the bath：用来设置集合点，等到指定个数的请求后并发执行其它参数默认即可</p>
 <h2 id="8、JSr-R223-Timer-和-BeanShell-Timer"><a href="#8、JSr-R223-Timer-和-BeanShell-Timer" class="headerlink" title="8、JSr R223 Timer   和  BeanShell Timer"></a>8、JSr R223 Timer   和  BeanShell Timer</h2><p>这两种定时器就不细说了，简单的说就是提供了脚本方式来进行控制，是更为灵活的方式。一般情况下，大家是不会用的。当然有兴趣的，可以去研究下，增强理解。</p>
 <p>总结<br>本文就各种定时器进行了介绍，并大致介绍了其可能的应用场景。不管是哪种定时器，都需要深入理解业务的情况下，统筹规划使用。以更深入的发挥其作用，模拟好真实应用场景，更好的挖掘性能瓶颈和评估目标服务的性能情况。</p>
-]]></content>
-      <categories>
-        <category>JMeter</category>
-      </categories>
-      <tags>
-        <tag>JMeter</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JMeter(三)_脚本录制之基于HTTP代理服务器</title>
-    <url>/2020/02/25/JMeter-%E4%B8%89-%E8%84%9A%E6%9C%AC%E5%BD%95%E5%88%B6%E4%B9%8B%E5%9F%BA%E4%BA%8EHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
-    <content><![CDATA[<h1 id="一、添加录制控制器"><a href="#一、添加录制控制器" class="headerlink" title="一、添加录制控制器"></a>一、添加录制控制器</h1><p>启动jmeter：在测试计划中添加线程组，线程组中添加逻辑控制器→录制控制器</p>
-<h1 id="二、添加HTTP代理服务器"><a href="#二、添加HTTP代理服务器" class="headerlink" title="二、添加HTTP代理服务器"></a>二、添加HTTP代理服务器</h1><p>工作台：添加非测试元件→HTTP代理服务器</p>
-<h1 id="三、配置代理服务器"><a href="#三、配置代理服务器" class="headerlink" title="三、配置代理服务器"></a>三、配置代理服务器</h1><p>服务器的配置，可以根据下面的代理服务器详细说明，根据需要配置不同代理模式。<br><img src="JMeter-%E4%B8%89-%E8%84%9A%E6%9C%AC%E5%BD%95%E5%88%B6%E4%B9%8B%E5%9F%BA%E4%BA%8EHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/WX20200225-165933@2x.png" alt="HTTP代理服务器"></p>
-<h2 id="代理服务器说明"><a href="#代理服务器说明" class="headerlink" title="代理服务器说明"></a>代理服务器说明</h2><p>1）名称：代理服务器名称，可以自定义<br>2）注释：对此代理服务器的说明，可自定义，默认为空<br>3）Global Settings</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">端口：JMeter代理服务器端口，需要检查端口是否被占用</span><br><span class="line">HTTPS Domains：https协议要监听的域名，如访问：https:<span class="regexp">//</span>api.xiaoyuzhoufm.com/</span><br></pre></td></tr></table></figure>
-<p>4）Test plan content</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">目标控制器：下拉选项，表明在哪个模块下面保存录制的请求</span><br><span class="line">分组：下拉框；对录制的请求按照一定方式进行进行分组，一般默认使用【不对样本分组】即可</span><br><span class="line">记录http信息头、添加断言、Regex matching：勾选框；记录每个请求的request <span class="selector-tag">header</span>、断言、正则表达式匹配等，录制一般使用默认勾选就行</span><br></pre></td></tr></table></figure>
-<p>5）HTTP Sampler settings</p>
-<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">A）<span class="keyword">Type</span>：http采样器的<span class="keyword">type</span>类型，默认为空</span><br><span class="line"> B）Prefix：对每个录制的http请求的前缀命名，默认为空，则录制的请求会按照数字递增的方式进行命名，如：<span class="number">0</span>，<span class="number">1</span>，<span class="number">2</span>......</span><br><span class="line">C）自动重定向：勾选框；表示请求是否自动重定向</span><br><span class="line">D）跟随重定向：勾选框；表示请求是否跟随重定向</span><br><span class="line">E）<span class="keyword">User</span> <span class="title">KeepAlive</span>：勾选框；表示此http请求的TCP链接是否保持不中断</span><br><span class="line">F）从HTML文件获取所有内涵的资源：勾选框，表示是否获取html文件中的资源信息，录制时一般默认不勾选</span><br></pre></td></tr></table></figure>
-<p>6）Content-Type filter</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">A</span>）Include：<span class="attribute">Content</span>-Type的白名单，表示那些<span class="attribute">Content</span>-Type可以通过</span><br><span class="line"><span class="selector-tag">B</span>）Exclude：<span class="attribute">Content</span>-Type黑名单，表示那些<span class="attribute">Content</span>-Type被拒绝</span><br></pre></td></tr></table></figure>
-<p>7）包含模式：表示哪些请求信息会被录制，如：*.html<br>8）排除模式：表示那些请求信息不会被录制，可点击Add suggested Excludes使用默认排除方式，<br>包含模式&amp;排除模式 就是我们需要的和我们不需要的。一般情况下，我们只需要排除我们不需要的。<br>格式：</p>
-<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"> .*\<span class="string">.css</span> 排除css文件，<span class="string">&quot; .* &quot;</span> 匹配任意字符的意思 <span class="string">&quot; \ &quot;</span>是转义的意思</span><br><span class="line"></span><br><span class="line"> .*\<span class="string">.js</span> 排除js文件</span><br><span class="line"></span><br><span class="line">.*\<span class="string">.png</span> 排除png文件</span><br></pre></td></tr></table></figure>
-<p>9）Notify Child Listeners of filtered samplers：是否唤起过滤取样器的后台监听，默认勾选即可</p>
-<h1 id="四、本地设置代理"><a href="#四、本地设置代理" class="headerlink" title="四、本地设置代理"></a>四、本地设置代理</h1><p>浏览器或手机设置为电脑代理</p>
-<h1 id="五、SSL问题"><a href="#五、SSL问题" class="headerlink" title="五、SSL问题"></a>五、SSL问题</h1><p>如果在录制过程中提示：SSL问题 ，那就需要安装SSL安全证书。<br><img src="JMeter-%E4%B8%89-%E8%84%9A%E6%9C%AC%E5%BD%95%E5%88%B6%E4%B9%8B%E5%9F%BA%E4%BA%8EHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/WX20200225-171508@2x.png" alt="SSL"><br>1）生成证书，在点击HTTP代理服务器的“启动”按钮后，弹出提示框：提示我们，CA证书已经创建，在jmeter的bin目录下<br> 2）安装证书（jmeter） 选择菜单栏“选项—SSL管理器”，再打开的对话框中选择bin目录下的证书<br>3）手机需要安装<code>apache-jmeter-5.1.1/bin</code>目录下<code>ApacheJMeterTemporaryRootCA.crt</code>证书</p>
-<h1 id="六、脚本录制"><a href="#六、脚本录制" class="headerlink" title="六、脚本录制"></a>六、脚本录制</h1><p>代理服务器配置后之后，点击启动，代理服务器就会开始记录所接受的http请求</p>
 ]]></content>
       <categories>
         <category>JMeter</category>
@@ -640,54 +640,6 @@
 <p>  注意:Pre-porcessors、Post-porcessors和Assirtions等元件仅对Sampler作用，如在它们作用域内没有任何Sampler，则不会被执行；<br>  如果在同一作用域范围内有多个同一类型的元件，则这些元件按照它们在test plan中的上下顺序依次执行。</p>
 </li>
 </ul>
-]]></content>
-      <categories>
-        <category>JMeter</category>
-      </categories>
-      <tags>
-        <tag>JMeter</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JMeter(六)_参数化</title>
-    <url>/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/</url>
-    <content><![CDATA[<h1 id="一、JMeter参数化简介"><a href="#一、JMeter参数化简介" class="headerlink" title="一、JMeter参数化简介"></a>一、JMeter参数化简介</h1><h2 id="JMeter参数化的概念"><a href="#JMeter参数化的概念" class="headerlink" title="JMeter参数化的概念"></a>JMeter参数化的概念</h2><p>当使用JMeter进行测试时，测试数据的准备是一项重要的工作。若要求每次迭代的数据不一样时，则需进行参数化，然后从参数化的文件中来读取测试数据。</p>
-<blockquote>
-<p>参数化：是自动化测试脚本的一种常用技巧，可将脚本中的某些输入使用参数来代替，如登录时利用GET/POST请求方式传递参数的场景，在脚本运行时指定参数的取值范围和规则。<br>脚本在运行时，根据需要选取不同的参数值作为输入，该方式称为数据驱动测试（Data Driven Test），而参数的取值范围被称为数据池（Data Pool）。</p>
-</blockquote>
-<h2 id="JMeter参数化方式之使用场景对比"><a href="#JMeter参数化方式之使用场景对比" class="headerlink" title="JMeter参数化方式之使用场景对比"></a>JMeter参数化方式之使用场景对比</h2><table>
-<thead>
-<tr>
-<th></th>
-<th>参数化方式</th>
-<th><span class="Apple-tab-span" style="white-space:pre"></span>使用场景</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>User Parameters</td>
-<td>适用于参数取值范围很小的时候使用</td>
-</tr>
-<tr>
-<td>2</td>
-<td>CSV Data Set Config</td>
-<td>适用于参数取值范围较大的时候使用，该方法具有更大的灵活性</td>
-</tr>
-<tr>
-<td>3</td>
-<td>User Defined Variables</td>
-<td>一般用于Test Plan中不需要随请求迭代的参数设置，如：Host、Port Number</td>
-</tr>
-<tr>
-<td>4</td>
-<td>函数助手：_CSVRead</td>
-<td>可作为其他参数化方式的补充项，如：随机数生成的函数${__Random(,,)}</td>
-</tr>
-</tbody></table>
-<h1 id="二、JMeter参数化的4种主要方式-操作演练"><a href="#二、JMeter参数化的4种主要方式-操作演练" class="headerlink" title="二、JMeter参数化的4种主要方式-操作演练"></a>二、JMeter参数化的4种主要方式-操作演练</h1><h2 id="User-Parameters（用户参数）"><a href="#User-Parameters（用户参数）" class="headerlink" title="User Parameters（用户参数）"></a>User Parameters（用户参数）</h2><p>操作路径：HTTP请求–&gt;添加–&gt;前置处理器–&gt;用户参数<br>1）添加User Parameters功能模块<br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E5%8F%82%E6%95%B0.png" alt="添加用户参数"><br>2）设置参数项、参数值<br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E7%94%A8%E6%88%B7%E5%8F%82%E6%95%B0.png" alt="用户参数"><br>3）配置HTTP取样器界面的请求参数：${xxx}<br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE.png" alt="HTTP请求参数配置"><br>4）配置Thread Group<br>设置线程数=2，即2个虚拟用户数，对应User Parameters中设置的2个用户<br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E7%BA%BF%E7%A8%8B%E6%95%B0.png" alt="线程数"></p>
-<h2 id="CSV-Data-Set-Config（CSV数据配置）"><a href="#CSV-Data-Set-Config（CSV数据配置）" class="headerlink" title="CSV Data Set Config（CSV数据配置）"></a>CSV Data Set Config（CSV数据配置）</h2><p>操作路径：线程组–&gt;添加–&gt;配置元件–&gt;CSV Data Set Config<br>1）添加CSV Data Set Config模块<br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E6%B7%BB%E5%8A%A0CSV%E6%95%B0%E6%8D%AE%E9%85%8D%E7%BD%AE.png" alt="添加CSV数据配置"><br>2）预先准备好要参数化的所有参数值（txt、csv文件）<br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E5%8F%82%E6%95%B0%E6%96%87%E4%BB%B6.png" alt="参数文件"><br>3）配置CSV Data来源<br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/CSV%E6%95%B0%E6%8D%AE%E9%85%8D%E7%BD%AE.png" alt="CSV数据配置"><br>4）设置HTTP取样器的请求参数：${xxx}<br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE.png" alt="HTTP请求参数配置"></p>
-<h2 id="User-Defined-Variables（用户自定义变量）"><a href="#User-Defined-Variables（用户自定义变量）" class="headerlink" title="User Defined Variables（用户自定义变量）"></a>User Defined Variables（用户自定义变量）</h2><p>操作路径：线程组–&gt;添加–&gt;配置元件–&gt;用户自定义变量<br>1）添加User Defined Variables模块<br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F.png" alt="添加用户自定义变量"><br>2）配置User Defined Variables界面中的参数及其值<br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E7%94%A8%E6%88%B7%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F.png" alt="用户自定义变量"><br>3）配置HTTP取样器中的请求参数<br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE2.png" alt="HTTP请求参数配置"></p>
-<h2 id="函数助手"><a href="#函数助手" class="headerlink" title="函数助手"></a>函数助手</h2><p>操作路径：Tools–&gt;函数助手对话框<br>1）选择参数化所需的函数，配置函数<br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E6%89%93%E5%BC%80%E5%87%BD%E6%95%B0%E5%AF%B9%E8%AF%9D%E5%8A%A9%E6%89%8B.png" alt="打开函数对话助手"><br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E9%85%8D%E7%BD%AE%E5%87%BD%E6%95%B0.png" alt="配置函数"><br>2）配置HTTP取样器的请求参数<br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE3.png" alt="HTTP请求参数配置"></p>
 ]]></content>
       <categories>
         <category>JMeter</category>
@@ -813,6 +765,54 @@
 <figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">$&#123;__CSVRead(<span class="regexp">/Users/</span>vic<span class="regexp">/Downloads/</span>Jmeter ALY/phone_numbers.csv,<span class="number">0</span>)&#125;;读取第一列的值</span><br><span class="line">$&#123;__CSVRead(<span class="regexp">/Users/</span>vic<span class="regexp">/Downloads/</span>Jmeter ALY/phone_numbers.csv,<span class="keyword">next</span>())&#125;; 每次读取下一次的值，配合第一条使用，否则不知道从哪里开始</span><br><span class="line"></span><br><span class="line">$&#123;__CSVRead(<span class="regexp">/Users/</span>vic<span class="regexp">/Downloads/</span>Jmeter ALY/phone_numbers.csv,*user_info)&#125;;使用别名，然后通过以下方法获取数据</span><br><span class="line">$&#123;__CSVRead(*user_info, <span class="number">1</span>)&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/CSVRead.png" alt="__CSVRead"></p>
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1>]]></content>
+      <categories>
+        <category>JMeter</category>
+      </categories>
+      <tags>
+        <tag>JMeter</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JMeter(六)_参数化</title>
+    <url>/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/</url>
+    <content><![CDATA[<h1 id="一、JMeter参数化简介"><a href="#一、JMeter参数化简介" class="headerlink" title="一、JMeter参数化简介"></a>一、JMeter参数化简介</h1><h2 id="JMeter参数化的概念"><a href="#JMeter参数化的概念" class="headerlink" title="JMeter参数化的概念"></a>JMeter参数化的概念</h2><p>当使用JMeter进行测试时，测试数据的准备是一项重要的工作。若要求每次迭代的数据不一样时，则需进行参数化，然后从参数化的文件中来读取测试数据。</p>
+<blockquote>
+<p>参数化：是自动化测试脚本的一种常用技巧，可将脚本中的某些输入使用参数来代替，如登录时利用GET/POST请求方式传递参数的场景，在脚本运行时指定参数的取值范围和规则。<br>脚本在运行时，根据需要选取不同的参数值作为输入，该方式称为数据驱动测试（Data Driven Test），而参数的取值范围被称为数据池（Data Pool）。</p>
+</blockquote>
+<h2 id="JMeter参数化方式之使用场景对比"><a href="#JMeter参数化方式之使用场景对比" class="headerlink" title="JMeter参数化方式之使用场景对比"></a>JMeter参数化方式之使用场景对比</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>参数化方式</th>
+<th><span class="Apple-tab-span" style="white-space:pre"></span>使用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>User Parameters</td>
+<td>适用于参数取值范围很小的时候使用</td>
+</tr>
+<tr>
+<td>2</td>
+<td>CSV Data Set Config</td>
+<td>适用于参数取值范围较大的时候使用，该方法具有更大的灵活性</td>
+</tr>
+<tr>
+<td>3</td>
+<td>User Defined Variables</td>
+<td>一般用于Test Plan中不需要随请求迭代的参数设置，如：Host、Port Number</td>
+</tr>
+<tr>
+<td>4</td>
+<td>函数助手：_CSVRead</td>
+<td>可作为其他参数化方式的补充项，如：随机数生成的函数${__Random(,,)}</td>
+</tr>
+</tbody></table>
+<h1 id="二、JMeter参数化的4种主要方式-操作演练"><a href="#二、JMeter参数化的4种主要方式-操作演练" class="headerlink" title="二、JMeter参数化的4种主要方式-操作演练"></a>二、JMeter参数化的4种主要方式-操作演练</h1><h2 id="User-Parameters（用户参数）"><a href="#User-Parameters（用户参数）" class="headerlink" title="User Parameters（用户参数）"></a>User Parameters（用户参数）</h2><p>操作路径：HTTP请求–&gt;添加–&gt;前置处理器–&gt;用户参数<br>1）添加User Parameters功能模块<br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E5%8F%82%E6%95%B0.png" alt="添加用户参数"><br>2）设置参数项、参数值<br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E7%94%A8%E6%88%B7%E5%8F%82%E6%95%B0.png" alt="用户参数"><br>3）配置HTTP取样器界面的请求参数：${xxx}<br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE.png" alt="HTTP请求参数配置"><br>4）配置Thread Group<br>设置线程数=2，即2个虚拟用户数，对应User Parameters中设置的2个用户<br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E7%BA%BF%E7%A8%8B%E6%95%B0.png" alt="线程数"></p>
+<h2 id="CSV-Data-Set-Config（CSV数据配置）"><a href="#CSV-Data-Set-Config（CSV数据配置）" class="headerlink" title="CSV Data Set Config（CSV数据配置）"></a>CSV Data Set Config（CSV数据配置）</h2><p>操作路径：线程组–&gt;添加–&gt;配置元件–&gt;CSV Data Set Config<br>1）添加CSV Data Set Config模块<br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E6%B7%BB%E5%8A%A0CSV%E6%95%B0%E6%8D%AE%E9%85%8D%E7%BD%AE.png" alt="添加CSV数据配置"><br>2）预先准备好要参数化的所有参数值（txt、csv文件）<br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E5%8F%82%E6%95%B0%E6%96%87%E4%BB%B6.png" alt="参数文件"><br>3）配置CSV Data来源<br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/CSV%E6%95%B0%E6%8D%AE%E9%85%8D%E7%BD%AE.png" alt="CSV数据配置"><br>4）设置HTTP取样器的请求参数：${xxx}<br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE.png" alt="HTTP请求参数配置"></p>
+<h2 id="User-Defined-Variables（用户自定义变量）"><a href="#User-Defined-Variables（用户自定义变量）" class="headerlink" title="User Defined Variables（用户自定义变量）"></a>User Defined Variables（用户自定义变量）</h2><p>操作路径：线程组–&gt;添加–&gt;配置元件–&gt;用户自定义变量<br>1）添加User Defined Variables模块<br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F.png" alt="添加用户自定义变量"><br>2）配置User Defined Variables界面中的参数及其值<br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E7%94%A8%E6%88%B7%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F.png" alt="用户自定义变量"><br>3）配置HTTP取样器中的请求参数<br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE2.png" alt="HTTP请求参数配置"></p>
+<h2 id="函数助手"><a href="#函数助手" class="headerlink" title="函数助手"></a>函数助手</h2><p>操作路径：Tools–&gt;函数助手对话框<br>1）选择参数化所需的函数，配置函数<br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E6%89%93%E5%BC%80%E5%87%BD%E6%95%B0%E5%AF%B9%E8%AF%9D%E5%8A%A9%E6%89%8B.png" alt="打开函数对话助手"><br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E9%85%8D%E7%BD%AE%E5%87%BD%E6%95%B0.png" alt="配置函数"><br>2）配置HTTP取样器的请求参数<br><img src="JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE3.png" alt="HTTP请求参数配置"></p>
+]]></content>
       <categories>
         <category>JMeter</category>
       </categories>
@@ -985,37 +985,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Mac Jenkins搭建</title>
-    <url>/2019/05/21/Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<h1 id="Mac-Jenkins搭建"><a href="#Mac-Jenkins搭建" class="headerlink" title="Mac Jenkins搭建"></a>Mac Jenkins搭建</h1><p>这里有两种方法可以用。第一种操作方便，可以直接下载安装包，但是安装包会有一些莫名的问题。第二种操作繁琐一点，需要操作命令行，直接命令行安装：</p>
-<h2 id="直接登录官网下载安装：（不推荐）"><a href="#直接登录官网下载安装：（不推荐）" class="headerlink" title="直接登录官网下载安装：（不推荐）"></a>直接登录官网下载安装：（不推荐）</h2><p>jenkins的官网下载地址：<a href="https://jenkins.io/download/">https://jenkins.io/download/</a><br>因为这里是Mac下面所以需要选择MacOS的版本：(左边是稳定版本，右边是测试版本，所以一般都是选择左边的)<br><img src="Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/15578018638193.jpg" alt="Jenkins官网"><br>下载完成以后直接点击安装就可以了。之后在浏览器输入链接：<a href="http://localhost:8080/">http://localhost:8080</a> 就行</p>
-<h2 id="brew下载安装-推荐使用-："><a href="#brew下载安装-推荐使用-：" class="headerlink" title="brew下载安装(推荐使用)："></a>brew下载安装(推荐使用)：</h2><ul>
-<li><p>安装安装brew（如果已安装跳过）</p>
-  <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">/usr/</span>bin<span class="regexp">/ruby -e &quot;$(curl -fsSL https:/</span><span class="regexp">/raw.githubusercontent.com/</span>Homebrew<span class="regexp">/install/m</span>aster/install)”</span><br></pre></td></tr></table></figure></li>
-<li><p>安装Jenkins</p>
-  <figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span><span class="keyword">jenkins</span></span><br></pre></td></tr></table></figure></li>
-<li><p>查找jenkins war地址</p>
-  <figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">#在安装后有可能找不到war包地址,可以用mdfind命令本地查询下</span><br><span class="line"></span><br><span class="line">mdfind -name jenkins.war</span><br><span class="line">#<span class="regexp">/usr/</span>local<span class="regexp">/Cellar/</span>jenkins<span class="regexp">/2.174/</span>libexec/jenkins.war</span><br></pre></td></tr></table></figure></li>
-<li><p>启动</p>
-  <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">java -jar <span class="regexp">/usr/</span>local<span class="regexp">/Cellar/</span>jenkins<span class="regexp">/2.116/</span>libexec/jenkins.war --httpPort=<span class="number">8080</span></span><br></pre></td></tr></table></figure></li>
-<li><p>后台启动</p>
-  <figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">后台启动的意思是放到后台运行,即使窗口被干掉,jenkins的进程也会存在.</span><br><span class="line"></span><br><span class="line">简单用shell脚本nohup命令放到后台</span><br><span class="line"></span><br><span class="line">启动脚本命令:sh startjenkins.sh</span><br><span class="line"></span><br><span class="line">#!<span class="regexp">/bin/</span>bash</span><br><span class="line">echo start jenkins</span><br><span class="line"></span><br><span class="line">nohup java -jar <span class="regexp">/usr/</span>local<span class="regexp">/Cellar/</span>jenkins<span class="regexp">/2.116/</span>libexec/jenkins.war --httpPort=<span class="number">8080</span> &amp;</span><br><span class="line"></span><br><span class="line">echo start end</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="Jenkins的环境配置"><a href="#Jenkins的环境配置" class="headerlink" title="Jenkins的环境配置"></a>Jenkins的环境配置</h1><h2 id="启动进入"><a href="#启动进入" class="headerlink" title="启动进入"></a>启动进入</h2><p>启动成功就可以在浏览器输入<a href="http://localhost:8080后">http://localhost:8080后</a><br><img src="Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/15578025178751.jpg" alt="Jenkins官网"><br>可以通过红色路径找到文件打开查看密码，Mac下面路径这个</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">/Users/</span>你的Mac用户名<span class="regexp">/.jenkins/</span>secrets/initialAdminPassword</span><br></pre></td></tr></table></figure>
-<p>密码：<br><img src="Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/15578027381238.jpg" alt="Jenkins官网"></p>
-<h2 id="插件安装"><a href="#插件安装" class="headerlink" title="插件安装"></a>插件安装</h2><p>输入密码进入插件安装的页面，分别是“安装建议的插件”和“选择插件进行安装”，这里我选择左侧的选项（“安装建议的插件”），然后等待自动安装完成<br>如果提示install failure，右下角有个retry，重试一下就好了</p>
-<h2 id="创建第一个管理员账户"><a href="#创建第一个管理员账户" class="headerlink" title="创建第一个管理员账户"></a>创建第一个管理员账户</h2><p><img src="Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/15578050696004.jpg" alt="Jenkins官网"><br>填写完表格，点击save and finish，jenkins的初始配置就完成啦<br>然后要重启一下，填入刚才输入的admin账号密码才能登录进去</p>
-<h1 id="jenkins常用操作"><a href="#jenkins常用操作" class="headerlink" title="jenkins常用操作"></a>jenkins常用操作</h1><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">访问:http:<span class="regexp">//</span>localhost:<span class="number">8080</span>/login?from=%<span class="number">2</span>F</span><br><span class="line"></span><br><span class="line">退出:http:<span class="regexp">//</span>localhost:<span class="number">8080</span>/<span class="keyword">exit</span> </span><br><span class="line"></span><br><span class="line">重启:http:<span class="regexp">//</span>localhost:<span class="number">8080</span>/restart </span><br><span class="line"></span><br><span class="line">重新加载:http:<span class="regexp">//</span>localhost:<span class="number">8080</span>/reload</span><br><span class="line"></span><br><span class="line"><span class="comment">#如果你不想/不需要后台服务，你可以运行:</span></span><br><span class="line">brew services start jenkins</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Jenkins</category>
-      </categories>
-      <tags>
-        <tag>Jenkins</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Mac下使用Hexo+Github搭建个人博客</title>
     <url>/2019/05/25/Mac%E4%B8%8B%E4%BD%BF%E7%94%A8Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Hexo是一个快速、简洁且高效的博客框架，最近有搭建个人博客的想法，便动手尝试了。<br>官方的<a href="https://hexo.io/zh-cn/docs/">文档</a></p>
@@ -1080,6 +1049,37 @@
       </categories>
       <tags>
         <tag>Hexo Next</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mac Jenkins搭建</title>
+    <url>/2019/05/21/Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<h1 id="Mac-Jenkins搭建"><a href="#Mac-Jenkins搭建" class="headerlink" title="Mac Jenkins搭建"></a>Mac Jenkins搭建</h1><p>这里有两种方法可以用。第一种操作方便，可以直接下载安装包，但是安装包会有一些莫名的问题。第二种操作繁琐一点，需要操作命令行，直接命令行安装：</p>
+<h2 id="直接登录官网下载安装：（不推荐）"><a href="#直接登录官网下载安装：（不推荐）" class="headerlink" title="直接登录官网下载安装：（不推荐）"></a>直接登录官网下载安装：（不推荐）</h2><p>jenkins的官网下载地址：<a href="https://jenkins.io/download/">https://jenkins.io/download/</a><br>因为这里是Mac下面所以需要选择MacOS的版本：(左边是稳定版本，右边是测试版本，所以一般都是选择左边的)<br><img src="Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/15578018638193.jpg" alt="Jenkins官网"><br>下载完成以后直接点击安装就可以了。之后在浏览器输入链接：<a href="http://localhost:8080/">http://localhost:8080</a> 就行</p>
+<h2 id="brew下载安装-推荐使用-："><a href="#brew下载安装-推荐使用-：" class="headerlink" title="brew下载安装(推荐使用)："></a>brew下载安装(推荐使用)：</h2><ul>
+<li><p>安装安装brew（如果已安装跳过）</p>
+  <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">/usr/</span>bin<span class="regexp">/ruby -e &quot;$(curl -fsSL https:/</span><span class="regexp">/raw.githubusercontent.com/</span>Homebrew<span class="regexp">/install/m</span>aster/install)”</span><br></pre></td></tr></table></figure></li>
+<li><p>安装Jenkins</p>
+  <figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span><span class="keyword">jenkins</span></span><br></pre></td></tr></table></figure></li>
+<li><p>查找jenkins war地址</p>
+  <figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">#在安装后有可能找不到war包地址,可以用mdfind命令本地查询下</span><br><span class="line"></span><br><span class="line">mdfind -name jenkins.war</span><br><span class="line">#<span class="regexp">/usr/</span>local<span class="regexp">/Cellar/</span>jenkins<span class="regexp">/2.174/</span>libexec/jenkins.war</span><br></pre></td></tr></table></figure></li>
+<li><p>启动</p>
+  <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">java -jar <span class="regexp">/usr/</span>local<span class="regexp">/Cellar/</span>jenkins<span class="regexp">/2.116/</span>libexec/jenkins.war --httpPort=<span class="number">8080</span></span><br></pre></td></tr></table></figure></li>
+<li><p>后台启动</p>
+  <figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">后台启动的意思是放到后台运行,即使窗口被干掉,jenkins的进程也会存在.</span><br><span class="line"></span><br><span class="line">简单用shell脚本nohup命令放到后台</span><br><span class="line"></span><br><span class="line">启动脚本命令:sh startjenkins.sh</span><br><span class="line"></span><br><span class="line">#!<span class="regexp">/bin/</span>bash</span><br><span class="line">echo start jenkins</span><br><span class="line"></span><br><span class="line">nohup java -jar <span class="regexp">/usr/</span>local<span class="regexp">/Cellar/</span>jenkins<span class="regexp">/2.116/</span>libexec/jenkins.war --httpPort=<span class="number">8080</span> &amp;</span><br><span class="line"></span><br><span class="line">echo start end</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="Jenkins的环境配置"><a href="#Jenkins的环境配置" class="headerlink" title="Jenkins的环境配置"></a>Jenkins的环境配置</h1><h2 id="启动进入"><a href="#启动进入" class="headerlink" title="启动进入"></a>启动进入</h2><p>启动成功就可以在浏览器输入<a href="http://localhost:8080后">http://localhost:8080后</a><br><img src="Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/15578025178751.jpg" alt="Jenkins官网"><br>可以通过红色路径找到文件打开查看密码，Mac下面路径这个</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">/Users/</span>你的Mac用户名<span class="regexp">/.jenkins/</span>secrets/initialAdminPassword</span><br></pre></td></tr></table></figure>
+<p>密码：<br><img src="Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/15578027381238.jpg" alt="Jenkins官网"></p>
+<h2 id="插件安装"><a href="#插件安装" class="headerlink" title="插件安装"></a>插件安装</h2><p>输入密码进入插件安装的页面，分别是“安装建议的插件”和“选择插件进行安装”，这里我选择左侧的选项（“安装建议的插件”），然后等待自动安装完成<br>如果提示install failure，右下角有个retry，重试一下就好了</p>
+<h2 id="创建第一个管理员账户"><a href="#创建第一个管理员账户" class="headerlink" title="创建第一个管理员账户"></a>创建第一个管理员账户</h2><p><img src="Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/15578050696004.jpg" alt="Jenkins官网"><br>填写完表格，点击save and finish，jenkins的初始配置就完成啦<br>然后要重启一下，填入刚才输入的admin账号密码才能登录进去</p>
+<h1 id="jenkins常用操作"><a href="#jenkins常用操作" class="headerlink" title="jenkins常用操作"></a>jenkins常用操作</h1><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">访问:http:<span class="regexp">//</span>localhost:<span class="number">8080</span>/login?from=%<span class="number">2</span>F</span><br><span class="line"></span><br><span class="line">退出:http:<span class="regexp">//</span>localhost:<span class="number">8080</span>/<span class="keyword">exit</span> </span><br><span class="line"></span><br><span class="line">重启:http:<span class="regexp">//</span>localhost:<span class="number">8080</span>/restart </span><br><span class="line"></span><br><span class="line">重新加载:http:<span class="regexp">//</span>localhost:<span class="number">8080</span>/reload</span><br><span class="line"></span><br><span class="line"><span class="comment">#如果你不想/不需要后台服务，你可以运行:</span></span><br><span class="line">brew services start jenkins</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Jenkins</category>
+      </categories>
+      <tags>
+        <tag>Jenkins</tag>
       </tags>
   </entry>
   <entry>
@@ -1157,7 +1157,7 @@
 </ol>
 <p>成功后，终端显示</p>
 <blockquote>
-<p>Your identitification has been saved in /Users/xxx/.ssh/id_rsa.<br>Your public key has been saved in /user/xxx/id_rsa.pub.<br>the key fingerprint is xxxxxxxxxx…….xxxxxxxx <a href="mailto:&#121;&#111;&#117;&#114;&#x5f;&#x65;&#109;&#97;&#x69;&#108;&#64;&#x65;&#x78;&#97;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#x6d;">&#121;&#111;&#117;&#114;&#x5f;&#x65;&#109;&#97;&#x69;&#108;&#64;&#x65;&#x78;&#97;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#x6d;</a><br>The key’s randomart image is:<br>![-w465](Mac电脑用终端生成SSH key 访问自己的Github/15577192525730.jpg)</p>
+<p>Your identitification has been saved in /Users/xxx/.ssh/id_rsa.<br>Your public key has been saved in /user/xxx/id_rsa.pub.<br>the key fingerprint is xxxxxxxxxx…….xxxxxxxx <a href="mailto:&#121;&#111;&#x75;&#114;&#x5f;&#x65;&#109;&#x61;&#x69;&#x6c;&#64;&#x65;&#x78;&#x61;&#109;&#112;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#109;">&#121;&#111;&#x75;&#114;&#x5f;&#x65;&#109;&#x61;&#x69;&#x6c;&#64;&#x65;&#x78;&#x61;&#109;&#112;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#109;</a><br>The key’s randomart image is:<br>![-w465](Mac电脑用终端生成SSH key 访问自己的Github/15577192525730.jpg)</p>
 </blockquote>
 <h1 id="将SSH密钥添加到ssh-agent"><a href="#将SSH密钥添加到ssh-agent" class="headerlink" title="将SSH密钥添加到ssh-agent"></a>将SSH密钥添加到ssh-agent</h1><ol>
 <li><p>在后台启动ssh-agent</p>
@@ -1167,7 +1167,7 @@
 </ol>
 <p>成功后，中选显示：</p>
 <blockquote>
-<p> Identity added: /Users/xxx/.ssh/id_rsa (<a href="mailto:&#x79;&#x6f;&#x75;&#x72;&#95;&#x65;&#x6d;&#x61;&#x69;&#108;&#64;&#x65;&#x78;&#x61;&#109;&#x70;&#108;&#101;&#46;&#99;&#x6f;&#109;">&#x79;&#x6f;&#x75;&#x72;&#95;&#x65;&#x6d;&#x61;&#x69;&#108;&#64;&#x65;&#x78;&#x61;&#109;&#x70;&#108;&#101;&#46;&#99;&#x6f;&#109;</a>)</p>
+<p> Identity added: /Users/xxx/.ssh/id_rsa (<a href="mailto:&#121;&#111;&#x75;&#x72;&#95;&#x65;&#x6d;&#97;&#x69;&#108;&#64;&#101;&#x78;&#97;&#x6d;&#x70;&#x6c;&#x65;&#46;&#99;&#x6f;&#109;">&#121;&#111;&#x75;&#x72;&#95;&#x65;&#x6d;&#97;&#x69;&#108;&#64;&#101;&#x78;&#97;&#x6d;&#x70;&#x6c;&#x65;&#46;&#99;&#x6f;&#109;</a>)</p>
 </blockquote>
 <h1 id="添加SSH-key-到Github-上"><a href="#添加SSH-key-到Github-上" class="headerlink" title="添加SSH key 到Github 上"></a>添加SSH key 到Github 上</h1><ol>
 <li><p>将SSH密钥复制到剪贴板。</p>
@@ -1447,6 +1447,76 @@
       </tags>
   </entry>
   <entry>
+    <title>atxserver2设备管理平台搭建</title>
+    <url>/2019/08/21/atxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>前面分享了STF Andriod设备远程管理平台的搭建和使用，但是STF不支持iOS设备连接，虽然现在社区有了STF集成iOS设备的开源方案，但是经过实践不太稳定，后面再Testerhome社区发现了一个新的框架ATX2同时支持Android和iOS设备远程管理，经过实践设备连接非常稳定，所以这里分享下这个平台的搭建和使用</p>
+<h1 id="ATX2简介"><a href="#ATX2简介" class="headerlink" title="ATX2简介"></a>ATX2简介</h1><p>ATX2是一款可以远程控制Android和iOS设备的设备管理平台。该平台使用的技术栈为:Python3+NodeJS+RethinkDB 项目目前已经开源，作者是阿里的一位大牛:<a href="https://github.com/codeskyblue">codeskyblue</a></p>
+<ul>
+<li>项目:Github地址:<a href="https://github.com/openatx/atxserver2">https://github.com/openatx/atxserver2</a></li>
+<li>平台框架图如下所示：<br><img src="atxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/atx-frame.png" alt="框架图"></li>
+</ul>
+<h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><p>系统环境:Mac Os 10.14.6(因为要使用iOS设备连接WDA，所以需要Mac Os环境)</p>
+<p>python3安装</p>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>python3</span><br></pre></td></tr></table></figure>
+<p>rethinkdb安装</p>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span> rethinkdb</span><br></pre></td></tr></table></figure>
+
+<h1 id="服务部署"><a href="#服务部署" class="headerlink" title="服务部署"></a>服务部署</h1><p>启动ATX2服务有2种方式：</p>
+<ul>
+<li>Docker部署</li>
+<li>源码部署</li>
+</ul>
+<h2 id="Docker部署"><a href="#Docker部署" class="headerlink" title="Docker部署"></a>Docker部署</h2><ul>
+<li>使用Docker部署需要安装Docker，具体安装步骤见:Docker安装</li>
+<li>代码Clone到本地</li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/openatx/</span>atxserver2</span><br></pre></td></tr></table></figure>
+<ul>
+<li>打开命令终端，切换到代码目录，执行一条命令即可</li>
+</ul>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">docker-compose up</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="源码部署"><a href="#源码部署" class="headerlink" title="源码部署"></a>源码部署</h2><p>先准备好一个rethinkdb服务器，并启动</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">rethinkdb</span></span><br></pre></td></tr></table></figure>
+<p>代码clone到本地</p>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">git</span>@github.com:openatx/atxserver2.git</span><br></pre></td></tr></table></figure>
+<p>打开命令终端，切换到代码目录，然后执行命令下面的命令安装依赖</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">pip3 <span class="keyword">install</span> -r requirements.txt</span><br></pre></td></tr></table></figure>
+<p>启动服务，命令如下</p>
+<figure class="highlight dsconfig"><table><tr><td class="code"><pre><span class="line"><span class="comment">#默认方式启动，使用默认的登录方式，默认端口</span></span><br><span class="line"><span class="string">python3</span> <span class="string">main</span>.<span class="string">py</span>  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定认证方式</span></span><br><span class="line"><span class="string">python3</span> <span class="string">main</span>.<span class="string">py</span> <span class="built_in">--auth</span> <span class="string">simple</span>  <span class="comment">#默认是一个非常simple的认证，输入邮箱就可以</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置监听端口</span></span><br><span class="line"><span class="string">python3</span> <span class="string">main</span>.<span class="string">py</span> <span class="built_in">--port</span> <span class="string">4000</span> <span class="comment"># 默认监听4000端口</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="打开页面"><a href="#打开页面" class="headerlink" title="打开页面"></a>打开页面</h2><p>启动之后，浏览器打开<a href="http://localhost(本机ip也可以):4000，登录之后就可以顺利的看到设备列表页了,由于还没有接入设备所以设备列表为空。">http://localhost(本机ip也可以):4000，登录之后就可以顺利的看到设备列表页了,由于还没有接入设备所以设备列表为空。</a><br><img src="atxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/atx_index.png" alt="框架图"></p>
+<h1 id="Android设备接入atxserver2-android-provider"><a href="#Android设备接入atxserver2-android-provider" class="headerlink" title="Android设备接入atxserver2-android-provider"></a>Android设备接入<a href="https://github.com/openatx/atxserver2-android-provider">atxserver2-android-provider</a></h1><p>依赖 Python3.6+, NodeJS 8, Git-LFS<br>NodeJS版本太高了也不行，一定要NodeJS 8，推荐使用nvm管理node版本</p>
+<h2 id="Install-git-lfs"><a href="#Install-git-lfs" class="headerlink" title="Install git-lfs"></a>Install git-lfs</h2><figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>git-lfs</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Clone代码到本地，切换到代码目录"><a href="#Clone代码到本地，切换到代码目录" class="headerlink" title="Clone代码到本地，切换到代码目录"></a>Clone代码到本地，切换到代码目录</h2><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/openatx/</span>atxserver2-android-provider</span><br><span class="line">cd atxserver2-android-provider</span><br><span class="line">git lfs install</span><br><span class="line">git lfs pull</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">npm <span class="keyword">install</span></span><br><span class="line">pip <span class="keyword">install</span> -r requirements.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="启动，需要指定atxserver2的地址-假设地址为-http-localhost-4000"><a href="#启动，需要指定atxserver2的地址-假设地址为-http-localhost-4000" class="headerlink" title="启动，需要指定atxserver2的地址, 假设地址为 http://localhost:4000"></a>启动，需要指定atxserver2的地址, 假设地址为 <a href="http://localhost:4000/">http://localhost:4000</a></h2><figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">python3</span> main.<span class="keyword">py</span> --server localhos<span class="variable">t:4000</span></span><br></pre></td></tr></table></figure>
+<p>Provider可以通过adb track-devices自动发现已经接入的设备，当手机接入到电脑上时，会自动给手机安装minicap, minitouch, atx-agent, app-uiautomator-[test].apk, whatsinput-apk</p>
+<p>接入的设备需要配置好开发者选项, 不同设备的设置方案放到了该项目的Issue中, tag: device-settings 如果没有该机型，可以自助添加</p>
+<h1 id="iOS设备接入atxserver2-ios-provider"><a href="#iOS设备接入atxserver2-ios-provider" class="headerlink" title="iOS设备接入atxserver2-ios-provider"></a>iOS设备接入<a href="https://github.com/openatx/atxserver2-ios-provider">atxserver2-ios-provider</a></h1><p>依赖 Python3.6+, NodeJS 8, WebDriverAgent(appium)</p>
+<h2 id="安装libimobiledevice工具包"><a href="#安装libimobiledevice工具包" class="headerlink" title="安装libimobiledevice工具包"></a>安装libimobiledevice工具包</h2><figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span>uninstall --ignore-dependencies libimobiledevice</span><br><span class="line"><span class="keyword">brew </span>uninstall --ignore-dependencies usbmuxd</span><br><span class="line"></span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>--HEAD usbmuxd</span><br><span class="line"><span class="keyword">brew </span>unlink usbmuxd</span><br><span class="line"><span class="keyword">brew </span>link usbmuxd</span><br><span class="line"></span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>--HEAD libimobiledevice</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>ideviceinstaller</span><br><span class="line"><span class="keyword">brew </span>link --overwrite ideviceinstaller</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装atxserver2-ios-provider"><a href="#安装atxserver2-ios-provider" class="headerlink" title="安装atxserver2-ios-provider,"></a>安装atxserver2-ios-provider,</h2><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/openatx/</span>atxserver2-ios-provider --recursive</span><br><span class="line">cd atxserver2-ios-provider</span><br><span class="line">pip3 install -r requirements.txt</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="初始化其中的ATX-WebDriverAgent"><a href="#初始化其中的ATX-WebDriverAgent" class="headerlink" title="初始化其中的ATX-WebDriverAgent"></a>初始化其中的ATX-WebDriverAgent</h2><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/appium/</span>WebDriverAgent</span><br><span class="line">cd ATX-WebDriverAgent</span><br><span class="line">brew install carthage</span><br><span class="line">.<span class="regexp">/Scripts/</span>bootstrap.sh</span><br></pre></td></tr></table></figure>
+<p>后找台手机接到苹果电脑上。 按照这个文档<a href="https://testerhome.com/topics/7220">https://testerhome.com/topics/7220</a> 对WebDriverAgent项目进行下设置</p>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">python3</span> main.<span class="keyword">py</span></span><br></pre></td></tr></table></figure>
+<p>连接成功后，如下图所示可以看到连接的iOS设备，点击立即使用即可远程控制。<br><img src="atxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/atx2_iOS_action.gif" alt="示例图"></p>
+]]></content>
+      <categories>
+        <category>App自动化</category>
+      </categories>
+      <tags>
+        <tag>App自动化</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2019/05/20/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -1538,76 +1608,6 @@
 <li>Using FBSimulatorControl framework directly</li>
 </ol>
 <figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 解锁keychain，以便可以正常的签名应用，</span></span><br><span class="line"><span class="attribute">PASSWORD</span>=<span class="string">&quot;replace-with-your-password&quot;</span></span><br><span class="line">security unlock-keychain -p <span class="variable">$PASSWORD</span> ~/Library/Keychains/login.keychain</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取设备的UDID</span></span><br><span class="line"><span class="attribute">UDID</span>=$(idevice_id -l | head -n1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行测试</span></span><br><span class="line">xcodebuild -project WebDriverAgent.xcodeproj -scheme WebDriverAgentRunner -destination <span class="string">&quot;id=<span class="variable">$UDID</span>&quot;</span> test</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>App自动化</category>
-      </categories>
-      <tags>
-        <tag>App自动化</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>atxserver2设备管理平台搭建</title>
-    <url>/2019/08/21/atxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<p>[TOC]</p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>前面分享了STF Andriod设备远程管理平台的搭建和使用，但是STF不支持iOS设备连接，虽然现在社区有了STF集成iOS设备的开源方案，但是经过实践不太稳定，后面再Testerhome社区发现了一个新的框架ATX2同时支持Android和iOS设备远程管理，经过实践设备连接非常稳定，所以这里分享下这个平台的搭建和使用</p>
-<h1 id="ATX2简介"><a href="#ATX2简介" class="headerlink" title="ATX2简介"></a>ATX2简介</h1><p>ATX2是一款可以远程控制Android和iOS设备的设备管理平台。该平台使用的技术栈为:Python3+NodeJS+RethinkDB 项目目前已经开源，作者是阿里的一位大牛:<a href="https://github.com/codeskyblue">codeskyblue</a></p>
-<ul>
-<li>项目:Github地址:<a href="https://github.com/openatx/atxserver2">https://github.com/openatx/atxserver2</a></li>
-<li>平台框架图如下所示：<br><img src="atxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/atx-frame.png" alt="框架图"></li>
-</ul>
-<h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><p>系统环境:Mac Os 10.14.6(因为要使用iOS设备连接WDA，所以需要Mac Os环境)</p>
-<p>python3安装</p>
-<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>python3</span><br></pre></td></tr></table></figure>
-<p>rethinkdb安装</p>
-<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span> rethinkdb</span><br></pre></td></tr></table></figure>
-
-<h1 id="服务部署"><a href="#服务部署" class="headerlink" title="服务部署"></a>服务部署</h1><p>启动ATX2服务有2种方式：</p>
-<ul>
-<li>Docker部署</li>
-<li>源码部署</li>
-</ul>
-<h2 id="Docker部署"><a href="#Docker部署" class="headerlink" title="Docker部署"></a>Docker部署</h2><ul>
-<li>使用Docker部署需要安装Docker，具体安装步骤见:Docker安装</li>
-<li>代码Clone到本地</li>
-</ul>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/openatx/</span>atxserver2</span><br></pre></td></tr></table></figure>
-<ul>
-<li>打开命令终端，切换到代码目录，执行一条命令即可</li>
-</ul>
-<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">docker-compose up</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="源码部署"><a href="#源码部署" class="headerlink" title="源码部署"></a>源码部署</h2><p>先准备好一个rethinkdb服务器，并启动</p>
-<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">rethinkdb</span></span><br></pre></td></tr></table></figure>
-<p>代码clone到本地</p>
-<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">git</span>@github.com:openatx/atxserver2.git</span><br></pre></td></tr></table></figure>
-<p>打开命令终端，切换到代码目录，然后执行命令下面的命令安装依赖</p>
-<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">pip3 <span class="keyword">install</span> -r requirements.txt</span><br></pre></td></tr></table></figure>
-<p>启动服务，命令如下</p>
-<figure class="highlight dsconfig"><table><tr><td class="code"><pre><span class="line"><span class="comment">#默认方式启动，使用默认的登录方式，默认端口</span></span><br><span class="line"><span class="string">python3</span> <span class="string">main</span>.<span class="string">py</span>  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定认证方式</span></span><br><span class="line"><span class="string">python3</span> <span class="string">main</span>.<span class="string">py</span> <span class="built_in">--auth</span> <span class="string">simple</span>  <span class="comment">#默认是一个非常simple的认证，输入邮箱就可以</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置监听端口</span></span><br><span class="line"><span class="string">python3</span> <span class="string">main</span>.<span class="string">py</span> <span class="built_in">--port</span> <span class="string">4000</span> <span class="comment"># 默认监听4000端口</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="打开页面"><a href="#打开页面" class="headerlink" title="打开页面"></a>打开页面</h2><p>启动之后，浏览器打开<a href="http://localhost(本机ip也可以):4000，登录之后就可以顺利的看到设备列表页了,由于还没有接入设备所以设备列表为空。">http://localhost(本机ip也可以):4000，登录之后就可以顺利的看到设备列表页了,由于还没有接入设备所以设备列表为空。</a><br><img src="atxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/atx_index.png" alt="框架图"></p>
-<h1 id="Android设备接入atxserver2-android-provider"><a href="#Android设备接入atxserver2-android-provider" class="headerlink" title="Android设备接入atxserver2-android-provider"></a>Android设备接入<a href="https://github.com/openatx/atxserver2-android-provider">atxserver2-android-provider</a></h1><p>依赖 Python3.6+, NodeJS 8, Git-LFS<br>NodeJS版本太高了也不行，一定要NodeJS 8，推荐使用nvm管理node版本</p>
-<h2 id="Install-git-lfs"><a href="#Install-git-lfs" class="headerlink" title="Install git-lfs"></a>Install git-lfs</h2><figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>git-lfs</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="Clone代码到本地，切换到代码目录"><a href="#Clone代码到本地，切换到代码目录" class="headerlink" title="Clone代码到本地，切换到代码目录"></a>Clone代码到本地，切换到代码目录</h2><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/openatx/</span>atxserver2-android-provider</span><br><span class="line">cd atxserver2-android-provider</span><br><span class="line">git lfs install</span><br><span class="line">git lfs pull</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">npm <span class="keyword">install</span></span><br><span class="line">pip <span class="keyword">install</span> -r requirements.txt</span><br></pre></td></tr></table></figure>
-
-<h2 id="启动，需要指定atxserver2的地址-假设地址为-http-localhost-4000"><a href="#启动，需要指定atxserver2的地址-假设地址为-http-localhost-4000" class="headerlink" title="启动，需要指定atxserver2的地址, 假设地址为 http://localhost:4000"></a>启动，需要指定atxserver2的地址, 假设地址为 <a href="http://localhost:4000/">http://localhost:4000</a></h2><figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">python3</span> main.<span class="keyword">py</span> --server localhos<span class="variable">t:4000</span></span><br></pre></td></tr></table></figure>
-<p>Provider可以通过adb track-devices自动发现已经接入的设备，当手机接入到电脑上时，会自动给手机安装minicap, minitouch, atx-agent, app-uiautomator-[test].apk, whatsinput-apk</p>
-<p>接入的设备需要配置好开发者选项, 不同设备的设置方案放到了该项目的Issue中, tag: device-settings 如果没有该机型，可以自助添加</p>
-<h1 id="iOS设备接入atxserver2-ios-provider"><a href="#iOS设备接入atxserver2-ios-provider" class="headerlink" title="iOS设备接入atxserver2-ios-provider"></a>iOS设备接入<a href="https://github.com/openatx/atxserver2-ios-provider">atxserver2-ios-provider</a></h1><p>依赖 Python3.6+, NodeJS 8, WebDriverAgent(appium)</p>
-<h2 id="安装libimobiledevice工具包"><a href="#安装libimobiledevice工具包" class="headerlink" title="安装libimobiledevice工具包"></a>安装libimobiledevice工具包</h2><figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span>uninstall --ignore-dependencies libimobiledevice</span><br><span class="line"><span class="keyword">brew </span>uninstall --ignore-dependencies usbmuxd</span><br><span class="line"></span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>--HEAD usbmuxd</span><br><span class="line"><span class="keyword">brew </span>unlink usbmuxd</span><br><span class="line"><span class="keyword">brew </span>link usbmuxd</span><br><span class="line"></span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>--HEAD libimobiledevice</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>ideviceinstaller</span><br><span class="line"><span class="keyword">brew </span>link --overwrite ideviceinstaller</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装atxserver2-ios-provider"><a href="#安装atxserver2-ios-provider" class="headerlink" title="安装atxserver2-ios-provider,"></a>安装atxserver2-ios-provider,</h2><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/openatx/</span>atxserver2-ios-provider --recursive</span><br><span class="line">cd atxserver2-ios-provider</span><br><span class="line">pip3 install -r requirements.txt</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="初始化其中的ATX-WebDriverAgent"><a href="#初始化其中的ATX-WebDriverAgent" class="headerlink" title="初始化其中的ATX-WebDriverAgent"></a>初始化其中的ATX-WebDriverAgent</h2><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/appium/</span>WebDriverAgent</span><br><span class="line">cd ATX-WebDriverAgent</span><br><span class="line">brew install carthage</span><br><span class="line">.<span class="regexp">/Scripts/</span>bootstrap.sh</span><br></pre></td></tr></table></figure>
-<p>后找台手机接到苹果电脑上。 按照这个文档<a href="https://testerhome.com/topics/7220">https://testerhome.com/topics/7220</a> 对WebDriverAgent项目进行下设置</p>
-<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">python3</span> main.<span class="keyword">py</span></span><br></pre></td></tr></table></figure>
-<p>连接成功后，如下图所示可以看到连接的iOS设备，点击立即使用即可远程控制。<br><img src="atxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/atx2_iOS_action.gif" alt="示例图"></p>
 ]]></content>
       <categories>
         <category>App自动化</category>
@@ -1782,38 +1782,6 @@
       </tags>
   </entry>
   <entry>
-    <title>libimobiledevice命令</title>
-    <url>/2019/05/21/libimobiledevice%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>A library to communicate with services of Apple iOS devices using native protocols.</p>
-<h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><ul>
-<li><p>打印app列表</p>
-  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">ideviceinstaller -l</span></span><br></pre></td></tr></table></figure></li>
-<li><p>查看当前已连接的设备的UUID</p>
-  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">idevice_id -l</span></span><br></pre></td></tr></table></figure></li>
-<li><p>获取设备信息</p>
-  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">ideviceinfo</span></span><br></pre></td></tr></table></figure></li>
-<li><p>获取设备时间</p>
-  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">idevicedate</span></span><br></pre></td></tr></table></figure></li>
-<li><p>重启设备</p>
-  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">idevicediagnostics restart</span></span><br></pre></td></tr></table></figure></li>
-<li><p>安装ipa包，卸载应用</p>
-  <figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">ideviceinstaller -<span class="selector-tag">i</span> xxx.ipa</span><br><span class="line"><span class="comment">//命令安装一个ipa文件到手机上，如果是企业签名的，非越狱机器也可以直接安装了。</span></span><br><span class="line"></span><br><span class="line">ideviceinstaller -U <span class="selector-attr">[bundleID]</span></span><br><span class="line"><span class="comment">//命令卸载应用，需要知道此应用的bundleID</span></span><br></pre></td></tr></table></figure></li>
-<li><p>查看系统日志</p>
-  <figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">idevicesyslog</span><br><span class="line"><span class="comment">//屏幕上即可看见手机上所有的日志</span></span><br><span class="line"></span><br><span class="line">idevicesyslog &gt;&gt; iphone.<span class="built_in">log</span> <span class="meta">&amp;</span></span><br><span class="line"><span class="comment">//该命令是将日志导入到iphone.log这个文件，并且是在后台执行。</span></span><br><span class="line"><span class="comment">//然后用tail -f和grep查看log</span></span><br><span class="line"></span><br><span class="line">tail -f iphone.<span class="built_in">log</span></span><br><span class="line">tail -f iphone.<span class="built_in">log</span> <span class="string">| grep &#x27;WeChat’  # 查看包含WeChat的行</span></span><br></pre></td></tr></table></figure></li>
-<li><p>截图</p>
-  <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">idevicescreenshot</span><br><span class="line"><span class="regexp">//</span>如果在使用截图的时候出现报错信息，那么就去把相应版本的DeveloperDiskImage的两个文件复制到libimobiledevice文件下面。</span><br><span class="line"></span><br><span class="line">路径：</span><br><span class="line"><span class="regexp">/Applications/</span>Xcode.app<span class="regexp">/Contents/</span>Developer<span class="regexp">/Platforms/i</span>PhoneOS.platform<span class="regexp">/DeviceSupport/</span>对应版本/</span><br><span class="line"></span><br><span class="line">获取版本号命令：</span><br><span class="line">ideviceinfo -k ProductVersion</span><br><span class="line"></span><br><span class="line">安装DeveloperDiskImage命令：</span><br><span class="line">ideviceimagemounter DeveloperDiskImage.dmg</span><br><span class="line"><span class="regexp">//</span>然后就可以正常截图了</span><br></pre></td></tr></table></figure></li>
-<li><p>遇到报错</p>
-  <figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line">解决方法：卸载重装</span><br><span class="line"><span class="keyword">brew </span>uninstall ideviceinstaller</span><br><span class="line"><span class="keyword">brew </span>uninstall libimobiledevice</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>--HEAD libimobiledevice</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>ideviceinstaller</span><br></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
-      <categories>
-        <category>资料</category>
-      </categories>
-      <tags>
-        <tag>资料</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>item2常用快捷键</title>
     <url>/2019/05/20/item2%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
     <content><![CDATA[<h1 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h1><ul>
@@ -1894,6 +1862,38 @@
       </tags>
   </entry>
   <entry>
+    <title>libimobiledevice命令</title>
+    <url>/2019/05/21/libimobiledevice%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>A library to communicate with services of Apple iOS devices using native protocols.</p>
+<h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><ul>
+<li><p>打印app列表</p>
+  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">ideviceinstaller -l</span></span><br></pre></td></tr></table></figure></li>
+<li><p>查看当前已连接的设备的UUID</p>
+  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">idevice_id -l</span></span><br></pre></td></tr></table></figure></li>
+<li><p>获取设备信息</p>
+  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">ideviceinfo</span></span><br></pre></td></tr></table></figure></li>
+<li><p>获取设备时间</p>
+  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">idevicedate</span></span><br></pre></td></tr></table></figure></li>
+<li><p>重启设备</p>
+  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">idevicediagnostics restart</span></span><br></pre></td></tr></table></figure></li>
+<li><p>安装ipa包，卸载应用</p>
+  <figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">ideviceinstaller -<span class="selector-tag">i</span> xxx.ipa</span><br><span class="line"><span class="comment">//命令安装一个ipa文件到手机上，如果是企业签名的，非越狱机器也可以直接安装了。</span></span><br><span class="line"></span><br><span class="line">ideviceinstaller -U <span class="selector-attr">[bundleID]</span></span><br><span class="line"><span class="comment">//命令卸载应用，需要知道此应用的bundleID</span></span><br></pre></td></tr></table></figure></li>
+<li><p>查看系统日志</p>
+  <figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">idevicesyslog</span><br><span class="line"><span class="comment">//屏幕上即可看见手机上所有的日志</span></span><br><span class="line"></span><br><span class="line">idevicesyslog &gt;&gt; iphone.<span class="built_in">log</span> <span class="meta">&amp;</span></span><br><span class="line"><span class="comment">//该命令是将日志导入到iphone.log这个文件，并且是在后台执行。</span></span><br><span class="line"><span class="comment">//然后用tail -f和grep查看log</span></span><br><span class="line"></span><br><span class="line">tail -f iphone.<span class="built_in">log</span></span><br><span class="line">tail -f iphone.<span class="built_in">log</span> <span class="string">| grep &#x27;WeChat’  # 查看包含WeChat的行</span></span><br></pre></td></tr></table></figure></li>
+<li><p>截图</p>
+  <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">idevicescreenshot</span><br><span class="line"><span class="regexp">//</span>如果在使用截图的时候出现报错信息，那么就去把相应版本的DeveloperDiskImage的两个文件复制到libimobiledevice文件下面。</span><br><span class="line"></span><br><span class="line">路径：</span><br><span class="line"><span class="regexp">/Applications/</span>Xcode.app<span class="regexp">/Contents/</span>Developer<span class="regexp">/Platforms/i</span>PhoneOS.platform<span class="regexp">/DeviceSupport/</span>对应版本/</span><br><span class="line"></span><br><span class="line">获取版本号命令：</span><br><span class="line">ideviceinfo -k ProductVersion</span><br><span class="line"></span><br><span class="line">安装DeveloperDiskImage命令：</span><br><span class="line">ideviceimagemounter DeveloperDiskImage.dmg</span><br><span class="line"><span class="regexp">//</span>然后就可以正常截图了</span><br></pre></td></tr></table></figure></li>
+<li><p>遇到报错</p>
+  <figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line">解决方法：卸载重装</span><br><span class="line"><span class="keyword">brew </span>uninstall ideviceinstaller</span><br><span class="line"><span class="keyword">brew </span>uninstall libimobiledevice</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>--HEAD libimobiledevice</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>ideviceinstaller</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>资料</category>
+      </categories>
+      <tags>
+        <tag>资料</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>云储存选择做Hexo博客图床（腾讯云、七牛云、网易云）</title>
     <url>/2019/05/23/%E4%BA%91%E5%82%A8%E5%AD%98%E9%80%89%E6%8B%A9%E5%81%9AHexo%E5%8D%9A%E5%AE%A2%E5%9B%BE%E5%BA%8A%EF%BC%88%E8%85%BE%E8%AE%AF%E4%BA%91%E3%80%81%E4%B8%83%E7%89%9B%E4%BA%91%E3%80%81%E7%BD%91%E6%98%93%E4%BA%91%EF%BC%89/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>博客里需要添加很多图片作为内容的补充，但是把图片放在本地博客文件夹里，上传到网上后，加载这些图片就是一个很大的问题，他们会拖累网页加载的速度，所以建议把图片放图床里，通过外链来访问和加载这些图片。</p>
@@ -1919,6 +1919,56 @@
       </categories>
       <tags>
         <tag>Hexo Next</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 mitmproxy + python 实现移动端异常数据测试</title>
+    <url>/2020/08/31/%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<p><a href="https://github.com/mitmproxy/mitmproxy">mitmproxy github地址（Man-in-the-middle attack）</a></p>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>Crash率是衡量一个App好坏的重要指标之一，如果你忽略了它的存在，它就会愈演愈烈<br>客户端的很大一部分的Crash是因为API返回的脏数据。比如当API返回空值、空数组或返回不是约定类型的数据，App收到这些数据，就极有可能发生空指针、数组越界和类型转换错误等Crash。而且这样的脏数据，特别容易引起线上大面积的崩溃。</p>
+<h1 id="异常数据测试方法"><a href="#异常数据测试方法" class="headerlink" title="异常数据测试方法"></a>异常数据测试方法</h1><p>手工测试时，借助charles等抓包工具，对返回结果拦截修改数据，再进行数据的maplocal</p>
+<h2 id="异常数据修改规则"><a href="#异常数据修改规则" class="headerlink" title="异常数据修改规则"></a>异常数据修改规则</h2><p>字符：非法字符、超长、null<br>数组：空数组、非法序列<br>接口超时：5s、10s<br>接口状态码：404、500、503<br>增加删除数据：数组、字典</p>
+<h1 id="mitmproxy是什么"><a href="#mitmproxy是什么" class="headerlink" title="mitmproxy是什么"></a>mitmproxy是什么</h1><p>顾名思义，mitmproxy 就是用于 MITM 的 proxy，MITM 即中间人攻击（Man-in-the-middle attack）。<br>    <img src="%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/mitmproxy.png" alt="mitmproxy"><br>    mitmproxy是一个支持HTTP和HTTPS的抓包程序，有类似Fiddler、Charles的功能，只不过它是一个控制台的形式操作。mitmproxy还有两个关联组件。一个是mitmdump，它是mitmproxy的命令行接口，利用它我们可以对接Python脚本，用Python实现监听后的处理。另一个是mitmweb，它是一个Web程序，通过它我们可以清楚观察mitmproxy捕获的请求。</p>
+<h2 id="mitmproxy有如下几项功能"><a href="#mitmproxy有如下几项功能" class="headerlink" title="mitmproxy有如下几项功能"></a>mitmproxy有如下几项功能</h2><ul>
+<li>拦截HTTP和HTTPS请求和响应。</li>
+<li>保存HTTP会话并进行分析。</li>
+<li>模拟客户端发起请求，模拟服务端返回响应。</li>
+<li>利用反向代理将流量转发给指定的服务器。</li>
+<li>支持Mac和Linux上的透明代理。</li>
+<li>利用Python对HTTP请求和响应进行实时处理。</li>
+</ul>
+<h1 id="安装mitmproxy"><a href="#安装mitmproxy" class="headerlink" title="安装mitmproxy"></a>安装mitmproxy</h1><p><code>brew install mitmproxy</code><br>安装完成后，系统将拥有 mitmproxy、mitmdump、mitmweb 三个命令<br>验证安装成功<br><code>mitmdump --version</code><br>应当可以看到类似于这样的输出：</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">Mitmproxy</span>: <span class="number">5</span>.<span class="number">2</span></span><br><span class="line"><span class="attribute">Python</span>:    <span class="number">3</span>.<span class="number">7</span>.<span class="number">7</span></span><br><span class="line"><span class="attribute">OpenSSL</span>:   OpenSSL <span class="number">1</span>.<span class="number">1</span>.<span class="number">1</span>g  <span class="number">21</span> Apr <span class="number">2020</span></span><br><span class="line"><span class="attribute">Platform</span>:  Darwin-<span class="number">19</span>.<span class="number">6</span>.<span class="number">0</span>-x<span class="number">86</span>_<span class="number">64</span>-i<span class="number">386</span>-<span class="number">64</span>bit</span><br></pre></td></tr></table></figure>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>要启动 mitmproxy 用 <code>mitmproxy</code>、<code>mitmdump</code>、<code>mitmweb</code> 这三个命令中的任意一个即可，这三个命令功能一致，且都可以加载自定义脚本，唯一的区别是交互界面的不同。<br>mitmproxy 命令启动后，会提供一个命令行界面，用户可以实时看到发生的请求，并通过命令过滤请求，查看请求数据。形如：<br>启动 mitmproxy：<br><code>mitmweb</code><br>应当看到如下输出：</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">Web server listening at http:<span class="regexp">//</span><span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">8081</span>/</span><br><span class="line">Proxy server listening at http:<span class="regexp">//</span>*:<span class="number">8080</span></span><br></pre></td></tr></table></figure>
+<h1 id="设置代理-https证书安装"><a href="#设置代理-https证书安装" class="headerlink" title="设置代理+https证书安装"></a>设置代理+https证书安装</h1><p>移动设备和电脑保存在一个wifi网络下，在移动设备在网络代理填写：电脑ip+8080(端口)<br>在浏览器输入:<code>mitm.it</code>，选择对应设备类型安装证书</p>
+<h1 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h1><p>完成了上述工作，我们已经具备了操作 mitmproxy 的基本能力 了。接下来开始开发自定义脚本，这才是 mitmproxy 真正强大的地方。<br>脚本的编写需要遵循 mitmproxy 规定的套路，这样的套路有两个，使用时选其中一个套路即可。<br>##第一个套路<br>编写一个 py 文件供 mitmproxy 加载，文件中定义了若干函数，这些函数实现了某些 mitmproxy 提供的事件，mitmproxy 会在某个事件发生时调用对应的函数，形如：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="code"><pre><span class="line"><span class="built_in">from</span> mitmproxy import <span class="keyword">http</span></span><br><span class="line"><span class="built_in">from</span> mitmproxy import ctx</span><br><span class="line"></span><br><span class="line"><span class="built_in">num</span> = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def request(flow: <span class="keyword">http</span>.HTTPFlow):</span><br><span class="line">    <span class="built_in">global</span> <span class="built_in">num</span></span><br><span class="line">    <span class="built_in">num</span> = <span class="built_in">num</span> + <span class="number">1</span></span><br><span class="line">    ctx.<span class="built_in">log</span>.info(<span class="string">&quot;We&#x27;ve seen %d flows&quot;</span> % <span class="built_in">num</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="第二个套路"><a href="#第二个套路" class="headerlink" title="第二个套路"></a>第二个套路</h2><p>编写一个 py 文件供 mitmproxy 加载，文件定义了变量 addons，addons 是个数组，每个元素是一个类实例，这些类有若干方法，这些方法实现了某些 mitmproxy 提供的事件，mitmproxy 会在某个事件发生时调用对应的方法。这些类，称为一个个 addon，比如一个叫 Counter 的 addon：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> mitmproxy <span class="keyword">import</span> http</span><br><span class="line"><span class="keyword">from</span> mitmproxy <span class="keyword">import</span> ctx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.num = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">request</span>(<span class="params">self, flow: http.HTTPFlow</span>):</span></span><br><span class="line">        self.num = self.num + <span class="number">1</span></span><br><span class="line">        ctx.log.info(<span class="string">&quot;We&#x27;ve seen %d flows&quot;</span> % self.num)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">addons = [</span><br><span class="line">    Counter()</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h2 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h2><p>这里强烈建议使用第二种套路，这也是官方内置的一些 addon 的实现方式。</p>
+<p>我们将上面第二种套路的示例代码存为 addons.py，再重新启动 mitmproxy：</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">mitmweb</span> -s addons.py</span><br></pre></td></tr></table></figure>
+<p>这个脚本是当 request 发生时，计数器加一，并打印日志。这里对应的是 request 事件</p>
+<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>事件针对不同生命周期分为 5 类：HTTP 生命周期、 TCP 生命周期、Websocket 生命周期、网络连接生命周期、通用生命周期</p>
+<p>这里我们只介绍HTTP 生命周期的事件：<br><code>def http_connect(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 收到了来自客户端的 HTTP CONNECT 请求。在 flow 上设置非 2xx 响应将返回该响应并断开连接。CONNECT 不是常用的 HTTP 请求方法，目的是与服务器建立代理连接，仅是 client 与 proxy 的之间的交流，所以 CONNECT 请求不会触发 request、response 等其他常规的 HTTP 事件。</p>
+<p><code>def requestheaders(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自客户端的 HTTP 请求的头部被成功读取。此时 flow 中的 request 的 body 是空的。</p>
+<p><code>def request(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自客户端的 HTTP 请求被成功完整读取。</p>
+<p><code>def responseheaders(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自服务端的 HTTP 响应的头部被成功读取。此时 flow 中的 response 的 body 是空的。</p>
+<p><code>def response(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自服务端端的 HTTP 响应被成功完整读取。</p>
+<p><code>def error(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 发生了一个 HTTP 错误。比如无效的服务端响应、连接断开等。注意与“有效的 HTTP 错误返回”不是一回事，后者是一个正确的服务端响应，只是 HTTP code 表示错误而已。</p>
+<p>大多数情况下我们只会用到针对 HTTP 生命周期的几个事件。再精简一点，甚至只需要用到 http_connect、request、response 三个事件就能完成大多数需求了。</p>
+<h2 id="脚本示例"><a href="#脚本示例" class="headerlink" title="脚本示例"></a>脚本示例</h2><figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">&quot;&quot;&quot;</span><br><span class="line">拦截请求的request</span><br><span class="line">拦截返回的response</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> mitmproxy <span class="keyword">import</span> http</span><br><span class="line"></span><br><span class="line">def request(flow: http.HTTPFlow):</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== intercept request start ==========================&quot;)</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== host is:&#123;&#125; ========================== &quot;.format(flow.request.host))</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== url is:&#123;&#125; ========================== &quot;.format(flow.request.url))</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== method is:&#123;&#125; ========================== &quot;.format(flow.request.<span class="keyword">method</span>))</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== intercept request end ==========================\n\n\n&quot;)</span><br><span class="line"></span><br><span class="line">def response(flow: http.HTTPFlow):</span><br><span class="line">        code = flow.response.status_code</span><br></pre></td></tr></table></figure>
+<h2 id="常用Api有"><a href="#常用Api有" class="headerlink" title="常用Api有"></a>常用Api有</h2><h3 id="request"><a href="#request" class="headerlink" title="request"></a>request</h3><figure class="highlight vbscript"><table><tr><td class="code"><pre><span class="line">flow.<span class="built_in">request</span>.headers # 获取所有头信息，包含Host、User-Agent、Content-type等字段</span><br><span class="line">flow.<span class="built_in">request</span>.url # 完整的请求地址，包含域名及请求参数，但是不包含放在body里面的请求参数</span><br><span class="line">flow.<span class="built_in">request</span>.pretty_url # 同flow.<span class="built_in">request</span>.url目前没看出什么差别</span><br><span class="line">flow.<span class="built_in">request</span>.host # 域名</span><br><span class="line">flow.<span class="built_in">request</span>.method # 请求方式。POST、<span class="keyword">GET</span>等</span><br><span class="line">flow.<span class="built_in">request</span>.scheme # 什么请求 ，如https</span><br><span class="line">flow.<span class="built_in">request</span>.path # 请求的路径，url除域名之外的内容</span><br><span class="line">flow.<span class="built_in">request</span>.get_text() # 请求中body内容，有一些http会把请求参数放在body里面，那么可通过此方法获取，返回字典类型</span><br><span class="line">flow.<span class="built_in">request</span>.query # 返回MultiDictView类型的数据，url直接带的键值参数</span><br><span class="line">flow.<span class="built_in">request</span>.get_content() # bytes,结果如flow.<span class="built_in">request</span>.get_text()</span><br><span class="line">flow.<span class="built_in">request</span>.raw_content # bytes,结果如flow.<span class="built_in">request</span>.get_content()</span><br><span class="line">flow.<span class="built_in">request</span>.urlencoded_form # MultiDictView，content-type：application/x-www-form-urlencoded时的请求参数，不包含url直接带的键值参数</span><br><span class="line">flow.<span class="built_in">request</span>.multipart_form # MultiDictView，content-type：multipart/form-data时的请求参数，不包含url直接带的键值参数</span><br></pre></td></tr></table></figure>
+<h3 id="response"><a href="#response" class="headerlink" title="response"></a>response</h3><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">flow<span class="selector-class">.response</span><span class="selector-class">.status_code</span> #状态码</span><br><span class="line">flow<span class="selector-class">.response</span>.text#返回内容，已解码</span><br><span class="line">flow<span class="selector-class">.response</span><span class="selector-class">.content</span> #返回内容，二进制</span><br><span class="line">flow<span class="selector-class">.response</span><span class="selector-class">.setText</span>()#修改返回内容，不需要转码</span><br></pre></td></tr></table></figure>
+
+<h1 id="设计流程"><a href="#设计流程" class="headerlink" title="设计流程"></a>设计流程</h1><p>在上面提到可以拦截request和response,那么就可以对response数据做修改，再返回修改后的数据.<br>基于上面提到修改数据规则，随机多拦截数据做随机修改.<br>保存修改前和修改后的数据，方便数据diff.<br><img src="%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/%E8%AE%BE%E8%AE%A1%E6%B5%81%E7%A8%8B.jpg" alt="设计流程"></p>
+]]></content>
+      <categories>
+        <category>移动性能</category>
+      </categories>
+      <tags>
+        <tag>移动性能</tag>
       </tags>
   </entry>
   <entry>
@@ -2003,56 +2053,6 @@
       </categories>
       <tags>
         <tag>Jenkins</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用 mitmproxy + python 实现移动端异常数据测试</title>
-    <url>/2020/08/31/%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<p><a href="https://github.com/mitmproxy/mitmproxy">mitmproxy github地址（Man-in-the-middle attack）</a></p>
-<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>Crash率是衡量一个App好坏的重要指标之一，如果你忽略了它的存在，它就会愈演愈烈<br>客户端的很大一部分的Crash是因为API返回的脏数据。比如当API返回空值、空数组或返回不是约定类型的数据，App收到这些数据，就极有可能发生空指针、数组越界和类型转换错误等Crash。而且这样的脏数据，特别容易引起线上大面积的崩溃。</p>
-<h1 id="异常数据测试方法"><a href="#异常数据测试方法" class="headerlink" title="异常数据测试方法"></a>异常数据测试方法</h1><p>手工测试时，借助charles等抓包工具，对返回结果拦截修改数据，再进行数据的maplocal</p>
-<h2 id="异常数据修改规则"><a href="#异常数据修改规则" class="headerlink" title="异常数据修改规则"></a>异常数据修改规则</h2><p>字符：非法字符、超长、null<br>数组：空数组、非法序列<br>接口超时：5s、10s<br>接口状态码：404、500、503<br>增加删除数据：数组、字典</p>
-<h1 id="mitmproxy是什么"><a href="#mitmproxy是什么" class="headerlink" title="mitmproxy是什么"></a>mitmproxy是什么</h1><p>顾名思义，mitmproxy 就是用于 MITM 的 proxy，MITM 即中间人攻击（Man-in-the-middle attack）。<br>    <img src="%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/mitmproxy.png" alt="mitmproxy"><br>    mitmproxy是一个支持HTTP和HTTPS的抓包程序，有类似Fiddler、Charles的功能，只不过它是一个控制台的形式操作。mitmproxy还有两个关联组件。一个是mitmdump，它是mitmproxy的命令行接口，利用它我们可以对接Python脚本，用Python实现监听后的处理。另一个是mitmweb，它是一个Web程序，通过它我们可以清楚观察mitmproxy捕获的请求。</p>
-<h2 id="mitmproxy有如下几项功能"><a href="#mitmproxy有如下几项功能" class="headerlink" title="mitmproxy有如下几项功能"></a>mitmproxy有如下几项功能</h2><ul>
-<li>拦截HTTP和HTTPS请求和响应。</li>
-<li>保存HTTP会话并进行分析。</li>
-<li>模拟客户端发起请求，模拟服务端返回响应。</li>
-<li>利用反向代理将流量转发给指定的服务器。</li>
-<li>支持Mac和Linux上的透明代理。</li>
-<li>利用Python对HTTP请求和响应进行实时处理。</li>
-</ul>
-<h1 id="安装mitmproxy"><a href="#安装mitmproxy" class="headerlink" title="安装mitmproxy"></a>安装mitmproxy</h1><p><code>brew install mitmproxy</code><br>安装完成后，系统将拥有 mitmproxy、mitmdump、mitmweb 三个命令<br>验证安装成功<br><code>mitmdump --version</code><br>应当可以看到类似于这样的输出：</p>
-<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">Mitmproxy</span>: <span class="number">5</span>.<span class="number">2</span></span><br><span class="line"><span class="attribute">Python</span>:    <span class="number">3</span>.<span class="number">7</span>.<span class="number">7</span></span><br><span class="line"><span class="attribute">OpenSSL</span>:   OpenSSL <span class="number">1</span>.<span class="number">1</span>.<span class="number">1</span>g  <span class="number">21</span> Apr <span class="number">2020</span></span><br><span class="line"><span class="attribute">Platform</span>:  Darwin-<span class="number">19</span>.<span class="number">6</span>.<span class="number">0</span>-x<span class="number">86</span>_<span class="number">64</span>-i<span class="number">386</span>-<span class="number">64</span>bit</span><br></pre></td></tr></table></figure>
-<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>要启动 mitmproxy 用 <code>mitmproxy</code>、<code>mitmdump</code>、<code>mitmweb</code> 这三个命令中的任意一个即可，这三个命令功能一致，且都可以加载自定义脚本，唯一的区别是交互界面的不同。<br>mitmproxy 命令启动后，会提供一个命令行界面，用户可以实时看到发生的请求，并通过命令过滤请求，查看请求数据。形如：<br>启动 mitmproxy：<br><code>mitmweb</code><br>应当看到如下输出：</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">Web server listening at http:<span class="regexp">//</span><span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">8081</span>/</span><br><span class="line">Proxy server listening at http:<span class="regexp">//</span>*:<span class="number">8080</span></span><br></pre></td></tr></table></figure>
-<h1 id="设置代理-https证书安装"><a href="#设置代理-https证书安装" class="headerlink" title="设置代理+https证书安装"></a>设置代理+https证书安装</h1><p>移动设备和电脑保存在一个wifi网络下，在移动设备在网络代理填写：电脑ip+8080(端口)<br>在浏览器输入:<code>mitm.it</code>，选择对应设备类型安装证书</p>
-<h1 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h1><p>完成了上述工作，我们已经具备了操作 mitmproxy 的基本能力 了。接下来开始开发自定义脚本，这才是 mitmproxy 真正强大的地方。<br>脚本的编写需要遵循 mitmproxy 规定的套路，这样的套路有两个，使用时选其中一个套路即可。<br>##第一个套路<br>编写一个 py 文件供 mitmproxy 加载，文件中定义了若干函数，这些函数实现了某些 mitmproxy 提供的事件，mitmproxy 会在某个事件发生时调用对应的函数，形如：</p>
-<figure class="highlight livecodeserver"><table><tr><td class="code"><pre><span class="line"><span class="built_in">from</span> mitmproxy import <span class="keyword">http</span></span><br><span class="line"><span class="built_in">from</span> mitmproxy import ctx</span><br><span class="line"></span><br><span class="line"><span class="built_in">num</span> = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def request(flow: <span class="keyword">http</span>.HTTPFlow):</span><br><span class="line">    <span class="built_in">global</span> <span class="built_in">num</span></span><br><span class="line">    <span class="built_in">num</span> = <span class="built_in">num</span> + <span class="number">1</span></span><br><span class="line">    ctx.<span class="built_in">log</span>.info(<span class="string">&quot;We&#x27;ve seen %d flows&quot;</span> % <span class="built_in">num</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="第二个套路"><a href="#第二个套路" class="headerlink" title="第二个套路"></a>第二个套路</h2><p>编写一个 py 文件供 mitmproxy 加载，文件定义了变量 addons，addons 是个数组，每个元素是一个类实例，这些类有若干方法，这些方法实现了某些 mitmproxy 提供的事件，mitmproxy 会在某个事件发生时调用对应的方法。这些类，称为一个个 addon，比如一个叫 Counter 的 addon：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> mitmproxy <span class="keyword">import</span> http</span><br><span class="line"><span class="keyword">from</span> mitmproxy <span class="keyword">import</span> ctx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.num = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">request</span>(<span class="params">self, flow: http.HTTPFlow</span>):</span></span><br><span class="line">        self.num = self.num + <span class="number">1</span></span><br><span class="line">        ctx.log.info(<span class="string">&quot;We&#x27;ve seen %d flows&quot;</span> % self.num)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">addons = [</span><br><span class="line">    Counter()</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<h2 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h2><p>这里强烈建议使用第二种套路，这也是官方内置的一些 addon 的实现方式。</p>
-<p>我们将上面第二种套路的示例代码存为 addons.py，再重新启动 mitmproxy：</p>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">mitmweb</span> -s addons.py</span><br></pre></td></tr></table></figure>
-<p>这个脚本是当 request 发生时，计数器加一，并打印日志。这里对应的是 request 事件</p>
-<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>事件针对不同生命周期分为 5 类：HTTP 生命周期、 TCP 生命周期、Websocket 生命周期、网络连接生命周期、通用生命周期</p>
-<p>这里我们只介绍HTTP 生命周期的事件：<br><code>def http_connect(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 收到了来自客户端的 HTTP CONNECT 请求。在 flow 上设置非 2xx 响应将返回该响应并断开连接。CONNECT 不是常用的 HTTP 请求方法，目的是与服务器建立代理连接，仅是 client 与 proxy 的之间的交流，所以 CONNECT 请求不会触发 request、response 等其他常规的 HTTP 事件。</p>
-<p><code>def requestheaders(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自客户端的 HTTP 请求的头部被成功读取。此时 flow 中的 request 的 body 是空的。</p>
-<p><code>def request(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自客户端的 HTTP 请求被成功完整读取。</p>
-<p><code>def responseheaders(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自服务端的 HTTP 响应的头部被成功读取。此时 flow 中的 response 的 body 是空的。</p>
-<p><code>def response(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自服务端端的 HTTP 响应被成功完整读取。</p>
-<p><code>def error(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 发生了一个 HTTP 错误。比如无效的服务端响应、连接断开等。注意与“有效的 HTTP 错误返回”不是一回事，后者是一个正确的服务端响应，只是 HTTP code 表示错误而已。</p>
-<p>大多数情况下我们只会用到针对 HTTP 生命周期的几个事件。再精简一点，甚至只需要用到 http_connect、request、response 三个事件就能完成大多数需求了。</p>
-<h2 id="脚本示例"><a href="#脚本示例" class="headerlink" title="脚本示例"></a>脚本示例</h2><figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">&quot;&quot;&quot;</span><br><span class="line">拦截请求的request</span><br><span class="line">拦截返回的response</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> mitmproxy <span class="keyword">import</span> http</span><br><span class="line"></span><br><span class="line">def request(flow: http.HTTPFlow):</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== intercept request start ==========================&quot;)</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== host is:&#123;&#125; ========================== &quot;.format(flow.request.host))</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== url is:&#123;&#125; ========================== &quot;.format(flow.request.url))</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== method is:&#123;&#125; ========================== &quot;.format(flow.request.<span class="keyword">method</span>))</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== intercept request end ==========================\n\n\n&quot;)</span><br><span class="line"></span><br><span class="line">def response(flow: http.HTTPFlow):</span><br><span class="line">        code = flow.response.status_code</span><br></pre></td></tr></table></figure>
-<h2 id="常用Api有"><a href="#常用Api有" class="headerlink" title="常用Api有"></a>常用Api有</h2><h3 id="request"><a href="#request" class="headerlink" title="request"></a>request</h3><figure class="highlight vbscript"><table><tr><td class="code"><pre><span class="line">flow.<span class="built_in">request</span>.headers # 获取所有头信息，包含Host、User-Agent、Content-type等字段</span><br><span class="line">flow.<span class="built_in">request</span>.url # 完整的请求地址，包含域名及请求参数，但是不包含放在body里面的请求参数</span><br><span class="line">flow.<span class="built_in">request</span>.pretty_url # 同flow.<span class="built_in">request</span>.url目前没看出什么差别</span><br><span class="line">flow.<span class="built_in">request</span>.host # 域名</span><br><span class="line">flow.<span class="built_in">request</span>.method # 请求方式。POST、<span class="keyword">GET</span>等</span><br><span class="line">flow.<span class="built_in">request</span>.scheme # 什么请求 ，如https</span><br><span class="line">flow.<span class="built_in">request</span>.path # 请求的路径，url除域名之外的内容</span><br><span class="line">flow.<span class="built_in">request</span>.get_text() # 请求中body内容，有一些http会把请求参数放在body里面，那么可通过此方法获取，返回字典类型</span><br><span class="line">flow.<span class="built_in">request</span>.query # 返回MultiDictView类型的数据，url直接带的键值参数</span><br><span class="line">flow.<span class="built_in">request</span>.get_content() # bytes,结果如flow.<span class="built_in">request</span>.get_text()</span><br><span class="line">flow.<span class="built_in">request</span>.raw_content # bytes,结果如flow.<span class="built_in">request</span>.get_content()</span><br><span class="line">flow.<span class="built_in">request</span>.urlencoded_form # MultiDictView，content-type：application/x-www-form-urlencoded时的请求参数，不包含url直接带的键值参数</span><br><span class="line">flow.<span class="built_in">request</span>.multipart_form # MultiDictView，content-type：multipart/form-data时的请求参数，不包含url直接带的键值参数</span><br></pre></td></tr></table></figure>
-<h3 id="response"><a href="#response" class="headerlink" title="response"></a>response</h3><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">flow<span class="selector-class">.response</span><span class="selector-class">.status_code</span> #状态码</span><br><span class="line">flow<span class="selector-class">.response</span>.text#返回内容，已解码</span><br><span class="line">flow<span class="selector-class">.response</span><span class="selector-class">.content</span> #返回内容，二进制</span><br><span class="line">flow<span class="selector-class">.response</span><span class="selector-class">.setText</span>()#修改返回内容，不需要转码</span><br></pre></td></tr></table></figure>
-
-<h1 id="设计流程"><a href="#设计流程" class="headerlink" title="设计流程"></a>设计流程</h1><p>在上面提到可以拦截request和response,那么就可以对response数据做修改，再返回修改后的数据.<br>基于上面提到修改数据规则，随机多拦截数据做随机修改.<br>保存修改前和修改后的数据，方便数据diff.<br><img src="%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/%E8%AE%BE%E8%AE%A1%E6%B5%81%E7%A8%8B.jpg" alt="设计流程"></p>
-]]></content>
-      <categories>
-        <category>移动性能</category>
-      </categories>
-      <tags>
-        <tag>移动性能</tag>
       </tags>
   </entry>
   <entry>
