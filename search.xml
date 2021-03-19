@@ -181,6 +181,32 @@
       </tags>
   </entry>
   <entry>
+    <title>Hexo NexT 代码块复制功能</title>
+    <url>/2019/05/26/Hexo%20NexT%20%E4%BB%A3%E7%A0%81%E5%9D%97%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>为了提高博客代码块的用户体验，仅仅代码高亮还不行，最好还能一键复制代码。故此文将讲述Hexo NexT主题博客的代码块复制功能配置。</p>
+<h1 id="下载clipboard-js"><a href="#下载clipboard-js" class="headerlink" title="下载clipboard.js"></a>下载clipboard.js</h1><p>三方插件 clipboardjs ，相关介绍和兼容性我就不赘述了，去它<a href="https://clipboardjs.com/">主页</a>或<a href="https://github.com/zenorocha/clipboard.js">github</a>上看。</p>
+<p>下载地址：</p>
+<ul>
+<li><a href="https://raw.githubusercontent.com/zenorocha/clipboard.js/master/dist/clipboard.js">clipboard.js</a></li>
+<li><a href="https://raw.githubusercontent.com/zenorocha/clipboard.js/master/dist/clipboard.min.js">clipboard.min.js</a><br>保存文件<code>clipboard.js</code>、<code>clipboard.min.js </code>，到目录<code>\themes\next\source\js\src</code>下</li>
+</ul>
+<h1 id="clipboardjs-使用"><a href="#clipboardjs-使用" class="headerlink" title="clipboardjs 使用"></a>clipboardjs 使用</h1><p>在<code>\themes\next\source\js\src</code>目录下，创建<code>clipboard-use.js</code>文件，文件内容如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*页面载入完成后，创建复制按钮*/</span></span><br><span class="line">!<span class="function"><span class="keyword">function</span> (<span class="params">e, t, a</span>) </span>&#123; </span><br><span class="line">  <span class="comment">/* code */</span></span><br><span class="line">  <span class="keyword">var</span> initCopyCode = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> copyHtml = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    copyHtml += <span class="string">&#x27;&lt;button class=&quot;btn-copy&quot; data-clipboard-snippet=&quot;&quot;&gt;&#x27;</span>;</span><br><span class="line">    copyHtml += <span class="string">&#x27;  &lt;i class=&quot;fa fa-globe&quot;&gt;&lt;/i&gt;&lt;span&gt;copy&lt;/span&gt;&#x27;</span>;</span><br><span class="line">    copyHtml += <span class="string">&#x27;&lt;/button&gt;&#x27;</span>;</span><br><span class="line">    $(<span class="string">&quot;.highlight .code pre&quot;</span>).before(copyHtml);</span><br><span class="line">    <span class="keyword">new</span> ClipboardJS(<span class="string">&#x27;.btn-copy&#x27;</span>, &#123;</span><br><span class="line">        target: <span class="function"><span class="keyword">function</span>(<span class="params">trigger</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> trigger.nextElementSibling;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  initCopyCode();</span><br><span class="line">&#125;(<span class="built_in">window</span>, <span class="built_in">document</span>);</span><br></pre></td></tr></table></figure>
+<p>在<code>.\themes\next\source\css\_custom\custom.styl</code>文件中添加下面代码：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">//代码块复制按钮</span><br><span class="line"><span class="selector-class">.highlight</span>&#123;</span><br><span class="line">  //方便copy代码按钮（btn-copy）的定位</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.btn-copy</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#eee</span>;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(<span class="number">#fcfcfc</span>,<span class="number">#eee</span>);</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#d5d5d5</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">3px</span>;</span><br><span class="line">    -webkit-user-select: none;</span><br><span class="line">    -moz-user-select: none;</span><br><span class="line">    -ms-user-select: none;</span><br><span class="line">    user-select: none;</span><br><span class="line">    -webkit-appearance: none;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">13px</span>;</span><br><span class="line">    <span class="attribute">font-weight</span>: <span class="number">700</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#333</span>;</span><br><span class="line">    -webkit-<span class="attribute">transition</span>: opacity .<span class="number">3s</span> ease-in-out;</span><br><span class="line">    -o-<span class="attribute">transition</span>: opacity .<span class="number">3s</span> ease-in-out;</span><br><span class="line">    <span class="attribute">transition</span>: opacity .<span class="number">3s</span> ease-in-out;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">2px</span> <span class="number">6px</span>;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.btn-copy</span> <span class="selector-tag">span</span> &#123;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="number">5px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.highlight</span><span class="selector-pseudo">:hover</span> <span class="selector-class">.btn-copy</span>&#123;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><p>在<code>.\themes\next\layout\_layout.swig</code>文件中，添加引用（注：在 swig 末尾或 body 结束标签（</body>）之前添加）：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 代码块复制功能 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;/js/clipboard.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;/js/clipboard-use.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>![添加位置示例](Hexo NexT 代码块复制功能/15588460292199.jpg)</p>
+]]></content>
+      <categories>
+        <category>Hexo Next</category>
+      </categories>
+      <tags>
+        <tag>Hexo Next</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CocoaPods安装</title>
     <url>/2019/08/21/CocoaPods%E5%AE%89%E8%A3%85/</url>
     <content><![CDATA[<h1 id="Ruby环境搭建"><a href="#Ruby环境搭建" class="headerlink" title="Ruby环境搭建"></a>Ruby环境搭建</h1><h2 id="查看当前Ruby版本"><a href="#查看当前Ruby版本" class="headerlink" title="查看当前Ruby版本"></a>查看当前Ruby版本</h2><figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">ruby -v</span></span><br></pre></td></tr></table></figure>
@@ -225,37 +251,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Docker安装</title>
-    <url>/2019/08/21/Docker%E5%AE%89%E8%A3%85/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>Hexo NexT 代码块复制功能</title>
-    <url>/2019/05/26/Hexo%20NexT%20%E4%BB%A3%E7%A0%81%E5%9D%97%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>为了提高博客代码块的用户体验，仅仅代码高亮还不行，最好还能一键复制代码。故此文将讲述Hexo NexT主题博客的代码块复制功能配置。</p>
-<h1 id="下载clipboard-js"><a href="#下载clipboard-js" class="headerlink" title="下载clipboard.js"></a>下载clipboard.js</h1><p>三方插件 clipboardjs ，相关介绍和兼容性我就不赘述了，去它<a href="https://clipboardjs.com/">主页</a>或<a href="https://github.com/zenorocha/clipboard.js">github</a>上看。</p>
-<p>下载地址：</p>
-<ul>
-<li><a href="https://raw.githubusercontent.com/zenorocha/clipboard.js/master/dist/clipboard.js">clipboard.js</a></li>
-<li><a href="https://raw.githubusercontent.com/zenorocha/clipboard.js/master/dist/clipboard.min.js">clipboard.min.js</a><br>保存文件<code>clipboard.js</code>、<code>clipboard.min.js </code>，到目录<code>\themes\next\source\js\src</code>下</li>
-</ul>
-<h1 id="clipboardjs-使用"><a href="#clipboardjs-使用" class="headerlink" title="clipboardjs 使用"></a>clipboardjs 使用</h1><p>在<code>\themes\next\source\js\src</code>目录下，创建<code>clipboard-use.js</code>文件，文件内容如下：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*页面载入完成后，创建复制按钮*/</span></span><br><span class="line">!<span class="function"><span class="keyword">function</span> (<span class="params">e, t, a</span>) </span>&#123; </span><br><span class="line">  <span class="comment">/* code */</span></span><br><span class="line">  <span class="keyword">var</span> initCopyCode = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> copyHtml = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    copyHtml += <span class="string">&#x27;&lt;button class=&quot;btn-copy&quot; data-clipboard-snippet=&quot;&quot;&gt;&#x27;</span>;</span><br><span class="line">    copyHtml += <span class="string">&#x27;  &lt;i class=&quot;fa fa-globe&quot;&gt;&lt;/i&gt;&lt;span&gt;copy&lt;/span&gt;&#x27;</span>;</span><br><span class="line">    copyHtml += <span class="string">&#x27;&lt;/button&gt;&#x27;</span>;</span><br><span class="line">    $(<span class="string">&quot;.highlight .code pre&quot;</span>).before(copyHtml);</span><br><span class="line">    <span class="keyword">new</span> ClipboardJS(<span class="string">&#x27;.btn-copy&#x27;</span>, &#123;</span><br><span class="line">        target: <span class="function"><span class="keyword">function</span>(<span class="params">trigger</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> trigger.nextElementSibling;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  initCopyCode();</span><br><span class="line">&#125;(<span class="built_in">window</span>, <span class="built_in">document</span>);</span><br></pre></td></tr></table></figure>
-<p>在<code>.\themes\next\source\css\_custom\custom.styl</code>文件中添加下面代码：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">//代码块复制按钮</span><br><span class="line"><span class="selector-class">.highlight</span>&#123;</span><br><span class="line">  //方便copy代码按钮（btn-copy）的定位</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.btn-copy</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#eee</span>;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(<span class="number">#fcfcfc</span>,<span class="number">#eee</span>);</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#d5d5d5</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">3px</span>;</span><br><span class="line">    -webkit-user-select: none;</span><br><span class="line">    -moz-user-select: none;</span><br><span class="line">    -ms-user-select: none;</span><br><span class="line">    user-select: none;</span><br><span class="line">    -webkit-appearance: none;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">13px</span>;</span><br><span class="line">    <span class="attribute">font-weight</span>: <span class="number">700</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#333</span>;</span><br><span class="line">    -webkit-<span class="attribute">transition</span>: opacity .<span class="number">3s</span> ease-in-out;</span><br><span class="line">    -o-<span class="attribute">transition</span>: opacity .<span class="number">3s</span> ease-in-out;</span><br><span class="line">    <span class="attribute">transition</span>: opacity .<span class="number">3s</span> ease-in-out;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">2px</span> <span class="number">6px</span>;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.btn-copy</span> <span class="selector-tag">span</span> &#123;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="number">5px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.highlight</span><span class="selector-pseudo">:hover</span> <span class="selector-class">.btn-copy</span>&#123;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><p>在<code>.\themes\next\layout\_layout.swig</code>文件中，添加引用（注：在 swig 末尾或 body 结束标签（</body>）之前添加）：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 代码块复制功能 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;/js/clipboard.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;/js/clipboard-use.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>![添加位置示例](Hexo NexT 代码块复制功能/15588460292199.jpg)</p>
-]]></content>
-      <categories>
-        <category>Hexo Next</category>
-      </categories>
-      <tags>
-        <tag>Hexo Next</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo Next 主题中添加本地搜索功能</title>
     <url>/2019/05/22/Hexo%20Next%20%E4%B8%BB%E9%A2%98%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD/</url>
     <content><![CDATA[<h1 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h1><p>随着时间的推移，个人站点的博客文章会越来越多，那怎么样才能快速找到你印象中的文章呢？增加一个站点内的搜索功能是非常有必要和方便的。</p>
@@ -277,6 +272,11 @@
       <tags>
         <tag>Hexo Next</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Docker安装</title>
+    <url>/2019/08/21/Docker%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>Hexo之添加萌萌哒</title>
@@ -426,6 +426,25 @@
       </tags>
   </entry>
   <entry>
+    <title>JMeter(一)_Mac下安装部署</title>
+    <url>/2020/02/25/JMeter-%E4%B8%80-Mac%E4%B8%8B%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/</url>
+    <content><![CDATA[<p><a href="https://jmeter.apache.org/download_jmeter.cgi">JMeter官网下载</a><br><img src="JMeter-%E4%B8%80-Mac%E4%B8%8B%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/1651582602156_.pic_hd.jpg" alt="Jmeter版本"></p>
+<h1 id="运行方法一，直接运行"><a href="#运行方法一，直接运行" class="headerlink" title="运行方法一，直接运行"></a>运行方法一，直接运行</h1><p>解压后<br>命令行进入/Users/vic/apache-jmeter-5.1.1/bin目录下，输入sh jmeter即可启动</p>
+<h1 id="运行方法二，配置环境变量"><a href="#运行方法二，配置环境变量" class="headerlink" title="运行方法二，配置环境变量"></a>运行方法二，配置环境变量</h1><p>配置环境变量<br><code>vim ~/.bash_profile</code></p>
+<p>内容输入举例：</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">JMETER_HOME</span>=/Users/vic/apache-jmeter-5.1.1</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=<span class="variable">$PATH</span>:$JMETER_HOME/bin</span><br></pre></td></tr></table></figure>
+<p>使环境变量生效<br><code>source ~/.bash_profile</code></p>
+<p>修改jmeter为中文：<br>编辑/Users/vic/apache-jmeter-5.1.1/bin目录下的jmeter.properties文件<br>修改第37行左右如下：<br><img src="JMeter-%E4%B8%80-Mac%E4%B8%8B%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/1671582611252_.pic.jpg" alt="Jmeter版本"></p>
+<p>打开终端输入：<code>jmeter</code> 启动JMeter</p>
+]]></content>
+      <categories>
+        <category>JMeter</category>
+      </categories>
+      <tags>
+        <tag>JMeter</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JMeter(七)_关联之正则表达式提取器</title>
     <url>/2020/02/27/JMeter-%E4%B8%83-%E5%85%B3%E8%81%94%E4%B9%8B%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8F%90%E5%8F%96%E5%99%A8/</url>
     <content><![CDATA[<h2 id="应用场景："><a href="#应用场景：" class="headerlink" title="应用场景："></a>应用场景：</h2><p>在一个线程组中，从前一个请求的响应结果中，提取到某些需要的内容，可以作为下一个接口需要的入参从而实现关联<br>添加路径：HTTP请求-&gt;添加-&gt;后置处理器-&gt;正则表达式提取器<br><img src="JMeter-%E4%B8%83-%E5%85%B3%E8%81%94%E4%B9%8B%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8F%90%E5%8F%96%E5%99%A8/%E6%B7%BB%E5%8A%A0%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8F%90%E5%8F%96%E5%99%A8.png" alt="添加正则表达式提取器"></p>
@@ -490,25 +509,6 @@
 <p>一个合适的正则表达式是： id?test\“:”(.+?)”</p>
 </blockquote>
 <h4 id="4、从消息头（header）提取token"><a href="#4、从消息头（header）提取token" class="headerlink" title="4、从消息头（header）提取token:"></a>4、从消息头（header）提取token:</h4><p><img src="JMeter-%E4%B8%83-%E5%85%B3%E8%81%94%E4%B9%8B%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8F%90%E5%8F%96%E5%99%A8/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8F%90%E5%8F%96%E5%99%A8.png" alt="正则表达式提取器"></p>
-]]></content>
-      <categories>
-        <category>JMeter</category>
-      </categories>
-      <tags>
-        <tag>JMeter</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JMeter(一)_Mac下安装部署</title>
-    <url>/2020/02/25/JMeter-%E4%B8%80-Mac%E4%B8%8B%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/</url>
-    <content><![CDATA[<p><a href="https://jmeter.apache.org/download_jmeter.cgi">JMeter官网下载</a><br><img src="JMeter-%E4%B8%80-Mac%E4%B8%8B%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/1651582602156_.pic_hd.jpg" alt="Jmeter版本"></p>
-<h1 id="运行方法一，直接运行"><a href="#运行方法一，直接运行" class="headerlink" title="运行方法一，直接运行"></a>运行方法一，直接运行</h1><p>解压后<br>命令行进入/Users/vic/apache-jmeter-5.1.1/bin目录下，输入sh jmeter即可启动</p>
-<h1 id="运行方法二，配置环境变量"><a href="#运行方法二，配置环境变量" class="headerlink" title="运行方法二，配置环境变量"></a>运行方法二，配置环境变量</h1><p>配置环境变量<br><code>vim ~/.bash_profile</code></p>
-<p>内容输入举例：</p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">JMETER_HOME</span>=/Users/vic/apache-jmeter-5.1.1</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=<span class="variable">$PATH</span>:$JMETER_HOME/bin</span><br></pre></td></tr></table></figure>
-<p>使环境变量生效<br><code>source ~/.bash_profile</code></p>
-<p>修改jmeter为中文：<br>编辑/Users/vic/apache-jmeter-5.1.1/bin目录下的jmeter.properties文件<br>修改第37行左右如下：<br><img src="JMeter-%E4%B8%80-Mac%E4%B8%8B%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/1671582611252_.pic.jpg" alt="Jmeter版本"></p>
-<p>打开终端输入：<code>jmeter</code> 启动JMeter</p>
 ]]></content>
       <categories>
         <category>JMeter</category>
@@ -985,37 +985,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Mac Jenkins搭建</title>
-    <url>/2019/05/21/Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<h1 id="Mac-Jenkins搭建"><a href="#Mac-Jenkins搭建" class="headerlink" title="Mac Jenkins搭建"></a>Mac Jenkins搭建</h1><p>这里有两种方法可以用。第一种操作方便，可以直接下载安装包，但是安装包会有一些莫名的问题。第二种操作繁琐一点，需要操作命令行，直接命令行安装：</p>
-<h2 id="直接登录官网下载安装：（不推荐）"><a href="#直接登录官网下载安装：（不推荐）" class="headerlink" title="直接登录官网下载安装：（不推荐）"></a>直接登录官网下载安装：（不推荐）</h2><p>jenkins的官网下载地址：<a href="https://jenkins.io/download/">https://jenkins.io/download/</a><br>因为这里是Mac下面所以需要选择MacOS的版本：(左边是稳定版本，右边是测试版本，所以一般都是选择左边的)<br><img src="Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/15578018638193.jpg" alt="Jenkins官网"><br>下载完成以后直接点击安装就可以了。之后在浏览器输入链接：<a href="http://localhost:8080/">http://localhost:8080</a> 就行</p>
-<h2 id="brew下载安装-推荐使用-："><a href="#brew下载安装-推荐使用-：" class="headerlink" title="brew下载安装(推荐使用)："></a>brew下载安装(推荐使用)：</h2><ul>
-<li><p>安装安装brew（如果已安装跳过）</p>
-  <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">/usr/</span>bin<span class="regexp">/ruby -e &quot;$(curl -fsSL https:/</span><span class="regexp">/raw.githubusercontent.com/</span>Homebrew<span class="regexp">/install/m</span>aster/install)”</span><br></pre></td></tr></table></figure></li>
-<li><p>安装Jenkins</p>
-  <figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span><span class="keyword">jenkins</span></span><br></pre></td></tr></table></figure></li>
-<li><p>查找jenkins war地址</p>
-  <figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">#在安装后有可能找不到war包地址,可以用mdfind命令本地查询下</span><br><span class="line"></span><br><span class="line">mdfind -name jenkins.war</span><br><span class="line">#<span class="regexp">/usr/</span>local<span class="regexp">/Cellar/</span>jenkins<span class="regexp">/2.174/</span>libexec/jenkins.war</span><br></pre></td></tr></table></figure></li>
-<li><p>启动</p>
-  <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">java -jar <span class="regexp">/usr/</span>local<span class="regexp">/Cellar/</span>jenkins<span class="regexp">/2.116/</span>libexec/jenkins.war --httpPort=<span class="number">8080</span></span><br></pre></td></tr></table></figure></li>
-<li><p>后台启动</p>
-  <figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">后台启动的意思是放到后台运行,即使窗口被干掉,jenkins的进程也会存在.</span><br><span class="line"></span><br><span class="line">简单用shell脚本nohup命令放到后台</span><br><span class="line"></span><br><span class="line">启动脚本命令:sh startjenkins.sh</span><br><span class="line"></span><br><span class="line">#!<span class="regexp">/bin/</span>bash</span><br><span class="line">echo start jenkins</span><br><span class="line"></span><br><span class="line">nohup java -jar <span class="regexp">/usr/</span>local<span class="regexp">/Cellar/</span>jenkins<span class="regexp">/2.116/</span>libexec/jenkins.war --httpPort=<span class="number">8080</span> &amp;</span><br><span class="line"></span><br><span class="line">echo start end</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="Jenkins的环境配置"><a href="#Jenkins的环境配置" class="headerlink" title="Jenkins的环境配置"></a>Jenkins的环境配置</h1><h2 id="启动进入"><a href="#启动进入" class="headerlink" title="启动进入"></a>启动进入</h2><p>启动成功就可以在浏览器输入<a href="http://localhost:8080后">http://localhost:8080后</a><br><img src="Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/15578025178751.jpg" alt="Jenkins官网"><br>可以通过红色路径找到文件打开查看密码，Mac下面路径这个</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">/Users/</span>你的Mac用户名<span class="regexp">/.jenkins/</span>secrets/initialAdminPassword</span><br></pre></td></tr></table></figure>
-<p>密码：<br><img src="Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/15578027381238.jpg" alt="Jenkins官网"></p>
-<h2 id="插件安装"><a href="#插件安装" class="headerlink" title="插件安装"></a>插件安装</h2><p>输入密码进入插件安装的页面，分别是“安装建议的插件”和“选择插件进行安装”，这里我选择左侧的选项（“安装建议的插件”），然后等待自动安装完成<br>如果提示install failure，右下角有个retry，重试一下就好了</p>
-<h2 id="创建第一个管理员账户"><a href="#创建第一个管理员账户" class="headerlink" title="创建第一个管理员账户"></a>创建第一个管理员账户</h2><p><img src="Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/15578050696004.jpg" alt="Jenkins官网"><br>填写完表格，点击save and finish，jenkins的初始配置就完成啦<br>然后要重启一下，填入刚才输入的admin账号密码才能登录进去</p>
-<h1 id="jenkins常用操作"><a href="#jenkins常用操作" class="headerlink" title="jenkins常用操作"></a>jenkins常用操作</h1><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">访问:http:<span class="regexp">//</span>localhost:<span class="number">8080</span>/login?from=%<span class="number">2</span>F</span><br><span class="line"></span><br><span class="line">退出:http:<span class="regexp">//</span>localhost:<span class="number">8080</span>/<span class="keyword">exit</span> </span><br><span class="line"></span><br><span class="line">重启:http:<span class="regexp">//</span>localhost:<span class="number">8080</span>/restart </span><br><span class="line"></span><br><span class="line">重新加载:http:<span class="regexp">//</span>localhost:<span class="number">8080</span>/reload</span><br><span class="line"></span><br><span class="line"><span class="comment">#如果你不想/不需要后台服务，你可以运行:</span></span><br><span class="line">brew services start jenkins</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Jenkins</category>
-      </categories>
-      <tags>
-        <tag>Jenkins</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Mac下使用Hexo+Github搭建个人博客</title>
     <url>/2019/05/25/Mac%E4%B8%8B%E4%BD%BF%E7%94%A8Hexo-Github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Hexo是一个快速、简洁且高效的博客框架，最近有搭建个人博客的想法，便动手尝试了。<br>官方的<a href="https://hexo.io/zh-cn/docs/">文档</a></p>
@@ -1118,6 +1087,61 @@
       </tags>
   </entry>
   <entry>
+    <title>Mac Jenkins搭建</title>
+    <url>/2019/05/21/Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<h1 id="Mac-Jenkins搭建"><a href="#Mac-Jenkins搭建" class="headerlink" title="Mac Jenkins搭建"></a>Mac Jenkins搭建</h1><p>这里有两种方法可以用。第一种操作方便，可以直接下载安装包，但是安装包会有一些莫名的问题。第二种操作繁琐一点，需要操作命令行，直接命令行安装：</p>
+<h2 id="直接登录官网下载安装：（不推荐）"><a href="#直接登录官网下载安装：（不推荐）" class="headerlink" title="直接登录官网下载安装：（不推荐）"></a>直接登录官网下载安装：（不推荐）</h2><p>jenkins的官网下载地址：<a href="https://jenkins.io/download/">https://jenkins.io/download/</a><br>因为这里是Mac下面所以需要选择MacOS的版本：(左边是稳定版本，右边是测试版本，所以一般都是选择左边的)<br><img src="Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/15578018638193.jpg" alt="Jenkins官网"><br>下载完成以后直接点击安装就可以了。之后在浏览器输入链接：<a href="http://localhost:8080/">http://localhost:8080</a> 就行</p>
+<h2 id="brew下载安装-推荐使用-："><a href="#brew下载安装-推荐使用-：" class="headerlink" title="brew下载安装(推荐使用)："></a>brew下载安装(推荐使用)：</h2><ul>
+<li><p>安装安装brew（如果已安装跳过）</p>
+  <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">/usr/</span>bin<span class="regexp">/ruby -e &quot;$(curl -fsSL https:/</span><span class="regexp">/raw.githubusercontent.com/</span>Homebrew<span class="regexp">/install/m</span>aster/install)”</span><br></pre></td></tr></table></figure></li>
+<li><p>安装Jenkins</p>
+  <figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span><span class="keyword">jenkins</span></span><br></pre></td></tr></table></figure></li>
+<li><p>查找jenkins war地址</p>
+  <figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">#在安装后有可能找不到war包地址,可以用mdfind命令本地查询下</span><br><span class="line"></span><br><span class="line">mdfind -name jenkins.war</span><br><span class="line">#<span class="regexp">/usr/</span>local<span class="regexp">/Cellar/</span>jenkins<span class="regexp">/2.174/</span>libexec/jenkins.war</span><br></pre></td></tr></table></figure></li>
+<li><p>启动</p>
+  <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">java -jar <span class="regexp">/usr/</span>local<span class="regexp">/Cellar/</span>jenkins<span class="regexp">/2.116/</span>libexec/jenkins.war --httpPort=<span class="number">8080</span></span><br></pre></td></tr></table></figure></li>
+<li><p>后台启动</p>
+  <figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">后台启动的意思是放到后台运行,即使窗口被干掉,jenkins的进程也会存在.</span><br><span class="line"></span><br><span class="line">简单用shell脚本nohup命令放到后台</span><br><span class="line"></span><br><span class="line">启动脚本命令:sh startjenkins.sh</span><br><span class="line"></span><br><span class="line">#!<span class="regexp">/bin/</span>bash</span><br><span class="line">echo start jenkins</span><br><span class="line"></span><br><span class="line">nohup java -jar <span class="regexp">/usr/</span>local<span class="regexp">/Cellar/</span>jenkins<span class="regexp">/2.116/</span>libexec/jenkins.war --httpPort=<span class="number">8080</span> &amp;</span><br><span class="line"></span><br><span class="line">echo start end</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="Jenkins的环境配置"><a href="#Jenkins的环境配置" class="headerlink" title="Jenkins的环境配置"></a>Jenkins的环境配置</h1><h2 id="启动进入"><a href="#启动进入" class="headerlink" title="启动进入"></a>启动进入</h2><p>启动成功就可以在浏览器输入<a href="http://localhost:8080后">http://localhost:8080后</a><br><img src="Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/15578025178751.jpg" alt="Jenkins官网"><br>可以通过红色路径找到文件打开查看密码，Mac下面路径这个</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">/Users/</span>你的Mac用户名<span class="regexp">/.jenkins/</span>secrets/initialAdminPassword</span><br></pre></td></tr></table></figure>
+<p>密码：<br><img src="Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/15578027381238.jpg" alt="Jenkins官网"></p>
+<h2 id="插件安装"><a href="#插件安装" class="headerlink" title="插件安装"></a>插件安装</h2><p>输入密码进入插件安装的页面，分别是“安装建议的插件”和“选择插件进行安装”，这里我选择左侧的选项（“安装建议的插件”），然后等待自动安装完成<br>如果提示install failure，右下角有个retry，重试一下就好了</p>
+<h2 id="创建第一个管理员账户"><a href="#创建第一个管理员账户" class="headerlink" title="创建第一个管理员账户"></a>创建第一个管理员账户</h2><p><img src="Mac%E4%B8%8BJenkins%E6%90%AD%E5%BB%BA/15578050696004.jpg" alt="Jenkins官网"><br>填写完表格，点击save and finish，jenkins的初始配置就完成啦<br>然后要重启一下，填入刚才输入的admin账号密码才能登录进去</p>
+<h1 id="jenkins常用操作"><a href="#jenkins常用操作" class="headerlink" title="jenkins常用操作"></a>jenkins常用操作</h1><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">访问:http:<span class="regexp">//</span>localhost:<span class="number">8080</span>/login?from=%<span class="number">2</span>F</span><br><span class="line"></span><br><span class="line">退出:http:<span class="regexp">//</span>localhost:<span class="number">8080</span>/<span class="keyword">exit</span> </span><br><span class="line"></span><br><span class="line">重启:http:<span class="regexp">//</span>localhost:<span class="number">8080</span>/restart </span><br><span class="line"></span><br><span class="line">重新加载:http:<span class="regexp">//</span>localhost:<span class="number">8080</span>/reload</span><br><span class="line"></span><br><span class="line"><span class="comment">#如果你不想/不需要后台服务，你可以运行:</span></span><br><span class="line">brew services start jenkins</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Jenkins</category>
+      </categories>
+      <tags>
+        <tag>Jenkins</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mac终端安装指定版本node</title>
+    <url>/2019/08/21/Mac%E7%BB%88%E7%AB%AF%E5%AE%89%E8%A3%85%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%ACnode/</url>
+    <content><![CDATA[<h1 id="安装brew"><a href="#安装brew" class="headerlink" title="安装brew"></a>安装brew</h1><p>终端上运行</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">/usr/bin/ruby -e “<span class="constructor">$(<span class="params">curl</span> -<span class="params">fsSL</span> <span class="params">https</span>:<span class="operator">/</span><span class="operator">/</span><span class="params">raw</span>.<span class="params">githubusercontent</span>.<span class="params">com</span><span class="operator">/</span>Homebrew<span class="operator">/</span><span class="params">install</span><span class="operator">/</span><span class="params">master</span><span class="operator">/</span><span class="params">install</span>)</span>”</span><br></pre></td></tr></table></figure>
+
+<h1 id="安装NVM"><a href="#安装NVM" class="headerlink" title="安装NVM"></a>安装NVM</h1><p><code>brew install nvm</code></p>
+<p>安装完成之后打开shell的配置文件</p>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cd</span> ~</span><br><span class="line">vim <span class="string">.bash_profile</span></span><br></pre></td></tr></table></figure>
+
+<p>在文件里添加以下命令</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">export NVM_DIR=~/.nvm</span><br><span class="line">source <span class="constructor">$(<span class="params">brew</span> --<span class="params">prefix</span> <span class="params">nvm</span>)</span>/nvm.sh</span><br></pre></td></tr></table></figure>
+
+<p>然后重新source</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> .bash_profile</span><br></pre></td></tr></table></figure>
+
+<h1 id="使用nvm安装node"><a href="#使用nvm安装node" class="headerlink" title="使用nvm安装node"></a>使用nvm安装node</h1><figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">nvm ls-remote 查看 所有的<span class="keyword">node</span><span class="title">可用版本</span></span><br><span class="line"><span class="title">nvm</span> install xxx 下载你想要的版本</span><br><span class="line">nvm use xxx 使用指定版本的<span class="keyword">node</span><span class="title"></span></span><br><span class="line"><span class="title">nvm</span> alias default xxx 每次启动终端都使用该版本的<span class="keyword">node</span><span class="title"></span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>资料</category>
+      </categories>
+      <tags>
+        <tag>资料</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Mac电脑用终端生成SSH key 访问自己的Github</title>
     <url>/2019/05/21/Mac%E7%94%B5%E8%84%91%E7%94%A8%E7%BB%88%E7%AB%AF%E7%94%9F%E6%88%90SSH%20key%20%E8%AE%BF%E9%97%AE%E8%87%AA%E5%B7%B1%E7%9A%84Github/</url>
     <content><![CDATA[<h1 id="首先检测自己电脑是否存在-SSH-key"><a href="#首先检测自己电脑是否存在-SSH-key" class="headerlink" title="首先检测自己电脑是否存在 SSH key"></a>首先检测自己电脑是否存在 SSH key</h1><p>在生成SSH密钥之前，您可以检查是否有任何现有的SSH密钥。</p>
@@ -1157,7 +1181,7 @@
 </ol>
 <p>成功后，终端显示</p>
 <blockquote>
-<p>Your identitification has been saved in /Users/xxx/.ssh/id_rsa.<br>Your public key has been saved in /user/xxx/id_rsa.pub.<br>the key fingerprint is xxxxxxxxxx…….xxxxxxxx <a href="mailto:&#x79;&#x6f;&#117;&#114;&#x5f;&#x65;&#x6d;&#97;&#x69;&#108;&#x40;&#101;&#120;&#97;&#109;&#x70;&#108;&#x65;&#x2e;&#x63;&#111;&#x6d;">&#x79;&#x6f;&#117;&#114;&#x5f;&#x65;&#x6d;&#97;&#x69;&#108;&#x40;&#101;&#120;&#97;&#109;&#x70;&#108;&#x65;&#x2e;&#x63;&#111;&#x6d;</a><br>The key’s randomart image is:<br>![-w465](Mac电脑用终端生成SSH key 访问自己的Github/15577192525730.jpg)</p>
+<p>Your identitification has been saved in /Users/xxx/.ssh/id_rsa.<br>Your public key has been saved in /user/xxx/id_rsa.pub.<br>the key fingerprint is xxxxxxxxxx…….xxxxxxxx <a href="mailto:&#121;&#x6f;&#117;&#x72;&#95;&#x65;&#x6d;&#x61;&#105;&#108;&#x40;&#x65;&#120;&#x61;&#x6d;&#x70;&#x6c;&#101;&#46;&#x63;&#111;&#x6d;">&#121;&#x6f;&#117;&#x72;&#95;&#x65;&#x6d;&#x61;&#105;&#108;&#x40;&#x65;&#120;&#x61;&#x6d;&#x70;&#x6c;&#101;&#46;&#x63;&#111;&#x6d;</a><br>The key’s randomart image is:<br>![-w465](Mac电脑用终端生成SSH key 访问自己的Github/15577192525730.jpg)</p>
 </blockquote>
 <h1 id="将SSH密钥添加到ssh-agent"><a href="#将SSH密钥添加到ssh-agent" class="headerlink" title="将SSH密钥添加到ssh-agent"></a>将SSH密钥添加到ssh-agent</h1><ol>
 <li><p>在后台启动ssh-agent</p>
@@ -1167,7 +1191,7 @@
 </ol>
 <p>成功后，中选显示：</p>
 <blockquote>
-<p> Identity added: /Users/xxx/.ssh/id_rsa (<a href="mailto:&#x79;&#111;&#x75;&#x72;&#95;&#x65;&#x6d;&#x61;&#x69;&#108;&#x40;&#x65;&#120;&#97;&#109;&#x70;&#x6c;&#x65;&#x2e;&#99;&#111;&#x6d;">&#x79;&#111;&#x75;&#x72;&#95;&#x65;&#x6d;&#x61;&#x69;&#108;&#x40;&#x65;&#120;&#97;&#109;&#x70;&#x6c;&#x65;&#x2e;&#99;&#111;&#x6d;</a>)</p>
+<p> Identity added: /Users/xxx/.ssh/id_rsa (<a href="mailto:&#x79;&#111;&#117;&#114;&#x5f;&#101;&#109;&#97;&#x69;&#108;&#x40;&#101;&#120;&#97;&#x6d;&#112;&#108;&#101;&#x2e;&#x63;&#111;&#109;">&#x79;&#111;&#117;&#114;&#x5f;&#101;&#109;&#97;&#x69;&#108;&#x40;&#101;&#120;&#97;&#x6d;&#112;&#108;&#101;&#x2e;&#x63;&#111;&#109;</a>)</p>
 </blockquote>
 <h1 id="添加SSH-key-到Github-上"><a href="#添加SSH-key-到Github-上" class="headerlink" title="添加SSH key 到Github 上"></a>添加SSH key 到Github 上</h1><ol>
 <li><p>将SSH密钥复制到剪贴板。</p>
@@ -1210,16 +1234,6 @@
       </categories>
       <tags>
         <tag>资料</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SQL基础语句总结</title>
-    <url>/2019/05/20/SQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E5%8F%A5%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<h1 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h1><p>SQL 是用于访问和处理数据库的标准的计算机语言。</p>
-<h1 id="什么是-SQL？"><a href="#什么是-SQL？" class="headerlink" title="什么是 SQL？"></a>什么是 SQL？</h1><p>SQL 指结构化查询语言<br>SQL 使我们有能力访问数据库<br>SQL 是一种 ANSI 的标准计算机语言<br>编者注：ANSI，美国国家标准化组织</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">#显示数据库</span><br><span class="line"><span class="keyword">show</span> databases;</span><br><span class="line"></span><br><span class="line">#判断是否存在数据库test_mysql,有的话先删除</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">database</span> <span class="keyword">if</span> <span class="keyword">exists</span> test_mysql;</span><br><span class="line"></span><br><span class="line">#创建数据库</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> test_mysql;</span><br><span class="line"></span><br><span class="line">#删除数据库</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">database</span> test_mysql;</span><br><span class="line"></span><br><span class="line">#使用该数据库</span><br><span class="line">use test_mysql;</span><br><span class="line"></span><br><span class="line">#显示数据库中的表</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">tables</span>;</span><br><span class="line"></span><br><span class="line">#先判断表是否存在,存在先删除</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> student;</span><br><span class="line"></span><br><span class="line">#创建表</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> student(</span><br><span class="line">id <span class="type">int</span> auto_increment <span class="keyword">primary key</span>,</span><br><span class="line"><span class="type">name</span> <span class="type">varchar</span>(<span class="number">50</span>),</span><br><span class="line">sex <span class="type">varchar</span>(<span class="number">20</span>),</span><br><span class="line"><span class="type">date</span> <span class="type">varchar</span>(<span class="number">50</span>),</span><br><span class="line">)<span class="keyword">default</span> charset=utf8;</span><br><span class="line"></span><br><span class="line">#删除表</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> student;</span><br><span class="line"></span><br><span class="line">#查看表的结构</span><br><span class="line">describe student;  #可以简写为<span class="keyword">desc</span> student;</span><br><span class="line"></span><br><span class="line">#插入数据</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> student <span class="keyword">values</span>(<span class="keyword">null</span>,<span class="string">&#x27;test&#x27;</span>,<span class="string">&#x27;2018-10-2&#x27;</span>);</span><br><span class="line"></span><br><span class="line">#查询表中的数据</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student;</span><br><span class="line"><span class="keyword">select</span> id,<span class="type">name</span> <span class="keyword">from</span> student;</span><br><span class="line"></span><br><span class="line">#修改某一条数据</span><br><span class="line"><span class="keyword">update</span> student <span class="keyword">set</span> <span class="type">name</span>=<span class="string">&#x27;jack&#x27;</span> <span class="keyword">where</span> id=<span class="number">4</span>;</span><br><span class="line"></span><br><span class="line">#删除数据</span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> student <span class="keyword">where</span> id=<span class="number">8</span>;</span><br><span class="line"></span><br><span class="line"># <span class="keyword">and</span> 且</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="type">date</span>&gt;<span class="string">&#x27;2018-1-2&#x27;</span> <span class="keyword">and</span> <span class="type">date</span>&lt;<span class="string">&#x27;2018-12-1&#x27;</span>;</span><br><span class="line"></span><br><span class="line"># <span class="keyword">or</span> 或</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="type">date</span>&lt;<span class="string">&#x27;2018-11-2&#x27;</span> <span class="keyword">or</span> <span class="type">date</span>&gt;<span class="string">&#x27;2018-12-1&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#between</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="type">date</span> <span class="keyword">between</span> <span class="string">&#x27;2018-1-2&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;2018-12-1&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#in 查询制定集合内的数据</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> id <span class="keyword">in</span> (<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">#排序 <span class="keyword">asc</span> 升序  <span class="keyword">desc</span> 降序</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">order</span> <span class="keyword">by</span> id <span class="keyword">asc</span>;</span><br><span class="line"></span><br><span class="line">#分组查询 #聚合函数</span><br><span class="line"><span class="keyword">select</span> max(id),<span class="type">name</span>,sex <span class="keyword">from</span> student <span class="keyword">group</span> <span class="keyword">by</span> sex;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> min(<span class="type">date</span>) <span class="keyword">from</span> student;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> avg(id) <span class="keyword">as</span> <span class="string">&#x27;Avg&#x27;</span> <span class="keyword">from</span> student;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> count(*) <span class="keyword">from</span> student;   #统计表中总数</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> count(sex) <span class="keyword">from</span> student;   #统计表中性别总数  若有一条数据中sex为空的话,就不予以统计~</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> sum(id) <span class="keyword">from</span> student;</span><br><span class="line"></span><br><span class="line">#查询第i条以后到第j条的数据(不包括第i条)</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">limit</span> <span class="number">2</span>,<span class="number">5</span>;  #显示<span class="number">3</span><span class="number">-5</span>条数据</span><br><span class="line"></span><br><span class="line">#修改数据</span><br><span class="line"><span class="keyword">update</span> student <span class="keyword">set</span> <span class="type">name</span>=<span class="string">&#x27;test&#x27;</span> <span class="keyword">where</span> id=<span class="number">2</span>;</span><br><span class="line"><span class="keyword">update</span> student <span class="keyword">set</span> <span class="type">name</span>=<span class="string">&#x27;花花&#x27;</span>,sex=<span class="string">&#x27;女&#x27;</span> <span class="keyword">where</span> id=<span class="number">2</span></span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> student <span class="keyword">where</span> id=<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">#修改表的名字</span><br><span class="line">#格式:<span class="keyword">alter</span> <span class="keyword">table</span> tbl_name <span class="keyword">rename</span> <span class="keyword">to</span> new_name</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">rename</span> <span class="keyword">to</span> test_1;</span><br><span class="line"></span><br><span class="line">#向表中增加一个字段(列)</span><br><span class="line">#格式:<span class="keyword">alter</span> <span class="keyword">table</span> tablename <span class="keyword">add</span> columnname <span class="keyword">type</span>;/<span class="keyword">alter</span> <span class="keyword">table</span> tablename <span class="keyword">add</span>(columnname <span class="keyword">type</span>);</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">add</span>  age <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">set</span> <span class="keyword">default</span> <span class="string">&#x27;1&#x27;</span>; #<span class="keyword">set</span> <span class="keyword">default</span> 设置默认值</span><br><span class="line"></span><br><span class="line">#修改表中某个字段的名字</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> tablename change columnname newcolumnname <span class="keyword">type</span>;  #修改一个表的字段名</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student change <span class="type">name</span> test_name <span class="type">varchar</span>(<span class="number">50</span>);</span><br><span class="line"></span><br><span class="line">#去掉表中字段age的默认值</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">alter</span> age <span class="keyword">drop</span> <span class="keyword">default</span>;</span><br><span class="line"></span><br><span class="line">#去掉表中字段age</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">drop</span> <span class="keyword">column</span> age;</span><br><span class="line"></span><br><span class="line">#删除表中主键</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">drop</span> <span class="keyword">primary key</span>;</span><br><span class="line"></span><br><span class="line">#表中增加主键</span><br><span class="line"><span class="meta">#alter table add primary key (column1,column2,....,column)</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">add</span> <span class="keyword">primary key</span> (student_id);</span><br><span class="line"></span><br><span class="line">#用文本方式将数据装入数据库表中（例如D:/mysql.txt）</span><br><span class="line"><span class="keyword">load</span> data <span class="keyword">local</span> infile &quot;D:/mysql.txt&quot; <span class="keyword">into</span> <span class="keyword">table</span> MYTABLE;</span><br><span class="line"></span><br><span class="line">#导入.<span class="keyword">sql</span>文件命令（例如D:/mysql.<span class="keyword">sql</span>）</span><br><span class="line">source d:/mysql.<span class="keyword">sql</span>;  #或者  /. d:/mysql.<span class="keyword">sql</span>;</span><br></pre></td></tr></table></figure>]]></content>
-      <tags>
-        <tag>备忘</tag>
       </tags>
   </entry>
   <entry>
@@ -1423,27 +1437,13 @@
       </tags>
   </entry>
   <entry>
-    <title>Mac终端安装指定版本node</title>
-    <url>/2019/08/21/Mac%E7%BB%88%E7%AB%AF%E5%AE%89%E8%A3%85%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%ACnode/</url>
-    <content><![CDATA[<h1 id="安装brew"><a href="#安装brew" class="headerlink" title="安装brew"></a>安装brew</h1><p>终端上运行</p>
-<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">/usr/bin/ruby -e “<span class="constructor">$(<span class="params">curl</span> -<span class="params">fsSL</span> <span class="params">https</span>:<span class="operator">/</span><span class="operator">/</span><span class="params">raw</span>.<span class="params">githubusercontent</span>.<span class="params">com</span><span class="operator">/</span>Homebrew<span class="operator">/</span><span class="params">install</span><span class="operator">/</span><span class="params">master</span><span class="operator">/</span><span class="params">install</span>)</span>”</span><br></pre></td></tr></table></figure>
-
-<h1 id="安装NVM"><a href="#安装NVM" class="headerlink" title="安装NVM"></a>安装NVM</h1><p><code>brew install nvm</code></p>
-<p>安装完成之后打开shell的配置文件</p>
-<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cd</span> ~</span><br><span class="line">vim <span class="string">.bash_profile</span></span><br></pre></td></tr></table></figure>
-
-<p>在文件里添加以下命令</p>
-<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">export NVM_DIR=~/.nvm</span><br><span class="line">source <span class="constructor">$(<span class="params">brew</span> --<span class="params">prefix</span> <span class="params">nvm</span>)</span>/nvm.sh</span><br></pre></td></tr></table></figure>
-
-<p>然后重新source</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> .bash_profile</span><br></pre></td></tr></table></figure>
-
-<h1 id="使用nvm安装node"><a href="#使用nvm安装node" class="headerlink" title="使用nvm安装node"></a>使用nvm安装node</h1><figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">nvm ls-remote 查看 所有的<span class="keyword">node</span><span class="title">可用版本</span></span><br><span class="line"><span class="title">nvm</span> install xxx 下载你想要的版本</span><br><span class="line">nvm use xxx 使用指定版本的<span class="keyword">node</span><span class="title"></span></span><br><span class="line"><span class="title">nvm</span> alias default xxx 每次启动终端都使用该版本的<span class="keyword">node</span><span class="title"></span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>资料</category>
-      </categories>
+    <title>SQL基础语句总结</title>
+    <url>/2019/05/20/SQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E5%8F%A5%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h1 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h1><p>SQL 是用于访问和处理数据库的标准的计算机语言。</p>
+<h1 id="什么是-SQL？"><a href="#什么是-SQL？" class="headerlink" title="什么是 SQL？"></a>什么是 SQL？</h1><p>SQL 指结构化查询语言<br>SQL 使我们有能力访问数据库<br>SQL 是一种 ANSI 的标准计算机语言<br>编者注：ANSI，美国国家标准化组织</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">#显示数据库</span><br><span class="line"><span class="keyword">show</span> databases;</span><br><span class="line"></span><br><span class="line">#判断是否存在数据库test_mysql,有的话先删除</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">database</span> <span class="keyword">if</span> <span class="keyword">exists</span> test_mysql;</span><br><span class="line"></span><br><span class="line">#创建数据库</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> test_mysql;</span><br><span class="line"></span><br><span class="line">#删除数据库</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">database</span> test_mysql;</span><br><span class="line"></span><br><span class="line">#使用该数据库</span><br><span class="line">use test_mysql;</span><br><span class="line"></span><br><span class="line">#显示数据库中的表</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">tables</span>;</span><br><span class="line"></span><br><span class="line">#先判断表是否存在,存在先删除</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> student;</span><br><span class="line"></span><br><span class="line">#创建表</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> student(</span><br><span class="line">id <span class="type">int</span> auto_increment <span class="keyword">primary key</span>,</span><br><span class="line"><span class="type">name</span> <span class="type">varchar</span>(<span class="number">50</span>),</span><br><span class="line">sex <span class="type">varchar</span>(<span class="number">20</span>),</span><br><span class="line"><span class="type">date</span> <span class="type">varchar</span>(<span class="number">50</span>),</span><br><span class="line">)<span class="keyword">default</span> charset=utf8;</span><br><span class="line"></span><br><span class="line">#删除表</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> student;</span><br><span class="line"></span><br><span class="line">#查看表的结构</span><br><span class="line">describe student;  #可以简写为<span class="keyword">desc</span> student;</span><br><span class="line"></span><br><span class="line">#插入数据</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> student <span class="keyword">values</span>(<span class="keyword">null</span>,<span class="string">&#x27;test&#x27;</span>,<span class="string">&#x27;2018-10-2&#x27;</span>);</span><br><span class="line"></span><br><span class="line">#查询表中的数据</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student;</span><br><span class="line"><span class="keyword">select</span> id,<span class="type">name</span> <span class="keyword">from</span> student;</span><br><span class="line"></span><br><span class="line">#修改某一条数据</span><br><span class="line"><span class="keyword">update</span> student <span class="keyword">set</span> <span class="type">name</span>=<span class="string">&#x27;jack&#x27;</span> <span class="keyword">where</span> id=<span class="number">4</span>;</span><br><span class="line"></span><br><span class="line">#删除数据</span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> student <span class="keyword">where</span> id=<span class="number">8</span>;</span><br><span class="line"></span><br><span class="line"># <span class="keyword">and</span> 且</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="type">date</span>&gt;<span class="string">&#x27;2018-1-2&#x27;</span> <span class="keyword">and</span> <span class="type">date</span>&lt;<span class="string">&#x27;2018-12-1&#x27;</span>;</span><br><span class="line"></span><br><span class="line"># <span class="keyword">or</span> 或</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="type">date</span>&lt;<span class="string">&#x27;2018-11-2&#x27;</span> <span class="keyword">or</span> <span class="type">date</span>&gt;<span class="string">&#x27;2018-12-1&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#between</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> <span class="type">date</span> <span class="keyword">between</span> <span class="string">&#x27;2018-1-2&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;2018-12-1&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#in 查询制定集合内的数据</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">where</span> id <span class="keyword">in</span> (<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">#排序 <span class="keyword">asc</span> 升序  <span class="keyword">desc</span> 降序</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">order</span> <span class="keyword">by</span> id <span class="keyword">asc</span>;</span><br><span class="line"></span><br><span class="line">#分组查询 #聚合函数</span><br><span class="line"><span class="keyword">select</span> max(id),<span class="type">name</span>,sex <span class="keyword">from</span> student <span class="keyword">group</span> <span class="keyword">by</span> sex;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> min(<span class="type">date</span>) <span class="keyword">from</span> student;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> avg(id) <span class="keyword">as</span> <span class="string">&#x27;Avg&#x27;</span> <span class="keyword">from</span> student;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> count(*) <span class="keyword">from</span> student;   #统计表中总数</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> count(sex) <span class="keyword">from</span> student;   #统计表中性别总数  若有一条数据中sex为空的话,就不予以统计~</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> sum(id) <span class="keyword">from</span> student;</span><br><span class="line"></span><br><span class="line">#查询第i条以后到第j条的数据(不包括第i条)</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">limit</span> <span class="number">2</span>,<span class="number">5</span>;  #显示<span class="number">3</span><span class="number">-5</span>条数据</span><br><span class="line"></span><br><span class="line">#修改数据</span><br><span class="line"><span class="keyword">update</span> student <span class="keyword">set</span> <span class="type">name</span>=<span class="string">&#x27;test&#x27;</span> <span class="keyword">where</span> id=<span class="number">2</span>;</span><br><span class="line"><span class="keyword">update</span> student <span class="keyword">set</span> <span class="type">name</span>=<span class="string">&#x27;花花&#x27;</span>,sex=<span class="string">&#x27;女&#x27;</span> <span class="keyword">where</span> id=<span class="number">2</span></span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> student <span class="keyword">where</span> id=<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">#修改表的名字</span><br><span class="line">#格式:<span class="keyword">alter</span> <span class="keyword">table</span> tbl_name <span class="keyword">rename</span> <span class="keyword">to</span> new_name</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">rename</span> <span class="keyword">to</span> test_1;</span><br><span class="line"></span><br><span class="line">#向表中增加一个字段(列)</span><br><span class="line">#格式:<span class="keyword">alter</span> <span class="keyword">table</span> tablename <span class="keyword">add</span> columnname <span class="keyword">type</span>;/<span class="keyword">alter</span> <span class="keyword">table</span> tablename <span class="keyword">add</span>(columnname <span class="keyword">type</span>);</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">add</span>  age <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">set</span> <span class="keyword">default</span> <span class="string">&#x27;1&#x27;</span>; #<span class="keyword">set</span> <span class="keyword">default</span> 设置默认值</span><br><span class="line"></span><br><span class="line">#修改表中某个字段的名字</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> tablename change columnname newcolumnname <span class="keyword">type</span>;  #修改一个表的字段名</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student change <span class="type">name</span> test_name <span class="type">varchar</span>(<span class="number">50</span>);</span><br><span class="line"></span><br><span class="line">#去掉表中字段age的默认值</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">alter</span> age <span class="keyword">drop</span> <span class="keyword">default</span>;</span><br><span class="line"></span><br><span class="line">#去掉表中字段age</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">drop</span> <span class="keyword">column</span> age;</span><br><span class="line"></span><br><span class="line">#删除表中主键</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">drop</span> <span class="keyword">primary key</span>;</span><br><span class="line"></span><br><span class="line">#表中增加主键</span><br><span class="line"><span class="meta">#alter table add primary key (column1,column2,....,column)</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">add</span> <span class="keyword">primary key</span> (student_id);</span><br><span class="line"></span><br><span class="line">#用文本方式将数据装入数据库表中（例如D:/mysql.txt）</span><br><span class="line"><span class="keyword">load</span> data <span class="keyword">local</span> infile &quot;D:/mysql.txt&quot; <span class="keyword">into</span> <span class="keyword">table</span> MYTABLE;</span><br><span class="line"></span><br><span class="line">#导入.<span class="keyword">sql</span>文件命令（例如D:/mysql.<span class="keyword">sql</span>）</span><br><span class="line">source d:/mysql.<span class="keyword">sql</span>;  #或者  /. d:/mysql.<span class="keyword">sql</span>;</span><br></pre></td></tr></table></figure>]]></content>
       <tags>
-        <tag>资料</tag>
+        <tag>备忘</tag>
       </tags>
   </entry>
   <entry>
@@ -1533,6 +1533,88 @@
 
 <p>More info: <a href="https://hexo.io/docs/deployment.html">Deployment</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>iOS真机安装WebDriverAgent</title>
+    <url>/2019/08/22/iOS%E7%9C%9F%E6%9C%BA%E5%AE%89%E8%A3%85WebDriverAgent/</url>
+    <content><![CDATA[<h1 id="iOS-真机安装-WebDriverAgent"><a href="#iOS-真机安装-WebDriverAgent" class="headerlink" title="iOS 真机安装 WebDriverAgent"></a>iOS 真机安装 WebDriverAgent</h1><p>本文根据 <a href="https://testerhome.com/topics/7220">ATX 文档 - iOS 真机如何安装 WebDriverAgent</a> 进行实践<br>参考资料<br><a href="https://github.com/openatx/facebook-wda">https://github.com/openatx/facebook-wda</a><br><a href="https://github.com/NetEaseGame/ATX">https://github.com/NetEaseGame/ATX</a><br><a href="https://github.com/facebook/WebDriverAgent">https://github.com/facebook/WebDriverAgent</a><br><a href="https://github.com/appium/WebDriverAgent">https://github.com/appium/WebDriverAgent</a></p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>注意：尽量升级Xcode到最新版本，iphone版本大于9.3</p>
+<ul>
+<li>Xcode版本：10.2.1</li>
+<li>iPhone版本：12.2</li>
+<li>OS版本：10.14.4</li>
+</ul>
+<h1 id="实践开始"><a href="#实践开始" class="headerlink" title="实践开始"></a>实践开始</h1><ul>
+<li><p>新建一个目录，从 git 下载 WDA 项目代码到本地<br>  <code>git clone https://github.com/facebook/WebDriverAgent</code></p>
+</li>
+<li><p>运行初始化脚本</p>
+  <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="comment">#进入代码目录</span></span><br><span class="line">cd xx<span class="regexp">/xx/</span>WebDriverAgent-master</span><br><span class="line"><span class="comment">#执行初始化脚本</span></span><br><span class="line">.<span class="regexp">/Scripts/</span>bootstrap.sh</span><br></pre></td></tr></table></figure></li>
+<li><p>注<br>  根据报错通过 brew 安装以下依赖</p>
+<ol>
+<li>carthage依赖：<code>brew install carthage</code></li>
+<li>npm：<code>brew install npm</code></li>
+</ol>
+</li>
+</ul>
+<h1 id="证书设置"><a href="#证书设置" class="headerlink" title="证书设置"></a>证书设置</h1><ol>
+<li><p>进入项目路径，双击打开WebDriverAgent.xcodeproj，打开xcode后按照下方数字序号依次点击，勾选第5项目，弹框内点击Enable Automatic。<br><img src="iOS%E7%9C%9F%E6%9C%BA%E5%AE%89%E8%A3%85WebDriverAgent/15571122331434.jpg"></p>
+</li>
+<li><p>Team 栏添加帐户（个人账号和开发者账号兼可）选中<br><img src="iOS%E7%9C%9F%E6%9C%BA%E5%AE%89%E8%A3%85WebDriverAgent/15571124398069.jpg" alt="-w1059"></p>
+</li>
+</ol>
+<ol start="3">
+<li><p>接着在TARGETS里面选中WebDriverAgentRunner，用同样的方法设置好证书<br><img src="iOS%E7%9C%9F%E6%9C%BA%E5%AE%89%E8%A3%85WebDriverAgent/15570487234316.jpg" alt="-w1139"></p>
+</li>
+<li><p>个人免费版的证书，还需要修改下WebDriverAgent的BundleID，随便加后缀，不要跟别人重复就好<br><img src="iOS%E7%9C%9F%E6%9C%BA%E5%AE%89%E8%A3%85WebDriverAgent/15571126202793.jpg"></p>
+</li>
+</ol>
+<h1 id="运行和测试"><a href="#运行和测试" class="headerlink" title="运行和测试"></a>运行和测试</h1><p><img src="iOS%E7%9C%9F%E6%9C%BA%E5%AE%89%E8%A3%85WebDriverAgent/15570489183241.jpg" alt="-w784"></p>
+<ul>
+<li><p>点击方框选项，分别选择WebDriverAgentRunner和目标设备</p>
+</li>
+<li><p>运行 Product -&gt; Test<br>一切正常的话，手机上会出现一个无图标的WebDriverAgent应用，启动之后，马上又返回到桌面。</p>
+</li>
+<li><p>个人免费证书第一次运行需要信任证书<br>日志信息如下：</p>
+<blockquote>
+<p>Verify the Developer App certificate for your account is trusted on your device. Open Settings on Vic小叶子 and navigate to General -&gt; Device Management, then select your Developer App certificate to trust it.</p>
+</blockquote>
+</li>
+</ul>
+<p>原因：开发者人员程序未受信任<br>解决：进入手机设置-&gt; 通用-&gt; 描述文件与设备管理-&gt; 点击开发者应用，信任一下就好了。</p>
+<p>此时控制台界面可以看到设备的IP。如果看不到的话，使用这种方法打开<br><img src="iOS%E7%9C%9F%E6%9C%BA%E5%AE%89%E8%A3%85WebDriverAgent/15570491084022.jpg" alt="-w607"><br><img src="iOS%E7%9C%9F%E6%9C%BA%E5%AE%89%E8%A3%85WebDriverAgent/15570491892095.jpg" alt="-w1248"></p>
+<ul>
+<li><p>通过上面给出的IP和端口，加上/status合成一个url地址。例如<a href="http://10.0.0.1:8100/status">http://10.0.0.1:8100/status</a>，然后浏览器打开。如果出现一串JSON输出，说明WDA安装成功了。</p>
+<p>  实际情况，我到这一步访问这个地址无响应：<br>  原因：部分国行的iphone机器通过IP和端口还不能访问<br>  解决：需要将手机的端口转发到Mac上（端口转发见下文）</p>
+</li>
+</ul>
+<h1 id="端口转发"><a href="#端口转发" class="headerlink" title="端口转发"></a>端口转发</h1><p>有些国产的iPhone机器通过手机的IP和端口还不能访问，此时需要将手机的端口转发到Mac上。</p>
+<ul>
+<li>安装libimobiledevice</li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span>update</span><br><span class="line"><span class="keyword">brew </span>uninstall --ignore-dependencies libimobiledevice</span><br><span class="line"><span class="keyword">brew </span>uninstall --ignore-dependencies usbmuxd</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>--HEAD usbmuxd</span><br><span class="line"><span class="keyword">brew </span>unlink usbmuxd</span><br><span class="line"><span class="keyword">brew </span>link usbmuxd</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>--HEAD libimobiledevice</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>转发端口<br><code>iproxy 8100 8100 UDID</code><br>使用iproxy –help 可以查到更具体的用法。</p>
+</li>
+<li><p>查询UDID<br>instruments -s</p>
+</li>
+</ul>
+<p>这时通过访问<code>http://localhost:8100/status</code>，如果出现一串JSON输出，说明WDA安装成功了。</p>
+<h1 id="inspector"><a href="#inspector" class="headerlink" title="inspector"></a>inspector</h1><p>是用来查看UI的图层，方便编写测试脚本<br>inspector的地址是:<code>http://localhost:8100/inspector</code><br><img src="iOS%E7%9C%9F%E6%9C%BA%E5%AE%89%E8%A3%85WebDriverAgent/15571131403218.jpg" alt="-w1673"></p>
+<h1 id="使用终端替代Xcode"><a href="#使用终端替代Xcode" class="headerlink" title="使用终端替代Xcode"></a>使用终端替代Xcode</h1><p>通常来说为了持续集成，能够全部自动化比较好一些<br>启动 WebDriverAgent，官方提供了四种方式：</p>
+<ol>
+<li>Xcode</li>
+<li>xcodebuild</li>
+<li>Using fbsimctl from FBSimulatorControl framework</li>
+<li>Using FBSimulatorControl framework directly</li>
+</ol>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 解锁keychain，以便可以正常的签名应用，</span></span><br><span class="line"><span class="attribute">PASSWORD</span>=<span class="string">&quot;replace-with-your-password&quot;</span></span><br><span class="line">security unlock-keychain -p <span class="variable">$PASSWORD</span> ~/Library/Keychains/login.keychain</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取设备的UDID</span></span><br><span class="line"><span class="attribute">UDID</span>=$(idevice_id -l | head -n1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行测试</span></span><br><span class="line">xcodebuild -project WebDriverAgent.xcodeproj -scheme WebDriverAgentRunner -destination <span class="string">&quot;id=<span class="variable">$UDID</span>&quot;</span> test</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>App自动化</category>
+      </categories>
+      <tags>
+        <tag>App自动化</tag>
+      </tags>
   </entry>
   <entry>
     <title>iOS设备型号名称对应表</title>
@@ -1697,88 +1779,6 @@
       </categories>
       <tags>
         <tag>资料</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>iOS真机安装WebDriverAgent</title>
-    <url>/2019/08/22/iOS%E7%9C%9F%E6%9C%BA%E5%AE%89%E8%A3%85WebDriverAgent/</url>
-    <content><![CDATA[<h1 id="iOS-真机安装-WebDriverAgent"><a href="#iOS-真机安装-WebDriverAgent" class="headerlink" title="iOS 真机安装 WebDriverAgent"></a>iOS 真机安装 WebDriverAgent</h1><p>本文根据 <a href="https://testerhome.com/topics/7220">ATX 文档 - iOS 真机如何安装 WebDriverAgent</a> 进行实践<br>参考资料<br><a href="https://github.com/openatx/facebook-wda">https://github.com/openatx/facebook-wda</a><br><a href="https://github.com/NetEaseGame/ATX">https://github.com/NetEaseGame/ATX</a><br><a href="https://github.com/facebook/WebDriverAgent">https://github.com/facebook/WebDriverAgent</a><br><a href="https://github.com/appium/WebDriverAgent">https://github.com/appium/WebDriverAgent</a></p>
-<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>注意：尽量升级Xcode到最新版本，iphone版本大于9.3</p>
-<ul>
-<li>Xcode版本：10.2.1</li>
-<li>iPhone版本：12.2</li>
-<li>OS版本：10.14.4</li>
-</ul>
-<h1 id="实践开始"><a href="#实践开始" class="headerlink" title="实践开始"></a>实践开始</h1><ul>
-<li><p>新建一个目录，从 git 下载 WDA 项目代码到本地<br>  <code>git clone https://github.com/facebook/WebDriverAgent</code></p>
-</li>
-<li><p>运行初始化脚本</p>
-  <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="comment">#进入代码目录</span></span><br><span class="line">cd xx<span class="regexp">/xx/</span>WebDriverAgent-master</span><br><span class="line"><span class="comment">#执行初始化脚本</span></span><br><span class="line">.<span class="regexp">/Scripts/</span>bootstrap.sh</span><br></pre></td></tr></table></figure></li>
-<li><p>注<br>  根据报错通过 brew 安装以下依赖</p>
-<ol>
-<li>carthage依赖：<code>brew install carthage</code></li>
-<li>npm：<code>brew install npm</code></li>
-</ol>
-</li>
-</ul>
-<h1 id="证书设置"><a href="#证书设置" class="headerlink" title="证书设置"></a>证书设置</h1><ol>
-<li><p>进入项目路径，双击打开WebDriverAgent.xcodeproj，打开xcode后按照下方数字序号依次点击，勾选第5项目，弹框内点击Enable Automatic。<br><img src="iOS%E7%9C%9F%E6%9C%BA%E5%AE%89%E8%A3%85WebDriverAgent/15571122331434.jpg"></p>
-</li>
-<li><p>Team 栏添加帐户（个人账号和开发者账号兼可）选中<br><img src="iOS%E7%9C%9F%E6%9C%BA%E5%AE%89%E8%A3%85WebDriverAgent/15571124398069.jpg" alt="-w1059"></p>
-</li>
-</ol>
-<ol start="3">
-<li><p>接着在TARGETS里面选中WebDriverAgentRunner，用同样的方法设置好证书<br><img src="iOS%E7%9C%9F%E6%9C%BA%E5%AE%89%E8%A3%85WebDriverAgent/15570487234316.jpg" alt="-w1139"></p>
-</li>
-<li><p>个人免费版的证书，还需要修改下WebDriverAgent的BundleID，随便加后缀，不要跟别人重复就好<br><img src="iOS%E7%9C%9F%E6%9C%BA%E5%AE%89%E8%A3%85WebDriverAgent/15571126202793.jpg"></p>
-</li>
-</ol>
-<h1 id="运行和测试"><a href="#运行和测试" class="headerlink" title="运行和测试"></a>运行和测试</h1><p><img src="iOS%E7%9C%9F%E6%9C%BA%E5%AE%89%E8%A3%85WebDriverAgent/15570489183241.jpg" alt="-w784"></p>
-<ul>
-<li><p>点击方框选项，分别选择WebDriverAgentRunner和目标设备</p>
-</li>
-<li><p>运行 Product -&gt; Test<br>一切正常的话，手机上会出现一个无图标的WebDriverAgent应用，启动之后，马上又返回到桌面。</p>
-</li>
-<li><p>个人免费证书第一次运行需要信任证书<br>日志信息如下：</p>
-<blockquote>
-<p>Verify the Developer App certificate for your account is trusted on your device. Open Settings on Vic小叶子 and navigate to General -&gt; Device Management, then select your Developer App certificate to trust it.</p>
-</blockquote>
-</li>
-</ul>
-<p>原因：开发者人员程序未受信任<br>解决：进入手机设置-&gt; 通用-&gt; 描述文件与设备管理-&gt; 点击开发者应用，信任一下就好了。</p>
-<p>此时控制台界面可以看到设备的IP。如果看不到的话，使用这种方法打开<br><img src="iOS%E7%9C%9F%E6%9C%BA%E5%AE%89%E8%A3%85WebDriverAgent/15570491084022.jpg" alt="-w607"><br><img src="iOS%E7%9C%9F%E6%9C%BA%E5%AE%89%E8%A3%85WebDriverAgent/15570491892095.jpg" alt="-w1248"></p>
-<ul>
-<li><p>通过上面给出的IP和端口，加上/status合成一个url地址。例如<a href="http://10.0.0.1:8100/status">http://10.0.0.1:8100/status</a>，然后浏览器打开。如果出现一串JSON输出，说明WDA安装成功了。</p>
-<p>  实际情况，我到这一步访问这个地址无响应：<br>  原因：部分国行的iphone机器通过IP和端口还不能访问<br>  解决：需要将手机的端口转发到Mac上（端口转发见下文）</p>
-</li>
-</ul>
-<h1 id="端口转发"><a href="#端口转发" class="headerlink" title="端口转发"></a>端口转发</h1><p>有些国产的iPhone机器通过手机的IP和端口还不能访问，此时需要将手机的端口转发到Mac上。</p>
-<ul>
-<li>安装libimobiledevice</li>
-</ul>
-<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span>update</span><br><span class="line"><span class="keyword">brew </span>uninstall --ignore-dependencies libimobiledevice</span><br><span class="line"><span class="keyword">brew </span>uninstall --ignore-dependencies usbmuxd</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>--HEAD usbmuxd</span><br><span class="line"><span class="keyword">brew </span>unlink usbmuxd</span><br><span class="line"><span class="keyword">brew </span>link usbmuxd</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>--HEAD libimobiledevice</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>转发端口<br><code>iproxy 8100 8100 UDID</code><br>使用iproxy –help 可以查到更具体的用法。</p>
-</li>
-<li><p>查询UDID<br>instruments -s</p>
-</li>
-</ul>
-<p>这时通过访问<code>http://localhost:8100/status</code>，如果出现一串JSON输出，说明WDA安装成功了。</p>
-<h1 id="inspector"><a href="#inspector" class="headerlink" title="inspector"></a>inspector</h1><p>是用来查看UI的图层，方便编写测试脚本<br>inspector的地址是:<code>http://localhost:8100/inspector</code><br><img src="iOS%E7%9C%9F%E6%9C%BA%E5%AE%89%E8%A3%85WebDriverAgent/15571131403218.jpg" alt="-w1673"></p>
-<h1 id="使用终端替代Xcode"><a href="#使用终端替代Xcode" class="headerlink" title="使用终端替代Xcode"></a>使用终端替代Xcode</h1><p>通常来说为了持续集成，能够全部自动化比较好一些<br>启动 WebDriverAgent，官方提供了四种方式：</p>
-<ol>
-<li>Xcode</li>
-<li>xcodebuild</li>
-<li>Using fbsimctl from FBSimulatorControl framework</li>
-<li>Using FBSimulatorControl framework directly</li>
-</ol>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 解锁keychain，以便可以正常的签名应用，</span></span><br><span class="line"><span class="attribute">PASSWORD</span>=<span class="string">&quot;replace-with-your-password&quot;</span></span><br><span class="line">security unlock-keychain -p <span class="variable">$PASSWORD</span> ~/Library/Keychains/login.keychain</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取设备的UDID</span></span><br><span class="line"><span class="attribute">UDID</span>=$(idevice_id -l | head -n1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行测试</span></span><br><span class="line">xcodebuild -project WebDriverAgent.xcodeproj -scheme WebDriverAgentRunner -destination <span class="string">&quot;id=<span class="variable">$UDID</span>&quot;</span> test</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>App自动化</category>
-      </categories>
-      <tags>
-        <tag>App自动化</tag>
       </tags>
   </entry>
   <entry>
