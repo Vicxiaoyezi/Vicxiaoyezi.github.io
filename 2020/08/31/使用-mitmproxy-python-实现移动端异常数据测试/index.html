@@ -7,12 +7,12 @@
 <meta name="generator" content="Hexo 5.4.0">
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/cat-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/cat-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/cat-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/cat-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/blog/css/main.css">
 
 
 
@@ -22,26 +22,26 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"vic.kim","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"vic.kim","root":"/blog/","images":"/blog/images","scheme":"Gemini","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blog/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 <meta name="description" content="mitmproxy github地址（Man-in-the-middle attack） 背景Crash率是衡量一个App好坏的重要指标之一，如果你忽略了它的存在，它就会愈演愈烈客户端的很大一部分的Crash是因为API返回的脏数据。比如当API返回空值、空数组或返回不是约定类型的数据，App收到这些数据，就极有可能发生空指针、数组越界和类型转换错误等Crash。而且这样的脏数据，特别容易引起线上">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用 mitmproxy + python 实现移动端异常数据测试">
-<meta property="og:url" content="https://vic.kim/2020/08/31/%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/index.html">
+<meta property="og:url" content="https://vic.kim/blog/2020/08/31/%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/index.html">
 <meta property="og:site_name" content="Vicの博客">
 <meta property="og:description" content="mitmproxy github地址（Man-in-the-middle attack） 背景Crash率是衡量一个App好坏的重要指标之一，如果你忽略了它的存在，它就会愈演愈烈客户端的很大一部分的Crash是因为API返回的脏数据。比如当API返回空值、空数组或返回不是约定类型的数据，App收到这些数据，就极有可能发生空指针、数组越界和类型转换错误等Crash。而且这样的脏数据，特别容易引起线上">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://vic.kim/2020/08/31/%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/mitmproxy.png">
-<meta property="og:image" content="https://vic.kim/2020/08/31/%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/%E8%AE%BE%E8%AE%A1%E6%B5%81%E7%A8%8B.jpg">
+<meta property="og:image" content="https://vic.kim/blog/.kim//mitmproxy.png">
+<meta property="og:image" content="https://vic.kim/blog/.kim//%E8%AE%BE%E8%AE%A1%E6%B5%81%E7%A8%8B.jpg">
 <meta property="article:published_time" content="2020-08-31T08:53:40.000Z">
 <meta property="article:modified_time" content="2020-09-08T03:25:35.091Z">
 <meta property="article:author" content="Vic">
 <meta property="article:tag" content="移动性能">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://vic.kim/2020/08/31/%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/mitmproxy.png">
+<meta name="twitter:image" content="https://vic.kim/blog/.kim//mitmproxy.png">
 
 
-<link rel="canonical" href="https://vic.kim/2020/08/31/%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/">
+<link rel="canonical" href="https://vic.kim/blog/2020/08/31/%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/">
 
 
 <script class="page-configurations">
@@ -112,7 +112,7 @@
 
   <div class="site-meta">
 
-    <a href="/" class="brand" rel="start">
+    <a href="/blog/" class="brand" rel="start">
       <i class="logo-line"></i>
       <h1 class="site-title">Vicの博客</h1>
       <i class="logo-line"></i>
@@ -131,11 +131,11 @@
 
 <nav class="site-nav">
   <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">13</span></a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">12</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">46</span></a></li>
+        <li class="menu-item menu-item-home"><a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">13</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">12</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">46</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -199,27 +199,27 @@
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Vic"
-      src="/images/smile.jpg">
+      src="/blog/images/smile.jpg">
   <p class="site-author-name" itemprop="name">Vic</p>
   <div class="site-description" itemprop="description">人生苦短，我学Python</div>
 </div>
 <div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
+          <a href="/blog/archives/">
         
           <span class="site-state-item-count">46</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
+            <a href="/blog/categories/">
           
         <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
+            <a href="/blog/tags/">
           
         <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">标签</span></a>
@@ -237,13 +237,13 @@
         </div>
 
       
-      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
-      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/blog/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/blog/js/tagcanvas.js"></script>
       <div class="widget-wrap">
           <h3 class="widget-title">Tag Cloud</h3>
           <div id="myCanvasContainer" class="widget tagcloud">
               <canvas width="250" height="250" id="resCanvas" style="width:100%">
-                  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/App%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag">App自动化</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-Next/" rel="tag">Hexo Next</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JMeter/" rel="tag">JMeter</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jenkins/" rel="tag">Jenkins</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/" rel="tag">UI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%87%E5%BF%98/" rel="tag">备忘</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/" rel="tag">接口测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" rel="tag">接口自动化测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E6%80%A7%E8%83%BD/" rel="tag">移动性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/" rel="tag">设备管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B5%84%E6%96%99/" rel="tag">资料</a><span class="tag-list-count">8</span></li></ul>
+                  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/App%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag">App自动化</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Hexo-Next/" rel="tag">Hexo Next</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/JMeter/" rel="tag">JMeter</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Jenkins/" rel="tag">Jenkins</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/UI/" rel="tag">UI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%A4%87%E5%BF%98/" rel="tag">备忘</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/" rel="tag">接口测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" rel="tag">接口自动化测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%A7%BB%E5%8A%A8%E6%80%A7%E8%83%BD/" rel="tag">移动性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/" rel="tag">设备管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E8%B5%84%E6%96%99/" rel="tag">资料</a><span class="tag-list-count">8</span></li></ul>
               </canvas>
           </div>
       </div>
@@ -274,10 +274,10 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://vic.kim/2020/08/31/%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/">
+    <link itemprop="mainEntityOfPage" href="https://vic.kim/blog/2020/08/31/%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/smile.jpg">
+      <meta itemprop="image" content="/blog/images/smile.jpg">
       <meta itemprop="name" content="Vic">
       <meta itemprop="description" content="人生苦短，我学Python">
     </span>
@@ -313,7 +313,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%A7%BB%E5%8A%A8%E6%80%A7%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">移动性能</span></a>
+          <a href="/blog/categories/%E7%A7%BB%E5%8A%A8%E6%80%A7%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">移动性能</span></a>
         </span>
     </span>
 
@@ -331,7 +331,7 @@
 <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>Crash率是衡量一个App好坏的重要指标之一，如果你忽略了它的存在，它就会愈演愈烈<br>客户端的很大一部分的Crash是因为API返回的脏数据。比如当API返回空值、空数组或返回不是约定类型的数据，App收到这些数据，就极有可能发生空指针、数组越界和类型转换错误等Crash。而且这样的脏数据，特别容易引起线上大面积的崩溃。</p>
 <h1 id="异常数据测试方法"><a href="#异常数据测试方法" class="headerlink" title="异常数据测试方法"></a>异常数据测试方法</h1><p>手工测试时，借助charles等抓包工具，对返回结果拦截修改数据，再进行数据的maplocal</p>
 <h2 id="异常数据修改规则"><a href="#异常数据修改规则" class="headerlink" title="异常数据修改规则"></a>异常数据修改规则</h2><p>字符：非法字符、超长、null<br>数组：空数组、非法序列<br>接口超时：5s、10s<br>接口状态码：404、500、503<br>增加删除数据：数组、字典</p>
-<h1 id="mitmproxy是什么"><a href="#mitmproxy是什么" class="headerlink" title="mitmproxy是什么"></a>mitmproxy是什么</h1><p>顾名思义，mitmproxy 就是用于 MITM 的 proxy，MITM 即中间人攻击（Man-in-the-middle attack）。<br>    <img src="/images/loading.gif" data-original="%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/mitmproxy.png" alt="mitmproxy"><br>    mitmproxy是一个支持HTTP和HTTPS的抓包程序，有类似Fiddler、Charles的功能，只不过它是一个控制台的形式操作。mitmproxy还有两个关联组件。一个是mitmdump，它是mitmproxy的命令行接口，利用它我们可以对接Python脚本，用Python实现监听后的处理。另一个是mitmweb，它是一个Web程序，通过它我们可以清楚观察mitmproxy捕获的请求。</p>
+<h1 id="mitmproxy是什么"><a href="#mitmproxy是什么" class="headerlink" title="mitmproxy是什么"></a>mitmproxy是什么</h1><p>顾名思义，mitmproxy 就是用于 MITM 的 proxy，MITM 即中间人攻击（Man-in-the-middle attack）。<br>    <img src="/images/loading.gif" data-original="/blog/.kim//mitmproxy.png" alt="mitmproxy"><br>    mitmproxy是一个支持HTTP和HTTPS的抓包程序，有类似Fiddler、Charles的功能，只不过它是一个控制台的形式操作。mitmproxy还有两个关联组件。一个是mitmdump，它是mitmproxy的命令行接口，利用它我们可以对接Python脚本，用Python实现监听后的处理。另一个是mitmweb，它是一个Web程序，通过它我们可以清楚观察mitmproxy捕获的请求。</p>
 <h2 id="mitmproxy有如下几项功能"><a href="#mitmproxy有如下几项功能" class="headerlink" title="mitmproxy有如下几项功能"></a>mitmproxy有如下几项功能</h2><ul>
 <li>拦截HTTP和HTTPS请求和响应。</li>
 <li>保存HTTP会话并进行分析。</li>
@@ -365,7 +365,7 @@
 <h2 id="常用Api有"><a href="#常用Api有" class="headerlink" title="常用Api有"></a>常用Api有</h2><h3 id="request"><a href="#request" class="headerlink" title="request"></a>request</h3><figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">flow.<span class="built_in">request</span>.headers # 获取所有头信息，包含Host、User-Agent、Content-type等字段</span><br><span class="line">flow.<span class="built_in">request</span>.url # 完整的请求地址，包含域名及请求参数，但是不包含放在body里面的请求参数</span><br><span class="line">flow.<span class="built_in">request</span>.pretty_url # 同flow.<span class="built_in">request</span>.url目前没看出什么差别</span><br><span class="line">flow.<span class="built_in">request</span>.host # 域名</span><br><span class="line">flow.<span class="built_in">request</span>.method # 请求方式。POST、<span class="keyword">GET</span>等</span><br><span class="line">flow.<span class="built_in">request</span>.scheme # 什么请求 ，如https</span><br><span class="line">flow.<span class="built_in">request</span>.path # 请求的路径，url除域名之外的内容</span><br><span class="line">flow.<span class="built_in">request</span>.get_text() # 请求中body内容，有一些http会把请求参数放在body里面，那么可通过此方法获取，返回字典类型</span><br><span class="line">flow.<span class="built_in">request</span>.query # 返回MultiDictView类型的数据，url直接带的键值参数</span><br><span class="line">flow.<span class="built_in">request</span>.get_content() # bytes,结果如flow.<span class="built_in">request</span>.get_text()</span><br><span class="line">flow.<span class="built_in">request</span>.raw_content # bytes,结果如flow.<span class="built_in">request</span>.get_content()</span><br><span class="line">flow.<span class="built_in">request</span>.urlencoded_form # MultiDictView，content-type：application/x-www-form-urlencoded时的请求参数，不包含url直接带的键值参数</span><br><span class="line">flow.<span class="built_in">request</span>.multipart_form # MultiDictView，content-type：multipart/form-data时的请求参数，不包含url直接带的键值参数</span><br></pre></td></tr></table></figure>
 <h3 id="response"><a href="#response" class="headerlink" title="response"></a>response</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">flow<span class="selector-class">.response</span><span class="selector-class">.status_code</span> #状态码</span><br><span class="line">flow<span class="selector-class">.response</span>.text#返回内容，已解码</span><br><span class="line">flow<span class="selector-class">.response</span><span class="selector-class">.content</span> #返回内容，二进制</span><br><span class="line">flow<span class="selector-class">.response</span><span class="selector-class">.setText</span>()#修改返回内容，不需要转码</span><br></pre></td></tr></table></figure>
 
-<h1 id="设计流程"><a href="#设计流程" class="headerlink" title="设计流程"></a>设计流程</h1><p>在上面提到可以拦截request和response,那么就可以对response数据做修改，再返回修改后的数据.<br>基于上面提到修改数据规则，随机多拦截数据做随机修改.<br>保存修改前和修改后的数据，方便数据diff.<br><img src="/images/loading.gif" data-original="%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/%E8%AE%BE%E8%AE%A1%E6%B5%81%E7%A8%8B.jpg" alt="设计流程"></p>
+<h1 id="设计流程"><a href="#设计流程" class="headerlink" title="设计流程"></a>设计流程</h1><p>在上面提到可以拦截request和response,那么就可以对response数据做修改，再返回修改后的数据.<br>基于上面提到修改数据规则，随机多拦截数据做随机修改.<br>保存修改前和修改后的数据，方便数据diff.<br><img src="/images/loading.gif" data-original="/blog/.kim//%E8%AE%BE%E8%AE%A1%E6%B5%81%E7%A8%8B.jpg" alt="设计流程"></p>
 
     </div>
 
@@ -375,19 +375,19 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E7%A7%BB%E5%8A%A8%E6%80%A7%E8%83%BD/" rel="tag"># 移动性能</a>
+              <a href="/blog/tags/%E7%A7%BB%E5%8A%A8%E6%80%A7%E8%83%BD/" rel="tag"># 移动性能</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2020/03/10/JMeter-%E5%8D%81-%E6%96%AD%E8%A8%80/" rel="prev" title="JMeter(十)_断言">
+                <a href="/blog/2020/03/10/JMeter-%E5%8D%81-%E6%96%AD%E8%A8%80/" rel="prev" title="JMeter(十)_断言">
                   <i class="fa fa-chevron-left"></i> JMeter(十)_断言
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/03/18/iOS%E8%AE%BE%E5%A4%87%E5%9E%8B%E5%8F%B7%E5%90%8D%E7%A7%B0%E5%AF%B9%E5%BA%94%E8%A1%A8/" rel="next" title="iOS设备型号名称对应表">
+                <a href="/blog/2021/03/18/iOS%E8%AE%BE%E5%A4%87%E5%9E%8B%E5%8F%B7%E5%90%8D%E7%A7%B0%E5%AF%B9%E5%BA%94%E8%A1%A8/" rel="next" title="iOS设备型号名称对应表">
                   iOS设备型号名称对应表 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
@@ -449,10 +449,10 @@
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+<script src="/blog/js/utils.js"></script><script src="/blog/js/motion.js"></script><script src="/blog/js/next-boot.js"></script>
 
   
-<script src="/js/local-search.js"></script>
+<script src="/blog/js/local-search.js"></script>
 
 
 
