@@ -445,6 +445,34 @@
       </tags>
   </entry>
   <entry>
+    <title>JMeter(三)_脚本录制之基于HTTP代理服务器</title>
+    <url>/2020/02/25/JMeter-%E4%B8%89-%E8%84%9A%E6%9C%AC%E5%BD%95%E5%88%B6%E4%B9%8B%E5%9F%BA%E4%BA%8EHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+    <content><![CDATA[<h1 id="一、添加录制控制器"><a href="#一、添加录制控制器" class="headerlink" title="一、添加录制控制器"></a>一、添加录制控制器</h1><p>启动jmeter：在测试计划中添加线程组，线程组中添加逻辑控制器→录制控制器</p>
+<h1 id="二、添加HTTP代理服务器"><a href="#二、添加HTTP代理服务器" class="headerlink" title="二、添加HTTP代理服务器"></a>二、添加HTTP代理服务器</h1><p>工作台：添加非测试元件→HTTP代理服务器</p>
+<h1 id="三、配置代理服务器"><a href="#三、配置代理服务器" class="headerlink" title="三、配置代理服务器"></a>三、配置代理服务器</h1><p>服务器的配置，可以根据下面的代理服务器详细说明，根据需要配置不同代理模式。<br><img src="/2020/02/25/JMeter-%E4%B8%89-%E8%84%9A%E6%9C%AC%E5%BD%95%E5%88%B6%E4%B9%8B%E5%9F%BA%E4%BA%8EHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/WX20200225-165933@2x.png" alt="HTTP代理服务器"></p>
+<h2 id="代理服务器说明"><a href="#代理服务器说明" class="headerlink" title="代理服务器说明"></a>代理服务器说明</h2><p>1）名称：代理服务器名称，可以自定义<br>2）注释：对此代理服务器的说明，可自定义，默认为空<br>3）Global Settings</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">端口：JMeter代理服务器端口，需要检查端口是否被占用</span><br><span class="line">HTTPS Domains：https协议要监听的域名，如访问：https:<span class="regexp">//</span>api.xiaoyuzhoufm.com/</span><br></pre></td></tr></table></figure>
+<p>4）Test plan content</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">目标控制器：下拉选项，表明在哪个模块下面保存录制的请求</span><br><span class="line">分组：下拉框；对录制的请求按照一定方式进行进行分组，一般默认使用【不对样本分组】即可</span><br><span class="line">记录http信息头、添加断言、Regex matching：勾选框；记录每个请求的request <span class="selector-tag">header</span>、断言、正则表达式匹配等，录制一般使用默认勾选就行</span><br></pre></td></tr></table></figure>
+<p>5）HTTP Sampler settings</p>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">A）<span class="keyword">Type</span>：http采样器的<span class="keyword">type</span>类型，默认为空</span><br><span class="line"> B）Prefix：对每个录制的http请求的前缀命名，默认为空，则录制的请求会按照数字递增的方式进行命名，如：<span class="number">0</span>，<span class="number">1</span>，<span class="number">2</span>......</span><br><span class="line">C）自动重定向：勾选框；表示请求是否自动重定向</span><br><span class="line">D）跟随重定向：勾选框；表示请求是否跟随重定向</span><br><span class="line">E）<span class="keyword">User</span> <span class="title">KeepAlive</span>：勾选框；表示此http请求的TCP链接是否保持不中断</span><br><span class="line">F）从HTML文件获取所有内涵的资源：勾选框，表示是否获取html文件中的资源信息，录制时一般默认不勾选</span><br></pre></td></tr></table></figure>
+<p>6）Content-Type filter</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">A</span>）Include：<span class="attribute">Content</span>-Type的白名单，表示那些<span class="attribute">Content</span>-Type可以通过</span><br><span class="line"><span class="selector-tag">B</span>）Exclude：<span class="attribute">Content</span>-Type黑名单，表示那些<span class="attribute">Content</span>-Type被拒绝</span><br></pre></td></tr></table></figure>
+<p>7）包含模式：表示哪些请求信息会被录制，如：*.html<br>8）排除模式：表示那些请求信息不会被录制，可点击Add suggested Excludes使用默认排除方式，<br>包含模式&amp;排除模式 就是我们需要的和我们不需要的。一般情况下，我们只需要排除我们不需要的。<br>格式：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"> .*\<span class="string">.css</span> 排除css文件，<span class="string">&quot; .* &quot;</span> 匹配任意字符的意思 <span class="string">&quot; \ &quot;</span>是转义的意思</span><br><span class="line"></span><br><span class="line"> .*\<span class="string">.js</span> 排除js文件</span><br><span class="line"></span><br><span class="line">.*\<span class="string">.png</span> 排除png文件</span><br></pre></td></tr></table></figure>
+<p>9）Notify Child Listeners of filtered samplers：是否唤起过滤取样器的后台监听，默认勾选即可</p>
+<h1 id="四、本地设置代理"><a href="#四、本地设置代理" class="headerlink" title="四、本地设置代理"></a>四、本地设置代理</h1><p>浏览器或手机设置为电脑代理</p>
+<h1 id="五、SSL问题"><a href="#五、SSL问题" class="headerlink" title="五、SSL问题"></a>五、SSL问题</h1><p>如果在录制过程中提示：SSL问题 ，那就需要安装SSL安全证书。<br><img src="/2020/02/25/JMeter-%E4%B8%89-%E8%84%9A%E6%9C%AC%E5%BD%95%E5%88%B6%E4%B9%8B%E5%9F%BA%E4%BA%8EHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/WX20200225-171508@2x.png" alt="SSL"><br>1）生成证书，在点击HTTP代理服务器的“启动”按钮后，弹出提示框：提示我们，CA证书已经创建，在jmeter的bin目录下<br> 2）安装证书（jmeter） 选择菜单栏“选项—SSL管理器”，再打开的对话框中选择bin目录下的证书<br>3）手机需要安装<code>apache-jmeter-5.1.1/bin</code>目录下<code>ApacheJMeterTemporaryRootCA.crt</code>证书</p>
+<h1 id="六、脚本录制"><a href="#六、脚本录制" class="headerlink" title="六、脚本录制"></a>六、脚本录制</h1><p>代理服务器配置后之后，点击启动，代理服务器就会开始记录所接受的http请求</p>
+]]></content>
+      <categories>
+        <category>JMeter</category>
+      </categories>
+      <tags>
+        <tag>JMeter</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JMeter(七)_关联之正则表达式提取器</title>
     <url>/2020/02/27/JMeter-%E4%B8%83-%E5%85%B3%E8%81%94%E4%B9%8B%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8F%90%E5%8F%96%E5%99%A8/</url>
     <content><![CDATA[<h2 id="应用场景："><a href="#应用场景：" class="headerlink" title="应用场景："></a>应用场景：</h2><p>在一个线程组中，从前一个请求的响应结果中，提取到某些需要的内容，可以作为下一个接口需要的入参从而实现关联<br>添加路径：HTTP请求-&gt;添加-&gt;后置处理器-&gt;正则表达式提取器<br><img src="/2020/02/27/JMeter-%E4%B8%83-%E5%85%B3%E8%81%94%E4%B9%8B%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8F%90%E5%8F%96%E5%99%A8/%E6%B7%BB%E5%8A%A0%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8F%90%E5%8F%96%E5%99%A8.png" alt="添加正则表达式提取器"></p>
@@ -509,34 +537,6 @@
 <p>一个合适的正则表达式是： id?test\“:”(.+?)”</p>
 </blockquote>
 <h4 id="4、从消息头（header）提取token"><a href="#4、从消息头（header）提取token" class="headerlink" title="4、从消息头（header）提取token:"></a>4、从消息头（header）提取token:</h4><p><img src="/2020/02/27/JMeter-%E4%B8%83-%E5%85%B3%E8%81%94%E4%B9%8B%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8F%90%E5%8F%96%E5%99%A8/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8F%90%E5%8F%96%E5%99%A8.png" alt="正则表达式提取器"></p>
-]]></content>
-      <categories>
-        <category>JMeter</category>
-      </categories>
-      <tags>
-        <tag>JMeter</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JMeter(三)_脚本录制之基于HTTP代理服务器</title>
-    <url>/2020/02/25/JMeter-%E4%B8%89-%E8%84%9A%E6%9C%AC%E5%BD%95%E5%88%B6%E4%B9%8B%E5%9F%BA%E4%BA%8EHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
-    <content><![CDATA[<h1 id="一、添加录制控制器"><a href="#一、添加录制控制器" class="headerlink" title="一、添加录制控制器"></a>一、添加录制控制器</h1><p>启动jmeter：在测试计划中添加线程组，线程组中添加逻辑控制器→录制控制器</p>
-<h1 id="二、添加HTTP代理服务器"><a href="#二、添加HTTP代理服务器" class="headerlink" title="二、添加HTTP代理服务器"></a>二、添加HTTP代理服务器</h1><p>工作台：添加非测试元件→HTTP代理服务器</p>
-<h1 id="三、配置代理服务器"><a href="#三、配置代理服务器" class="headerlink" title="三、配置代理服务器"></a>三、配置代理服务器</h1><p>服务器的配置，可以根据下面的代理服务器详细说明，根据需要配置不同代理模式。<br><img src="/2020/02/25/JMeter-%E4%B8%89-%E8%84%9A%E6%9C%AC%E5%BD%95%E5%88%B6%E4%B9%8B%E5%9F%BA%E4%BA%8EHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/WX20200225-165933@2x.png" alt="HTTP代理服务器"></p>
-<h2 id="代理服务器说明"><a href="#代理服务器说明" class="headerlink" title="代理服务器说明"></a>代理服务器说明</h2><p>1）名称：代理服务器名称，可以自定义<br>2）注释：对此代理服务器的说明，可自定义，默认为空<br>3）Global Settings</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">端口：JMeter代理服务器端口，需要检查端口是否被占用</span><br><span class="line">HTTPS Domains：https协议要监听的域名，如访问：https:<span class="regexp">//</span>api.xiaoyuzhoufm.com/</span><br></pre></td></tr></table></figure>
-<p>4）Test plan content</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">目标控制器：下拉选项，表明在哪个模块下面保存录制的请求</span><br><span class="line">分组：下拉框；对录制的请求按照一定方式进行进行分组，一般默认使用【不对样本分组】即可</span><br><span class="line">记录http信息头、添加断言、Regex matching：勾选框；记录每个请求的request <span class="selector-tag">header</span>、断言、正则表达式匹配等，录制一般使用默认勾选就行</span><br></pre></td></tr></table></figure>
-<p>5）HTTP Sampler settings</p>
-<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">A）<span class="keyword">Type</span>：http采样器的<span class="keyword">type</span>类型，默认为空</span><br><span class="line"> B）Prefix：对每个录制的http请求的前缀命名，默认为空，则录制的请求会按照数字递增的方式进行命名，如：<span class="number">0</span>，<span class="number">1</span>，<span class="number">2</span>......</span><br><span class="line">C）自动重定向：勾选框；表示请求是否自动重定向</span><br><span class="line">D）跟随重定向：勾选框；表示请求是否跟随重定向</span><br><span class="line">E）<span class="keyword">User</span> <span class="title">KeepAlive</span>：勾选框；表示此http请求的TCP链接是否保持不中断</span><br><span class="line">F）从HTML文件获取所有内涵的资源：勾选框，表示是否获取html文件中的资源信息，录制时一般默认不勾选</span><br></pre></td></tr></table></figure>
-<p>6）Content-Type filter</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">A</span>）Include：<span class="attribute">Content</span>-Type的白名单，表示那些<span class="attribute">Content</span>-Type可以通过</span><br><span class="line"><span class="selector-tag">B</span>）Exclude：<span class="attribute">Content</span>-Type黑名单，表示那些<span class="attribute">Content</span>-Type被拒绝</span><br></pre></td></tr></table></figure>
-<p>7）包含模式：表示哪些请求信息会被录制，如：*.html<br>8）排除模式：表示那些请求信息不会被录制，可点击Add suggested Excludes使用默认排除方式，<br>包含模式&amp;排除模式 就是我们需要的和我们不需要的。一般情况下，我们只需要排除我们不需要的。<br>格式：</p>
-<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"> .*\<span class="string">.css</span> 排除css文件，<span class="string">&quot; .* &quot;</span> 匹配任意字符的意思 <span class="string">&quot; \ &quot;</span>是转义的意思</span><br><span class="line"></span><br><span class="line"> .*\<span class="string">.js</span> 排除js文件</span><br><span class="line"></span><br><span class="line">.*\<span class="string">.png</span> 排除png文件</span><br></pre></td></tr></table></figure>
-<p>9）Notify Child Listeners of filtered samplers：是否唤起过滤取样器的后台监听，默认勾选即可</p>
-<h1 id="四、本地设置代理"><a href="#四、本地设置代理" class="headerlink" title="四、本地设置代理"></a>四、本地设置代理</h1><p>浏览器或手机设置为电脑代理</p>
-<h1 id="五、SSL问题"><a href="#五、SSL问题" class="headerlink" title="五、SSL问题"></a>五、SSL问题</h1><p>如果在录制过程中提示：SSL问题 ，那就需要安装SSL安全证书。<br><img src="/2020/02/25/JMeter-%E4%B8%89-%E8%84%9A%E6%9C%AC%E5%BD%95%E5%88%B6%E4%B9%8B%E5%9F%BA%E4%BA%8EHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/WX20200225-171508@2x.png" alt="SSL"><br>1）生成证书，在点击HTTP代理服务器的“启动”按钮后，弹出提示框：提示我们，CA证书已经创建，在jmeter的bin目录下<br> 2）安装证书（jmeter） 选择菜单栏“选项—SSL管理器”，再打开的对话框中选择bin目录下的证书<br>3）手机需要安装<code>apache-jmeter-5.1.1/bin</code>目录下<code>ApacheJMeterTemporaryRootCA.crt</code>证书</p>
-<h1 id="六、脚本录制"><a href="#六、脚本录制" class="headerlink" title="六、脚本录制"></a>六、脚本录制</h1><p>代理服务器配置后之后，点击启动，代理服务器就会开始记录所接受的http请求</p>
 ]]></content>
       <categories>
         <category>JMeter</category>
@@ -773,6 +773,54 @@
       </tags>
   </entry>
   <entry>
+    <title>JMeter(六)_参数化</title>
+    <url>/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/</url>
+    <content><![CDATA[<h1 id="一、JMeter参数化简介"><a href="#一、JMeter参数化简介" class="headerlink" title="一、JMeter参数化简介"></a>一、JMeter参数化简介</h1><h2 id="JMeter参数化的概念"><a href="#JMeter参数化的概念" class="headerlink" title="JMeter参数化的概念"></a>JMeter参数化的概念</h2><p>当使用JMeter进行测试时，测试数据的准备是一项重要的工作。若要求每次迭代的数据不一样时，则需进行参数化，然后从参数化的文件中来读取测试数据。</p>
+<blockquote>
+<p>参数化：是自动化测试脚本的一种常用技巧，可将脚本中的某些输入使用参数来代替，如登录时利用GET/POST请求方式传递参数的场景，在脚本运行时指定参数的取值范围和规则。<br>脚本在运行时，根据需要选取不同的参数值作为输入，该方式称为数据驱动测试（Data Driven Test），而参数的取值范围被称为数据池（Data Pool）。</p>
+</blockquote>
+<h2 id="JMeter参数化方式之使用场景对比"><a href="#JMeter参数化方式之使用场景对比" class="headerlink" title="JMeter参数化方式之使用场景对比"></a>JMeter参数化方式之使用场景对比</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>参数化方式</th>
+<th><span class="Apple-tab-span" style="white-space:pre"></span>使用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>User Parameters</td>
+<td>适用于参数取值范围很小的时候使用</td>
+</tr>
+<tr>
+<td>2</td>
+<td>CSV Data Set Config</td>
+<td>适用于参数取值范围较大的时候使用，该方法具有更大的灵活性</td>
+</tr>
+<tr>
+<td>3</td>
+<td>User Defined Variables</td>
+<td>一般用于Test Plan中不需要随请求迭代的参数设置，如：Host、Port Number</td>
+</tr>
+<tr>
+<td>4</td>
+<td>函数助手：_CSVRead</td>
+<td>可作为其他参数化方式的补充项，如：随机数生成的函数${__Random(,,)}</td>
+</tr>
+</tbody></table>
+<h1 id="二、JMeter参数化的4种主要方式-操作演练"><a href="#二、JMeter参数化的4种主要方式-操作演练" class="headerlink" title="二、JMeter参数化的4种主要方式-操作演练"></a>二、JMeter参数化的4种主要方式-操作演练</h1><h2 id="User-Parameters（用户参数）"><a href="#User-Parameters（用户参数）" class="headerlink" title="User Parameters（用户参数）"></a>User Parameters（用户参数）</h2><p>操作路径：HTTP请求–&gt;添加–&gt;前置处理器–&gt;用户参数<br>1）添加User Parameters功能模块<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E5%8F%82%E6%95%B0.png" alt="添加用户参数"><br>2）设置参数项、参数值<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E7%94%A8%E6%88%B7%E5%8F%82%E6%95%B0.png" alt="用户参数"><br>3）配置HTTP取样器界面的请求参数：${xxx}<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE.png" alt="HTTP请求参数配置"><br>4）配置Thread Group<br>设置线程数=2，即2个虚拟用户数，对应User Parameters中设置的2个用户<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E7%BA%BF%E7%A8%8B%E6%95%B0.png" alt="线程数"></p>
+<h2 id="CSV-Data-Set-Config（CSV数据配置）"><a href="#CSV-Data-Set-Config（CSV数据配置）" class="headerlink" title="CSV Data Set Config（CSV数据配置）"></a>CSV Data Set Config（CSV数据配置）</h2><p>操作路径：线程组–&gt;添加–&gt;配置元件–&gt;CSV Data Set Config<br>1）添加CSV Data Set Config模块<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E6%B7%BB%E5%8A%A0CSV%E6%95%B0%E6%8D%AE%E9%85%8D%E7%BD%AE.png" alt="添加CSV数据配置"><br>2）预先准备好要参数化的所有参数值（txt、csv文件）<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E5%8F%82%E6%95%B0%E6%96%87%E4%BB%B6.png" alt="参数文件"><br>3）配置CSV Data来源<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/CSV%E6%95%B0%E6%8D%AE%E9%85%8D%E7%BD%AE.png" alt="CSV数据配置"><br>4）设置HTTP取样器的请求参数：${xxx}<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE.png" alt="HTTP请求参数配置"></p>
+<h2 id="User-Defined-Variables（用户自定义变量）"><a href="#User-Defined-Variables（用户自定义变量）" class="headerlink" title="User Defined Variables（用户自定义变量）"></a>User Defined Variables（用户自定义变量）</h2><p>操作路径：线程组–&gt;添加–&gt;配置元件–&gt;用户自定义变量<br>1）添加User Defined Variables模块<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F.png" alt="添加用户自定义变量"><br>2）配置User Defined Variables界面中的参数及其值<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E7%94%A8%E6%88%B7%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F.png" alt="用户自定义变量"><br>3）配置HTTP取样器中的请求参数<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE2.png" alt="HTTP请求参数配置"></p>
+<h2 id="函数助手"><a href="#函数助手" class="headerlink" title="函数助手"></a>函数助手</h2><p>操作路径：Tools–&gt;函数助手对话框<br>1）选择参数化所需的函数，配置函数<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E6%89%93%E5%BC%80%E5%87%BD%E6%95%B0%E5%AF%B9%E8%AF%9D%E5%8A%A9%E6%89%8B.png" alt="打开函数对话助手"><br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E9%85%8D%E7%BD%AE%E5%87%BD%E6%95%B0.png" alt="配置函数"><br>2）配置HTTP取样器的请求参数<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE3.png" alt="HTTP请求参数配置"></p>
+]]></content>
+      <categories>
+        <category>JMeter</category>
+      </categories>
+      <tags>
+        <tag>JMeter</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JMeter(十)_断言</title>
     <url>/2020/03/10/JMeter-%E5%8D%81-%E6%96%AD%E8%A8%80/</url>
     <content><![CDATA[<p>用于检查测试中得到的响应数据等是否符合预期，用以保证性能测试过程中的数据交互与预期一致。</p>
@@ -832,54 +880,6 @@
 <h2 id="监听器-→察看结果树"><a href="#监听器-→察看结果树" class="headerlink" title="监听器 →察看结果树"></a>监听器 →察看结果树</h2><p>添加好监视器，点击运行，开始测试<br>测试结束后，如果我们的请求成功，那么结果树里面的模拟请求会显示为绿色，可以通过取样器结果里面的响应状态码信息来判断<br><img src="/2020/02/25/JMeter-%E5%9B%9B-HTTP%E8%AF%B7%E6%B1%82/%E7%BB%93%E6%9E%9C%E6%A0%91.png" alt="结果树"></p>
 <p>也可以点击请求模块，查看我们发送的请求<br>里面有我们发送的请求的方法、协议、地址以及实体主体数据，以及数据类型，大小，发送时间等信息<br><img src="/2020/02/25/JMeter-%E5%9B%9B-HTTP%E8%AF%B7%E6%B1%82/%E8%AF%B7%E6%B1%82%E6%95%B0%E6%8D%AE.png" alt="请求数据"></p>
 <p>响应数据：里面包含服务器返回给我们的响应数据实体，如下图<br><img src="/2020/02/25/JMeter-%E5%9B%9B-HTTP%E8%AF%B7%E6%B1%82/%E5%93%8D%E5%BA%94%E6%95%B0%E6%8D%AE.png" alt="响应数据"></p>
-]]></content>
-      <categories>
-        <category>JMeter</category>
-      </categories>
-      <tags>
-        <tag>JMeter</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JMeter(六)_参数化</title>
-    <url>/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/</url>
-    <content><![CDATA[<h1 id="一、JMeter参数化简介"><a href="#一、JMeter参数化简介" class="headerlink" title="一、JMeter参数化简介"></a>一、JMeter参数化简介</h1><h2 id="JMeter参数化的概念"><a href="#JMeter参数化的概念" class="headerlink" title="JMeter参数化的概念"></a>JMeter参数化的概念</h2><p>当使用JMeter进行测试时，测试数据的准备是一项重要的工作。若要求每次迭代的数据不一样时，则需进行参数化，然后从参数化的文件中来读取测试数据。</p>
-<blockquote>
-<p>参数化：是自动化测试脚本的一种常用技巧，可将脚本中的某些输入使用参数来代替，如登录时利用GET/POST请求方式传递参数的场景，在脚本运行时指定参数的取值范围和规则。<br>脚本在运行时，根据需要选取不同的参数值作为输入，该方式称为数据驱动测试（Data Driven Test），而参数的取值范围被称为数据池（Data Pool）。</p>
-</blockquote>
-<h2 id="JMeter参数化方式之使用场景对比"><a href="#JMeter参数化方式之使用场景对比" class="headerlink" title="JMeter参数化方式之使用场景对比"></a>JMeter参数化方式之使用场景对比</h2><table>
-<thead>
-<tr>
-<th></th>
-<th>参数化方式</th>
-<th><span class="Apple-tab-span" style="white-space:pre"></span>使用场景</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>User Parameters</td>
-<td>适用于参数取值范围很小的时候使用</td>
-</tr>
-<tr>
-<td>2</td>
-<td>CSV Data Set Config</td>
-<td>适用于参数取值范围较大的时候使用，该方法具有更大的灵活性</td>
-</tr>
-<tr>
-<td>3</td>
-<td>User Defined Variables</td>
-<td>一般用于Test Plan中不需要随请求迭代的参数设置，如：Host、Port Number</td>
-</tr>
-<tr>
-<td>4</td>
-<td>函数助手：_CSVRead</td>
-<td>可作为其他参数化方式的补充项，如：随机数生成的函数${__Random(,,)}</td>
-</tr>
-</tbody></table>
-<h1 id="二、JMeter参数化的4种主要方式-操作演练"><a href="#二、JMeter参数化的4种主要方式-操作演练" class="headerlink" title="二、JMeter参数化的4种主要方式-操作演练"></a>二、JMeter参数化的4种主要方式-操作演练</h1><h2 id="User-Parameters（用户参数）"><a href="#User-Parameters（用户参数）" class="headerlink" title="User Parameters（用户参数）"></a>User Parameters（用户参数）</h2><p>操作路径：HTTP请求–&gt;添加–&gt;前置处理器–&gt;用户参数<br>1）添加User Parameters功能模块<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E5%8F%82%E6%95%B0.png" alt="添加用户参数"><br>2）设置参数项、参数值<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E7%94%A8%E6%88%B7%E5%8F%82%E6%95%B0.png" alt="用户参数"><br>3）配置HTTP取样器界面的请求参数：${xxx}<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE.png" alt="HTTP请求参数配置"><br>4）配置Thread Group<br>设置线程数=2，即2个虚拟用户数，对应User Parameters中设置的2个用户<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E7%BA%BF%E7%A8%8B%E6%95%B0.png" alt="线程数"></p>
-<h2 id="CSV-Data-Set-Config（CSV数据配置）"><a href="#CSV-Data-Set-Config（CSV数据配置）" class="headerlink" title="CSV Data Set Config（CSV数据配置）"></a>CSV Data Set Config（CSV数据配置）</h2><p>操作路径：线程组–&gt;添加–&gt;配置元件–&gt;CSV Data Set Config<br>1）添加CSV Data Set Config模块<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E6%B7%BB%E5%8A%A0CSV%E6%95%B0%E6%8D%AE%E9%85%8D%E7%BD%AE.png" alt="添加CSV数据配置"><br>2）预先准备好要参数化的所有参数值（txt、csv文件）<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E5%8F%82%E6%95%B0%E6%96%87%E4%BB%B6.png" alt="参数文件"><br>3）配置CSV Data来源<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/CSV%E6%95%B0%E6%8D%AE%E9%85%8D%E7%BD%AE.png" alt="CSV数据配置"><br>4）设置HTTP取样器的请求参数：${xxx}<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE.png" alt="HTTP请求参数配置"></p>
-<h2 id="User-Defined-Variables（用户自定义变量）"><a href="#User-Defined-Variables（用户自定义变量）" class="headerlink" title="User Defined Variables（用户自定义变量）"></a>User Defined Variables（用户自定义变量）</h2><p>操作路径：线程组–&gt;添加–&gt;配置元件–&gt;用户自定义变量<br>1）添加User Defined Variables模块<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F.png" alt="添加用户自定义变量"><br>2）配置User Defined Variables界面中的参数及其值<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E7%94%A8%E6%88%B7%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F.png" alt="用户自定义变量"><br>3）配置HTTP取样器中的请求参数<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE2.png" alt="HTTP请求参数配置"></p>
-<h2 id="函数助手"><a href="#函数助手" class="headerlink" title="函数助手"></a>函数助手</h2><p>操作路径：Tools–&gt;函数助手对话框<br>1）选择参数化所需的函数，配置函数<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E6%89%93%E5%BC%80%E5%87%BD%E6%95%B0%E5%AF%B9%E8%AF%9D%E5%8A%A9%E6%89%8B.png" alt="打开函数对话助手"><br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E9%85%8D%E7%BD%AE%E5%87%BD%E6%95%B0.png" alt="配置函数"><br>2）配置HTTP取样器的请求参数<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE3.png" alt="HTTP请求参数配置"></p>
 ]]></content>
       <categories>
         <category>JMeter</category>
@@ -1157,7 +1157,7 @@
 </ol>
 <p>成功后，终端显示</p>
 <blockquote>
-<p>Your identitification has been saved in /Users/xxx/.ssh/id_rsa.<br>Your public key has been saved in /user/xxx/id_rsa.pub.<br>the key fingerprint is xxxxxxxxxx…….xxxxxxxx <a href="mailto:&#121;&#111;&#x75;&#114;&#x5f;&#101;&#x6d;&#97;&#105;&#108;&#64;&#101;&#x78;&#x61;&#109;&#x70;&#x6c;&#101;&#46;&#99;&#111;&#109;">&#121;&#111;&#x75;&#114;&#x5f;&#101;&#x6d;&#97;&#105;&#108;&#64;&#101;&#x78;&#x61;&#109;&#x70;&#x6c;&#101;&#46;&#99;&#111;&#109;</a><br>The key’s randomart image is:<br><img src="/2019/05/21/Mac%E7%94%B5%E8%84%91%E7%94%A8%E7%BB%88%E7%AB%AF%E7%94%9F%E6%88%90SSH%20key%20%E8%AE%BF%E9%97%AE%E8%87%AA%E5%B7%B1%E7%9A%84Github/15577192525730.jpg" alt="-w465"></p>
+<p>Your identitification has been saved in /Users/xxx/.ssh/id_rsa.<br>Your public key has been saved in /user/xxx/id_rsa.pub.<br>the key fingerprint is xxxxxxxxxx…….xxxxxxxx <a href="mailto:&#121;&#111;&#x75;&#x72;&#x5f;&#101;&#x6d;&#97;&#105;&#x6c;&#x40;&#101;&#120;&#97;&#x6d;&#112;&#108;&#x65;&#46;&#99;&#x6f;&#109;">&#121;&#111;&#x75;&#x72;&#x5f;&#101;&#x6d;&#97;&#105;&#x6c;&#x40;&#101;&#120;&#97;&#x6d;&#112;&#108;&#x65;&#46;&#99;&#x6f;&#109;</a><br>The key’s randomart image is:<br><img src="/2019/05/21/Mac%E7%94%B5%E8%84%91%E7%94%A8%E7%BB%88%E7%AB%AF%E7%94%9F%E6%88%90SSH%20key%20%E8%AE%BF%E9%97%AE%E8%87%AA%E5%B7%B1%E7%9A%84Github/15577192525730.jpg" alt="-w465"></p>
 </blockquote>
 <h1 id="将SSH密钥添加到ssh-agent"><a href="#将SSH密钥添加到ssh-agent" class="headerlink" title="将SSH密钥添加到ssh-agent"></a>将SSH密钥添加到ssh-agent</h1><ol>
 <li><p>在后台启动ssh-agent</p>
@@ -1167,7 +1167,7 @@
 </ol>
 <p>成功后，中选显示：</p>
 <blockquote>
-<p> Identity added: /Users/xxx/.ssh/id_rsa (<a href="mailto:&#121;&#x6f;&#x75;&#114;&#95;&#x65;&#109;&#x61;&#x69;&#108;&#64;&#101;&#x78;&#x61;&#109;&#x70;&#108;&#x65;&#x2e;&#x63;&#x6f;&#x6d;">&#121;&#x6f;&#x75;&#114;&#95;&#x65;&#109;&#x61;&#x69;&#108;&#64;&#101;&#x78;&#x61;&#109;&#x70;&#108;&#x65;&#x2e;&#x63;&#x6f;&#x6d;</a>)</p>
+<p> Identity added: /Users/xxx/.ssh/id_rsa (<a href="mailto:&#121;&#x6f;&#x75;&#x72;&#95;&#x65;&#x6d;&#x61;&#105;&#x6c;&#64;&#x65;&#120;&#x61;&#x6d;&#x70;&#x6c;&#101;&#46;&#99;&#x6f;&#x6d;">&#121;&#x6f;&#x75;&#x72;&#95;&#x65;&#x6d;&#x61;&#105;&#x6c;&#64;&#x65;&#120;&#x61;&#x6d;&#x70;&#x6c;&#101;&#46;&#99;&#x6f;&#x6d;</a>)</p>
 </blockquote>
 <h1 id="添加SSH-key-到Github-上"><a href="#添加SSH-key-到Github-上" class="headerlink" title="添加SSH key 到Github 上"></a>添加SSH key 到Github 上</h1><ol>
 <li><p>将SSH密钥复制到剪贴板。</p>
@@ -1447,24 +1447,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2019/05/20/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>atxserver2设备管理平台搭建</title>
     <url>/2019/08/21/atxserver2%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/</url>
     <content><![CDATA[<p>[TOC]</p>
@@ -1532,6 +1514,104 @@
       </categories>
       <tags>
         <tag>App自动化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2019/05/20/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>item2常用快捷键</title>
+    <url>/2019/05/20/item2%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
+    <content><![CDATA[<h1 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h1><ul>
+<li>新建标签：command + t</li>
+<li>关闭标签：command + w</li>
+<li>切换标签：command + 数字 command + 左右方向键</li>
+<li>切换全屏：command + enter</li>
+<li>查找：command + f</li>
+</ul>
+<h1 id="分屏"><a href="#分屏" class="headerlink" title="分屏"></a>分屏</h1><ul>
+<li>垂直分屏：command + d</li>
+<li>水平分屏：command + shift + d</li>
+<li>切换屏幕：command + option + 方向键 command + [ 或 command + ]</li>
+<li>查看历史命令：command + ;</li>
+<li>查看剪贴板历史：command + shift + h</li>
+</ul>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><ul>
+<li>清除当前行：ctrl + u</li>
+<li>到行首：ctrl + a</li>
+<li>到行尾：ctrl + e</li>
+<li>前进后退：ctrl + f/b (相当于左右方向键)</li>
+<li>上一条命令：ctrl + p</li>
+<li>搜索命令历史：ctrl + r</li>
+<li>删除当前光标的字符：ctrl + d</li>
+<li>删除光标之前的字符：ctrl + h</li>
+<li>删除光标之前的单词：ctrl + w</li>
+<li>删除到文本末尾：ctrl + k</li>
+<li>交换光标处文本：ctrl + t</li>
+<li>清屏1：command + r</li>
+<li>清屏2：ctrl + l</li>
+</ul>
+<h1 id="自带有哪些很实用的功能-快捷键"><a href="#自带有哪些很实用的功能-快捷键" class="headerlink" title="自带有哪些很实用的功能/快捷键"></a>自带有哪些很实用的功能/快捷键</h1><ul>
+<li>⌘ + 数字在各 tab 标签直接来回切换</li>
+<li>选择即复制 + 鼠标中键粘贴，这个很实用</li>
+<li>⌘ + f 所查找的内容会被自动复制</li>
+<li>⌘ + d 横着分屏 / ⌘ + shift + d 竖着分屏</li>
+<li>⌘ + r = clear，而且只是换到新一屏，不会想 clear 一样创建一个空屏</li>
+<li>ctrl + u 清空当前行，无论光标在什么位置</li>
+<li>输入开头命令后 按 ⌘ + ; 会自动列出输入过的命令</li>
+<li>⌘ + shift + h 会列出剪切板历史</li>
+<li>可以在 Preferences &gt; keys 设置全局快捷键调出 iterm，这个也可以用过 Alfred 实现</li>
+</ul>
+<h1 id="我常用的一些快捷键"><a href="#我常用的一些快捷键" class="headerlink" title="我常用的一些快捷键"></a>我常用的一些快捷键</h1><ul>
+<li>⌘ + 1 / 2 左右 tab 之间来回切换，这个在 前面 已经介绍过了</li>
+<li>⌘← / ⌘→ 到一行命令最左边/最右边 ，这个功能同 C+a / C+e</li>
+<li>⌥← / ⌥→ 按单词前移/后移，相当与 C+f / C+b，其实这个功能在Iterm中已经预定义好了，⌥f / ⌥b，看个人习惯了</li>
+</ul>
+<h1 id="设置方法如下"><a href="#设置方法如下" class="headerlink" title="设置方法如下"></a>设置方法如下</h1><p>当然除了这些可以自定义的也不能忘了 linux 下那些好用的组合</p>
+<ul>
+<li>C+a / C+e 这个几乎在哪都可以使用</li>
+<li>C+p / !! 上一条命令</li>
+<li>C+k 从光标处删至命令行尾 (本来 C+u 是删至命令行首，但iterm中是删掉整行)</li>
+<li>C+w A+d 从光标处删至字首/尾</li>
+<li>C+h C+d 删掉光标前后的自负</li>
+<li>C+y 粘贴至光标后</li>
+<li>C+r 搜索命令历史，这个较常用</li>
+</ul>
+<h1 id="选择喜欢的配色方案。"><a href="#选择喜欢的配色方案。" class="headerlink" title="选择喜欢的配色方案。"></a>选择喜欢的配色方案。</h1><p>在Preferences-&gt;Profiles-&gt;Colors的load presets可以选择某个配色方案。也可以自己下载。在网站<a href="http://iterm2colorschemes.com/%EF%BC%8C%E5%87%A0%E4%B9%8E%E5%8F%AF%E4%BB%A5%E6%89%BE%E5%88%B0%E6%89%80%E6%9C%89%E5%8F%AF%E7%94%A8%E7%9A%84%E9%85%8D%E8%89%B2%E6%96%B9%E6%A1%88%E3%80%82">http://iterm2colorschemes.com/，几乎可以找到所有可用的配色方案。</a></p>
+<h1 id="选中即复制"><a href="#选中即复制" class="headerlink" title="选中即复制"></a>选中即复制</h1><p>iterm2有2种好用的选中即复制模式。</p>
+<ul>
+<li>一种是用鼠标，在iterm2中，选中某个路径或者某个词汇，那么，iterm2就自动复制了。</li>
+<li>另一种是无鼠标模式，command+f,弹出iterm2的查找模式，输入要查找并复制的内容的前几个字母，确认找到的是自己的内容之后，输入tab，查找窗口将自动变化内容，并将其复制。如果输入的是shift+tab，则自动将查找内容的左边选中并复制。</li>
+</ul>
+<h1 id="屏幕切割"><a href="#屏幕切割" class="headerlink" title="屏幕切割"></a>屏幕切割</h1><ul>
+<li>command+d：垂直分割；</li>
+<li>command+shift+d：水平分割</li>
+</ul>
+<h1 id="自动完成"><a href="#自动完成" class="headerlink" title="自动完成"></a>自动完成</h1><p>输入打头几个字母，然后输入command+; iterm2将自动列出之前输入过的类似命令。</p>
+<h1 id="剪切历史"><a href="#剪切历史" class="headerlink" title="剪切历史"></a>剪切历史</h1><p>输入command+shift+h，iterm2将自动列出剪切板的历史记录。如果需要将剪切板的历史记录保存到磁盘，在Preferences &gt; General &gt; Save copy/paste history to disk.中设置。</p>
+<h1 id="全屏切换"><a href="#全屏切换" class="headerlink" title="全屏切换"></a>全屏切换</h1><p>command+enter进入与返回全屏模式</p>
+<h1 id="Expose所有Tab"><a href="#Expose所有Tab" class="headerlink" title="Exposé所有Tab"></a>Exposé所有Tab</h1><p>command+option+e,并且可以搜索</p>
+]]></content>
+      <categories>
+        <category>资料</category>
+      </categories>
+      <tags>
+        <tag>备忘</tag>
       </tags>
   </entry>
   <entry>
@@ -1782,86 +1862,6 @@
       </tags>
   </entry>
   <entry>
-    <title>item2常用快捷键</title>
-    <url>/2019/05/20/item2%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
-    <content><![CDATA[<h1 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h1><ul>
-<li>新建标签：command + t</li>
-<li>关闭标签：command + w</li>
-<li>切换标签：command + 数字 command + 左右方向键</li>
-<li>切换全屏：command + enter</li>
-<li>查找：command + f</li>
-</ul>
-<h1 id="分屏"><a href="#分屏" class="headerlink" title="分屏"></a>分屏</h1><ul>
-<li>垂直分屏：command + d</li>
-<li>水平分屏：command + shift + d</li>
-<li>切换屏幕：command + option + 方向键 command + [ 或 command + ]</li>
-<li>查看历史命令：command + ;</li>
-<li>查看剪贴板历史：command + shift + h</li>
-</ul>
-<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><ul>
-<li>清除当前行：ctrl + u</li>
-<li>到行首：ctrl + a</li>
-<li>到行尾：ctrl + e</li>
-<li>前进后退：ctrl + f/b (相当于左右方向键)</li>
-<li>上一条命令：ctrl + p</li>
-<li>搜索命令历史：ctrl + r</li>
-<li>删除当前光标的字符：ctrl + d</li>
-<li>删除光标之前的字符：ctrl + h</li>
-<li>删除光标之前的单词：ctrl + w</li>
-<li>删除到文本末尾：ctrl + k</li>
-<li>交换光标处文本：ctrl + t</li>
-<li>清屏1：command + r</li>
-<li>清屏2：ctrl + l</li>
-</ul>
-<h1 id="自带有哪些很实用的功能-快捷键"><a href="#自带有哪些很实用的功能-快捷键" class="headerlink" title="自带有哪些很实用的功能/快捷键"></a>自带有哪些很实用的功能/快捷键</h1><ul>
-<li>⌘ + 数字在各 tab 标签直接来回切换</li>
-<li>选择即复制 + 鼠标中键粘贴，这个很实用</li>
-<li>⌘ + f 所查找的内容会被自动复制</li>
-<li>⌘ + d 横着分屏 / ⌘ + shift + d 竖着分屏</li>
-<li>⌘ + r = clear，而且只是换到新一屏，不会想 clear 一样创建一个空屏</li>
-<li>ctrl + u 清空当前行，无论光标在什么位置</li>
-<li>输入开头命令后 按 ⌘ + ; 会自动列出输入过的命令</li>
-<li>⌘ + shift + h 会列出剪切板历史</li>
-<li>可以在 Preferences &gt; keys 设置全局快捷键调出 iterm，这个也可以用过 Alfred 实现</li>
-</ul>
-<h1 id="我常用的一些快捷键"><a href="#我常用的一些快捷键" class="headerlink" title="我常用的一些快捷键"></a>我常用的一些快捷键</h1><ul>
-<li>⌘ + 1 / 2 左右 tab 之间来回切换，这个在 前面 已经介绍过了</li>
-<li>⌘← / ⌘→ 到一行命令最左边/最右边 ，这个功能同 C+a / C+e</li>
-<li>⌥← / ⌥→ 按单词前移/后移，相当与 C+f / C+b，其实这个功能在Iterm中已经预定义好了，⌥f / ⌥b，看个人习惯了</li>
-</ul>
-<h1 id="设置方法如下"><a href="#设置方法如下" class="headerlink" title="设置方法如下"></a>设置方法如下</h1><p>当然除了这些可以自定义的也不能忘了 linux 下那些好用的组合</p>
-<ul>
-<li>C+a / C+e 这个几乎在哪都可以使用</li>
-<li>C+p / !! 上一条命令</li>
-<li>C+k 从光标处删至命令行尾 (本来 C+u 是删至命令行首，但iterm中是删掉整行)</li>
-<li>C+w A+d 从光标处删至字首/尾</li>
-<li>C+h C+d 删掉光标前后的自负</li>
-<li>C+y 粘贴至光标后</li>
-<li>C+r 搜索命令历史，这个较常用</li>
-</ul>
-<h1 id="选择喜欢的配色方案。"><a href="#选择喜欢的配色方案。" class="headerlink" title="选择喜欢的配色方案。"></a>选择喜欢的配色方案。</h1><p>在Preferences-&gt;Profiles-&gt;Colors的load presets可以选择某个配色方案。也可以自己下载。在网站<a href="http://iterm2colorschemes.com/%EF%BC%8C%E5%87%A0%E4%B9%8E%E5%8F%AF%E4%BB%A5%E6%89%BE%E5%88%B0%E6%89%80%E6%9C%89%E5%8F%AF%E7%94%A8%E7%9A%84%E9%85%8D%E8%89%B2%E6%96%B9%E6%A1%88%E3%80%82">http://iterm2colorschemes.com/，几乎可以找到所有可用的配色方案。</a></p>
-<h1 id="选中即复制"><a href="#选中即复制" class="headerlink" title="选中即复制"></a>选中即复制</h1><p>iterm2有2种好用的选中即复制模式。</p>
-<ul>
-<li>一种是用鼠标，在iterm2中，选中某个路径或者某个词汇，那么，iterm2就自动复制了。</li>
-<li>另一种是无鼠标模式，command+f,弹出iterm2的查找模式，输入要查找并复制的内容的前几个字母，确认找到的是自己的内容之后，输入tab，查找窗口将自动变化内容，并将其复制。如果输入的是shift+tab，则自动将查找内容的左边选中并复制。</li>
-</ul>
-<h1 id="屏幕切割"><a href="#屏幕切割" class="headerlink" title="屏幕切割"></a>屏幕切割</h1><ul>
-<li>command+d：垂直分割；</li>
-<li>command+shift+d：水平分割</li>
-</ul>
-<h1 id="自动完成"><a href="#自动完成" class="headerlink" title="自动完成"></a>自动完成</h1><p>输入打头几个字母，然后输入command+; iterm2将自动列出之前输入过的类似命令。</p>
-<h1 id="剪切历史"><a href="#剪切历史" class="headerlink" title="剪切历史"></a>剪切历史</h1><p>输入command+shift+h，iterm2将自动列出剪切板的历史记录。如果需要将剪切板的历史记录保存到磁盘，在Preferences &gt; General &gt; Save copy/paste history to disk.中设置。</p>
-<h1 id="全屏切换"><a href="#全屏切换" class="headerlink" title="全屏切换"></a>全屏切换</h1><p>command+enter进入与返回全屏模式</p>
-<h1 id="Expose所有Tab"><a href="#Expose所有Tab" class="headerlink" title="Exposé所有Tab"></a>Exposé所有Tab</h1><p>command+option+e,并且可以搜索</p>
-]]></content>
-      <categories>
-        <category>资料</category>
-      </categories>
-      <tags>
-        <tag>备忘</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>libimobiledevice命令</title>
     <url>/2019/05/21/libimobiledevice%E5%91%BD%E4%BB%A4/</url>
     <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>A library to communicate with services of Apple iOS devices using native protocols.</p>
@@ -1919,56 +1919,6 @@
       </categories>
       <tags>
         <tag>Hexo Next</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用 mitmproxy + python 实现移动端异常数据测试</title>
-    <url>/2020/08/31/%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<p><a href="https://github.com/mitmproxy/mitmproxy">mitmproxy github地址（Man-in-the-middle attack）</a></p>
-<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>Crash率是衡量一个App好坏的重要指标之一，如果你忽略了它的存在，它就会愈演愈烈<br>客户端的很大一部分的Crash是因为API返回的脏数据。比如当API返回空值、空数组或返回不是约定类型的数据，App收到这些数据，就极有可能发生空指针、数组越界和类型转换错误等Crash。而且这样的脏数据，特别容易引起线上大面积的崩溃。</p>
-<h1 id="异常数据测试方法"><a href="#异常数据测试方法" class="headerlink" title="异常数据测试方法"></a>异常数据测试方法</h1><p>手工测试时，借助charles等抓包工具，对返回结果拦截修改数据，再进行数据的maplocal</p>
-<h2 id="异常数据修改规则"><a href="#异常数据修改规则" class="headerlink" title="异常数据修改规则"></a>异常数据修改规则</h2><p>字符：非法字符、超长、null<br>数组：空数组、非法序列<br>接口超时：5s、10s<br>接口状态码：404、500、503<br>增加删除数据：数组、字典</p>
-<h1 id="mitmproxy是什么"><a href="#mitmproxy是什么" class="headerlink" title="mitmproxy是什么"></a>mitmproxy是什么</h1><p>顾名思义，mitmproxy 就是用于 MITM 的 proxy，MITM 即中间人攻击（Man-in-the-middle attack）。<br>    <img src="/2020/08/31/%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/mitmproxy.png" alt="mitmproxy"><br>    mitmproxy是一个支持HTTP和HTTPS的抓包程序，有类似Fiddler、Charles的功能，只不过它是一个控制台的形式操作。mitmproxy还有两个关联组件。一个是mitmdump，它是mitmproxy的命令行接口，利用它我们可以对接Python脚本，用Python实现监听后的处理。另一个是mitmweb，它是一个Web程序，通过它我们可以清楚观察mitmproxy捕获的请求。</p>
-<h2 id="mitmproxy有如下几项功能"><a href="#mitmproxy有如下几项功能" class="headerlink" title="mitmproxy有如下几项功能"></a>mitmproxy有如下几项功能</h2><ul>
-<li>拦截HTTP和HTTPS请求和响应。</li>
-<li>保存HTTP会话并进行分析。</li>
-<li>模拟客户端发起请求，模拟服务端返回响应。</li>
-<li>利用反向代理将流量转发给指定的服务器。</li>
-<li>支持Mac和Linux上的透明代理。</li>
-<li>利用Python对HTTP请求和响应进行实时处理。</li>
-</ul>
-<h1 id="安装mitmproxy"><a href="#安装mitmproxy" class="headerlink" title="安装mitmproxy"></a>安装mitmproxy</h1><p><code>brew install mitmproxy</code><br>安装完成后，系统将拥有 mitmproxy、mitmdump、mitmweb 三个命令<br>验证安装成功<br><code>mitmdump --version</code><br>应当可以看到类似于这样的输出：</p>
-<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">Mitmproxy</span>: <span class="number">5</span>.<span class="number">2</span></span><br><span class="line"><span class="attribute">Python</span>:    <span class="number">3</span>.<span class="number">7</span>.<span class="number">7</span></span><br><span class="line"><span class="attribute">OpenSSL</span>:   OpenSSL <span class="number">1</span>.<span class="number">1</span>.<span class="number">1</span>g  <span class="number">21</span> Apr <span class="number">2020</span></span><br><span class="line"><span class="attribute">Platform</span>:  Darwin-<span class="number">19</span>.<span class="number">6</span>.<span class="number">0</span>-x<span class="number">86</span>_<span class="number">64</span>-i<span class="number">386</span>-<span class="number">64</span>bit</span><br></pre></td></tr></table></figure>
-<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>要启动 mitmproxy 用 <code>mitmproxy</code>、<code>mitmdump</code>、<code>mitmweb</code> 这三个命令中的任意一个即可，这三个命令功能一致，且都可以加载自定义脚本，唯一的区别是交互界面的不同。<br>mitmproxy 命令启动后，会提供一个命令行界面，用户可以实时看到发生的请求，并通过命令过滤请求，查看请求数据。形如：<br>启动 mitmproxy：<br><code>mitmweb</code><br>应当看到如下输出：</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">Web server listening at http:<span class="regexp">//</span><span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">8081</span>/</span><br><span class="line">Proxy server listening at http:<span class="regexp">//</span>*:<span class="number">8080</span></span><br></pre></td></tr></table></figure>
-<h1 id="设置代理-https证书安装"><a href="#设置代理-https证书安装" class="headerlink" title="设置代理+https证书安装"></a>设置代理+https证书安装</h1><p>移动设备和电脑保存在一个wifi网络下，在移动设备在网络代理填写：电脑ip+8080(端口)<br>在浏览器输入:<code>mitm.it</code>，选择对应设备类型安装证书</p>
-<h1 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h1><p>完成了上述工作，我们已经具备了操作 mitmproxy 的基本能力 了。接下来开始开发自定义脚本，这才是 mitmproxy 真正强大的地方。<br>脚本的编写需要遵循 mitmproxy 规定的套路，这样的套路有两个，使用时选其中一个套路即可。<br>##第一个套路<br>编写一个 py 文件供 mitmproxy 加载，文件中定义了若干函数，这些函数实现了某些 mitmproxy 提供的事件，mitmproxy 会在某个事件发生时调用对应的函数，形如：</p>
-<figure class="highlight livecodeserver"><table><tr><td class="code"><pre><span class="line"><span class="built_in">from</span> mitmproxy import <span class="keyword">http</span></span><br><span class="line"><span class="built_in">from</span> mitmproxy import ctx</span><br><span class="line"></span><br><span class="line"><span class="built_in">num</span> = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def request(flow: <span class="keyword">http</span>.HTTPFlow):</span><br><span class="line">    <span class="built_in">global</span> <span class="built_in">num</span></span><br><span class="line">    <span class="built_in">num</span> = <span class="built_in">num</span> + <span class="number">1</span></span><br><span class="line">    ctx.<span class="built_in">log</span>.info(<span class="string">&quot;We&#x27;ve seen %d flows&quot;</span> % <span class="built_in">num</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="第二个套路"><a href="#第二个套路" class="headerlink" title="第二个套路"></a>第二个套路</h2><p>编写一个 py 文件供 mitmproxy 加载，文件定义了变量 addons，addons 是个数组，每个元素是一个类实例，这些类有若干方法，这些方法实现了某些 mitmproxy 提供的事件，mitmproxy 会在某个事件发生时调用对应的方法。这些类，称为一个个 addon，比如一个叫 Counter 的 addon：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> mitmproxy <span class="keyword">import</span> http</span><br><span class="line"><span class="keyword">from</span> mitmproxy <span class="keyword">import</span> ctx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.num = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">request</span>(<span class="params">self, flow: http.HTTPFlow</span>):</span></span><br><span class="line">        self.num = self.num + <span class="number">1</span></span><br><span class="line">        ctx.log.info(<span class="string">&quot;We&#x27;ve seen %d flows&quot;</span> % self.num)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">addons = [</span><br><span class="line">    Counter()</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<h2 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h2><p>这里强烈建议使用第二种套路，这也是官方内置的一些 addon 的实现方式。</p>
-<p>我们将上面第二种套路的示例代码存为 addons.py，再重新启动 mitmproxy：</p>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">mitmweb</span> -s addons.py</span><br></pre></td></tr></table></figure>
-<p>这个脚本是当 request 发生时，计数器加一，并打印日志。这里对应的是 request 事件</p>
-<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>事件针对不同生命周期分为 5 类：HTTP 生命周期、 TCP 生命周期、Websocket 生命周期、网络连接生命周期、通用生命周期</p>
-<p>这里我们只介绍HTTP 生命周期的事件：<br><code>def http_connect(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 收到了来自客户端的 HTTP CONNECT 请求。在 flow 上设置非 2xx 响应将返回该响应并断开连接。CONNECT 不是常用的 HTTP 请求方法，目的是与服务器建立代理连接，仅是 client 与 proxy 的之间的交流，所以 CONNECT 请求不会触发 request、response 等其他常规的 HTTP 事件。</p>
-<p><code>def requestheaders(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自客户端的 HTTP 请求的头部被成功读取。此时 flow 中的 request 的 body 是空的。</p>
-<p><code>def request(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自客户端的 HTTP 请求被成功完整读取。</p>
-<p><code>def responseheaders(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自服务端的 HTTP 响应的头部被成功读取。此时 flow 中的 response 的 body 是空的。</p>
-<p><code>def response(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自服务端端的 HTTP 响应被成功完整读取。</p>
-<p><code>def error(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 发生了一个 HTTP 错误。比如无效的服务端响应、连接断开等。注意与“有效的 HTTP 错误返回”不是一回事，后者是一个正确的服务端响应，只是 HTTP code 表示错误而已。</p>
-<p>大多数情况下我们只会用到针对 HTTP 生命周期的几个事件。再精简一点，甚至只需要用到 http_connect、request、response 三个事件就能完成大多数需求了。</p>
-<h2 id="脚本示例"><a href="#脚本示例" class="headerlink" title="脚本示例"></a>脚本示例</h2><figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">&quot;&quot;&quot;</span><br><span class="line">拦截请求的request</span><br><span class="line">拦截返回的response</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> mitmproxy <span class="keyword">import</span> http</span><br><span class="line"></span><br><span class="line">def request(flow: http.HTTPFlow):</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== intercept request start ==========================&quot;)</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== host is:&#123;&#125; ========================== &quot;.format(flow.request.host))</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== url is:&#123;&#125; ========================== &quot;.format(flow.request.url))</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== method is:&#123;&#125; ========================== &quot;.format(flow.request.<span class="keyword">method</span>))</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== intercept request end ==========================\n\n\n&quot;)</span><br><span class="line"></span><br><span class="line">def response(flow: http.HTTPFlow):</span><br><span class="line">        code = flow.response.status_code</span><br></pre></td></tr></table></figure>
-<h2 id="常用Api有"><a href="#常用Api有" class="headerlink" title="常用Api有"></a>常用Api有</h2><h3 id="request"><a href="#request" class="headerlink" title="request"></a>request</h3><figure class="highlight vbscript"><table><tr><td class="code"><pre><span class="line">flow.<span class="built_in">request</span>.headers # 获取所有头信息，包含Host、User-Agent、Content-type等字段</span><br><span class="line">flow.<span class="built_in">request</span>.url # 完整的请求地址，包含域名及请求参数，但是不包含放在body里面的请求参数</span><br><span class="line">flow.<span class="built_in">request</span>.pretty_url # 同flow.<span class="built_in">request</span>.url目前没看出什么差别</span><br><span class="line">flow.<span class="built_in">request</span>.host # 域名</span><br><span class="line">flow.<span class="built_in">request</span>.method # 请求方式。POST、<span class="keyword">GET</span>等</span><br><span class="line">flow.<span class="built_in">request</span>.scheme # 什么请求 ，如https</span><br><span class="line">flow.<span class="built_in">request</span>.path # 请求的路径，url除域名之外的内容</span><br><span class="line">flow.<span class="built_in">request</span>.get_text() # 请求中body内容，有一些http会把请求参数放在body里面，那么可通过此方法获取，返回字典类型</span><br><span class="line">flow.<span class="built_in">request</span>.query # 返回MultiDictView类型的数据，url直接带的键值参数</span><br><span class="line">flow.<span class="built_in">request</span>.get_content() # bytes,结果如flow.<span class="built_in">request</span>.get_text()</span><br><span class="line">flow.<span class="built_in">request</span>.raw_content # bytes,结果如flow.<span class="built_in">request</span>.get_content()</span><br><span class="line">flow.<span class="built_in">request</span>.urlencoded_form # MultiDictView，content-type：application/x-www-form-urlencoded时的请求参数，不包含url直接带的键值参数</span><br><span class="line">flow.<span class="built_in">request</span>.multipart_form # MultiDictView，content-type：multipart/form-data时的请求参数，不包含url直接带的键值参数</span><br></pre></td></tr></table></figure>
-<h3 id="response"><a href="#response" class="headerlink" title="response"></a>response</h3><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">flow<span class="selector-class">.response</span><span class="selector-class">.status_code</span> #状态码</span><br><span class="line">flow<span class="selector-class">.response</span>.text#返回内容，已解码</span><br><span class="line">flow<span class="selector-class">.response</span><span class="selector-class">.content</span> #返回内容，二进制</span><br><span class="line">flow<span class="selector-class">.response</span><span class="selector-class">.setText</span>()#修改返回内容，不需要转码</span><br></pre></td></tr></table></figure>
-
-<h1 id="设计流程"><a href="#设计流程" class="headerlink" title="设计流程"></a>设计流程</h1><p>在上面提到可以拦截request和response,那么就可以对response数据做修改，再返回修改后的数据.<br>基于上面提到修改数据规则，随机多拦截数据做随机修改.<br>保存修改前和修改后的数据，方便数据diff.<br><img src="/2020/08/31/%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/%E8%AE%BE%E8%AE%A1%E6%B5%81%E7%A8%8B.jpg" alt="设计流程"></p>
-]]></content>
-      <categories>
-        <category>移动性能</category>
-      </categories>
-      <tags>
-        <tag>移动性能</tag>
       </tags>
   </entry>
   <entry>
@@ -2053,6 +2003,56 @@
       </categories>
       <tags>
         <tag>Jenkins</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 mitmproxy + python 实现移动端异常数据测试</title>
+    <url>/2020/08/31/%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<p><a href="https://github.com/mitmproxy/mitmproxy">mitmproxy github地址（Man-in-the-middle attack）</a></p>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>Crash率是衡量一个App好坏的重要指标之一，如果你忽略了它的存在，它就会愈演愈烈<br>客户端的很大一部分的Crash是因为API返回的脏数据。比如当API返回空值、空数组或返回不是约定类型的数据，App收到这些数据，就极有可能发生空指针、数组越界和类型转换错误等Crash。而且这样的脏数据，特别容易引起线上大面积的崩溃。</p>
+<h1 id="异常数据测试方法"><a href="#异常数据测试方法" class="headerlink" title="异常数据测试方法"></a>异常数据测试方法</h1><p>手工测试时，借助charles等抓包工具，对返回结果拦截修改数据，再进行数据的maplocal</p>
+<h2 id="异常数据修改规则"><a href="#异常数据修改规则" class="headerlink" title="异常数据修改规则"></a>异常数据修改规则</h2><p>字符：非法字符、超长、null<br>数组：空数组、非法序列<br>接口超时：5s、10s<br>接口状态码：404、500、503<br>增加删除数据：数组、字典</p>
+<h1 id="mitmproxy是什么"><a href="#mitmproxy是什么" class="headerlink" title="mitmproxy是什么"></a>mitmproxy是什么</h1><p>顾名思义，mitmproxy 就是用于 MITM 的 proxy，MITM 即中间人攻击（Man-in-the-middle attack）。<br>    <img src="/2020/08/31/%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/mitmproxy.png" alt="mitmproxy"><br>    mitmproxy是一个支持HTTP和HTTPS的抓包程序，有类似Fiddler、Charles的功能，只不过它是一个控制台的形式操作。mitmproxy还有两个关联组件。一个是mitmdump，它是mitmproxy的命令行接口，利用它我们可以对接Python脚本，用Python实现监听后的处理。另一个是mitmweb，它是一个Web程序，通过它我们可以清楚观察mitmproxy捕获的请求。</p>
+<h2 id="mitmproxy有如下几项功能"><a href="#mitmproxy有如下几项功能" class="headerlink" title="mitmproxy有如下几项功能"></a>mitmproxy有如下几项功能</h2><ul>
+<li>拦截HTTP和HTTPS请求和响应。</li>
+<li>保存HTTP会话并进行分析。</li>
+<li>模拟客户端发起请求，模拟服务端返回响应。</li>
+<li>利用反向代理将流量转发给指定的服务器。</li>
+<li>支持Mac和Linux上的透明代理。</li>
+<li>利用Python对HTTP请求和响应进行实时处理。</li>
+</ul>
+<h1 id="安装mitmproxy"><a href="#安装mitmproxy" class="headerlink" title="安装mitmproxy"></a>安装mitmproxy</h1><p><code>brew install mitmproxy</code><br>安装完成后，系统将拥有 mitmproxy、mitmdump、mitmweb 三个命令<br>验证安装成功<br><code>mitmdump --version</code><br>应当可以看到类似于这样的输出：</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">Mitmproxy</span>: <span class="number">5</span>.<span class="number">2</span></span><br><span class="line"><span class="attribute">Python</span>:    <span class="number">3</span>.<span class="number">7</span>.<span class="number">7</span></span><br><span class="line"><span class="attribute">OpenSSL</span>:   OpenSSL <span class="number">1</span>.<span class="number">1</span>.<span class="number">1</span>g  <span class="number">21</span> Apr <span class="number">2020</span></span><br><span class="line"><span class="attribute">Platform</span>:  Darwin-<span class="number">19</span>.<span class="number">6</span>.<span class="number">0</span>-x<span class="number">86</span>_<span class="number">64</span>-i<span class="number">386</span>-<span class="number">64</span>bit</span><br></pre></td></tr></table></figure>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>要启动 mitmproxy 用 <code>mitmproxy</code>、<code>mitmdump</code>、<code>mitmweb</code> 这三个命令中的任意一个即可，这三个命令功能一致，且都可以加载自定义脚本，唯一的区别是交互界面的不同。<br>mitmproxy 命令启动后，会提供一个命令行界面，用户可以实时看到发生的请求，并通过命令过滤请求，查看请求数据。形如：<br>启动 mitmproxy：<br><code>mitmweb</code><br>应当看到如下输出：</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">Web server listening at http:<span class="regexp">//</span><span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">8081</span>/</span><br><span class="line">Proxy server listening at http:<span class="regexp">//</span>*:<span class="number">8080</span></span><br></pre></td></tr></table></figure>
+<h1 id="设置代理-https证书安装"><a href="#设置代理-https证书安装" class="headerlink" title="设置代理+https证书安装"></a>设置代理+https证书安装</h1><p>移动设备和电脑保存在一个wifi网络下，在移动设备在网络代理填写：电脑ip+8080(端口)<br>在浏览器输入:<code>mitm.it</code>，选择对应设备类型安装证书</p>
+<h1 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h1><p>完成了上述工作，我们已经具备了操作 mitmproxy 的基本能力 了。接下来开始开发自定义脚本，这才是 mitmproxy 真正强大的地方。<br>脚本的编写需要遵循 mitmproxy 规定的套路，这样的套路有两个，使用时选其中一个套路即可。<br>##第一个套路<br>编写一个 py 文件供 mitmproxy 加载，文件中定义了若干函数，这些函数实现了某些 mitmproxy 提供的事件，mitmproxy 会在某个事件发生时调用对应的函数，形如：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="code"><pre><span class="line"><span class="built_in">from</span> mitmproxy import <span class="keyword">http</span></span><br><span class="line"><span class="built_in">from</span> mitmproxy import ctx</span><br><span class="line"></span><br><span class="line"><span class="built_in">num</span> = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def request(flow: <span class="keyword">http</span>.HTTPFlow):</span><br><span class="line">    <span class="built_in">global</span> <span class="built_in">num</span></span><br><span class="line">    <span class="built_in">num</span> = <span class="built_in">num</span> + <span class="number">1</span></span><br><span class="line">    ctx.<span class="built_in">log</span>.info(<span class="string">&quot;We&#x27;ve seen %d flows&quot;</span> % <span class="built_in">num</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="第二个套路"><a href="#第二个套路" class="headerlink" title="第二个套路"></a>第二个套路</h2><p>编写一个 py 文件供 mitmproxy 加载，文件定义了变量 addons，addons 是个数组，每个元素是一个类实例，这些类有若干方法，这些方法实现了某些 mitmproxy 提供的事件，mitmproxy 会在某个事件发生时调用对应的方法。这些类，称为一个个 addon，比如一个叫 Counter 的 addon：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> mitmproxy <span class="keyword">import</span> http</span><br><span class="line"><span class="keyword">from</span> mitmproxy <span class="keyword">import</span> ctx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.num = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">request</span>(<span class="params">self, flow: http.HTTPFlow</span>):</span></span><br><span class="line">        self.num = self.num + <span class="number">1</span></span><br><span class="line">        ctx.log.info(<span class="string">&quot;We&#x27;ve seen %d flows&quot;</span> % self.num)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">addons = [</span><br><span class="line">    Counter()</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h2 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h2><p>这里强烈建议使用第二种套路，这也是官方内置的一些 addon 的实现方式。</p>
+<p>我们将上面第二种套路的示例代码存为 addons.py，再重新启动 mitmproxy：</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">mitmweb</span> -s addons.py</span><br></pre></td></tr></table></figure>
+<p>这个脚本是当 request 发生时，计数器加一，并打印日志。这里对应的是 request 事件</p>
+<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>事件针对不同生命周期分为 5 类：HTTP 生命周期、 TCP 生命周期、Websocket 生命周期、网络连接生命周期、通用生命周期</p>
+<p>这里我们只介绍HTTP 生命周期的事件：<br><code>def http_connect(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 收到了来自客户端的 HTTP CONNECT 请求。在 flow 上设置非 2xx 响应将返回该响应并断开连接。CONNECT 不是常用的 HTTP 请求方法，目的是与服务器建立代理连接，仅是 client 与 proxy 的之间的交流，所以 CONNECT 请求不会触发 request、response 等其他常规的 HTTP 事件。</p>
+<p><code>def requestheaders(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自客户端的 HTTP 请求的头部被成功读取。此时 flow 中的 request 的 body 是空的。</p>
+<p><code>def request(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自客户端的 HTTP 请求被成功完整读取。</p>
+<p><code>def responseheaders(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自服务端的 HTTP 响应的头部被成功读取。此时 flow 中的 response 的 body 是空的。</p>
+<p><code>def response(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 来自服务端端的 HTTP 响应被成功完整读取。</p>
+<p><code>def error(self, flow: mitmproxy.http.HTTPFlow):</code><br>(Called when) 发生了一个 HTTP 错误。比如无效的服务端响应、连接断开等。注意与“有效的 HTTP 错误返回”不是一回事，后者是一个正确的服务端响应，只是 HTTP code 表示错误而已。</p>
+<p>大多数情况下我们只会用到针对 HTTP 生命周期的几个事件。再精简一点，甚至只需要用到 http_connect、request、response 三个事件就能完成大多数需求了。</p>
+<h2 id="脚本示例"><a href="#脚本示例" class="headerlink" title="脚本示例"></a>脚本示例</h2><figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">&quot;&quot;&quot;</span><br><span class="line">拦截请求的request</span><br><span class="line">拦截返回的response</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> mitmproxy <span class="keyword">import</span> http</span><br><span class="line"></span><br><span class="line">def request(flow: http.HTTPFlow):</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== intercept request start ==========================&quot;)</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== host is:&#123;&#125; ========================== &quot;.format(flow.request.host))</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== url is:&#123;&#125; ========================== &quot;.format(flow.request.url))</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== method is:&#123;&#125; ========================== &quot;.format(flow.request.<span class="keyword">method</span>))</span><br><span class="line">        ctx.<span class="keyword">log</span>.<span class="keyword">info</span>(&quot;========================== intercept request end ==========================\n\n\n&quot;)</span><br><span class="line"></span><br><span class="line">def response(flow: http.HTTPFlow):</span><br><span class="line">        code = flow.response.status_code</span><br></pre></td></tr></table></figure>
+<h2 id="常用Api有"><a href="#常用Api有" class="headerlink" title="常用Api有"></a>常用Api有</h2><h3 id="request"><a href="#request" class="headerlink" title="request"></a>request</h3><figure class="highlight vbscript"><table><tr><td class="code"><pre><span class="line">flow.<span class="built_in">request</span>.headers # 获取所有头信息，包含Host、User-Agent、Content-type等字段</span><br><span class="line">flow.<span class="built_in">request</span>.url # 完整的请求地址，包含域名及请求参数，但是不包含放在body里面的请求参数</span><br><span class="line">flow.<span class="built_in">request</span>.pretty_url # 同flow.<span class="built_in">request</span>.url目前没看出什么差别</span><br><span class="line">flow.<span class="built_in">request</span>.host # 域名</span><br><span class="line">flow.<span class="built_in">request</span>.method # 请求方式。POST、<span class="keyword">GET</span>等</span><br><span class="line">flow.<span class="built_in">request</span>.scheme # 什么请求 ，如https</span><br><span class="line">flow.<span class="built_in">request</span>.path # 请求的路径，url除域名之外的内容</span><br><span class="line">flow.<span class="built_in">request</span>.get_text() # 请求中body内容，有一些http会把请求参数放在body里面，那么可通过此方法获取，返回字典类型</span><br><span class="line">flow.<span class="built_in">request</span>.query # 返回MultiDictView类型的数据，url直接带的键值参数</span><br><span class="line">flow.<span class="built_in">request</span>.get_content() # bytes,结果如flow.<span class="built_in">request</span>.get_text()</span><br><span class="line">flow.<span class="built_in">request</span>.raw_content # bytes,结果如flow.<span class="built_in">request</span>.get_content()</span><br><span class="line">flow.<span class="built_in">request</span>.urlencoded_form # MultiDictView，content-type：application/x-www-form-urlencoded时的请求参数，不包含url直接带的键值参数</span><br><span class="line">flow.<span class="built_in">request</span>.multipart_form # MultiDictView，content-type：multipart/form-data时的请求参数，不包含url直接带的键值参数</span><br></pre></td></tr></table></figure>
+<h3 id="response"><a href="#response" class="headerlink" title="response"></a>response</h3><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">flow<span class="selector-class">.response</span><span class="selector-class">.status_code</span> #状态码</span><br><span class="line">flow<span class="selector-class">.response</span>.text#返回内容，已解码</span><br><span class="line">flow<span class="selector-class">.response</span><span class="selector-class">.content</span> #返回内容，二进制</span><br><span class="line">flow<span class="selector-class">.response</span><span class="selector-class">.setText</span>()#修改返回内容，不需要转码</span><br></pre></td></tr></table></figure>
+
+<h1 id="设计流程"><a href="#设计流程" class="headerlink" title="设计流程"></a>设计流程</h1><p>在上面提到可以拦截request和response,那么就可以对response数据做修改，再返回修改后的数据.<br>基于上面提到修改数据规则，随机多拦截数据做随机修改.<br>保存修改前和修改后的数据，方便数据diff.<br><img src="/2020/08/31/%E4%BD%BF%E7%94%A8-mitmproxy-python-%E5%AE%9E%E7%8E%B0%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95/%E8%AE%BE%E8%AE%A1%E6%B5%81%E7%A8%8B.jpg" alt="设计流程"></p>
+]]></content>
+      <categories>
+        <category>移动性能</category>
+      </categories>
+      <tags>
+        <tag>移动性能</tag>
       </tags>
   </entry>
   <entry>
