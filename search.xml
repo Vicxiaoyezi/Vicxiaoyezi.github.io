@@ -256,29 +256,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo Next 主题中添加本地搜索功能</title>
-    <url>/2019/05/22/Hexo%20Next%20%E4%B8%BB%E9%A2%98%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD/</url>
-    <content><![CDATA[<h1 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h1><p>随着时间的推移，个人站点的博客文章会越来越多，那怎么样才能快速找到你印象中的文章呢？增加一个站点内的搜索功能是非常有必要和方便的。</p>
-<h1 id="安装本地搜索插件-hexo-generator-search"><a href="#安装本地搜索插件-hexo-generator-search" class="headerlink" title="安装本地搜索插件 hexo-generator-search"></a>安装本地搜索插件 hexo-generator-search</h1><p>在博客根目录下执行下列命令</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-<span class="keyword">search</span> <span class="comment">--save</span></span><br></pre></td></tr></table></figure>
-<p>安装之后，会在站点目录的 public 文件夹下创建一个 search.xml 文件。</p>
-<h1 id="修改全局配置文件-config-yml（博客根目录）"><a href="#修改全局配置文件-config-yml（博客根目录）" class="headerlink" title="修改全局配置文件_config.yml（博客根目录）"></a>修改全局配置文件_config.yml（博客根目录）</h1><p>在站点配置文件 _config.yml 中添加如下内容：</p>
-<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line"><span class="meta"># Search </span></span><br><span class="line"><span class="symbol">search:</span></span><br><span class="line"><span class="symbol">  path:</span> .<span class="meta-keyword">/public/</span>search.xml</span><br><span class="line"><span class="symbol">  field:</span> post</span><br><span class="line"><span class="symbol">  format:</span> html</span><br><span class="line"><span class="symbol">  limit:</span> <span class="number">10000</span></span><br></pre></td></tr></table></figure>
-<p>path：索引文件的路径，相对于站点根目录<br>field：搜索范围，默认是 post，还可以选择 page、all，设置成 all 表示搜索所有页面<br>limit：限制搜索的条目数</p>
-<h1 id="hexo主题配置文件（-themes-next-config-yml）"><a href="#hexo主题配置文件（-themes-next-config-yml）" class="headerlink" title="hexo主题配置文件（/themes/next/_config.yml）"></a>hexo主题配置文件（/themes/next/_config.yml）</h1><p>在主题配置文件 _config.yml 中找到如下内容：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">local_search:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">trigger:</span> <span class="string">auto</span></span><br><span class="line">  <span class="attr">top_n_per_article:</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>修改<code>local_search</code>的<code>enable</code>为<code>true</code></p>
-<p><code>top_n_per_article </code>字段表示在每篇文章中显示的搜索结果数量，设成 -1 会显示每篇文章的所有搜索结果数量。</p>
-<h1 id="重新部署"><a href="#重新部署" class="headerlink" title="重新部署"></a>重新部署</h1><p>然后执行以下命令，重新部署网站即可愉快的使用本地搜索功能了</p>
-<figure class="highlight sas"><table><tr><td class="code"><pre><span class="line">hexo clean <span class="variable">&amp;&amp;</span> hexo g <span class="variable">&amp;&amp;</span> hexo d</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Hexo Next</category>
-      </categories>
-      <tags>
-        <tag>Hexo Next</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo之添加萌萌哒</title>
     <url>/2019/05/26/Hexo%E4%B9%8B%E6%B7%BB%E5%8A%A0%E8%90%8C%E8%90%8C%E5%93%92/</url>
     <content><![CDATA[<h1 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h1><figure class="highlight ada"><table><tr><td class="code"><pre><span class="line">npm install <span class="comment">--save hexo-helper-live2d</span></span><br></pre></td></tr></table></figure>
@@ -330,6 +307,29 @@
 <li>再在&lt;你喜欢的模型名字&gt;下建json文件：&lt;你喜欢的模型名字&gt;.model.json</li>
 </ul>
 <h1 id="安装模型。在命令行（即Git-Bash）运行以下命令即可："><a href="#安装模型。在命令行（即Git-Bash）运行以下命令即可：" class="headerlink" title="安装模型。在命令行（即Git Bash）运行以下命令即可："></a>安装模型。在命令行（即Git Bash）运行以下命令即可：</h1><figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">npm</span> install –save live<span class="number">2</span>d-widget-model-&lt;你喜欢的模型名字&gt;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Hexo Next</category>
+      </categories>
+      <tags>
+        <tag>Hexo Next</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo Next 主题中添加本地搜索功能</title>
+    <url>/2019/05/22/Hexo%20Next%20%E4%B8%BB%E9%A2%98%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD/</url>
+    <content><![CDATA[<h1 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h1><p>随着时间的推移，个人站点的博客文章会越来越多，那怎么样才能快速找到你印象中的文章呢？增加一个站点内的搜索功能是非常有必要和方便的。</p>
+<h1 id="安装本地搜索插件-hexo-generator-search"><a href="#安装本地搜索插件-hexo-generator-search" class="headerlink" title="安装本地搜索插件 hexo-generator-search"></a>安装本地搜索插件 hexo-generator-search</h1><p>在博客根目录下执行下列命令</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-<span class="keyword">search</span> <span class="comment">--save</span></span><br></pre></td></tr></table></figure>
+<p>安装之后，会在站点目录的 public 文件夹下创建一个 search.xml 文件。</p>
+<h1 id="修改全局配置文件-config-yml（博客根目录）"><a href="#修改全局配置文件-config-yml（博客根目录）" class="headerlink" title="修改全局配置文件_config.yml（博客根目录）"></a>修改全局配置文件_config.yml（博客根目录）</h1><p>在站点配置文件 _config.yml 中添加如下内容：</p>
+<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line"><span class="meta"># Search </span></span><br><span class="line"><span class="symbol">search:</span></span><br><span class="line"><span class="symbol">  path:</span> .<span class="meta-keyword">/public/</span>search.xml</span><br><span class="line"><span class="symbol">  field:</span> post</span><br><span class="line"><span class="symbol">  format:</span> html</span><br><span class="line"><span class="symbol">  limit:</span> <span class="number">10000</span></span><br></pre></td></tr></table></figure>
+<p>path：索引文件的路径，相对于站点根目录<br>field：搜索范围，默认是 post，还可以选择 page、all，设置成 all 表示搜索所有页面<br>limit：限制搜索的条目数</p>
+<h1 id="hexo主题配置文件（-themes-next-config-yml）"><a href="#hexo主题配置文件（-themes-next-config-yml）" class="headerlink" title="hexo主题配置文件（/themes/next/_config.yml）"></a>hexo主题配置文件（/themes/next/_config.yml）</h1><p>在主题配置文件 _config.yml 中找到如下内容：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">local_search:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">trigger:</span> <span class="string">auto</span></span><br><span class="line">  <span class="attr">top_n_per_article:</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>修改<code>local_search</code>的<code>enable</code>为<code>true</code></p>
+<p><code>top_n_per_article </code>字段表示在每篇文章中显示的搜索结果数量，设成 -1 会显示每篇文章的所有搜索结果数量。</p>
+<h1 id="重新部署"><a href="#重新部署" class="headerlink" title="重新部署"></a>重新部署</h1><p>然后执行以下命令，重新部署网站即可愉快的使用本地搜索功能了</p>
+<figure class="highlight sas"><table><tr><td class="code"><pre><span class="line">hexo clean <span class="variable">&amp;&amp;</span> hexo g <span class="variable">&amp;&amp;</span> hexo d</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>Hexo Next</category>
       </categories>
@@ -426,25 +426,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JMeter(一)_Mac下安装部署</title>
-    <url>/2020/02/25/JMeter-%E4%B8%80-Mac%E4%B8%8B%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/</url>
-    <content><![CDATA[<p><a href="https://jmeter.apache.org/download_jmeter.cgi">JMeter官网下载</a><br><img src="/2020/02/25/JMeter-%E4%B8%80-Mac%E4%B8%8B%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/1651582602156_.pic_hd.jpg" alt="Jmeter版本"></p>
-<h1 id="运行方法一，直接运行"><a href="#运行方法一，直接运行" class="headerlink" title="运行方法一，直接运行"></a>运行方法一，直接运行</h1><p>解压后<br>命令行进入/Users/vic/apache-jmeter-5.1.1/bin目录下，输入sh jmeter即可启动</p>
-<h1 id="运行方法二，配置环境变量"><a href="#运行方法二，配置环境变量" class="headerlink" title="运行方法二，配置环境变量"></a>运行方法二，配置环境变量</h1><p>配置环境变量<br><code>vim ~/.bash_profile</code></p>
-<p>内容输入举例：</p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">JMETER_HOME</span>=/Users/vic/apache-jmeter-5.1.1</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=<span class="variable">$PATH</span>:$JMETER_HOME/bin</span><br></pre></td></tr></table></figure>
-<p>使环境变量生效<br><code>source ~/.bash_profile</code></p>
-<p>修改jmeter为中文：<br>编辑/Users/vic/apache-jmeter-5.1.1/bin目录下的jmeter.properties文件<br>修改第37行左右如下：<br><img src="/2020/02/25/JMeter-%E4%B8%80-Mac%E4%B8%8B%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/1671582611252_.pic.jpg" alt="Jmeter版本"></p>
-<p>打开终端输入：<code>jmeter</code> 启动JMeter</p>
-]]></content>
-      <categories>
-        <category>JMeter</category>
-      </categories>
-      <tags>
-        <tag>JMeter</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JMeter(七)_关联之正则表达式提取器</title>
     <url>/2020/02/27/JMeter-%E4%B8%83-%E5%85%B3%E8%81%94%E4%B9%8B%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8F%90%E5%8F%96%E5%99%A8/</url>
     <content><![CDATA[<h2 id="应用场景："><a href="#应用场景：" class="headerlink" title="应用场景："></a>应用场景：</h2><p>在一个线程组中，从前一个请求的响应结果中，提取到某些需要的内容，可以作为下一个接口需要的入参从而实现关联<br>添加路径：HTTP请求-&gt;添加-&gt;后置处理器-&gt;正则表达式提取器<br><img src="/2020/02/27/JMeter-%E4%B8%83-%E5%85%B3%E8%81%94%E4%B9%8B%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8F%90%E5%8F%96%E5%99%A8/%E6%B7%BB%E5%8A%A0%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8F%90%E5%8F%96%E5%99%A8.png" alt="添加正则表达式提取器"></p>
@@ -518,6 +499,25 @@
       </tags>
   </entry>
   <entry>
+    <title>JMeter(一)_Mac下安装部署</title>
+    <url>/2020/02/25/JMeter-%E4%B8%80-Mac%E4%B8%8B%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/</url>
+    <content><![CDATA[<p><a href="https://jmeter.apache.org/download_jmeter.cgi">JMeter官网下载</a><br><img src="/2020/02/25/JMeter-%E4%B8%80-Mac%E4%B8%8B%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/1651582602156_.pic_hd.jpg" alt="Jmeter版本"></p>
+<h1 id="运行方法一，直接运行"><a href="#运行方法一，直接运行" class="headerlink" title="运行方法一，直接运行"></a>运行方法一，直接运行</h1><p>解压后<br>命令行进入/Users/vic/apache-jmeter-5.1.1/bin目录下，输入sh jmeter即可启动</p>
+<h1 id="运行方法二，配置环境变量"><a href="#运行方法二，配置环境变量" class="headerlink" title="运行方法二，配置环境变量"></a>运行方法二，配置环境变量</h1><p>配置环境变量<br><code>vim ~/.bash_profile</code></p>
+<p>内容输入举例：</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">JMETER_HOME</span>=/Users/vic/apache-jmeter-5.1.1</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=<span class="variable">$PATH</span>:$JMETER_HOME/bin</span><br></pre></td></tr></table></figure>
+<p>使环境变量生效<br><code>source ~/.bash_profile</code></p>
+<p>修改jmeter为中文：<br>编辑/Users/vic/apache-jmeter-5.1.1/bin目录下的jmeter.properties文件<br>修改第37行左右如下：<br><img src="/2020/02/25/JMeter-%E4%B8%80-Mac%E4%B8%8B%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/1671582611252_.pic.jpg" alt="Jmeter版本"></p>
+<p>打开终端输入：<code>jmeter</code> 启动JMeter</p>
+]]></content>
+      <categories>
+        <category>JMeter</category>
+      </categories>
+      <tags>
+        <tag>JMeter</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JMeter(三)_脚本录制之基于HTTP代理服务器</title>
     <url>/2020/02/25/JMeter-%E4%B8%89-%E8%84%9A%E6%9C%AC%E5%BD%95%E5%88%B6%E4%B9%8B%E5%9F%BA%E4%BA%8EHTTP%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
     <content><![CDATA[<h1 id="一、添加录制控制器"><a href="#一、添加录制控制器" class="headerlink" title="一、添加录制控制器"></a>一、添加录制控制器</h1><p>启动jmeter：在测试计划中添加线程组，线程组中添加逻辑控制器→录制控制器</p>
@@ -576,32 +576,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JMeter(二)_基础介绍</title>
-    <url>/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/</url>
-    <content><![CDATA[<h2 id="测试计划（test-plan）"><a href="#测试计划（test-plan）" class="headerlink" title="测试计划（test plan）"></a>测试计划（test plan）</h2><p>描述一个性能测试，包含本次测试所有相关功能<br><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-155506@2x.png" alt="测试计划"></p>
-<h2 id="threads（users）线程"><a href="#threads（users）线程" class="headerlink" title="threads（users）线程"></a>threads（users）线程</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-155944@2x.png" alt="线程组"><br>Setup thread group：<br>一种特殊类型的线程，可用于执行预测试操作。即执行测试前进行定期线程组的执行</p>
-<p>Teardown thread group：<br>一种特殊类型的线程，可用于执行测试后动作。即执行测试结束后执行定期的线程组</p>
-<p>Thread group：<br>通常添加使用的线程，一般一个线程组可看做一个虚拟用户组，其中每个线程为一个虚拟用户</p>
-<h2 id="测试片段（test-fragment）"><a href="#测试片段（test-fragment）" class="headerlink" title="测试片段（test fragment）"></a>测试片段（test fragment）</h2><p>应用在控制器上的一个特殊线程组，与线程组处于同一层级，必须与Include Controller或模块控制器一起使用才被执行。<br>应用场景：<br>1、当jmeter脚本非常复杂的时候，可以通过测试片段分模块管理用例<br>2、当jmeter脚本由多个测试人员共同完成，通过测试片段分人分模块管理用例</p>
-<h2 id="取样器（Sampler）"><a href="#取样器（Sampler）" class="headerlink" title="取样器（Sampler）"></a>取样器（Sampler）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160607@2x.png" alt="取样器"><br>是性能测试中向服务器发送请求，记录响应信息，记录响应时间的最小单元，JMeter 原生支持多种不同的sampler<br>如 HTTP Request Sampler 、 FTP  Request Sampler 、TCP  Request Sampler 、JDBC Request Sampler 等<br>每一种不同类型的 sampler 可以根据设置的参数向服务器发出不同类型的请求。<br>Java Request Sampler 和 Beanshell Request Sampler 是两种特殊的可定制的 Sampler （暂不讨论）</p>
-<h2 id="逻辑控制器（Logic-Controller）"><a href="#逻辑控制器（Logic-Controller）" class="headerlink" title="逻辑控制器（Logic Controller）"></a>逻辑控制器（Logic Controller）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160636@2x.png" alt="逻辑控制器"><br>包含两类原件：<br>一类是控制Test Plan中Sampler节点发送请求的逻辑顺序控制器，常用的有：If Controller、Swith Controller、Loop Controller、Random Controller等<br>另一类是用来组织和控制Sampler节点的，如Transaction Controller、Throughput Controller等</p>
-<h2 id="监听器（Listener）"><a href="#监听器（Listener）" class="headerlink" title="监听器（Listener）"></a>监听器（Listener）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160723@2x.png" alt="监听器"><br>对测试结果进行处理和可视化展示的一系列组件，常用的有图形结果、查看结果树、聚合报告等<br>以上的五类原件就可以构成一个简单的性能测试脚本</p>
-<p>聚合报告<br><strong>Label：</strong>每个 JMeter 的 element（例如 HTTP Request）都有一个 Name 属性，这里显示的就是 Name 属性的值<br><strong>Samples：</strong>表示你这次测试中一共发出了多少个请求，如果模拟10个用户，每个用户迭代10次，那么这里显示100<br><strong>Average：</strong>平均响应时间——默认情况下是单个 Request 的平均响应时间，当使用了 Transaction Controller 时，也可以以Transaction 为单位显示平均响应时间<br><strong>Median：</strong>中位数，也就是 50％ 用户的响应时间<br><strong>90% Line：</strong>90％ 用户的响应时间<br><strong>Min：</strong>最小响应时间<br><strong>Max：</strong>最大响应时间<br><strong>Error%：</strong>本次测试中出现错误的请求的数量/请求的总数<br><strong>Throughput：</strong>吞吐量——默认情况下表示每秒完成的请求数（Request per Second），当使用了 Transaction Controller 时，也可以表示类似 LoadRunner 的 Transaction per Second 数<br><strong>KB/Sec：</strong>每秒从服务器端接收到的数据量</p>
-<h2 id="配置元件（Config-Element）"><a href="#配置元件（Config-Element）" class="headerlink" title="配置元件（Config Element）"></a>配置元件（Config Element）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160737@2x.png" alt="配置元件"><br>用于提供对静态数据配置的支持。CSV Date Set Config可以将本地数据文件形成数据池（Date Pool），而对应于HTTP Request Configuration和TCP Request Sample等类型的Configuration元件则可以修改这些Sample的默认数据等</p>
-<h2 id="定时器（Time）"><a href="#定时器（Time）" class="headerlink" title="定时器（Time）"></a>定时器（Time）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160849@2x.png" alt="定时器"><br>用于操作之间设置等待时间，等待时间使性能测试中常用的控制客户端QPS的手段，jmeter定义了Constant Times、</p>
-<p>Constant Throughput Times、Guass Ramdon Times等不同类型的Times</p>
-<h2 id="断言（Assertions）"><a href="#断言（Assertions）" class="headerlink" title="断言（Assertions）"></a>断言（Assertions）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-161013@2x.png" alt="断言"><br>用于检查测试中得到的响应数据等是否符合预期，Assertions一般用来设置检查点，用以保证性能测试过程中的数据交互与预期一致</p>
-<h2 id="前置处理器（Pre-Processors）"><a href="#前置处理器（Pre-Processors）" class="headerlink" title="前置处理器（Pre Processors）"></a>前置处理器（Pre Processors）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160912@2x.png" alt="前置处理器"><br>用于在实际请求发出之前对即将发出的请求进行特殊处理。<br>例如：当URL中有sessionID一类的session信息时，可以通过该处理器填充发出请求实际的sessionID。</p>
-<h2 id="后置处理器（Pre-Processors）"><a href="#后置处理器（Pre-Processors）" class="headerlink" title="后置处理器（Pre Processors）"></a>后置处理器（Pre Processors）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160927@2x.png" alt="后置处理器"><br>用于对Sampler发出请求后得到的服务器响应进行处理。一般用来提取响应中的特定数据<br>例如：正则表达式，用于提取响应数据中匹配某正则表达式的数据段，</p>
-]]></content>
-      <categories>
-        <category>JMeter</category>
-      </categories>
-      <tags>
-        <tag>JMeter</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JMeter(五)_元件的作用域与执行顺序</title>
     <url>/2020/02/27/JMeter-%E4%BA%94-%E5%85%83%E4%BB%B6%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/</url>
     <content><![CDATA[<p>JMeter可以通过鼠标拖拽来随意改变元件之间的顺序以及元件的父子关系，那么随着它们的顺序和所在的域不同，它们在执行的时候，也会有很多不同。</p>
@@ -640,6 +614,32 @@
 <p>  注意:Pre-porcessors、Post-porcessors和Assirtions等元件仅对Sampler作用，如在它们作用域内没有任何Sampler，则不会被执行；<br>  如果在同一作用域范围内有多个同一类型的元件，则这些元件按照它们在test plan中的上下顺序依次执行。</p>
 </li>
 </ul>
+]]></content>
+      <categories>
+        <category>JMeter</category>
+      </categories>
+      <tags>
+        <tag>JMeter</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JMeter(二)_基础介绍</title>
+    <url>/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/</url>
+    <content><![CDATA[<h2 id="测试计划（test-plan）"><a href="#测试计划（test-plan）" class="headerlink" title="测试计划（test plan）"></a>测试计划（test plan）</h2><p>描述一个性能测试，包含本次测试所有相关功能<br><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-155506@2x.png" alt="测试计划"></p>
+<h2 id="threads（users）线程"><a href="#threads（users）线程" class="headerlink" title="threads（users）线程"></a>threads（users）线程</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-155944@2x.png" alt="线程组"><br>Setup thread group：<br>一种特殊类型的线程，可用于执行预测试操作。即执行测试前进行定期线程组的执行</p>
+<p>Teardown thread group：<br>一种特殊类型的线程，可用于执行测试后动作。即执行测试结束后执行定期的线程组</p>
+<p>Thread group：<br>通常添加使用的线程，一般一个线程组可看做一个虚拟用户组，其中每个线程为一个虚拟用户</p>
+<h2 id="测试片段（test-fragment）"><a href="#测试片段（test-fragment）" class="headerlink" title="测试片段（test fragment）"></a>测试片段（test fragment）</h2><p>应用在控制器上的一个特殊线程组，与线程组处于同一层级，必须与Include Controller或模块控制器一起使用才被执行。<br>应用场景：<br>1、当jmeter脚本非常复杂的时候，可以通过测试片段分模块管理用例<br>2、当jmeter脚本由多个测试人员共同完成，通过测试片段分人分模块管理用例</p>
+<h2 id="取样器（Sampler）"><a href="#取样器（Sampler）" class="headerlink" title="取样器（Sampler）"></a>取样器（Sampler）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160607@2x.png" alt="取样器"><br>是性能测试中向服务器发送请求，记录响应信息，记录响应时间的最小单元，JMeter 原生支持多种不同的sampler<br>如 HTTP Request Sampler 、 FTP  Request Sampler 、TCP  Request Sampler 、JDBC Request Sampler 等<br>每一种不同类型的 sampler 可以根据设置的参数向服务器发出不同类型的请求。<br>Java Request Sampler 和 Beanshell Request Sampler 是两种特殊的可定制的 Sampler （暂不讨论）</p>
+<h2 id="逻辑控制器（Logic-Controller）"><a href="#逻辑控制器（Logic-Controller）" class="headerlink" title="逻辑控制器（Logic Controller）"></a>逻辑控制器（Logic Controller）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160636@2x.png" alt="逻辑控制器"><br>包含两类原件：<br>一类是控制Test Plan中Sampler节点发送请求的逻辑顺序控制器，常用的有：If Controller、Swith Controller、Loop Controller、Random Controller等<br>另一类是用来组织和控制Sampler节点的，如Transaction Controller、Throughput Controller等</p>
+<h2 id="监听器（Listener）"><a href="#监听器（Listener）" class="headerlink" title="监听器（Listener）"></a>监听器（Listener）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160723@2x.png" alt="监听器"><br>对测试结果进行处理和可视化展示的一系列组件，常用的有图形结果、查看结果树、聚合报告等<br>以上的五类原件就可以构成一个简单的性能测试脚本</p>
+<p>聚合报告<br><strong>Label：</strong>每个 JMeter 的 element（例如 HTTP Request）都有一个 Name 属性，这里显示的就是 Name 属性的值<br><strong>Samples：</strong>表示你这次测试中一共发出了多少个请求，如果模拟10个用户，每个用户迭代10次，那么这里显示100<br><strong>Average：</strong>平均响应时间——默认情况下是单个 Request 的平均响应时间，当使用了 Transaction Controller 时，也可以以Transaction 为单位显示平均响应时间<br><strong>Median：</strong>中位数，也就是 50％ 用户的响应时间<br><strong>90% Line：</strong>90％ 用户的响应时间<br><strong>Min：</strong>最小响应时间<br><strong>Max：</strong>最大响应时间<br><strong>Error%：</strong>本次测试中出现错误的请求的数量/请求的总数<br><strong>Throughput：</strong>吞吐量——默认情况下表示每秒完成的请求数（Request per Second），当使用了 Transaction Controller 时，也可以表示类似 LoadRunner 的 Transaction per Second 数<br><strong>KB/Sec：</strong>每秒从服务器端接收到的数据量</p>
+<h2 id="配置元件（Config-Element）"><a href="#配置元件（Config-Element）" class="headerlink" title="配置元件（Config Element）"></a>配置元件（Config Element）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160737@2x.png" alt="配置元件"><br>用于提供对静态数据配置的支持。CSV Date Set Config可以将本地数据文件形成数据池（Date Pool），而对应于HTTP Request Configuration和TCP Request Sample等类型的Configuration元件则可以修改这些Sample的默认数据等</p>
+<h2 id="定时器（Time）"><a href="#定时器（Time）" class="headerlink" title="定时器（Time）"></a>定时器（Time）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160849@2x.png" alt="定时器"><br>用于操作之间设置等待时间，等待时间使性能测试中常用的控制客户端QPS的手段，jmeter定义了Constant Times、</p>
+<p>Constant Throughput Times、Guass Ramdon Times等不同类型的Times</p>
+<h2 id="断言（Assertions）"><a href="#断言（Assertions）" class="headerlink" title="断言（Assertions）"></a>断言（Assertions）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-161013@2x.png" alt="断言"><br>用于检查测试中得到的响应数据等是否符合预期，Assertions一般用来设置检查点，用以保证性能测试过程中的数据交互与预期一致</p>
+<h2 id="前置处理器（Pre-Processors）"><a href="#前置处理器（Pre-Processors）" class="headerlink" title="前置处理器（Pre Processors）"></a>前置处理器（Pre Processors）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160912@2x.png" alt="前置处理器"><br>用于在实际请求发出之前对即将发出的请求进行特殊处理。<br>例如：当URL中有sessionID一类的session信息时，可以通过该处理器填充发出请求实际的sessionID。</p>
+<h2 id="后置处理器（Pre-Processors）"><a href="#后置处理器（Pre-Processors）" class="headerlink" title="后置处理器（Pre Processors）"></a>后置处理器（Pre Processors）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160927@2x.png" alt="后置处理器"><br>用于对Sampler发出请求后得到的服务器响应进行处理。一般用来提取响应中的特定数据<br>例如：正则表达式，用于提取响应数据中匹配某正则表达式的数据段，</p>
 ]]></content>
       <categories>
         <category>JMeter</category>
@@ -1118,6 +1118,30 @@
       </tags>
   </entry>
   <entry>
+    <title>Mac终端安装指定版本node</title>
+    <url>/2019/08/21/Mac%E7%BB%88%E7%AB%AF%E5%AE%89%E8%A3%85%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%ACnode/</url>
+    <content><![CDATA[<h1 id="安装brew"><a href="#安装brew" class="headerlink" title="安装brew"></a>安装brew</h1><p>终端上运行</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">/usr/bin/ruby -e “<span class="constructor">$(<span class="params">curl</span> -<span class="params">fsSL</span> <span class="params">https</span>:<span class="operator">/</span><span class="operator">/</span><span class="params">raw</span>.<span class="params">githubusercontent</span>.<span class="params">com</span><span class="operator">/</span>Homebrew<span class="operator">/</span><span class="params">install</span><span class="operator">/</span><span class="params">master</span><span class="operator">/</span><span class="params">install</span>)</span>”</span><br></pre></td></tr></table></figure>
+
+<h1 id="安装NVM"><a href="#安装NVM" class="headerlink" title="安装NVM"></a>安装NVM</h1><p><code>brew install nvm</code></p>
+<p>安装完成之后打开shell的配置文件</p>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cd</span> ~</span><br><span class="line">vim <span class="string">.bash_profile</span></span><br></pre></td></tr></table></figure>
+
+<p>在文件里添加以下命令</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">export NVM_DIR=~/.nvm</span><br><span class="line">source <span class="constructor">$(<span class="params">brew</span> --<span class="params">prefix</span> <span class="params">nvm</span>)</span>/nvm.sh</span><br></pre></td></tr></table></figure>
+
+<p>然后重新source</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> .bash_profile</span><br></pre></td></tr></table></figure>
+
+<h1 id="使用nvm安装node"><a href="#使用nvm安装node" class="headerlink" title="使用nvm安装node"></a>使用nvm安装node</h1><figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">nvm ls-remote 查看 所有的<span class="keyword">node</span><span class="title">可用版本</span></span><br><span class="line"><span class="title">nvm</span> install xxx 下载你想要的版本</span><br><span class="line">nvm use xxx 使用指定版本的<span class="keyword">node</span><span class="title"></span></span><br><span class="line"><span class="title">nvm</span> alias default xxx 每次启动终端都使用该版本的<span class="keyword">node</span><span class="title"></span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>资料</category>
+      </categories>
+      <tags>
+        <tag>资料</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Mac电脑用终端生成SSH key 访问自己的Github</title>
     <url>/2019/05/21/Mac%E7%94%B5%E8%84%91%E7%94%A8%E7%BB%88%E7%AB%AF%E7%94%9F%E6%88%90SSH%20key%20%E8%AE%BF%E9%97%AE%E8%87%AA%E5%B7%B1%E7%9A%84Github/</url>
     <content><![CDATA[<h1 id="首先检测自己电脑是否存在-SSH-key"><a href="#首先检测自己电脑是否存在-SSH-key" class="headerlink" title="首先检测自己电脑是否存在 SSH key"></a>首先检测自己电脑是否存在 SSH key</h1><p>在生成SSH密钥之前，您可以检查是否有任何现有的SSH密钥。</p>
@@ -1157,7 +1181,7 @@
 </ol>
 <p>成功后，终端显示</p>
 <blockquote>
-<p>Your identitification has been saved in /Users/xxx/.ssh/id_rsa.<br>Your public key has been saved in /user/xxx/id_rsa.pub.<br>the key fingerprint is xxxxxxxxxx…….xxxxxxxx <a href="mailto:&#x79;&#111;&#117;&#114;&#x5f;&#101;&#x6d;&#97;&#x69;&#x6c;&#64;&#x65;&#x78;&#97;&#109;&#x70;&#x6c;&#x65;&#46;&#99;&#x6f;&#109;">&#x79;&#111;&#117;&#114;&#x5f;&#101;&#x6d;&#97;&#x69;&#x6c;&#64;&#x65;&#x78;&#97;&#109;&#x70;&#x6c;&#x65;&#46;&#99;&#x6f;&#109;</a><br>The key’s randomart image is:<br><img src="/2019/05/21/Mac%E7%94%B5%E8%84%91%E7%94%A8%E7%BB%88%E7%AB%AF%E7%94%9F%E6%88%90SSH%20key%20%E8%AE%BF%E9%97%AE%E8%87%AA%E5%B7%B1%E7%9A%84Github/15577192525730.jpg" alt="-w465"></p>
+<p>Your identitification has been saved in /Users/xxx/.ssh/id_rsa.<br>Your public key has been saved in /user/xxx/id_rsa.pub.<br>the key fingerprint is xxxxxxxxxx…….xxxxxxxx <a href="mailto:&#121;&#x6f;&#117;&#x72;&#95;&#101;&#109;&#x61;&#x69;&#x6c;&#x40;&#x65;&#120;&#x61;&#x6d;&#x70;&#108;&#101;&#x2e;&#99;&#x6f;&#109;">&#121;&#x6f;&#117;&#x72;&#95;&#101;&#109;&#x61;&#x69;&#x6c;&#x40;&#x65;&#120;&#x61;&#x6d;&#x70;&#108;&#101;&#x2e;&#99;&#x6f;&#109;</a><br>The key’s randomart image is:<br><img src="/2019/05/21/Mac%E7%94%B5%E8%84%91%E7%94%A8%E7%BB%88%E7%AB%AF%E7%94%9F%E6%88%90SSH%20key%20%E8%AE%BF%E9%97%AE%E8%87%AA%E5%B7%B1%E7%9A%84Github/15577192525730.jpg" alt="-w465"></p>
 </blockquote>
 <h1 id="将SSH密钥添加到ssh-agent"><a href="#将SSH密钥添加到ssh-agent" class="headerlink" title="将SSH密钥添加到ssh-agent"></a>将SSH密钥添加到ssh-agent</h1><ol>
 <li><p>在后台启动ssh-agent</p>
@@ -1167,7 +1191,7 @@
 </ol>
 <p>成功后，中选显示：</p>
 <blockquote>
-<p> Identity added: /Users/xxx/.ssh/id_rsa (<a href="mailto:&#121;&#111;&#x75;&#x72;&#95;&#x65;&#x6d;&#97;&#105;&#108;&#64;&#x65;&#x78;&#97;&#x6d;&#x70;&#108;&#101;&#46;&#x63;&#x6f;&#x6d;">&#121;&#111;&#x75;&#x72;&#95;&#x65;&#x6d;&#97;&#105;&#108;&#64;&#x65;&#x78;&#97;&#x6d;&#x70;&#108;&#101;&#46;&#x63;&#x6f;&#x6d;</a>)</p>
+<p> Identity added: /Users/xxx/.ssh/id_rsa (<a href="mailto:&#121;&#x6f;&#117;&#114;&#x5f;&#101;&#109;&#97;&#x69;&#108;&#x40;&#x65;&#x78;&#x61;&#x6d;&#112;&#x6c;&#x65;&#46;&#x63;&#x6f;&#109;">&#121;&#x6f;&#117;&#114;&#x5f;&#101;&#109;&#97;&#x69;&#108;&#x40;&#x65;&#x78;&#x61;&#x6d;&#112;&#x6c;&#x65;&#46;&#x63;&#x6f;&#109;</a>)</p>
 </blockquote>
 <h1 id="添加SSH-key-到Github-上"><a href="#添加SSH-key-到Github-上" class="headerlink" title="添加SSH key 到Github 上"></a>添加SSH key 到Github 上</h1><ol>
 <li><p>将SSH密钥复制到剪贴板。</p>
@@ -1205,30 +1229,6 @@
 </li>
 </ol>
 ]]></content>
-      <categories>
-        <category>资料</category>
-      </categories>
-      <tags>
-        <tag>资料</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Mac终端安装指定版本node</title>
-    <url>/2019/08/21/Mac%E7%BB%88%E7%AB%AF%E5%AE%89%E8%A3%85%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%ACnode/</url>
-    <content><![CDATA[<h1 id="安装brew"><a href="#安装brew" class="headerlink" title="安装brew"></a>安装brew</h1><p>终端上运行</p>
-<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">/usr/bin/ruby -e “<span class="constructor">$(<span class="params">curl</span> -<span class="params">fsSL</span> <span class="params">https</span>:<span class="operator">/</span><span class="operator">/</span><span class="params">raw</span>.<span class="params">githubusercontent</span>.<span class="params">com</span><span class="operator">/</span>Homebrew<span class="operator">/</span><span class="params">install</span><span class="operator">/</span><span class="params">master</span><span class="operator">/</span><span class="params">install</span>)</span>”</span><br></pre></td></tr></table></figure>
-
-<h1 id="安装NVM"><a href="#安装NVM" class="headerlink" title="安装NVM"></a>安装NVM</h1><p><code>brew install nvm</code></p>
-<p>安装完成之后打开shell的配置文件</p>
-<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cd</span> ~</span><br><span class="line">vim <span class="string">.bash_profile</span></span><br></pre></td></tr></table></figure>
-
-<p>在文件里添加以下命令</p>
-<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">export NVM_DIR=~/.nvm</span><br><span class="line">source <span class="constructor">$(<span class="params">brew</span> --<span class="params">prefix</span> <span class="params">nvm</span>)</span>/nvm.sh</span><br></pre></td></tr></table></figure>
-
-<p>然后重新source</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> .bash_profile</span><br></pre></td></tr></table></figure>
-
-<h1 id="使用nvm安装node"><a href="#使用nvm安装node" class="headerlink" title="使用nvm安装node"></a>使用nvm安装node</h1><figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">nvm ls-remote 查看 所有的<span class="keyword">node</span><span class="title">可用版本</span></span><br><span class="line"><span class="title">nvm</span> install xxx 下载你想要的版本</span><br><span class="line">nvm use xxx 使用指定版本的<span class="keyword">node</span><span class="title"></span></span><br><span class="line"><span class="title">nvm</span> alias default xxx 每次启动终端都使用该版本的<span class="keyword">node</span><span class="title"></span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>资料</category>
       </categories>
@@ -1970,6 +1970,16 @@
       <tags>
         <tag>移动性能</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>解决&quot;XX&quot;已损坏</title>
+    <url>/2021/04/22/%E8%A7%A3%E5%86%B3-XX-%E5%B7%B2%E6%8D%9F%E5%9D%8F/</url>
+    <content><![CDATA[<p>系统为最新的macOS 11.2.3。</p>
+<p>新安装第三方源软件报以下错误：”XX”已损坏，无法打开。 您应该将它移到废纸篓</p>
+<h3 id="检查安全性与隐私-任何来源"><a href="#检查安全性与隐私-任何来源" class="headerlink" title="检查安全性与隐私-任何来源"></a>检查安全性与隐私-任何来源</h3><p>系统偏好设置 -&gt; 安全性与隐私<br>检查该位置下”任何来源”是否已经存在<br><img src="/2021/04/22/%E8%A7%A3%E5%86%B3-XX-%E5%B7%B2%E6%8D%9F%E5%9D%8F/%E5%AE%89%E5%85%A8%E6%80%A7%E4%B8%8E%E9%9A%90%E7%A7%81.png" alt="安全性与隐私"><br>如果不包含”任何来源”，则打开终端，输入以下命令，然后输入电脑密码，回车<br><code>sudo spctl --master-disable</code></p>
+<h3 id="quarantine"><a href="#quarantine" class="headerlink" title="quarantine"></a>quarantine</h3><p>重新打开之前报错软件，如果仍报错，继续以下操作<br>终端中输入以下命令(注意: 后面有个空格)<br><code>sudo xattr -d com.apple.quarantine /Applications/Alfred\ 4.app</code></p>
+<p>然后重新打开应用即可，我的最多执行到此问题就解决了，如果还出现问题，则要排查一下是否是程序本身的问题。</p>
+]]></content>
   </entry>
   <entry>
     <title>（Mac）iOS自动化打包（Jenkins+fastlane+pgy</title>
