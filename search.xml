@@ -1,6 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>10分钟看懂Docker和K8S</title>
+    <url>/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/</url>
+    <content><![CDATA[<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>2010年，几个搞IT的年轻人，在美国旧金山成立了一家名叫“dotCloud”的公司。这家公司主要提供基于PaaS的云计算技术服务。具体来说，是和LXC有关的容器技术。<br>LXC，就是Linux容器虚拟技术（Linux container）</p>
+<p>后来，dotCloud公司将自己的容器技术进行了简化和标准化，并命名为——Docker。<br><img src="/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/149930-20190731223405786-383145862.jpg" alt="Docker"></p>
+<p>Docker技术诞生之后，并没有引起行业的关注。而dotCloud公司，作为一家小型创业企业，在激烈的竞争之下，也步履维艰。正当他们快要坚持不下去的时候，脑子里蹦出了“开源”的想法。什么是“开源”？开源，就是开放源代码。也就是将原来内部保密的程序源代码开放给所有人，然后让大家一起参与进来，贡献代码和意见。</p>
+<p>有的软件是一开始就开源的。也有的软件，是混不下去，创造者又不想放弃，所以选择开源。自己养不活，就吃“百家饭”嘛。2013年3月，dotCloud公司的创始人之一，Docker之父，28岁的Solomon Hykes正式决定，将Docker项目开源。</p>
+<p>不开则已，一开惊人。越来越多的IT工程师发现了Docker的优点，然后蜂拥而至，加入Docker开源社区。Docker的人气迅速攀升，速度之快，令人瞠目结舌。开源当月，Docker 0.1 版本发布。此后的每一个月，Docker都会发布一个版本。到2014年6月9日，Docker 1.0 版本正式发布。此时的Docker，已经成为行业里人气最火爆的开源技术，没有之一。甚至像Google、微软、Amazon、VMware这样的巨头，都对它青睐有加，表示将全力支持。Docker火了之后，dotCloud公司干脆把公司名字也改成了Docker Inc. 。</p>
+<p> Docker和容器技术为什么会这么火爆？说白了，就是因为它“轻”。在容器技术之前，业界的网红是虚拟机。虚拟机技术的代表，是VMWare和OpenStack。</p>
+<p>相信很多人都用过虚拟机。虚拟机，就是在你的操作系统里面，装一个软件，然后通过这个软件，再模拟一台甚至多台“子电脑”出来。在“子电脑”里，你可以和正常电脑一样运行程序，例如开QQ。如果你愿意，你可以变出好几个“子电脑”，里面都开上QQ。“子电脑”和“子电脑”之间，是相互隔离的，互不影响。虚拟机属于虚拟化技术。</p>
+<p>而Docker这样的容器技术，也是虚拟化技术，属于轻量级的虚拟化。虚拟机虽然可以隔离出很多“子电脑”，但占用空间更大，启动更慢，虚拟机软件可能还要花钱（例如VMWare）。而容器技术恰好没有这些缺点。它不需要虚拟出整个操作系统，只需要虚拟一个小规模的环境（类似“沙箱”）。</p>
+<p>它启动时间很快，几秒钟就能完成。而且，它对资源的利用率很高（一台主机可以同时运行几千个Docker容器）。此外，它占的空间很小，虚拟机一般要几GB到几十GB的空间，而容器只需要MB级甚至KB级。正因为如此，容器技术受到了热烈的欢迎和追捧，发展迅速。<br><img src="/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/149930-20190731223738304-439883279.jpg" alt="容器和虚拟机的对比"></p>
+<h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><p>我们具体来看看Docker。大家需要注意，Docker本身并不是容器，它是创建容器的工具，是应用容器<br>引擎。想要搞懂Docker，其实看它的两句口号就行。</p>
+<p><strong>第一句，是“Build, Ship and Run”</strong>。<br>也就是，“搭建、发送、运行”，三板斧。</p>
+<p>举个例子：我来到一片空地，想建个房子，于是我搬石头、砍木头、画图纸，一顿操作，终于把这个房子盖好了。</p>
+<p>结果，我住了一段时间，想搬到另一片空地去。这时候，按以往的办法，我只能再次搬石头、砍木头、画图纸、盖房子。但是，跑来一个老巫婆，教会我一种魔法。这种魔法，可以把我盖好的房子复制一份，做成“镜像”，放在我的背包里。等我到了另一片空地，就用这个“镜像”，复制一套房子，摆在那<br>边，拎包入住。怎么样？是不是很神奇？</p>
+<p><strong>Docker的第二句口号就是：“Build once，Run anywhere（搭建一次，到处能用）”</strong>。<br>Docker技术的三大核心概念，分别是：</p>
+<ul>
+<li>镜像（Image）</li>
+<li>容器（Container）</li>
+<li>仓库（Repository）<br>我刚才例子里面，那个放在包里的“镜像”，就是<strong>Docker镜像</strong>。而我的背包，就是<strong>Docker仓库</strong>。我在空地上，用魔法造好的房子，就是一个<strong>Docker容器</strong>。</li>
+</ul>
+<p>说白了，这个Docker镜像，是一个特殊的文件系统。它除了提供容器运行时所需的程序、库、资源、配置等文件外，还包含了一些为运行时准备的一些配置参数（例如环境变量）。镜像不包含任何动态数据，其内容在构建之后也不会被改变。也就是说，每次变出房子，房子是一样的，但生活用品之类的，都是不管的。谁住谁负责添置。</p>
+<p>每一个镜像可以变出一种房子。那么，我可以有多个镜像呀！也就是说，我盖了一个欧式别墅，生成了镜像。另一个哥们可能盖了一个中国四合院，也生成了镜像。还有哥们，盖了一个非洲茅草屋，也生成了镜像。。。这么一来，我们可以交换镜像，你用我的，我用你的，岂不是很爽？</p>
+<p>于是乎，就变成了一个大的公共仓库。负责对Docker镜像进行管理的，是<strong>Docker Registry服务</strong>（类似仓库管理员）。不是任何人建的任何镜像都是合法的。万一有人盖了一个有问题的房子呢？所以，Docker Registry服务对镜像的管理是非常严格的。最常使用的Registry公开服务，是官方的Docker Hub，这也是默认的 Registry，并拥有大量的高质量的官方镜像。</p>
+<h1 id="K8S"><a href="#K8S" class="headerlink" title="K8S"></a>K8S</h1><p>好了，说完了Docker，我们再把目光转向K8S。</p>
+<p>就在Docker容器技术被炒得热火朝天之时，大家发现，如果想要将Docker应用于具体的业务实现，是存在困难的——编排、管理和调度等各个方面，都不容易。于是，人们迫切需要一套管理系统，对Docker及容器进行更高级更灵活的管理。</p>
+<p>就在这个时候，K8S出现了。</p>
+<p>K8S，就是基于容器的集群管理平台，它的全称，是kubernetes。</p>
+<p>Kubernetes 这个单词来自于希腊语，含义是舵手或领航员。K8S是它的缩写，用“8”字替代了了“ubernete”这8个字符。和Docker不同，K8S的创造者，是众人皆知的行业巨头——<strong>Google</strong>。然而，K8S并不是一件全新的发明。它的前身，是Google自己捣鼓了十多年的<strong>Borg系统</strong>。K8S是2014年6月由Google公司正式公布出来并宣布开源的。同年7月，微软、Red Hat、IBM、Docker、CoreOS、 Mesosphere和Saltstack 等公司，相继加入K8S。之后的一年内，VMware、HP、Intel等公司，也陆续加入。2015年7月，Google正式加入OpenStack基金会。与此同时，Kuberentes v1.0正式发布。目前，kubernetes的版本已经发展到V1.13。K8S的架构，略微有一点复杂，我们简单来看一下。</p>
+<p>一个K8S系统，通常称为一个K8S集群（Cluster）。<br>这个集群主要包括两个部分：<br>    * 一个Master节点（主节点）<br>    * 一群Node节点（计算节点）<br><img src="/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/WechatIMG14.png"></p>
+<p>一看就明白：Master节点主要还是负责管理和控制。Node节点是工作负载节点，里面是具体的容器。深入来看这两种节点。首先是Master节点。<br><img src="/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/WechatIMG15.png"></p>
+<p>Master节点包括API Server、Scheduler、Controller manager、etcd。</p>
+<ul>
+<li>API Server是整个系统的对外接口，供客户端和其它组件调用，相当于“营业厅”。</li>
+<li>Scheduler负责对集群内部的资源进行调度，相当于“调度室”。</li>
+<li>Controller manager负责管理控制器，相当于“大总管”。<br>然后是Node节点。<br><img src="/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/WechatIMG16.png"></li>
+</ul>
+<p>Node节点包括Docker、kubelet、kube-proxy、Fluentd、kube-dns（可选），还有就是Pod。</p>
+<p>Pod是Kubernetes最基本的操作单元。一个Pod代表着集群中运行的一个进程，它内部封装了一个或多个紧密相关的容器。除了Pod之外，K8S还有一个Service的概念，一个Service可以看作一组提供相同服务的Pod的对外访问接口。这段不太好理解，跳过吧。</p>
+<p>Docker，不用说了，创建容器的。<br>Kubelet，主要负责监视指派到它所在Node上的Pod，包括创建、修改、监控、删除等。<br>Kube-proxy，主要负责为Pod对象提供代理。<br>Fluentd，主要负责日志收集、存储与查询。<br>是不是有点懵？唉，三言两语真的很难讲清楚，继续跳过吧。</p>
+<p>Docker和K8S都介绍完了，然而文章并没有结束。</p>
+<p><strong>接下来的部分，是写给核心网工程师甚至所有通信工程师看的</strong>。</p>
+<p>从几十年前的1G，到现在的4G，再到将来的5G，移动通信发生了翻天覆地的变化，核心网亦是如此。</p>
+<p>但是，如果你仔细洞察这些变化，会发现，所谓的核心网，其实本质上并没有发生改变，无非就是很多的服务器而已。不同的核心网网元，就是不同的服务器，不同的计算节点。</p>
+<p>变化的，是这些“服务器”的形态和接口：形态，从机柜单板，变成机柜刀片，从机柜刀片，变成X86通用刀片服务器；接口，从中继线缆，变成网线，从网线，变成光纤。</p>
+<p>就算变来变去，还是服务器，是计算节点，是CPU。</p>
+<p>既然是服务器，那么就势必会和IT云计算一样，走上虚拟化的道路。毕竟，虚拟化有太多的优势，例如前文所说的低成本、高利用率、充分灵活、动态调度，等等。</p>
+<p>前几年，大家以为虚拟机是核心网的终极形态。目前看来，更有可能是容器化。这几年经常说的NFV（网元功能虚拟化），也有可能改口为NFC（网元功能容器化）。</p>
+<p>以VoLTE为例，如果按以前2G/3G的方式，那需要大量的专用设备，分别充当EPC和IMS的不同网元。而采用容器之后，很可能只需要一台服务器，创建十几个容器，用不同的容器，来分别运行不同网元的服务程序。这些容器，随时可以创建，也可以随时销毁。还能够在不停机的情况下，随意变大，随意变小，随意变强，随意变弱，在性能和功耗之间动态平衡。简直完美！</p>
+<p>5G时代，核心网采用微服务架构，也是和容器完美搭配——单体式架构（Monolithic）变成微服务架构（Microservices），相当于一个全能型变成N个专能型。每个专能型，分配给一个隔离的容器，赋予了最大程度的灵活。<br><img src="/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/%E7%B2%BE%E7%BB%86%E5%8C%96%E5%88%86%E5%B7%A5.jpg" alt="精细化分工"></p>
+<p>按照这样的发展趋势，在移动通信系统中，除了天线，剩下的部分都有可能虚拟化。核心网是第一个，但不是最后一个。虚拟化之后的核心网，与其说属于通信，实际上更应该归为IT。核心网的功能，只是容器中普通一个软件功能而已。</p>
+<p>至于说在座的各位核心网工程师，恭喜你们，马上就要成功转型啦！<br><img src="/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/WechatIMG17.png"></p>
+<p><a href="https://www.jianshu.com/p/f1f94c6968f5">https://www.jianshu.com/p/f1f94c6968f5</a></p>
+]]></content>
+      <categories>
+        <category>Docker</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ATX2入门进阶应用</title>
     <url>/2019/08/22/ATX2%E5%85%A5%E9%97%A8%E8%BF%9B%E9%98%B6%E5%BA%94%E7%94%A8/</url>
     <content><![CDATA[<p>[TOC]</p>
@@ -119,73 +181,6 @@
       </tags>
   </entry>
   <entry>
-    <title>10分钟看懂Docker和K8S</title>
-    <url>/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/</url>
-    <content><![CDATA[<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>2010年，几个搞IT的年轻人，在美国旧金山成立了一家名叫“dotCloud”的公司。这家公司主要提供基于PaaS的云计算技术服务。具体来说，是和LXC有关的容器技术。<br>LXC，就是Linux容器虚拟技术（Linux container）</p>
-<p>后来，dotCloud公司将自己的容器技术进行了简化和标准化，并命名为——Docker。<br><img src="/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/149930-20190731223405786-383145862.jpg" alt="Docker"></p>
-<p>Docker技术诞生之后，并没有引起行业的关注。而dotCloud公司，作为一家小型创业企业，在激烈的竞争之下，也步履维艰。正当他们快要坚持不下去的时候，脑子里蹦出了“开源”的想法。什么是“开源”？开源，就是开放源代码。也就是将原来内部保密的程序源代码开放给所有人，然后让大家一起参与进来，贡献代码和意见。</p>
-<p>有的软件是一开始就开源的。也有的软件，是混不下去，创造者又不想放弃，所以选择开源。自己养不活，就吃“百家饭”嘛。2013年3月，dotCloud公司的创始人之一，Docker之父，28岁的Solomon Hykes正式决定，将Docker项目开源。</p>
-<p>不开则已，一开惊人。越来越多的IT工程师发现了Docker的优点，然后蜂拥而至，加入Docker开源社区。Docker的人气迅速攀升，速度之快，令人瞠目结舌。开源当月，Docker 0.1 版本发布。此后的每一个月，Docker都会发布一个版本。到2014年6月9日，Docker 1.0 版本正式发布。此时的Docker，已经成为行业里人气最火爆的开源技术，没有之一。甚至像Google、微软、Amazon、VMware这样的巨头，都对它青睐有加，表示将全力支持。Docker火了之后，dotCloud公司干脆把公司名字也改成了Docker Inc. 。</p>
-<p> Docker和容器技术为什么会这么火爆？说白了，就是因为它“轻”。在容器技术之前，业界的网红是虚拟机。虚拟机技术的代表，是VMWare和OpenStack。</p>
-<p>相信很多人都用过虚拟机。虚拟机，就是在你的操作系统里面，装一个软件，然后通过这个软件，再模拟一台甚至多台“子电脑”出来。在“子电脑”里，你可以和正常电脑一样运行程序，例如开QQ。如果你愿意，你可以变出好几个“子电脑”，里面都开上QQ。“子电脑”和“子电脑”之间，是相互隔离的，互不影响。虚拟机属于虚拟化技术。</p>
-<p>而Docker这样的容器技术，也是虚拟化技术，属于轻量级的虚拟化。虚拟机虽然可以隔离出很多“子电脑”，但占用空间更大，启动更慢，虚拟机软件可能还要花钱（例如VMWare）。而容器技术恰好没有这些缺点。它不需要虚拟出整个操作系统，只需要虚拟一个小规模的环境（类似“沙箱”）。</p>
-<p>它启动时间很快，几秒钟就能完成。而且，它对资源的利用率很高（一台主机可以同时运行几千个Docker容器）。此外，它占的空间很小，虚拟机一般要几GB到几十GB的空间，而容器只需要MB级甚至KB级。正因为如此，容器技术受到了热烈的欢迎和追捧，发展迅速。<br><img src="/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/149930-20190731223738304-439883279.jpg" alt="容器和虚拟机的对比"></p>
-<h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><p>我们具体来看看Docker。大家需要注意，Docker本身并不是容器，它是创建容器的工具，是应用容器<br>引擎。想要搞懂Docker，其实看它的两句口号就行。</p>
-<p><strong>第一句，是“Build, Ship and Run”</strong>。<br>也就是，“搭建、发送、运行”，三板斧。</p>
-<p>举个例子：我来到一片空地，想建个房子，于是我搬石头、砍木头、画图纸，一顿操作，终于把这个房子盖好了。</p>
-<p>结果，我住了一段时间，想搬到另一片空地去。这时候，按以往的办法，我只能再次搬石头、砍木头、画图纸、盖房子。但是，跑来一个老巫婆，教会我一种魔法。这种魔法，可以把我盖好的房子复制一份，做成“镜像”，放在我的背包里。等我到了另一片空地，就用这个“镜像”，复制一套房子，摆在那<br>边，拎包入住。怎么样？是不是很神奇？</p>
-<p><strong>Docker的第二句口号就是：“Build once，Run anywhere（搭建一次，到处能用）”</strong>。<br>Docker技术的三大核心概念，分别是：</p>
-<ul>
-<li>镜像（Image）</li>
-<li>容器（Container）</li>
-<li>仓库（Repository）<br>我刚才例子里面，那个放在包里的“镜像”，就是<strong>Docker镜像</strong>。而我的背包，就是<strong>Docker仓库</strong>。我在空地上，用魔法造好的房子，就是一个<strong>Docker容器</strong>。</li>
-</ul>
-<p>说白了，这个Docker镜像，是一个特殊的文件系统。它除了提供容器运行时所需的程序、库、资源、配置等文件外，还包含了一些为运行时准备的一些配置参数（例如环境变量）。镜像不包含任何动态数据，其内容在构建之后也不会被改变。也就是说，每次变出房子，房子是一样的，但生活用品之类的，都是不管的。谁住谁负责添置。</p>
-<p>每一个镜像可以变出一种房子。那么，我可以有多个镜像呀！也就是说，我盖了一个欧式别墅，生成了镜像。另一个哥们可能盖了一个中国四合院，也生成了镜像。还有哥们，盖了一个非洲茅草屋，也生成了镜像。。。这么一来，我们可以交换镜像，你用我的，我用你的，岂不是很爽？</p>
-<p>于是乎，就变成了一个大的公共仓库。负责对Docker镜像进行管理的，是<strong>Docker Registry服务</strong>（类似仓库管理员）。不是任何人建的任何镜像都是合法的。万一有人盖了一个有问题的房子呢？所以，Docker Registry服务对镜像的管理是非常严格的。最常使用的Registry公开服务，是官方的Docker Hub，这也是默认的 Registry，并拥有大量的高质量的官方镜像。</p>
-<h1 id="K8S"><a href="#K8S" class="headerlink" title="K8S"></a>K8S</h1><p>好了，说完了Docker，我们再把目光转向K8S。</p>
-<p>就在Docker容器技术被炒得热火朝天之时，大家发现，如果想要将Docker应用于具体的业务实现，是存在困难的——编排、管理和调度等各个方面，都不容易。于是，人们迫切需要一套管理系统，对Docker及容器进行更高级更灵活的管理。</p>
-<p>就在这个时候，K8S出现了。</p>
-<p>K8S，就是基于容器的集群管理平台，它的全称，是kubernetes。</p>
-<p>Kubernetes 这个单词来自于希腊语，含义是舵手或领航员。K8S是它的缩写，用“8”字替代了了“ubernete”这8个字符。和Docker不同，K8S的创造者，是众人皆知的行业巨头——<strong>Google</strong>。然而，K8S并不是一件全新的发明。它的前身，是Google自己捣鼓了十多年的<strong>Borg系统</strong>。K8S是2014年6月由Google公司正式公布出来并宣布开源的。同年7月，微软、Red Hat、IBM、Docker、CoreOS、 Mesosphere和Saltstack 等公司，相继加入K8S。之后的一年内，VMware、HP、Intel等公司，也陆续加入。2015年7月，Google正式加入OpenStack基金会。与此同时，Kuberentes v1.0正式发布。目前，kubernetes的版本已经发展到V1.13。K8S的架构，略微有一点复杂，我们简单来看一下。</p>
-<p>一个K8S系统，通常称为一个K8S集群（Cluster）。<br>这个集群主要包括两个部分：<br>    * 一个Master节点（主节点）<br>    * 一群Node节点（计算节点）<br><img src="/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/WechatIMG14.png"></p>
-<p>一看就明白：Master节点主要还是负责管理和控制。Node节点是工作负载节点，里面是具体的容器。深入来看这两种节点。首先是Master节点。<br><img src="/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/WechatIMG15.png"></p>
-<p>Master节点包括API Server、Scheduler、Controller manager、etcd。</p>
-<ul>
-<li>API Server是整个系统的对外接口，供客户端和其它组件调用，相当于“营业厅”。</li>
-<li>Scheduler负责对集群内部的资源进行调度，相当于“调度室”。</li>
-<li>Controller manager负责管理控制器，相当于“大总管”。<br>然后是Node节点。<br><img src="/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/WechatIMG16.png"></li>
-</ul>
-<p>Node节点包括Docker、kubelet、kube-proxy、Fluentd、kube-dns（可选），还有就是Pod。</p>
-<p>Pod是Kubernetes最基本的操作单元。一个Pod代表着集群中运行的一个进程，它内部封装了一个或多个紧密相关的容器。除了Pod之外，K8S还有一个Service的概念，一个Service可以看作一组提供相同服务的Pod的对外访问接口。这段不太好理解，跳过吧。</p>
-<p>Docker，不用说了，创建容器的。<br>Kubelet，主要负责监视指派到它所在Node上的Pod，包括创建、修改、监控、删除等。<br>Kube-proxy，主要负责为Pod对象提供代理。<br>Fluentd，主要负责日志收集、存储与查询。<br>是不是有点懵？唉，三言两语真的很难讲清楚，继续跳过吧。</p>
-<p>Docker和K8S都介绍完了，然而文章并没有结束。</p>
-<p><strong>接下来的部分，是写给核心网工程师甚至所有通信工程师看的</strong>。</p>
-<p>从几十年前的1G，到现在的4G，再到将来的5G，移动通信发生了翻天覆地的变化，核心网亦是如此。</p>
-<p>但是，如果你仔细洞察这些变化，会发现，所谓的核心网，其实本质上并没有发生改变，无非就是很多的服务器而已。不同的核心网网元，就是不同的服务器，不同的计算节点。</p>
-<p>变化的，是这些“服务器”的形态和接口：形态，从机柜单板，变成机柜刀片，从机柜刀片，变成X86通用刀片服务器；接口，从中继线缆，变成网线，从网线，变成光纤。</p>
-<p>就算变来变去，还是服务器，是计算节点，是CPU。</p>
-<p>既然是服务器，那么就势必会和IT云计算一样，走上虚拟化的道路。毕竟，虚拟化有太多的优势，例如前文所说的低成本、高利用率、充分灵活、动态调度，等等。</p>
-<p>前几年，大家以为虚拟机是核心网的终极形态。目前看来，更有可能是容器化。这几年经常说的NFV（网元功能虚拟化），也有可能改口为NFC（网元功能容器化）。</p>
-<p>以VoLTE为例，如果按以前2G/3G的方式，那需要大量的专用设备，分别充当EPC和IMS的不同网元。而采用容器之后，很可能只需要一台服务器，创建十几个容器，用不同的容器，来分别运行不同网元的服务程序。这些容器，随时可以创建，也可以随时销毁。还能够在不停机的情况下，随意变大，随意变小，随意变强，随意变弱，在性能和功耗之间动态平衡。简直完美！</p>
-<p>5G时代，核心网采用微服务架构，也是和容器完美搭配——单体式架构（Monolithic）变成微服务架构（Microservices），相当于一个全能型变成N个专能型。每个专能型，分配给一个隔离的容器，赋予了最大程度的灵活。<br><img src="/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/%E7%B2%BE%E7%BB%86%E5%8C%96%E5%88%86%E5%B7%A5.jpg" alt="精细化分工"></p>
-<p>按照这样的发展趋势，在移动通信系统中，除了天线，剩下的部分都有可能虚拟化。核心网是第一个，但不是最后一个。虚拟化之后的核心网，与其说属于通信，实际上更应该归为IT。核心网的功能，只是容器中普通一个软件功能而已。</p>
-<p>至于说在座的各位核心网工程师，恭喜你们，马上就要成功转型啦！<br><img src="/2019/05/23/10%E5%88%86%E9%92%9F%E7%9C%8B%E6%87%82Docker%E5%92%8CK8S/WechatIMG17.png"></p>
-<p><a href="https://www.jianshu.com/p/f1f94c6968f5">https://www.jianshu.com/p/f1f94c6968f5</a></p>
-]]></content>
-      <categories>
-        <category>Docker</category>
-      </categories>
-      <tags>
-        <tag>Docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Docker安装</title>
-    <url>/2019/08/21/Docker%E5%AE%89%E8%A3%85/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title>CocoaPods安装</title>
     <url>/2019/08/21/CocoaPods%E5%AE%89%E8%A3%85/</url>
     <content><![CDATA[<h1 id="Ruby环境搭建"><a href="#Ruby环境搭建" class="headerlink" title="Ruby环境搭建"></a>Ruby环境搭建</h1><h2 id="查看当前Ruby版本"><a href="#查看当前Ruby版本" class="headerlink" title="查看当前Ruby版本"></a>查看当前Ruby版本</h2><figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">ruby -v</span></span><br></pre></td></tr></table></figure>
@@ -230,6 +225,34 @@
       </tags>
   </entry>
   <entry>
+    <title>Docker安装</title>
+    <url>/2019/08/21/Docker%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>Hexo Next 主题中添加本地搜索功能</title>
+    <url>/2019/05/22/Hexo%20Next%20%E4%B8%BB%E9%A2%98%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD/</url>
+    <content><![CDATA[<h1 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h1><p>随着时间的推移，个人站点的博客文章会越来越多，那怎么样才能快速找到你印象中的文章呢？增加一个站点内的搜索功能是非常有必要和方便的。</p>
+<h1 id="安装本地搜索插件-hexo-generator-search"><a href="#安装本地搜索插件-hexo-generator-search" class="headerlink" title="安装本地搜索插件 hexo-generator-search"></a>安装本地搜索插件 hexo-generator-search</h1><p>在博客根目录下执行下列命令</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-<span class="keyword">search</span> <span class="comment">--save</span></span><br></pre></td></tr></table></figure>
+<p>安装之后，会在站点目录的 public 文件夹下创建一个 search.xml 文件。</p>
+<h1 id="修改全局配置文件-config-yml（博客根目录）"><a href="#修改全局配置文件-config-yml（博客根目录）" class="headerlink" title="修改全局配置文件_config.yml（博客根目录）"></a>修改全局配置文件_config.yml（博客根目录）</h1><p>在站点配置文件 _config.yml 中添加如下内容：</p>
+<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line"><span class="meta"># Search </span></span><br><span class="line"><span class="symbol">search:</span></span><br><span class="line"><span class="symbol">  path:</span> .<span class="meta-keyword">/public/</span>search.xml</span><br><span class="line"><span class="symbol">  field:</span> post</span><br><span class="line"><span class="symbol">  format:</span> html</span><br><span class="line"><span class="symbol">  limit:</span> <span class="number">10000</span></span><br></pre></td></tr></table></figure>
+<p>path：索引文件的路径，相对于站点根目录<br>field：搜索范围，默认是 post，还可以选择 page、all，设置成 all 表示搜索所有页面<br>limit：限制搜索的条目数</p>
+<h1 id="hexo主题配置文件（-themes-next-config-yml）"><a href="#hexo主题配置文件（-themes-next-config-yml）" class="headerlink" title="hexo主题配置文件（/themes/next/_config.yml）"></a>hexo主题配置文件（/themes/next/_config.yml）</h1><p>在主题配置文件 _config.yml 中找到如下内容：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">local_search:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">trigger:</span> <span class="string">auto</span></span><br><span class="line">  <span class="attr">top_n_per_article:</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>修改<code>local_search</code>的<code>enable</code>为<code>true</code></p>
+<p><code>top_n_per_article </code>字段表示在每篇文章中显示的搜索结果数量，设成 -1 会显示每篇文章的所有搜索结果数量。</p>
+<h1 id="重新部署"><a href="#重新部署" class="headerlink" title="重新部署"></a>重新部署</h1><p>然后执行以下命令，重新部署网站即可愉快的使用本地搜索功能了</p>
+<figure class="highlight sas"><table><tr><td class="code"><pre><span class="line">hexo clean <span class="variable">&amp;&amp;</span> hexo g <span class="variable">&amp;&amp;</span> hexo d</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Hexo Next</category>
+      </categories>
+      <tags>
+        <tag>Hexo Next</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo NexT 代码块复制功能</title>
     <url>/2019/05/26/Hexo%20NexT%20%E4%BB%A3%E7%A0%81%E5%9D%97%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>为了提高博客代码块的用户体验，仅仅代码高亮还不行，最好还能一键复制代码。故此文将讲述Hexo NexT主题博客的代码块复制功能配置。</p>
@@ -248,29 +271,6 @@
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 代码块复制功能 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;/js/clipboard.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;/js/clipboard-use.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><img src="/2019/05/26/Hexo%20NexT%20%E4%BB%A3%E7%A0%81%E5%9D%97%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD/15588460292199.jpg" alt="添加位置示例"></p>
 ]]></content>
-      <categories>
-        <category>Hexo Next</category>
-      </categories>
-      <tags>
-        <tag>Hexo Next</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo Next 主题中添加本地搜索功能</title>
-    <url>/2019/05/22/Hexo%20Next%20%E4%B8%BB%E9%A2%98%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD/</url>
-    <content><![CDATA[<h1 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h1><p>随着时间的推移，个人站点的博客文章会越来越多，那怎么样才能快速找到你印象中的文章呢？增加一个站点内的搜索功能是非常有必要和方便的。</p>
-<h1 id="安装本地搜索插件-hexo-generator-search"><a href="#安装本地搜索插件-hexo-generator-search" class="headerlink" title="安装本地搜索插件 hexo-generator-search"></a>安装本地搜索插件 hexo-generator-search</h1><p>在博客根目录下执行下列命令</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-<span class="keyword">search</span> <span class="comment">--save</span></span><br></pre></td></tr></table></figure>
-<p>安装之后，会在站点目录的 public 文件夹下创建一个 search.xml 文件。</p>
-<h1 id="修改全局配置文件-config-yml（博客根目录）"><a href="#修改全局配置文件-config-yml（博客根目录）" class="headerlink" title="修改全局配置文件_config.yml（博客根目录）"></a>修改全局配置文件_config.yml（博客根目录）</h1><p>在站点配置文件 _config.yml 中添加如下内容：</p>
-<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line"><span class="meta"># Search </span></span><br><span class="line"><span class="symbol">search:</span></span><br><span class="line"><span class="symbol">  path:</span> .<span class="meta-keyword">/public/</span>search.xml</span><br><span class="line"><span class="symbol">  field:</span> post</span><br><span class="line"><span class="symbol">  format:</span> html</span><br><span class="line"><span class="symbol">  limit:</span> <span class="number">10000</span></span><br></pre></td></tr></table></figure>
-<p>path：索引文件的路径，相对于站点根目录<br>field：搜索范围，默认是 post，还可以选择 page、all，设置成 all 表示搜索所有页面<br>limit：限制搜索的条目数</p>
-<h1 id="hexo主题配置文件（-themes-next-config-yml）"><a href="#hexo主题配置文件（-themes-next-config-yml）" class="headerlink" title="hexo主题配置文件（/themes/next/_config.yml）"></a>hexo主题配置文件（/themes/next/_config.yml）</h1><p>在主题配置文件 _config.yml 中找到如下内容：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">local_search:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">trigger:</span> <span class="string">auto</span></span><br><span class="line">  <span class="attr">top_n_per_article:</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>修改<code>local_search</code>的<code>enable</code>为<code>true</code></p>
-<p><code>top_n_per_article </code>字段表示在每篇文章中显示的搜索结果数量，设成 -1 会显示每篇文章的所有搜索结果数量。</p>
-<h1 id="重新部署"><a href="#重新部署" class="headerlink" title="重新部署"></a>重新部署</h1><p>然后执行以下命令，重新部署网站即可愉快的使用本地搜索功能了</p>
-<figure class="highlight sas"><table><tr><td class="code"><pre><span class="line">hexo clean <span class="variable">&amp;&amp;</span> hexo g <span class="variable">&amp;&amp;</span> hexo d</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>Hexo Next</category>
       </categories>
@@ -412,6 +412,20 @@
       </tags>
   </entry>
   <entry>
+    <title>Homebrew</title>
+    <url>/2019/05/20/Homebrew/</url>
+    <content><![CDATA[<h1 id="什么是Homebrew？"><a href="#什么是Homebrew？" class="headerlink" title="什么是Homebrew？"></a>什么是Homebrew？</h1><p>Homebrew是一款Mac OS平台下的软件包管理工具，拥有安装、卸载、更新、查看、搜索等很多实用的功能。简单的一条指令，就可以实现包管理，而不用你关心各种依赖和文件路径的情况，十分方便快捷。</p>
+<p><a href="https://brew.sh/index_zh-cn.html">官方网站</a>：又提示缺少套件啦？别担心，Homebrew 随时守候。Homebrew —— OS X 不可或缺的套件管理器。</p>
+<h1 id="安装Homebrew"><a href="#安装Homebrew" class="headerlink" title="安装Homebrew"></a>安装Homebrew</h1><figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"><span class="meta">#安装</span></span><br><span class="line">/usr/bin/ruby -e <span class="string">&quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span>`</span><br><span class="line"></span><br><span class="line"><span class="meta">#验证是否安装成功</span></span><br><span class="line">brew doctor</span><br><span class="line"></span><br><span class="line"><span class="meta">#查看brew版本</span></span><br><span class="line">brew -v</span><br><span class="line"></span><br><span class="line"><span class="meta">#查看brew帮助文档</span></span><br><span class="line">brew –help</span><br><span class="line"></span><br><span class="line"><span class="meta">#更新Homebrew</span></span><br><span class="line">brew update</span><br></pre></td></tr></table></figure>
+<h1 id="使用Homebrew"><a href="#使用Homebrew" class="headerlink" title="使用Homebrew"></a>使用Homebrew</h1><figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="comment">#安装包</span></span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>&lt;packageName&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">#卸载软件</span></span><br><span class="line"><span class="keyword">brew </span>uninstall &lt;packageName&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">#搜索软件</span></span><br><span class="line"><span class="keyword">brew </span>search &lt;packageName&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看已安装软件列表</span></span><br><span class="line"><span class="keyword">brew </span>list</span><br><span class="line"></span><br><span class="line"><span class="comment">#更新包</span></span><br><span class="line"><span class="keyword">brew </span>upgrade             <span class="comment"># 更新全部包</span></span><br><span class="line"><span class="keyword">brew </span>upgrade $FORMULA    <span class="comment"># 更新指定包</span></span><br><span class="line"><span class="keyword">brew </span>outdated            <span class="comment"># 查看可更新的包</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#清理旧版本和缓存文件</span></span><br><span class="line"><span class="keyword">brew </span>cleanup             <span class="comment"># 清理所有包的旧版本</span></span><br><span class="line"><span class="keyword">brew </span>cleanup $FORMULA    <span class="comment"># 清理指定包的旧版本</span></span><br><span class="line"><span class="keyword">brew </span>cleanup -n          <span class="comment"># 查看可清理的旧版本包，不执行实际操作</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查看包信息</span></span><br><span class="line"><span class="keyword">brew </span>info &lt;packageName&gt;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>资料</category>
+      </categories>
+      <tags>
+        <tag>资料</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JMeter(一)_Mac下安装部署</title>
     <url>/2020/02/25/JMeter-%E4%B8%80-Mac%E4%B8%8B%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/</url>
     <content><![CDATA[<p><a href="https://jmeter.apache.org/download_jmeter.cgi">JMeter官网下载</a><br><img src="/2020/02/25/JMeter-%E4%B8%80-Mac%E4%B8%8B%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/1651582602156_.pic_hd.jpg" alt="Jmeter版本"></p>
@@ -428,20 +442,6 @@
       </categories>
       <tags>
         <tag>JMeter</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Homebrew</title>
-    <url>/2019/05/20/Homebrew/</url>
-    <content><![CDATA[<h1 id="什么是Homebrew？"><a href="#什么是Homebrew？" class="headerlink" title="什么是Homebrew？"></a>什么是Homebrew？</h1><p>Homebrew是一款Mac OS平台下的软件包管理工具，拥有安装、卸载、更新、查看、搜索等很多实用的功能。简单的一条指令，就可以实现包管理，而不用你关心各种依赖和文件路径的情况，十分方便快捷。</p>
-<p><a href="https://brew.sh/index_zh-cn.html">官方网站</a>：又提示缺少套件啦？别担心，Homebrew 随时守候。Homebrew —— OS X 不可或缺的套件管理器。</p>
-<h1 id="安装Homebrew"><a href="#安装Homebrew" class="headerlink" title="安装Homebrew"></a>安装Homebrew</h1><figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"><span class="meta">#安装</span></span><br><span class="line">/usr/bin/ruby -e <span class="string">&quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span>`</span><br><span class="line"></span><br><span class="line"><span class="meta">#验证是否安装成功</span></span><br><span class="line">brew doctor</span><br><span class="line"></span><br><span class="line"><span class="meta">#查看brew版本</span></span><br><span class="line">brew -v</span><br><span class="line"></span><br><span class="line"><span class="meta">#查看brew帮助文档</span></span><br><span class="line">brew –help</span><br><span class="line"></span><br><span class="line"><span class="meta">#更新Homebrew</span></span><br><span class="line">brew update</span><br></pre></td></tr></table></figure>
-<h1 id="使用Homebrew"><a href="#使用Homebrew" class="headerlink" title="使用Homebrew"></a>使用Homebrew</h1><figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="comment">#安装包</span></span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>&lt;packageName&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">#卸载软件</span></span><br><span class="line"><span class="keyword">brew </span>uninstall &lt;packageName&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">#搜索软件</span></span><br><span class="line"><span class="keyword">brew </span>search &lt;packageName&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看已安装软件列表</span></span><br><span class="line"><span class="keyword">brew </span>list</span><br><span class="line"></span><br><span class="line"><span class="comment">#更新包</span></span><br><span class="line"><span class="keyword">brew </span>upgrade             <span class="comment"># 更新全部包</span></span><br><span class="line"><span class="keyword">brew </span>upgrade $FORMULA    <span class="comment"># 更新指定包</span></span><br><span class="line"><span class="keyword">brew </span>outdated            <span class="comment"># 查看可更新的包</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#清理旧版本和缓存文件</span></span><br><span class="line"><span class="keyword">brew </span>cleanup             <span class="comment"># 清理所有包的旧版本</span></span><br><span class="line"><span class="keyword">brew </span>cleanup $FORMULA    <span class="comment"># 清理指定包的旧版本</span></span><br><span class="line"><span class="keyword">brew </span>cleanup -n          <span class="comment"># 查看可清理的旧版本包，不执行实际操作</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查看包信息</span></span><br><span class="line"><span class="keyword">brew </span>info &lt;packageName&gt;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>资料</category>
-      </categories>
-      <tags>
-        <tag>资料</tag>
       </tags>
   </entry>
   <entry>
@@ -546,32 +546,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JMeter(二)_基础介绍</title>
-    <url>/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/</url>
-    <content><![CDATA[<h2 id="测试计划（test-plan）"><a href="#测试计划（test-plan）" class="headerlink" title="测试计划（test plan）"></a>测试计划（test plan）</h2><p>描述一个性能测试，包含本次测试所有相关功能<br><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-155506@2x.png" alt="测试计划"></p>
-<h2 id="threads（users）线程"><a href="#threads（users）线程" class="headerlink" title="threads（users）线程"></a>threads（users）线程</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-155944@2x.png" alt="线程组"><br>Setup thread group：<br>一种特殊类型的线程，可用于执行预测试操作。即执行测试前进行定期线程组的执行</p>
-<p>Teardown thread group：<br>一种特殊类型的线程，可用于执行测试后动作。即执行测试结束后执行定期的线程组</p>
-<p>Thread group：<br>通常添加使用的线程，一般一个线程组可看做一个虚拟用户组，其中每个线程为一个虚拟用户</p>
-<h2 id="测试片段（test-fragment）"><a href="#测试片段（test-fragment）" class="headerlink" title="测试片段（test fragment）"></a>测试片段（test fragment）</h2><p>应用在控制器上的一个特殊线程组，与线程组处于同一层级，必须与Include Controller或模块控制器一起使用才被执行。<br>应用场景：<br>1、当jmeter脚本非常复杂的时候，可以通过测试片段分模块管理用例<br>2、当jmeter脚本由多个测试人员共同完成，通过测试片段分人分模块管理用例</p>
-<h2 id="取样器（Sampler）"><a href="#取样器（Sampler）" class="headerlink" title="取样器（Sampler）"></a>取样器（Sampler）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160607@2x.png" alt="取样器"><br>是性能测试中向服务器发送请求，记录响应信息，记录响应时间的最小单元，JMeter 原生支持多种不同的sampler<br>如 HTTP Request Sampler 、 FTP  Request Sampler 、TCP  Request Sampler 、JDBC Request Sampler 等<br>每一种不同类型的 sampler 可以根据设置的参数向服务器发出不同类型的请求。<br>Java Request Sampler 和 Beanshell Request Sampler 是两种特殊的可定制的 Sampler （暂不讨论）</p>
-<h2 id="逻辑控制器（Logic-Controller）"><a href="#逻辑控制器（Logic-Controller）" class="headerlink" title="逻辑控制器（Logic Controller）"></a>逻辑控制器（Logic Controller）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160636@2x.png" alt="逻辑控制器"><br>包含两类原件：<br>一类是控制Test Plan中Sampler节点发送请求的逻辑顺序控制器，常用的有：If Controller、Swith Controller、Loop Controller、Random Controller等<br>另一类是用来组织和控制Sampler节点的，如Transaction Controller、Throughput Controller等</p>
-<h2 id="监听器（Listener）"><a href="#监听器（Listener）" class="headerlink" title="监听器（Listener）"></a>监听器（Listener）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160723@2x.png" alt="监听器"><br>对测试结果进行处理和可视化展示的一系列组件，常用的有图形结果、查看结果树、聚合报告等<br>以上的五类原件就可以构成一个简单的性能测试脚本</p>
-<p>聚合报告<br><strong>Label：</strong>每个 JMeter 的 element（例如 HTTP Request）都有一个 Name 属性，这里显示的就是 Name 属性的值<br><strong>Samples：</strong>表示你这次测试中一共发出了多少个请求，如果模拟10个用户，每个用户迭代10次，那么这里显示100<br><strong>Average：</strong>平均响应时间——默认情况下是单个 Request 的平均响应时间，当使用了 Transaction Controller 时，也可以以Transaction 为单位显示平均响应时间<br><strong>Median：</strong>中位数，也就是 50％ 用户的响应时间<br><strong>90% Line：</strong>90％ 用户的响应时间<br><strong>Min：</strong>最小响应时间<br><strong>Max：</strong>最大响应时间<br><strong>Error%：</strong>本次测试中出现错误的请求的数量/请求的总数<br><strong>Throughput：</strong>吞吐量——默认情况下表示每秒完成的请求数（Request per Second），当使用了 Transaction Controller 时，也可以表示类似 LoadRunner 的 Transaction per Second 数<br><strong>KB/Sec：</strong>每秒从服务器端接收到的数据量</p>
-<h2 id="配置元件（Config-Element）"><a href="#配置元件（Config-Element）" class="headerlink" title="配置元件（Config Element）"></a>配置元件（Config Element）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160737@2x.png" alt="配置元件"><br>用于提供对静态数据配置的支持。CSV Date Set Config可以将本地数据文件形成数据池（Date Pool），而对应于HTTP Request Configuration和TCP Request Sample等类型的Configuration元件则可以修改这些Sample的默认数据等</p>
-<h2 id="定时器（Time）"><a href="#定时器（Time）" class="headerlink" title="定时器（Time）"></a>定时器（Time）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160849@2x.png" alt="定时器"><br>用于操作之间设置等待时间，等待时间使性能测试中常用的控制客户端QPS的手段，jmeter定义了Constant Times、</p>
-<p>Constant Throughput Times、Guass Ramdon Times等不同类型的Times</p>
-<h2 id="断言（Assertions）"><a href="#断言（Assertions）" class="headerlink" title="断言（Assertions）"></a>断言（Assertions）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-161013@2x.png" alt="断言"><br>用于检查测试中得到的响应数据等是否符合预期，Assertions一般用来设置检查点，用以保证性能测试过程中的数据交互与预期一致</p>
-<h2 id="前置处理器（Pre-Processors）"><a href="#前置处理器（Pre-Processors）" class="headerlink" title="前置处理器（Pre Processors）"></a>前置处理器（Pre Processors）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160912@2x.png" alt="前置处理器"><br>用于在实际请求发出之前对即将发出的请求进行特殊处理。<br>例如：当URL中有sessionID一类的session信息时，可以通过该处理器填充发出请求实际的sessionID。</p>
-<h2 id="后置处理器（Pre-Processors）"><a href="#后置处理器（Pre-Processors）" class="headerlink" title="后置处理器（Pre Processors）"></a>后置处理器（Pre Processors）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160927@2x.png" alt="后置处理器"><br>用于对Sampler发出请求后得到的服务器响应进行处理。一般用来提取响应中的特定数据<br>例如：正则表达式，用于提取响应数据中匹配某正则表达式的数据段，</p>
-]]></content>
-      <categories>
-        <category>JMeter</category>
-      </categories>
-      <tags>
-        <tag>JMeter</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JMeter(九)_定时器</title>
     <url>/2020/03/10/JMeter-%E4%B9%9D-%E5%AE%9A%E6%97%B6%E5%99%A8/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在默认情况下，jmeter 发送每个请求之间是没有延时的，如果采用默认方式，如果线程数足够大，瞬间就会将服务器压死。再则在实际的业务过程中，请求之间是有一定时间的停顿的所以在请求之间设置合理的延时是必须的，也是更接近用户真实业务情况。在 jmeter 中，定时器组件提供了系列不同类型的延时控制。合理使用定时器组件，能让你的性能测试更接近真实，更能挖掘出系统的瓶颈和评估系统的性能指标。</p>
@@ -649,45 +623,23 @@
       </tags>
   </entry>
   <entry>
-    <title>JMeter(六)_参数化</title>
-    <url>/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/</url>
-    <content><![CDATA[<h1 id="一、JMeter参数化简介"><a href="#一、JMeter参数化简介" class="headerlink" title="一、JMeter参数化简介"></a>一、JMeter参数化简介</h1><h2 id="JMeter参数化的概念"><a href="#JMeter参数化的概念" class="headerlink" title="JMeter参数化的概念"></a>JMeter参数化的概念</h2><p>当使用JMeter进行测试时，测试数据的准备是一项重要的工作。若要求每次迭代的数据不一样时，则需进行参数化，然后从参数化的文件中来读取测试数据。</p>
-<blockquote>
-<p>参数化：是自动化测试脚本的一种常用技巧，可将脚本中的某些输入使用参数来代替，如登录时利用GET/POST请求方式传递参数的场景，在脚本运行时指定参数的取值范围和规则。<br>脚本在运行时，根据需要选取不同的参数值作为输入，该方式称为数据驱动测试（Data Driven Test），而参数的取值范围被称为数据池（Data Pool）。</p>
-</blockquote>
-<h2 id="JMeter参数化方式之使用场景对比"><a href="#JMeter参数化方式之使用场景对比" class="headerlink" title="JMeter参数化方式之使用场景对比"></a>JMeter参数化方式之使用场景对比</h2><table>
-<thead>
-<tr>
-<th></th>
-<th>参数化方式</th>
-<th><span class="Apple-tab-span" style="white-space:pre"></span>使用场景</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>User Parameters</td>
-<td>适用于参数取值范围很小的时候使用</td>
-</tr>
-<tr>
-<td>2</td>
-<td>CSV Data Set Config</td>
-<td>适用于参数取值范围较大的时候使用，该方法具有更大的灵活性</td>
-</tr>
-<tr>
-<td>3</td>
-<td>User Defined Variables</td>
-<td>一般用于Test Plan中不需要随请求迭代的参数设置，如：Host、Port Number</td>
-</tr>
-<tr>
-<td>4</td>
-<td>函数助手：_CSVRead</td>
-<td>可作为其他参数化方式的补充项，如：随机数生成的函数${__Random(,,)}</td>
-</tr>
-</tbody></table>
-<h1 id="二、JMeter参数化的4种主要方式-操作演练"><a href="#二、JMeter参数化的4种主要方式-操作演练" class="headerlink" title="二、JMeter参数化的4种主要方式-操作演练"></a>二、JMeter参数化的4种主要方式-操作演练</h1><h2 id="User-Parameters（用户参数）"><a href="#User-Parameters（用户参数）" class="headerlink" title="User Parameters（用户参数）"></a>User Parameters（用户参数）</h2><p>操作路径：HTTP请求–&gt;添加–&gt;前置处理器–&gt;用户参数<br>1）添加User Parameters功能模块<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E5%8F%82%E6%95%B0.png" alt="添加用户参数"><br>2）设置参数项、参数值<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E7%94%A8%E6%88%B7%E5%8F%82%E6%95%B0.png" alt="用户参数"><br>3）配置HTTP取样器界面的请求参数：${xxx}<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE.png" alt="HTTP请求参数配置"><br>4）配置Thread Group<br>设置线程数=2，即2个虚拟用户数，对应User Parameters中设置的2个用户<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E7%BA%BF%E7%A8%8B%E6%95%B0.png" alt="线程数"></p>
-<h2 id="CSV-Data-Set-Config（CSV数据配置）"><a href="#CSV-Data-Set-Config（CSV数据配置）" class="headerlink" title="CSV Data Set Config（CSV数据配置）"></a>CSV Data Set Config（CSV数据配置）</h2><p>操作路径：线程组–&gt;添加–&gt;配置元件–&gt;CSV Data Set Config<br>1）添加CSV Data Set Config模块<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E6%B7%BB%E5%8A%A0CSV%E6%95%B0%E6%8D%AE%E9%85%8D%E7%BD%AE.png" alt="添加CSV数据配置"><br>2）预先准备好要参数化的所有参数值（txt、csv文件）<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E5%8F%82%E6%95%B0%E6%96%87%E4%BB%B6.png" alt="参数文件"><br>3）配置CSV Data来源<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/CSV%E6%95%B0%E6%8D%AE%E9%85%8D%E7%BD%AE.png" alt="CSV数据配置"><br>4）设置HTTP取样器的请求参数：${xxx}<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE.png" alt="HTTP请求参数配置"></p>
-<h2 id="User-Defined-Variables（用户自定义变量）"><a href="#User-Defined-Variables（用户自定义变量）" class="headerlink" title="User Defined Variables（用户自定义变量）"></a>User Defined Variables（用户自定义变量）</h2><p>操作路径：线程组–&gt;添加–&gt;配置元件–&gt;用户自定义变量<br>1）添加User Defined Variables模块<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F.png" alt="添加用户自定义变量"><br>2）配置User Defined Variables界面中的参数及其值<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E7%94%A8%E6%88%B7%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F.png" alt="用户自定义变量"><br>3）配置HTTP取样器中的请求参数<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE2.png" alt="HTTP请求参数配置"></p>
-<h2 id="函数助手"><a href="#函数助手" class="headerlink" title="函数助手"></a>函数助手</h2><p>操作路径：Tools–&gt;函数助手对话框<br>1）选择参数化所需的函数，配置函数<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E6%89%93%E5%BC%80%E5%87%BD%E6%95%B0%E5%AF%B9%E8%AF%9D%E5%8A%A9%E6%89%8B.png" alt="打开函数对话助手"><br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E9%85%8D%E7%BD%AE%E5%87%BD%E6%95%B0.png" alt="配置函数"><br>2）配置HTTP取样器的请求参数<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE3.png" alt="HTTP请求参数配置"></p>
+    <title>JMeter(二)_基础介绍</title>
+    <url>/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/</url>
+    <content><![CDATA[<h2 id="测试计划（test-plan）"><a href="#测试计划（test-plan）" class="headerlink" title="测试计划（test plan）"></a>测试计划（test plan）</h2><p>描述一个性能测试，包含本次测试所有相关功能<br><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-155506@2x.png" alt="测试计划"></p>
+<h2 id="threads（users）线程"><a href="#threads（users）线程" class="headerlink" title="threads（users）线程"></a>threads（users）线程</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-155944@2x.png" alt="线程组"><br>Setup thread group：<br>一种特殊类型的线程，可用于执行预测试操作。即执行测试前进行定期线程组的执行</p>
+<p>Teardown thread group：<br>一种特殊类型的线程，可用于执行测试后动作。即执行测试结束后执行定期的线程组</p>
+<p>Thread group：<br>通常添加使用的线程，一般一个线程组可看做一个虚拟用户组，其中每个线程为一个虚拟用户</p>
+<h2 id="测试片段（test-fragment）"><a href="#测试片段（test-fragment）" class="headerlink" title="测试片段（test fragment）"></a>测试片段（test fragment）</h2><p>应用在控制器上的一个特殊线程组，与线程组处于同一层级，必须与Include Controller或模块控制器一起使用才被执行。<br>应用场景：<br>1、当jmeter脚本非常复杂的时候，可以通过测试片段分模块管理用例<br>2、当jmeter脚本由多个测试人员共同完成，通过测试片段分人分模块管理用例</p>
+<h2 id="取样器（Sampler）"><a href="#取样器（Sampler）" class="headerlink" title="取样器（Sampler）"></a>取样器（Sampler）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160607@2x.png" alt="取样器"><br>是性能测试中向服务器发送请求，记录响应信息，记录响应时间的最小单元，JMeter 原生支持多种不同的sampler<br>如 HTTP Request Sampler 、 FTP  Request Sampler 、TCP  Request Sampler 、JDBC Request Sampler 等<br>每一种不同类型的 sampler 可以根据设置的参数向服务器发出不同类型的请求。<br>Java Request Sampler 和 Beanshell Request Sampler 是两种特殊的可定制的 Sampler （暂不讨论）</p>
+<h2 id="逻辑控制器（Logic-Controller）"><a href="#逻辑控制器（Logic-Controller）" class="headerlink" title="逻辑控制器（Logic Controller）"></a>逻辑控制器（Logic Controller）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160636@2x.png" alt="逻辑控制器"><br>包含两类原件：<br>一类是控制Test Plan中Sampler节点发送请求的逻辑顺序控制器，常用的有：If Controller、Swith Controller、Loop Controller、Random Controller等<br>另一类是用来组织和控制Sampler节点的，如Transaction Controller、Throughput Controller等</p>
+<h2 id="监听器（Listener）"><a href="#监听器（Listener）" class="headerlink" title="监听器（Listener）"></a>监听器（Listener）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160723@2x.png" alt="监听器"><br>对测试结果进行处理和可视化展示的一系列组件，常用的有图形结果、查看结果树、聚合报告等<br>以上的五类原件就可以构成一个简单的性能测试脚本</p>
+<p>聚合报告<br><strong>Label：</strong>每个 JMeter 的 element（例如 HTTP Request）都有一个 Name 属性，这里显示的就是 Name 属性的值<br><strong>Samples：</strong>表示你这次测试中一共发出了多少个请求，如果模拟10个用户，每个用户迭代10次，那么这里显示100<br><strong>Average：</strong>平均响应时间——默认情况下是单个 Request 的平均响应时间，当使用了 Transaction Controller 时，也可以以Transaction 为单位显示平均响应时间<br><strong>Median：</strong>中位数，也就是 50％ 用户的响应时间<br><strong>90% Line：</strong>90％ 用户的响应时间<br><strong>Min：</strong>最小响应时间<br><strong>Max：</strong>最大响应时间<br><strong>Error%：</strong>本次测试中出现错误的请求的数量/请求的总数<br><strong>Throughput：</strong>吞吐量——默认情况下表示每秒完成的请求数（Request per Second），当使用了 Transaction Controller 时，也可以表示类似 LoadRunner 的 Transaction per Second 数<br><strong>KB/Sec：</strong>每秒从服务器端接收到的数据量</p>
+<h2 id="配置元件（Config-Element）"><a href="#配置元件（Config-Element）" class="headerlink" title="配置元件（Config Element）"></a>配置元件（Config Element）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160737@2x.png" alt="配置元件"><br>用于提供对静态数据配置的支持。CSV Date Set Config可以将本地数据文件形成数据池（Date Pool），而对应于HTTP Request Configuration和TCP Request Sample等类型的Configuration元件则可以修改这些Sample的默认数据等</p>
+<h2 id="定时器（Time）"><a href="#定时器（Time）" class="headerlink" title="定时器（Time）"></a>定时器（Time）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160849@2x.png" alt="定时器"><br>用于操作之间设置等待时间，等待时间使性能测试中常用的控制客户端QPS的手段，jmeter定义了Constant Times、</p>
+<p>Constant Throughput Times、Guass Ramdon Times等不同类型的Times</p>
+<h2 id="断言（Assertions）"><a href="#断言（Assertions）" class="headerlink" title="断言（Assertions）"></a>断言（Assertions）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-161013@2x.png" alt="断言"><br>用于检查测试中得到的响应数据等是否符合预期，Assertions一般用来设置检查点，用以保证性能测试过程中的数据交互与预期一致</p>
+<h2 id="前置处理器（Pre-Processors）"><a href="#前置处理器（Pre-Processors）" class="headerlink" title="前置处理器（Pre Processors）"></a>前置处理器（Pre Processors）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160912@2x.png" alt="前置处理器"><br>用于在实际请求发出之前对即将发出的请求进行特殊处理。<br>例如：当URL中有sessionID一类的session信息时，可以通过该处理器填充发出请求实际的sessionID。</p>
+<h2 id="后置处理器（Pre-Processors）"><a href="#后置处理器（Pre-Processors）" class="headerlink" title="后置处理器（Pre Processors）"></a>后置处理器（Pre Processors）</h2><p><img src="/2020/02/25/JMeter-%E4%BA%8C-%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/WX20200225-160927@2x.png" alt="后置处理器"><br>用于对Sampler发出请求后得到的服务器响应进行处理。一般用来提取响应中的特定数据<br>例如：正则表达式，用于提取响应数据中匹配某正则表达式的数据段，</p>
 ]]></content>
       <categories>
         <category>JMeter</category>
@@ -813,6 +765,54 @@
 <figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">$&#123;__CSVRead(<span class="regexp">/Users/</span>vic<span class="regexp">/Downloads/</span>Jmeter ALY/phone_numbers.csv,<span class="number">0</span>)&#125;;读取第一列的值</span><br><span class="line">$&#123;__CSVRead(<span class="regexp">/Users/</span>vic<span class="regexp">/Downloads/</span>Jmeter ALY/phone_numbers.csv,<span class="keyword">next</span>())&#125;; 每次读取下一次的值，配合第一条使用，否则不知道从哪里开始</span><br><span class="line"></span><br><span class="line">$&#123;__CSVRead(<span class="regexp">/Users/</span>vic<span class="regexp">/Downloads/</span>Jmeter ALY/phone_numbers.csv,*user_info)&#125;;使用别名，然后通过以下方法获取数据</span><br><span class="line">$&#123;__CSVRead(*user_info, <span class="number">1</span>)&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="/2020/02/28/JMeter-%E5%85%AB-%E5%87%BD%E6%95%B0%E5%8A%A9%E6%89%8B%E5%A4%A7%E5%85%A8/CSVRead.png" alt="__CSVRead"></p>
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1>]]></content>
+      <categories>
+        <category>JMeter</category>
+      </categories>
+      <tags>
+        <tag>JMeter</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JMeter(六)_参数化</title>
+    <url>/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/</url>
+    <content><![CDATA[<h1 id="一、JMeter参数化简介"><a href="#一、JMeter参数化简介" class="headerlink" title="一、JMeter参数化简介"></a>一、JMeter参数化简介</h1><h2 id="JMeter参数化的概念"><a href="#JMeter参数化的概念" class="headerlink" title="JMeter参数化的概念"></a>JMeter参数化的概念</h2><p>当使用JMeter进行测试时，测试数据的准备是一项重要的工作。若要求每次迭代的数据不一样时，则需进行参数化，然后从参数化的文件中来读取测试数据。</p>
+<blockquote>
+<p>参数化：是自动化测试脚本的一种常用技巧，可将脚本中的某些输入使用参数来代替，如登录时利用GET/POST请求方式传递参数的场景，在脚本运行时指定参数的取值范围和规则。<br>脚本在运行时，根据需要选取不同的参数值作为输入，该方式称为数据驱动测试（Data Driven Test），而参数的取值范围被称为数据池（Data Pool）。</p>
+</blockquote>
+<h2 id="JMeter参数化方式之使用场景对比"><a href="#JMeter参数化方式之使用场景对比" class="headerlink" title="JMeter参数化方式之使用场景对比"></a>JMeter参数化方式之使用场景对比</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>参数化方式</th>
+<th><span class="Apple-tab-span" style="white-space:pre"></span>使用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>User Parameters</td>
+<td>适用于参数取值范围很小的时候使用</td>
+</tr>
+<tr>
+<td>2</td>
+<td>CSV Data Set Config</td>
+<td>适用于参数取值范围较大的时候使用，该方法具有更大的灵活性</td>
+</tr>
+<tr>
+<td>3</td>
+<td>User Defined Variables</td>
+<td>一般用于Test Plan中不需要随请求迭代的参数设置，如：Host、Port Number</td>
+</tr>
+<tr>
+<td>4</td>
+<td>函数助手：_CSVRead</td>
+<td>可作为其他参数化方式的补充项，如：随机数生成的函数${__Random(,,)}</td>
+</tr>
+</tbody></table>
+<h1 id="二、JMeter参数化的4种主要方式-操作演练"><a href="#二、JMeter参数化的4种主要方式-操作演练" class="headerlink" title="二、JMeter参数化的4种主要方式-操作演练"></a>二、JMeter参数化的4种主要方式-操作演练</h1><h2 id="User-Parameters（用户参数）"><a href="#User-Parameters（用户参数）" class="headerlink" title="User Parameters（用户参数）"></a>User Parameters（用户参数）</h2><p>操作路径：HTTP请求–&gt;添加–&gt;前置处理器–&gt;用户参数<br>1）添加User Parameters功能模块<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E5%8F%82%E6%95%B0.png" alt="添加用户参数"><br>2）设置参数项、参数值<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E7%94%A8%E6%88%B7%E5%8F%82%E6%95%B0.png" alt="用户参数"><br>3）配置HTTP取样器界面的请求参数：${xxx}<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE.png" alt="HTTP请求参数配置"><br>4）配置Thread Group<br>设置线程数=2，即2个虚拟用户数，对应User Parameters中设置的2个用户<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E7%BA%BF%E7%A8%8B%E6%95%B0.png" alt="线程数"></p>
+<h2 id="CSV-Data-Set-Config（CSV数据配置）"><a href="#CSV-Data-Set-Config（CSV数据配置）" class="headerlink" title="CSV Data Set Config（CSV数据配置）"></a>CSV Data Set Config（CSV数据配置）</h2><p>操作路径：线程组–&gt;添加–&gt;配置元件–&gt;CSV Data Set Config<br>1）添加CSV Data Set Config模块<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E6%B7%BB%E5%8A%A0CSV%E6%95%B0%E6%8D%AE%E9%85%8D%E7%BD%AE.png" alt="添加CSV数据配置"><br>2）预先准备好要参数化的所有参数值（txt、csv文件）<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E5%8F%82%E6%95%B0%E6%96%87%E4%BB%B6.png" alt="参数文件"><br>3）配置CSV Data来源<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/CSV%E6%95%B0%E6%8D%AE%E9%85%8D%E7%BD%AE.png" alt="CSV数据配置"><br>4）设置HTTP取样器的请求参数：${xxx}<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE.png" alt="HTTP请求参数配置"></p>
+<h2 id="User-Defined-Variables（用户自定义变量）"><a href="#User-Defined-Variables（用户自定义变量）" class="headerlink" title="User Defined Variables（用户自定义变量）"></a>User Defined Variables（用户自定义变量）</h2><p>操作路径：线程组–&gt;添加–&gt;配置元件–&gt;用户自定义变量<br>1）添加User Defined Variables模块<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F.png" alt="添加用户自定义变量"><br>2）配置User Defined Variables界面中的参数及其值<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E7%94%A8%E6%88%B7%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F.png" alt="用户自定义变量"><br>3）配置HTTP取样器中的请求参数<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE2.png" alt="HTTP请求参数配置"></p>
+<h2 id="函数助手"><a href="#函数助手" class="headerlink" title="函数助手"></a>函数助手</h2><p>操作路径：Tools–&gt;函数助手对话框<br>1）选择参数化所需的函数，配置函数<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E6%89%93%E5%BC%80%E5%87%BD%E6%95%B0%E5%AF%B9%E8%AF%9D%E5%8A%A9%E6%89%8B.png" alt="打开函数对话助手"><br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/%E9%85%8D%E7%BD%AE%E5%87%BD%E6%95%B0.png" alt="配置函数"><br>2）配置HTTP取样器的请求参数<br><img src="/2020/02/27/JMeter-%E5%85%AD-%E5%8F%82%E6%95%B0%E5%8C%96/HTTP%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE3.png" alt="HTTP请求参数配置"></p>
+]]></content>
       <categories>
         <category>JMeter</category>
       </categories>
@@ -1153,12 +1153,36 @@
 <p>.bash_profile文件示例：</p>
 <figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">export ANDROID_HOME=<span class="regexp">/Users/pengdan</span><span class="regexp">/software/sdk</span></span><br><span class="line">export NDK=<span class="regexp">/Users/pengdan</span><span class="regexp">/software/android</span>-ndk-r10d</span><br><span class="line">export GRADLE_HOME=<span class="regexp">/Users/pengdan</span><span class="regexp">/software/gradle</span><span class="number">-2.4</span></span><br><span class="line">export SUBLIME=<span class="regexp">/Users/pengdan</span><span class="regexp">/home/subin</span></span><br><span class="line">export PATH=<span class="variable">$ANDROID_HOME</span>/<span class="symbol">tools:</span><span class="variable">$ANDROID_HOME</span>/platform-<span class="symbol">tools:</span><span class="variable">$GRADLE_HOME</span>/<span class="symbol">bin:</span><span class="variable">$PATH</span></span><br><span class="line">export PATH=<span class="variable">$PATH</span><span class="symbol">:</span><span class="variable">$SUBLIME</span><span class="symbol">:/usr/local/mysql/bin</span></span><br><span class="line">export PATH=<span class="variable">$PATH</span><span class="symbol">:/Users/pengdan/software/apache-tomcat-</span><span class="number">7.0</span>.<span class="number">70</span>/bin</span><br></pre></td></tr></table></figure>
 
-<p>解决方法2:<br>可以使用zsh的方法进行配置：<br>（1）可以直接在<del>/.zshrc中添加path或者环境变量<br>（2）在目录</del>/oh-my-zsh/custom文件夹下的任何.zsh文件中的环境变量都将会加载。</p>
+<p>解决方法2:<br>可以使用zsh的方法进行配置：<br>（1）可以直接在~/.zshrc中添加path或者环境变量<br>（2）在目录~/oh-my-zsh/custom文件夹下的任何.zsh文件中的环境变量都将会加载。</p>
 <p>.zshrc:</p>
 <pre><code><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Path to your oh-my-zsh installation.</span></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">ZSH</span>=/Users/shaoc/.oh-my-zsh</span><br><span class="line">source <span class="variable">$ZSH</span>/oh-my-zsh.sh</span><br><span class="line"></span><br><span class="line">alias <span class="attribute">zshconfig</span>=<span class="string">&quot;vim ~/.zshrc&quot;</span></span><br><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure>
 </code></pre>
 <p>~/oh-my-zsh/custom/my.zsh:<br><code>alias subl=\&#39;&#39;/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl&#39;\&#39;</code></p>
 ]]></content>
+      <categories>
+        <category>资料</category>
+      </categories>
+      <tags>
+        <tag>资料</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mac终端安装指定版本node</title>
+    <url>/2019/08/21/Mac%E7%BB%88%E7%AB%AF%E5%AE%89%E8%A3%85%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%ACnode/</url>
+    <content><![CDATA[<h1 id="安装brew"><a href="#安装brew" class="headerlink" title="安装brew"></a>安装brew</h1><p>终端上运行</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">/usr/bin/ruby -e “<span class="constructor">$(<span class="params">curl</span> -<span class="params">fsSL</span> <span class="params">https</span>:<span class="operator">/</span><span class="operator">/</span><span class="params">raw</span>.<span class="params">githubusercontent</span>.<span class="params">com</span><span class="operator">/</span>Homebrew<span class="operator">/</span><span class="params">install</span><span class="operator">/</span><span class="params">master</span><span class="operator">/</span><span class="params">install</span>)</span>”</span><br></pre></td></tr></table></figure>
+
+<h1 id="安装NVM"><a href="#安装NVM" class="headerlink" title="安装NVM"></a>安装NVM</h1><p><code>brew install nvm</code></p>
+<p>安装完成之后打开shell的配置文件</p>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cd</span> ~</span><br><span class="line">vim <span class="string">.bash_profile</span></span><br></pre></td></tr></table></figure>
+
+<p>在文件里添加以下命令</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">export NVM_DIR=~/.nvm</span><br><span class="line">source <span class="constructor">$(<span class="params">brew</span> --<span class="params">prefix</span> <span class="params">nvm</span>)</span>/nvm.sh</span><br></pre></td></tr></table></figure>
+
+<p>然后重新source</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> .bash_profile</span><br></pre></td></tr></table></figure>
+
+<h1 id="使用nvm安装node"><a href="#使用nvm安装node" class="headerlink" title="使用nvm安装node"></a>使用nvm安装node</h1><figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">nvm ls-remote 查看 所有的<span class="keyword">node</span><span class="title">可用版本</span></span><br><span class="line"><span class="title">nvm</span> install xxx 下载你想要的版本</span><br><span class="line">nvm use xxx 使用指定版本的<span class="keyword">node</span><span class="title"></span></span><br><span class="line"><span class="title">nvm</span> alias default xxx 每次启动终端都使用该版本的<span class="keyword">node</span><span class="title"></span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>资料</category>
       </categories>
@@ -1206,7 +1230,7 @@
 </ol>
 <p>成功后，终端显示</p>
 <blockquote>
-<p>Your identitification has been saved in /Users/xxx/.ssh/id_rsa.<br>Your public key has been saved in /user/xxx/id_rsa.pub.<br>the key fingerprint is xxxxxxxxxx…….xxxxxxxx <a href="mailto:&#121;&#111;&#x75;&#x72;&#x5f;&#x65;&#109;&#97;&#105;&#108;&#64;&#x65;&#120;&#97;&#x6d;&#112;&#108;&#101;&#46;&#x63;&#111;&#109;">&#121;&#111;&#x75;&#x72;&#x5f;&#x65;&#109;&#97;&#105;&#108;&#64;&#x65;&#120;&#97;&#x6d;&#112;&#108;&#101;&#46;&#x63;&#111;&#109;</a><br>The key’s randomart image is:<br><img src="/2019/05/21/Mac%E7%94%B5%E8%84%91%E7%94%A8%E7%BB%88%E7%AB%AF%E7%94%9F%E6%88%90SSH%20key%20%E8%AE%BF%E9%97%AE%E8%87%AA%E5%B7%B1%E7%9A%84Github/15577192525730.jpg" alt="-w465"></p>
+<p>Your identitification has been saved in /Users/xxx/.ssh/id_rsa.<br>Your public key has been saved in /user/xxx/id_rsa.pub.<br>the key fingerprint is xxxxxxxxxx…….xxxxxxxx <a href="mailto:&#x79;&#111;&#117;&#114;&#95;&#x65;&#x6d;&#97;&#x69;&#108;&#64;&#101;&#x78;&#97;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#x6d;">&#x79;&#111;&#117;&#114;&#95;&#x65;&#x6d;&#97;&#x69;&#108;&#64;&#101;&#x78;&#97;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#x6d;</a><br>The key’s randomart image is:<br><img src="/2019/05/21/Mac%E7%94%B5%E8%84%91%E7%94%A8%E7%BB%88%E7%AB%AF%E7%94%9F%E6%88%90SSH%20key%20%E8%AE%BF%E9%97%AE%E8%87%AA%E5%B7%B1%E7%9A%84Github/15577192525730.jpg" alt="-w465"></p>
 </blockquote>
 <h1 id="将SSH密钥添加到ssh-agent"><a href="#将SSH密钥添加到ssh-agent" class="headerlink" title="将SSH密钥添加到ssh-agent"></a>将SSH密钥添加到ssh-agent</h1><ol>
 <li><p>在后台启动ssh-agent</p>
@@ -1216,7 +1240,7 @@
 </ol>
 <p>成功后，中选显示：</p>
 <blockquote>
-<p> Identity added: /Users/xxx/.ssh/id_rsa (<a href="mailto:&#x79;&#111;&#x75;&#114;&#95;&#x65;&#109;&#x61;&#x69;&#108;&#x40;&#x65;&#120;&#97;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#111;&#x6d;">&#x79;&#111;&#x75;&#114;&#95;&#x65;&#109;&#x61;&#x69;&#108;&#x40;&#x65;&#120;&#97;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#111;&#x6d;</a>)</p>
+<p> Identity added: /Users/xxx/.ssh/id_rsa (<a href="mailto:&#x79;&#x6f;&#x75;&#x72;&#95;&#x65;&#109;&#x61;&#x69;&#x6c;&#x40;&#101;&#x78;&#x61;&#109;&#x70;&#108;&#101;&#46;&#x63;&#x6f;&#109;">&#x79;&#x6f;&#x75;&#x72;&#95;&#x65;&#109;&#x61;&#x69;&#x6c;&#x40;&#101;&#x78;&#x61;&#109;&#x70;&#108;&#101;&#46;&#x63;&#x6f;&#109;</a>)</p>
 </blockquote>
 <h1 id="添加SSH-key-到Github-上"><a href="#添加SSH-key-到Github-上" class="headerlink" title="添加SSH key 到Github 上"></a>添加SSH key 到Github 上</h1><ol>
 <li><p>将SSH密钥复制到剪贴板。</p>
@@ -1254,30 +1278,6 @@
 </li>
 </ol>
 ]]></content>
-      <categories>
-        <category>资料</category>
-      </categories>
-      <tags>
-        <tag>资料</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Mac终端安装指定版本node</title>
-    <url>/2019/08/21/Mac%E7%BB%88%E7%AB%AF%E5%AE%89%E8%A3%85%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%ACnode/</url>
-    <content><![CDATA[<h1 id="安装brew"><a href="#安装brew" class="headerlink" title="安装brew"></a>安装brew</h1><p>终端上运行</p>
-<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">/usr/bin/ruby -e “<span class="constructor">$(<span class="params">curl</span> -<span class="params">fsSL</span> <span class="params">https</span>:<span class="operator">/</span><span class="operator">/</span><span class="params">raw</span>.<span class="params">githubusercontent</span>.<span class="params">com</span><span class="operator">/</span>Homebrew<span class="operator">/</span><span class="params">install</span><span class="operator">/</span><span class="params">master</span><span class="operator">/</span><span class="params">install</span>)</span>”</span><br></pre></td></tr></table></figure>
-
-<h1 id="安装NVM"><a href="#安装NVM" class="headerlink" title="安装NVM"></a>安装NVM</h1><p><code>brew install nvm</code></p>
-<p>安装完成之后打开shell的配置文件</p>
-<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cd</span> ~</span><br><span class="line">vim <span class="string">.bash_profile</span></span><br></pre></td></tr></table></figure>
-
-<p>在文件里添加以下命令</p>
-<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">export NVM_DIR=~/.nvm</span><br><span class="line">source <span class="constructor">$(<span class="params">brew</span> --<span class="params">prefix</span> <span class="params">nvm</span>)</span>/nvm.sh</span><br></pre></td></tr></table></figure>
-
-<p>然后重新source</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> .bash_profile</span><br></pre></td></tr></table></figure>
-
-<h1 id="使用nvm安装node"><a href="#使用nvm安装node" class="headerlink" title="使用nvm安装node"></a>使用nvm安装node</h1><figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">nvm ls-remote 查看 所有的<span class="keyword">node</span><span class="title">可用版本</span></span><br><span class="line"><span class="title">nvm</span> install xxx 下载你想要的版本</span><br><span class="line">nvm use xxx 使用指定版本的<span class="keyword">node</span><span class="title"></span></span><br><span class="line"><span class="title">nvm</span> alias default xxx 每次启动终端都使用该版本的<span class="keyword">node</span><span class="title"></span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>资料</category>
       </categories>
@@ -1566,6 +1566,24 @@
       </tags>
   </entry>
   <entry>
+    <title>Hello World</title>
+    <url>/2019/05/20/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>cron表达式详解</title>
     <url>/2021/05/10/cron%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%A6%E8%A7%A3/</url>
     <content><![CDATA[<p>我们经常使用 cron 表达式来定义定时任务的执行策略，今天我们就总结一下 cron 表达式的一些相关知识。</p>
@@ -1731,24 +1749,6 @@
 </ul>
 <figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line"><span class="module-access"><span class="module"><span class="identifier">CronExpression</span>.</span></span>is<span class="constructor">ValidExpression(<span class="params">cron</span>)</span></span><br></pre></td></tr></table></figure>
 
-]]></content>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2019/05/20/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html">Deployment</a></p>
 ]]></content>
   </entry>
   <entry>
@@ -1999,6 +1999,38 @@
       </tags>
   </entry>
   <entry>
+    <title>libimobiledevice命令</title>
+    <url>/2019/05/21/libimobiledevice%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>A library to communicate with services of Apple iOS devices using native protocols.</p>
+<h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><ul>
+<li><p>打印app列表</p>
+  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">ideviceinstaller -l</span></span><br></pre></td></tr></table></figure></li>
+<li><p>查看当前已连接的设备的UUID</p>
+  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">idevice_id -l</span></span><br></pre></td></tr></table></figure></li>
+<li><p>获取设备信息</p>
+  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">ideviceinfo</span></span><br></pre></td></tr></table></figure></li>
+<li><p>获取设备时间</p>
+  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">idevicedate</span></span><br></pre></td></tr></table></figure></li>
+<li><p>重启设备</p>
+  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">idevicediagnostics restart</span></span><br></pre></td></tr></table></figure></li>
+<li><p>安装ipa包，卸载应用</p>
+  <figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">ideviceinstaller -<span class="selector-tag">i</span> xxx.ipa</span><br><span class="line"><span class="comment">//命令安装一个ipa文件到手机上，如果是企业签名的，非越狱机器也可以直接安装了。</span></span><br><span class="line"></span><br><span class="line">ideviceinstaller -U <span class="selector-attr">[bundleID]</span></span><br><span class="line"><span class="comment">//命令卸载应用，需要知道此应用的bundleID</span></span><br></pre></td></tr></table></figure></li>
+<li><p>查看系统日志</p>
+  <figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">idevicesyslog</span><br><span class="line"><span class="comment">//屏幕上即可看见手机上所有的日志</span></span><br><span class="line"></span><br><span class="line">idevicesyslog &gt;&gt; iphone.<span class="built_in">log</span> <span class="meta">&amp;</span></span><br><span class="line"><span class="comment">//该命令是将日志导入到iphone.log这个文件，并且是在后台执行。</span></span><br><span class="line"><span class="comment">//然后用tail -f和grep查看log</span></span><br><span class="line"></span><br><span class="line">tail -f iphone.<span class="built_in">log</span></span><br><span class="line">tail -f iphone.<span class="built_in">log</span> <span class="string">| grep &#x27;WeChat’  # 查看包含WeChat的行</span></span><br></pre></td></tr></table></figure></li>
+<li><p>截图</p>
+  <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">idevicescreenshot</span><br><span class="line"><span class="regexp">//</span>如果在使用截图的时候出现报错信息，那么就去把相应版本的DeveloperDiskImage的两个文件复制到libimobiledevice文件下面。</span><br><span class="line"></span><br><span class="line">路径：</span><br><span class="line"><span class="regexp">/Applications/</span>Xcode.app<span class="regexp">/Contents/</span>Developer<span class="regexp">/Platforms/i</span>PhoneOS.platform<span class="regexp">/DeviceSupport/</span>对应版本/</span><br><span class="line"></span><br><span class="line">获取版本号命令：</span><br><span class="line">ideviceinfo -k ProductVersion</span><br><span class="line"></span><br><span class="line">安装DeveloperDiskImage命令：</span><br><span class="line">ideviceimagemounter DeveloperDiskImage.dmg</span><br><span class="line"><span class="regexp">//</span>然后就可以正常截图了</span><br></pre></td></tr></table></figure></li>
+<li><p>遇到报错</p>
+  <figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line">解决方法：卸载重装</span><br><span class="line"><span class="keyword">brew </span>uninstall ideviceinstaller</span><br><span class="line"><span class="keyword">brew </span>uninstall libimobiledevice</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>--HEAD libimobiledevice</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>ideviceinstaller</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>资料</category>
+      </categories>
+      <tags>
+        <tag>资料</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>item2常用快捷键</title>
     <url>/2019/05/20/item2%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
     <content><![CDATA[<h1 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h1><ul>
@@ -2076,38 +2108,6 @@
       </categories>
       <tags>
         <tag>备忘</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>libimobiledevice命令</title>
-    <url>/2019/05/21/libimobiledevice%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>A library to communicate with services of Apple iOS devices using native protocols.</p>
-<h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><ul>
-<li><p>打印app列表</p>
-  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">ideviceinstaller -l</span></span><br></pre></td></tr></table></figure></li>
-<li><p>查看当前已连接的设备的UUID</p>
-  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">idevice_id -l</span></span><br></pre></td></tr></table></figure></li>
-<li><p>获取设备信息</p>
-  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">ideviceinfo</span></span><br></pre></td></tr></table></figure></li>
-<li><p>获取设备时间</p>
-  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">idevicedate</span></span><br></pre></td></tr></table></figure></li>
-<li><p>重启设备</p>
-  <figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">idevicediagnostics restart</span></span><br></pre></td></tr></table></figure></li>
-<li><p>安装ipa包，卸载应用</p>
-  <figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">ideviceinstaller -<span class="selector-tag">i</span> xxx.ipa</span><br><span class="line"><span class="comment">//命令安装一个ipa文件到手机上，如果是企业签名的，非越狱机器也可以直接安装了。</span></span><br><span class="line"></span><br><span class="line">ideviceinstaller -U <span class="selector-attr">[bundleID]</span></span><br><span class="line"><span class="comment">//命令卸载应用，需要知道此应用的bundleID</span></span><br></pre></td></tr></table></figure></li>
-<li><p>查看系统日志</p>
-  <figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">idevicesyslog</span><br><span class="line"><span class="comment">//屏幕上即可看见手机上所有的日志</span></span><br><span class="line"></span><br><span class="line">idevicesyslog &gt;&gt; iphone.<span class="built_in">log</span> <span class="meta">&amp;</span></span><br><span class="line"><span class="comment">//该命令是将日志导入到iphone.log这个文件，并且是在后台执行。</span></span><br><span class="line"><span class="comment">//然后用tail -f和grep查看log</span></span><br><span class="line"></span><br><span class="line">tail -f iphone.<span class="built_in">log</span></span><br><span class="line">tail -f iphone.<span class="built_in">log</span> <span class="string">| grep &#x27;WeChat’  # 查看包含WeChat的行</span></span><br></pre></td></tr></table></figure></li>
-<li><p>截图</p>
-  <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">idevicescreenshot</span><br><span class="line"><span class="regexp">//</span>如果在使用截图的时候出现报错信息，那么就去把相应版本的DeveloperDiskImage的两个文件复制到libimobiledevice文件下面。</span><br><span class="line"></span><br><span class="line">路径：</span><br><span class="line"><span class="regexp">/Applications/</span>Xcode.app<span class="regexp">/Contents/</span>Developer<span class="regexp">/Platforms/i</span>PhoneOS.platform<span class="regexp">/DeviceSupport/</span>对应版本/</span><br><span class="line"></span><br><span class="line">获取版本号命令：</span><br><span class="line">ideviceinfo -k ProductVersion</span><br><span class="line"></span><br><span class="line">安装DeveloperDiskImage命令：</span><br><span class="line">ideviceimagemounter DeveloperDiskImage.dmg</span><br><span class="line"><span class="regexp">//</span>然后就可以正常截图了</span><br></pre></td></tr></table></figure></li>
-<li><p>遇到报错</p>
-  <figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line">解决方法：卸载重装</span><br><span class="line"><span class="keyword">brew </span>uninstall ideviceinstaller</span><br><span class="line"><span class="keyword">brew </span>uninstall libimobiledevice</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>--HEAD libimobiledevice</span><br><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>ideviceinstaller</span><br></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
-      <categories>
-        <category>资料</category>
-      </categories>
-      <tags>
-        <tag>资料</tag>
       </tags>
   </entry>
   <entry>
